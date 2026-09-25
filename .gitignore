@@ -1,0 +1,35 @@
+# Binarios y compilados C++
+*.o
+*.obj
+*.exe
+*.out
+*.app
+build/
+bin/
+src/cpp/test_sqlite
+src/cpp/pea_cpp
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env/
+*.egg-info/
+
+# Bases de datos generadas en ejecución y temporales
+*.db
+*.sqlite3
+!data/empty_placeholder.db
+
+# IDEs y editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Archivos de empaque final
+*.zip
+*.tar.gz
