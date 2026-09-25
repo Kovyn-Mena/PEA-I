@@ -71,11 +71,25 @@ g++ -std=c++17 -Wall -Isrc/cpp/include Taller2_AB_PO_XX.cpp -lsqlite3 -o Taller2
 ### 2. Ejecución en Python (Persona B)
 * **Requisitos:**
   ```bash
-  pip install -r requirements.txt # requests beautifulsoup4 pypdf matplotlib
+  pip install -r requirements.txt
   ```
+
+#### Opción A (Rápida con Makefile):
+* **Ejecutar la consola interactiva Python:**
+  ```bash
+  make run-py
+  ```
+
+#### Opción B (Ejecución directa del entregable):
+```bash
+python3 Taller2_AB_PO_XX.py
+```
+
 * **Ejecutar pruebas unitarias de TDAs:**
   ```bash
   python3 src/python/test_tda.py
+  # O ejecutar todas las pruebas (C++ y Python) juntas:
+  make test
   ```
 
 ---
