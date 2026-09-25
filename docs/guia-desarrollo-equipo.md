@@ -332,15 +332,26 @@ Todas están especificadas en `requirements.txt`:
 
 Para mantener el repositorio impecable y profesional:
 
-1. **Descargar ramas remotas actualizadas:**
+1. **Paso 0 — Aceptar la Invitación de Colaborador en GitHub:**
+   * Abre tu navegador e inicia sesión en GitHub.
+   * Entra directamente al enlace de invitación:  
+     👉 **[https://github.com/Kovyn-Mena/PEA-I/invitations](https://github.com/Kovyn-Mena/PEA-I/invitations)** (o revisa el correo enviado por GitHub).
+   * Haz clic en el botón verde **"Accept invitation"** para habilitar tus permisos de colaborador (clonar, crear ramas y hacer push).
+
+2. **Paso 1 — Clonar el Repositorio y Configurar Entorno en tu PC:**
+   ```bash
+   git clone https://github.com/Kovyn-Mena/PEA-I.git
+   cd PEA-I
+   pip install -r requirements.txt
+   ```
+
+3. **Paso 2 — Cambiarse a la Rama Asignada (ejemplo para Ingesta):**
    ```bash
    git fetch origin
-   ```
-2. **Cambiarse a la rama asignada (ejemplo para Ingesta):**
-   ```bash
    git checkout feature/ingesta-datos
    ```
-3. **Programar y hacer commits pequeños y claros:**
+
+4. **Paso 3 — Programar y hacer commits pequeños y claros:**
    ```bash
    git add src/python/core/ingesta.py
    git commit -m "feat(ingesta): implementar parser HTML con BeautifulSoup para GrupLAC"
