@@ -67,7 +67,12 @@ public:
     static char leerTecla() {
     #if defined(_WIN32) || defined(_WIN64)
         if (ISATTY(0)) {
-            return static_cast<char>(_getch());
+            int c = _getch();
+            if (c == 0 || c == 224) { // Tecla especial o flecha en Windows
+                (void)_getch();       // consumir el segundo byte
+                return 0;
+            }
+            return static_cast<char>(c);
         } else {
             char c = 0;
             if (std::cin >> c) return c;
@@ -185,6 +190,9 @@ public:
     // -----------------------------------------------------------------
     void iniciar() {
         std::signal(SIGINT, manejadorSenal);
+    #if defined(_WIN32) || defined(_WIN64)
+        std::system("chcp 65001 > nul");
+    #endif
         limpiarPantalla();
         std::cout << "=================================================================\n";
         std::cout << "     PEA-i: PROGRAMA ESTADISTICO DE ANALISIS DE INVESTIGACION   \n";

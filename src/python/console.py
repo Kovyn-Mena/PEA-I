@@ -49,7 +49,11 @@ class ConsolaApp:
         """Captura una sola tecla inmediatamente sin requerir ENTER"""
         if os.name == 'nt':
             import msvcrt
-            return msvcrt.getch().decode('utf-8', errors='ignore')
+            ch = msvcrt.getch()
+            if ch in (b'\x00', b'\xe0'):
+                (void_code := msvcrt.getch()) # Consumir el segundo byte de flechas/teclas especiales
+                return ''
+            return ch.decode('utf-8', errors='ignore')
         else:
             if sys.stdin.isatty():
                 import termios
@@ -129,6 +133,8 @@ class ConsolaApp:
     # PUNTO DE ENTRADA INTERACTIVO (Punto 10 pág 3)
     # -----------------------------------------------------------------
     def iniciar(self):
+        if os.name == 'nt':
+            os.system("chcp 65001 > nul 2>&1")
         signal.signal(signal.SIGINT, manejador_sigint)
         self.limpiar_pantalla()
         print("=================================================================")
