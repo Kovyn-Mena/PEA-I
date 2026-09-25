@@ -5,6 +5,8 @@
 #include <iomanip>
 #include <string>
 #include <cstdlib>
+#include <csignal>
+#include <cerrno>
 
 #if defined(_WIN32) || defined(_WIN64)
     #include <conio.h>
@@ -13,6 +15,7 @@
 #else
     #include <termios.h>
     #include <unistd.h>
+    #include <sys/ioctl.h>
     #define ISATTY isatty
 #endif
 
@@ -25,6 +28,7 @@
 // APLICACIÓN DE CONSOLA AUTÓNOMA (C++) - PEA-i
 // Lectura inmediata de teclas (tipo getch) multiplataforma (Linux/Mac/Win)
 // Borrado de pantalla instantáneo y navegación con retorno en 0
+// Manejo seguro de Ctrl+C y eventos de copia en terminal
 // =====================================================================
 
 class ConsolaApp {
@@ -33,6 +37,14 @@ private:
     Pila historial;
     Cola colaIngesta;
     std::string rutaBD;
+
+    // Manejador de señal Ctrl+C para evitar interrupción accidental al intentar copiar
+    static void manejadorSenal(int sig) {
+        if (sig == SIGINT) {
+            std::cout << "\n\n  [i] Recordatorio: En la terminal de Linux use Ctrl+Shift+C para copiar texto.\n"
+                      << "      (Para salir del programa, utilice la opción 0 en el menú).\n" << std::flush;
+        }
+    }
 
 public:
     ConsolaApp(const std::string& bd = "data/pea_investigacion.db")
@@ -73,10 +85,28 @@ public:
             newAttrs.c_cc[VTIME] = 0;
 
             if (tcsetattr(STDIN_FILENO, TCSANOW, &newAttrs) < 0) return 0;
-            ssize_t n = read(STDIN_FILENO, &buf, 1);
-            tcsetattr(STDIN_FILENO, TCSANOW, &oldAttrs); // Restaurar terminal
+
+            ssize_t n = 0;
+            do {
+                n = read(STDIN_FILENO, &buf, 1);
+            } while (n < 0 && errno == EINTR); // Reintentar si fue interrumpido por señal (ej. Ctrl+C)
+
+            tcsetattr(STDIN_FILENO, TCSANOW, &oldAttrs); // Restaurar siempre la terminal
 
             if (n <= 0) return 0;
+
+            // Si es un código de escape (como flechas del teclado o selección del ratón)
+            if (buf == 27) { // '\033' ESC
+                int bytesDisponibles = 0;
+                if (ioctl(STDIN_FILENO, FIONREAD, &bytesDisponibles) == 0 && bytesDisponibles > 0) {
+                    for (int i = 0; i < bytesDisponibles; ++i) {
+                        char basurero;
+                        (void)read(STDIN_FILENO, &basurero, 1);
+                    }
+                }
+                return 0; // Se ignora la secuencia de escape para no activar opciones falsas
+            }
+
             return buf;
         } else {
             // Modo tubería / script de prueba automatizada
@@ -90,16 +120,19 @@ public:
     // Pausa que reacciona a CUALQUIER tecla o a ENTER de inmediato
     static void pausar(const std::string& mensaje = "\n[Presione cualquier tecla o ENTER para continuar / regresar]... ") {
         std::cout << mensaje << std::flush;
-        leerTecla();
+        while (true) {
+            char c = leerTecla();
+            if (c != 0) break; // Espera hasta que haya una pulsación real
+        }
         std::cout << "\n";
     }
 
-    // Selector instantáneo de menú: espera únicamente las teclas permitidas
+    // Selector instantáneo de menú: espera únicamente las teclas numéricas permitidas
     static int leerOpcionMenu(const std::string& opcionesValidas, const std::string& mensaje = "Seleccione una opción: ") {
         std::cout << mensaje << std::flush;
         while (true) {
             char tecla = leerTecla();
-            if (tecla == 0) return 0;
+            if (tecla == 0) continue; // Si fue código nulo/escape, continúa esperando sin salir
 
             // Verificar si la tecla corresponde a una de las opciones del menú
             if (opcionesValidas.find(tecla) != std::string::npos) {
@@ -151,6 +184,7 @@ public:
     // PUNTO DE ENTRADA INTERACTIVO (Punto 10 pág 3)
     // -----------------------------------------------------------------
     void iniciar() {
+        std::signal(SIGINT, manejadorSenal);
         limpiarPantalla();
         std::cout << "=================================================================\n";
         std::cout << "     PEA-i: PROGRAMA ESTADISTICO DE ANALISIS DE INVESTIGACION   \n";
