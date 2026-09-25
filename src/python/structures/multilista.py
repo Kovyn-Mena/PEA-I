@@ -2,6 +2,7 @@
 TDA Multilista / Hipercubo de Información (Python)
 Enlace Ortogonal tridimensional: Grupos <-> Investigadores <-> Productos
 """
+import random
 from .nodos import NodoGrupo, NodoInvestigador, NodoProducto
 
 class Multilista:
@@ -88,6 +89,104 @@ class Multilista:
                 p = p.sig_producto_grupo
             g = g.sig_grupo
         return None
+
+    # -----------------------------------------------------------------
+    # BÚSQUEDA INTELIGENTE (POR TEXTO O EJEMPLO ALEATORIO)
+    # -----------------------------------------------------------------
+    def buscar_grupo_por_texto(self, termino: str):
+        if not termino:
+            return None
+        t = termino.lower()
+        # 1. Coincidencia exacta de código
+        exacto = self.buscar_grupo(termino)
+        if exacto:
+            return exacto
+        # 2. Coincidencia parcial en nombre, código o líder
+        g = self.cabeza_grupos
+        while g is not None:
+            if t in g.nombre.lower() or t in g.codigo_grupo.lower() or t in g.lider.lower():
+                return g
+            g = g.sig_grupo
+        return None
+
+    def obtener_grupo_aleatorio(self):
+        total = self.contar_grupos(False)
+        if total == 0:
+            return None
+        idx = random.randint(0, total - 1)
+        g = self.cabeza_grupos
+        for _ in range(idx):
+            if g.sig_grupo:
+                g = g.sig_grupo
+        return g
+
+    def buscar_investigador_por_texto(self, termino: str):
+        if not termino:
+            return None
+        t = termino.lower()
+        exacto = self.buscar_investigador(termino)
+        if exacto:
+            return exacto
+        g = self.cabeza_grupos
+        while g is not None:
+            inv = g.primer_investigador
+            while inv is not None:
+                if t in inv.nombre_completo.lower() or t in inv.documento_id.lower():
+                    return inv
+                inv = inv.sig_investigador
+            g = g.sig_grupo
+        return None
+
+    def obtener_investigador_aleatorio(self):
+        total = self.contar_investigadores(False)
+        if total == 0:
+            return None
+        idx = random.randint(0, total - 1)
+        contador = 0
+        g = self.cabeza_grupos
+        while g is not None:
+            inv = g.primer_investigador
+            while inv is not None:
+                if contador == idx:
+                    return inv
+                contador += 1
+                inv = inv.sig_investigador
+            g = g.sig_grupo
+        return (self.cabeza_grupos.primer_investigador if self.cabeza_grupos else None)
+
+    def buscar_producto_por_texto(self, termino: str):
+        if not termino:
+            return None
+        t = termino.lower()
+        exacto = self.buscar_producto(termino)
+        if exacto:
+            return exacto
+        g = self.cabeza_grupos
+        while g is not None:
+            p = g.primer_producto
+            while p is not None:
+                if t in p.titulo.lower() or t in p.id_producto.lower() or t in p.tipo.lower():
+                    return p
+                p = p.sig_producto_grupo
+            g = g.sig_grupo
+        return None
+
+    def obtener_producto_aleatorio(self):
+        total = self.contar_productos(False)
+        if total == 0:
+            return None
+        idx = random.randint(0, total - 1)
+        contador = 0
+        g = self.cabeza_grupos
+        while g is not None:
+            p = g.primer_producto
+            while p is not None:
+                if contador == idx:
+                    return p
+                contador += 1
+                p = p.sig_producto_grupo
+            g = g.sig_grupo
+        return (self.cabeza_grupos.primer_producto if self.cabeza_grupos else None)
 
     # -----------------------------------------------------------------
     # 3. DESACTIVACIÓN (Borrado Lógico)

@@ -334,13 +334,24 @@ public:
                 pausar();
             } else if (op == 3) {
                 limpiarPantalla();
-                std::cout << "--- CONSULTAR DETALLE DE GRUPO (Ingrese 0 para regresar) ---\n";
-                std::string cod = leerLinea("Código del Grupo: ");
-                if (cod == "0") continue;
+                std::cout << "=================================================================\n";
+                std::cout << "--- CONSULTAR DETALLE DE GRUPO ---\n";
+                std::cout << "Búsqueda por Código o Nombre (ej: COL0002099 o GIDSE)\n";
+                std::cout << "[Sugerencia: Presione ENTER para ver un ejemplo aleatorio, o 0 para regresar]\n";
+                std::cout << "=================================================================\n";
+                std::string busqueda = leerLinea("Término de búsqueda: ", true);
+                if (busqueda == "0") continue;
 
-                NodoGrupo* g = multi.buscarGrupo(cod);
+                NodoGrupo* g = nullptr;
+                if (busqueda.empty()) {
+                    g = multi.obtenerGrupoAleatorio();
+                    if (g) std::cout << "\n[i] Mostrando ejemplo aleatorio: [" << g->codigo_grupo << "] " << g->nombre << "\n";
+                } else {
+                    g = multi.buscarGrupoPorTexto(busqueda);
+                }
+
                 if (!g) {
-                    std::cout << "\n[!] Grupo no encontrado.\n";
+                    std::cout << "\n[!] No se encontró ningún grupo que coincida con '" << busqueda << "'.\n";
                 } else {
                     std::cout << "\n=================================================================\n";
                     std::cout << "DETALLE DEL GRUPO: " << g->nombre << "\n";
@@ -505,13 +516,24 @@ public:
                 pausar();
             } else if (op == 3) {
                 limpiarPantalla();
-                std::cout << "--- CONSULTAR DETALLE DE INVESTIGADOR (Ingrese 0 para regresar) ---\n";
-                std::string doc = leerLinea("Documento del Investigador: ");
-                if (doc == "0") continue;
+                std::cout << "=================================================================\n";
+                std::cout << "--- CONSULTAR DETALLE DE INVESTIGADOR ---\n";
+                std::cout << "Búsqueda por Documento/ID o Nombre (ej: 0000494917 o Adith)\n";
+                std::cout << "[Sugerencia: Presione ENTER para ver un ejemplo aleatorio, o 0 para regresar]\n";
+                std::cout << "=================================================================\n";
+                std::string busqueda = leerLinea("Término de búsqueda: ", true);
+                if (busqueda == "0") continue;
 
-                NodoInvestigador* inv = multi.buscarInvestigador(doc);
+                NodoInvestigador* inv = nullptr;
+                if (busqueda.empty()) {
+                    inv = multi.obtenerInvestigadorAleatorio();
+                    if (inv) std::cout << "\n[i] Mostrando ejemplo aleatorio: [" << inv->documento_id << "] " << inv->nombre_completo << "\n";
+                } else {
+                    inv = multi.buscarInvestigadorPorTexto(busqueda);
+                }
+
                 if (!inv) {
-                    std::cout << "\n[!] Investigador no encontrado.\n";
+                    std::cout << "\n[!] No se encontró ningún investigador que coincida con '" << busqueda << "'.\n";
                 } else {
                     std::cout << "\n=================================================================\n";
                     std::cout << "INVESTIGADOR: " << inv->nombre_completo << "\n";
@@ -675,13 +697,24 @@ public:
                 pausar();
             } else if (op == 3) {
                 limpiarPantalla();
-                std::cout << "--- CONSULTAR DETALLE DE PRODUCTO (0 para regresar) ---\n";
-                std::string idP = leerLinea("ID del Producto: ");
-                if (idP == "0") continue;
+                std::cout << "=================================================================\n";
+                std::cout << "--- CONSULTAR DETALLE DE PRODUCTO ---\n";
+                std::cout << "Búsqueda por ID o Título (ej: PROD-001 o Hipercubo)\n";
+                std::cout << "[Sugerencia: Presione ENTER para ver un ejemplo aleatorio, o 0 para regresar]\n";
+                std::cout << "=================================================================\n";
+                std::string busqueda = leerLinea("Término de búsqueda: ", true);
+                if (busqueda == "0") continue;
 
-                NodoProducto* p = multi.buscarProducto(idP);
+                NodoProducto* p = nullptr;
+                if (busqueda.empty()) {
+                    p = multi.obtenerProductoAleatorio();
+                    if (p) std::cout << "\n[i] Mostrando ejemplo aleatorio: [" << p->id_producto << "] " << p->titulo << "\n";
+                } else {
+                    p = multi.buscarProductoPorTexto(busqueda);
+                }
+
                 if (!p) {
-                    std::cout << "\n[!] Producto no encontrado.\n";
+                    std::cout << "\n[!] No se encontró ningún producto que coincida con '" << busqueda << "'.\n";
                 } else {
                     std::cout << "\n=================================================================\n";
                     std::cout << "PRODUCTO: [" << p->id_producto << "] " << p->titulo << "\n";

@@ -59,7 +59,15 @@ void testMultilistaYHipercubo() {
     assert(multi.contarProductos() == 2);
     assert(multi.buscarProducto("PR-03") == nullptr);
 
-    std::cout << "  -> OK: Multilista ortogonal, conteos y filtros verificados.\n";
+    // Búsqueda inteligente por texto y muestreo aleatorio
+    assert(multi.buscarGrupoPorTexto("gidse") != nullptr);
+    assert(multi.buscarInvestigadorPorTexto("kovyn") != nullptr);
+    assert(multi.buscarProductoPorTexto("hipercubo") != nullptr);
+    assert(multi.obtenerGrupoAleatorio() != nullptr);
+    assert(multi.obtenerInvestigadorAleatorio() != nullptr);
+    assert(multi.obtenerProductoAleatorio() != nullptr);
+
+    std::cout << "  -> OK: Multilista ortogonal, conteos, filtros y búsqueda inteligente verificados.\n";
 }
 
 void testPilaDeshacer() {
