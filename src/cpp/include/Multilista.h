@@ -4,6 +4,8 @@
 #include "Nodo.h"
 #include <iostream>
 #include <string>
+#include <cctype>
+#include <cstdlib>
 
 // =====================================================================
 // TDA MULTILISTA / HIPERCUBO DE INFORMACIÓN
@@ -122,6 +124,123 @@ public:
             g = g->sigGrupo;
         }
         return nullptr;
+    }
+
+    // -----------------------------------------------------------------
+    // BÚSQUEDA INTELIGENTE (POR TEXTO O EJEMPLO ALEATORIO)
+    // -----------------------------------------------------------------
+
+    static bool contieneSubcadena(std::string texto, std::string sub) {
+        if (sub.empty()) return true;
+        for (char &c : texto) c = std::tolower(static_cast<unsigned char>(c));
+        for (char &c : sub) c = std::tolower(static_cast<unsigned char>(c));
+        return texto.find(sub) != std::string::npos;
+    }
+
+    // Búsqueda inteligente por código o subcadena de nombre/líder
+    NodoGrupo* buscarGrupoPorTexto(const std::string& termino) const {
+        if (termino.empty()) return nullptr;
+        NodoGrupo* exacto = buscarGrupo(termino);
+        if (exacto) return exacto;
+
+        NodoGrupo* act = cabezaGrupos;
+        while (act != nullptr) {
+            if (contieneSubcadena(act->nombre, termino) || contieneSubcadena(act->codigo_grupo, termino) || contieneSubcadena(act->lider, termino)) {
+                return act;
+            }
+            act = act->sigGrupo;
+        }
+        return nullptr;
+    }
+
+    // Obtener un grupo de ejemplo aleatorio
+    NodoGrupo* obtenerGrupoAleatorio() const {
+        int total = contarGrupos(false);
+        if (total == 0) return nullptr;
+        int target = std::rand() % total;
+        NodoGrupo* act = cabezaGrupos;
+        for (int i = 0; i < target && act != nullptr; ++i) {
+            act = act->sigGrupo;
+        }
+        return act ? act : cabezaGrupos;
+    }
+
+    // Búsqueda inteligente de investigador por documento o nombre
+    NodoInvestigador* buscarInvestigadorPorTexto(const std::string& termino) const {
+        if (termino.empty()) return nullptr;
+        NodoInvestigador* exacto = buscarInvestigador(termino);
+        if (exacto) return exacto;
+
+        NodoGrupo* g = cabezaGrupos;
+        while (g != nullptr) {
+            NodoInvestigador* inv = g->primerInvestigador;
+            while (inv != nullptr) {
+                if (contieneSubcadena(inv->nombre_completo, termino) || contieneSubcadena(inv->documento_id, termino)) {
+                    return inv;
+                }
+                inv = inv->sigInvestigador;
+            }
+            g = g->sigGrupo;
+        }
+        return nullptr;
+    }
+
+    // Obtener un investigador de ejemplo aleatorio
+    NodoInvestigador* obtenerInvestigadorAleatorio() const {
+        int total = contarInvestigadores(false);
+        if (total == 0) return nullptr;
+        int target = std::rand() % total;
+        int contador = 0;
+        NodoGrupo* g = cabezaGrupos;
+        while (g != nullptr) {
+            NodoInvestigador* inv = g->primerInvestigador;
+            while (inv != nullptr) {
+                if (contador == target) return inv;
+                contador++;
+                inv = inv->sigInvestigador;
+            }
+            g = g->sigGrupo;
+        }
+        return (cabezaGrupos && cabezaGrupos->primerInvestigador) ? cabezaGrupos->primerInvestigador : nullptr;
+    }
+
+    // Búsqueda inteligente de producto por ID o título
+    NodoProducto* buscarProductoPorTexto(const std::string& termino) const {
+        if (termino.empty()) return nullptr;
+        NodoProducto* exacto = buscarProducto(termino);
+        if (exacto) return exacto;
+
+        NodoGrupo* g = cabezaGrupos;
+        while (g != nullptr) {
+            NodoProducto* p = g->primerProducto;
+            while (p != nullptr) {
+                if (contieneSubcadena(p->titulo, termino) || contieneSubcadena(p->id_producto, termino) || contieneSubcadena(p->tipo, termino)) {
+                    return p;
+                }
+                p = p->sigProductoGrupo;
+            }
+            g = g->sigGrupo;
+        }
+        return nullptr;
+    }
+
+    // Obtener un producto de ejemplo aleatorio
+    NodoProducto* obtenerProductoAleatorio() const {
+        int total = contarProductos(false);
+        if (total == 0) return nullptr;
+        int target = std::rand() % total;
+        int contador = 0;
+        NodoGrupo* g = cabezaGrupos;
+        while (g != nullptr) {
+            NodoProducto* p = g->primerProducto;
+            while (p != nullptr) {
+                if (contador == target) return p;
+                contador++;
+                p = p->sigProductoGrupo;
+            }
+            g = g->sigGrupo;
+        }
+        return (cabezaGrupos && cabezaGrupos->primerProducto) ? cabezaGrupos->primerProducto : nullptr;
     }
 
     // -----------------------------------------------------------------

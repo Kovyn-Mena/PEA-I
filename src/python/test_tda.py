@@ -64,7 +64,15 @@ def test_multilista_y_hipercubo():
     assert multi.contar_productos() == 2
     assert multi.buscar_producto("PR-03") is None
 
-    print("  -> OK: Multilista ortogonal, conteos y filtros verificados.")
+    # Búsqueda inteligente por texto y muestreo aleatorio
+    assert multi.buscar_grupo_por_texto("gidse") is not None
+    assert multi.buscar_investigador_por_texto("kovyn") is not None
+    assert multi.buscar_producto_por_texto("hipercubo") is not None
+    assert multi.obtener_grupo_aleatorio() is not None
+    assert multi.obtener_investigador_aleatorio() is not None
+    assert multi.obtener_producto_aleatorio() is not None
+
+    print("  -> OK: Multilista ortogonal, conteos, filtros y búsqueda inteligente verificados.")
 
 def test_pila_deshacer():
     print("[TEST Python] 2. TDA Pila (Historial / Deshacer)...")

@@ -264,13 +264,24 @@ class ConsolaApp:
                 self.pausar()
             elif op == 3:
                 self.limpiar_pantalla()
-                print("--- CONSULTAR DETALLE DE GRUPO (Ingrese 0 para regresar) ---")
-                cod = self.leer_linea("Código del Grupo: ")
-                if cod == "0":
+                print("=================================================================")
+                print("--- CONSULTAR DETALLE DE GRUPO ---")
+                print("Búsqueda por Código o Nombre (ej: COL0002099 o GIDSE)")
+                print("[Sugerencia: Presione ENTER para ver un ejemplo aleatorio, o 0 para regresar]")
+                print("=================================================================")
+                busqueda = self.leer_linea("Término de búsqueda: ", True)
+                if busqueda == "0":
                     continue
-                g = self.multi.buscar_grupo(cod)
+                g = None
+                if not busqueda:
+                    g = self.multi.obtener_grupo_aleatorio()
+                    if g:
+                        print(f"\n[i] Mostrando ejemplo aleatorio: [{g.codigo_grupo}] {g.nombre}")
+                else:
+                    g = self.multi.buscar_grupo_por_texto(busqueda)
+
                 if not g:
-                    print("\n[!] Grupo no encontrado.")
+                    print(f"\n[!] No se encontró ningún grupo que coincida con '{busqueda}'.")
                 else:
                     print("\n=================================================================")
                     print(f"DETALLE DEL GRUPO: {g.nombre}")
@@ -415,13 +426,24 @@ class ConsolaApp:
                 self.pausar()
             elif op == 3:
                 self.limpiar_pantalla()
-                print("--- CONSULTAR DETALLE DE INVESTIGADOR (Ingrese 0 para regresar) ---")
-                doc = self.leer_linea("Documento del Investigador: ")
-                if doc == "0":
+                print("=================================================================")
+                print("--- CONSULTAR DETALLE DE INVESTIGADOR ---")
+                print("Búsqueda por Documento/ID o Nombre (ej: 0000494917 o Adith)")
+                print("[Sugerencia: Presione ENTER para ver un ejemplo aleatorio, o 0 para regresar]")
+                print("=================================================================")
+                busqueda = self.leer_linea("Término de búsqueda: ", True)
+                if busqueda == "0":
                     continue
-                inv = self.multi.buscar_investigador(doc)
+                inv = None
+                if not busqueda:
+                    inv = self.multi.obtener_investigador_aleatorio()
+                    if inv:
+                        print(f"\n[i] Mostrando ejemplo aleatorio: [{inv.documento_id}] {inv.nombre_completo}")
+                else:
+                    inv = self.multi.buscar_investigador_por_texto(busqueda)
+
                 if not inv:
-                    print("\n[!] Investigador no encontrado.")
+                    print(f"\n[!] No se encontró ningún investigador que coincida con '{busqueda}'.")
                 else:
                     print("\n=================================================================")
                     print(f"INVESTIGADOR: {inv.nombre_completo}")
@@ -563,13 +585,24 @@ class ConsolaApp:
                 self.pausar()
             elif op == 3:
                 self.limpiar_pantalla()
-                print("--- CONSULTAR DETALLE DE PRODUCTO (0 para regresar) ---")
-                id_p = self.leer_linea("ID del Producto: ")
-                if id_p == "0":
+                print("=================================================================")
+                print("--- CONSULTAR DETALLE DE PRODUCTO ---")
+                print("Búsqueda por ID o Título (ej: PROD-001 o Hipercubo)")
+                print("[Sugerencia: Presione ENTER para ver un ejemplo aleatorio, o 0 para regresar]")
+                print("=================================================================")
+                busqueda = self.leer_linea("Término de búsqueda: ", True)
+                if busqueda == "0":
                     continue
-                p = self.multi.buscar_producto(id_p)
+                p = None
+                if not busqueda:
+                    p = self.multi.obtener_producto_aleatorio()
+                    if p:
+                        print(f"\n[i] Mostrando ejemplo aleatorio: [{p.id_producto}] {p.titulo}")
+                else:
+                    p = self.multi.buscar_producto_por_texto(busqueda)
+
                 if not p:
-                    print("\n[!] Producto no encontrado.")
+                    print(f"\n[!] No se encontró ningún producto que coincida con '{busqueda}'.")
                 else:
                     print("\n=================================================================")
                     print(f"PRODUCTO: [{p.id_producto}] {p.titulo}")
