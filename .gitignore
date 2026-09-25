@@ -9,6 +9,8 @@ bin/
 src/cpp/test_sqlite
 src/cpp/test_tda
 src/cpp/pea_cpp
+pea_cpp
+Taller2_AB_PO_XX
 
 # Python
 __pycache__/

@@ -37,21 +37,45 @@ El sistema modela la información en un **Hipercubo de información multidimensi
 
 ---
 
-## 🛠️ Requisitos de Compilación y Ejecución
+## 🛠️ Instrucciones de Compilación y Ejecución Directa
 
-### C++
-* Compilador `g++` con soporte C++17.
-* Librería SQLite3 de desarrollo (`libsqlite3-dev`).
-* Compilación:
+### 1. Ejecución en C++ (Persona A)
+
+#### Opción A (Rápida con Makefile):
+* **Compilar y Ejecutar:**
   ```bash
-  g++ -std=c++17 -Wall src/cpp/test_sqlite.cpp -lsqlite3 -o src/cpp/test_sqlite
+  make run
+  ```
+* **Solo Compilar:**
+  ```bash
+  make
+  ./pea_cpp
+  ```
+* **Ejecutar Suite de Pruebas Unitarias:**
+  ```bash
+  make test
+  ```
+* **Limpiar binarios:**
+  ```bash
+  make clean
   ```
 
-### Python
-* Python 3.10+
-* Módulos necesarios para ingesta y gráficos:
+#### Opción B (Compilación directa con g++):
+```bash
+g++ -std=c++17 -Wall -Isrc/cpp/include Taller2_AB_PO_XX.cpp -lsqlite3 -o Taller2_AB_PO_XX
+./Taller2_AB_PO_XX
+```
+
+---
+
+### 2. Ejecución en Python (Persona B)
+* **Requisitos:**
   ```bash
-  pip install requests beautifulsoup4 pypdf matplotlib
+  pip install -r requirements.txt # requests beautifulsoup4 pypdf matplotlib
+  ```
+* **Ejecutar pruebas unitarias de TDAs:**
+  ```bash
+  python3 src/python/test_tda.py
   ```
 
 ---
