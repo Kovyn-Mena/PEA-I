@@ -1,0 +1,4 @@
+codigo_grupo,nombre_grupo,documento_investigador,nombre_investigador,id_producto,tipo_producto,titulo_producto,anio,categoria,validado
+COL0002099,GIDSE,0000494917,Adith Pérez,CSV-001,Articulo,Estructuras enlazadas y persistencia,2024,A1,1
+COL0002099,GIDSE,0000882190,Kovyn Mena,CSV-002,Software,Módulo de web scraping para GrupLAC,2025,A,1
+COL0005544,GISI,0000331456,Laura Quintero,CSV-003,Capitulo,Procesamiento de lenguaje natural en MinCiencias,2023,B,0
