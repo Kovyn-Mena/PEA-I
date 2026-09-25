@@ -5,6 +5,17 @@
 #include <iomanip>
 #include <string>
 #include <cstdlib>
+
+#if defined(_WIN32) || defined(_WIN64)
+    #include <conio.h>
+    #include <io.h>
+    #define ISATTY _isatty
+#else
+    #include <termios.h>
+    #include <unistd.h>
+    #define ISATTY isatty
+#endif
+
 #include "Multilista.h"
 #include "Pila.h"
 #include "Cola.h"
@@ -12,8 +23,8 @@
 
 // =====================================================================
 // APLICACIÓN DE CONSOLA AUTÓNOMA (C++) - PEA-i
-// 100% Independiente de GUI | Limpieza de pantalla multiplataforma
-// Validación robusta de teclado (manejo de ENTER y retroceso con 0)
+// Lectura inmediata de teclas (tipo getch) multiplataforma (Linux/Mac/Win)
+// Borrado de pantalla instantáneo y navegación con retorno en 0
 // =====================================================================
 
 class ConsolaApp {
@@ -28,34 +39,83 @@ public:
         : rutaBD(bd) {}
 
     // -----------------------------------------------------------------
-    // HELPERS MULTIPLATAFORMA DE PANTALLA Y ENTRADA
+    // HELPERS MULTIPLATAFORMA DE TECLADO Y PANTALLA
     // -----------------------------------------------------------------
 
-    // Borrado de pantalla independiente del Sistema Operativo (Windows, Linux, macOS)
+    // Borrado de pantalla multiplataforma
     static void limpiarPantalla() {
     #if defined(_WIN32) || defined(_WIN64)
         std::system("cls");
     #else
-        // Secuencia ANSI universal de limpieza y reposicionamiento del cursor
         std::cout << "\033[2J\033[H" << std::flush;
     #endif
     }
 
-    // Pausa amigable que espera ENTER para avanzar o retroceder
-    static void pausar(const std::string& mensaje = "\n[Presione ENTER para continuar / regresar]... ") {
-        std::cout << mensaje << std::flush;
-        std::string linea;
-        std::getline(std::cin, linea);
+    // Lectura de una sola tecla inmediata sin necesidad de presionar ENTER (getch)
+    static char leerTecla() {
+    #if defined(_WIN32) || defined(_WIN64)
+        if (ISATTY(0)) {
+            return static_cast<char>(_getch());
+        } else {
+            char c = 0;
+            if (std::cin >> c) return c;
+            return 0;
+        }
+    #else
+        if (ISATTY(STDIN_FILENO)) {
+            char buf = 0;
+            struct termios oldAttrs;
+            if (tcgetattr(STDIN_FILENO, &oldAttrs) < 0) return 0;
+
+            struct termios newAttrs = oldAttrs;
+            newAttrs.c_lflag &= ~(ICANON | ECHO); // Sin buffer y sin eco automático
+            newAttrs.c_cc[VMIN] = 1;
+            newAttrs.c_cc[VTIME] = 0;
+
+            if (tcsetattr(STDIN_FILENO, TCSANOW, &newAttrs) < 0) return 0;
+            ssize_t n = read(STDIN_FILENO, &buf, 1);
+            tcsetattr(STDIN_FILENO, TCSANOW, &oldAttrs); // Restaurar terminal
+
+            if (n <= 0) return 0;
+            return buf;
+        } else {
+            // Modo tubería / script de prueba automatizada
+            char c = 0;
+            if (std::cin >> c) return c;
+            return 0;
+        }
+    #endif
     }
 
-    // Lectura segura de texto (evita trampas de saltos de línea residuales)
+    // Pausa que reacciona a CUALQUIER tecla o a ENTER de inmediato
+    static void pausar(const std::string& mensaje = "\n[Presione cualquier tecla o ENTER para continuar / regresar]... ") {
+        std::cout << mensaje << std::flush;
+        leerTecla();
+        std::cout << "\n";
+    }
+
+    // Selector instantáneo de menú: espera únicamente las teclas permitidas
+    static int leerOpcionMenu(const std::string& opcionesValidas, const std::string& mensaje = "Seleccione una opción: ") {
+        std::cout << mensaje << std::flush;
+        while (true) {
+            char tecla = leerTecla();
+            if (tecla == 0) return 0;
+
+            // Verificar si la tecla corresponde a una de las opciones del menú
+            if (opcionesValidas.find(tecla) != std::string::npos) {
+                std::cout << tecla << "\n"; // Eco inmediato para retroalimentación visual
+                return tecla - '0';
+            }
+        }
+    }
+
+    // Lectura de texto línea por línea (para nombres, títulos, etc.)
     static std::string leerLinea(const std::string& mensaje, bool permitirVacio = false) {
         while (true) {
             std::cout << mensaje;
             std::string linea;
             if (!std::getline(std::cin, linea)) return "";
 
-            // Si se permite vacío (ej: presionar ENTER para omitir o volver)
             if (permitirVacio) return linea;
 
             size_t first = linea.find_first_not_of(" \t\r\n");
@@ -66,7 +126,7 @@ public:
         }
     }
 
-    // Lectura segura de enteros: si presiona solo ENTER, maneja el valor por defecto
+    // Lectura de número entero para formularios (ej. año)
     static int leerEntero(const std::string& mensaje, int valorPorDefecto = -1) {
         while (true) {
             std::cout << mensaje;
@@ -76,13 +136,13 @@ public:
             size_t first = linea.find_first_not_of(" \t\r\n");
             if (first == std::string::npos) {
                 if (valorPorDefecto != -1) return valorPorDefecto;
-                std::cout << "  [!] Ingrese un número válido (o 0 para regresar).\n";
+                std::cout << "  [!] Ingrese un valor numérico (o 0 para cancelar).\n";
                 continue;
             }
             try {
                 return std::stoi(linea.substr(first));
             } catch (...) {
-                std::cout << "  [!] Entrada inválida. Ingrese un número (o 0 para regresar).\n";
+                std::cout << "  [!] Entrada inválida. Ingrese un número.\n";
             }
         }
     }
@@ -101,7 +161,7 @@ public:
         std::cout << "  [2] Iniciar con estructuras en memoria vacias\n";
         std::cout << "-----------------------------------------------------------------\n";
         
-        int opcion = leerEntero("Opción [1 o 2]: ", 1);
+        int opcion = leerOpcionMenu("12", "Opción [1 o 2]: ");
         if (opcion == 1) {
             std::cout << "\n[+] Cargando datos desde SQLite hacia la Multilista...\n";
             if (GestorSQLite::cargarDesdeBD(multi, rutaBD)) {
@@ -116,7 +176,7 @@ public:
             std::cout << "\n[+] Iniciando con estructuras en memoria vacías.\n";
         }
 
-        pausar("\n[Presione ENTER para ingresar al Menú Principal]... ");
+        pausar("\n[Presione cualquier tecla o ENTER para ingresar al Menú Principal]... ");
         menuPrincipal();
     }
 
@@ -138,7 +198,7 @@ public:
             std::cout << "  6. Guardar cambios en la Base de Datos (Persistencia)\n";
             std::cout << "  0. Salir del Sistema\n";
             std::cout << "-----------------------------------------------------------------\n";
-            op = leerEntero("Seleccione una opción: ");
+            op = leerOpcionMenu("0123456", "Presione una opción [0-6]: ");
 
             switch (op) {
                 case 1: menuGrupos(); break;
@@ -158,7 +218,7 @@ public:
                     std::cout << "  [0] Cancelar y regresar al menú\n";
                     std::cout << "-----------------------------------------------------------------\n";
                     {
-                        int confirm = leerEntero("Opción [1/2/0]: ", 2);
+                        int confirm = leerOpcionMenu("012", "Presione opción [1/2/0]: ");
                         if (confirm == 1) {
                             guardarEnBD();
                             std::cout << "\n[+] Cambios guardados. ¡Éxitos en el taller!\n";
@@ -169,9 +229,6 @@ public:
                         }
                     }
                     break;
-                default:
-                    std::cout << "  [!] Opción no válida.\n";
-                    pausar();
             }
         }
     }
@@ -194,7 +251,7 @@ public:
             std::cout << "  6. Eliminar Grupo Físicamente (Cascada)\n";
             std::cout << "  0. Anterior / Regresar al Menú Principal\n";
             std::cout << "-----------------------------------------------------------------\n";
-            op = leerEntero("Opción: ");
+            op = leerOpcionMenu("0123456", "Presione una opción [0-6]: ");
 
             if (op == 1) {
                 limpiarPantalla();
@@ -320,7 +377,8 @@ public:
                 if (cod == "0") continue;
 
                 std::cout << "\n  [ADVERTENCIA] Se eliminará el grupo, sus investigadores y productos asociados.\n";
-                if (leerEntero("¿Confirmar eliminación física definitiva? (1: Sí / 0: Cancelar): ", 0) == 1) {
+                int conf = leerOpcionMenu("01", "¿Confirmar eliminación física definitiva? (1: Sí / 0: Cancelar): ");
+                if (conf == 1) {
                     if (multi.eliminarGrupo(cod)) {
                         historial.push("ELIMINAR", "GRUPO", cod, "");
                         std::cout << "\n[OK] Grupo y dependencias eliminados físicamente de memoria.\n";
@@ -353,7 +411,7 @@ public:
             std::cout << "  6. Eliminar Investigador Físicamente\n";
             std::cout << "  0. Anterior / Regresar al Menú Principal\n";
             std::cout << "-----------------------------------------------------------------\n";
-            op = leerEntero("Opción: ");
+            op = leerOpcionMenu("0123456", "Presione una opción [0-6]: ");
 
             if (op == 1) {
                 limpiarPantalla();
@@ -480,7 +538,8 @@ public:
                 std::string doc = leerLinea("Documento del Investigador a ELIMINAR: ");
                 if (doc == "0") continue;
 
-                if (leerEntero("¿Confirmar eliminación física? (1: Sí / 0: Cancelar): ", 0) == 1) {
+                int conf = leerOpcionMenu("01", "¿Confirmar eliminación física definitiva? (1: Sí / 0: Cancelar): ");
+                if (conf == 1) {
                     if (multi.eliminarInvestigador(doc)) {
                         historial.push("ELIMINAR", "INVESTIGADOR", doc, "");
                         std::cout << "\n[OK] Investigador y sus productos eliminados de la memoria.\n";
@@ -513,7 +572,7 @@ public:
             std::cout << "  6. Eliminar Producto Físicamente\n";
             std::cout << "  0. Anterior / Regresar al Menú Principal\n";
             std::cout << "-----------------------------------------------------------------\n";
-            op = leerEntero("Opción: ");
+            op = leerOpcionMenu("0123456", "Presione una opción [0-6]: ");
 
             if (op == 1) {
                 limpiarPantalla();
@@ -571,7 +630,7 @@ public:
                 std::string tit = leerLinea("Título de la obra: ");
                 int anio = leerEntero("Año de publicación: ");
                 std::string cat = leerLinea("Categoría MinCiencias (A1, A, B, C): ");
-                int val = leerEntero("¿Validado/Avalado por MinCiencias? (1: Sí / 0: No): ", 0);
+                int val = leerOpcionMenu("01", "¿Validado/Avalado por MinCiencias? (1: Sí / 0: No): ");
 
                 if (multi.insertarProducto(codG, idInv, idP, tipo, tit, anio, cat, val == 1, true)) {
                     historial.push("CREAR", "PRODUCTO", idP, codG);
@@ -614,7 +673,8 @@ public:
                     p->titulo = leerLinea("Nuevo Título (" + p->titulo + "): ");
                     p->anio = leerEntero("Nuevo Año: ");
                     p->categoria_minciencias = leerLinea("Nueva Categoría (" + p->categoria_minciencias + "): ");
-                    p->validado = (leerEntero("¿Validado? (1: Sí / 0: No): ", 0) == 1);
+                    int val = leerOpcionMenu("01", "¿Validado? (1: Sí / 0: No): ");
+                    p->validado = (val == 1);
                     historial.push("MODIFICAR", "PRODUCTO", idP, prev);
                     std::cout << "\n[OK] Producto actualizado exitosamente.\n";
                 }
@@ -641,7 +701,8 @@ public:
                 std::string idP = leerLinea("ID del Producto a ELIMINAR: ");
                 if (idP == "0") continue;
 
-                if (leerEntero("¿Confirmar eliminación física? (1: Sí / 0: Cancelar): ", 0) == 1) {
+                int conf = leerOpcionMenu("01", "¿Confirmar eliminación física? (1: Sí / 0: Cancelar): ");
+                if (conf == 1) {
                     if (multi.eliminarProducto(idP)) {
                         historial.push("ELIMINAR", "PRODUCTO", idP, "");
                         std::cout << "\n[OK] Producto desenlazado ortogonalmente y liberado de memoria.\n";
@@ -765,7 +826,7 @@ public:
         std::cout << "  [3] Rango de años personalizado\n";
         std::cout << "  [0] Anterior / Regresar al Menú Principal\n";
         std::cout << "-----------------------------------------------------------------\n";
-        int opFiltro = leerEntero("Opción: ", 0);
+        int opFiltro = leerOpcionMenu("0123", "Presione opción [0-3]: ");
 
         int anioInicio = 0, anioFin = 9999;
         if (opFiltro == 1) {
@@ -776,7 +837,7 @@ public:
             anioInicio = leerEntero("Año inicial: ");
             anioFin = leerEntero("Año final: ");
         } else {
-            return; // Regresar
+            return; // 0: Regresar
         }
 
         int prodsVentana = multi.contarProductosPorVentana(anioInicio, anioFin, true);
