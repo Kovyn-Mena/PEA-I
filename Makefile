@@ -18,9 +18,15 @@ $(TARGET): $(SRC) $(wildcard src/cpp/include/*.h)
 	$(CXX) $(CXXFLAGS) $(SRC) -o $(TARGET) $(LDFLAGS)
 	@echo "[OK] Compilación exitosa: ./$(TARGET)"
 
-# Ejecutar el programa en consola
-run: $(TARGET)
+# Ejecutar el programa en consola C++
+run: run-cpp
+
+run-cpp: $(TARGET)
 	./$(TARGET)
+
+# Ejecutar el programa en consola Python
+run-py:
+	python3 Taller2_AB_PO_XX.py
 
 # Ejecutar la suite completa de pruebas unitarias (C++ y Python)
 test:
@@ -35,4 +41,4 @@ clean:
 	rm -f $(TARGET) src/cpp/test_tda src/cpp/test_sqlite
 	@echo "[OK] Archivos temporales eliminados."
 
-.PHONY: all run test clean
+.PHONY: all run run-cpp run-py test clean
