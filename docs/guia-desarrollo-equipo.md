@@ -34,11 +34,6 @@ flowchart TD
         direction LR
         subgraph TRACK_A ["Línea Persona A (Kovyn - Linux)"]
             F4["Fase 4: Interoperabilidad C++ <-> Python<br><i>(Tuberías IPC popen() + CLI Bridge)</i>"]:::parallelA
-            F6_BONUS["Fase 6.B: Módulo Complementario Rust<br><i>(Bonus opcional del Taller)</i>"]:::parallelA
-        end
-
-        subgraph TRACK_A ["Línea Persona A (Kovyn - Linux)"]
-            F4["Fase 4: Interoperabilidad C++ <-> Python<br><i>(Tuberías IPC popen() + CLI Bridge)</i>"]:::parallelA
             F4_GUI["Fase 4.B: GUI Creativa en C++<br><i>(Visualizador Gráfico / ImGui o Raylib - Compl. 14.c)</i>"]:::parallelA
             F6_BONUS["Fase 6.B: Módulo Complementario Rust<br><i>(Bonus opcional del Taller - Compl. 14.f)</i>"]:::parallelA
         end
@@ -361,9 +356,13 @@ Para mantener el repositorio impecable y profesional:
 
 ---
 
-## 🛡️ 8. Reglas de Oro para Todo el Equipo
+## 🛡️ 8. Reglas de Oro y Principios Arquitectónicos
 
-1. **No tocar `data/schema.sql`:** La base de datos es el contrato común. Si se cambia un nombre de columna, se rompería C++ o Python.
-2. **No usar estructuras nativas para almacenar el hipercubo:** La información en RAM **siempre** debe residir en los nodos de la `Multilista`.
-3. **La consola nunca debe dejar de funcionar:** Cualquier nueva funcionalidad gráfica o de ingesta debe integrarse como un módulo modular complementario sin alterar la autonomía de la consola.
-4. **Validar antes de hacer commit:** Correr siempre `make test` (o `python src/python/test_tda.py`) antes de subir cambios.
+1. **Principio Sagrado: "Consola Primero" y Desacoplamiento Total de la GUI:**
+   * **El sistema NUNCA debe depender de la interfaz gráfica para operar.**
+   * La consola autónoma (tanto en C++ como en Python) es el **núcleo evaluado directamente en el examen parcial** por el docente.
+   * La consola debe ser 100% autosuficiente: realizar CRUD completo, navegar con `getch`, ejecutar la Pila Undo, procesar archivos/URLs, filtrar por años y emitir tablas estadísticas sin necesidad de abrir ninguna ventana gráfica.
+   * Las interfaces gráficas (tanto el Dashboard de Python como el visualizador de C++) son **capas visuales externas y desacopladas**, diseñadas como complementos opcionales para la nota 5.0 (invocables mediante la bandera `--gui` o desde opciones del menú). Si la GUI falla, se cierra o se ejecuta en un servidor sin entorno gráfico, la consola debe seguir funcionando de forma impecable sin arrojar excepciones.
+2. **No tocar `data/schema.sql`:** La base de datos SQLite es el contrato común. Si se altera una columna o tipo, se rompería la sincronización entre C++ y Python.
+3. **No usar estructuras nativas para almacenar el hipercubo:** La información en RAM **siempre** debe residir en los nodos con punteros ortogonales de la `Multilista` (está prohibido reemplazarla por listas, diccionarios o `std::vector`).
+4. **Validar antes de hacer commit:** Correr siempre `make test` (o `python src/python/test_tda.py`) antes de subir cambios a GitHub.
