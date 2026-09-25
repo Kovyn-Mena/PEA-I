@@ -37,21 +37,28 @@ flowchart TD
             F6_BONUS["Fase 6.B: Módulo Complementario Rust<br><i>(Bonus opcional del Taller)</i>"]:::parallelA
         end
 
+        subgraph TRACK_A ["Línea Persona A (Kovyn - Linux)"]
+            F4["Fase 4: Interoperabilidad C++ <-> Python<br><i>(Tuberías IPC popen() + CLI Bridge)</i>"]:::parallelA
+            F4_GUI["Fase 4.B: GUI Creativa en C++<br><i>(Visualizador Gráfico / ImGui o Raylib - Compl. 14.c)</i>"]:::parallelA
+            F6_BONUS["Fase 6.B: Módulo Complementario Rust<br><i>(Bonus opcional del Taller - Compl. 14.f)</i>"]:::parallelA
+        end
+
         subgraph TRACK_B ["Línea Persona B (Compañero - Windows)"]
             F3["Fase 3: Ingesta Masiva Multifuente<br><i>(Web Scraping GrupLAC/CvLAC + PDF + CSV + Cola)</i>"]:::parallelB
-            F5["Fase 5: Dashboard Gráfico Interactivo<br><i>(Tkinter + Gráficos Matplotlib + Filtro Años)</i>"]:::parallelB
+            F5["Fase 5: Dashboard Gráfico Interactivo<br><i>(Tkinter + Gráficos Matplotlib + 3 Vistas - Compl. 14.c)</i>"]:::parallelB
         end
     end
 
     F6["Fase 6.A: Integración Total, Documentación Técnica & Entrega<br><i>(Word SPEC/HU/Casos de Uso + Taller2_AB_PO_XX)</i>"]:::final
 
-    F0 -->|Esquema de entidades| F1
+    F0 -->|Esquema de entidades + Plan de Grupo| F1
     F1 -->|TDAs en RAM| F2
     F2 -->|Base de consola lista| F4
+    F2 -->|Estructuras para renderizado| F4_GUI
     F0 & F1 -->|Cola TDA y Persistencia| F3
     F3 -->|Genera datos para visualización| F5
     F3 & F5 -->|Python scripts listos para ser invocados| F4
-    F4 & F5 & F6_BONUS -->|Ensamble de todos los complementos| F6
+    F4 & F4_GUI & F5 & F6_BONUS -->|Ensamble de todos los complementos| F6
 ```
 
 ---
@@ -60,14 +67,15 @@ flowchart TD
 
 | Fase | Nombre y Alcance | Responsable | Estado | Depende de... | Se ejecuta en simultáneo con... | ¿Por qué existe y qué aporta al 5.0? |
 | :---: | :--- | :---: | :---: | :---: | :---: | :--- |
-| **0** | **Contrato Relacional y SQLite** | Persona A | **Hecho** | Ninguna (Inicio) | — | Crea la única fuente de la verdad (`data/pea_investigacion.db`). Permite que C++ y Python compartan datos sin servidores externos. |
+| **0** | **Contrato Relacional y SQLite** | Persona A | **Hecho** | Ninguna (Inicio) | — | Crea la única fuente de la verdad (`data/pea_investigacion.db`). Soporta Grupos (con Plan e integrantes), Investigadores y Productos. |
 | **1** | **TDAs Académicos Puros (Nodos)** | Persona A | **Hecho** | Fase 0 | — | Implementa el Hipercubo 3D, Pila y Cola desde cero. Cumple la exigencia del docente de prohibir `std::vector` y listas nativas. |
-| **2** | **Consolas Autónomas (C++ y Python)** | Persona A | **Hecho** | Fases 0 y 1 | — | Base de consola para el examen parcial. Incluye CRUD, borrado lógico, filtros de años, búsqueda por texto, random con ENTER y navegación instantánea (`getch`). |
-| **3** | **Ingesta Masiva (Scraping/PDF/CSV)** | **Persona B** | **EN CURSO** | Fases 0 y 1 | **Fase 4 (Persona A)** | **Punto 7 del Taller:** Descarga automática desde GrupLAC y CvLAC, lectura de informes PDF y archivos CSV usando la Cola TDA. |
-| **4** | **Interoperabilidad C++ $\leftrightarrow$ Python** | **Persona A** | **EN CURSO** | Fase 2 | **Fase 3 y 5 (Persona B)** | **Punto 14.d (Complemento 5.0):** Permite que la consola en C++ invoque por debajo el scraping o el dashboard gráfico en Python usando `popen()`. |
-| **5** | **Dashboard Gráfico (Tkinter + Matplotlib)** | **Persona B** | **PENDIENTE** | Fases 0 y 3 | **Fase 4 y 6.B (Persona A)** | **Punto 12.b (Obligatorio 4.0):** Presenta histogramas por año, gráficos de barras por categoría MinCiencias y selector de ventana de observación. |
-| **6.A**| **Documentación Técnica & Entrega** | **Ambos** | **PENDIENTE** | Fases 3, 4 y 5 | — | **Notas 1 y 2 del Taller:** Documento Word formal con SPEC, Historias de Usuario, Diagramas de Casos de Uso y archivos finales de entrega. |
-| **6.B**| **Módulo Opcional Rust (CLI/Bridge)** | **Persona A** | **OPCIONAL** | Fase 2 | Fase 5 (Persona B) | **Punto 14.f (Complemento 5.0):** Pequeño analizador o CLI en Rust para asegurar el 5.0 rotundo frente a cualquier rúbrica. |
+| **2** | **Consolas Autónomas (C++ y Python)** | Persona A | **Hecho** | Fases 0 y 1 | — | Base de consola para el examen parcial. CRUD completo (incluyendo Plan del Grupo), filtros de años, 3 vistas estadísticas y UX `getch`. |
+| **3** | **Ingesta Masiva (Scraping/PDF/CSV)** | **Persona B** | **EN CURSO** | Fases 0 y 1 | **Fases 4 y 4.B (Persona A)** | **Punto 7 del Taller:** Descarga automática desde GrupLAC y CvLAC, lectura de informes PDF y archivos CSV usando la Cola TDA. |
+| **4** | **Interoperabilidad C++ $\leftrightarrow$ Python** | **Persona A** | **EN CURSO** | Fase 2 | **Fases 3 y 5 (Persona B)** | **Punto 14.d (Complemento 5.0):** Permite que C++ invoque el scraping o el dashboard en Python mediante `popen()`. |
+| **4.B**| **GUI Creativa en C++** | **Persona A** | **EN CURSO** | Fase 2 | **Fases 3 y 5 (Persona B)** | **Punto 14.c (Complemento 5.0):** Interfaz gráfica creativa en C++ (ImGui / Raylib o canvas gráfico) para visualización visual del Hipercubo. |
+| **5** | **Dashboard Gráfico (Tkinter + Matplotlib)** | **Persona B** | **PENDIENTE** | Fases 0 y 3 | **Fases 4.B y 6.B (Persona A)**| **Punto 12.b (Obligatorio 4.0):** Dashboard con las 3 vistas obligatorias (Grupo, Investigador, Producto), histogramas por año y barras por categoría. |
+| **6.A**| **Documentación Técnica & Entrega Formal** | **Ambos** | **PENDIENTE** | Fases 3, 4, 4.B, 5 | — | **Notas 1 a 8 del Taller:** Word formal (SPEC, HU, Casos de Uso), entrega antes del lunes 19 de octubre 11:59 am con iniciales en los fuentes. |
+| **6.B**| **Módulo Opcional Rust (CLI/Bridge)** | **Persona A** | **OPCIONAL** | Fase 2 | Fase 5 (Persona B) | **Punto 14.f (Complemento 5.0):** Analizador complementario en Rust para blindar el 5.0 rotundo frente a cualquier rúbrica. |
 
 ---
 
@@ -148,14 +156,31 @@ flowchart TD
 
 ---
 
+### 🔹 Fase 4.B: GUI Creativa en C++ (Visualizador Gráfico / ImGui / Raylib) — [EN CURSO: PERSONA A]
+* **Rama asignada:** `feature/cpp-gui` (o integrada en `feature/cpp-interop`)
+* **Archivos a crear:** `src/cpp/include/GUIApp.h`, `src/cpp/gui_main.cpp`.
+* **¿Por qué existe y qué hace?:**
+  El Punto 14.c establece: *"Uso de GUI creativa"*. Aunque el Punto 12.a indica que en C++ la consola descriptiva es suficiente para el 4.0, para garantizar el **5.0 indiscutible**, Persona A construirá una interfaz gráfica nativa complementaria en C++:
+  1. Renderizado interactivo del **Hipercubo 3D / Multilista**: visualiza los nodos ortogonales en pantalla conectando grupos con investigadores y productos mediante líneas o tarjetas dinámicas.
+  2. Tablas interactivas con ordenamiento y filtros por año.
+  3. Ejecución directa mediante la bandera `./pea_cpp --gui`.
+* **¿De qué depende?:** De la Fase 2 (Multilista y estructuras en C++).
+* **¿Se puede hacer en simultáneo con Fase 3 y 5?:** **SÍ.** Persona A desarrolla la GUI de C++ en Linux mientras Persona B desarrolla la GUI de Python en Windows.
+
+---
+
 ### 🔹 Fase 5: Dashboard Gráfico Interactivo (Tkinter + Matplotlib) — [PENDIENTE: PERSONA B]
 * **Rama asignada:** `feature/python-gui`
 * **Archivo a crear:** `src/python/gui.py`
 * **Librerías a usar:** `tkinter` (nativo) y `matplotlib`.
 * **¿Por qué existe y qué hace?:**
-  El Punto 12.b exige:
+  El Punto 12.b y 12.c exigen:
   > *"En Python el programa mostrará un DASHBOARD con la información estadística, histogramas y diagramas de barras. Ejemplo: https://sistemainvestigacion.uniminuto.edu/PGrupos/Ver/141"*
-  * Crea una ventana limpia con pestañas (*Grupos*, *Investigadores*, *Productos*, *Métricas*).
+  > *"El usuario final, puede utilizar diferentes vistas o aproximaciones: i. Por grupo, ii. Por investigador, iii. Por productos."*
+  * Crea una ventana limpia con 3 vistas estadísticas obligatorias (Punto 12.c):
+    1. **Vista por Grupo:** Indicadores de producción total, investigadores adscritos, plan estratégico y estado de actividad.
+    2. **Vista por Investigador:** Producción autorada por investigador, categorías MinCiencias e histórico de publicaciones.
+    3. **Vista por Productos:** Clasificación por tipo (artículos, libros, software, patentes) y estado de aval/validación.
   * Incrusta gráficos de `matplotlib`:
     * Gráfico de barras de productos por categoría (`A1`, `A`, `B`, `C`).
     * Histograma de producción científica por año.
@@ -165,13 +190,25 @@ flowchart TD
 
 ---
 
-### 🔹 Fase 6: Documentación Formal (SPEC/HU), Empaquetado y Bonus Rust — [PENDIENTE: AMBOS]
+### 🔹 Fase 6: Documentación Formal (SPEC/HU), Empaquetado y Entrega — [PENDIENTE: AMBOS]
 * **Archivos:** `Documentacion_Tecnica_GrupoXX.docx`, `integrantes.txt`, `Taller2_AB_PO_XX.cpp`, `Taller2_AB_PO_XX.py`, y opcionalmente módulo Rust.
 * **¿Por qué existe y qué hace?:**
-  * Cumplir con las formalidades de entrega exigidas por el docente antes del plazo:
-    1. Documento Word formal con especificación técnica (SPEC), diagrama del Hipercubo, Historias de Usuario (HU) y Diagramas de Casos de Uso.
-    2. Archivos ejecutables renombrados con las iniciales de los integrantes (ej. `Taller2_KM_...`).
-    3. Asegurar que todos los complementos (Git, SQLite, GUI, Interoperabilidad, Rust) estén verificados al 100%.
+  Cumplir con las formalidades y requisitos de entrega estrictos exigidos por el docente en las Notas del Taller:
+  1. **Documento Word formal de especificación técnica:**
+     * Especificación formal de requerimientos (SPEC).
+     * Historias de Usuario (HU).
+     * Diagramas de Casos de Uso.
+     * Diagrama y justificación matemática del Hipercubo de Información y los 4 TDAs.
+  2. **Nomenclatura de Archivos de Entrega (Notas 1 y 8):**
+     * Los archivos principales deben llevar las iniciales de los estudiantes en su nombre (ej. `Taller2_KM_PO_XX.cpp` y `Taller2_KM_PO_XX.py`).
+  3. **Identificación de Estudiantes (Nota 4):**
+     * Archivo de texto `integrantes.txt` con nombres completos, códigos estudiantiles y correos institucionales.
+  4. **Condiciones Oficiales de Entrega (Notas 5, 6 y 7):**
+     * **Fecha y hora límite:** Antes del **lunes 19 de octubre a las 11:59 AM**.
+     * **Correo de envío:** `adithperez@unicesar.edu.co`.
+     * **Asunto del correo (Subject obligatorio):** `Estructura de datos Taller 2 Grupo XX 2026`.
+  5. **Módulo Opcional Rust (Punto 14.f - Complemento 5.0):**
+     * Analizador CLI complementario en Rust (`src/rust/`) para blindar el 5.0 frente a cualquier rúbrica.
 
 ---
 
