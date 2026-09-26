@@ -24,6 +24,7 @@
 #include "Cola.h"
 #include "GestorSQLite.h"
 #include "VisualizadorGrafico.h"
+#include "GestorInterop.h"
 
 // =====================================================================
 // APLICACIÓN DE CONSOLA AUTÓNOMA (C++) - PEA-i
@@ -262,9 +263,10 @@ public:
             std::cout << "  5. Resumen Estadistico y Filtro por Ventana de Años\n";
             std::cout << "  6. Guardar cambios en la Base de Datos (Persistencia)\n";
             std::cout << "  7. Visualizador Grafico del Hipercubo 3D (GUI C++)\n";
+            std::cout << "  8. Ingesta de Datos MinCiencias (Web Scraping / PDF / CSV - Puente Python)\n";
             std::cout << "  0. Salir del Sistema\n";
             std::cout << "-----------------------------------------------------------------\n";
-            op = leerOpcionMenu("01234567", "Presione una opción [0-7]: ");
+            op = leerOpcionMenu("012345678", "Presione una opción [0-8]: ");
 
             switch (op) {
                 case 1: menuGrupos(); break;
@@ -274,6 +276,7 @@ public:
                 case 5: menuEstadisticasYFiltro(); break;
                 case 6: guardarEnBD(); break;
                 case 7: VisualizadorGrafico::lanzarVisualizador(multi); pausar(); break;
+                case 8: menuIngestaInteroperabilidad(); break;
                 case 0:
                     limpiarPantalla();
                     std::cout << "=================================================================\n";
@@ -296,6 +299,111 @@ public:
                         }
                     }
                     break;
+            }
+        }
+    }
+
+    // -----------------------------------------------------------------
+    // INGESTA DE DATOS & WEB SCRAPING (INTEROPERABILIDAD C++ <-> PYTHON)
+    // -----------------------------------------------------------------
+    void menuIngestaInteroperabilidad() {
+        int op = -1;
+        while (op != 0) {
+            limpiarPantalla();
+            std::cout << "=================================================================\n";
+            std::cout << "  PEA-i UPC > Ingesta de Datos & Web Scraping (Interoperabilidad)\n";
+            std::cout << "=================================================================\n";
+            std::cout << "  1. Web Scraping de Grupo MinCiencias (GrupLAC)\n";
+            std::cout << "  2. Web Scraping de Investigador MinCiencias (CvLAC)\n";
+            std::cout << "  3. Procesar Archivo CSV de Investigacion (data/muestra_upc.csv)\n";
+            std::cout << "  4. Procesar Archivo PDF de Produccion Cientifica\n";
+            std::cout << "  0. Anterior / Regresar al Menu Principal\n";
+            std::cout << "-----------------------------------------------------------------\n";
+            op = leerOpcionMenu("01234", "Presione una opcion [0-4]: ");
+
+            if (op == 1) {
+                limpiarPantalla();
+                std::cout << "=================================================================\n";
+                std::cout << "--- WEB SCRAPING: GRUPO MINCIENCIAS (GrupLAC) ---\n";
+                std::cout << "URL oficial del taller: Grupo GIDSE (00000000002099)\n";
+                std::cout << "[Presione ENTER para usar la URL oficial, o 0 para cancelar]\n";
+                std::cout << "=================================================================\n";
+                std::string url = leerLinea("URL GrupLAC: ", true);
+                if (url == "0") continue;
+                if (url.empty()) {
+                    url = "https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002099";
+                }
+                std::string salida;
+                if (GestorInterop::ejecutarScrapingURL(url, salida)) {
+                    std::cout << "\n[+] Recargando datos en la Multilista en RAM desde SQLite...\n";
+                    GestorSQLite::cargarDesdeBD(multi, rutaBD);
+                    std::cout << "[OK] Multilista actualizada en RAM: " 
+                              << multi.contarGrupos(false) << " grupos, "
+                              << multi.contarInvestigadores(false) << " investigadores, "
+                              << multi.contarProductos(false) << " productos.\n";
+                }
+                pausar();
+            } else if (op == 2) {
+                limpiarPantalla();
+                std::cout << "=================================================================\n";
+                std::cout << "--- WEB SCRAPING: INVESTIGADOR MINCIENCIAS (CvLAC) ---\n";
+                std::cout << "URL oficial del taller: Ing. Adith Perez (0000494917)\n";
+                std::cout << "[Presione ENTER para usar la URL oficial, o 0 para cancelar]\n";
+                std::cout << "=================================================================\n";
+                std::string url = leerLinea("URL CvLAC: ", true);
+                if (url == "0") continue;
+                if (url.empty()) {
+                    url = "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000494917";
+                }
+                std::string salida;
+                if (GestorInterop::ejecutarScrapingURL(url, salida)) {
+                    std::cout << "\n[+] Recargando datos en la Multilista en RAM desde SQLite...\n";
+                    GestorSQLite::cargarDesdeBD(multi, rutaBD);
+                    std::cout << "[OK] Multilista actualizada en RAM: " 
+                              << multi.contarGrupos(false) << " grupos, "
+                              << multi.contarInvestigadores(false) << " investigadores, "
+                              << multi.contarProductos(false) << " productos.\n";
+                }
+                pausar();
+            } else if (op == 3) {
+                limpiarPantalla();
+                std::cout << "=================================================================\n";
+                std::cout << "--- PROCESAMIENTO DE ARCHIVO CSV ---\n";
+                std::cout << "[Presione ENTER para usar 'data/muestra_upc.csv', o 0 para cancelar]\n";
+                std::cout << "=================================================================\n";
+                std::string ruta = leerLinea("Ruta del archivo CSV: ", true);
+                if (ruta == "0") continue;
+                if (ruta.empty()) {
+                    ruta = "data/muestra_upc.csv";
+                }
+                std::string salida;
+                if (GestorInterop::ejecutarIngestaCSV(ruta, salida)) {
+                    std::cout << "\n[+] Recargando datos en la Multilista en RAM desde SQLite...\n";
+                    GestorSQLite::cargarDesdeBD(multi, rutaBD);
+                    std::cout << "[OK] Multilista actualizada en RAM: " 
+                              << multi.contarGrupos(false) << " grupos, "
+                              << multi.contarInvestigadores(false) << " investigadores, "
+                              << multi.contarProductos(false) << " productos.\n";
+                }
+                pausar();
+            } else if (op == 4) {
+                limpiarPantalla();
+                std::cout << "=================================================================\n";
+                std::cout << "--- PROCESAMIENTO DE ARCHIVO PDF ---\n";
+                std::cout << "[Ingrese ruta del archivo PDF, o 0 para cancelar]\n";
+                std::cout << "=================================================================\n";
+                std::string ruta = leerLinea("Ruta del archivo PDF: ");
+                if (ruta == "0") continue;
+                std::string salida;
+                if (GestorInterop::ejecutarIngestaPDF(ruta, salida)) {
+                    std::cout << "\n[+] Recargando datos en la Multilista en RAM desde SQLite...\n";
+                    GestorSQLite::cargarDesdeBD(multi, rutaBD);
+                    std::cout << "[OK] Multilista actualizada en RAM: " 
+                              << multi.contarGrupos(false) << " grupos, "
+                              << multi.contarInvestigadores(false) << " investigadores, "
+                              << multi.contarProductos(false) << " productos.\n";
+                }
+                pausar();
             }
         }
     }
