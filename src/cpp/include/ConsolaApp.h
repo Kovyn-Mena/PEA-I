@@ -23,6 +23,7 @@
 #include "Pila.h"
 #include "Cola.h"
 #include "GestorSQLite.h"
+#include "VisualizadorGrafico.h"
 
 // =====================================================================
 // APLICACIÓN DE CONSOLA AUTÓNOMA (C++) - PEA-i
@@ -223,6 +224,28 @@ public:
     }
 
     // -----------------------------------------------------------------
+    // PUNTO DE ENTRADA DIRECTO MODO GUI
+    // -----------------------------------------------------------------
+    void iniciarGUI() {
+        std::signal(SIGINT, manejadorSenal);
+    #if defined(_WIN32) || defined(_WIN64)
+        std::system("chcp 65001 > nul");
+    #endif
+        limpiarPantalla();
+        std::cout << "=================================================================\n";
+        std::cout << "     PEA-i UPC: MODO INTERFAZ GRAFICA (C++ VISUALIZER)          \n";
+        std::cout << "=================================================================\n";
+        std::cout << "[+] Precargando datos desde SQLite (" << rutaBD << ")...\n";
+        if (GestorSQLite::cargarDesdeBD(multi, rutaBD)) {
+            std::cout << "[OK] " << multi.contarGrupos(false) << " grupos, "
+                      << multi.contarInvestigadores(false) << " investigadores, "
+                      << multi.contarProductos(false) << " productos cargados en RAM.\n";
+        }
+        VisualizadorGrafico::lanzarVisualizador(multi);
+        std::cout << "\n[OK] Visualizador grafico interactivo iniciado exitosamente.\n";
+    }
+
+    // -----------------------------------------------------------------
     // MENÚ PRINCIPAL
     // -----------------------------------------------------------------
     void menuPrincipal() {
@@ -238,9 +261,10 @@ public:
             std::cout << "  4. Deshacer ultima accion (Pila Undo - LIFO) [" << historial.tamano() << " en pila]\n";
             std::cout << "  5. Resumen Estadistico y Filtro por Ventana de Años\n";
             std::cout << "  6. Guardar cambios en la Base de Datos (Persistencia)\n";
+            std::cout << "  7. Visualizador Grafico del Hipercubo 3D (GUI C++)\n";
             std::cout << "  0. Salir del Sistema\n";
             std::cout << "-----------------------------------------------------------------\n";
-            op = leerOpcionMenu("0123456", "Presione una opción [0-6]: ");
+            op = leerOpcionMenu("01234567", "Presione una opción [0-7]: ");
 
             switch (op) {
                 case 1: menuGrupos(); break;
@@ -249,6 +273,7 @@ public:
                 case 4: ejecutarDeshacer(); break;
                 case 5: menuEstadisticasYFiltro(); break;
                 case 6: guardarEnBD(); break;
+                case 7: VisualizadorGrafico::lanzarVisualizador(multi); pausar(); break;
                 case 0:
                     limpiarPantalla();
                     std::cout << "=================================================================\n";

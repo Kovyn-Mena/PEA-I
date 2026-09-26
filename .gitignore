@@ -6,6 +6,7 @@
 *.app
 build/
 bin/
+dist/
 src/cpp/test_sqlite
 src/cpp/test_tda
 src/cpp/pea_cpp

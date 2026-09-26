@@ -28,6 +28,12 @@ run-cpp: $(TARGET)
 run-py:
 	python3 Taller2_AB_PO_XX.py
 
+# Ejecutar el modo visualizador gráfico (C++ GUI)
+gui: $(TARGET)
+	./$(TARGET) --gui
+
+run-gui: gui
+
 # Ejecutar la suite completa de pruebas unitarias (C++ y Python)
 test:
 	@echo "--- Ejecutando pruebas unitarias C++ ---"
@@ -41,4 +47,4 @@ clean:
 	rm -f $(TARGET) src/cpp/test_tda src/cpp/test_sqlite
 	@echo "[OK] Archivos temporales eliminados."
 
-.PHONY: all run run-cpp run-py test clean
+.PHONY: all run run-cpp run-py gui run-gui test clean
