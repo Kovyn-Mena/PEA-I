@@ -178,9 +178,10 @@ class ConsolaApp:
             print(f"  4. Deshacer ultima accion (Pila Undo - LIFO) [{self.historial.tamano()} en pila]")
             print("  5. Resumen Estadistico y Filtro por Ventana de Años")
             print("  6. Guardar cambios en la Base de Datos (Persistencia)")
+            print("  7. Ingesta de Datos MinCiencias (Web Scraping / PDF / CSV - Cola FIFO)")
             print("  0. Salir del Sistema")
             print("-----------------------------------------------------------------")
-            op = self.leer_opcion_menu("0123456", "Presione una opción [0-6]: ")
+            op = self.leer_opcion_menu("01234567", "Presione una opción [0-7]: ")
 
             if op == 1:
                 self.menu_grupos()
@@ -194,6 +195,8 @@ class ConsolaApp:
                 self.menu_estadisticas_y_filtro()
             elif op == 6:
                 self.guardar_en_bd()
+            elif op == 7:
+                self.menu_ingesta()
             elif op == 0:
                 self.limpiar_pantalla()
                 print("=================================================================")
@@ -212,6 +215,91 @@ class ConsolaApp:
                     op = -1
                 else:
                     print("\n[+] Saliendo sin guardar cambios recientes.")
+
+    # -----------------------------------------------------------------
+    # INGESTA DE DATOS & WEB SCRAPING (TDA COLA FIFO)
+    # -----------------------------------------------------------------
+    def menu_ingesta(self):
+        from python.core.ingesta import MotorIngesta
+        op = -1
+        while op != 0:
+            self.limpiar_pantalla()
+            print("=================================================================")
+            print("  PEA-i UPC > Ingesta de Datos & Web Scraping (TDA Cola FIFO)    ")
+            print("=================================================================")
+            print("  1. Web Scraping de Grupo MinCiencias (GrupLAC)")
+            print("  2. Web Scraping de Investigador MinCiencias (CvLAC)")
+            print("  3. Procesar Archivo CSV de Investigación (data/muestra_upc.csv)")
+            print("  4. Procesar Archivo PDF de Producción Científica")
+            print("  0. Anterior / Regresar al Menú Principal")
+            print("-----------------------------------------------------------------")
+            op = self.leer_opcion_menu("01234", "Presione una opción [0-4]: ")
+
+            if op == 1:
+                self.limpiar_pantalla()
+                print("=================================================================")
+                print("--- WEB SCRAPING: GRUPO MINCIENCIAS (GrupLAC) ---")
+                print("URL oficial del taller: Grupo GIDSE (00000000002099)")
+                print("[Presione ENTER para usar la URL oficial, o 0 para cancelar]")
+                print("=================================================================")
+                url = self.leer_linea("URL GrupLAC: ", permite_vacio=True)
+                if url == "0": continue
+                if not url:
+                    url = "https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002099"
+                GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+                motor = MotorIngesta(self.ruta_bd)
+                if motor.ejecutar_ingesta("URL_GRUPLAC", url):
+                    GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
+                self.pausar()
+
+            elif op == 2:
+                self.limpiar_pantalla()
+                print("=================================================================")
+                print("--- WEB SCRAPING: INVESTIGADOR MINCIENCIAS (CvLAC) ---")
+                print("URL oficial del taller: Ing. Adith Pérez (0000494917)")
+                print("[Presione ENTER para usar la URL oficial, o 0 para cancelar]")
+                print("=================================================================")
+                url = self.leer_linea("URL CvLAC: ", permite_vacio=True)
+                if url == "0": continue
+                if not url:
+                    url = "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000494917"
+                GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+                motor = MotorIngesta(self.ruta_bd)
+                if motor.ejecutar_ingesta("URL_CVLAC", url):
+                    GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
+                self.pausar()
+
+            elif op == 3:
+                self.limpiar_pantalla()
+                print("=================================================================")
+                print("--- PROCESAMIENTO DE ARCHIVO CSV ---")
+                print("[Presione ENTER para usar 'data/muestra_upc.csv', o 0 para cancelar]")
+                print("=================================================================")
+                ruta = self.leer_linea("Ruta del archivo CSV: ", permite_vacio=True)
+                if ruta == "0": continue
+                if not ruta:
+                    ruta = "data/muestra_upc.csv"
+                GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+                motor = MotorIngesta(self.ruta_bd)
+                if motor.ejecutar_ingesta("ARCHIVO_CSV", ruta):
+                    GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
+                self.pausar()
+
+            elif op == 4:
+                self.limpiar_pantalla()
+                print("=================================================================")
+                print("--- PROCESAMIENTO DE ARCHIVO PDF ---")
+                print("[Presione ENTER para usar 'data/muestra_articulo.pdf', o 0 para cancelar]")
+                print("=================================================================")
+                ruta = self.leer_linea("Ruta del archivo PDF: ", permite_vacio=True)
+                if ruta == "0": continue
+                if not ruta:
+                    ruta = "data/muestra_articulo.pdf"
+                GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+                motor = MotorIngesta(self.ruta_bd)
+                if motor.ejecutar_ingesta("ARCHIVO_PDF", ruta):
+                    GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
+                self.pausar()
 
     # -----------------------------------------------------------------
     # CRUD: GRUPOS
