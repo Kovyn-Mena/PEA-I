@@ -333,6 +333,7 @@ public:
                 if (url.empty()) {
                     url = "https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002099";
                 }
+                GestorSQLite::guardarEnBD(multi, rutaBD);
                 std::string salida;
                 if (GestorInterop::ejecutarScrapingURL(url, salida)) {
                     std::cout << "\n[+] Recargando datos en la Multilista en RAM desde SQLite...\n";
@@ -355,6 +356,7 @@ public:
                 if (url.empty()) {
                     url = "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000494917";
                 }
+                GestorSQLite::guardarEnBD(multi, rutaBD);
                 std::string salida;
                 if (GestorInterop::ejecutarScrapingURL(url, salida)) {
                     std::cout << "\n[+] Recargando datos en la Multilista en RAM desde SQLite...\n";
@@ -376,6 +378,7 @@ public:
                 if (ruta.empty()) {
                     ruta = "data/muestra_upc.csv";
                 }
+                GestorSQLite::guardarEnBD(multi, rutaBD);
                 std::string salida;
                 if (GestorInterop::ejecutarIngestaCSV(ruta, salida)) {
                     std::cout << "\n[+] Recargando datos en la Multilista en RAM desde SQLite...\n";
@@ -394,6 +397,7 @@ public:
                 std::cout << "=================================================================\n";
                 std::string ruta = leerLinea("Ruta del archivo PDF: ");
                 if (ruta == "0") continue;
+                GestorSQLite::guardarEnBD(multi, rutaBD);
                 std::string salida;
                 if (GestorInterop::ejecutarIngestaPDF(ruta, salida)) {
                     std::cout << "\n[+] Recargando datos en la Multilista en RAM desde SQLite...\n";

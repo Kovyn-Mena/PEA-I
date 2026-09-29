@@ -4,6 +4,8 @@
 -- =====================================================================
 
 PRAGMA foreign_keys = ON;
+PRAGMA journal_mode = WAL;
+PRAGMA busy_timeout = 5000;
 
 -- 1. Tabla de Grupos de Investigación
 CREATE TABLE IF NOT EXISTS Grupos (

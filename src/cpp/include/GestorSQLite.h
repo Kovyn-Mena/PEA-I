@@ -21,6 +21,10 @@ public:
             return false;
         }
 
+        sqlite3_busy_timeout(db, 5000);
+        sqlite3_exec(db, "PRAGMA journal_mode = WAL;", nullptr, nullptr, nullptr);
+        sqlite3_exec(db, "PRAGMA foreign_keys = ON;", nullptr, nullptr, nullptr);
+
         // 1. Cargar Grupos
         const char* sqlGrupos = "SELECT codigo_grupo, nombre, clasificacion, area_conocimiento, lider, anio_creacion, activo FROM Grupos;";
         sqlite3_stmt* stmtG = nullptr;
@@ -87,6 +91,9 @@ public:
             std::cerr << "[ERROR Persistencia] No se pudo abrir la BD para guardar: " << sqlite3_errmsg(db) << "\n";
             return false;
         }
+
+        sqlite3_busy_timeout(db, 5000);
+        sqlite3_exec(db, "PRAGMA journal_mode = WAL;", nullptr, nullptr, nullptr);
 
         char* errMsg = nullptr;
         sqlite3_exec(db, "PRAGMA foreign_keys = OFF;", nullptr, nullptr, nullptr);

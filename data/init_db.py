@@ -16,8 +16,11 @@ def init_database():
     if os.path.exists(DB_PATH):
         os.remove(DB_PATH)
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, timeout=5.0)
     cursor = conn.cursor()
+    cursor.execute("PRAGMA journal_mode = WAL;")
+    cursor.execute("PRAGMA busy_timeout = 5000;")
+    cursor.execute("PRAGMA foreign_keys = ON;")
 
     with open(SCHEMA_PATH, "r", encoding="utf-8") as f:
         schema_sql = f.read()

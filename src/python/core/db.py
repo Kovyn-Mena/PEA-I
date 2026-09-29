@@ -19,8 +19,11 @@ class GestorPersistencia:
             return False
 
         try:
-            conn = sqlite3.connect(ruta_bd)
+            conn = sqlite3.connect(ruta_bd, timeout=5.0)
             cursor = conn.cursor()
+            cursor.execute("PRAGMA journal_mode = WAL;")
+            cursor.execute("PRAGMA busy_timeout = 5000;")
+            cursor.execute("PRAGMA foreign_keys = ON;")
 
             # 1. Cargar Grupos
             cursor.execute("SELECT codigo_grupo, nombre, clasificacion, area_conocimiento, lider, anio_creacion, activo FROM Grupos;")
@@ -50,8 +53,10 @@ class GestorPersistencia:
     def guardar_en_bd(multi: Multilista, ruta_bd: str = "data/pea_investigacion.db") -> bool:
         """Sincroniza el estado de la Multilista en SQLite usando una transacción atómica"""
         try:
-            conn = sqlite3.connect(ruta_bd)
+            conn = sqlite3.connect(ruta_bd, timeout=5.0)
             cursor = conn.cursor()
+            cursor.execute("PRAGMA journal_mode = WAL;")
+            cursor.execute("PRAGMA busy_timeout = 5000;")
 
             cursor.execute("PRAGMA foreign_keys = OFF;")
             cursor.execute("BEGIN TRANSACTION;")
