@@ -776,41 +776,105 @@ public:
             op = leerOpcionMenu("0123456", "Presione una opción [0-6]: ");
 
             if (op == 1) {
-                limpiarPantalla();
-                std::cout << "===================================================================================\n";
-                std::cout << "                            LISTADO DE PRODUCTOS DE INVESTIGACIÓN                  \n";
-                std::cout << "===================================================================================\n";
-                std::cout << std::left 
-                          << std::setw(12) << "ID"
-                          << std::setw(12) << "TIPO"
-                          << std::setw(32) << "TITULO"
-                          << std::setw(6)  << "AÑO"
-                          << std::setw(6)  << "CAT"
-                          << std::setw(7)  << "VAL"
-                          << std::setw(8)  << "ESTADO" << "\n";
-                std::cout << std::string(83, '-') << "\n";
+                // Recolectar productos para navegación paginada
+                std::vector<NodoProducto*> todosProds;
                 NodoGrupo* g = multi.getCabezaGrupos();
-                bool hayDatos = false;
                 while (g) {
                     NodoProducto* p = g->primerProducto;
                     while (p) {
-                        hayDatos = true;
-                        std::string titCorto = p->titulo.length() > 30 ? p->titulo.substr(0, 27) + "..." : p->titulo;
-                        std::cout << std::left 
-                                  << std::setw(12) << p->id_producto
-                                  << std::setw(12) << p->tipo
-                                  << std::setw(32) << titCorto
-                                  << std::setw(6)  << p->anio
-                                  << std::setw(6)  << p->categoria_minciencias
-                                  << std::setw(7)  << (p->validado ? "SI" : "NO")
-                                  << std::setw(8)  << (p->activo ? "[ACT]" : "[INA]") << "\n";
+                        todosProds.push_back(p);
                         p = p->sigProductoGrupo;
                     }
                     g = g->sigGrupo;
                 }
-                if (!hayDatos) std::cout << "  (No hay productos registrados)\n";
-                std::cout << "===================================================================================\n";
-                pausar();
+
+                if (todosProds.empty()) {
+                    limpiarPantalla();
+                    std::cout << "\n  (No hay productos registrados en el sistema)\n";
+                    pausar();
+                    continue;
+                }
+
+                size_t pagina = 0;
+                const size_t porPagina = 12;
+                std::string filtroBusqueda = "";
+
+                while (true) {
+                    limpiarPantalla();
+                    // Filtrar si hay búsqueda activa
+                    std::vector<NodoProducto*> filtrados;
+                    for (auto* prod : todosProds) {
+                        if (filtroBusqueda.empty() || 
+                            Multilista::contieneSubcadena(prod->titulo, filtroBusqueda) || 
+                            Multilista::contieneSubcadena(prod->id_producto, filtroBusqueda) ||
+                            Multilista::contieneSubcadena(prod->tipo, filtroBusqueda)) {
+                            filtrados.push_back(prod);
+                        }
+                    }
+
+                    size_t totalFiltrados = filtrados.size();
+                    size_t totalPaginas = (totalFiltrados == 0) ? 1 : ((totalFiltrados + porPagina - 1) / porPagina);
+                    if (pagina >= totalPaginas) pagina = totalPaginas - 1;
+
+                    std::cout << "========================================================================================\n";
+                    std::cout << "                         LISTADO DE PRODUCTOS CIENTÍFICOS (PAGINADO)                    \n";
+                    std::cout << "========================================================================================\n";
+                    if (!filtroBusqueda.empty()) {
+                        std::cout << "  [Filtro activo: \"" << filtroBusqueda << "\" - Coincidencias: " << totalFiltrados << "]\n";
+                    }
+                    std::cout << std::left 
+                              << std::setw(15) << "ID"
+                              << std::setw(12) << "TIPO"
+                              << std::setw(36) << "TITULO"
+                              << std::setw(6)  << "AÑO"
+                              << std::setw(6)  << "CAT"
+                              << std::setw(6)  << "AVAL"
+                              << std::setw(8)  << "ESTADO" << "\n";
+                    std::cout << std::string(88, '-') << "\n";
+
+                    size_t inicio = pagina * porPagina;
+                    size_t fin = std::min(inicio + porPagina, totalFiltrados);
+
+                    if (totalFiltrados == 0) {
+                        std::cout << "  (No se encontraron productos con el filtro especificado)\n";
+                    } else {
+                        for (size_t i = inicio; i < fin; ++i) {
+                            NodoProducto* p = filtrados[i];
+                            std::string titCorto = p->titulo.length() > 34 ? p->titulo.substr(0, 31) + "..." : p->titulo;
+                            std::cout << std::left 
+                                      << std::setw(15) << p->id_producto
+                                      << std::setw(12) << p->tipo
+                                      << std::setw(36) << titCorto
+                                      << std::setw(6)  << p->anio
+                                      << std::setw(6)  << p->categoria_minciencias
+                                      << std::setw(6)  << (p->validado ? "SI" : "NO")
+                                      << std::setw(8)  << (p->activo ? "[ACT]" : "[INA]") << "\n";
+                        }
+                    }
+                    std::cout << "========================================================================================\n";
+                    std::cout << "  Página " << (pagina + 1) << " de " << totalPaginas 
+                              << " | Mostrando " << (totalFiltrados == 0 ? 0 : inicio + 1) << "-" << fin 
+                              << " de " << totalFiltrados << " productos\n";
+                    std::cout << "  [S] Siguiente | [A] Anterior | [B] Buscar | [T] Todos | [0] Regresar al Menú\n";
+                    std::cout << "----------------------------------------------------------------------------------------\n";
+                    std::cout << "Seleccione una opción: ";
+
+                    char t = leerTecla();
+                    std::cout << t << "\n";
+                    if (t == '0') {
+                        break;
+                    } else if (t == 's' || t == 'S') {
+                        if (pagina + 1 < totalPaginas) pagina++;
+                    } else if (t == 'a' || t == 'A') {
+                        if (pagina > 0) pagina--;
+                    } else if (t == 'b' || t == 'B') {
+                        filtroBusqueda = leerLinea("Texto a buscar (o ENTER para limpiar): ", true);
+                        pagina = 0;
+                    } else if (t == 't' || t == 'T') {
+                        filtroBusqueda = "";
+                        pagina = 0;
+                    }
+                }
             } else if (op == 2) {
                 limpiarPantalla();
                 std::cout << "--- INCLUIR NUEVO PRODUCTO (Ingrese 0 para cancelar) ---\n";

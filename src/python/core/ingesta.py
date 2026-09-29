@@ -144,11 +144,11 @@ class MotorIngesta:
                 parent_table = h.find_parent("table")
                 if parent_table:
                     for row in parent_table.find_all("tr")[1:]:
-                        cols = [td.get_text(strip=True) for td in row.find_all("td")]
+                        cols = [td.get_text(strip=True).replace('\xa0', ' ') for td in row.find_all("td")]
                         if cols and len(cols) >= 2:
                             nom_raw = cols[0]
                             nom_limpio = re.sub(r'^\d+\.-', '', nom_raw).strip()
-                            if nom_limpio and len(nom_limpio) > 3:
+                            if nom_limpio and len(nom_limpio) > 3 and nom_limpio.lower() != "nombre":
                                 rol = cols[1] if len(cols) > 1 else "Integrante"
                                 integrantes_extraidos.append((nom_limpio, rol))
                 break
@@ -278,7 +278,7 @@ class MotorIngesta:
             if "Nombre" in txt and len(txt) < 15:
                 nxt = td.find_next_sibling("td")
                 if nxt and nxt.get_text(strip=True):
-                    nombre_investigador = nxt.get_text(strip=True)
+                    nombre_investigador = nxt.get_text(strip=True).replace('\xa0', ' ').strip()
                     break
 
         # 2. Categoría MinCiencias

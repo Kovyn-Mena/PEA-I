@@ -627,28 +627,83 @@ class ConsolaApp:
             op = self.leer_opcion_menu("0123456", "Presione una opción [0-6]: ")
 
             if op == 1:
-                self.limpiar_pantalla()
-                print("===================================================================================")
-                print("                            LISTADO DE PRODUCTOS DE INVESTIGACIÓN                  ")
-                print("===================================================================================")
-                print(f"{'ID':<12}{'TIPO':<12}{'TITULO':<32}{'AÑO':<6}{'CAT':<6}{'VAL':<7}{'ESTADO':<8}")
-                print("-" * 83)
+                # Recolectar productos para navegación paginada
+                todos_prods = []
                 g = self.multi.cabeza_grupos
-                hay_datos = False
                 while g:
                     p = g.primer_producto
                     while p:
-                        hay_datos = True
-                        tit_corto = p.titulo[:27] + "..." if len(p.titulo) > 30 else p.titulo
-                        val_str = "SI" if p.validado else "NO"
-                        act_str = "[ACT]" if p.activo else "[INA]"
-                        print(f"{p.id_producto:<12}{p.tipo:<12}{tit_corto:<32}{p.anio:<6}{p.categoria_minciencias:<6}{val_str:<7}{act_str:<8}")
+                        todos_prods.append(p)
                         p = p.sig_producto_grupo
                     g = g.sig_grupo
-                if not hay_datos:
-                    print("  (No hay productos registrados)")
-                print("===================================================================================")
-                self.pausar()
+
+                if not todos_prods:
+                    self.limpiar_pantalla()
+                    print("\n  (No hay productos registrados en el sistema)")
+                    self.pausar()
+                    continue
+
+                pagina = 0
+                por_pagina = 12
+                filtro_busqueda = ""
+
+                while True:
+                    self.limpiar_pantalla()
+                    # Filtrar según búsqueda
+                    filtrados = [
+                        p for p in todos_prods
+                        if not filtro_busqueda or
+                        filtro_busqueda.lower() in p.titulo.lower() or
+                        filtro_busqueda.lower() in p.id_producto.lower() or
+                        filtro_busqueda.lower() in p.tipo.lower()
+                    ]
+
+                    total_filtrados = len(filtrados)
+                    total_paginas = 1 if total_filtrados == 0 else (total_filtrados + por_pagina - 1) // por_pagina
+                    if pagina >= total_paginas: pagina = total_paginas - 1
+
+                    print("========================================================================================")
+                    print("                         LISTADO DE PRODUCTOS CIENTÍFICOS (PAGINADO)                    ")
+                    print("========================================================================================")
+                    if filtro_busqueda:
+                        print(f"  [Filtro activo: '{filtro_busqueda}' - Coincidencias: {total_filtrados}]")
+                    print(f"{'ID':<15}{'TIPO':<12}{'TITULO':<36}{'AÑO':<6}{'CAT':<6}{'AVAL':<6}{'ESTADO':<8}")
+                    print("-" * 88)
+
+                    inicio = pagina * por_pagina
+                    fin = min(inicio + por_pagina, total_filtrados)
+
+                    if total_filtrados == 0:
+                        print("  (No se encontraron productos con el filtro especificado)")
+                    else:
+                        for i in range(inicio, fin):
+                            p = filtrados[i]
+                            tit_corto = p.titulo[:33] + "..." if len(p.titulo) > 34 else p.titulo
+                            val_str = "SI" if p.validado else "NO"
+                            act_str = "[ACT]" if p.activo else "[INA]"
+                            print(f"{p.id_producto:<15}{p.tipo:<12}{tit_corto:<36}{p.anio:<6}{p.categoria_minciencias:<6}{val_str:<6}{act_str:<8}")
+
+                    print("========================================================================================")
+                    print(f"  Página {pagina + 1} de {total_paginas} | Mostrando {0 if total_filtrados == 0 else inicio + 1}-{fin} de {total_filtrados} productos")
+                    print("  [S] Siguiente | [A] Anterior | [B] Buscar | [T] Todos | [0] Regresar al Menú")
+                    print("----------------------------------------------------------------------------------------")
+                    sys.stdout.write("Seleccione una opción: ")
+                    sys.stdout.flush()
+
+                    t = self.leer_tecla().lower()
+                    print(t)
+                    if t == '0':
+                        break
+                    elif t == 's':
+                        if pagina + 1 < total_paginas: pagina += 1
+                    elif t == 'a':
+                        if pagina > 0: pagina -= 1
+                    elif t == 'b':
+                        filtro_busqueda = self.leer_linea("Texto a buscar (o ENTER para limpiar): ", permite_vacio=True)
+                        pagina = 0
+                    elif t == 't':
+                        filtro_busqueda = ""
+                        pagina = 0
             elif op == 2:
                 self.limpiar_pantalla()
                 print("--- INCLUIR NUEVO PRODUCTO (Ingrese 0 para cancelar) ---")

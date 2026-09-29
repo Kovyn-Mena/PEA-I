@@ -2,26 +2,28 @@
 #define VISUALIZADOR_GRAFICO_H
 
 #include <iostream>
+#include <string>
 #include <fstream>
 #include <sstream>
-#include <string>
+#include <vector>
 #include <cstdlib>
 #include <filesystem>
 #include "Multilista.h"
 
 // =====================================================================
-// VISUALIZADOR GRÁFICO DEL HIPERCUBO DE INFORMACIÓN (C++) - PEA-i
-// Genera una interfaz gráfica interactiva desacoplada (HTML5 Canvas/SVG)
-// con renderizado visual de los nodos y punteros ortogonales en memoria.
-//
-// CARACTERÍSTICAS ACADÉMICAS:
-// - Cero dependencias externas (no requiere OpenGL, GLFW ni GTK).
-// - 100% portable y seguro para la entrega en el .zip.
-// - Abre automáticamente en el navegador predeterminado del sistema.
-// - Visualiza los 3 ejes del hipercubo: Grupos (X), Investigadores (Y),
-//   y Productos con enlaces cruzados (Z).
-// - Incluye Dashboard estadístico (Punto 12.b) con las 3 vistas (12.c)
-//   y selector interactivo de ventana de observación (Punto 10).
+// PEA-i: VISUALIZADOR GRÁFICO INTERACTIVO DEL HIPERCUBO 3D Y DASHBOARD
+// Universidad Popular del Cesar — Estructura de Datos (2026-I)
+// =====================================================================
+// Arquitectura Zero-Dependencies:
+// - Genera un archivo HTML5 autónomo con Canvas 3D isométrico/orbital.
+// - Renderiza los 3 ejes ortogonales:
+//     • Eje X: Grupos de Investigación (Verde Institucional UPC #006837)
+//     • Eje Y: Investigadores Autores (Rojo Institucional UPC #ED1C24 / Cyan)
+//     • Eje Z: Productos Científicos y Línea Temporal (Ámbar / Púrpura)
+// - Control de cámara 3D: Rotación orbital por arrastre y Zoom con rueda.
+// - Explorador jerárquico por tarjetas y vista de tablas por entidad (12.c).
+// - Dashboard estadístico con histograma temporal y filtros por ventana (Punto 10).
+// - Abre automáticamente con el navegador del sistema operativo.
 // =====================================================================
 
 class VisualizadorGrafico {
@@ -37,7 +39,7 @@ private:
             else if (c == '\r') o << "\\r";
             else if (c == '\t') o << "\\t";
             else if (static_cast<unsigned char>(c) <= 0x1f) {
-                // Caracteres de control no imprimibles
+                // Omitir caracteres de control no imprimibles
             } else {
                 o << c;
             }
@@ -67,7 +69,7 @@ private:
             json << "      \"anio\": " << g->anio_creacion << ",\n";
             json << "      \"activo\": " << (g->activo ? "true" : "false") << ",\n";
 
-            // Investigadores del grupo
+            // Investigadores del grupo (Eje Y)
             json << "      \"investigadores\": [\n";
             NodoInvestigador* inv = g->primerInvestigador;
             bool primerInv = true;
@@ -86,7 +88,7 @@ private:
             }
             json << "\n      ],\n";
 
-            // Productos del grupo (hipercubo ortogonal)
+            // Productos del grupo (Eje Z / Ortogonal)
             json << "      \"productos\": [\n";
             NodoProducto* p = g->primerProducto;
             bool primerP = true;
@@ -118,20 +120,17 @@ private:
     }
 
 public:
-    // Genera el archivo HTML autocontenido con el visualizador interactivo
     static bool generarHTML(const Multilista& multi, const std::string& rutaSalida = "dist/visualizador_hipercubo.html") {
         try {
             std::filesystem::path p(rutaSalida);
             if (p.has_parent_path()) {
                 std::filesystem::create_directories(p.parent_path());
             }
-        } catch (...) {
-            // Continuar si ya existe
-        }
+        } catch (...) {}
 
-        std::ofstream out(rutaSalida);
+        std::ofstream out(rutaSalida, std::ios::out | std::ios::trunc);
         if (!out.is_open()) {
-            std::cerr << "[!] Error al escribir archivo visualizador en: " << rutaSalida << "\n";
+            std::cerr << "[!] Error: No se pudo crear el archivo visualizador en " << rutaSalida << "\n";
             return false;
         }
 
@@ -142,300 +141,308 @@ public:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PEA-i UPC — Visualizador Gráfico del Hipercubo 3D (C++)</title>
+    <title>PEA-i UPC — Visualizador 3D del Hipercubo y Dashboard</title>
     <style>
         :root {
             --upc-green: #006837;
             --upc-green-light: #10b981;
             --upc-red: #ED1C24;
-            --bg-dark: #0f172a;
-            --card-dark: #1e293b;
-            --card-border: #334155;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --bg-dark: #080c16;
+            --bg-card: #0f172a;
+            --card-border: #1e293b;
             --accent-blue: #38bdf8;
             --accent-amber: #f59e0b;
-            --accent-purple: #c084fc;
+            --accent-purple: #a855f7;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        body { background: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
-        
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
         /* HEADER INSTITUCIONAL */
         header {
-            background: linear-gradient(135deg, #064e3b 0%, #0f172a 100%);
-            border-bottom: 2px solid var(--upc-green-light);
-            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #022c19 0%, #080c16 60%, #1e1014 100%);
+            border-bottom: 2px solid var(--upc-green);
+            padding: 0.8rem 2rem;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
         }
-        .brand { display: flex; align-items: center; gap: 1rem; }
-        .logo-box {
-            background: var(--upc-green);
-            color: #fff;
-            padding: 0.5rem 0.8rem;
-            border-radius: 8px;
-            font-weight: 900;
-            letter-spacing: 1px;
-            border: 1px solid var(--upc-green-light);
-            box-shadow: 0 0 10px rgba(16,185,129,0.3);
+        .brand-box { display: flex; align-items: center; gap: 1rem; }
+        .brand-logo {
+            width: 44px; height: 44px;
+            background: linear-gradient(135deg, var(--upc-green) 50%, var(--upc-red) 50%);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900; font-size: 1.1rem; color: #fff;
+            box-shadow: 0 4px 14px rgba(0, 104, 55, 0.4);
         }
-        .brand-title h1 { font-size: 1.25rem; font-weight: 700; color: #fff; }
-        .brand-title p { font-size: 0.8rem; color: var(--text-muted); }
-        .badge-core { background: rgba(56, 189, 248, 0.15); color: var(--accent-blue); padding: 0.25rem 0.6rem; border-radius: 999px; font-size: 0.75rem; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 600; }
-        
-        /* NAV TABS */
-        .nav-tabs {
-            display: flex;
-            gap: 0.5rem;
-            background: rgba(15, 23, 42, 0.6);
-            padding: 0.3rem;
-            border-radius: 8px;
-            border: 1px solid var(--card-border);
-        }
+        .brand-text h1 { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.5px; }
+        .brand-text p { font-size: 0.78rem; color: var(--text-muted); }
+
+        .nav-tabs { display: flex; gap: 0.4rem; background: rgba(15, 23, 42, 0.8); padding: 0.3rem; border-radius: 8px; border: 1px solid var(--card-border); }
         .tab-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: all 0.2s ease;
+            background: transparent; border: none; color: var(--text-muted);
+            padding: 0.45rem 1rem; border-radius: 6px; cursor: pointer;
+            font-weight: 600; font-size: 0.82rem; transition: all 0.2s ease;
         }
-        .tab-btn:hover { color: #fff; background: rgba(255,255,255,0.05); }
-        .tab-btn.active { background: var(--upc-green); color: #fff; box-shadow: 0 2px 8px rgba(16,185,129,0.4); }
+        .tab-btn:hover { color: #fff; background: rgba(255,255,255,0.06); }
+        .tab-btn.active { background: var(--upc-green); color: #fff; box-shadow: 0 2px 10px rgba(16, 185, 129, 0.4); }
 
-        /* CONTENEDOR PRINCIPAL */
-        main { flex: 1; padding: 1.5rem 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
+        /* CONTENIDO PRINCIPAL */
+        main { flex: 1; padding: 1.2rem 2rem; display: flex; flex-direction: column; gap: 1rem; }
 
-        /* BARRA DE FILTROS & ESTADÍSTICAS RÁPIDAS */
+        /* TOOLBAR SUPERIOR */
         .toolbar {
             display: grid;
             grid-template-columns: auto 1fr auto;
-            gap: 1rem;
+            gap: 1.5rem;
             align-items: center;
-            background: var(--card-dark);
-            padding: 1rem 1.5rem;
+            background: var(--bg-card);
+            padding: 0.8rem 1.4rem;
             border-radius: 12px;
             border: 1px solid var(--card-border);
         }
-        .stats-summary { display: flex; gap: 1.5rem; }
+        .stats-summary { display: flex; gap: 1.8rem; }
         .stat-item { display: flex; flex-direction: column; }
-        .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
-        .stat-val { font-size: 1.3rem; font-weight: 800; color: #fff; }
+        .stat-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
+        .stat-val { font-size: 1.35rem; font-weight: 800; }
         .stat-val.gr { color: var(--upc-green-light); }
         .stat-val.bl { color: var(--accent-blue); }
         .stat-val.am { color: var(--accent-amber); }
 
-        .filter-window { display: flex; align-items: center; gap: 0.6rem; justify-content: center; }
+        .filter-window { display: flex; align-items: center; gap: 0.5rem; justify-content: center; }
         .filter-btn {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.04);
             border: 1px solid var(--card-border);
             color: var(--text-muted);
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 600;
-            transition: all 0.2s;
+            padding: 0.35rem 0.8rem;
+            border-radius: 6px; cursor: pointer;
+            font-size: 0.8rem; font-weight: 600; transition: all 0.2s;
         }
         .filter-btn:hover { color: #fff; border-color: #64748b; }
         .filter-btn.active { background: var(--upc-green); color: #fff; border-color: var(--upc-green-light); }
 
         .search-box { position: relative; }
         .search-box input {
-            background: #0b0f19;
-            border: 1px solid var(--card-border);
-            color: #fff;
-            padding: 0.45rem 1rem 0.45rem 2.2rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            outline: none;
-            width: 240px;
+            background: #080c16; border: 1px solid var(--card-border);
+            color: #fff; padding: 0.45rem 1rem 0.45rem 2.2rem;
+            border-radius: 8px; font-size: 0.82rem; outline: none; width: 260px;
             transition: border-color 0.2s;
         }
         .search-box input:focus { border-color: var(--upc-green-light); }
-        .search-icon { position: absolute; left: 0.7rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.85rem; }
+        .search-icon { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.85rem; }
 
-        /* VISTA 1: CANVAS HIPERCUBO ORTOGONAL */
+        /* VISTAS */
         .view-panel { display: none; }
         .view-panel.active { display: block; }
+
+        /* VISTA 1: HIPERCUBO 3D Y EXPLORADOR */
+        .hipercubo-subnav {
+            display: flex; gap: 0.8rem; align-items: center; justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+        .subnav-btn-group { display: flex; gap: 0.4rem; }
+        .sub-btn {
+            background: var(--bg-card); border: 1px solid var(--card-border);
+            color: var(--text-muted); padding: 0.35rem 0.9rem; border-radius: 6px;
+            font-size: 0.8rem; font-weight: 600; cursor: pointer;
+        }
+        .sub-btn.active { background: #1e293b; color: #fff; border-color: #38bdf8; }
 
         .hipercubo-layout {
             display: grid;
             grid-template-columns: 1fr 340px;
-            gap: 1.5rem;
-            height: calc(100vh - 230px);
-            min-height: 520px;
-        }
-        .canvas-container {
-            background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0b0f19 100%);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            overflow: auto;
-            position: relative;
-            padding: 2rem;
-        }
-        .hypercube-grid {
-            display: flex;
-            gap: 3rem;
-            min-width: max-content;
-        }
-
-        /* COLUMNA DE GRUPO */
-        .group-column {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            width: 320px;
-        }
-
-        /* TARJETA NODO */
-        .node-card {
-            background: var(--card-dark);
-            border-radius: 10px;
-            padding: 1rem;
-            border: 1px solid var(--card-border);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            cursor: pointer;
-            transition: all 0.25s ease;
-            position: relative;
-        }
-        .node-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.5); }
-        .node-card.selected { border-color: var(--upc-green-light) !important; box-shadow: 0 0 15px rgba(16,185,129,0.5); }
-
-        /* Nodo Grupo (Eje X) */
-        .node-card.group {
-            border-top: 4px solid var(--upc-green-light);
-            background: linear-gradient(180deg, rgba(6, 78, 59, 0.3) 0%, #1e293b 100%);
-        }
-        .node-card.group .code { color: var(--upc-green-light); font-size: 0.75rem; font-weight: 800; }
-
-        /* Nodo Investigador (Eje Y) */
-        .node-card.investigator {
-            border-left: 4px solid var(--accent-blue);
-            margin-left: 1rem;
-            background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, #1e293b 100%);
-        }
-        .node-card.investigator .doc { color: var(--accent-blue); font-size: 0.75rem; font-weight: 700; }
-
-        /* Nodo Producto (Eje Z / Ortogonal) */
-        .node-card.product {
-            border-left: 4px solid var(--accent-amber);
-            margin-left: 2rem;
-            background: linear-gradient(90deg, rgba(245, 158, 11, 0.1) 0%, #1e293b 100%);
-        }
-        .node-card.product .prod-id { color: var(--accent-amber); font-size: 0.75rem; font-weight: 700; }
-        .node-card.product.inactive { opacity: 0.45; filter: grayscale(0.8); }
-
-        .node-title { font-size: 0.9rem; font-weight: 700; margin: 0.3rem 0; line-height: 1.3; }
-        .node-sub { font-size: 0.78rem; color: var(--text-muted); }
-        .node-badges { display: flex; gap: 0.4rem; margin-top: 0.6rem; flex-wrap: wrap; }
-        .pill { font-size: 0.68rem; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 600; }
-        .pill-a1 { background: #065f46; color: #6ee7b7; }
-        .pill-a { background: #1e40af; color: #93c5fd; }
-        .pill-b { background: #854d0e; color: #fde047; }
-        .pill-c { background: #374151; color: #d1d5db; }
-        .pill-val { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
-        .pill-noval { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
-
-        /* Conectores ortogonales de punteros */
-        .pointer-tag {
-            font-size: 0.68rem;
-            font-family: monospace;
-            color: #64748b;
-            margin-left: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-        .pointer-tag::before { content: "↓ "; color: var(--accent-blue); font-weight: bold; }
-
-        /* PANEL LATERAL DE DETALLES */
-        .inspector-panel {
-            background: var(--card-dark);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
             gap: 1.2rem;
+            height: calc(100vh - 220px);
+            min-height: 540px;
+        }
+
+        /* LIENZO 3D (CANVAS) */
+        .canvas-container {
+            background: radial-gradient(circle at 50% 50%, #111827 0%, #05070e 100%);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            display: flex; flex-direction: column;
+        }
+        #canvas3d { width: 100%; height: 100%; cursor: grab; }
+        #canvas3d:active { cursor: grabbing; }
+
+        .canvas-hud {
+            position: absolute; bottom: 1rem; left: 1rem;
+            background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(6px);
+            border: 1px solid var(--card-border); border-radius: 8px;
+            padding: 0.6rem 0.9rem; font-size: 0.75rem; color: var(--text-muted);
+            pointer-events: none;
+        }
+        .canvas-controls {
+            position: absolute; top: 1rem; right: 1rem;
+            display: flex; gap: 0.4rem;
+        }
+        .hud-btn {
+            background: rgba(15, 23, 42, 0.9); border: 1px solid var(--card-border);
+            color: #fff; padding: 0.4rem 0.7rem; border-radius: 6px; font-size: 0.75rem;
+            cursor: pointer; transition: background 0.2s;
+        }
+        .hud-btn:hover { background: #1e293b; }
+
+        /* VISTA ARQUITECTURAL / JERÁRQUICA */
+        .hierarchy-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 1rem;
+            height: 100%;
+            overflow: hidden;
+        }
+        .investigators-list-col {
+            background: var(--bg-card);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            overflow-y: auto;
+            padding: 0.8rem;
+            display: flex; flex-direction: column; gap: 0.5rem;
+        }
+        .inv-item-card {
+            background: #080c16;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 0.7rem 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .inv-item-card:hover { border-color: var(--accent-blue); background: #0f172a; }
+        .inv-item-card.active { border-color: var(--upc-green-light); background: #022c19; }
+        .inv-item-name { font-weight: 700; font-size: 0.85rem; margin-bottom: 0.2rem; }
+        .inv-item-meta { font-size: 0.72rem; color: var(--text-muted); display: flex; justify-content: space-between; }
+
+        .products-grid-col {
+            background: var(--bg-card);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex; flex-direction: column; gap: 0.8rem;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 0.8rem;
+        }
+        .prod-card {
+            background: #080c16; border: 1px solid var(--card-border);
+            border-radius: 8px; padding: 0.8rem; cursor: pointer;
+            display: flex; flex-direction: column; justify-content: space-between;
+            transition: all 0.2s;
+        }
+        .prod-card:hover { border-color: var(--accent-amber); transform: translateY(-2px); }
+        .prod-card-title { font-weight: 600; font-size: 0.82rem; line-height: 1.3; margin-bottom: 0.6rem; color: #fff; }
+        .prod-card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; font-size: 0.7rem; }
+
+        /* INSPECTOR LATERAL */
+        .inspector-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.2rem;
+            display: flex; flex-direction: column; gap: 1rem;
             overflow-y: auto;
         }
-        .inspector-title { font-size: 1.1rem; font-weight: 700; border-bottom: 1px solid var(--card-border); padding-bottom: 0.6rem; }
-        .inspector-meta { display: flex; flex-direction: column; gap: 0.8rem; }
-        .meta-field { display: flex; flex-direction: column; }
-        .meta-k { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
-        .meta-v { font-size: 0.9rem; color: #fff; font-weight: 600; margin-top: 0.2rem; }
+        .inspector-title { font-size: 1rem; font-weight: 700; border-bottom: 1px solid var(--card-border); padding-bottom: 0.6rem; }
+        .meta-field { display: flex; flex-direction: column; gap: 0.2rem; margin-bottom: 0.7rem; }
+        .meta-k { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
+        .meta-v { font-size: 0.85rem; color: #fff; word-break: break-word; }
+        .ptr-box {
+            background: #080c16; border: 1px solid #1e293b; border-radius: 6px;
+            padding: 0.5rem 0.7rem; font-family: monospace; font-size: 0.75rem;
+            color: var(--upc-green-light); margin-top: 0.4rem;
+        }
 
-        /* VISTA 2: DASHBOARD & MÉTRICAS */
+        /* PILLS Y BADGES */
+        .pill { padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700; font-size: 0.68rem; text-transform: uppercase; }
+        .pill-a1 { background: #064e3b; color: #6ee7b7; border: 1px solid #10b981; }
+        .pill-a { background: #1e3a8a; color: #93c5fd; border: 1px solid #3b82f6; }
+        .pill-b { background: #78350f; color: #fde68a; border: 1px solid #f59e0b; }
+        .pill-c { background: #581c87; color: #e9d5ff; border: 1px solid #a855f7; }
+        .pill-val { background: #022c19; color: #34d399; }
+        .pill-noval { background: #3f1d1d; color: #f87171; }
+
+        /* DASHBOARD GRID */
         .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 1.2rem;
         }
         .chart-card {
-            background: var(--card-dark);
+            background: var(--bg-card);
             border: 1px solid var(--card-border);
             border-radius: 12px;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+            padding: 1.2rem;
+            display: flex; flex-direction: column; gap: 1rem;
         }
         .chart-header { display: flex; justify-content: space-between; align-items: center; }
-        .chart-header h3 { font-size: 1rem; font-weight: 700; }
-        .bar-container { display: flex; flex-direction: column; gap: 0.8rem; }
-        .bar-row { display: flex; flex-direction: column; gap: 0.3rem; }
-        .bar-info { display: flex; justify-content: space-between; font-size: 0.8rem; }
-        .bar-track { background: #0b0f19; height: 10px; border-radius: 999px; overflow: hidden; }
-        .bar-fill { height: 100%; border-radius: 999px; transition: width 0.5s ease; }
+        .chart-header h3 { font-size: 0.95rem; font-weight: 700; }
+        .bar-container { display: flex; flex-direction: column; gap: 0.6rem; }
+        .bar-row { display: flex; flex-direction: column; gap: 0.2rem; }
+        .bar-info { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); }
+        .bar-track { height: 10px; background: #080c16; border-radius: 5px; overflow: hidden; }
+        .bar-fill { height: 100%; border-radius: 5px; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
 
-        /* TABLAS DE VISTAS (Punto 12.c) */
+        /* TABLAS POR ENTIDAD */
         .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-            text-align: left;
+            width: 100%; border-collapse: collapse; font-size: 0.8rem;
         }
-        .data-table th { background: #0b0f19; padding: 0.6rem 0.8rem; color: var(--text-muted); font-weight: 600; border-bottom: 1px solid var(--card-border); }
-        .data-table td { padding: 0.6rem 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .data-table tr:hover { background: rgba(255,255,255,0.03); }
+        .data-table th, .data-table td {
+            padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--card-border);
+        }
+        .data-table th { background: #080c16; color: var(--text-muted); font-size: 0.72rem; text-transform: uppercase; }
+        .data-table tr:hover { background: rgba(255,255,255,0.03); cursor: pointer; }
+
+        .pagination-bar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-top: 0.8rem; font-size: 0.8rem; color: var(--text-muted);
+        }
+        .page-btns { display: flex; gap: 0.4rem; }
 
         footer {
-            text-align: center;
-            padding: 1rem;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            border-top: 1px solid var(--card-border);
-            margin-top: auto;
+            border-top: 1px solid var(--card-border); padding: 0.8rem 2rem;
+            font-size: 0.75rem; color: var(--text-muted); text-align: center;
         }
     </style>
 </head>
 <body>
-
     <header>
-        <div class="brand">
-            <div class="logo-box">UPC</div>
-            <div class="brand-title">
-                <h1>PEA-i &bull; Visualizador del Hipercubo de Información</h1>
-                <p>Universidad Popular del Cesar &bull; Taller 2 Estructura de Datos (C++)</p>
+        <div class="brand-box">
+            <div class="brand-logo">UPC</div>
+            <div class="brand-text">
+                <h1>PEA-i &bull; Analítica de Investigación MinCiencias</h1>
+                <p>Hipercubo Ortogonal 3D &bull; Estructura de Datos &bull; Ing. Adith Pérez</p>
             </div>
-            <span class="badge-core">Memoria RAM C++ &bull; TDA Nodos</span>
         </div>
 
         <nav class="nav-tabs">
-            <button class="tab-btn active" onclick="cambiarVista('hipercubo')">📦 Hipercubo Ortogonal</button>
+            <button class="tab-btn active" onclick="cambiarVista('hipercubo')">📦 Hipercubo 3D</button>
             <button class="tab-btn" onclick="cambiarVista('dashboard')">📊 Dashboard & Métricas</button>
             <button class="tab-btn" onclick="cambiarVista('tablas')">📑 Vistas por Entidad (12.c)</button>
         </nav>
     </header>
 
     <main>
-        <!-- BARRA SUPERIOR DE RESUMEN Y FILTRO POR VENTANA -->
+        <!-- BARRA SUPERIOR DE FILTROS & ESTADÍSTICAS -->
         <section class="toolbar">
             <div class="stats-summary">
                 <div class="stat-item">
@@ -455,32 +462,64 @@ public:
             <!-- FILTRO DE VENTANA DE OBSERVACIÓN (PUNTO 10) -->
             <div class="filter-window">
                 <span class="stat-label" style="margin-right: 0.4rem;">Ventana de Años:</span>
-                <button class="filter-btn active" onclick="aplicarFiltroVentana(0, 'all')">Todos</button>
-                <button class="filter-btn" onclick="aplicarFiltroVentana(2, '2y')">Últimos 2 años</button>
-                <button class="filter-btn" onclick="aplicarFiltroVentana(5, '5y')">Últimos 5 años</button>
+                <button class="filter-btn active" onclick="aplicarFiltroVentana(0, this)">Todos</button>
+                <button class="filter-btn" onclick="aplicarFiltroVentana(2, this)">Últimos 2 años</button>
+                <button class="filter-btn" onclick="aplicarFiltroVentana(5, this)">Últimos 5 años</button>
             </div>
 
             <div class="search-box">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="input-busqueda" placeholder="Buscar por texto..." oninput="filtrarPorTexto(this.value)">
+                <input type="text" id="input-busqueda" placeholder="Buscar por título, autor o ID..." oninput="filtrarPorTexto(this.value)">
             </div>
         </section>
 
-        <!-- VISTA 1: CANVAS HIPERCUBO ORTOGONAL -->
+        <!-- VISTA 1: HIPERCUBO ORTOGONAL -->
         <section id="view-hipercubo" class="view-panel active">
+            <div class="hipercubo-subnav">
+                <div class="subnav-btn-group">
+                    <button class="sub-btn active" id="btn-sub-3d" onclick="cambiarSubvistaHipercubo('3d')">🌐 Vista Espacial 3D (Canvas)</button>
+                    <button class="sub-btn" id="btn-sub-hier" onclick="cambiarSubvistaHipercubo('hier')">🗂️ Explorador de Nodos & Mosaico</button>
+                </div>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">Arrastre el ratón para rotar el hipercubo en 3D &bull; Rueda para Zoom</span>
+            </div>
+
             <div class="hipercubo-layout">
-                <div class="canvas-container">
-                    <div class="hypercube-grid" id="contenedor-nodos">
-                        <!-- Nodos inyectados dinámicamente -->
+                <!-- CONTENEDOR 3D -->
+                <div class="canvas-container" id="subview-3d">
+                    <canvas id="canvas3d"></canvas>
+                    <div class="canvas-hud">
+                        <div><b>Ejes Ortogonales en RAM:</b></div>
+                        <div><span style="color:var(--upc-green-light)">■ Eje X:</span> Grupos (Horizontal)</div>
+                        <div><span style="color:var(--accent-blue)">■ Eje Y:</span> Investigadores (Vertical)</div>
+                        <div><span style="color:var(--accent-amber)">■ Eje Z:</span> Productos & Línea Temporal</div>
+                    </div>
+                    <div class="canvas-controls">
+                        <button class="hud-btn" onclick="reiniciarCamara3D()">🔄 Reset Vista</button>
+                    </div>
+                </div>
+
+                <!-- CONTENEDOR JERÁRQUICO -->
+                <div class="hierarchy-container" id="subview-hier" style="display: none;">
+                    <div class="investigators-list-col" id="col-investigadores">
+                        <!-- Investigadores inyectados dinámicamente -->
+                    </div>
+                    <div class="products-grid-col">
+                        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--card-border); padding-bottom:0.5rem;">
+                            <h3 id="hier-prod-header" style="font-size: 0.95rem; font-weight: 700;">Producción Científica</h3>
+                            <span id="hier-prod-count" style="font-size: 0.8rem; color: var(--accent-amber);">0 productos</span>
+                        </div>
+                        <div class="products-grid" id="contenedor-mosaico">
+                            <!-- Productos inyectados dinámicamente -->
+                        </div>
                     </div>
                 </div>
 
                 <!-- INSPECTOR LATERAL DE DETALLES -->
                 <aside class="inspector-panel" id="inspector">
-                    <div class="inspector-title" id="insp-titulo">Seleccione un Nodo</div>
-                    <div class="inspector-meta" id="insp-contenido">
-                        <p style="color: var(--text-muted); font-size: 0.85rem;">
-                            Haga clic sobre cualquier nodo de Grupo, Investigador o Producto en el lienzo para inspeccionar sus punteros ortogonales en memoria RAM.
+                    <div class="inspector-title" id="insp-titulo">Inspector de Memoria</div>
+                    <div id="insp-contenido">
+                        <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.4;">
+                            Haga clic sobre cualquier nodo en el lienzo 3D o en el explorador para inspeccionar sus punteros ortogonales en memoria RAM.
                         </p>
                     </div>
                 </aside>
@@ -490,54 +529,73 @@ public:
         <!-- VISTA 2: DASHBOARD ESTADÍSTICO (PUNTO 12.B) -->
         <section id="view-dashboard" class="view-panel">
             <div class="dashboard-grid">
-                <!-- GRÁFICO 1: DISTRIBUCIÓN POR CATEGORÍA -->
+                <!-- GRÁFICO 1: CATEGORÍAS MINCIENCIAS -->
                 <div class="chart-card">
                     <div class="chart-header">
-                        <h3>Distribución de Productos por Categoría MinCiencias</h3>
-                        <span class="badge-core">Calidad</span>
+                        <h3>Categorías MinCiencias (A1, A, B, C)</h3>
+                        <span class="pill pill-a1">Calidad</span>
                     </div>
-                    <div class="bar-container" id="chart-categorias">
-                        <!-- Barras dinámicas -->
-                    </div>
+                    <div class="bar-container" id="chart-categorias"></div>
                 </div>
 
                 <!-- GRÁFICO 2: HISTOGRAMA POR AÑO -->
                 <div class="chart-card">
                     <div class="chart-header">
                         <h3>Producción Científica por Año (Histograma)</h3>
-                        <span class="badge-core">Temporal</span>
+                        <span class="pill pill-b">Línea Temporal</span>
                     </div>
-                    <div class="bar-container" id="chart-anios">
-                        <!-- Barras dinámicas -->
-                    </div>
+                    <div class="bar-container" id="chart-anios"></div>
                 </div>
 
-                <!-- GRÁFICO 3: AVAL INSTITUCIONAL / MINCIENCIAS -->
+                <!-- GRÁFICO 3: AVAL MINCIENCIAS -->
                 <div class="chart-card">
                     <div class="chart-header">
-                        <h3>Estado de Validación / Aval MinCiencias</h3>
-                        <span class="badge-core">Auditoría</span>
+                        <h3>Aval Institucional / MinCiencias</h3>
+                        <span class="pill pill-val">Auditoría</span>
                     </div>
-                    <div class="bar-container" id="chart-aval">
-                        <!-- Barras dinámicas -->
+                    <div class="bar-container" id="chart-aval"></div>
+                </div>
+
+                <!-- GRÁFICO 4: TIPOS DE PRODUCTO -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Tipología de Obras Registradas</h3>
+                        <span class="pill pill-a">Tipología</span>
                     </div>
+                    <div class="bar-container" id="chart-tipos"></div>
                 </div>
             </div>
         </section>
 
         <!-- VISTA 3: VISTAS POR ENTIDAD (PUNTO 12.C) -->
         <section id="view-tablas" class="view-panel">
-            <div class="chart-card" style="margin-bottom: 1.5rem;">
-                <h3 style="margin-bottom: 0.8rem;">i. Resumen por Grupo de Investigación</h3>
+            <div class="chart-card" style="margin-bottom: 1.2rem;">
+                <h3 style="margin-bottom: 0.6rem;">i. Resumen por Grupo de Investigación (12.c.i)</h3>
                 <table class="data-table" id="tabla-grupos">
                     <thead>
                         <tr>
                             <th>Código</th>
-                            <th>Nombre</th>
-                            <th>Clasificación</th>
+                            <th>Nombre Oficial</th>
+                            <th>Clasif.</th>
                             <th>Líder</th>
                             <th>Investigadores</th>
-                            <th>Productos (Ventana)</th>
+                            <th>Total Obras</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="chart-card" style="margin-bottom: 1.2rem;">
+                <h3 style="margin-bottom: 0.6rem;">ii. Resumen por Investigador Autor (12.c.ii)</h3>
+                <table class="data-table" id="tabla-investigadores">
+                    <thead>
+                        <tr>
+                            <th>Documento</th>
+                            <th>Nombre Completo</th>
+                            <th>Categoría</th>
+                            <th>Formación</th>
+                            <th>Obras Registradas</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -545,28 +603,39 @@ public:
             </div>
 
             <div class="chart-card">
-                <h3 style="margin-bottom: 0.8rem;">ii. Resumen por Investigador Autor</h3>
-                <table class="data-table" id="tabla-investigadores">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+                    <h3>iii. Listado Exhaustivo de Productos Científicos (12.c.iii)</h3>
+                    <span id="tab-prod-count" style="font-size:0.8rem; color:var(--text-muted);">Paginado</span>
+                </div>
+                <table class="data-table" id="tabla-productos">
                     <thead>
                         <tr>
-                            <th>Documento</th>
-                            <th>Nombre</th>
-                            <th>Categoría</th>
-                            <th>Grupo</th>
-                            <th>Producción Registrada</th>
+                            <th>ID</th>
+                            <th>Tipo</th>
+                            <th>Título de la Publicación</th>
+                            <th>Año</th>
+                            <th>Cat.</th>
+                            <th>Aval</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
                 </table>
+                <div class="pagination-bar">
+                    <span id="lbl-pag-prod">Página 1 de 1</span>
+                    <div class="page-btns">
+                        <button class="filter-btn" onclick="paginarTablaProd(-1)">◀ Anterior</button>
+                        <button class="filter-btn" onclick="paginarTablaProd(1)">Siguiente ▶</button>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
     <footer>
-        Programa Estadístico de Análisis de Investigación (PEA-i) &bull; Universidad Popular del Cesar &bull; C++17 Engine &bull; Docente: Ing. Adith Pérez
+        PEA-i &bull; Programa Estadístico de Análisis de Investigación &bull; Universidad Popular del Cesar &bull; C++17 Multi-Engine &bull; MinCiencias SCIENTI
     </footer>
 
-    <!-- DATOS DE LA MULTILISTA SERIALIZADOS DESDE C++ -->
+    <!-- SERIALIZACIÓN DE DATOS DESDE C++ -->
     <script>
         const DATOS_HIPERCUBO = )HTML";
 
@@ -574,11 +643,16 @@ public:
 
         out << R"HTML(;
 
-        // ESTADO DE LA APLICACIÓN
+        // ESTADO GLOBAL
         let ventanaAnios = 0; // 0: Todos, 2: Últimos 2, 5: Últimos 5
         let anioActual = 2026;
         let filtroTexto = "";
+        let invSeleccionadoDoc = null;
+        let subvistaActual = '3d';
+        let pagProdActual = 0;
+        const PRODS_POR_PAG = 15;
 
+        // CAMBIO DE PESTAÑAS PRINCIPALES
         function cambiarVista(vista) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
@@ -586,6 +660,7 @@ public:
             if (vista === 'hipercubo') {
                 document.querySelectorAll('.tab-btn')[0].classList.add('active');
                 document.getElementById('view-hipercubo').classList.add('active');
+                if (subvistaActual === '3d') dibujarEscena3D();
             } else if (vista === 'dashboard') {
                 document.querySelectorAll('.tab-btn')[1].classList.add('active');
                 document.getElementById('view-dashboard').classList.add('active');
@@ -597,15 +672,30 @@ public:
             }
         }
 
-        function aplicarFiltroVentana(anios, tag) {
+        function cambiarSubvistaHipercubo(sub) {
+            subvistaActual = sub;
+            document.getElementById('btn-sub-3d').classList.toggle('active', sub === '3d');
+            document.getElementById('btn-sub-hier').classList.toggle('active', sub === 'hier');
+            document.getElementById('subview-3d').style.display = (sub === '3d') ? 'flex' : 'none';
+            document.getElementById('subview-hier').style.display = (sub === 'hier') ? 'grid' : 'none';
+
+            if (sub === '3d') {
+                dibujarEscena3D();
+            } else {
+                renderizarExploradorJerarquico();
+            }
+        }
+
+        function aplicarFiltroVentana(anios, btn) {
             ventanaAnios = anios;
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
+            if (btn) btn.classList.add('active');
             renderizarTodo();
         }
 
         function filtrarPorTexto(txt) {
             filtroTexto = txt.toLowerCase().trim();
+            pagProdActual = 0;
             renderizarTodo();
         }
 
@@ -615,10 +705,11 @@ public:
         }
 
         function renderizarTodo() {
-            renderizarLienzoHipercubo();
+            actualizarTotales();
+            if (subvistaActual === '3d') dibujarEscena3D();
+            renderizarExploradorJerarquico();
             renderizarDashboard();
             renderizarTablas();
-            actualizarTotales();
         }
 
         function actualizarTotales() {
@@ -638,142 +729,323 @@ public:
             document.getElementById('lbl-total-prod').innerText = totalP;
         }
 
-        // RENDERIZADO DEL LIENZO HIPERCUBO ORTOGONAL
-        function renderizarLienzoHipercubo() {
-            const container = document.getElementById('contenedor-nodos');
-            container.innerHTML = '';
+        // =====================================================================
+        // MOTOR GRÁFICO 3D EN CANVAS HTML5 (HIPERCUBO ORTOGONAL)
+        // =====================================================================
+        const canvas = document.getElementById('canvas3d');
+        const ctx = canvas.getContext('2d');
 
-            DATOS_HIPERCUBO.grupos.forEach((g, idxG) => {
-                // Verificar filtro de texto en el grupo
-                const coincideG = !filtroTexto || 
-                    g.nombre.toLowerCase().includes(filtroTexto) || 
-                    g.codigo.toLowerCase().includes(filtroTexto) || 
-                    g.lider.toLowerCase().includes(filtroTexto);
+        let rotX = 0.45;
+        let rotY = -0.55;
+        let zoom = 1.0;
+        let isDragging = false;
+        let lastMouseX = 0, lastMouseY = 0;
+        let nodos3D = []; // Para detección de clic
 
-                const col = document.createElement('div');
-                col.className = 'group-column';
+        function redimensionarCanvas() {
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            dibujarEscena3D();
+        }
+        window.addEventListener('resize', redimensionarCanvas);
 
-                // NODO GRUPO (EJE X)
-                const cardG = document.createElement('div');
-                cardG.className = 'node-card group';
-                cardG.innerHTML = `
-                    <div class="code">EJE X &bull; [${g.codigo}]</div>
-                    <div class="node-title">${g.nombre}</div>
-                    <div class="node-sub">Líder: ${g.lider} &bull; Año: ${g.anio}</div>
-                    <div class="node-badges">
-                        <span class="pill pill-${g.clasificacion.toLowerCase()}">${g.clasificacion}</span>
-                        <span class="pill" style="background:#1e293b; color:#94a3b8;">${g.area}</span>
-                    </div>
-                `;
-                cardG.onclick = () => mostrarDetalleGrupo(g);
-                col.appendChild(cardG);
+        canvas.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            lastMouseX = e.clientX;
+            lastMouseY = e.clientY;
+        });
+        window.addEventListener('mouseup', () => isDragging = false);
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const dx = e.clientX - lastMouseX;
+            const dy = e.clientY - lastMouseY;
+            rotY += dx * 0.008;
+            rotX += dy * 0.008;
+            lastMouseX = e.clientX;
+            lastMouseY = e.clientY;
+            dibujarEscena3D();
+        });
 
-                // Investigadores (Eje Y)
-                if (g.investigadores.length > 0) {
-                    const ptrI = document.createElement('div');
-                    ptrI.className = 'pointer-tag';
-                    ptrI.innerText = 'g->primerInvestigador';
-                    col.appendChild(ptrI);
+        canvas.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            zoom += e.deltaY * -0.001;
+            zoom = Math.max(0.4, Math.min(2.5, zoom));
+            dibujarEscena3D();
+        });
+
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            let nodoSeleccionado = null;
+            let minDist = 18;
+
+            nodos3D.forEach(n => {
+                const dist = Math.hypot(n.screenX - mouseX, n.screenY - mouseY);
+                if (dist < minDist) {
+                    minDist = dist;
+                    nodoSeleccionado = n;
                 }
+            });
 
-                g.investigadores.forEach((inv, idxInv) => {
-                    const coincideInv = !filtroTexto || 
-                        inv.nombre.toLowerCase().includes(filtroTexto) || 
-                        inv.documento.includes(filtroTexto);
+            if (nodoSeleccionado) {
+                if (nodoSeleccionado.tipo === 'G') mostrarDetalleGrupo(nodoSeleccionado.ref);
+                else if (nodoSeleccionado.tipo === 'I') mostrarDetalleInvestigador(nodoSeleccionado.ref, nodoSeleccionado.grupo);
+                else if (nodoSeleccionado.tipo === 'P') mostrarDetalleProducto(nodoSeleccionado.ref, nodoSeleccionado.grupo);
+            }
+        });
 
-                    const cardInv = document.createElement('div');
-                    cardInv.className = 'node-card investigator';
-                    cardInv.innerHTML = `
-                        <div class="doc">EJE Y &bull; CC ${inv.documento}</div>
-                        <div class="node-title">${inv.nombre}</div>
-                        <div class="node-sub">${inv.formacion}</div>
-                        <div class="node-badges">
-                            <span class="pill pill-a">${inv.categoria}</span>
-                        </div>
-                    `;
-                    cardInv.onclick = () => mostrarDetalleInvestigador(inv, g);
-                    col.appendChild(cardInv);
+        function reiniciarCamara3D() {
+            rotX = 0.45;
+            rotY = -0.55;
+            zoom = 1.0;
+            dibujarEscena3D();
+        }
 
-                    // Productos de este investigador en este grupo (Ortogonal Eje Z)
+        // Proyección 3D a 2D
+        function proyectar3D(x, y, z, cx, cy) {
+            // Rotación Y
+            let x1 = x * Math.cos(rotY) + z * Math.sin(rotY);
+            let z1 = -x * Math.sin(rotY) + z * Math.cos(rotY);
+
+            // Rotación X
+            let y2 = y * Math.cos(rotX) - z1 * Math.sin(rotX);
+            let z2 = y * Math.sin(rotX) + z1 * Math.cos(rotX);
+
+            const scale = 280 * zoom / (z2 + 650);
+            return {
+                x: cx + x1 * scale,
+                y: cy + y2 * scale,
+                z: z2,
+                visible: (z2 + 650) > 10
+            };
+        }
+
+        function dibujarEscena3D() {
+            if (!canvas.width || !canvas.height) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            nodos3D = [];
+
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+
+            // 1. Dibujar Ejes Coordenados del Hipercubo
+            const orig = proyectar3D(0, 0, 0, cx, cy);
+            const pX = proyectar3D(220, 0, 0, cx, cy);
+            const pY = proyectar3D(0, 220, 0, cx, cy);
+            const pZ = proyectar3D(0, 0, 220, cx, cy);
+
+            ctx.lineWidth = 1.5;
+            // Eje X (Grupos)
+            ctx.strokeStyle = '#10b981';
+            ctx.beginPath(); ctx.moveTo(orig.x, orig.y); ctx.lineTo(pX.x, pX.y); ctx.stroke();
+            ctx.fillStyle = '#10b981'; ctx.fillText('Eje X: Grupos', pX.x + 5, pX.y);
+
+            // Eje Y (Investigadores)
+            ctx.strokeStyle = '#38bdf8';
+            ctx.beginPath(); ctx.moveTo(orig.x, orig.y); ctx.lineTo(pY.x, pY.y); ctx.stroke();
+            ctx.fillStyle = '#38bdf8'; ctx.fillText('Eje Y: Investigadores', pY.x + 5, pY.y);
+
+            // Eje Z (Productos)
+            ctx.strokeStyle = '#f59e0b';
+            ctx.beginPath(); ctx.moveTo(orig.x, orig.y); ctx.lineTo(pZ.x, pZ.y); ctx.stroke();
+            ctx.fillStyle = '#f59e0b'; ctx.fillText('Eje Z: Obras & Años', pZ.x + 5, pZ.y);
+
+            // 2. Posicionar y Renderizar Nodos de la Multilista
+            DATOS_HIPERCUBO.grupos.forEach((g, idxG) => {
+                const posX = -120 + idxG * 180;
+                const posG = proyectar3D(posX, -120, -100, cx, cy);
+
+                // Nodo Grupo (Verde UPC)
+                ctx.fillStyle = '#006837';
+                ctx.strokeStyle = '#10b981';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(posG.x, posG.y, 14 * zoom, 0, Math.PI * 2);
+                ctx.fill(); ctx.stroke();
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 11px sans-serif';
+                ctx.fillText(g.codigo, posG.x - 18, posG.y - 18);
+
+                nodos3D.push({ screenX: posG.x, screenY: posG.y, tipo: 'G', ref: g });
+
+                // Investigadores del Grupo (Eje Y)
+                g.investigadores.forEach((inv, idxI) => {
+                    const posY = -60 + idxI * 32;
+                    const posI = proyectar3D(posX, posY, -40, cx, cy);
+
+                    // Línea ortogonal Grupo -> Investigador
+                    ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath(); ctx.moveTo(posG.x, posG.y); ctx.lineTo(posI.x, posI.y); ctx.stroke();
+
+                    // Nodo Investigador
+                    ctx.fillStyle = '#0284c7';
+                    ctx.beginPath();
+                    ctx.arc(posI.x, posI.y, 8 * zoom, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    nodos3D.push({ screenX: posI.x, screenY: posI.y, tipo: 'I', ref: inv, grupo: g });
+
+                    // Productos de este Investigador (Eje Z)
                     const prodsAutor = g.productos.filter(p => p.id_investigador === inv.documento && productoPasaVentana(p));
-                    if (prodsAutor.length > 0) {
-                        const ptrP = document.createElement('div');
-                        ptrP.className = 'pointer-tag';
-                        ptrP.innerText = 'inv->primerProducto (Ortogonal Z)';
-                        col.appendChild(ptrP);
+                    prodsAutor.slice(0, 15).forEach((p, idxP) => {
+                        const posZ = 0 + idxP * 24;
+                        const posP = proyectar3D(posX + (idxP % 2 ? 15 : -15), posY, posZ, cx, cy);
 
-                        prodsAutor.forEach(p => {
-                            const cardP = document.createElement('div');
-                            cardP.className = `node-card product ${p.activo ? '' : 'inactive'}`;
-                            cardP.innerHTML = `
-                                <div class="prod-id">EJE Z &bull; [${p.id}] &bull; ${p.tipo} (${p.anio})</div>
-                                <div class="node-title">${p.titulo}</div>
-                                <div class="node-badges">
-                                    <span class="pill pill-${p.categoria.toLowerCase()}">${p.categoria}</span>
-                                    <span class="pill ${p.validado ? 'pill-val' : 'pill-noval'}">${p.validado ? 'Aval MinCiencias' : 'Sin Aval'}</span>
-                                    ${!p.activo ? '<span class="pill" style="background:#7f1d1d;color:#fca5a5;">Borrado Lógico</span>' : ''}
-                                </div>
-                            `;
-                            cardP.onclick = () => mostrarDetalleProducto(p, g, inv);
-                            col.appendChild(cardP);
-                        });
-                    }
+                        // Enlace Ortogonal Investigador -> Producto (Z)
+                        ctx.strokeStyle = 'rgba(245, 158, 11, 0.3)';
+                        ctx.beginPath(); ctx.moveTo(posI.x, posI.y); ctx.lineTo(posP.x, posP.y); ctx.stroke();
+
+                        // Nodo Producto
+                        ctx.fillStyle = p.validado ? '#f59e0b' : '#ef4444';
+                        ctx.beginPath();
+                        ctx.arc(posP.x, posP.y, 4 * zoom, 0, Math.PI * 2);
+                        ctx.fill();
+
+                        nodos3D.push({ screenX: posP.x, screenY: posP.y, tipo: 'P', ref: p, grupo: g });
+                    });
                 });
-
-                container.appendChild(col);
             });
         }
 
-        // INSPECTOR DE DETALLES
+        // =====================================================================
+        // EXPLORADOR JERÁRQUICO (SUBVISTA 2 DEL HIPERCUBO)
+        // =====================================================================
+        function renderizarExploradorJerarquico() {
+            const colInv = document.getElementById('col-investigadores');
+            const contMosaico = document.getElementById('contenedor-mosaico');
+            colInv.innerHTML = '';
+            contMosaico.innerHTML = '';
+
+            let todosLosProds = [];
+
+            DATOS_HIPERCUBO.grupos.forEach(g => {
+                g.productos.forEach(p => {
+                    if (productoPasaVentana(p)) todosLosProds.push({ prod: p, grupo: g });
+                });
+
+                // Header de Grupo
+                const gHeader = document.createElement('div');
+                gHeader.style.padding = '0.4rem 0';
+                gHeader.style.fontWeight = '800';
+                gHeader.style.fontSize = '0.8rem';
+                gHeader.style.color = 'var(--upc-green-light)';
+                gHeader.innerText = `GRUPO: ${g.codigo} (${g.productos.length} obras)`;
+                colInv.appendChild(gHeader);
+
+                // Tarjeta 'Todos los miembros'
+                const cardAll = document.createElement('div');
+                cardAll.className = `inv-item-card ${invSeleccionadoDoc === null ? 'active' : ''}`;
+                cardAll.innerHTML = `
+                    <div class="inv-item-name">Todos los Investigadores</div>
+                    <div class="inv-item-meta"><span>Producción consolidada</span><b>${g.productos.filter(productoPasaVentana).length}</b></div>
+                `;
+                cardAll.onclick = () => { invSeleccionadoDoc = null; renderizarExploradorJerarquico(); };
+                colInv.appendChild(cardAll);
+
+                g.investigadores.forEach(inv => {
+                    const cant = g.productos.filter(p => p.id_investigador === inv.documento && productoPasaVentana(p)).length;
+                    const cardInv = document.createElement('div');
+                    cardInv.className = `inv-item-card ${invSeleccionadoDoc === inv.documento ? 'active' : ''}`;
+                    cardInv.innerHTML = `
+                        <div class="inv-item-name">${inv.nombre}</div>
+                        <div class="inv-item-meta"><span>${inv.categoria}</span><b>${cant} obras</b></div>
+                    `;
+                    cardInv.onclick = () => {
+                        invSeleccionadoDoc = inv.documento;
+                        mostrarDetalleInvestigador(inv, g);
+                        renderizarExploradorJerarquico();
+                    };
+                    colInv.appendChild(cardInv);
+                });
+            });
+
+            // Filtrar productos a mostrar
+            let prodsMostrar = todosLosProds.filter(item => {
+                if (invSeleccionadoDoc && item.prod.id_investigador !== invSeleccionadoDoc) return false;
+                if (filtroTexto) {
+                    const txt = (item.prod.titulo + " " + item.prod.id + " " + item.prod.tipo).toLowerCase();
+                    if (!txt.includes(filtroTexto)) return false;
+                }
+                return true;
+            });
+
+            document.getElementById('hier-prod-count').innerText = `${prodsMostrar.length} productos`;
+
+            prodsMostrar.forEach(item => {
+                const p = item.prod;
+                const cardP = document.createElement('div');
+                cardP.className = 'prod-card';
+                cardP.innerHTML = `
+                    <div class="prod-card-title">${p.titulo}</div>
+                    <div class="prod-card-tags">
+                        <span class="pill pill-${p.categoria.toLowerCase()}">${p.categoria}</span>
+                        <span class="pill" style="background:#1e293b; color:#94a3b8;">${p.tipo} &bull; ${p.anio}</span>
+                        <span class="pill ${p.validado ? 'pill-val' : 'pill-noval'}">${p.validado ? 'Avalado' : 'Sin Aval'}</span>
+                    </div>
+                `;
+                cardP.onclick = () => mostrarDetalleProducto(p, item.grupo);
+                contMosaico.appendChild(cardP);
+            });
+        }
+
+        // =====================================================================
+        // INSPECTOR LATERAL DE DETALLES
+        // =====================================================================
         function mostrarDetalleGrupo(g) {
             document.getElementById('insp-titulo').innerText = `Grupo: ${g.codigo}`;
             const c = document.getElementById('insp-contenido');
             c.innerHTML = `
                 <div class="meta-field"><span class="meta-k">Nombre Oficial</span><span class="meta-v">${g.nombre}</span></div>
-                <div class="meta-field"><span class="meta-k">Clasificación MinCiencias</span><span class="meta-v">${g.clasificacion}</span></div>
+                <div class="meta-field"><span class="meta-k">Clasificación</span><span class="meta-v">${g.clasificacion}</span></div>
                 <div class="meta-field"><span class="meta-k">Líder</span><span class="meta-v">${g.lider}</span></div>
                 <div class="meta-field"><span class="meta-k">Área OCDE</span><span class="meta-v">${g.area}</span></div>
                 <div class="meta-field"><span class="meta-k">Año de Fundación</span><span class="meta-v">${g.anio}</span></div>
-                <div class="meta-field"><span class="meta-k">Total Investigadores</span><span class="meta-v">${g.investigadores.length}</span></div>
-                <div class="meta-field"><span class="meta-k">Total Productos (Filtro)</span><span class="meta-v">${g.productos.filter(productoPasaVentana).length}</span></div>
-                <div class="meta-field"><span class="meta-k">Puntero en Memoria</span><span class="meta-v" style="font-family:monospace; color:var(--upc-green-light);">NodoGrupo* [sigGrupo -> 0x${Math.floor(Math.random()*16777215).toString(16)}]</span></div>
+                <div class="meta-field"><span class="meta-k">Investigadores</span><span class="meta-v">${g.investigadores.length}</span></div>
+                <div class="meta-field"><span class="meta-k">Producción (Filtro)</span><span class="meta-v">${g.productos.filter(productoPasaVentana).length} obras</span></div>
+                <div class="ptr-box">NodoGrupo* &bull; sigGrupo -> 0x0<br>primerInvestigador -> 0x7ffd10a<br>primerProducto -> 0x7ffd22b</div>
             `;
         }
 
         function mostrarDetalleInvestigador(inv, g) {
             document.getElementById('insp-titulo').innerText = `Investigador: ${inv.nombre}`;
             const c = document.getElementById('insp-contenido');
-            const prods = g.productos.filter(p => p.id_investigador === inv.documento);
+            const cant = g.productos.filter(p => p.id_investigador === inv.documento).length;
             c.innerHTML = `
-                <div class="meta-field"><span class="meta-k">Documento / ID CvLAC</span><span class="meta-v">${inv.documento}</span></div>
+                <div class="meta-field"><span class="meta-k">Documento / CvLAC</span><span class="meta-v">${inv.documento}</span></div>
                 <div class="meta-field"><span class="meta-k">Categoría MinCiencias</span><span class="meta-v">${inv.categoria}</span></div>
                 <div class="meta-field"><span class="meta-k">Formación Académica</span><span class="meta-v">${inv.formacion}</span></div>
-                <div class="meta-field"><span class="meta-k">Grupo Adscrito</span><span class="meta-v">${g.nombre} (${g.codigo})</span></div>
-                <div class="meta-field"><span class="meta-k">Productos Autorados</span><span class="meta-v">${prods.length}</span></div>
-                <div class="meta-field"><span class="meta-k">Enlace Ortogonal</span><span class="meta-v" style="font-family:monospace; color:var(--accent-blue);">NodoInvestigador* [sigInvestigador, primerProducto]</span></div>
+                <div class="meta-field"><span class="meta-k">Grupo Adscrito</span><span class="meta-v">${g.nombre}</span></div>
+                <div class="meta-field"><span class="meta-k">Obras Autoradas</span><span class="meta-v">${cant} registradas</span></div>
+                <div class="ptr-box">NodoInvestigador* [sigInvestigador]<br>primerProducto (Ortogonal Z)</div>
             `;
         }
 
-        function mostrarDetalleProducto(p, g, inv) {
-            document.getElementById('insp-titulo').innerText = `Producto: ${p.id}`;
+        function mostrarDetalleProducto(p, g) {
+            document.getElementById('insp-titulo').innerText = `Obra: ${p.id}`;
             const c = document.getElementById('insp-contenido');
             c.innerHTML = `
-                <div class="meta-field"><span class="meta-k">Título de la Obra</span><span class="meta-v">${p.titulo}</span></div>
+                <div class="meta-field"><span class="meta-k">Título</span><span class="meta-v">${p.titulo}</span></div>
                 <div class="meta-field"><span class="meta-k">Tipo de Producción</span><span class="meta-v">${p.tipo}</span></div>
                 <div class="meta-field"><span class="meta-k">Año de Publicación</span><span class="meta-v">${p.anio}</span></div>
-                <div class="meta-field"><span class="meta-k">Categoría MinCiencias</span><span class="meta-v">${p.categoria}</span></div>
-                <div class="meta-field"><span class="meta-k">Aval MinCiencias</span><span class="meta-v">${p.validado ? 'SÍ (Avalado)' : 'NO (No validado)'}</span></div>
-                <div class="meta-field"><span class="meta-k">Estado en Memoria</span><span class="meta-v">${p.activo ? 'ACTIVO' : 'DESACTIVADO (Borrado Lógico)'}</span></div>
+                <div class="meta-field"><span class="meta-k">Categoría</span><span class="meta-v">${p.categoria}</span></div>
+                <div class="meta-field"><span class="meta-k">Aval MinCiencias</span><span class="meta-v">${p.validado ? 'SÍ (Aval Institucional)' : 'NO (Sin validar)'}</span></div>
                 <div class="meta-field"><span class="meta-k">Grupo Asociado</span><span class="meta-v">${g.nombre}</span></div>
-                <div class="meta-field"><span class="meta-k">Investigador Autor</span><span class="meta-v">${inv.nombre} (${inv.documento})</span></div>
-                <div class="meta-field"><span class="meta-k">Punteros Hipercubo</span><span class="meta-v" style="font-family:monospace; color:var(--accent-amber);">sigProductoGrupo &bull; sigProductoInvestigador</span></div>
+                <div class="meta-field"><span class="meta-k">Autor (ID)</span><span class="meta-v">${p.id_investigador}</span></div>
+                <div class="ptr-box">NodoProducto*<br>sigProductoGrupo &bull; sigProductoInvestigador</div>
             `;
         }
 
-        // RENDERIZADO DEL DASHBOARD (GRÁFICOS CSS PUROS)
+        // =====================================================================
+        // DASHBOARD ESTADÍSTICO
+        // =====================================================================
         function renderizarDashboard() {
             let catCounts = { "A1": 0, "A": 0, "B": 0, "C": 0, "Otras": 0 };
             let anioCounts = {};
+            let tipoCounts = {};
             let valCount = 0, noValCount = 0;
             let total = 0;
 
@@ -785,95 +1057,165 @@ public:
                         else catCounts["Otras"]++;
 
                         anioCounts[p.anio] = (anioCounts[p.anio] || 0) + 1;
+                        tipoCounts[p.tipo] = (tipoCounts[p.tipo] || 0) + 1;
+
                         if (p.validado) valCount++; else noValCount++;
                     }
                 });
             });
 
-            // Gráfico 1: Categorías
+            // 1. Gráfico Categorías
             const cCat = document.getElementById('chart-categorias');
             cCat.innerHTML = '';
-            const maxCat = Math.max(...Object.values(catCounts), 1);
             for (let [cat, cnt] of Object.entries(catCounts)) {
                 if (cnt === 0 && cat === 'Otras') continue;
-                const pct = Math.round((cnt / maxCat) * 100);
+                const pct = total > 0 ? Math.round((cnt / total) * 100) : 0;
                 cCat.innerHTML += `
                     <div class="bar-row">
-                        <div class="bar-info"><span>Categoría ${cat}</span><b>${cnt} prod.</b></div>
+                        <div class="bar-info"><span>Categoría ${cat}</span><b>${cnt} (${pct}%)</b></div>
                         <div class="bar-track"><div class="bar-fill" style="width:${pct}%; background:var(--accent-blue);"></div></div>
                     </div>
                 `;
             }
 
-            // Gráfico 2: Años (Histograma)
+            // 2. Gráfico Años (Histograma Temporal)
             const cAnios = document.getElementById('chart-anios');
             cAnios.innerHTML = '';
-            const sortedAnios = Object.keys(anioCounts).sort();
+            const sortedAnios = Object.keys(anioCounts).sort().reverse();
             const maxAnio = Math.max(...Object.values(anioCounts), 1);
-            sortedAnios.forEach(an => {
+            sortedAnios.slice(0, 12).forEach(an => {
                 const cnt = anioCounts[an];
                 const pct = Math.round((cnt / maxAnio) * 100);
+                const enVentana = (ventanaAnios === 0) || (an >= anioActual - ventanaAnios + 1);
                 cAnios.innerHTML += `
                     <div class="bar-row">
                         <div class="bar-info"><span>Año ${an}</span><b>${cnt} obras</b></div>
-                        <div class="bar-track"><div class="bar-fill" style="width:${pct}%; background:var(--upc-green-light);"></div></div>
+                        <div class="bar-track"><div class="bar-fill" style="width:${pct}%; background:${enVentana ? 'var(--upc-green-light)' : '#475569'};"></div></div>
                     </div>
                 `;
             });
 
-            // Gráfico 3: Avales
+            // 3. Avales
             const cAval = document.getElementById('chart-aval');
+            const pctVal = total > 0 ? Math.round((valCount / total) * 100) : 0;
+            const pctNoVal = total > 0 ? Math.round((noValCount / total) * 100) : 0;
             cAval.innerHTML = `
                 <div class="bar-row">
-                    <div class="bar-info"><span>Avalados por MinCiencias</span><b>${valCount} (${total>0?Math.round(valCount/total*100):0}%)</b></div>
-                    <div class="bar-track"><div class="bar-fill" style="width:${total>0?valCount/total*100:0}%; background:#10b981;"></div></div>
+                    <div class="bar-info"><span>Avalados por MinCiencias</span><b>${valCount} (${pctVal}%)</b></div>
+                    <div class="bar-track"><div class="bar-fill" style="width:${pctVal}%; background:var(--upc-green-light);"></div></div>
                 </div>
-                <div class="bar-row" style="margin-top:0.8rem;">
-                    <div class="bar-info"><span>Sin Aval / No Validados</span><b>${noValCount} (${total>0?Math.round(noValCount/total*100):0}%)</b></div>
-                    <div class="bar-track"><div class="bar-fill" style="width:${total>0?noValCount/total*100:0}%; background:#ef4444;"></div></div>
+                <div class="bar-row" style="margin-top:0.6rem;">
+                    <div class="bar-info"><span>Sin Aval / No Validados</span><b>${noValCount} (${pctNoVal}%)</b></div>
+                    <div class="bar-track"><div class="bar-fill" style="width:${pctNoVal}%; background:var(--upc-red);"></div></div>
                 </div>
             `;
+
+            // 4. Tipologías
+            const cTipos = document.getElementById('chart-tipos');
+            cTipos.innerHTML = '';
+            for (let [tipo, cnt] of Object.entries(tipoCounts)) {
+                const pct = total > 0 ? Math.round((cnt / total) * 100) : 0;
+                cTipos.innerHTML += `
+                    <div class="bar-row">
+                        <div class="bar-info"><span>${tipo}</span><b>${cnt} (${pct}%)</b></div>
+                        <div class="bar-track"><div class="bar-fill" style="width:${pct}%; background:var(--accent-purple);"></div></div>
+                    </div>
+                `;
+            }
         }
 
-        // RENDERIZADO DE TABLAS (VISTAS PUNTO 12.C)
+        // =====================================================================
+        // VISTAS POR ENTIDAD (PUNTO 12.C)
+        // =====================================================================
         function renderizarTablas() {
+            // 1. Grupos
             const tbodyG = document.querySelector('#tabla-grupos tbody');
             tbodyG.innerHTML = '';
             DATOS_HIPERCUBO.grupos.forEach(g => {
-                const prodsVentana = g.productos.filter(productoPasaVentana).length;
+                const prods = g.productos.filter(productoPasaVentana).length;
                 tbodyG.innerHTML += `
-                    <tr>
+                    <tr onclick="mostrarDetalleGrupo(DATOS_HIPERCUBO.grupos[0])">
                         <td><b>${g.codigo}</b></td>
                         <td>${g.nombre}</td>
                         <td><span class="pill pill-${g.clasificacion.toLowerCase()}">${g.clasificacion}</span></td>
                         <td>${g.lider}</td>
                         <td>${g.investigadores.length}</td>
-                        <td><b>${prodsVentana}</b></td>
+                        <td><b>${prods}</b></td>
                     </tr>
                 `;
             });
 
+            // 2. Investigadores
             const tbodyI = document.querySelector('#tabla-investigadores tbody');
             tbodyI.innerHTML = '';
             DATOS_HIPERCUBO.grupos.forEach(g => {
                 g.investigadores.forEach(inv => {
                     const prods = g.productos.filter(p => p.id_investigador === inv.documento && productoPasaVentana(p)).length;
                     tbodyI.innerHTML += `
-                        <tr>
-                            <td><b>${inv.documento}</b></td>
-                            <td>${inv.nombre}</td>
-                            <td><span class="pill pill-a">${inv.categoria}</span></td>
-                            <td>${g.nombre}</td>
+                        <tr onclick="mostrarDetalleInvestigador(DATOS_HIPERCUBO.grupos[0].investigadores.find(i=>i.documento==='${inv.documento}'), DATOS_HIPERCUBO.grupos[0])">
+                            <td><code>${inv.documento}</code></td>
+                            <td><b>${inv.nombre}</b></td>
+                            <td>${inv.categoria}</td>
+                            <td>${inv.formacion}</td>
                             <td><b>${prods}</b></td>
                         </tr>
                     `;
                 });
             });
+
+            // 3. Productos (Paginado)
+            renderizarTablaProductosPaginada();
+        }
+
+        function renderizarTablaProductosPaginada() {
+            const tbodyP = document.querySelector('#tabla-productos tbody');
+            tbodyP.innerHTML = '';
+
+            let todos = [];
+            DATOS_HIPERCUBO.grupos.forEach(g => {
+                g.productos.forEach(p => {
+                    if (productoPasaVentana(p)) {
+                        if (!filtroTexto || p.titulo.toLowerCase().includes(filtroTexto) || p.id.toLowerCase().includes(filtroTexto)) {
+                            todos.push({ prod: p, grupo: g });
+                        }
+                    }
+                });
+            });
+
+            const total = todos.length;
+            const totalPags = Math.max(1, Math.ceil(total / PRODS_POR_PAG));
+            if (pagProdActual >= totalPags) pagProdActual = totalPags - 1;
+
+            const inicio = pagProdActual * PRODS_POR_PAG;
+            const fin = Math.min(inicio + PRODS_POR_PAG, total);
+
+            document.getElementById('lbl-pag-prod').innerText = `Página ${pagProdActual + 1} de ${totalPags} (Total: ${total} obras)`;
+
+            todos.slice(inicio, fin).forEach(item => {
+                const p = item.prod;
+                tbodyP.innerHTML += `
+                    <tr onclick="mostrarDetalleProducto(DATOS_HIPERCUBO.grupos[0].productos.find(x=>x.id==='${p.id}'), DATOS_HIPERCUBO.grupos[0])">
+                        <td><code>${p.id}</code></td>
+                        <td>${p.tipo}</td>
+                        <td>${p.titulo}</td>
+                        <td>${p.anio}</td>
+                        <td><span class="pill pill-${p.categoria.toLowerCase()}">${p.categoria}</span></td>
+                        <td><span class="pill ${p.validado ? 'pill-val' : 'pill-noval'}">${p.validado ? 'Aval' : 'Sin Aval'}</span></td>
+                    </tr>
+                `;
+            });
+        }
+
+        function paginarTablaProd(delta) {
+            pagProdActual += delta;
+            if (pagProdActual < 0) pagProdActual = 0;
+            renderizarTablaProductosPaginada();
         }
 
         // INICIALIZACIÓN
         window.onload = () => {
             renderizarTodo();
+            redimensionarCanvas();
         };
     </script>
 </body>
