@@ -192,12 +192,41 @@ class MotorIngesta:
                                 m_anio = re.search(r'\b(20[0-2]\d|19[89]\d)\b', raw_txt)
                                 anio = int(m_anio.group(1)) if m_anio else 2024
 
+                                # Extraer autores reales de la publicación
+                                m_aut = re.search(r'Autores:\s*([^,\n\r]+)', raw_txt)
+                                nom_autor_primario = m_aut.group(1).strip() if m_aut else ""
+                                nom_autor_primario = re.sub(r'[\xa0\s]+', ' ', nom_autor_primario).strip()
+
+                                # Asociar al investigador correspondiente
+                                id_inv_asociado = id_inv_lider
+                                if nom_autor_primario:
+                                    inv_encontrado = None
+                                    g_actual = multi.buscar_grupo(cod_grupo)
+                                    if g_actual:
+                                        cur_inv = g_actual.primer_investigador
+                                        while cur_inv:
+                                            palabras = nom_autor_primario.split()
+                                            if any(len(pal) > 3 and pal.lower() in cur_inv.nombre_completo.lower() for pal in palabras):
+                                                inv_encontrado = cur_inv
+                                                break
+                                            cur_inv = cur_inv.sig_investigador
+                                    
+                                    if inv_encontrado:
+                                        id_inv_asociado = inv_encontrado.documento_id
+                                    else:
+                                        # Registrar nuevo autor como investigador del grupo
+                                        doc_nuevo = f"INV{nro_grupo[-4:]}{abs(hash(nom_autor_primario)) % 1000:03d}"
+                                        if not multi.buscar_investigador(doc_nuevo):
+                                            multi.insertar_investigador(cod_grupo, doc_nuevo, nom_autor_primario.title(), "Junior", "Ingeniería de Sistemas", True)
+                                            resumen["investigadores"] += 1
+                                        id_inv_asociado = doc_nuevo
+
                                 if not multi.buscar_producto(id_prod):
-                                    multi.insertar_producto(cod_grupo, id_inv_lider, id_prod, tipo, titulo, anio, "A1", True, True)
+                                    multi.insertar_producto(cod_grupo, id_inv_asociado, id_prod, tipo, titulo, anio, "A1", True, True)
                                     resumen["productos"] += 1
-                                if prod_count >= 20: # Límite representativo para velocidad
+                                if prod_count >= 50: # Límite representativo para velocidad
                                     break
-                if prod_count >= 20:
+                if prod_count >= 50:
                     break
 
         return resumen
@@ -219,7 +248,10 @@ class MotorIngesta:
         invs = [
             ("0000494917", "Adith Bismarck Pérez Orozco", "Senior", "Doctorado en Ingeniería de Sistemas"),
             ("0000882190", "Kovyn Mena", "Junior", "Ingeniería de Sistemas"),
-            ("0000331456", "John Jairo Patiño Vanegas", "Asociado", "Maestría en Computación")
+            ("INV2099002", "John Jairo Patiño Vanegas", "Asociado", "Maestría en Computación"),
+            ("INV2099004", "Alfonso Enrique García Payares", "Junior", "Ingeniería de Sistemas"),
+            ("INV2099005", "Gloria Marina Rosado Galindo", "Asociado", "Ingeniería de Sistemas"),
+            ("INV2099006", "Heyner Alexander Aroca Araujo", "Junior", "Ingeniería de Sistemas")
         ]
         for doc, nom, cat, form in invs:
             if not multi.buscar_investigador(doc):
@@ -227,14 +259,16 @@ class MotorIngesta:
                 resumen["investigadores"] += 1
 
         prods = [
-            ("FALLBACK-001", "Articulo", "Modelo de hipercubo para análisis multidimensional en MinCiencias", 2024, "A1", True),
-            ("FALLBACK-002", "Software", "PEA-i: Sistema de analítica institucional de investigación UPC", 2025, "A1", True),
-            ("FALLBACK-003", "Articulo", "Epistemological Foundations of Quantitative Software Research", 2023, "A", True),
-            ("FALLBACK-004", "Libro", "Fundamentos de Estructuras de Datos aplicadas a grafos y multilistas", 2022, "A1", True)
+            ("FALLBACK-001", "0000494917", "Articulo", "Modelo de hipercubo para análisis multidimensional en MinCiencias", 2024, "A1", True),
+            ("FALLBACK-002", "0000882190", "Software", "PEA-i: Sistema de analítica institucional de investigación UPC", 2025, "A1", True),
+            ("FALLBACK-003", "INV2099002", "Articulo", "Epistemological Foundations of Quantitative Software Research", 2023, "A", True),
+            ("FALLBACK-004", "0000494917", "Libro", "Fundamentos de Estructuras de Datos aplicadas a grafos y multilistas", 2022, "A1", True),
+            ("FALLBACK-005", "INV2099005", "Articulo", "Scientific Methods of Quantitative Research in Engineering", 2026, "A1", True),
+            ("FALLBACK-006", "INV2099006", "Articulo", "Pensamiento sistémico y simulación microcontrolada", 2025, "A", True)
         ]
-        for id_p, tip, tit, an, cat, val in prods:
+        for id_p, doc_inv, tip, tit, an, cat, val in prods:
             if not multi.buscar_producto(id_p):
-                multi.insertar_producto(cod_grupo, "0000494917", id_p, tip, tit, an, cat, val, True)
+                multi.insertar_producto(cod_grupo, doc_inv, id_p, tip, tit, an, cat, val, True)
                 resumen["productos"] += 1
 
         return resumen

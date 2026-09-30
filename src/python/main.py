@@ -63,6 +63,12 @@ def main():
             print("[!] Falta especificar la ruta para --ingesta-archivo")
             sys.exit(1)
 
+    elif "--gui" in args or "-g" in args:
+        from python.gui import DashboardApp
+        app_gui = DashboardApp(db_path)
+        app_gui.iniciar()
+        sys.exit(0)
+
     app = ConsolaApp(db_path)
     app.iniciar()
 

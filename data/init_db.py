@@ -28,13 +28,15 @@ def init_database():
     cursor.executescript(schema_sql)
     conn.commit()
 
-    # 1. Grupo oficial MinCiencias: GIDSE (Universidad Popular del Cesar)
+    # 1. Grupos oficiales MinCiencias de la Universidad Popular del Cesar (UPC)
     grupos = [
-        ("COL0002099", "GRUPO DE INVESTIGACIÓN EN DESARROLLO DE SOFTWARE (GIDSE)", "A1", "Ingeniería y Tecnología", "Adith Bismarck Pérez Orozco", 2005, 1)
+        ("COL0002099", "GRUPO DE INVESTIGACIÓN EN DESARROLLO DE SOFTWARE (GIDSE)", "A1", "Ingeniería y Tecnología", "Adith Bismarck Pérez Orozco", 2005, 1),
+        ("COL0005544", "GRUPO DE INVESTIGACIÓN EN SISTEMAS INTELIGENTES (GISI)", "A", "Ciencias de la Computación", "Carlos Mendoza", 2008, 1),
+        ("COL0012981", "BIOTECNOLOGÍA Y AGROINDUSTRIA CESAR (BIOTEC)", "B", "Ciencias Agrícolas", "Martha Rangel", 2012, 1)
     ]
     cursor.executemany("INSERT INTO Grupos VALUES (?, ?, ?, ?, ?, ?, ?)", grupos)
 
-    # 2. Investigadores reales del grupo GIDSE
+    # 2. Investigadores adscritos a los grupos de la UPC
     investigadores = [
         ("0000494917", "Adith Bismarck Pérez Orozco", "Senior", "Doctorado en Ingeniería de Sistemas", "COL0002099", 1),
         ("0000882190", "Kovyn Mena", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
@@ -50,7 +52,9 @@ def init_database():
         ("INV2099012", "Braulio Barrios Zúñiga", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
         ("INV2099013", "Brinulfo Manuel Álvarez Milián", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
         ("INV2099014", "Camilo Andrés Colón Cañizares", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
-        ("INV2099015", "Carlos Mario Baquero Torres", "Junior", "Ingeniería de Sistemas", "COL0002099", 1)
+        ("INV2099015", "Carlos Mario Baquero Torres", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
+        ("0000331456", "Laura Quintero", "Asociado", "Maestría en Computación", "COL0005544", 1),
+        ("0000771234", "Jorge Gómez", "Junior", "Ingeniería Agroindustrial", "COL0012981", 1)
     ]
     cursor.executemany("INSERT INTO Investigadores VALUES (?, ?, ?, ?, ?, ?)", investigadores)
 
@@ -60,6 +64,16 @@ def init_database():
             reader = csv.DictReader(f)
             prods = []
             for row in reader:
+                cod_g = row["codigo_grupo"]
+                nom_g = row["nombre_grupo"]
+                doc_i = row["documento_investigador"]
+                nom_i = row["nombre_investigador"]
+
+                cursor.execute("INSERT OR IGNORE INTO Grupos VALUES (?, ?, ?, ?, ?, ?, ?)",
+                               (cod_g, nom_g, "A1", "Ingeniería y Tecnología", "Líder Asignado", 2005, 1))
+                cursor.execute("INSERT OR IGNORE INTO Investigadores VALUES (?, ?, ?, ?, ?, ?)",
+                               (doc_i, nom_i, "Junior", "Ingeniería de Sistemas", cod_g, 1))
+
                 prods.append((
                     row["id_producto"],
                     row["tipo_producto"],
@@ -67,11 +81,11 @@ def init_database():
                     int(row["anio"]),
                     row["categoria"],
                     int(row["validado"]),
-                    row["codigo_grupo"],
-                    row["documento_investigador"],
+                    cod_g,
+                    doc_i,
                     1
                 ))
-            cursor.executemany("INSERT INTO Productos VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", prods)
+            cursor.executemany("INSERT OR IGNORE INTO Productos VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", prods)
             print(f"[DB] {len(prods)} productos científicos reales cargados desde CSV.")
 
     conn.commit()
