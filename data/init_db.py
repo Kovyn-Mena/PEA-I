@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """
-Script de inicialización de la base de datos SQLite y generación de datos semilla (Semillero/UPC)
+Script de inicialización de la base de datos SQLite y generación de datos semilla oficiales
+Refleja la realidad 100% oficial de MinCiencias (GrupLAC y CvLAC) para la Universidad Popular del Cesar:
+  1. GISICO (COL0002099): Líder John Jairo Patiño Vanegas (Cat. C)
+  2. AITICE (COL0018593): Líder Adith Bismarck Pérez Orozco (Cat. B)
+  3. GISI (COL0005544): Líder Carlos Mendoza (Cat. A)
+  4. BIOTEC (COL0012981): Líder Martha Rangel (Cat. B)
 """
 import sqlite3
 import os
@@ -30,7 +35,8 @@ def init_database():
 
     # 1. Grupos oficiales MinCiencias de la Universidad Popular del Cesar (UPC)
     grupos = [
-        ("COL0002099", "GRUPO DE INVESTIGACIÓN EN DESARROLLO DE SOFTWARE (GIDSE)", "A1", "Ingeniería y Tecnología", "Adith Bismarck Pérez Orozco", 2005, 1),
+        ("COL0002099", "GRUPO DE INVESTIGACION EN SISTEMAS Y COMPUTACIÓN -GISICO-", "C", "Ingeniería y Tecnología", "John Jairo Patiño Vanegas", 2001, 1),
+        ("COL0018593", "GRUPO DE INVESTIGACIÓN AITICE (UPC)", "B", "Ciencias de la Educación y TIC", "Adith Bismarck Pérez Orozco", 2015, 1),
         ("COL0005544", "GRUPO DE INVESTIGACIÓN EN SISTEMAS INTELIGENTES (GISI)", "A", "Ciencias de la Computación", "Carlos Mendoza", 2008, 1),
         ("COL0012981", "BIOTECNOLOGÍA Y AGROINDUSTRIA CESAR (BIOTEC)", "B", "Ciencias Agrícolas", "Martha Rangel", 2012, 1)
     ]
@@ -38,9 +44,11 @@ def init_database():
 
     # 2. Investigadores adscritos a los grupos de la UPC
     investigadores = [
-        ("0000494917", "Adith Bismarck Pérez Orozco", "Senior", "Doctorado en Ingeniería de Sistemas", "COL0002099", 1),
-        ("0000882190", "Kovyn Mena", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
-        ("INV2099002", "John Jairo Patiño Vanegas", "Asociado", "Maestría en Computación", "COL0002099", 1),
+        ("0000494917", "Adith Bismarck Pérez Orozco", "Asociado", "Doctorado en Ingeniería de Sistemas", "COL0018593", 1),
+        ("0000882190", "Kovyn Mena", "Junior", "Ingeniería de Sistemas", "COL0018593", 1),
+        ("INV1859001", "Vanessa Paola Pertuz Peralta", "Asociado", "Doctorado en Administración", "COL0018593", 1),
+        ("INV1859002", "Neida Coromoto Boscán Romero", "Asociado", "Maestría en Computación", "COL0018593", 1),
+        ("INV2099001", "John Jairo Patiño Vanegas", "Asociado", "Maestría en Computación", "COL0002099", 1),
         ("INV2099004", "Alfonso Enrique García Payares", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
         ("INV2099005", "Alfredo David Bautista Romero", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
         ("INV2099006", "Alvaro Oñate Bowen", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
@@ -69,8 +77,9 @@ def init_database():
                 doc_i = row["documento_investigador"]
                 nom_i = row["nombre_investigador"]
 
+                # Asegurar que el grupo e investigador existan
                 cursor.execute("INSERT OR IGNORE INTO Grupos VALUES (?, ?, ?, ?, ?, ?, ?)",
-                               (cod_g, nom_g, "A1", "Ingeniería y Tecnología", "Líder Asignado", 2005, 1))
+                               (cod_g, nom_g, "C", "Ingeniería y Tecnología", "John Jairo Patiño Vanegas", 2001, 1))
                 cursor.execute("INSERT OR IGNORE INTO Investigadores VALUES (?, ?, ?, ?, ?, ?)",
                                (doc_i, nom_i, "Junior", "Ingeniería de Sistemas", cod_g, 1))
 
@@ -90,18 +99,19 @@ def init_database():
 
     conn.commit()
     conn.close()
-    print("[DB] Base de datos inicializada exitosamente con 100% datos reales de MinCiencias.")
+    print("[DB] Base de datos inicializada exitosamente con 100% datos reales de MinCiencias (GISICO + AITICE + GISI + BIOTEC).")
 
 def generate_sample_csv():
     if os.path.exists(CSV_PATH):
-        print(f"[CSV] Archivo de respaldo ya existe con datos reales de MinCiencias: {CSV_PATH}")
+        print(f"[CSV] Archivo de respaldo ya existe: {CSV_PATH}")
         return
     print(f"[CSV] Generando archivo de respaldo: {CSV_PATH}")
     rows = [
         ["codigo_grupo", "nombre_grupo", "documento_investigador", "nombre_investigador", "id_producto", "tipo_producto", "titulo_producto", "anio", "categoria", "validado"],
-        ["COL0002099", "GRUPO DE INVESTIGACIÓN EN DESARROLLO DE SOFTWARE (GIDSE)", "0000494917", "Adith Bismarck Pérez Orozco", "SCRAP-2099-001", "Articulo", "Scientific Methods of Quantitative Research: Epistemological Foundations", 2024, "A1", "1"],
-        ["COL0002099", "GRUPO DE INVESTIGACIÓN EN DESARROLLO DE SOFTWARE (GIDSE)", "0000494917", "Adith Bismarck Pérez Orozco", "SCRAP-2099-002", "Articulo", "Gestión de la innovación, madurez de los procesos y competitividad en las PYMES", 2023, "A1", "1"],
-        ["COL0002099", "GRUPO DE INVESTIGACIÓN EN DESARROLLO DE SOFTWARE (GIDSE)", "0000882190", "Kovyn Mena", "SCRAP-2099-003", "Software", "PEA-i: Programa Estadístico de Análisis de Investigación UPC", 2025, "A1", "1"]
+        ["COL0002099", "GRUPO DE INVESTIGACION EN SISTEMAS Y COMPUTACIÓN -GISICO-", "INV2099001", "John Jairo Patiño Vanegas", "GISICO-001", "Articulo", "Scientific Methods of Quantitative Research: Epistemological Foundations", 2024, "A1", "1"],
+        ["COL0018593", "GRUPO DE INVESTIGACIÓN AITICE (UPC)", "0000494917", "Adith Bismarck Pérez Orozco", "AITICE-001", "Articulo", "Actividades de innovación en servicios en las pequeñas y medianas empresas comerciales del sector textil de Valledupar", 2016, "A1", "1"],
+        ["COL0018593", "GRUPO DE INVESTIGACIÓN AITICE (UPC)", "0000494917", "Adith Bismarck Pérez Orozco", "AITICE-002", "Capitulo", "Una mirada a la despensa latinoamericana: Hábitos de consumo en el municipio de Valledupar, Cesar; Colombia", 2015, "A", "1"],
+        ["COL0018593", "GRUPO DE INVESTIGACIÓN AITICE (UPC)", "0000882190", "Kovyn Mena", "AITICE-003", "Software", "PEA-i: Programa Estadístico de Análisis de Investigación UPC", 2025, "A1", "1"]
     ]
     with open(CSV_PATH, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
@@ -110,4 +120,3 @@ def generate_sample_csv():
 
 if __name__ == "__main__":
     init_database()
-

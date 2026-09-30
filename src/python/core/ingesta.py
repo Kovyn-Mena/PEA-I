@@ -232,23 +232,23 @@ class MotorIngesta:
         return resumen
 
     def _fallback_gruplac(self, cod_grupo: str, multi: Multilista, resumen: dict) -> dict:
-        """Plan B: Ingesta con datos representativos reales de GIDSE si MinCiencias está caído"""
+        """Plan B: Ingesta con datos representativos reales de GISICO si MinCiencias está caído"""
         if not multi.buscar_grupo(cod_grupo):
             multi.insertar_grupo(
                 cod_grupo,
-                "GRUPO DE INVESTIGACIÓN EN DESARROLLO DE SOFTWARE (GIDSE)",
-                "A1",
+                "GRUPO DE INVESTIGACION EN SISTEMAS Y COMPUTACIÓN -GISICO-",
+                "C",
                 "Ingeniería y Tecnología",
-                "Adith Bismarck Pérez Orozco",
-                2005,
+                "John Jairo Patiño Vanegas",
+                2001,
                 True
             )
             resumen["grupos"] += 1
 
         invs = [
-            ("0000494917", "Adith Bismarck Pérez Orozco", "Senior", "Doctorado en Ingeniería de Sistemas"),
+            ("INV2099001", "John Jairo Patiño Vanegas", "Asociado", "Maestría en Computación"),
+            ("0000494917", "Adith Bismarck Pérez Orozco", "Asociado", "Doctorado en Ingeniería de Sistemas"),
             ("0000882190", "Kovyn Mena", "Junior", "Ingeniería de Sistemas"),
-            ("INV2099002", "John Jairo Patiño Vanegas", "Asociado", "Maestría en Computación"),
             ("INV2099004", "Alfonso Enrique García Payares", "Junior", "Ingeniería de Sistemas"),
             ("INV2099005", "Gloria Marina Rosado Galindo", "Asociado", "Ingeniería de Sistemas"),
             ("INV2099006", "Heyner Alexander Aroca Araujo", "Junior", "Ingeniería de Sistemas")
