@@ -324,7 +324,24 @@ def build_document():
         ["Pila (Stack)", "LIFO (Last-In, First-Out)", "Módulo Deshacer (Undo). Cada inserción, edición o borrado hace push(). Al presionar Undo se hace pop() revirtiendo el estado en O(1)."],
         ["Cola (Queue)", "FIFO (First-In, First-Out)", "Ingesta masiva por lotes. Encola tareas de scraping GrupLAC/CvLAC, parseo de PDF y CSV, procesándolas en orden estricto de llegada."]
     ]
-    format_table(tbl_tda, widths_tda, headers_tda, data_tda)
+    doc.add_heading("3.3 Taxonomía Oficial y Matriz de Ponderación MinCiencias 2024 (Convocatoria 957)", level=2)
+    doc.add_paragraph(
+        "Frente a modelos obsoletos (pre-2022) que utilizaban listas planas de productos sin ponderación, "
+        "el sistema PEA-i implementa la taxonomía oficial de la Convocatoria Nacional 957 de 2024 (Anexo 1 del Modelo MinCiencias), "
+        "estructurada en 5 Familias Oficiales, clases de medición jerárquicas y pesos para el cálculo del Índice de Producción Ponderada (IPP):"
+    )
+
+    tbl_fam = doc.add_table(rows=1, cols=4)
+    headers_fam = ["Familia 2024", "Nombre Oficial", "Tipologías Representativas", "Peso Global (pts)"]
+    widths_fam = [Inches(1.2), Inches(2.2), Inches(2.3), Inches(0.8)]
+    data_fam = [
+        ["GNC", "Generación de Nuevo Conocimiento", "Artículos indexados A1-C (Q1-Q4), Libros de investigación, Capítulos y Patentes.", "40 - 100"],
+        ["DTI", "Desarrollo Tecnológico e Innovación", "Software con soporte lógico ante DNDA, Prototipos industriales, Diseños y Regulaciones.", "60 - 90"],
+        ["ASC", "Apropiación Social del Conocimiento", "Procesos participativos de CTeI con comunidades y Proyectos de innovación social territorial.", "50 - 90"],
+        ["DPC", "Divulgación Pública de la Ciencia", "Ponencias en eventos científicos nacionales/internacionales, Talleres y Documentos de trabajo.", "30 - 60"],
+        ["FRH", "Formación de Recurso Humano", "Tesis de Doctorado, Trabajos de grado de Maestría/Pregrado y Asesorías Programa Ondas (APO).", "30 - 100"]
+    ]
+    format_table(tbl_fam, widths_fam, headers_fam, data_fam)
     doc.add_paragraph().paragraph_format.space_after = Pt(12)
 
     # --- SECCIÓN 4: ESPECIFICACIÓN FORMAL DE REQUERIMIENTOS (SPEC) ---

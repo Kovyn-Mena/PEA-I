@@ -19,6 +19,7 @@ from python.structures.multilista import Multilista
 from python.structures.pila import Pila
 from python.structures.cola import Cola
 from python.core.db import GestorPersistencia
+from python.core.catalogo_2024 import CatalogoMinCiencias2024
 
 def manejador_sigint(sig, frame):
     """Evita que el usuario interrumpa el programa si intenta copiar con Ctrl+C"""
@@ -879,19 +880,27 @@ class ConsolaApp:
 
         articulos = libros = software = capitulos = patentes = 0
         cat_a1 = cat_a2 = cat_a = cat_b = cat_c = validados = 0
-        gnc = dte = asc = frh = 0
+        fam_gnc = fam_dti = fam_asc = fam_dpc = fam_frh = 0
+        puntos_ponderados = 0
 
         g = self.multi.cabeza_grupos
         while g:
             p = g.primer_producto
             while p:
                 if p.activo and g.activo:
-                    if p.tipo == "Articulo": articulos += 1; gnc += 1
-                    elif p.tipo == "Libro": libros += 1; gnc += 1
-                    elif p.tipo == "Software": software += 1; dte += 1
-                    elif p.tipo == "Capitulo": capitulos += 1; gnc += 1
-                    elif p.tipo == "Patente": patentes += 1; gnc += 1
-                    elif p.tipo == "Trabajo de Grado": frh += 1
+                    info = CatalogoMinCiencias2024.clasificar_producto(p.tipo, p.categoria_minciencias, p.titulo)
+                    f = info["familia"]
+                    if f == "GNC": fam_gnc += 1
+                    elif f == "DTI": fam_dti += 1
+                    elif f == "ASC": fam_asc += 1
+                    elif f == "DPC": fam_dpc += 1
+                    elif f == "FRH": fam_frh += 1
+
+                    if p.tipo == "Articulo": articulos += 1
+                    elif p.tipo == "Libro": libros += 1
+                    elif p.tipo == "Software": software += 1
+                    elif p.tipo == "Capitulo": capitulos += 1
+                    elif p.tipo == "Patente": patentes += 1
 
                     if p.categoria_minciencias == "A1": cat_a1 += 1
                     elif p.categoria_minciencias == "A2": cat_a2 += 1
@@ -899,15 +908,21 @@ class ConsolaApp:
                     elif p.categoria_minciencias == "B": cat_b += 1
                     elif p.categoria_minciencias == "C": cat_c += 1
 
-                    if p.validado: validados += 1
+                    if p.validado:
+                        validados += 1
+                        puntos_ponderados += info["global_weight"]
+                    else:
+                        puntos_ponderados += (info["global_weight"] // 2)
                 p = p.sig_producto_grupo
             g = g.sig_grupo
 
-        print("\n--- Macro-Tipologías MinCiencias (SCIENTI) ---")
-        print(f"  • GNC (Generación Nuevo Conocimiento):   {gnc} (Artículos, Libros, Capítulos, Patentes)")
-        print(f"  • DTE (Desarrollo Tecnológico e Innov.): {dte} (Software, Diseños, Prototipos)")
-        print(f"  • ASC (Apropiación Social Conocimiento): {asc} (Eventos, Divulgación Científica)")
-        print(f"  • FRH (Formación Recurso Humano CTeI):   {frh} (Trabajos de Grado, Tesis)")
+        print("\n--- Modelo MinCiencias 2024: 5 Familias Oficiales (Convocatoria 957) ---")
+        print(f"  • [GNC] Generación Nuevo Conocimiento:   {fam_gnc} (Artículos, Libros, Capítulos, Patentes)")
+        print(f"  • [DTI] Desarrollo Tecnológico e Innov.: {fam_dti} (Software, Diseños, Prototipos)")
+        print(f"  • [ASC] Apropiación Social Conocimiento: {fam_asc} (Procesos CTeI e Innovación Social)")
+        print(f"  • [DPC] Divulgación Pública Ciencia:    {fam_dpc} (Eventos, Talleres, Informes Técnicos)")
+        print(f"  • [FRH] Formación Recurso Humano CTeI:   {fam_frh} (Tesis doctorales, Trabajos de Grado, APO)")
+        print(f"  🏆 Índice de Producción Ponderada (IPP): {puntos_ponderados} pts MinCiencias")
 
         print("\n--- Desglose por Tipo Específico de Producto ---")
         print(f"  - Artículos científicos: {articulos}")

@@ -42,6 +42,7 @@ if PROJECT_ROOT not in sys.path:
 
 from src.python.structures.multilista import Multilista
 from src.python.core.db import GestorPersistencia
+from src.python.core.catalogo_2024 import CatalogoMinCiencias2024
 
 # Macro-Tipologías MinCiencias
 def obtener_macro_tipologia(tipo: str) -> str:
@@ -74,10 +75,12 @@ class DashboardApp:
         tipos_counts = {}
         macro_counts = {
             "GNC (Nuevo Conocimiento)": 0,
-            "DTE (Tecnología/Software)": 0,
+            "DTI (Tecnología/Innov.)": 0,
             "ASC (Apropiación Social)": 0,
+            "DPC (Divulgación Ciencia)": 0,
             "FRH (Formación Talento)": 0
         }
+        total_puntos_ipp = 0
 
         g = self.multi.cabeza_grupos
         while g:
@@ -97,11 +100,15 @@ class DashboardApp:
 
                     tipos_counts[p.tipo] = tipos_counts.get(p.tipo, 0) + 1
                     
-                    macro = obtener_macro_tipologia(p.tipo)
-                    if "GNC" in macro: macro_counts["GNC (Nuevo Conocimiento)"] += 1
-                    elif "DTE" in macro: macro_counts["DTE (Tecnología/Software)"] += 1
-                    elif "ASC" in macro: macro_counts["ASC (Apropiación Social)"] += 1
-                    elif "FRH" in macro: macro_counts["FRH (Formación Talento)"] += 1
+                    info = CatalogoMinCiencias2024.clasificar_producto(p.tipo, p.categoria_minciencias, p.titulo)
+                    fam = info["familia"]
+                    if fam == "GNC": macro_counts["GNC (Nuevo Conocimiento)"] += 1
+                    elif fam == "DTI": macro_counts["DTI (Tecnología/Innov.)"] += 1
+                    elif fam == "ASC": macro_counts["ASC (Apropiación Social)"] += 1
+                    elif fam == "DPC": macro_counts["DPC (Divulgación Ciencia)"] += 1
+                    elif fam == "FRH": macro_counts["FRH (Formación Talento)"] += 1
+
+                    total_puntos_ipp += info["global_weight"] if p.validado else (info["global_weight"] // 2)
                 p = p.sig_producto_grupo
             g = g.sig_grupo
 
@@ -133,12 +140,12 @@ class DashboardApp:
         ax2.tick_params(axis='x', rotation=45, labelsize=8)
         ax2.grid(axis='y', linestyle='--', alpha=0.3)
 
-        # 3. Macro-Tipologías MinCiencias (GNC, DTE, ASC, FRH)
+        # 3. 5 Familias Oficiales MinCiencias 2024 (GNC, DTI, ASC, DPC, FRH)
         ax3 = axes[1, 0]
         etiquetas_macro = list(macro_counts.keys())
         cant_macro = [macro_counts[k] for k in etiquetas_macro]
-        ax3.barh(etiquetas_macro, cant_macro, color=['#006837', '#38bdf8', '#f59e0b', '#ec4899'], edgecolor='#1e293b')
-        ax3.set_title("Macro-Tipologías SCIENTI MinCiencias", color='#38bdf8', fontsize=11, fontweight='bold')
+        ax3.barh(etiquetas_macro, cant_macro, color=['#006837', '#38bdf8', '#f59e0b', '#818cf8', '#ec4899'], edgecolor='#1e293b')
+        ax3.set_title(f"5 Familias MinCiencias 2024 (IPP: {total_puntos_ipp} pts)", color='#38bdf8', fontsize=11, fontweight='bold')
         ax3.set_facecolor('#0f172a')
         ax3.grid(axis='x', linestyle='--', alpha=0.3)
         for b in ax3.patches:
@@ -220,10 +227,13 @@ class DashboardApp:
         while g:
             cur_p = g.primer_producto
             while cur_p:
+                info_2024 = CatalogoMinCiencias2024.clasificar_producto(cur_p.tipo, cur_p.categoria_minciencias, cur_p.titulo)
                 filas_prods.append({
                     "id": cur_p.id_producto,
                     "tipo": cur_p.tipo,
-                    "macro": obtener_macro_tipologia(cur_p.tipo).split(" ")[0],
+                    "familia": info_2024["familia"],
+                    "codigo_2024": info_2024["codigo_2024"],
+                    "peso": info_2024["global_weight"],
                     "titulo": cur_p.titulo,
                     "anio": cur_p.anio,
                     "categoria": cur_p.categoria_minciencias,
@@ -367,16 +377,16 @@ class DashboardApp:
     </div>
 
     <div class="card">
-        <h2>📑 iii. Vista por Productos de Investigación (12.c.iii)</h2>
+        <h2>📑 iii. Vista por Productos de Investigación (12.c.iii — Modelo MinCiencias 2024)</h2>
         <table>
             <thead>
-                <tr><th>ID</th><th>Macro-Tipología</th><th>Tipo</th><th>Título</th><th>Año</th><th>Categoría</th><th>Aval MinCiencias</th></tr>
+                <tr><th>ID</th><th>Familia 2024</th><th>Código</th><th>Peso IPP</th><th>Tipo</th><th>Título</th><th>Año</th><th>Categoría</th><th>Aval MinCiencias</th></tr>
             </thead>
             <tbody>
-                {''.join(f"<tr><td><code>{p['id']}</code></td><td><span class='tag-macro'>{p['macro']}</span></td><td>{p['tipo']}</td><td>{p['titulo']}</td><td>{p['anio']}</td><td>{p['categoria']}</td><td>{p['validado']}</td></tr>" for p in filas_prods[:40])}
+                {''.join(f"<tr><td><code>{p['id']}</code></td><td><span class='tag-macro'>{p['familia']}</span></td><td><b>{p['codigo_2024']}</b></td><td>{p['peso']} pts</td><td>{p['tipo']}</td><td>{p['titulo']}</td><td>{p['anio']}</td><td>{p['categoria']}</td><td>{p['validado']}</td></tr>" for p in filas_prods[:40])}
             </tbody>
         </table>
-        <p style="font-size:0.75rem; color:#94a3b8; margin-top:0.8rem;">Mostrando las primeras 40 obras científicas de un total de {len(filas_prods)} en memoria RAM.</p>
+        <p style="font-size:0.75rem; color:#94a3b8; margin-top:0.8rem;">Mostrando las primeras 40 obras científicas de un total de {len(filas_prods)} en memoria RAM clasificadas bajo el Modelo MinCiencias 2024.</p>
     </div>
 </body>
 </html>

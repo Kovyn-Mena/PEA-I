@@ -25,6 +25,7 @@
 #include "GestorSQLite.h"
 #include "VisualizadorGrafico.h"
 #include "GestorInterop.h"
+#include "Catalogo2024.h"
 
 // =====================================================================
 // APLICACIÓN DE CONSOLA AUTÓNOMA (C++) - PEA-i
@@ -1057,19 +1058,26 @@ public:
 
         int articulos = 0, libros = 0, software = 0, capitulos = 0, patentes = 0;
         int catA1 = 0, catA2 = 0, catA = 0, catB = 0, catC = 0, validados = 0;
-        int gnc = 0, dte = 0, asc = 0, frh = 0;
+        int famGNC = 0, famDTI = 0, famASC = 0, famDPC = 0, famFRH = 0;
+        int puntosPonderadosTotal = 0;
 
         NodoGrupo* g = multi.getCabezaGrupos();
         while (g) {
             NodoProducto* p = g->primerProducto;
             while (p) {
                 if (p->activo && g->activo) {
-                    if (p->tipo == "Articulo") { articulos++; gnc++; }
-                    else if (p->tipo == "Libro") { libros++; gnc++; }
-                    else if (p->tipo == "Software") { software++; dte++; }
-                    else if (p->tipo == "Capitulo") { capitulos++; gnc++; }
-                    else if (p->tipo == "Patente") { patentes++; gnc++; }
-                    else if (p->tipo == "Trabajo de Grado") { frh++; }
+                    InfoTipologia2024 info = Catalogo2024::clasificar(p->tipo, p->categoria_minciencias, p->titulo);
+                    if (info.familia == "GNC") famGNC++;
+                    else if (info.familia == "DTI") famDTI++;
+                    else if (info.familia == "ASC") famASC++;
+                    else if (info.familia == "DPC") famDPC++;
+                    else if (info.familia == "FRH") famFRH++;
+
+                    if (p->tipo == "Articulo") articulos++;
+                    else if (p->tipo == "Libro") libros++;
+                    else if (p->tipo == "Software") software++;
+                    else if (p->tipo == "Capitulo") capitulos++;
+                    else if (p->tipo == "Patente") patentes++;
 
                     if (p->categoria_minciencias == "A1") catA1++;
                     else if (p->categoria_minciencias == "A2") catA2++;
@@ -1077,18 +1085,25 @@ public:
                     else if (p->categoria_minciencias == "B") catB++;
                     else if (p->categoria_minciencias == "C") catC++;
 
-                    if (p->validado) validados++;
+                    if (p->validado) {
+                        validados++;
+                        puntosPonderadosTotal += info.global_weight;
+                    } else {
+                        puntosPonderadosTotal += (info.global_weight / 2);
+                    }
                 }
                 p = p->sigProductoGrupo;
             }
             g = g->sigGrupo;
         }
 
-        std::cout << "\n--- Macro-Tipologías MinCiencias (SCIENTI) ---\n";
-        std::cout << "  • GNC (Generación Nuevo Conocimiento):   " << gnc << " (Artículos, Libros, Capítulos, Patentes)\n";
-        std::cout << "  • DTE (Desarrollo Tecnológico e Innov.): " << dte << " (Software, Diseños, Prototipos)\n";
-        std::cout << "  • ASC (Apropiación Social Conocimiento): " << asc << " (Eventos, Divulgación Científica)\n";
-        std::cout << "  • FRH (Formación Recurso Humano CTeI):   " << frh << " (Trabajos de Grado, Tesis)\n";
+        std::cout << "\n--- Modelo MinCiencias 2024: 5 Familias Oficiales (Convocatoria 957) ---\n";
+        std::cout << "  • [GNC] Generación de Nuevo Conocimiento:   " << famGNC << " (Artículos, Libros, Capítulos, Patentes)\n";
+        std::cout << "  • [DTI] Desarrollo Tecnológico e Innov.:    " << famDTI << " (Software, Prototipos, Diseños)\n";
+        std::cout << "  • [ASC] Apropiación Social del Conocimiento:" << famASC << " (Procesos CTeI e Innovación Social)\n";
+        std::cout << "  • [DPC] Divulgación Pública de la Ciencia:  " << famDPC << " (Eventos, Talleres, Informes Técnicos)\n";
+        std::cout << "  • [FRH] Formación de Recurso Humano CTeI:   " << famFRH << " (Tesis doctorales, Trabajos de grado, APO)\n";
+        std::cout << "  🏆 Índice de Producción Ponderada (IPP):    " << puntosPonderadosTotal << " pts MinCiencias\n";
 
         std::cout << "\n--- Desglose por Tipo Específico de Producto ---\n";
         std::cout << "  - Artículos científicos: " << articulos << "\n";
