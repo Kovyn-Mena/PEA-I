@@ -1056,20 +1056,23 @@ public:
         std::cout << "• Productos Activos:        " << totalProdActivos << "\n";
 
         int articulos = 0, libros = 0, software = 0, capitulos = 0, patentes = 0;
-        int catA1 = 0, catA = 0, catB = 0, catC = 0, validados = 0;
+        int catA1 = 0, catA2 = 0, catA = 0, catB = 0, catC = 0, validados = 0;
+        int gnc = 0, dte = 0, asc = 0, frh = 0;
 
         NodoGrupo* g = multi.getCabezaGrupos();
         while (g) {
             NodoProducto* p = g->primerProducto;
             while (p) {
                 if (p->activo && g->activo) {
-                    if (p->tipo == "Articulo") articulos++;
-                    else if (p->tipo == "Libro") libros++;
-                    else if (p->tipo == "Software") software++;
-                    else if (p->tipo == "Capitulo") capitulos++;
-                    else if (p->tipo == "Patente") patentes++;
+                    if (p->tipo == "Articulo") { articulos++; gnc++; }
+                    else if (p->tipo == "Libro") { libros++; gnc++; }
+                    else if (p->tipo == "Software") { software++; dte++; }
+                    else if (p->tipo == "Capitulo") { capitulos++; gnc++; }
+                    else if (p->tipo == "Patente") { patentes++; gnc++; }
+                    else if (p->tipo == "Trabajo de Grado") { frh++; }
 
                     if (p->categoria_minciencias == "A1") catA1++;
+                    else if (p->categoria_minciencias == "A2") catA2++;
                     else if (p->categoria_minciencias == "A") catA++;
                     else if (p->categoria_minciencias == "B") catB++;
                     else if (p->categoria_minciencias == "C") catC++;
@@ -1081,16 +1084,23 @@ public:
             g = g->sigGrupo;
         }
 
-        std::cout << "\n--- Desglose por Tipo de Producto ---\n";
+        std::cout << "\n--- Macro-Tipologías MinCiencias (SCIENTI) ---\n";
+        std::cout << "  • GNC (Generación Nuevo Conocimiento):   " << gnc << " (Artículos, Libros, Capítulos, Patentes)\n";
+        std::cout << "  • DTE (Desarrollo Tecnológico e Innov.): " << dte << " (Software, Diseños, Prototipos)\n";
+        std::cout << "  • ASC (Apropiación Social Conocimiento): " << asc << " (Eventos, Divulgación Científica)\n";
+        std::cout << "  • FRH (Formación Recurso Humano CTeI):   " << frh << " (Trabajos de Grado, Tesis)\n";
+
+        std::cout << "\n--- Desglose por Tipo Específico de Producto ---\n";
         std::cout << "  - Artículos científicos: " << articulos << "\n";
         std::cout << "  - Libros / Obras:        " << libros << "\n";
         std::cout << "  - Capítulos de libro:    " << capitulos << "\n";
         std::cout << "  - Desarrollos software:  " << software << "\n";
         std::cout << "  - Patentes registradas:  " << patentes << "\n";
 
-        std::cout << "\n--- Calidad MinCiencias & Validación ---\n";
-        std::cout << "  - Categoría A1: " << catA1 << " | Categoría A: " << catA 
-                  << " | Categoría B: " << catB << " | Categoría C: " << catC << "\n";
+        std::cout << "\n--- Calidad Editorial Publindex & Validación ---\n";
+        std::cout << "  - A1: " << catA1;
+        if (catA2 > 0) std::cout << " | A2: " << catA2;
+        std::cout << " | A: " << catA << " | B: " << catB << " | C: " << catC << "\n";
         std::cout << "  - Avalados por MinCiencias: " << validados 
                   << " (" << (totalProdActivos > 0 ? (validados * 100 / totalProdActivos) : 0) << "%)\n";
 

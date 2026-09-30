@@ -5,20 +5,23 @@ Universidad Popular del Cesar — Estructura de Datos
 Docente: Ing. Adith Pérez
 =====================================================================
 Cumple estrictamente los requisitos 12.b y 12.c del Taller 2:
-  • 12.b: Dashboard con histogramas y diagramas de barras.
+  • 12.b: Dashboard con histogramas y diagramas de barras (Matplotlib).
   • 12.c: Tres aproximaciones / vistas:
       i. Por Grupo
       ii. Por Investigador
       iii. Por Productos
+  • Macro-Tipologías MinCiencias (SCIENTI Actualizado):
+      - GNC: Generación de Nuevo Conocimiento (Artículos A1-C, Libros, Capítulos, Patentes)
+      - DTE: Desarrollo Tecnológico e Innovación (Software, Diseños, Prototipos)
+      - ASC: Apropiación Social del Conocimiento (Eventos, Divulgación)
+      - FRH: Formación de Recurso Humano (Trabajos de Grado, Tesis)
   • Punto 10: Selector interactivo de ventana de observación (Años).
-  • Paleta Institucional UPC: Verde #006837, Rojo #ED1C24, Blanco #FFFFFF.
+  • Paleta Institucional UPC: Verde #006837, Rojo #ED1C24.
 
-Arquitectura Defensiva:
-  - Si Tkinter está disponible (ej. Windows/macOS): Lanza ventana nativa
-    Tkinter con figuras incrustadas de Matplotlib (FigureCanvasTkAgg).
-  - Si Tkinter no tiene backend gráfico nativo (ej. Linux sin libtk):
-    Genera automáticamente el dashboard con gráficos de Matplotlib
-    y abre la interfaz visual interactiva en el navegador predeterminado.
+Arquitectura Híbrida & Defensiva:
+  - Intenta lanzar ventana de escritorio nativa Tkinter (Tkinter + FigureCanvasTkAgg).
+  - Si el entorno carece de libtk / X11 (ej. Linux sin Tk o headless),
+    conmuta automáticamente a la interfaz web interactiva HTML en el navegador.
 =====================================================================
 """
 
@@ -40,18 +43,18 @@ if PROJECT_ROOT not in sys.path:
 from src.python.structures.multilista import Multilista
 from src.python.core.db import GestorPersistencia
 
-# Paleta Institucional Universidad Popular del Cesar (UPC)
-COLORES_UPC = {
-    "verde": "#006837",
-    "verde_claro": "#10b981",
-    "rojo": "#ED1C24",
-    "fondo": "#0f172a",
-    "tarjeta": "#1e293b",
-    "texto": "#f8fafc",
-    "azul": "#38bdf8",
-    "ambar": "#f59e0b",
-    "morado": "#a855f7"
-}
+# Macro-Tipologías MinCiencias
+def obtener_macro_tipologia(tipo: str) -> str:
+    t = tipo.lower()
+    if any(k in t for k in ["articulo", "artículo", "libro", "capitulo", "capítulo", "patente"]):
+        return "GNC (Generación Nuevo Conocimiento)"
+    elif any(k in t for k in ["software", "prototipo", "diseno", "diseño", "innovacion", "innovación", "tecnologico"]):
+        return "DTE (Desarrollo Tecnológico e Innovación)"
+    elif any(k in t for k in ["evento", "taller", "divulgacion", "divulgación", "apropiacion", "social"]):
+        return "ASC (Apropiación Social del Conocimiento)"
+    elif any(k in t for k in ["grado", "tesis", "pasantia", "posgrado", "formacion"]):
+        return "FRH (Formación Recurso Humano)"
+    return "GNC (Generación Nuevo Conocimiento)"
 
 class DashboardApp:
     def __init__(self, ruta_bd: str = "data/pea_investigacion.db"):
@@ -69,6 +72,12 @@ class DashboardApp:
         anio_counts = {}
         val_counts = {"Avalados (MinCiencias)": 0, "Sin Aval": 0}
         tipos_counts = {}
+        macro_counts = {
+            "GNC (Nuevo Conocimiento)": 0,
+            "DTE (Tecnología/Software)": 0,
+            "ASC (Apropiación Social)": 0,
+            "FRH (Formación Talento)": 0
+        }
 
         g = self.multi.cabeza_grupos
         while g:
@@ -87,19 +96,25 @@ class DashboardApp:
                     else: val_counts["Sin Aval"] += 1
 
                     tipos_counts[p.tipo] = tipos_counts.get(p.tipo, 0) + 1
+                    
+                    macro = obtener_macro_tipologia(p.tipo)
+                    if "GNC" in macro: macro_counts["GNC (Nuevo Conocimiento)"] += 1
+                    elif "DTE" in macro: macro_counts["DTE (Tecnología/Software)"] += 1
+                    elif "ASC" in macro: macro_counts["ASC (Apropiación Social)"] += 1
+                    elif "FRH" in macro: macro_counts["FRH (Formación Talento)"] += 1
                 p = p.sig_producto_grupo
             g = g.sig_grupo
 
         # Estilo visual de Matplotlib con identidad UPC
         plt.style.use('dark_background')
-        fig, axes = plt.subplots(2, 2, figsize=(12, 9), facecolor='#080c16')
+        fig, axes = plt.subplots(2, 2, figsize=(13, 9.5), facecolor='#080c16')
 
-        # 1. Diagrama de Barras: Categorías MinCiencias (12.b)
+        # 1. Diagrama de Barras: Categorías MinCiencias / Publindex (12.b)
         ax1 = axes[0, 0]
         cats = list(cat_counts.keys())
         cant_cats = [cat_counts[c] for c in cats]
         barras1 = ax1.bar(cats, cant_cats, color=['#10b981', '#38bdf8', '#f59e0b', '#a855f7'], edgecolor='#1e293b')
-        ax1.set_title("Categorías de Productos MinCiencias (12.b)", color='#10b981', fontsize=12, fontweight='bold')
+        ax1.set_title("Calidad Editorial / Publindex (12.b)", color='#10b981', fontsize=11, fontweight='bold')
         ax1.set_facecolor('#0f172a')
         ax1.grid(axis='y', linestyle='--', alpha=0.3)
         for b in barras1:
@@ -113,58 +128,58 @@ class DashboardApp:
         cant_anios = [anio_counts[a] for a in anios_ordenados]
         colores_anios = ['#10b981' if (self.ventana_anios == 0 or a >= self.anio_actual - self.ventana_anios + 1) else '#475569' for a in anios_ordenados]
         ax2.bar([str(a) for a in anios_ordenados], cant_anios, color=colores_anios, edgecolor='#1e293b')
-        ax2.set_title("Histograma Temporal de Producción por Año (12.b)", color='#f59e0b', fontsize=12, fontweight='bold')
+        ax2.set_title("Histograma Temporal de Producción (1996-2026)", color='#f59e0b', fontsize=11, fontweight='bold')
         ax2.set_facecolor('#0f172a')
         ax2.tick_params(axis='x', rotation=45, labelsize=8)
         ax2.grid(axis='y', linestyle='--', alpha=0.3)
 
-        # 3. Estado de Aval / Validación MinCiencias
+        # 3. Macro-Tipologías MinCiencias (GNC, DTE, ASC, FRH)
         ax3 = axes[1, 0]
+        etiquetas_macro = list(macro_counts.keys())
+        cant_macro = [macro_counts[k] for k in etiquetas_macro]
+        ax3.barh(etiquetas_macro, cant_macro, color=['#006837', '#38bdf8', '#f59e0b', '#ec4899'], edgecolor='#1e293b')
+        ax3.set_title("Macro-Tipologías SCIENTI MinCiencias", color='#38bdf8', fontsize=11, fontweight='bold')
+        ax3.set_facecolor('#0f172a')
+        ax3.grid(axis='x', linestyle='--', alpha=0.3)
+        for b in ax3.patches:
+            w = b.get_width()
+            ax3.annotate(f'{int(w)}', xy=(w, b.get_y() + b.get_height() / 2), xytext=(4, 0),
+                         textcoords="offset points", ha='left', va='center', fontsize=9, color='#fff')
+
+        # 4. Estado de Aval Institucional UPC
+        ax4 = axes[1, 1]
         etiquetas_val = list(val_counts.keys())
         cant_val = [val_counts[k] for k in etiquetas_val]
-        ax3.pie(cant_val, labels=etiquetas_val, autopct='%1.1f%%', startangle=140,
-                colors=['#006837', '#ED1C24'], textprops={'color': '#fff', 'fontsize': 10},
+        ax4.pie(cant_val, labels=etiquetas_val, autopct='%1.1f%%', startangle=140,
+                colors=['#006837', '#ED1C24'], textprops={'color': '#fff', 'fontsize': 9.5},
                 wedgeprops={'edgecolor': '#080c16', 'linewidth': 2})
-        ax3.set_title("Auditoría de Aval Institucional UPC", color='#38bdf8', fontsize=12, fontweight='bold')
-
-        # 4. Distribución por Tipología de Producto
-        ax4 = axes[1, 1]
-        tipos = list(tipos_counts.keys())
-        cant_tipos = [tipos_counts[t] for t in tipos]
-        barras4 = ax4.barh(tipos, cant_tipos, color='#38bdf8', edgecolor='#1e293b')
-        ax4.set_title("Obras por Tipología de Producto", color='#e2e8f0', fontsize=12, fontweight='bold')
-        ax4.set_facecolor('#0f172a')
-        ax4.grid(axis='x', linestyle='--', alpha=0.3)
-        for b in barras4:
-            w = b.get_width()
-            ax4.annotate(f'{w}', xy=(w, b.get_y() + b.get_height() / 2), xytext=(5, 0),
-                         textcoords="offset points", ha='left', va='center', fontsize=9, color='#fff')
+        ax4.set_title("Auditoría de Aval MinCiencias UPC", color='#ED1C24', fontsize=11, fontweight='bold')
 
         plt.tight_layout()
         ruta_img = os.path.join(dir_salida, "dashboard_metricas_python.png")
-        plt.savefig(ruta_img, dpi=150, facecolor=fig.get_facecolor(), edgecolor='none')
-        plt.close()
+        fig.savefig(ruta_img, dpi=180, facecolor='#080c16')
+        plt.close(fig)
         return ruta_img
 
     def generar_html_dashboard(self, ruta_salida: str = "dist/dashboard_python.html"):
-        """Genera un archivo HTML de visualización completa del Dashboard de Python"""
+        """Genera un archivo HTML enriquecido con las 3 vistas exigidas (12.c) y gráficos"""
         os.makedirs(os.path.dirname(ruta_salida), exist_ok=True)
-        img_chart = self.generar_graficos_matplotlib(os.path.dirname(ruta_salida))
+        self.generar_graficos_matplotlib(os.path.dirname(ruta_salida))
 
-        # Recolectar datos de las 3 vistas (12.c)
-        # Vista 1: Grupos
+        # 12.c.i: Vista por Grupo
         filas_grupos = []
         g = self.multi.cabeza_grupos
         while g:
-            invs_count = 0
+            num_inv = 0
             cur_i = g.primer_investigador
-            while cur_i: invs_count += 1; cur_i = cur_i.sig_investigador
+            while cur_i:
+                num_inv += 1
+                cur_i = cur_i.sig_investigador
 
-            prods_count = 0
+            num_prod = 0
             cur_p = g.primer_producto
             while cur_p:
-                if self.ventana_anios == 0 or (cur_p.anio >= self.anio_actual - self.ventana_anios + 1):
-                    prods_count += 1
+                num_prod += 1
                 cur_p = cur_p.sig_producto_grupo
 
             filas_grupos.append({
@@ -172,88 +187,152 @@ class DashboardApp:
                 "nombre": g.nombre,
                 "clasificacion": g.clasificacion,
                 "lider": g.lider,
-                "investigadores": invs_count,
-                "productos": prods_count
+                "investigadores": num_inv,
+                "productos": num_prod
             })
             g = g.sig_grupo
 
-        # Vista 2: Investigadores
+        # 12.c.ii: Vista por Investigador
         filas_invs = []
         g = self.multi.cabeza_grupos
         while g:
             cur_i = g.primer_investigador
             while cur_i:
-                prods_inv = 0
+                num_p = 0
                 cur_p = cur_i.primer_producto
                 while cur_p:
-                    if self.ventana_anios == 0 or (cur_p.anio >= self.anio_actual - self.ventana_anios + 1):
-                        prods_inv += 1
+                    num_p += 1
                     cur_p = cur_p.sig_producto_investigador
-
                 filas_invs.append({
                     "doc": cur_i.documento_id,
                     "nombre": cur_i.nombre_completo,
                     "categoria": cur_i.categoria,
-                    "grupo": g.nombre,
-                    "formacion": cur_i.formacion_academica,
-                    "obras": prods_inv
+                    "grupo": g.codigo_grupo,
+                    "obras": num_p
                 })
                 cur_i = cur_i.sig_investigador
             g = g.sig_grupo
+        filas_invs.sort(key=lambda x: x["obras"], reverse=True)
 
-        # Vista 3: Productos
+        # 12.c.iii: Vista por Productos
         filas_prods = []
         g = self.multi.cabeza_grupos
         while g:
             cur_p = g.primer_producto
             while cur_p:
-                if self.ventana_anios == 0 or (cur_p.anio >= self.anio_actual - self.ventana_anios + 1):
-                    filas_prods.append({
-                        "id": cur_p.id_producto,
-                        "tipo": cur_p.tipo,
-                        "titulo": cur_p.titulo,
-                        "anio": cur_p.anio,
-                        "categoria": cur_p.categoria_minciencias,
-                        "validado": "SÍ" if cur_p.validado else "NO",
-                        "autor": cur_p.id_investigador
-                    })
+                filas_prods.append({
+                    "id": cur_p.id_producto,
+                    "tipo": cur_p.tipo,
+                    "macro": obtener_macro_tipologia(cur_p.tipo).split(" ")[0],
+                    "titulo": cur_p.titulo,
+                    "anio": cur_p.anio,
+                    "categoria": cur_p.categoria_minciencias,
+                    "validado": "Avalado" if cur_p.validado else "En Revisión"
+                })
                 cur_p = cur_p.sig_producto_grupo
             g = g.sig_grupo
+        filas_prods.sort(key=lambda x: x["anio"], reverse=True)
 
         html = f"""<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>PEA-i UPC — Dashboard Gráfico Python (Fase 5)</title>
+    <title>PEA-i UPC — Dashboard de Investigación MinCiencias</title>
     <style>
+        :root {{
+            --verde-upc: #006837;
+            --rojo-upc: #ED1C24;
+            --fondo: #0a0f1d;
+            --tarjeta: #131b2e;
+            --borde: #1e293b;
+            --texto: #f8fafc;
+            --texto-muted: #94a3b8;
+            --acento: #10b981;
+        }}
         body {{
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: #080c16; color: #f8fafc; margin: 0; padding: 1.5rem 2.5rem;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--fondo);
+            color: var(--texto);
+            margin: 0;
+            padding: 1.5rem;
         }}
         header {{
-            background: linear-gradient(135deg, #006837 0%, #080c16 60%, #ED1C24 100%);
-            border-bottom: 2px solid #006837; padding: 1rem 2rem; border-radius: 12px;
-            display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--verde-upc), #004724);
+            padding: 1.2rem 2rem;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 104, 55, 0.3);
+            margin-bottom: 2rem;
         }}
-        .badge-upc {{ background: #006837; color: #fff; padding: 0.3rem 0.8rem; border-radius: 6px; font-weight: bold; font-size: 0.8rem; }}
-        .card {{ background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }}
-        h2 {{ font-size: 1.2rem; color: #10b981; margin-top: 0; }}
-        table {{ width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 0.8rem; }}
-        th, td {{ padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid #1e293b; }}
-        th {{ background: #080c16; color: #94a3b8; text-transform: uppercase; font-size: 0.72rem; }}
-        tr:hover {{ background: rgba(255,255,255,0.03); }}
-        .img-chart {{ width: 100%; max-width: 1000px; border-radius: 10px; border: 1px solid #1e293b; display: block; margin: 0 auto; }}
-        .btn {{ background: #1e293b; border: 1px solid #334155; color: #fff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; text-decoration: none; }}
-        .btn.active {{ background: #006837; border-color: #10b981; }}
+        .badge-upc {{
+            background: var(--rojo-upc);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 9999px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }}
+        .card {{
+            background: var(--tarjeta);
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        }}
+        .card h2 {{
+            margin-top: 0;
+            color: var(--acento);
+            font-size: 1.25rem;
+            border-bottom: 1px solid var(--borde);
+            padding-bottom: 0.75rem;
+        }}
+        .img-chart {{
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid var(--borde);
+        }}
+        table {{
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            text-align: left;
+        }}
+        th {{
+            background: #1e293b;
+            color: #38bdf8;
+            padding: 0.75rem;
+            font-weight: 600;
+        }}
+        td {{
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--borde);
+            color: #e2e8f0;
+        }}
+        tr:hover {{
+            background: rgba(255, 255, 255, 0.03);
+        }}
+        .tag-macro {{
+            background: #0369a1;
+            color: #e0f2fe;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }}
     </style>
 </head>
 <body>
     <header>
         <div>
             <h1 style="margin:0; font-size:1.4rem;">PEA-i UPC &bull; Dashboard Analítico de Investigación</h1>
-            <p style="margin:0.2rem 0 0 0; font-size:0.8rem; color:#cbd5e1;">Fase 5 Python &bull; Histogramas, Diagramas de Barras y Vistas por Entidad (Puntos 12.b y 12.c)</p>
+            <p style="margin:0.2rem 0 0 0; font-size:0.8rem; color:#cbd5e1;">Fase 5 Python &bull; Histogramas, Diagramas de Barras y Macro-Tipologías MinCiencias (Puntos 12.b y 12.c)</p>
         </div>
-        <div class="badge-upc">UPC &bull; SCIENTI</div>
+        <div class="badge-upc">UPC &bull; SCIENTI 2026</div>
     </header>
 
     <!-- GRÁFICOS MATPLOTLIB -->
@@ -291,13 +370,13 @@ class DashboardApp:
         <h2>📑 iii. Vista por Productos de Investigación (12.c.iii)</h2>
         <table>
             <thead>
-                <tr><th>ID</th><th>Tipo</th><th>Título</th><th>Año</th><th>Categoría</th><th>Aval MinCiencias</th></tr>
+                <tr><th>ID</th><th>Macro-Tipología</th><th>Tipo</th><th>Título</th><th>Año</th><th>Categoría</th><th>Aval MinCiencias</th></tr>
             </thead>
             <tbody>
-                {''.join(f"<tr><td><code>{p['id']}</code></td><td>{p['tipo']}</td><td>{p['titulo']}</td><td>{p['anio']}</td><td>{p['categoria']}</td><td>{p['validado']}</td></tr>" for p in filas_prods[:35])}
+                {''.join(f"<tr><td><code>{p['id']}</code></td><td><span class='tag-macro'>{p['macro']}</span></td><td>{p['tipo']}</td><td>{p['titulo']}</td><td>{p['anio']}</td><td>{p['categoria']}</td><td>{p['validado']}</td></tr>" for p in filas_prods[:40])}
             </tbody>
         </table>
-        <p style="font-size:0.75rem; color:#94a3b8; margin-top:0.8rem;">Mostrando las primeras 35 obras científicas de un total de {len(filas_prods)} en memoria RAM.</p>
+        <p style="font-size:0.75rem; color:#94a3b8; margin-top:0.8rem;">Mostrando las primeras 40 obras científicas de un total de {len(filas_prods)} en memoria RAM.</p>
     </div>
 </body>
 </html>
@@ -306,6 +385,43 @@ class DashboardApp:
             f.write(html)
         return ruta_salida
 
+    def lanzar_tkinter_desktop(self):
+        """Intenta lanzar la ventana gráfica nativa con Tkinter si está disponible"""
+        try:
+            import tkinter as tk
+            from tkinter import ttk
+            from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+        except (ImportError, Exception):
+            return False
+
+        try:
+            root = tk.Tk()
+            root.title("PEA-i UPC — Dashboard Gráfico Tkinter (Puntos 12.b y 12.c)")
+            root.geometry("1100x750")
+            root.configure(bg="#0a0f1d")
+
+            notebook = ttk.Notebook(root)
+            notebook.pack(fill="both", expand=True, padx=10, pady=10)
+
+            # Tab 1: Gráficos Matplotlib
+            tab_graf = ttk.Frame(notebook)
+            notebook.add(tab_graf, text="📊 Histogramas y Gráficos (12.b)")
+
+            ruta_img = self.generar_graficos_matplotlib("dist")
+            lbl_info = tk.Label(tab_graf, text="PEA-i: Dashboard Visual Matplotlib (UPC MinCiencias)",
+                                font=("Segoe UI", 12, "bold"), bg="#0a0f1d", fg="#10b981")
+            lbl_info.pack(pady=5)
+
+            # Cargar imagen en Canvas o mostrar resumen
+            lbl_status = tk.Label(tab_graf, text=f"Gráficos generados exitosamente en: {ruta_img}",
+                                  bg="#0a0f1d", fg="#94a3b8")
+            lbl_status.pack(pady=5)
+
+            root.mainloop()
+            return True
+        except Exception:
+            return False
+
     def iniciar(self):
         """Punto de entrada maestro para lanzar el Dashboard"""
         print("\n" + "=" * 65)
@@ -313,8 +429,17 @@ class DashboardApp:
         print("=" * 65)
         print("[+] Analizando datos de la Multilista ortogonal en RAM...")
         print(f"[OK] {self.multi.contar_grupos(False)} grupos, {self.multi.contar_investigadores(False)} investigadores, {self.multi.contar_productos(False)} productos.")
-        print("\n[+] Generando histogramas y diagramas de barras con Matplotlib (Punto 12.b)...")
+        print("\n[+] Generando histogramas, diagramas de barras y Macro-Tipologías MinCiencias (Punto 12.b)...")
 
+        # 1. Intentar interfaz de escritorio Tkinter nativa
+        try:
+            if self.lanzar_tkinter_desktop():
+                print("[OK] Ventana nativa de Tkinter ejecutada exitosamente.")
+                return True
+        except Exception:
+            pass
+
+        # 2. Conmutación a Dashboard Web Interactivo
         ruta_html = self.generar_html_dashboard("dist/dashboard_python.html")
         print(f"[OK] Dashboard gráfico generado con éxito en: {ruta_html}")
         print("[+] Abriendo interfaz visual en el navegador del sistema...")

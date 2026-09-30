@@ -878,20 +878,23 @@ class ConsolaApp:
         print(f"• Productos Activos:        {total_prod_act}")
 
         articulos = libros = software = capitulos = patentes = 0
-        cat_a1 = cat_a = cat_b = cat_c = validados = 0
+        cat_a1 = cat_a2 = cat_a = cat_b = cat_c = validados = 0
+        gnc = dte = asc = frh = 0
 
         g = self.multi.cabeza_grupos
         while g:
             p = g.primer_producto
             while p:
                 if p.activo and g.activo:
-                    if p.tipo == "Articulo": articulos += 1
-                    elif p.tipo == "Libro": libros += 1
-                    elif p.tipo == "Software": software += 1
-                    elif p.tipo == "Capitulo": capitulos += 1
-                    elif p.tipo == "Patente": patentes += 1
+                    if p.tipo == "Articulo": articulos += 1; gnc += 1
+                    elif p.tipo == "Libro": libros += 1; gnc += 1
+                    elif p.tipo == "Software": software += 1; dte += 1
+                    elif p.tipo == "Capitulo": capitulos += 1; gnc += 1
+                    elif p.tipo == "Patente": patentes += 1; gnc += 1
+                    elif p.tipo == "Trabajo de Grado": frh += 1
 
                     if p.categoria_minciencias == "A1": cat_a1 += 1
+                    elif p.categoria_minciencias == "A2": cat_a2 += 1
                     elif p.categoria_minciencias == "A": cat_a += 1
                     elif p.categoria_minciencias == "B": cat_b += 1
                     elif p.categoria_minciencias == "C": cat_c += 1
@@ -900,15 +903,24 @@ class ConsolaApp:
                 p = p.sig_producto_grupo
             g = g.sig_grupo
 
-        print("\n--- Desglose por Tipo de Producto ---")
+        print("\n--- Macro-Tipologías MinCiencias (SCIENTI) ---")
+        print(f"  • GNC (Generación Nuevo Conocimiento):   {gnc} (Artículos, Libros, Capítulos, Patentes)")
+        print(f"  • DTE (Desarrollo Tecnológico e Innov.): {dte} (Software, Diseños, Prototipos)")
+        print(f"  • ASC (Apropiación Social Conocimiento): {asc} (Eventos, Divulgación Científica)")
+        print(f"  • FRH (Formación Recurso Humano CTeI):   {frh} (Trabajos de Grado, Tesis)")
+
+        print("\n--- Desglose por Tipo Específico de Producto ---")
         print(f"  - Artículos científicos: {articulos}")
         print(f"  - Libros / Obras:        {libros}")
         print(f"  - Capítulos de libro:    {capitulos}")
         print(f"  - Desarrollos software:  {software}")
         print(f"  - Patentes registradas:  {patentes}")
 
-        print("\n--- Calidad MinCiencias & Validación ---")
-        print(f"  - Categoría A1: {cat_a1} | Categoría A: {cat_a} | Categoría B: {cat_b} | Categoría C: {cat_c}")
+        print("\n--- Calidad Editorial Publindex & Validación ---")
+        cat_str = f"A1: {cat_a1}"
+        if cat_a2 > 0: cat_str += f" | A2: {cat_a2}"
+        cat_str += f" | A: {cat_a} | B: {cat_b} | C: {cat_c}"
+        print(f"  - {cat_str}")
         porc = (validados * 100 // total_prod_act) if total_prod_act > 0 else 0
         print(f"  - Avalados por MinCiencias: {validados} ({porc}%)")
 
