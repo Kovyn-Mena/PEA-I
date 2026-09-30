@@ -91,7 +91,7 @@ def generar_diagrama_hipercubo():
             ha="center", va="top", fontsize=10, style="italic", color="#4A5568")
 
     # Eje X: Grupos (Horizontal)
-    grupos = [("GIDSE\n(COL0002099)\nCat: A1", 0.15), ("GISI\n(COL0005544)\nCat: A", 0.50), ("BIOTEC\n(COL0012981)\nCat: B", 0.85)]
+    grupos = [("GISICO\n(COL0002099)\nCat: C", 0.15), ("AITICE\n(COL0043834)\nCat: B", 0.50), ("GISI\n(COL0005544)\nCat: A", 0.85)]
     for nombre, x in grupos:
         rect = patches.FancyBboxPatch((x - 0.10, 0.72), 0.20, 0.14, boxstyle="round,pad=0.01,rounding_size=0.02",
                                       facecolor=COLOR_VERDE_UPC, edgecolor="#004724", linewidth=2)
@@ -108,33 +108,33 @@ def generar_diagrama_hipercubo():
     ax.annotate("", xy=(0.98, 0.79), xytext=(0.96, 0.79), arrowprops=dict(arrowstyle="-|>", lw=2, color="#A0AEC0"))
     ax.text(0.99, 0.79, "NULL", ha="left", va="center", fontsize=8, fontweight="bold", color="#A0AEC0")
 
-    # Eje Y: Investigadores bajo GIDSE (Vertical)
-    invs_gidse = [
-        ("Ing. Adith Pérez Orozco\nLíder GIDSE (Senior)", 0.50),
-        ("Kovyn Mena\nInvestigador Junior", 0.30),
+    # Eje Y: Investigadores bajo GISICO (Vertical)
+    invs_gisico = [
+        ("John Jairo Patiño Vanegas\nLíder GISICO (Asociado)", 0.50),
+        ("Adith Bismarck Pérez Orozco\nInvestigador Asociado", 0.30),
         ("Eydy Del Carmen Suarez\nInvestigadora Asociada", 0.10)
     ]
 
-    # Flecha primerInvestigador desde GIDSE
+    # Flecha primerInvestigador desde GISICO
     ax.annotate("", xy=(0.15, 0.58), xytext=(0.15, 0.71), arrowprops=dict(arrowstyle="->", lw=2, color=COLOR_AZUL))
     ax.text(0.16, 0.65, "primerInvestigador", ha="left", va="center", fontsize=8, fontweight="bold", color=COLOR_AZUL)
 
-    for i, (nombre, y) in enumerate(invs_gidse):
+    for i, (nombre, y) in enumerate(invs_gisico):
         rect = patches.FancyBboxPatch((0.04, y - 0.04), 0.22, 0.08, boxstyle="round,pad=0.01,rounding_size=0.02",
                                       facecolor="#2B6CB0", edgecolor="#1A365D", linewidth=1.5)
         ax.add_patch(rect)
         ax.text(0.15, y, nombre, ha="center", va="center", color="#FFFFFF", fontsize=8, fontweight="bold")
-        if i < len(invs_gidse) - 1:
-            next_y = invs_gidse[i+1][1]
+        if i < len(invs_gisico) - 1:
+            next_y = invs_gisico[i+1][1]
             ax.annotate("", xy=(0.15, next_y + 0.05), xytext=(0.15, y - 0.05),
                         arrowprops=dict(arrowstyle="->", lw=1.8, color=COLOR_AZUL))
             ax.text(0.16, (y + next_y)/2, "sigInvestigador", ha="left", va="center", fontsize=7.5, color=COLOR_AZUL)
 
     # Eje Z: Productos cruzados vinculados a Investigador y a Grupo
     prods = [
-        ("Artículo: Scientific Methods...\nAño: 2024 | Cat: A1 | Valid: Sí", 0.50),
-        ("Software: PEA-i Sistema UPC\nAño: 2025 | Cat: A1 | Valid: Sí", 0.30),
-        ("Capítulo: Gestión Innovación...\nAño: 2023 | Cat: A | Valid: Sí", 0.10),
+        ("Artículo: Quantitative Software...\nAño: 2024 | Cat: A1 | Valid: Sí", 0.50),
+        ("Artículo: Actividades de innovación...\nAño: 2016 | Cat: A1 | Valid: Sí", 0.30),
+        ("Artículo: Scientific Methods...\nAño: 2024 | Cat: A1 | Valid: Sí", 0.10),
     ]
 
     for (texto, y) in prods:
@@ -143,11 +143,11 @@ def generar_diagrama_hipercubo():
         ax.add_patch(rect)
         ax.text(0.67, y, texto, ha="center", va="center", color="#742A2A", fontsize=8, fontweight="bold")
 
-    # Enlace Ortogonal 1: Adith -> Producto 1
+    # Enlace Ortogonal 1: John Jairo -> Producto 1
     ax.annotate("", xy=(0.47, 0.50), xytext=(0.27, 0.50), arrowprops=dict(arrowstyle="->", lw=2, color=COLOR_ROJO_UPC))
     ax.text(0.37, 0.52, "primerProducto", ha="center", va="bottom", fontsize=7.5, fontweight="bold", color=COLOR_ROJO_UPC)
 
-    # Enlace Ortogonal 2: Kovyn -> Producto 2
+    # Enlace Ortogonal 2: Adith -> Producto 2
     ax.annotate("", xy=(0.47, 0.30), xytext=(0.27, 0.30), arrowprops=dict(arrowstyle="->", lw=2, color=COLOR_ROJO_UPC))
     ax.text(0.37, 0.32, "primerProducto", ha="center", va="bottom", fontsize=7.5, fontweight="bold", color=COLOR_ROJO_UPC)
 
@@ -155,7 +155,7 @@ def generar_diagrama_hipercubo():
     ax.annotate("", xy=(0.47, 0.10), xytext=(0.27, 0.10), arrowprops=dict(arrowstyle="->", lw=2, color=COLOR_ROJO_UPC))
     ax.text(0.37, 0.12, "primerProducto", ha="center", va="bottom", fontsize=7.5, fontweight="bold", color=COLOR_ROJO_UPC)
 
-    # Enlace del Grupo GIDSE directo hacia la cadena de productos del grupo (sigProductoGrupo)
+    # Enlace del Grupo GISICO directo hacia la cadena de productos del grupo (sigProductoGrupo)
     ax.annotate("", xy=(0.67, 0.55), xytext=(0.20, 0.71),
                 arrowprops=dict(arrowstyle="->", lw=1.5, ls=":", color=COLOR_VERDE_UPC,
                                 connectionstyle="angle,angleA=-90,angleB=180,rad=10"))

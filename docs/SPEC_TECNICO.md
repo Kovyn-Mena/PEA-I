@@ -72,20 +72,20 @@ El problema exige el modelado basado en un **Hipercubo de Información** tridime
 ```mermaid
 graph TD
     subgraph Eje_Grupos ["Eje X: Grupos (Lista Principal)"]
-        G1["Grupo: GIDSE (A1)<br>sigGrupo"] --> G2["Grupo: GISI (A)<br>sigGrupo"]
-        G2 --> G3["Grupo: BIOTEC (B)<br>NULL"]
+        G1["Grupo: GISICO (C)<br>sigGrupo"] --> G2["Grupo: AITICE (B)<br>sigGrupo"]
+        G2 --> G3["Grupo: GISI (A)<br>NULL"]
     end
 
     subgraph Eje_Investigadores ["Eje Y: Investigadores (Sublista)"]
-        G1 -->|primerInvestigador| I1["Inv: Ing. Adith Pérez (Senior)<br>sigInvestigador"]
-        I1 --> I2["Inv: Kovyn Mena (Junior)<br>sigInvestigador"]
-        I2 --> I3["Inv: Eydy Suarez (Asociada)<br>NULL"]
+        G1 -->|primerInvestigador| I1["Líder: John Jairo Patiño (Asoc)<br>sigInvestigador"]
+        I1 --> I2["Inv: Ing. Adith Pérez (Asoc)<br>sigInvestigador"]
+        I2 --> I3["Inv: Eydy Suarez (Asoc)<br>NULL"]
     end
 
     subgraph Eje_Productos ["Eje Z: Productos (Sublista Cruzada Ortogonal)"]
-        I1 -->|primerProducto| P1["Art: Scientific Methods...<br>Año: 2024 (A1)"]
-        I2 -->|primerProducto| P2["Soft: PEA-i Sistema UPC<br>Año: 2025 (A1)"]
-        I3 -->|primerProducto| P3["Cap: Gestión Innovación...<br>Año: 2023 (A)"]
+        I1 -->|primerProducto| P1["Art: Quantitative Software...<br>Año: 2024 (A1)"]
+        I2 -->|primerProducto| P2["Art: Actividades innovación...<br>Año: 2016 (A1)"]
+        I3 -->|primerProducto| P3["Art: Scientific Methods...<br>Año: 2024 (A1)"]
     end
 
     G1 -.->|primerProductoGrupo| P1

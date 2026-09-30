@@ -3,7 +3,7 @@
 Script de inicialización de la base de datos SQLite y generación de datos semilla oficiales
 Refleja la realidad 100% oficial de MinCiencias (GrupLAC y CvLAC) para la Universidad Popular del Cesar:
   1. GISICO (COL0002099): Líder John Jairo Patiño Vanegas (Cat. C) — Adith Pérez es integrante/investigador.
-  2. AITICE (COL0018593): Líder Armando Javier López Sierra (Cat. B) — Grupo/Semillero de TIC en Educación.
+  2. AITICE (COL0043834): Líder Armando Javier López Sierra (Cat. B) — Grupo de Innovación TIC en Educación.
   3. GISI (COL0005544): Líder Carlos Mendoza (Cat. A)
   4. BIOTEC (COL0012981): Líder Martha Rangel (Cat. B)
 """
@@ -36,20 +36,19 @@ def init_database():
     # 1. Grupos oficiales MinCiencias de la Universidad Popular del Cesar (UPC)
     grupos = [
         ("COL0002099", "GRUPO DE INVESTIGACION EN SISTEMAS Y COMPUTACIÓN -GISICO-", "C", "Ingeniería y Tecnología", "John Jairo Patiño Vanegas", 2001, 1),
-        ("COL0018593", "GRUPO DE INVESTIGACIÓN AITICE (UPC)", "B", "Ciencias de la Educación y TIC", "Armando Javier López Sierra", 2011, 1),
+        ("COL0043834", "GRUPO DE INVESTIGACIÓN AITICE (UPC)", "B", "Ciencias de la Educación y TIC", "Armando Javier López Sierra", 2011, 1),
         ("COL0005544", "GRUPO DE INVESTIGACIÓN EN SISTEMAS INTELIGENTES (GISI)", "A", "Ciencias de la Computación", "Carlos Mendoza", 2008, 1),
         ("COL0012981", "BIOTECNOLOGÍA Y AGROINDUSTRIA CESAR (BIOTEC)", "B", "Ciencias Agrícolas", "Martha Rangel", 2012, 1)
     ]
     cursor.executemany("INSERT INTO Grupos VALUES (?, ?, ?, ?, ?, ?, ?)", grupos)
 
-    # 2. Investigadores adscritos a los grupos de la UPC
+    # 2. Investigadores oficiales registrados ante MinCiencias
     investigadores = [
         ("INV2099001", "John Jairo Patiño Vanegas", "Asociado", "Maestría en Computación", "COL0002099", 1),
         ("0000494917", "Adith Bismarck Pérez Orozco", "Asociado", "Doctorado en Ingeniería de Sistemas", "COL0002099", 1),
-        ("0000882190", "Kovyn Mena", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
-        ("INV1859000", "Armando Javier López Sierra", "Asociado", "Master in Arts in Education (UNAD)", "COL0018593", 1),
-        ("INV1859001", "Vanessa Paola Pertuz Peralta", "Asociado", "Doctorado en Administración", "COL0018593", 1),
-        ("INV1859002", "Neida Coromoto Boscán Romero", "Asociado", "Maestría en Computación", "COL0018593", 1),
+        ("INV4383000", "Armando Javier López Sierra", "Asociado", "Master in Arts in Education (UNAD)", "COL0043834", 1),
+        ("INV4383001", "Vanessa Paola Pertuz Peralta", "Asociado", "Doctorado en Administración", "COL0043834", 1),
+        ("INV4383002", "Neida Coromoto Boscán Romero", "Asociado", "Maestría en Computación", "COL0043834", 1),
         ("INV2099004", "Alfonso Enrique García Payares", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
         ("INV2099005", "Alfredo David Bautista Romero", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
         ("INV2099006", "Alvaro Oñate Bowen", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),

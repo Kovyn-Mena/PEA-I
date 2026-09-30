@@ -248,7 +248,7 @@ class MotorIngesta:
         invs = [
             ("INV2099001", "John Jairo Patiño Vanegas", "Asociado", "Maestría en Computación"),
             ("0000494917", "Adith Bismarck Pérez Orozco", "Asociado", "Doctorado en Ingeniería de Sistemas"),
-            ("0000882190", "Kovyn Mena", "Junior", "Ingeniería de Sistemas"),
+            ("INV2099003", "Eydy Del Carmen Suarez Brieva", "Asociado", "Maestría en Sistemas"),
             ("INV2099004", "Alfonso Enrique García Payares", "Junior", "Ingeniería de Sistemas"),
             ("INV2099005", "Gloria Marina Rosado Galindo", "Asociado", "Ingeniería de Sistemas"),
             ("INV2099006", "Heyner Alexander Aroca Araujo", "Junior", "Ingeniería de Sistemas")
@@ -260,8 +260,8 @@ class MotorIngesta:
 
         prods = [
             ("FALLBACK-001", "0000494917", "Articulo", "Modelo de hipercubo para análisis multidimensional en MinCiencias", 2024, "A1", True),
-            ("FALLBACK-002", "0000882190", "Software", "PEA-i: Sistema de analítica institucional de investigación UPC", 2025, "A1", True),
-            ("FALLBACK-003", "INV2099002", "Articulo", "Epistemological Foundations of Quantitative Software Research", 2023, "A", True),
+            ("FALLBACK-002", "INV2099003", "Software", "Sistema de analítica institucional de investigación universitaria", 2025, "A1", True),
+            ("FALLBACK-003", "INV2099001", "Articulo", "Epistemological Foundations of Quantitative Software Research", 2023, "A", True),
             ("FALLBACK-004", "0000494917", "Libro", "Fundamentos de Estructuras de Datos aplicadas a grafos y multilistas", 2022, "A1", True),
             ("FALLBACK-005", "INV2099005", "Articulo", "Scientific Methods of Quantitative Research in Engineering", 2026, "A1", True),
             ("FALLBACK-006", "INV2099006", "Articulo", "Pensamiento sistémico y simulación microcontrolada", 2025, "A", True)
