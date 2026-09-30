@@ -1,0 +1,13 @@
+[package]
+name = "pea_audit_rust"
+version = "1.0.0"
+edition = "2021"
+authors = ["Kovyn Mena <kbmena@unicesar.edu.co>"]
+description = "Módulo auditor de invariantes y micro-benchmarks para el sistema PEA-i (Taller 2 Estructura de Datos UPC)"
+
+[dependencies]
+rusqlite = { version = "0.31", features = ["bundled"] }
+
+[[bin]]
+name = "pea_audit"
+path = "src/main.rs"
