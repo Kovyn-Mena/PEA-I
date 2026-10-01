@@ -65,7 +65,13 @@ audit-rust:
 
 # Limpiar ejecutables y temporales
 clean:
-	rm -f $(TARGET) src/cpp/test_tda src/cpp/test_sqlite
+	rm -f $(TARGET) src/cpp/test_tda src/cpp/test_sqlite Taller2_EstructuraDatos_GrupoXX.zip
 	@echo "[OK] Archivos temporales eliminados."
 
-.PHONY: all run run-cpp run-py gui run-gui gui-py run-gui-py test docs audit-rust clean
+# Empaquetar entrega final en archivo ZIP para envío al docente (adithperez@unicesar.edu.co)
+package: clean docs
+	@python3 scripts/package_zip.py
+
+.PHONY: all run run-cpp run-py gui run-gui gui-py run-gui-py test docs audit-rust clean package
+
+
