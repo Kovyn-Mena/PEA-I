@@ -43,6 +43,8 @@ if PROJECT_ROOT not in sys.path:
 from src.python.structures.multilista import Multilista
 from src.python.core.db import GestorPersistencia
 from src.python.core.catalogo_2024 import CatalogoMinCiencias2024
+from src.python.core.reporte_pdf import generar_informe_grupo_pdf
+
 
 # Macro-Tipologías MinCiencias
 def obtener_macro_tipologia(tipo: str) -> str:
@@ -243,6 +245,13 @@ class DashboardApp:
             g = g.sig_grupo
         filas_prods.sort(key=lambda x: x["anio"], reverse=True)
 
+        # Pre-generar informes PDF oficiales con ReportLab para los grupos listados
+        for grp in filas_grupos:
+            try:
+                generar_informe_grupo_pdf(grp["codigo"], self.ruta_bd)
+            except Exception:
+                pass
+
         html = f"""<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -356,10 +365,10 @@ class DashboardApp:
         <h2>🏢 i. Vista por Grupo de Investigación (12.c.i)</h2>
         <table>
             <thead>
-                <tr><th>Código</th><th>Nombre Oficial</th><th>Clasificación</th><th>Líder</th><th>Investigadores</th><th>Productos</th></tr>
+                <tr><th>Código</th><th>Nombre Oficial</th><th>Clasificación</th><th>Líder</th><th>Investigadores</th><th>Productos</th><th>Informe Oficial</th></tr>
             </thead>
             <tbody>
-                {''.join(f"<tr><td><b>{g['codigo']}</b></td><td>{g['nombre']}</td><td>{g['clasificacion']}</td><td>{g['lider']}</td><td>{g['investigadores']}</td><td><b>{g['productos']}</b></td></tr>" for g in filas_grupos)}
+                {''.join(f"<tr><td><b>{g['codigo']}</b></td><td>{g['nombre']}</td><td>{g['clasificacion']}</td><td>{g['lider']}</td><td>{g['investigadores']}</td><td><b>{g['productos']}</b></td><td><a href='../reportes/Informe_GrupLAC_{g['codigo']}.pdf' target='_blank' style='background:#006837; color:white; padding:3px 8px; border-radius:4px; text-decoration:none; font-size:0.75rem; font-weight:bold;'>📄 Descargar PDF</a></td></tr>" for g in filas_grupos)}
             </tbody>
         </table>
     </div>

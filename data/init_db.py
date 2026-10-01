@@ -11,12 +11,29 @@ import sqlite3
 import os
 import csv
 
+import sys
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, ".."))
 SCHEMA_PATH = os.path.join(BASE_DIR, "schema.sql")
 DB_PATH = os.path.join(BASE_DIR, "pea_investigacion.db")
 CSV_PATH = os.path.join(BASE_DIR, "muestra_upc.csv")
+JSON_PATH = os.path.join(BASE_DIR, "pea_data_upc.json")
 
-def init_database():
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+def init_database(forzar_muestra_reducida: bool = False):
+    if not forzar_muestra_reducida and os.path.exists(JSON_PATH):
+        try:
+            from data.import_pea_json import importar_dataset_completo
+        except ModuleNotFoundError:
+            from import_pea_json import importar_dataset_completo
+        importar_dataset_completo()
+        return
+
+
     print(f"[DB] Inicializando base de datos en: {DB_PATH}")
     if os.path.exists(DB_PATH):
         os.remove(DB_PATH)
@@ -32,6 +49,7 @@ def init_database():
     
     cursor.executescript(schema_sql)
     conn.commit()
+
 
     # 1. Grupos oficiales MinCiencias de la Universidad Popular del Cesar (UPC)
     grupos = [

@@ -342,6 +342,28 @@ def build_document():
         ["FRH", "Formación de Recurso Humano", "Tesis de Doctorado, Trabajos de grado de Maestría/Pregrado y Asesorías Programa Ondas (APO).", "30 - 100"]
     ]
     format_table(tbl_fam, widths_fam, headers_fam, data_fam)
+    doc.add_paragraph().paragraph_format.space_after = Pt(8)
+
+    # 3.4 Informes PDF ReportLab
+    doc.add_heading("3.4 Generación de Informes Institucionales PDF Estilo GrupLAC (ReportLab)", level=2)
+    doc.add_paragraph(
+        "El sistema integra un motor de generación de reportes formales en formato PDF (src/python/core/reporte_pdf.py) "
+        "utilizando la librería ReportLab. Cada informe reproduce la estructura oficial de la ficha GrupLAC de MinCiencias "
+        "con los colores institucionales de la Universidad Popular del Cesar (Verde UPC #006837 y Rojo UPC #ED1C24), "
+        "incluyendo la ficha técnica del grupo, el balance consolidado del Modelo 2024 (5 macro-familias y puntaje IPP), "
+        "el cuerpo de investigadores adscritos y el catálogo de productos científicos con su estado de validación."
+    )
+    doc.add_paragraph().paragraph_format.space_after = Pt(8)
+
+    # 3.5 Dataset Masivo UPC
+    doc.add_heading("3.5 Dataset Institucional Masivo de la UPC (61 Grupos y 3,335 Productos)", level=2)
+    doc.add_paragraph(
+        "Para responder a auditorías de gran escala y evidenciar la escalabilidad y eficiencia de la Multilista Ortogonal 3D, "
+        "el sistema soporta la carga del dataset institucional completo de la Universidad Popular del Cesar "
+        "(data/pea_data_upc.json y data/import_pea_json.py). Este repositorio abarca 61 grupos de investigación, "
+        "más de 350 investigadores y 3,335 productos científicos normalizados y clasificados automáticamente bajo "
+        "las reglas del Modelo MinCiencias 2024, manteniendo en todo momento la integridad de autorías reales."
+    )
     doc.add_paragraph().paragraph_format.space_after = Pt(12)
 
     # --- SECCIÓN 4: ESPECIFICACIÓN FORMAL DE REQUERIMIENTOS (SPEC) ---

@@ -60,6 +60,18 @@ El sistema resuelve el Taller 2 de Estructura de Datos implementando dos solucio
 | `activo` | `Booleano (1/0)` | E/S | Estado: `1` (Activo en estadísticas), `0` (Desactivado). |
 | `cumple_ventana_obs` | `Booleano` | Salida | Indicador de pertinencia en la ventana de observación evaluada. |
 
+### 2.4 Módulo de Generación de Informes Oficiales PDF (ReportLab)
+El sistema integra generación autónoma de informes en formato PDF estilo GrupLAC (`src/python/core/reporte_pdf.py`):
+* **Identidad Institucional:** Paleta oficial UPC (`#006837`, `#ED1C24` y `#1e3a5f`).
+* **Ficha Técnica y Liderazgo:** Ficha de grupo, categorías y directores MinCiencias.
+* **Balance Modelo 2024:** 5 macro-familias (GNC, DTI, ASC, DPC, FRH) y puntaje IPP institucional.
+* **Integrantes y Catálogo:** Desglose de integrantes y catálogo cronológico de productos.
+
+### 2.5 Dataset Institucional Masivo de la UPC (61 Grupos y 3,335 Productos)
+Soporte dual de persistencia y análisis de datos:
+* **Modo Muestra Verificada:** Grupos insignia auditados (GISICO `COL0002099`, AITICE `COL0043834`, GISI `COL0005544`, BIOTEC `COL0012981`).
+* **Modo Institucional Completo:** Ingesta de los 61 grupos de la Universidad Popular del Cesar, 362 investigadores y 3,351 productos científicos normalizados (`data/import_pea_json.py`).
+
 ---
 
 ## 🧊 3. Modelado del Hipercubo 3D mediante Multilistas Ortogonales

@@ -37,3 +37,9 @@ venv/
 # Archivos de empaque final
 *.zip
 *.tar.gz
+
+# Reportes PDF generados dinámicamente
+reportes/*.pdf
+!reportes/Informe_GrupLAC_COL0002099.pdf
+!reportes/Informe_GrupLAC_COL0043834.pdf
+

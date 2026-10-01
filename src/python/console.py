@@ -180,9 +180,10 @@ class ConsolaApp:
             print("  5. Resumen Estadistico y Filtro por Ventana de Años")
             print("  6. Guardar cambios en la Base de Datos (Persistencia)")
             print("  7. Ingesta de Datos MinCiencias (Web Scraping / PDF / CSV - Cola FIFO)")
+            print("  8. Generar Informe PDF Institucional de Grupo (Estilo GrupLAC - ReportLab)")
             print("  0. Salir del Sistema")
             print("-----------------------------------------------------------------")
-            op = self.leer_opcion_menu("01234567", "Presione una opción [0-7]: ")
+            op = self.leer_opcion_menu("012345678", "Presione una opción [0-8]: ")
 
             if op == 1:
                 self.menu_grupos()
@@ -198,6 +199,8 @@ class ConsolaApp:
                 self.guardar_en_bd()
             elif op == 7:
                 self.menu_ingesta()
+            elif op == 8:
+                self.menu_generar_informe_pdf()
             elif op == 0:
                 self.limpiar_pantalla()
                 print("=================================================================")
@@ -318,9 +321,10 @@ class ConsolaApp:
             print("  4. Modificar Grupo")
             print("  5. Desactivar / Reactivar Grupo (Borrado Lógico)")
             print("  6. Eliminar Grupo Físicamente (Cascada)")
+            print("  7. Generar Informe PDF Institucional de Grupo (ReportLab)")
             print("  0. Anterior / Regresar al Menú Principal")
             print("-----------------------------------------------------------------")
-            op = self.leer_opcion_menu("0123456", "Presione una opción [0-6]: ")
+            op = self.leer_opcion_menu("01234567", "Presione una opción [0-7]: ")
 
             if op == 1:
                 self.limpiar_pantalla()
@@ -454,6 +458,39 @@ class ConsolaApp:
                 else:
                     print("\n[+] Operación cancelada.")
                 self.pausar()
+            elif op == 7:
+                self.menu_generar_informe_pdf()
+
+    def menu_generar_informe_pdf(self, codigo_defecto: str = ""):
+        from python.core.reporte_pdf import generar_informe_grupo_pdf
+        self.limpiar_pantalla()
+        print("=================================================================")
+        print("     PEA-i UPC > GENERADOR DE INFORMES PDF (ESTILO GRUPLAC)      ")
+        print("=================================================================")
+        if not codigo_defecto:
+            print("Grupos registrados en memoria:")
+            g = self.multi.cabeza_grupos
+            count = 0
+            while g and count < 10:
+                print(f"  • {g.codigo_grupo}: {g.nombre[:45]}")
+                g = g.sig_grupo
+                count += 1
+            if count == 0:
+                print("  (Consultando directamente la base de datos institucional)")
+            print("-----------------------------------------------------------------")
+            cod = self.leer_linea("Ingrese el código del grupo [ej. COL0002099 o COL0043834]: ", permitir_vacio=False)
+        else:
+            cod = codigo_defecto
+
+        try:
+            print(f"\n[+] Generando informe formal en PDF para {cod}...")
+            ruta = generar_informe_grupo_pdf(cod, self.ruta_bd)
+            print(f"\n[OK] ¡Informe institucional en PDF generado exitosamente!")
+            print(f"     Archivo: {ruta}")
+            print("     (Puede abrir este archivo con cualquier visor de PDF en su sistema)")
+        except Exception as e:
+            print(f"\n[!] Error al generar el informe PDF: {e}")
+        self.pausar()
 
     # -----------------------------------------------------------------
     # CRUD: INVESTIGADORES

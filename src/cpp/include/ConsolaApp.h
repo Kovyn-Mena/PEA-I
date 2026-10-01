@@ -265,9 +265,10 @@ public:
             std::cout << "  6. Guardar cambios en la Base de Datos (Persistencia)\n";
             std::cout << "  7. Visualizador Grafico del Hipercubo 3D (GUI C++)\n";
             std::cout << "  8. Ingesta de Datos MinCiencias (Web Scraping / PDF / CSV - Puente Python)\n";
+            std::cout << "  9. Generar Informe PDF Institucional de Grupo (ReportLab)\n";
             std::cout << "  0. Salir del Sistema\n";
             std::cout << "-----------------------------------------------------------------\n";
-            op = leerOpcionMenu("012345678", "Presione una opción [0-8]: ");
+            op = leerOpcionMenu("0123456789", "Presione una opción [0-9]: ");
 
             switch (op) {
                 case 1: menuGrupos(); break;
@@ -278,6 +279,7 @@ public:
                 case 6: guardarEnBD(); break;
                 case 7: VisualizadorGrafico::lanzarVisualizador(multi); pausar(); break;
                 case 8: menuIngestaInteroperabilidad(); break;
+                case 9: menuGenerarInformePDF(); break;
                 case 0:
                     limpiarPantalla();
                     std::cout << "=================================================================\n";
@@ -429,9 +431,10 @@ public:
             std::cout << "  4. Modificar Grupo\n";
             std::cout << "  5. Desactivar / Reactivar Grupo (Borrado Lógico)\n";
             std::cout << "  6. Eliminar Grupo Físicamente (Cascada)\n";
+            std::cout << "  7. Generar Informe PDF Institucional de Grupo (ReportLab)\n";
             std::cout << "  0. Anterior / Regresar al Menú Principal\n";
             std::cout << "-----------------------------------------------------------------\n";
-            op = leerOpcionMenu("0123456", "Presione una opción [0-6]: ");
+            op = leerOpcionMenu("01234567", "Presione una opción [0-7]: ");
 
             if (op == 1) {
                 limpiarPantalla();
@@ -580,8 +583,45 @@ public:
                     std::cout << "\n[+] Operación cancelada.\n";
                 }
                 pausar();
+            } else if (op == 7) {
+                menuGenerarInformePDF();
             }
         }
+    }
+
+    void menuGenerarInformePDF(const std::string& codigoDefecto = "") {
+        limpiarPantalla();
+        std::cout << "=================================================================\n";
+        std::cout << "     PEA-i UPC > GENERADOR DE INFORMES PDF (ESTILO GRUPLAC)      \n";
+        std::cout << "=================================================================\n";
+        std::string cod = codigoDefecto;
+        if (cod.empty()) {
+            std::cout << "Grupos registrados en memoria RAM:\n";
+            NodoGrupo* g = multi.getCabezaGrupos();
+            int count = 0;
+            while (g && count < 10) {
+                std::cout << "  • " << g->codigo_grupo << ": " << g->nombre.substr(0, 45) << "\n";
+                g = g->sigGrupo;
+                count++;
+            }
+            if (count == 0) {
+                std::cout << "  (Consultando directamente la base de datos institucional)\n";
+            }
+            std::cout << "-----------------------------------------------------------------\n";
+            cod = leerLinea("Ingrese el código del grupo [ej. COL0002099 o COL0043834]: ");
+        }
+        if (cod.empty() || cod == "0") return;
+
+        std::cout << "\n[+] Generando informe formal en PDF para " << cod << " (ReportLab)...\n";
+        std::string cmd = "python3 src/python/core/reporte_pdf.py " + cod;
+        int res = std::system(cmd.c_str());
+        if (res == 0) {
+            std::cout << "\n[OK] ¡Informe PDF institucional generado con éxito!\n";
+            std::cout << "     Directorio: reportes/Informe_GrupLAC_" << cod << ".pdf\n";
+        } else {
+            std::cout << "\n[!] Error generando el informe PDF (código: " << res << ").\n";
+        }
+        pausar();
     }
 
     // -----------------------------------------------------------------
