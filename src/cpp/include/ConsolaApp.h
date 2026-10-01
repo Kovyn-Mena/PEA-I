@@ -263,7 +263,7 @@ public:
             std::cout << "  4. Deshacer ultima accion (Pila Undo - LIFO) [" << historial.tamano() << " en pila]\n";
             std::cout << "  5. Resumen Estadistico y Filtro por Ventana de Años\n";
             std::cout << "  6. Guardar cambios en la Base de Datos (Persistencia)\n";
-            std::cout << "  7. Visualizador Grafico del Hipercubo 3D (GUI C++)\n";
+            std::cout << "  7. Portal Institucional de Investigacion y Dashboard (GUI C++)\n";
             std::cout << "  8. Ingesta de Datos MinCiencias (Web Scraping / PDF / CSV - Puente Python)\n";
             std::cout << "  9. Generar Informe PDF Institucional de Grupo (ReportLab)\n";
             std::cout << "  0. Salir del Sistema\n";
