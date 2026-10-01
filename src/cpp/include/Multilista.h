@@ -10,6 +10,13 @@
 // =====================================================================
 // TDA MULTILISTA / HIPERCUBO DE INFORMACIÓN
 // Enlace Ortogonal tridimensional: Grupos <-> Investigadores <-> Productos
+//
+// Operaciones Clave y Complejidad Algorítmica:
+// 1. Inserción de Grupo/Investigador/Producto: O(1) cabeza / O(n) verificación
+// 2. Búsqueda exacta: O(G) para grupo, O(G*I) para inv, O(G*P) para prod
+// 3. Desactivación Lógica (Soft Delete): O(1) una vez localizado el nodo
+// 4. Eliminación Física: O(1) reconexión de punteros ortogonales + delete
+// 5. Filtro por Ventana de Años: Recorrido lineal O(Total Productos)
 // =====================================================================
 
 class Multilista {

@@ -328,7 +328,7 @@ public:
                 limpiarPantalla();
                 std::cout << "=================================================================\n";
                 std::cout << "--- WEB SCRAPING: GRUPO MINCIENCIAS (GrupLAC) ---\n";
-                std::cout << "URL oficial del taller: Grupo GIDSE (00000000002099)\n";
+                std::cout << "URL oficial del taller: Grupo GISICO (00000000002099)\n";
                 std::cout << "[Presione ENTER para usar la URL oficial, o 0 para cancelar]\n";
                 std::cout << "=================================================================\n";
                 std::string url = leerLinea("URL GrupLAC: ", true);
@@ -485,7 +485,7 @@ public:
                 limpiarPantalla();
                 std::cout << "=================================================================\n";
                 std::cout << "--- CONSULTAR DETALLE DE GRUPO ---\n";
-                std::cout << "Búsqueda por Código o Nombre (ej: COL0002099 o GIDSE)\n";
+                std::cout << "Búsqueda por Código o Nombre (ej: COL0002099 o GISICO)\n";
                 std::cout << "[Sugerencia: Presione ENTER para ver un ejemplo aleatorio, o 0 para regresar]\n";
                 std::cout << "=================================================================\n";
                 std::string busqueda = leerLinea("Término de búsqueda: ", true);

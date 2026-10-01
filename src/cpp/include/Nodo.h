@@ -6,6 +6,20 @@
 // =====================================================================
 // DEFINICIÓN DE ENTIDADES Y NODOS PARA EL HIPERCUBO DE INFORMACIÓN
 // Modelado mediante Multilista jerárquica ortogonal basada en punteros
+//
+//               EJE X: Grupos de Investigación
+//               [Grupo 1] -------------------> [Grupo 2]
+//                  | (primerInvestigador)
+//                  v
+//               EJE Y: Investigadores
+//               [Investigador A] ------------> [Investigador B]
+//                  | (primerProducto)
+//                  v
+//               EJE Z: Productos (Enlace Ortogonal Cruzado)
+//               [Producto P1] ---> sigProductoInvestigador ---> [Producto P2]
+//                  | (sigProductoGrupo)
+//                  v
+//               [Producto P3]
 // =====================================================================
 
 // ---------------------------------------------------------------------

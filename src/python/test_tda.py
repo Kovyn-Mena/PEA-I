@@ -16,13 +16,13 @@ def test_multilista_y_hipercubo():
     multi = Multilista()
 
     # 1. Inserción de grupos
-    assert multi.insertar_grupo("COL0002099", "GIDSE", "A1", "Ingeniería", "Adith Pérez", 2005)
+    assert multi.insertar_grupo("COL0002099", "GISICO", "C", "Ingeniería", "John Jairo Patiño", 2005)
     assert multi.insertar_grupo("COL0005544", "GISI", "A", "Computación", "Carlos Mendoza", 2008)
     assert not multi.insertar_grupo("COL0002099", "DUPLICADO", "B", "Ing", "Nadie", 2010)
 
     # 2. Inserción de investigadores
     assert multi.insertar_investigador("COL0002099", "INV-01", "Adith Pérez", "Senior", "Doctor")
-    assert multi.insertar_investigador("COL0002099", "INV-02", "Kovyn Mena", "Junior", "Ingeniero")
+    assert multi.insertar_investigador("COL0002099", "INV-02", "Eydy Suarez", "Junior", "Ingeniero")
     assert multi.insertar_investigador("COL0005544", "INV-03", "Laura Quintero", "Asociado", "Magister")
 
     # 3. Inserción de productos (Ortogonalidad)
@@ -65,8 +65,8 @@ def test_multilista_y_hipercubo():
     assert multi.buscar_producto("PR-03") is None
 
     # Búsqueda inteligente por texto y muestreo aleatorio
-    assert multi.buscar_grupo_por_texto("gidse") is not None
-    assert multi.buscar_investigador_por_texto("kovyn") is not None
+    assert multi.buscar_grupo_por_texto("gisico") is not None
+    assert multi.buscar_investigador_por_texto("eydy") is not None
     assert multi.buscar_producto_por_texto("hipercubo") is not None
     assert multi.obtener_grupo_aleatorio() is not None
     assert multi.obtener_investigador_aleatorio() is not None
@@ -79,7 +79,7 @@ def test_pila_deshacer():
     pila = Pila()
     assert pila.esta_vacia()
 
-    pila.push("CREAR", "GRUPO", "COL0002099", "Nuevo grupo GIDSE")
+    pila.push("CREAR", "GRUPO", "COL0002099", "Nuevo grupo GISICO")
     pila.push("MODIFICAR", "PRODUCTO", "PR-01", "titulo=Paper Anterior")
     assert pila.tamano() == 2
 
@@ -99,7 +99,7 @@ def test_cola_ingesta():
     cola = Cola()
     assert cola.esta_vacia()
 
-    cola.encolar("URL_GRUPLAC", "https://scienti.minciencias.gov.co/gruplac/...", "GrupLAC GIDSE")
+    cola.encolar("URL_GRUPLAC", "https://scienti.minciencias.gov.co/gruplac/...", "GrupLAC GISICO")
     cola.encolar("ARCHIVO_PDF", "data/muestra_upc.pdf", "PDF Institucional")
     cola.encolar("ARCHIVO_CSV", "data/muestra_upc.csv", "CSV Respaldo")
     assert cola.tamano() == 3

@@ -10,13 +10,13 @@ void testMultilistaYHipercubo() {
     Multilista multi;
 
     // Inserción de 2 grupos
-    assert(multi.insertarGrupo("COL0002099", "GIDSE", "A1", "Ingeniería", "Adith Pérez", 2005));
+    assert(multi.insertarGrupo("COL0002099", "GISICO", "C", "Ingeniería", "John Jairo Patiño", 2005));
     assert(multi.insertarGrupo("COL0005544", "GISI", "A", "Computación", "Carlos Mendoza", 2008));
     assert(!multi.insertarGrupo("COL0002099", "DUPLICADO", "B", "Ing", "Nadie", 2010)); // Evita duplicados
 
     // Inserción de investigadores
     assert(multi.insertarInvestigador("COL0002099", "INV-01", "Adith Pérez", "Senior", "Doctor"));
-    assert(multi.insertarInvestigador("COL0002099", "INV-02", "Kovyn Mena", "Junior", "Ingeniero"));
+    assert(multi.insertarInvestigador("COL0002099", "INV-02", "Eydy Suarez", "Junior", "Ingeniero"));
     assert(multi.insertarInvestigador("COL0005544", "INV-03", "Laura Quintero", "Asociado", "Magister"));
 
     // Inserción de productos (Ortogonalidad)
@@ -60,8 +60,8 @@ void testMultilistaYHipercubo() {
     assert(multi.buscarProducto("PR-03") == nullptr);
 
     // Búsqueda inteligente por texto y muestreo aleatorio
-    assert(multi.buscarGrupoPorTexto("gidse") != nullptr);
-    assert(multi.buscarInvestigadorPorTexto("kovyn") != nullptr);
+    assert(multi.buscarGrupoPorTexto("gisico") != nullptr);
+    assert(multi.buscarInvestigadorPorTexto("eydy") != nullptr);
     assert(multi.buscarProductoPorTexto("hipercubo") != nullptr);
     assert(multi.obtenerGrupoAleatorio() != nullptr);
     assert(multi.obtenerInvestigadorAleatorio() != nullptr);
@@ -75,7 +75,7 @@ void testPilaDeshacer() {
     Pila pila;
     assert(pila.estaVacia());
 
-    pila.push("CREAR", "GRUPO", "COL0002099", "Nuevo grupo GIDSE");
+    pila.push("CREAR", "GRUPO", "COL0002099", "Nuevo grupo GISICO");
     pila.push("MODIFICAR", "PRODUCTO", "PR-01", "titulo=Paper Anterior");
     assert(pila.tamano() == 2);
 
@@ -98,7 +98,7 @@ void testColaIngesta() {
     Cola cola;
     assert(cola.estaVacia());
 
-    cola.encolar("URL_GRUPLAC", "https://scienti.minciencias.gov.co/gruplac/...", "GrupLAC GIDSE");
+    cola.encolar("URL_GRUPLAC", "https://scienti.minciencias.gov.co/gruplac/...", "GrupLAC GISICO");
     cola.encolar("ARCHIVO_PDF", "data/muestra_upc.pdf", "PDF Institucional");
     cola.encolar("ARCHIVO_CSV", "data/muestra_upc.csv", "CSV Respaldo");
     assert(cola.tamano() == 3);

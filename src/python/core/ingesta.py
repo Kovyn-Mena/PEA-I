@@ -88,13 +88,13 @@ class MotorIngesta:
         soup = BeautifulSoup(html_text, "html.parser")
 
         # 1. Nombre del Grupo
-        nombre_grupo = "GRUPO DE INVESTIGACIÓN GIDSE (UPC)"
+        nombre_grupo = "GRUPO DE INVESTIGACIÓN GISICO (UPC)"
         span_encabezado = soup.find("span", class_="celdaEncabezado")
         if span_encabezado and span_encabezado.get_text(strip=True):
             nombre_grupo = span_encabezado.get_text(strip=True)
 
         # 2. Líder
-        lider = "Adith Pérez"
+        lider = "John Jairo Patiño Vanegas"
         td_lider = soup.find("td", string=re.compile(r"Líder|Lider", re.I))
         if td_lider and td_lider.find_next_sibling("td"):
             lider = td_lider.find_next_sibling("td").get_text(strip=True)
@@ -286,7 +286,7 @@ class MotorIngesta:
         # Asegurar que exista un grupo receptor por defecto
         cod_grupo_def = "COL0002099"
         if not multi.buscar_grupo(cod_grupo_def):
-            multi.insertar_grupo(cod_grupo_def, "GRUPO DE INVESTIGACIÓN GIDSE (UPC)", "A1", "Ingeniería y Tecnología", "Adith Pérez", 2005, True)
+            multi.insertar_grupo(cod_grupo_def, "GRUPO DE INVESTIGACIÓN GISICO (UPC)", "C", "Ingeniería y Tecnología", "John Jairo Patiño Vanegas", 2005, True)
             resumen["grupos"] += 1
 
         html_text = ""
@@ -478,7 +478,7 @@ class MotorIngesta:
         # Grupo e Investigador por defecto si no existen
         cod_grupo = "COL0002099"
         if not multi.buscar_grupo(cod_grupo):
-            multi.insertar_grupo(cod_grupo, "GRUPO DE INVESTIGACIÓN GIDSE (UPC)", "A1", "Ingeniería y Tecnología", "Adith Pérez", 2005, True)
+            multi.insertar_grupo(cod_grupo, "GRUPO DE INVESTIGACIÓN GISICO (UPC)", "C", "Ingeniería y Tecnología", "John Jairo Patiño Vanegas", 2005, True)
             resumen["grupos"] += 1
 
         doc_inv = "0000494917"
