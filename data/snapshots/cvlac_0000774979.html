@@ -1,0 +1,3343 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edici�n de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producci�n en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        WILLIAM ARTURO&nbsp;CAMARILLO&nbsp;TORRES
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>CAMARILLO TORRES, WILLIAM ARTURO</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestr�a/Magister</b>
+                            Universidad Internacional Iberoamericana<br />
+                            M�ster en Gesti�n y Auditor�as Ambientales en Ingenier�a y Tecnolog�a Ambiental<br />
+                            Febrerode2012 - de <br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Especializaci�n</b>
+                            FUNDACION UNIVERSITARIA CLARETIANA <br />
+                            ESPECIALIZACI�N EN GERENCIA DE SERVICIOS SOCIALES<br />
+                            Febrerode2021 - Marzode 2022<br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD POPULAR DEL CESAR<br />
+                            INGENIERIA AGROINDUSTRIAL<br />
+                            Marzode1999 - Juniode 2007<br />
+                            OBTENCI�N DE BIOETANOL A PARTIR DEL ALMID�N DE YUCA, CULTIVADAS EN LAS ZONAS NORTE Y CENTRO DEL CESAR, COMO COMBUSTIBLE OXIGENANTE DE LA GASOLINA.</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Secundario</b>
+                            Colegio Nari�o<br />
+                            <br />
+                            Enerode1993 - de 1998<br />
+                            </td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3>Formaci&oacute;n Complementaria</h3></td>
+                            </tr>   
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Atencion Al Cliente<br />
+                        Enerode2003 - de 2003<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Tecnicas de ventas<br />
+                        Enerode2003 - de 2003<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Viverista forestal<br />
+                        Enerode2004 - de 2004<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Transformaci�n Microbiana del Carb�n y Materia Org�nica Humificada para el Manejo del Suelo Tropical<br />
+                        Septiembrede2011 - Septiembrede 2011<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        TA Instruments_Waters LLC � Lanzetta Rengifo y CIA<br />
+                        REOLOG�A Y AN�LISIS T�RMICO<br />
+                        Enerode2008 - de 2008<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Pol�ticas de seguridad alimentaria y nutricional en Colombia<br />
+                        Abrilde2009 - Juniode 2009<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        Camara de Comercio de Valledupar y Fundacion Promover<br />
+                        Desarrollo Del Cultivo de Bambu<br />
+                        Enerode2004 - de 2004<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Sistema de gesti�n ambiental SGA Norma NTC ISO 14001<br />
+                        Juniode2009 - Juliode 2009<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        English Discoveries - Basico I <br />
+                        Febrerode2010 - Marzode 2010<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Formulaci�n de proyectos<br />
+                        Marzode2010 - Abrilde 2010<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Administraci�n de proyectos: Caracter�sticas, factores de �xito, t�cnicas y herramientas administrativas<br />
+                        Marzode2010 - Abrilde 2010<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Analisis e Interpretacion de Datos Estadisticos<br />
+                        Enerode2007 - de 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Turismo en espacios rurales<br />
+                        Mayode2009 - Juniode 2009<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensi�n</b>
+                        Fundaci�n Manuel Mejia<br />
+                        Empresarizaci�n para organizaciones de productores agropecuarios<br />
+                        Diciembrede2012 - Diciembrede 2012<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensi�n</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        DIPLOMADO EN METODOLOG�A DE LA INVESTIGACI�N<br />
+                        Mayode2006 - Octubrede 2006<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensi�n</b>
+                        Cooperativa Integral Lechera del Cesar<br />
+                        Capacitaci�n en gesti�n a propietarios de peque�as empresas ganaderas<br />
+                        Juliode2010 - Diciembrede 2010<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensi�n</b>
+                        Corporaci�n Promotora De Las Comunidades Municipales De Colombia .Ong<br />
+                        Diplomado en Planes de Negocios para Microempresas Rurales<br />
+                        Juniode2011 - Noviembrede 2011<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Otros</b>
+                        FUNDACION UNIVERSITARIA DEL AREA ANDINA<br />
+                        Taller Centros de Acompa�amiento al Desarrollo Empresarial - CADE<br />
+                        Agostode2011 - Agostode 2011<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Otros</b>
+                        CORPORACI�N AGENCIA DE DESARROLLO ECON�MICO LOCAL DEL COMPLEJO CENAGOSO DE LA ZAPATOSA, R�O MAGDALENA Y DEPRESI�N MOMPOSINA<br />
+                        SEminario Taller para organizaciones en desarrollo productivo y gesti�n empresarial<br />
+                        Juniode2011 - Agostode 2011<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Otros</b>
+                        Gobernaci�n del departamento del C�sar<br />
+                        Metodolog�a General Ajustada - MGA<br />
+                        Juliode2010 - Juliode 2010<br />
+                        </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Grupo de investigacion en Energia Alternativa y Biomasa (GEAB_CIDTEC)</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>10&nbsp;horas Semanales
+                        Mayo de 2005            
+                         de <br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigaci�n</span><br>
+                        
+                        - &nbsp;
+                        Investigaci�n y Desarrollo
+                        <i> - Titulo:</i>&nbsp;  ASESORIAS                            
+                        Mayo 2005            
+                         <br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Grupo de Investigacion en Sistemas y Productos Agroindustriales (ISPA)</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>10&nbsp;horas Semanales
+                        Mayo de 2007            
+                         de <br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigaci�n</span><br>
+                        
+                        - &nbsp;
+                        Investigaci�n y Desarrollo
+                        <i> - Titulo:</i>&nbsp;  ASESORIAS                            
+                        Mayo 2007            
+                         <br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>ASOCIACION DE PRODUCTORES DE ESPECIES MENORES Y SISTEMAS AGROINDUSTRIALES DEL DEPARTAMENTO DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>10&nbsp;horas Semanales
+                        Septiembre de 2009            
+                         de <br><br>   
+                        
+                        <span class="blueTitle">Actividades de administraci�n</span><br>
+                                            
+                        - &nbsp;Director de unidad            
+                        <i> - Cargo:</i>&nbsp;Director de unidad          
+                        Septiembre de 2009            
+                         de <br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Centro de Investigaci�n y Desarrollo Tecnologico del Carb�n - CIDTEC</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>10&nbsp;horas Semanales
+                        Febrero de 2007            
+                         de Actual<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administraci�n</span><br>
+                                            
+                        - &nbsp;Consejos, Comisiones y Consultor�a            
+                        <i> - Cargo:</i>&nbsp;Miembro de la Coordinacion del Comite tecnico para la conformacion de una Red en Investigacion Agropecuaria para el Caribe Seco, entre un convenio de la Universidad Popular del Cesar, Corpoica y otras entes gubernamentales, academicas y cientificas          
+                        Agosto de 2007            
+                         de <br>
+
+                                            
+                        - &nbsp;Otra actividad t�cnico-cient�fica relevante            
+                        <i> - Cargo:</i>&nbsp;ASESORAMIENTO EN PROPUESTAS DE INVESTIGACION AGROINDUSTRIAL EN AREAS RELACIONADA CON LOS BIOCOMBUSTIBLES, PRODUCTOS AMILACEOS Y OTROS, Y BIOFERTILIZANTES          
+                        Febrero de 2007            
+                         de <br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>CORPORACI�N AGENCIA DE DESARROLLO ECON�MICO LOCAL DEL COMPLEJO CENAGOSO DE LA ZAPATOSA, R�O MAGDALENA Y DEPRESI�N MOMPOSINA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Junio de 2011            
+                         de Actual<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administraci�n</span><br>
+                                            
+                        - &nbsp;Direcci�n y Administraci�n            
+                        <i> - Cargo:</i>&nbsp;Direcci�n y Administraci�n          
+                        Octubre de 2012            
+                         de <br>
+
+                                            
+                        - &nbsp;Servicio T�cnico Especializado            
+                        <i> - Cargo:</i>&nbsp;Servicio T�cnico Especializado          
+                        Junio de 2011            
+                        Enero de 2014<br>
+
+                                            
+                        - &nbsp;Direcci�n y Administraci�n            
+                        <i> - Cargo:</i>&nbsp;Direcci�n y Administraci�n          
+                        Octubre de 2011            
+                        Febrero de 2014<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Agosto de 2011            
+                        Abril de 2012<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administraci�n</span><br>
+                                            
+                        - &nbsp;Servicio T�cnico Especializado            
+                        <i> - Cargo:</i>&nbsp;Servicio T�cnico Especializado          
+                        Agosto de 2011            
+                        Abril de 2012<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Corporaci�n Colombiana De Investigaci�n Agropecuaria - AGROSAVIA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>60&nbsp;horas Semanales
+                        Noviembre de 2010            
+                        Junio de 2011<br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigaci�n</span><br>
+                        
+                        - &nbsp;
+                        Investigaci�n y Desarrollo
+                        <i> - Titulo:</i>&nbsp; Diagnostico Actual del Cultivo de Aguacate e Implementacion de las Buenas Practicas Agronomicas y Comercializadoras del Cesar                            
+                        Noviembre 2010            
+                        Junio 2011<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Asociaci�n Nacional De Usuarios Campesinos - Anuc</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Septiembre de 2010            
+                        Diciembre de 2010<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Capacitaci�n/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; Establecimiento de dos unidades productivas en los municipios de Manaure y Valledupar � Cesar, aplicando las buenas pr�cticas agr�colas � BPA,&nbsp;60 
+                        Septiembre 2010            
+                        Diciembre 2010<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD DE ANTIOQUIA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Julio de 2008            
+                        Agosto de 2009<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administraci�n</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Investigador pasante          
+                        Julio de 2008            
+                        Agosto de 2009<br>
+
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigaci�n</span><br>
+                        
+                        - &nbsp;
+                        Pasant�as
+                        <i> - Titulo:</i>&nbsp; Investigador Pasante                            
+                        Julio 2008            
+                        Agosto 2009<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Grupo de Quimica de Recursos Energeticos y Medio Ambiente - QUIREMA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>30&nbsp;horas Semanales
+                        Julio de 2008            
+                        Agosto de 2009<br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigaci�n</span><br>
+                        
+                        - &nbsp;
+                        Investigaci�n y Desarrollo
+                        <i> - Titulo:</i>&nbsp; EFECTO DEL ETANOL EN LA FORMACI�N DEL HOLL�N DURANTE LA COMBUSTI�N                            
+                        Julio 2008            
+                        Agosto 2009<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD DE ANTIOQUIA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Mayo de 2008            
+                        Agosto de 2009<br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigaci�n</span><br>
+                        
+                        - &nbsp;
+                        Investigaci�n y Desarrollo
+                        <i> - Titulo:</i>&nbsp; EVALUACION DE LAS PROPIEDADES FISICOQUIMICAS DE LOS SUBPRODUCTOS GENERADOS EN LA COMBUSTION DE MEZCLAS GASOLINA - ALCOHOL ETILICO ANHIDRO CARBURANTE                            
+                        Mayo 2008            
+                        Agosto 2009<br>            
+
+                        
+                        - &nbsp;
+                        Pasant�as
+                        <i> - Titulo:</i>&nbsp;  Joven Investigador (pasante)                            
+                        Julio 2008            
+                        Agosto 2009<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Marzo de 2009            
+                        Agosto de 2009<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administraci�n</span><br>
+                                            
+                        - &nbsp;Otra actividad t�cnico-cient�fica relevante            
+                        <i> - Cargo:</i>&nbsp;Otra actividad t�cnico-cient�fica relevante          
+                        Marzo de 2009            
+                        Agosto de 2009<br>
+
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigaci�n</span><br>
+                        
+                        - &nbsp;
+                        Investigaci�n y Desarrollo
+                        <i> - Titulo:</i>&nbsp; EFECTO DEL ETANOL EN LOS PROCESOS DE COMBUSTI�N
+
+Evaluaci�n De Las Propiedades Fisicoqu�micas De Los Subproductos Generados En La Combusti�n De Mezclas Gasolina � Alcohol Et�lico Anhidro Carburante                            
+                        Marzo 2009            
+                        Agosto 2009<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Mayo de 2008            
+                        Diciembre de 2008<br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigaci�n</span><br>
+                        
+                        - &nbsp;
+                        Pasant�as
+                        <i> - Titulo:</i>&nbsp; Evaluaci�n de las propiedades fisicoqu�micas de los subproductos generados en la combusti�n de mezclas gasolina � alcohol et�lico anhidro carburante                            
+                        Mayo 2008            
+                        Diciembre 2008<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>CENTRO DE INVESTIGACION PARA EL DESARROLLO DE LA INGENIER�A</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Abril de 2005            
+                        Mayo de 2007<br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigaci�n</span><br>
+                        
+                        - &nbsp;
+                        Investigaci�n y Desarrollo
+                        <i> - Titulo:</i>&nbsp; OBTENCION DE BIOETANOL A PARTIR DEL ALMIDON DE LA YUCA, CULTIVAS EN LAS ZONAS NORTE Y CENTRO DEL CESAR, COMO COMBUSTIBLE OXIGENANTE DE LA GASOLINA                            
+                        Abril 2005            
+                        Mayo 2007<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Abril de 2005            
+                        Mayo de 2007<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administraci�n</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Joven investigador          
+                        Mayo de 2008            
+                         de <br>
+
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Otro (Asesor Investigativo)          
+                        Febrero de 2007            
+                         de <br>
+
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Otro (analista)          
+                        Abril de 2005            
+                        Mayo de 2007<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ingenier�a y Tecnolog�a -- Ingenier�a Qu�mica -- Ingenier�a Qu�mica (Plantas y Productos)</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Alimentos y Bebidas</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ciencias Sociales -- Otras Ciencias Sociales -- Ciencias Sociales, Interdisciplinaria</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ciencias Naturales -- Ciencias Biol�gicas -- Biolog�a Celular y Microbiolog�a</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ingenier�a y Tecnolog�a -- Ingenier�a Qu�mica -- Ingenier�a de Procesos</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="5"><h3 >Idiomas</h3></td>
+                            </tr>    
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td><b>Habla</b></td>
+                                <td><b>Escribe</b></td>
+                                <td><b>Lee</b></td>
+                                <td><b>Entiende</b></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;Ingl�s</li></td>
+                    <td>Deficiente</td>
+                    <td>Deficiente</td>
+                    <td>Aceptable</td>
+                    <td>Deficiente</td>                                                        
+                </tr>    
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;Gesti�n empresarial y socioorganizacional, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Investigacion Agricola, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Biocombustibles, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Sistemas y Estrategias Agroindustriales, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Investigacion no Alimentaria, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Investigaci�n Alimentaria, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Biocombustibles_Reducci�n del impacto ambiental causado por el uso de combustibles f�siles, <i>Activa:</i>Si</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Reconocimientos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>Primer Encuentro de Egresados con fines de Renovaci�n del Registro Calificado y Acreditaci�n de los Programas de Ingenier�a Agroindustrial, Sistemas, Ambientales y Sanitarias y Electr�nicas. ,UNIVERSIDAD POPULAR DEL CESAR - Noviembrede 2009</li></td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los �tems de producci�n con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la �ltima <i>Convocatoria Nacional para el Reconocimiento y Medici�n de Grupos de Investigaci�n, Desarrollo Tecnol�gico o de Innovaci�n y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a></td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutor�as - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM ARTURO CAMARILLO TORRES,                    
+                            
+                            DETERMINACION DEL EFECTO DE LA EDAD DE COSECHA SOBRE LA CALIDAD DEL ALMIDON AGRIO OBTENIDO A PARTIR DE VARIEDADES TRADICIONALES DE YUCA EN EL NORTE DEL DEPARTAMENTO DEL CESAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2008.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            DEIRA MARTINEZ MARTINEZ/ GUSTAVO TRUJILLO DAZA&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): DEIRA VIVIANA MARTINEZ MARTINEZ , GUSTAVO ADOLFO TRUJILLO DAZA , OSWALDO MORALES , WILLIAM ARTURO CAMARILLO TORRES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingenier�a y Tecnolog�a -- Biotecnolog�a Industrial -- Biotecnolog�a Industrial,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutor�as - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM ARTURO CAMARILLO TORRES,                    
+                            
+                            CARACTERIZACION FISICOQUIMICA Y APROVECHAMIENTO DE LA TUNA (OPUNTIA SSP), CULTIVADA EN EL CORREGIMIENTO DE GUAYMARAL DEPARTAMENTO DEL CESAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2008.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            JOSE DANIEL IMITOLA FERNANDEZ/ JOSE DUARTE PEDROZO&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JOSE DANIEL IMITOLA FERNANDEZ , JOSE DUARTE PEDROZO , OSWALDO MORALES , WILLIAM ARTURO CAMARILLO TORRES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingenier�a y Tecnolog�a -- Ingenier�a Qu�mica -- Ingenier�a de Procesos,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutor�as - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM ARTURO CAMARILLO TORRES,                    
+                            
+                            EVALUACION DE UN SISTEMA ALIMENTICIO SOSTENIBLE A PARTIR DE TRUPILLO (ProsopisJuliflora) EN LA EXPLOTACION OVINA, DE LA ZONA SUR DEL MUNICIPIO DE VALLEDUPAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2012.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            OSCAR EDUARDO DAZA DAZA/ WILMER DANIEL IBA�EZ BARROS&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): TIRSO BINICIO MESTRE ARZUAGA , WILLIAM ARTURO CAMARILLO TORRES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,                        
+                            Ciencias Agr�colas -- Ciencias Veterinarias -- Ciencias Veterinarias,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutor�as - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM ARTURO CAMARILLO TORRES,                    
+                            
+                            EVALUACION E IMPLEMENTACION DE UN SISTEMA ALIMENTICIO SOSTENIBLE A PATIR DEL FRUTO DE ALGARROBILLO (PITCHECOLOBIUM SAMAN) EN LA EXPLOTACION OVINA EN EL MUNICIPIO DE VALLEDUPAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2012.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Luz Elvira Alvarez Miranda/ Ibeth Herrera&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): TIRSO BINICIO MESTRE ARZUAGA , WILLIAM ARTURO CAMARILLO TORRES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,                        
+                            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Ingenier�a de Producci�n,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutor�as - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM ARTURO CAMARILLO TORRES,                    
+                            
+                            CARACTERIZACION FISICOQU�MICA Y OBTENCION DE SUPLEMENTO ALIMENTICIO PARA CONSUMO HUMANO A PARTIR DEL NOPAL (OPUNTIA SSP), SILVESTRE EN EL CORREGIMIENTO DEL VALLITO MUNICIPIO DEL PASO (CESAR).&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2008.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            HUGUES VEGA MANJARREZ/ WALTER PADILLA BAQUERO&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): HUGUES VEGA MANJARRES , OSWALDO MORALES , WALTER PADILLA BAQUERO , WILLIAM ARTURO CAMARILLO TORRES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Alimentos y Bebidas,                        
+                            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Ingenier�a de Producci�n,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutor�as - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM ARTURO CAMARILLO TORRES,                    
+                            
+                            EVALUACION DE UN SISTEMA ALIMENTICIO SOSTENIBLE A PATIR DEL FRUTO DEL CARANGANITO (cassia emarginata) EN LA EXPLOTACION OVINA EN EL MUNICIPIO DE VALLEDUPAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2012.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            PEDRO ANTONIO JIMENEZ SIERRA/ EDUARDO LUIS BERRIO MAFLA&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): TIRSO BINICIO MESTRE ARZUAGA , WILLIAM ARTURO CAMARILLO TORRES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,                        
+                            Ciencias Agr�colas -- Ciencias Veterinarias -- Ciencias Veterinarias,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutor�as - Iniciaci�n Cient�fica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM ARTURO CAMARILLO TORRES,                    
+                            
+                            IMPLEMENTACI�N DE UNA ESTRATEGIA DE TRANSFERENCIA PARTICIPATIVA PARA EL MANEJO SOSTENIBLE DE HORMIGA ARRIERA EN EL CESAR&nbsp;
+                            Corporaci�n Colombiana De Investigaci�n Agropecuaria - AGROSAVIA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Investigacion Agricola,
+                            &nbsp;2010.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            William Camarillo&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): WILLIAM ARTURO CAMARILLO TORRES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingenier�a y Tecnolog�a -- Ingenier�a Qu�mica -- Ingenier�a de Procesos,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutor�as - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM ARTURO CAMARILLO TORRES,                    
+                            
+                            CONVERSION MICROBIANA DE CLADODIOS DE TUNA (Opuntia spp) PARA LA OBTENCION DE ETANOL CON FINES BIOENERGETICOS EN EL DEPARTAMENTO DEL CESAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis en curso&nbsp;
+                            MICROBIOLOGIA,
+                            &nbsp;2009.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            MARTINEZ ORELLANO ADRIANA MARCELA / PINEDA CASTILLO YERLIS&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): WILLIAM ARTURO CAMARILLO TORRES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingenier�a y Tecnolog�a -- Ingenier�a Qu�mica -- Ingenier�a Qu�mica (Plantas y Productos),
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutor�as - Iniciaci�n Cient�fica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM ARTURO CAMARILLO TORRES,                    
+                            
+                            APROVECHAMIENTO AGROINDUSTRIAL DE LA TUNA PARA LA PRODUCCION DE ALCOHOL ETILICO ANHIDRO CARBURANTE&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis en curso&nbsp;
+                            CIDTEC,
+                            &nbsp;2008.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): CARLOS REYES BRITTO , CLARIVEL PARRA DITTA , GLORIA MARIA RESTREPO VASQUEZ , JUAN MIGUEL MARIN SEPULVEDA , LUIS ALBERTO RIOS , LUIS CARLOS DIAZ MUEGUE , WILLIAM ARTURO CAMARILLO TORRES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Alimentos y Bebidas,
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Fabricaci�n de coque, refinado de petr�leo, elaboraci�n de combustibles nucleares y producci�n de alcohol - Producci�n de alcohol,                    
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutor�as - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM ARTURO CAMARILLO TORRES,                    
+                            
+                            DISE�O, CONSTRUCCION Y EVALUACION DE UN DIGESTOR ANAEROBICO PARA LA PRODUCCION DE BIOGAS Y FERTILIZANTES EN EL MUNICIPIO DE VALLEDUPAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2008.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Yuranis Anaya/ Miguel Canchila&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): CLARIVEL PARRA DITTA , WILLIAM ARTURO CAMARILLO TORRES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Biol�gicas -- Biolog�a Celular y Microbiolog�a,                        
+                            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Alimentos y Bebidas,
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Desarrollo rural,                    
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutor�as - Iniciaci�n Cient�fica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM ARTURO CAMARILLO TORRES,                    
+                            
+                            FORTALECIMIENTO DE LA CONECTIVIDAD ENTRE LOS SISTEMAS DE PRODUCCION AGRICOLA, PECUARIO Y AGROINDUSTRIAL EN EL CARIBE SECO&nbsp;
+                            Universidad Popular del Cesar - CORPOICA (Motilonia)&nbsp;
+                            Estado: Tesis en curso&nbsp;
+                            Investigaci�n Agropecuaria,
+                            &nbsp;2007.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Comunidad de productor, industria y comercio del Caribe Seco&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): WILLIAM ARTURO CAMARILLO TORRES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Agr�colas -- Agricultura, Silvicultura y Pesca -- Agronom�a,                        
+                            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Alimentos y Bebidas,
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Productos y procesos biotecnol�gicos - Productos y procesos biotecnol�gicos vinculados a la agricultura,                    
+                                                    
+                            Agricultura, pecuaria, silvicultura, explotaci�n forestal - Producci�n vegetal,                    
+                                                    
+                            Agricultura, pecuaria, silvicultura, explotaci�n forestal,                    
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutor�as - Iniciaci�n Cient�fica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM ARTURO CAMARILLO TORRES,                    
+                            
+                            EVALUACI�N DE LOS EFECTOS AMBIENTALES Y ENERG�TICOS ORIGINADOS A PARTIR DE LA MEZCLA GASOLINA REGULAR-ETANOL ANHIDRO CARBURANTE Y DE LOS GASES DE COMBUSTI�N EN LOS MOTORES DE CICLO OTTO&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis en curso&nbsp;
+                            Centro de Investigacion y Desarrollo Tecnologico,
+                            &nbsp;2007.
+                            <i>Dirigi&oacute; como: </i>,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            GEAB&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): WILLIAM ARTURO CAMARILLO TORRES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Biol�gicas -- Biolog�a Celular y Microbiolog�a,
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Otros sectores - Energ�a,                    
+                                                    
+                            Otros sectores - Industria Metal-Mec�nica,                    
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutor�as - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM ARTURO CAMARILLO TORRES,                    
+                            
+                            OBTENCI�N DE ETANOL A PARTIR DEL APROVECHAMIENTO DE LA BIOMASA CELUL�SICA PRESENTE EN EL JACINTO DE AGUA (Eichhornia Crassipes).&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis en curso&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2009.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            LICETH TRUJILLO DAZA/ GISELLE ARZUAGA LINDERO&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): WILLIAM ARTURO CAMARILLO TORRES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingenier�a y Tecnolog�a -- Ingenier�a Qu�mica -- Ingenier�a Qu�mica (Plantas y Productos),
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a></td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a></td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Mesa de expertos de los sectores agropecuario y agroindustria: AGENDA PROSPECTIVA DE CIENCIA, TECNOLOG�A E INNOVACI�N DEL DEPARTAMENTO DEL CESAR 2005-2014&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2006-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Hotel Sicarare &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Agenda Prospectiva de C,T+I
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM ARTURO CAMARILLO TORRES
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Mesa de expertos de los sectores agropecuario y agroindustria&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2006-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Hotel Sicarare &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Agenda Prospectiva de C,T+I
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM ARTURO CAMARILLO TORRES
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>I Seminario Interinstitucional sobre FORMACI�N DEL PROFESORADO PARA LA EDUCACI�N SUPERIOR&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2008-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en MEDELL�N &nbsp; - Auditorios SIU_UDEA &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DE ANTIOQUIA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM ARTURO CAMARILLO TORRES
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>PRIMER CONGRESO INTERNACIONAL DE MATERIALES, ENERG�A Y MEDIO AMBIENTE (CIMEM)&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2007-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en BARRANQUILLA &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>APROVECHAMIENTO DE LA CANTIDAD DE HIDRATOS DE CARBONO DE L A YUCA CULTIVA EN LAS ZONAS NORTE Y CENTRO DEL DEPARTAMENTO DEL CESAR PARA LA OBTENCION DE ALCOHOL CARBURANTE
+                                                        <i>Tipo de producto:</i>Producci�n bibliogr�fica - Trabajos en eventos (Cap�tulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM ARTURO CAMARILLO TORRES
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>5</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>II JORNADA DE INVESTIGACION AGROINDUSTRIAL&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2007-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>OBTENCI�N DE ALCOHOL ETILICO CARBURANTE A PARTIR DE LOS CARBOHIDRATOS DE YUCA TRADICIONAL
+                                                        <i>Tipo de producto:</i>Producci�n bibliogr�fica - Trabajos en eventos (Cap�tulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM ARTURO CAMARILLO TORRES
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>6</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>VIII Congreso Nacional y III Internacional de Ciencia y Tecnolog�a del Carb�n y Combustibles Alternativos. Ciencia e industria comprometidas por un futuro energ�tico sostenible&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2009-11-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en BOGOT�, D.C. &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Caracterizaci�n qu�mica de los precursores de holl�n y material particulado generados en llamas alif�ticas
+                                                        <i>Tipo de producto:</i>Producci�n bibliogr�fica - Trabajos en eventos (Cap�tulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Efecto del etanol en el material particulado producido en la combusti�n de combustibles arom�ticos
+                                                        <i>Tipo de producto:</i>Producci�n bibliogr�fica - Trabajos en eventos (Cap�tulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM ARTURO CAMARILLO TORRES
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>7</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Congreso Nacional y III Internacional de Ciencia y Tecnolog�a del Carb�n y Combustibles Alternativos. Ciencia e industria comprometidas por un futuro energ�tico sostenible&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2009-11-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en BOGOT�, D.C. &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Caracterizaci�n fisicoqu�mica del material particulado generado en un motor a combusti�n interna que opera con mezclas diesel � biodiesel
+                                                        <i>Tipo de producto:</i>Producci�n bibliogr�fica - Trabajos en eventos (Cap�tulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM ARTURO CAMARILLO TORRES
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>8</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>III Seminario Nacional y I internacional en Geolog�a, Miner�a Y Medio Ambiente. �Por un Impacto Positivo al Planeta Azul�&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2009-12-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en SANTA MARTA &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Obtenci�n de bioetanol a partir del almid�n de la yuca cultivada en las zonas norte y centro del Cesar, como combustible oxigenante de la gasolina
+                                                        <i>Tipo de producto:</i>Producci�n bibliogr�fica - Trabajos en eventos (Cap�tulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM ARTURO CAMARILLO TORRES
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>9</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XII Congreso Nacional de Fitomejoramiento y Producci�n de Cultivos&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2011-06-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en MONTER�A &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Detecci�n de Phytophthora cinnamomi en suelos y tejido de aguacate de dos municipios del Cesar
+                                                        <i>Tipo de producto:</i>Producci�n bibliogr�fica - Trabajos en eventos (Cap�tulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Diagn�stico del estado actual del cultivo de aguacate (Persea americana) en Curuman� Cesar
+                                                        <i>Tipo de producto:</i>Producci�n bibliogr�fica - Trabajos en eventos (Cap�tulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM ARTURO CAMARILLO TORRES
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>10</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>I Taller Nacional de Producci�n Sostenible de Frijol  &nbsp;
+                                                <i>Tipo de evento: </i>Taller&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2010-05-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Agroindustrializaci�n de la semilla de frijol (Phaseolus vulgaris L.)
+                                                        <i>Tipo de producto:</i>Producci�n bibliogr�fica - Trabajos en eventos (Cap�tulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM ARTURO CAMARILLO TORRES
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>11</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>III Congreso Internacional  sobre Uso Racional Eficiente de la Energ�a - CIUREE 2008&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2008-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en MEDELL�N &nbsp; - Edificio Extension de Universidad de Antioquia &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DE ANTIOQUIA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM ARTURO CAMARILLO TORRES
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>12</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>V SEMANA NACIONAL ALIMENTARIA&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2002-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en PAMPLONA &nbsp; - Pamplona &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DE PAMPLONA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM ARTURO CAMARILLO TORRES
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>13</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>II SEMINARIO INTERNACIONAL EN BIOCOMBUSTIBLES Y COMBUSTIBLES ALTERNATIVOS&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2006-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en BOGOT�, D.C. &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD NACIONAL DE COLOMBIA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM ARTURO CAMARILLO TORRES
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>14</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Seminario sobre MATERIALES CARBONOSOS Y ADSORBENTES&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2007-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - UPC - sede Sabanas, Auditorio IPS &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM ARTURO CAMARILLO TORRES
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>15</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>SEMINARIO NACIONAL: PROMOCI�N DE LA CULTURA DEL AUTOCUIDADO Y LA PREVENCI�N DE LOS RIESGOS PROFESIONALES&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2005-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Bellas artes &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Ministerio De La Protecci�n Social
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM ARTURO CAMARILLO TORRES
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>16</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>SEGUNDO FIN DE SEMANA TECNOLOGICO Y ALIMANTARIO&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2005-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - CEAD &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD NACIONAL ABIERTA Y A DISTANCIA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM ARTURO CAMARILLO TORRES
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>17</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Tercer fin de SEMANA TECNOL�GICO Y ALIMENTARIO&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2006-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - CEAD &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD NACIONAL ABIERTA Y A DISTANCIA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM ARTURO CAMARILLO TORRES
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>18</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>SEMINARIO INTERNACIONAL: TECNOLOG�AS NO CONVENCIONALES APLICADAS A LA AGROINDUSTRIA&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2003-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en PALMIRA &nbsp; - sede palmira &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD NACIONAL DE COLOMBIA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM ARTURO CAMARILLO TORRES
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producci�n bibliogr�fica - Art�culo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                WILLIAM ARTURO CAMARILLO TORRES,                    
+                                    
+                ASLENIS EMIDIA MELO RIOS,                    
+                                    
+                ADRIANA TOFINO RIVERA,                    
+                
+                "Evaluaci�n agron�mica y sensorial de fr�jol (Phaseolus vulgaris L.) mejorado nutricionalmente en el norte del departamento del Cesar, Colombia"
+                . En: Colombia&nbsp;<br>
+                Perspectivas en Nutrici�n Humana&nbsp;
+                <i>ISSN:</i>&nbsp;0124-4108&nbsp;
+                <i>ed:</i>&nbsp;Editorial Universidad de antioquia<br>
+                <i>v.</i>13
+                <i>fasc.</i>02
+                p.161
+                - 177
+                ,2011,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Frijol,                    
+                                    
+                Alimento biofortificado,                    
+                                    
+                Evaluaci�n sensorial y agronomica,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producci�n bibliogr�fica - Art�culo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                WILLIAM ARTURO CAMARILLO TORRES,                    
+                                    
+                CLARIVEL PARRA DITTA,                    
+                                    
+                HENRY QUITIAQUEZ ERIRA,                    
+                                    
+                DAVINSON TROCONYS CASTANEZ,                    
+                
+                "HIDR�LISIS Y FERMENTACI�N ALCOH�LICA A PARTIR DEL ALMID�N DE YUCA PARA LA OBTENCI�N DE BIOETANOL"
+                . En: Colombia&nbsp;<br>
+                Revista Cientifica Documentos De Ingenieria&nbsp;
+                <i>ISSN:</i>&nbsp;1692-8075&nbsp;
+                <i>ed:</i>&nbsp;Ediciones Unicesar<br>
+                <i>v.</i>3
+                <i>fasc.</i>1
+                p.49
+                - 62
+                ,2006,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                BIOETANOL,                    
+                
+
+                
+                
+                <br><b>Sectores: </b><br>
+                                        
+                Fabricaci�n de coque, refinado de petr�leo, elaboraci�n de combustibles nucleares y producci�n de alcohol - Producci�n de alcohol,                    
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producci�n bibliogr�fica - Art�culo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                HENRY QUITIAQUEZ ERIRA,                    
+                                    
+                WILLIAM ARTURO CAMARILLO TORRES,                    
+                                    
+                CLARIVEL PARRA DITTA,                    
+                
+                "CARACTERIZACI�N DEL ALCOHOL ETILICO CARBURANTE OBTENIDO A PARTIR DEL ALMIDON DE YUCA TRADICIONAL"
+                . En: Colombia&nbsp;<br>
+                Revista Cientifica Documentos De Ingenieria&nbsp;
+                <i>ISSN:</i>&nbsp;1692-8075&nbsp;
+                <i>ed:</i>&nbsp;Ediciones Unicesar<br>
+                <i>v.</i>06
+                <i>fasc.</i>3
+                p.9
+                - 14
+                ,2007,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Aprovechamiento del almidon de yuca,                    
+                                    
+                BIOETANOL,                    
+                                    
+                Biocombustibles,                    
+                
+
+                
+                
+                <br><b>Sectores: </b><br>
+                                        
+                Fabricaci�n de coque, refinado de petr�leo, elaboraci�n de combustibles nucleares y producci�n de alcohol - Producci�n de alcohol,                    
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a></td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a>        
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td colspan="2"><h3 >Capitulos de libro</h3></td>
+            </tr>
+                
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Otro cap�tulo de libro publicado<br>
+                    WILLIAM ARTURO CAMARILLO TORRES,                    
+                    
+                    Tipo: Otro cap�tulo de libro publicado<br>
+                    CLARIVEL PARRA DITTA,                    
+                    
+                    Tipo: Otro cap�tulo de libro publicado<br>
+                    HENRY QUITIAQUEZ ERIRA,                    
+                    
+
+                    "APROVECHAMIENTO DE LA CANTIDAD DE HIDRATOS DE CARBONO DE L A YUCA CULTIVA EN LAS ZONAS NORTE Y CENTRO DEL DEPARTAMENTO DEL CESAR PARA LA OBTENCION DE ALCOHOL CARBURANTE"
+                    S�ntesis Y Caracterizaci�n De Propiedades Mec�nicas E Hinchamiento De Hidrogeles De Alcohol Polivinilico Para Aplicaciones M�dicas
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-958-98279-3-2&nbsp;
+                    <i>ed:</i>&nbsp;Publicaciones UTP
+                    <i>, v.</i>
+                    , p.1
+                    - 6&nbsp;
+                    
+                    ,2007
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ingenier�a y Tecnolog�a -- Ingenier�a Qu�mica -- Ingenier�a Qu�mica (Plantas y Productos),                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+
+</table>
+</td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a></td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiol�gica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiol�gica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a>
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Productos tecnol&oacute;gicos</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+            <li><b>Producci�n t�cnica - Productos tecnol�gicos - Otro </b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            WILLIAM ARTURO CAMARILLO TORRES,                    
+                                
+            HENRY QUITIAQUEZ ERIRA,                    
+                                
+            CLARIVEL PARRA DITTA,                    
+            
+            OBTENCI�N DE BIOETANOL A PARTIR DE ALMID�N DE YUCA, CULTIVADAS EN LAS ZONAS NORTE Y CENTRO DEL DEPARTAMENTO DEL CESAR, COMO COMBUSTIBLE OXIGENANTE DE LA GASOLINA,
+            <i>Nombre comercial: </i>BIOETANOL,
+            <i>contrato/registro: </i>,
+            . En: Colombia,&nbsp;
+            ,2007,&nbsp;
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            BIOETANOL,                    
+                                
+            Biocombustibles,                    
+                                
+            Aprovechamiento de la tuna como materia prima,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Alimentos y Bebidas,                    
+            
+            
+            
+            <br><b>Sectores: </b><br>
+                                    
+            Otros sectores - Energ�a,                    
+            
+
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%">
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3>Planta piloto</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producci�n t�cnica - Planta piloto</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        WILLIAM ARTURO CAMARILLO TORRES,                    
+                                            
+                        CLARIVEL PARRA DITTA,                    
+                                            
+                        HENRY QUITIAQUEZ ERIRA,                    
+                                            
+                        DAVINSON TROCONYS CASTANEZ,                    
+                        
+                        COLUMNA EMPACADA CON ANILLOS RASCHING,
+                        <i>Nombre comercial: </i>,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2007,&nbsp;
+                        
+                        
+                        <br><b>Palabras: </b><br>
+                                            
+                        Rectificacion o deshidratacion,                    
+                                            
+                        Biocombustibles,                    
+                                            
+                        BIOETANOL,                    
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Alimentos y Bebidas,                    
+                        
+                        
+                        
+                        <br><b>Sectores: </b><br>
+                                                
+                        Fabricaci�n de coque, refinado de petr�leo, elaboraci�n de combustibles nucleares y producci�n de alcohol - Producci�n de alcohol,                    
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+            
+        </table>
+        </td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a>
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3>Dem&aacute;s trabajos</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+            <li><b>Dem�s trabajos - Dem�s trabajos</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            WILLIAM ARTURO CAMARILLO TORRES,                    
+                                
+            HUGUES VEGA MANJARRES,                    
+                                
+            OSWALDO MORALES,                    
+                                
+            WALTER PADILLA BAQUERO,                    
+            
+            CARACTERIZACION FISICOQU�MICA Y OBTENCION DE SUPLEMENTO ALIMENTICIO PARA CONSUMO HUMANO A PARTIR DEL NOPAL (OPUNTIA SSP), SILVESTRE EN EL CORREGIMIENTO DEL VALLITO MUNICIPIO DEL PASO (CESAR).
+            . En: Colombia,&nbsp;
+            ,2008,&nbsp;
+            <i>finalidad: </i>obtencion de productos alimenticios para consumo animal a partir de los clodocios de la Opuntia ssp&nbsp;
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Alimentos y Bebidas,                    
+                                    
+            Ingenier�a y Tecnolog�a -- Ingenier�a Qu�mica -- Ingenier�a de Procesos,                    
+            
+            
+            
+            <br><b>Sectores: </b><br>
+                                    
+            Agricultura, pecuaria, silvicultura, explotaci�n forestal,                    
+                                    
+            Salud humana - Nutrici�n y alimentaci�n,                    
+            
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td>
+                    
+            <li><b>Dem�s trabajos - Dem�s trabajos</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            WILLIAM ARTURO CAMARILLO TORRES,                    
+                                
+            ARIDYS ZAMORA ALVAREZ,                    
+                                
+            ANA MILENA PUERTA LOBO,                    
+            
+            EVALUACI�N DE LA CAPACIDAD HIDROLITICA DEL RHIZOPUS SSP, PARA LA PRODUCCI�N DE GLUCOSA A PARTIR DE LAS HARINAS DE YUCA, �AME Y MALANGA CON FINES DE OBTENER BIOETANOL
+            . En: Colombia,&nbsp;
+            ,2007,&nbsp;
+            <i>finalidad: </i>Obtencion de glucosa por medio de la capacidad hidrolitica de un microorganismo&nbsp;
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias Biol�gicas -- Biolog�a Celular y Microbiolog�a,                    
+            
+            
+            
+            <br><b>Sectores: </b><br>
+                                    
+            Fabricaci�n de coque, refinado de petr�leo, elaboraci�n de combustibles nucleares y producci�n de alcohol - Producci�n de alcohol,                    
+                                    
+            Otros sectores - Energ�a,                    
+            
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td>
+                    
+            <li><b>Dem�s trabajos - Dem�s trabajos</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            JOSE DANIEL IMITOLA FERNANDEZ,                    
+                                
+            OSWALDO MORALES,                    
+                                
+            WILLIAM ARTURO CAMARILLO TORRES,                    
+                                
+            JOSE DUARTE PEDROZO,                    
+            
+            CARACTERIZACION FISICOQUIMICA Y APROVECHAMIENTO DE LA TUNA (OPUNTIA SSP), CULTIVADA EN EL CORREGIMIENTO DE GUAYMARAL DEPARTAMENTO DEL CESAR.
+            . En: Colombia,&nbsp;
+            ,2008,&nbsp;
+            <i>finalidad: </i>Caracterizacion y aprovechamiento de la fruta del nopal para su utilizacion en la alimentacion humano&nbsp;
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Alimentos y Bebidas,                    
+            
+            
+            
+            <br><b>Sectores: </b><br>
+                                    
+            Salud humana - Nutrici�n y alimentaci�n,                    
+                                    
+            Agricultura, pecuaria, silvicultura, explotaci�n forestal - Producci�n vegetal,                    
+            
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td>
+                    
+            <li><b>Dem�s trabajos - Dem�s trabajos</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            WILLIAM ARTURO CAMARILLO TORRES,                    
+                                
+            ADRIANA TOFINO RIVERA,                    
+                                
+            DEIRA VIVIANA MARTINEZ MARTINEZ,                    
+                                
+            GUSTAVO ADOLFO TRUJILLO DAZA,                    
+            
+            DETERMINACION DEL EFECTO DE LA EDAD DE COSECHA SOBRE LA CALIDAD DEL ALMIDON AGRIO OBTENIDO A PARTIR DE VARIEDADES TRADICIONALES DE YUCA EN EL NORTE DEL DEPARTAMENTO DEL CESAR
+            . En: Colombia,&nbsp;
+            ,2008,&nbsp;
+            <i>finalidad: </i>obtencion de almidon agrio con fines alimenticios&nbsp;
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Alimentos y Bebidas,                    
+            
+            
+            
+            <br><b>Sectores: </b><br>
+                                    
+            Salud humana - Nutrici�n y alimentaci�n,                    
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        ESTUDIO PRELIMINAR PARA LA DETERMINACI�N DEL POTENCIAL DE USO DE CARBONES METEORIZADOS EN ACTIVIDADES DE REHABILITACI�N DE SUELOS<br>
+                        <i>Inicio:&nbsp;</i>Octubre&nbsp;
+                        2009                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Abril&nbsp;
+                        2010
+                        
+                        
+                        <i>Fin:&nbsp;</i>Abril&nbsp;
+                        2010
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>6<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El estudio de las sustancias h�micas reviste inter�s, debido a que estos compuestos presentan numerosos efectos favorables relacionados con la salud y calidad del suelo, y desencadenan efectos ben�ficos en el crecimiento y nutrici�n de las plantas. Desde el punto de vista econ�mico las enmiendas h�micas son parte importante del mercado de insumos org�nicos para la agricultura. Antecedentes en la obtenci�n de �cidos h�micos  a partir de carbones  bituminosos y de de bajo rango y la aplicaci�n de los productos para acrecentar las cosechas en diversos cultivos han mostrado resultados positivos.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        OBTENCION DE BIOETANOL A PARTIR DEL ALMIDON DE LA YUCA, CULTIVAS EN LAS ZONAS NORTE Y CENTRO DEL CESAR, COMO COMBUSTIBLE OXIGENANTE DE LA GASOLINA<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2005                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Produccion de bioetanol a partir de productos amilaceos, para determinarlo como alcohol etilo carburante.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        EVALUACION DE LAS PROPIEDADES FISICOQUIMICAS DE LOS SUBPRODUCTOS GENERADOS EN LA COMBUSTION DE MEZCLAS GASOLINA - ALCOHOL ETILICO ANHIDRO CARBURANTE<br>
+                        <i>Inicio:&nbsp;</i>Mayo&nbsp;
+                        2008                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Agosto&nbsp;
+                        2009
+                        
+                        
+                        <i>Fin:&nbsp;</i>Agosto&nbsp;
+                        2009
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>12<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        EFECTO DEL ETANOL EN LA FORMACI�N DEL HOLL�N DURANTE LA COMBUSTI�N<br>
+                        <i>Inicio:&nbsp;</i>Julio&nbsp;
+                        2008                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Agosto&nbsp;
+                        2009
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>13<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        DIAGNOSTICO DEL ESTADO ACTUAL DEL CULTIVO DE AGUACATE E IMPLEMENTACION DE LAS BUENAS PRACTICAS AGRONOMICAS Y COMERCIALIZADORAS EN EL CESAR<br>
+                        <i>Inicio:&nbsp;</i>Noviembre&nbsp;
+                        2010                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Junio&nbsp;
+                        2011
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2011
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>7<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

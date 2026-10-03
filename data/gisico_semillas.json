@@ -1,0 +1,773 @@
+{
+ "grupo": {
+  "codigo": "COL0018706",
+  "nombre": "GRUPO DE INVESTIGACION EN SISTEMAS Y COMPUTACION -GISICO-",
+  "lider": "John Jairo Patiño Vanegas",
+  "plan": "1) Consolidacion de grupo interdisciplinario en Ingenieria de Sistemas. 2) Trabajos de grado en lineas del grupo. 3) Produccion de articulos indexados. 4) Formacion avanzada y eventos academico-cientificos. 5) Proyectos y convocatorias.",
+  "lineas": "CIENCIA E INGENIERIA DE LOS DATOS; INGENIERIA DE SOFTWARE; INTELIGENCIA ARTIFICIAL; REDES Y TELECOMUNICACIONES; SEGURIDAD DE LA INFORMACION; SISTEMAS DE INFORMACION; SISTEMAS INTELIGENTES; TECNOLOGIAS DE INFORMACION Y COMUNICACION"
+ },
+ "investigadores": [
+  {
+   "cod_rh": "0000799157",
+   "nombre": "john jairo PATI�O VANEGAS",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000799157",
+   "periodo": "2013/1 - Actual"
+  },
+  {
+   "cod_rh": "0000494917",
+   "nombre": "Adith Bismarck P�rez Orozco",
+   "correo": "",
+   "categoria": "Asociado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000494917",
+   "periodo": "2014/2 - Actual"
+  },
+  {
+   "cod_rh": "0002117790",
+   "nombre": "ALFONSO ENRIQUE GARCIA PAYARES",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0002117790",
+   "periodo": "2023/1 - Actual"
+  },
+  {
+   "cod_rh": "0000058234",
+   "nombre": "Alfredo David Bautista Romero",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000058234",
+   "periodo": "2023/1 - Actual"
+  },
+  {
+   "cod_rh": "0000599484",
+   "nombre": "Alvaro O�ate Bowen",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000599484",
+   "periodo": "2021/9 - Actual"
+  },
+  {
+   "cod_rh": "0000018777",
+   "nombre": "AMILKAR JOSE HERNANDEZ O�ATE",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000018777",
+   "periodo": "2024/1 - Actual"
+  },
+  {
+   "cod_rh": "0001401320",
+   "nombre": "Amilkar sierra romano",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001401320",
+   "periodo": "2022/1 - Actual"
+  },
+  {
+   "cod_rh": "0001554707",
+   "nombre": "Andr�s Alberto Herrera Garc�a",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001554707",
+   "periodo": "2016/1 - Actual"
+  },
+  {
+   "cod_rh": "0001202898",
+   "nombre": "Anya Miyeth BOLA�O ARIAS",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001202898",
+   "periodo": "2017/1 - Actual"
+  },
+  {
+   "cod_rh": "0001506336",
+   "nombre": "Boris Arturo Gonz�lez Rivera",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001506336",
+   "periodo": "2016/1 - Actual"
+  },
+  {
+   "cod_rh": "0001400853",
+   "nombre": "BRAULIO BARRIOS ZU�IGA",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001400853",
+   "periodo": "2018/2 - Actual"
+  },
+  {
+   "cod_rh": "0001401309",
+   "nombre": "BRINULFO MANUEL ALVAREZ MILIAN",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001401309",
+   "periodo": "2023/1 - Actual"
+  },
+  {
+   "cod_rh": "0001751044",
+   "nombre": "Camilo Andres Col�n  Ca�izares",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001751044",
+   "periodo": "2017/2 - Actual"
+  },
+  {
+   "cod_rh": "0001911078",
+   "nombre": "Carlos Mario Baquero Torres",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001911078",
+   "periodo": "2021/7 - Actual"
+  },
+  {
+   "cod_rh": "0000420174",
+   "nombre": "CESAR CLEMENTE ACOSTA DIAZ",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000420174",
+   "periodo": "2014/1 - Actual"
+  },
+  {
+   "cod_rh": "0001403090",
+   "nombre": "Danier Fresley Vanegas Becerra",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001403090",
+   "periodo": "2014/1 - Actual"
+  },
+  {
+   "cod_rh": "0001911094",
+   "nombre": "Dario Andres Ramos Ca�as",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001911094",
+   "periodo": "2021/7 - Actual"
+  },
+  {
+   "cod_rh": "0001426300",
+   "nombre": "David Ricardo Fernandez Rincones",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001426300",
+   "periodo": "2013/1 - Actual"
+  },
+  {
+   "cod_rh": "0000749028",
+   "nombre": "Deivis De Jesus Martinez Acosta",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000749028",
+   "periodo": "2016/1 - Actual"
+  },
+  {
+   "cod_rh": "0000122991",
+   "nombre": "Dimas Augusto Martinez Cardona",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000122991",
+   "periodo": "2023/1 - Actual"
+  },
+  {
+   "cod_rh": "0000128905",
+   "nombre": "EDUARDO JOSE MENDOZA ARMENTA",
+   "correo": "",
+   "categoria": "Junior",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000128905",
+   "periodo": "2022/6 - Actual"
+  },
+  {
+   "cod_rh": "0001401632",
+   "nombre": "Eduardo Luis Garc�a Marrugo",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001401632",
+   "periodo": "2014/7 - Actual"
+  },
+  {
+   "cod_rh": "0001534611",
+   "nombre": "EDWARD FABIAN MENDOZA USTARIZ",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001534611",
+   "periodo": "2023/1 - Actual"
+  },
+  {
+   "cod_rh": "0001906965",
+   "nombre": "Edwin Manuel Vides  Hern�ndez",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001906965",
+   "periodo": "2021/7 - Actual"
+  },
+  {
+   "cod_rh": "0000613916",
+   "nombre": "Efrain Boom Carcamo",
+   "correo": "",
+   "categoria": "Junior",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000613916",
+   "periodo": "2007/6 - 2009/12"
+  },
+  {
+   "cod_rh": "0000162546",
+   "nombre": "EMIR GEANCARLOS  QUINTERO SOLANO",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000162546",
+   "periodo": "2001/2 - 2012/6"
+  },
+  {
+   "cod_rh": "0000186711",
+   "nombre": "ENRIQUE CARLOS PEREZ LARA",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000186711",
+   "periodo": "2016/1 - Actual"
+  },
+  {
+   "cod_rh": "0000666106",
+   "nombre": "Eydy Del Carmen Suarez Brieva",
+   "correo": "",
+   "categoria": "Junior",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000666106",
+   "periodo": "2016/1 - Actual"
+  },
+  {
+   "cod_rh": "0000984264",
+   "nombre": "FELIX MIGUEL MOVILLA CONTRERAS",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000984264",
+   "periodo": "2007/1 - 2014/1"
+  },
+  {
+   "cod_rh": "0000310581",
+   "nombre": "Gail Albeiro Gutierrez Ramirez",
+   "correo": "",
+   "categoria": "Asociado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000310581",
+   "periodo": "2001/2 - 2015/2"
+  },
+  {
+   "cod_rh": "0001914500",
+   "nombre": "Germ�n Alfonso Gaviria Uribe",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001914500",
+   "periodo": "2021/8 - Actual"
+  },
+  {
+   "cod_rh": "0000441708",
+   "nombre": "Gloria Marina Rosado Galindo",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000441708",
+   "periodo": "2016/1 - Actual"
+  },
+  {
+   "cod_rh": "0000688487",
+   "nombre": "Harold Moreno Bonilla",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000688487",
+   "periodo": "2022/2 - Actual"
+  },
+  {
+   "cod_rh": "0001404785",
+   "nombre": "heyner alexander  aroca  araujo",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001404785",
+   "periodo": "2023/9 - Actual"
+  },
+  {
+   "cod_rh": "0001911320",
+   "nombre": "IVAN JOSE LUQUEZ ARIAS",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001911320",
+   "periodo": "2021/7 - Actual"
+  },
+  {
+   "cod_rh": "0000563978",
+   "nombre": "Jader Dario Alean Valle",
+   "correo": "",
+   "categoria": "Junior",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000563978",
+   "periodo": "2006/1 - Actual"
+  },
+  {
+   "cod_rh": "0001445220",
+   "nombre": "Jaidy Marjorie J�come  Lindarte",
+   "correo": "",
+   "categoria": "Junior",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001445220",
+   "periodo": "2012/6 - Actual"
+  },
+  {
+   "cod_rh": "0001718099",
+   "nombre": "Jaime Jes�s  Ospino Navarro",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001718099",
+   "periodo": "2019/7 - Actual"
+  },
+  {
+   "cod_rh": "0001613360",
+   "nombre": "JAIRO FRANCISCO SEOANES LEON",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001613360",
+   "periodo": "2014/1 - Actual"
+  },
+  {
+   "cod_rh": "0000536407",
+   "nombre": "Janer Onasis Campo Zambrano",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000536407",
+   "periodo": "2003/3 - 2004/12"
+  },
+  {
+   "cod_rh": "0001606848",
+   "nombre": "JENIS DEL CARMEN SAGBINI ECHAVEZ",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001606848",
+   "periodo": "2015/1 - Actual"
+  },
+  {
+   "cod_rh": "0000273236",
+   "nombre": "Jesus Alfonso Torres Ortega",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000273236",
+   "periodo": "2001/2 - 2012/6"
+  },
+  {
+   "cod_rh": "0001911192",
+   "nombre": "Jhon Rafael Pacheco  Escalona",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001911192",
+   "periodo": "2021/7 - Actual"
+  },
+  {
+   "cod_rh": "0001750960",
+   "nombre": "Jordan Jhonsson Cuadro Negrette",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001750960",
+   "periodo": "2017/2 - Actual"
+  },
+  {
+   "cod_rh": "0000036253",
+   "nombre": "JORGE JEISSON MANDON ARENGAS",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000036253",
+   "periodo": "2013/1 - Actual"
+  },
+  {
+   "cod_rh": "0001579321",
+   "nombre": "JORGE LUIS GONZALEZ",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001579321",
+   "periodo": "2019/1 - Actual"
+  },
+  {
+   "cod_rh": "0000550051",
+   "nombre": "JOSE ALEJANDRO OROZCO  OCHOA",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000550051",
+   "periodo": "2003/4 - 2004/12"
+  },
+  {
+   "cod_rh": "0001911319",
+   "nombre": "Jose Luis Alvarez Campo",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001911319",
+   "periodo": "2021/7 - Actual"
+  },
+  {
+   "cod_rh": "0001450217",
+   "nombre": "JUAN ANDRES YANETH RINCON",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001450217",
+   "periodo": "2022/1 - Actual"
+  },
+  {
+   "cod_rh": "0000666475",
+   "nombre": "Juan Guillermo Reales Alfaro",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000666475",
+   "periodo": "2008/7 - 2014/1"
+  },
+  {
+   "cod_rh": "0000549851",
+   "nombre": "Julio Cesar ROMERO PABON",
+   "correo": "",
+   "categoria": "Asociado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000549851",
+   "periodo": "2008/6 - 2012/6"
+  },
+  {
+   "cod_rh": "0001490904",
+   "nombre": "karolay andrea ortiz comas",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001490904",
+   "periodo": "2014/10 - Actual"
+  },
+  {
+   "cod_rh": "0002158281",
+   "nombre": "Kendrys Adriana  D�az Villa",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0002158281",
+   "periodo": "2024/1 - Actual"
+  },
+  {
+   "cod_rh": "0001490524",
+   "nombre": "Kevin Andrey Rosales Ferreira",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001490524",
+   "periodo": "2014/1 - Actual"
+  },
+  {
+   "cod_rh": "0001401301",
+   "nombre": "Leidys del Carmen Contreras  Chinchilla",
+   "correo": "",
+   "categoria": "Junior",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001401301",
+   "periodo": "2013/2 - Actual"
+  },
+  {
+   "cod_rh": "0000459372",
+   "nombre": "Leonardo Felipe Arias Acevedo",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000459372",
+   "periodo": "2005/9 - 2012/6"
+  },
+  {
+   "cod_rh": "0000967130",
+   "nombre": "Libanis ARGUELLES DAZA",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000967130",
+   "periodo": "2014/1 - Actual"
+  },
+  {
+   "cod_rh": "0002401514",
+   "nombre": "Liliana Patricia Ortiz  Rozo",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0002401514",
+   "periodo": "2023/1 - Actual"
+  },
+  {
+   "cod_rh": "0001560153",
+   "nombre": "Luis angel Quiroz Mieles",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001560153",
+   "periodo": "2013/1 - Actual"
+  },
+  {
+   "cod_rh": "0000168425",
+   "nombre": "Luis Caleb Garcia Aguilar",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000168425",
+   "periodo": "2018/8 - Actual"
+  },
+  {
+   "cod_rh": "0000545880",
+   "nombre": "Luis P�REZ P�REZ",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000545880",
+   "periodo": "2023/1 - Actual"
+  },
+  {
+   "cod_rh": "0000442712",
+   "nombre": "Maribel romero mestre",
+   "correo": "",
+   "categoria": "Junior",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000442712",
+   "periodo": "2012/6 - Actual"
+  },
+  {
+   "cod_rh": "0000446300",
+   "nombre": "Mayle ortiz alkerque",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000446300",
+   "periodo": "2005/1 - Actual"
+  },
+  {
+   "cod_rh": "0002026248",
+   "nombre": "Miguel Andr�s Daza Bran",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0002026248",
+   "periodo": "2023/2 - Actual"
+  },
+  {
+   "cod_rh": "0000019717",
+   "nombre": "Nestor Enrique Fontalvo  Albor",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000019717",
+   "periodo": "2013/1 - Actual"
+  },
+  {
+   "cod_rh": "0000614971",
+   "nombre": "Omar Alfredo Figueroa Moreno",
+   "correo": "",
+   "categoria": "Junior",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000614971",
+   "periodo": "2008/1 - 2010/6"
+  },
+  {
+   "cod_rh": "0001401057",
+   "nombre": "Osvaldo Rueda Carre�o",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001401057",
+   "periodo": "2019/2 - Actual"
+  },
+  {
+   "cod_rh": "0000501816",
+   "nombre": "OVIDIO RODOLFO BAQUERO BONILLA",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000501816",
+   "periodo": "2008/1 - 2010/1"
+  },
+  {
+   "cod_rh": "0000547883",
+   "nombre": "Ricardo David Pertuz Mercado",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000547883",
+   "periodo": "2001/2 - 2010/1"
+  },
+  {
+   "cod_rh": "0000235156",
+   "nombre": "Ricardo DURAN BARON",
+   "correo": "",
+   "categoria": "Asociado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000235156",
+   "periodo": "2001/2 - 2010/1"
+  },
+  {
+   "cod_rh": "0001401310",
+   "nombre": "Roberto Augusto Fern�ndez Ram�rez",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001401310",
+   "periodo": "2018/1 - Actual"
+  },
+  {
+   "cod_rh": "0000167691",
+   "nombre": "rodolfo molina santiago",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000167691",
+   "periodo": "2019/7 - Actual"
+  },
+  {
+   "cod_rh": "0000955450",
+   "nombre": "Ronald Alexander Vacca Ascanio",
+   "correo": "",
+   "categoria": "Junior",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000955450",
+   "periodo": "2021/7 - Actual"
+  },
+  {
+   "cod_rh": "0001453688",
+   "nombre": "SADAINER FERNEY HERNANDEZ CHACON",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001453688",
+   "periodo": "2024/1 - Actual"
+  },
+  {
+   "cod_rh": "0000025167",
+   "nombre": "SAMIR ELIAS FRAGOZO BARBOSA",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000025167",
+   "periodo": "2015/1 - Actual"
+  },
+  {
+   "cod_rh": "0000600474",
+   "nombre": "Tatiana Milena Juliao Lemus",
+   "correo": "",
+   "categoria": "Junior",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000600474",
+   "periodo": "2009/2 - 2009/12"
+  },
+  {
+   "cod_rh": "0000439720",
+   "nombre": "Tilcia Stella Duran Ibarra",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000439720",
+   "periodo": "2006/7 - 2010/1"
+  },
+  {
+   "cod_rh": "0000971782",
+   "nombre": "Tonny Enrique Jimenez Marquez",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000971782",
+   "periodo": "2022/1 - Actual"
+  },
+  {
+   "cod_rh": "0001420512",
+   "nombre": "Vanessa Paola Blanco Villafa�e",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001420512",
+   "periodo": "2017/1 - Actual"
+  },
+  {
+   "cod_rh": "0001412870",
+   "nombre": "Vanessa Paola Pertuz Peralta",
+   "correo": "",
+   "categoria": "Senior",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001412870",
+   "periodo": "2018/2 - Actual"
+  },
+  {
+   "cod_rh": "0001616492",
+   "nombre": "waldir molina molina",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001616492",
+   "periodo": "2014/1 - Actual"
+  },
+  {
+   "cod_rh": "0001423842",
+   "nombre": "WENDYS CAROLINA NIEVES ARROYO",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001423842",
+   "periodo": "2014/10 - Actual"
+  },
+  {
+   "cod_rh": "0000774979",
+   "nombre": "WILLIAM ARTURO CAMARILLO TORRES",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000774979",
+   "periodo": "2006/2 - 2008/12"
+  },
+  {
+   "cod_rh": "0000235164",
+   "nombre": "William Moreno Rios",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000235164",
+   "periodo": "2002/3 - 2013/12"
+  },
+  {
+   "cod_rh": "0001346156",
+   "nombre": "Wilman Jose Vega Castilla",
+   "correo": "",
+   "categoria": "No categorizado",
+   "cvlac": "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001346156",
+   "periodo": "2013/1 - Actual"
+  }
+ ],
+ "productos": [
+  {
+   "titulo": "Scientific Methods of Quantitative Research: Epistemological Foundations",
+   "tipo": "Articulo",
+   "categoria": "Por verificar",
+   "validacion": "Pendiente",
+   "anio": 2026,
+   "rh": "0000441708"
+  },
+  {
+   "titulo": "Scientific Methods of Quantitative Research: Epistemological Foundations",
+   "tipo": "Articulo",
+   "categoria": "Por verificar",
+   "validacion": "Pendiente",
+   "anio": 2026,
+   "rh": "0001404785"
+  },
+  {
+   "titulo": "Gesti�n de la innovaci�n",
+   "tipo": "Articulo",
+   "categoria": "Por verificar",
+   "validacion": "Pendiente",
+   "anio": 2026,
+   "rh": "0000688487"
+  },
+  {
+   "titulo": "Pensamiento sist�mico y simulaci�n microcontrolada en riego por goteo: revisi�n sistem�tica para el dise�o de modelos educativos-tecnol�gicos\n\r\r\n                Colombia",
+   "tipo": "Articulo",
+   "categoria": "Por verificar",
+   "validacion": "Pendiente",
+   "anio": 2025,
+   "rh": "0001404785"
+  },
+  {
+   "titulo": "Investigaci�n",
+   "tipo": "Articulo",
+   "categoria": "Por verificar",
+   "validacion": "Pendiente",
+   "anio": 2025,
+   "rh": "0000441708"
+  },
+  {
+   "titulo": "Pensamiento sist�mico y simulaci�n microcontrolada en riego por goteo: revisi�n sistem�tica para el dise�o de modelos educativos-tecnol�gicos",
+   "tipo": "Articulo",
+   "categoria": "Por verificar",
+   "validacion": "Pendiente",
+   "anio": 2025,
+   "rh": "0001579321"
+  },
+  {
+   "titulo": "Community smells in software development communities:systematic literature review\n\r\r\n                Colombia",
+   "tipo": "Articulo",
+   "categoria": "Por verificar",
+   "validacion": "Pendiente",
+   "anio": 2025,
+   "rh": "0000666106"
+  },
+  {
+   "titulo": "Discovering the Chimera of (Un)Happiness in Agile Software Development Communities: A Systematic Literature Review\n\r\r\n                Suiza",
+   "tipo": "Articulo",
+   "categoria": "Por verificar",
+   "validacion": "Pendiente",
+   "anio": 2025,
+   "rh": "0000666106"
+  },
+  {
+   "titulo": "Discovering the Chimera of (Un)Happiness in Agile Software Development Communities: A Systematic Literature Review\n\r\r\n                Suiza",
+   "tipo": "Articulo",
+   "categoria": "Por verificar",
+   "validacion": "Pendiente",
+   "anio": 2025,
+   "rh": "0000666106"
+  },
+  {
+   "titulo": "Investigaci�n",
+   "tipo": "Articulo",
+   "categoria": "Por verificar",
+   "validacion": "Pendiente",
+   "anio": 2025,
+   "rh": "0000441708"
+  }
+ ]
+}

@@ -1,0 +1,2392 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edici�n de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producci�n en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        JORGE LUIS&nbsp;GONZALEZ&nbsp;
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>GONZALEZ, JORGE LUIS</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Doctorado</b>
+                            Universidad Privada Dr. Rafael Belloso Chac�n, URBE<br />
+                            Ciencias, Tecnologia e Innovacion<br />
+                            Mayode2024 - de <br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestr�a/Magister</b>
+                            Universidad Rafael Belloso Chac�n<br />
+                            CONTROL Y AUTOMATIZACION DE PROCESOS<br />
+                            Marzode2014 - Noviembrede 2016<br />
+                            SISTEMA MICROCONTROLADO DE RIEGO Y FERTILIZACION POR GOTEO PARA CULTIVO DE AJI EN EL DEPARTAMENTO DE LA GUAJIRA-COLOMBIA</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Especializaci�n</b>
+                            FUNDACI�N UNIVERSIDAD DEL NORTE<br />
+                            GERENCIA DE PROYECTOS DE INGENIERIA<br />
+                            Septiembrede2012 - Diciembrede 2015<br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Especializaci�n</b>
+                            UNIVERSIDAD POPULAR DEL CESAR<br />
+                            ESPECIALIZACI�N EN INGENIER�A DE SOFTWARE<br />
+                            Marzode2022 - Diciembrede 2022<br />
+                            BASE DE DATOS PARA LA ADMINISTRACION DE LA INFORMACION DE EGRESADOS</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD POPULAR DEL CESAR<br />
+                            INGENIERIA DE SISTEMAS<br />
+                            Agostode2001 - Diciembrede 2009<br />
+                            IMPLEMENTACION DE UN SISTEMAS DE INFORMACION PARA UNA VIDEO TIENDA</td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Febrero de 2020            
+                         de <br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Algoritmo y fundamentos de programacion,&nbsp;22 
+                        Febrero 2024            
+                        Junio 2024<br>
+
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Etica Profesional,&nbsp;90 
+                        Febrero 2024            
+                        Junio 2024<br>
+
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Auditoria de Sistemas,&nbsp;35 
+                        Febrero 2024            
+                        Junio 2024<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD DE LA GUAJIRA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>&nbsp;horas Semanales
+                        Marzo de 2011            
+                         de <br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>comfacesar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>8&nbsp;horas Semanales
+                        Abril de 2010            
+                        Diciembre de 2010<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Perfeccionamiento            
+                        <i> - Nombre del curso:</i>&nbsp; INFORMATICA,&nbsp;15 
+                        Abril 2010            
+                        Diciembre 2010<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Otras Ingenier�as y Tecnolog�as</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ingenier�a y Tecnolog�a -- Ingenier�as El�ctrica, Electr�nica e Inform�tica -- Ingenier�a de Sistemas y Comunicaciones</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ingenier�a y Tecnolog�a -- Ingenier�as El�ctrica, Electr�nica e Inform�tica -- Automatizaci�n y Sistemas de Control</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ciencias Sociales -- Ciencias de la Educaci�n -- Educaci�n General (Incluye Capacitaci�n, Pedagog�a)</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;Rob�tica y Automatizaci�n, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Ingenier�a de software, <i>Activa:</i>Si</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Reconocimientos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>MENCI�N DE HONOR AL MERITO PEDAG�GICO, INVESTIGADOR A LA INNOVACI�N INTELECTUAL ,UNIVERSIDAD DE LA GUAJIRA UNIGUAJIRA - Mayode 2016</li></td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los �tems de producci�n con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la �ltima <i>Convocatoria Nacional para el Reconocimiento y Medici�n de Grupos de Investigaci�n, Desarrollo Tecnol�gico o de Innovaci�n y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a>
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Asesor�as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>CIENCIAS Y TECNOLOG�AS EN EL CONTEXTOS DE LA ELABORACI�N DE PROYECTOS ONDAS</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Instituci&oacute;n: </i>INSTITUCI�N EDUCATIVA EL CARMELO DE SAN JUAN DEL CESAR,Ciudad: VILLANUEVA
+                            <br/>
+
+                        </blockquote>
+                    </td>
+                </tr>
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>PROCESO DE ARTICULACION INVESTIGACION Y EXPERIENCIAS ORIENTADAS A INTEGRAR LA CIENCIA, LA TECNOLOGIA E INNOVACION EN LA ESCUELA BASICA Y MEDIA EN EL SUR DE LA GUAJIRA.</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Instituci&oacute;n: </i>INSTITUCI�N EDUCATIVA NORMAL SUPERIOR,Ciudad: SAN JUAN DEL CESAR
+                            <br/>
+
+                        </blockquote>
+                    </td>
+                </tr>
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>PROCESO DE ARTICULACI�N INVESTIGACI�N E EXPERIENCIAS ORIENTADAS A INTEGRAR LA CIENCIA, LA TECNOLOG�A E INNOVACI�N EN LA ESCUELA B�SICA Y MEDIA EN EL SUR DE LA GUAJIRA</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Instituci&oacute;n: </i>INSTITUCI�N EDUCATIVA EL CARMELO DE SAN JUAN DEL CESAR,Ciudad: SAN JUAN DEL CESAR
+                            <br/>
+
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Cursos de corta duraci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Producci�n t�cnica - Cursos de corta duraci�n dictados - Perfeccionamiento</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            JORGE LUIS GONZALEZ,                    
+                                            
+                            INFORMATICA II,
+                            <i>Finalidad: </i>CAPACITACION EN EXCEL AVAMZADO
+                            . En: Colombia&nbsp;
+                            ,2016,&nbsp;
+                            ,UNIVERSIDAD DE LA GUAJIRA.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;8 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Otras Ingenier�as y Tecnolog�as,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producci�n t�cnica - Cursos de corta duraci�n dictados - Perfeccionamiento</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            JORGE LUIS GONZALEZ,                    
+                                            
+                            INFORMATICA II,
+                            <i>Finalidad: </i>CAPACITACION EN EXCEL AVANZADO
+                            . En: Colombia&nbsp;
+                            ,2016,&nbsp;
+                            ,UNIVERSIDAD DE LA GUAJIRA.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;8 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Otras Ingenier�as y Tecnolog�as,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producci�n t�cnica - Cursos de corta duraci�n dictados - Perfeccionamiento</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            JORGE LUIS GONZALEZ,                    
+                                            
+                            INFORMATICA I,
+                            <i>Finalidad: </i>CAPACITACION EN HERRAMIENTAS TECNOLOGICAS Y OFIMATICA
+                            . En: Colombia&nbsp;
+                            ,2017,&nbsp;
+                            ,UNIVERSIDAD DE LA GUAJIRA.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;8 semanas&nbsp;
+                            
+                            
+                            <br><b>Palabras: </b><br>
+                                                
+                            INFORMATICA, TECNOLOGIA, OFIMATICA, WEB 2.0,                    
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Otras Ingenier�as y Tecnolog�as,                    
+                            
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Educaci�n - Educaci�n superior,                    
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producci�n t�cnica - Cursos de corta duraci�n dictados - Extensi�n extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            JORGE LUIS GONZALEZ,                    
+                                            
+                            INFORMATICA II,
+                            <i>Finalidad: </i>
+                            . En: Colombia&nbsp;
+                            ,2017,&nbsp;
+                            ,.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;0 semanas&nbsp;
+                            
+                            
+                            <br><b>Palabras: </b><br>
+                                                
+                            INFORMACION, AUTOMATIZACION, COMPUTADOR,                    
+                                                
+                            INFORMATICA, TECNOLOGIA, OFIMATICA, WEB 2.0,                    
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Otras Ingenier�as y Tecnolog�as,                    
+                            
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Educaci�n - Educaci�n superior,                    
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutor�as - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JORGE LUIS GONZALEZ,                    
+                            
+                            DISE�O DEL PROGRAMA DE SEGURIDAD Y SALUD EN EL TRABAJO DIRECCIONADO A REALIZAR EN LA INSTITUCI�N EDUCATIVA DENZIL ESCOLAR, SEDE MEGA COLEGIO, RIOHACHA LA GUAJIRA&nbsp;
+                            UNIVERSIDAD DE LA GUAJIRA UNIGUAJIRA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SALUD OCUPACIONAL,
+                            &nbsp;2017.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            YANIRIS NAVARRO ARGUMEDO&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JORGE LUIS GONZALEZ,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Otras Ingenier�as y Tecnolog�as,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutor�as - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JORGE LUIS GONZALEZ,                    
+                            
+                            AN�LISIS DE LOS FACTORES DE RIESGOS LABORALES EN LOS EMPLEADOS DE LA EMPRESA SOLUCIONES BIOM�DICAS EN VALLEDUPAR CESAR&nbsp;
+                            UNIVERSIDAD DE LA GUAJIRA UNIGUAJIRA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SALUD OCUPACIONAL,
+                            &nbsp;2017.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            DANIELA URDIALES OLMEDO, JOHALIS CONTRERAS URDIALES&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JORGE LUIS GONZALEZ,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Otras Ingenier�as y Tecnolog�as,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutor�as - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JORGE LUIS GONZALEZ,                    
+                            
+                            APLICATIVO WEB PARA LA SOLUCI�N INTEGRAL DE GESTI�N EMPRESARIAL, OPTIMIZACI�N DE LA EFICIENCIA OPERATIVA Y VENTAS EN L�NEA PARA LA EMPRESA CONFECCIONES BENNYS EN VALLEDUPAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2023.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JORGE LUIS GONZALEZ,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Otras Ingenier�as y Tecnolog�as,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Jurado en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JORGE LUIS GONZALEZ,                    
+                            
+                            <i>Titulo:&nbsp;</i>APLICACI�N M�VIL PARA INCENTIVAR EL TURISMO COMUNITARIO EN EL MUNICIPIO DE PUEBLO BELLO, DEPARTAMENTO DEL CESAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>VAN JOSE LUQUEZ ARIAS-JOSE LUIS ALVAREZ CAMPO &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingenier�a y Tecnolog�a -- Ingenier�a Civil -- Ingenier�a Civil,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JORGE LUIS GONZALEZ,                    
+                            
+                            <i>Titulo:&nbsp;</i>APLICATIVO WEB PARA LA GESTION DEL BANCO DE PROGRAMAS Y PROYECTOS DE LA UNIVERSIDAD POPULAR DEL CESAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>ANDRES FELIPE AVILA HERNANDEZ -  MIGUEL DAVID CANTILLO BECERRA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Otras Ingenier�as y Tecnolog�as,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JORGE LUIS GONZALEZ,                    
+                            
+                            <i>Titulo:&nbsp;</i>APLICATIVO WEB PARA EL CONTROL DEL TRANSPORTE DE MATERIALES EN LA CANTERA SANTA LUCIA DEL VALLE                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>ALBERTO ENRIQUE ROJAS GUERRA &nbsp;                
+                            
+                            
+                            <br><b>Palabras: </b><br>
+                                                
+                            INFORMATICA, TECNOLOGIA, OFIMATICA, WEB 2.0,                    
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingenier�a y Tecnolog�a -- Ingenier�as El�ctrica, Electr�nica e Inform�tica -- Ingenier�a de Sistemas y Comunicaciones,                    
+                            
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Desarrollo Urbano,                    
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JORGE LUIS GONZALEZ,                    
+                            
+                            <i>Titulo:&nbsp;</i>AN�LISIS DE LOS FACTORES DE RIESGOS LABORALES EN LOS EMPLEADOS DE LA EMPRESA SOLUCIONES BIOM�DICAS EN VALLEDUPAR CESAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD DE LA GUAJIRA&nbsp;
+                            <i>programa acad&eacute;mico</i> SALUD OCUPACIONAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Daniela Urdiales Olmedo &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Otras Ingenier�as y Tecnolog�as,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JORGE LUIS GONZALEZ,                    
+                            
+                            <i>Titulo:&nbsp;</i>AN�LISIS DE LOS FACTORES DE RIESGOS LABORALES EN LOS EMPLEADOS DE LA EMPRESA SOLUCIONES BIOM�DICAS EN VALLEDUPAR CESAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD DE LA GUAJIRA&nbsp;
+                            <i>programa acad&eacute;mico</i> SALUD OCUPACIONAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Johalis Maria Contreras Urdiales &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Otras Ingenier�as y Tecnolog�as,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JORGE LUIS GONZALEZ,                    
+                            
+                            <i>Titulo:&nbsp;</i>FUNCIONALIDAD DEL SISTEMA DE GESTION DOCUMENTAL EN LA UNIVERSIDAD DE LA GUAJIRA                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Trabajo de grado/tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD DE LA GUAJIRA&nbsp;
+                            <i>programa acad&eacute;mico</i> ADMINISTRACION DE EMPRESAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>SAUL GREGORIO ROJAS &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Otras Ingenier�as y Tecnolog�as,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a></td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>II ENCUENTRO INTERNACIONAL DE INVESTIGACION Y EXTENSION DENOMINADO INVESTIGACION, CIENCIA Y TECNOLOGIA COMO EJES TRANSVERSALES PARA EL DESARROLLO DE LA PAZ EN COLOMBIA&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2016-05-25 00:00:00.0,&nbsp;
+                                                    2016-05-26 00:00:00.0 &nbsp;
+                                                    en VILLANUEVA &nbsp; - UNIGUAJIRA SEDE VILLANUEVA &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>FACTORES PSICOSOCIALES QUE INCIDEN EN EL CONSUMO DE SUSTANCIAS SICOACTIVAS EN ELOS ADOLECENTES
+                                                        <i>Tipo de producto:</i>Producci�n t�cnica - Presentaci�n de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>DESARROLLO DE BLOG E INTERACCION CON OVAS COMO ESTRATEGIA DIDACTICA EN LA ENSE�ANZA APRENDIZAJE DE LA LECTO-ESCRITURA EN LOS NI�OS DE PREESCOLAR DE LA INSTITUCION EDUCATIVA INSPROSSUR DEL MUNICIPIO DE VILLANUEVA LA GUAJIRA
+                                                        <i>Tipo de producto:</i>Producci�n t�cnica - Presentaci�n de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>SISTEMA MICROCONTROLADO DE RIEGO Y FERTILIZACION PARA CULTIVO DE MAIZ EN EL MUNICIPIO DEL MOLINO DEPARTAMENTO DE LA GUAJIRA
+                                                        <i>Tipo de producto:</i>Producci�n t�cnica - Presentaci�n de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>IMPLEMENTACION DEL E-MARKETING EN EL COMERCIO DEL MUNICIPIO DE VILLANUEVA
+                                                        <i>Tipo de producto:</i>Producci�n t�cnica - Presentaci�n de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>TRABAJO SOCIAL CON GRUPO, UNA ALTERNATIVA PARA PROMOVER EL CAMBIO SOCIAL
+                                                        <i>Tipo de producto:</i>Producci�n t�cnica - Presentaci�n de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DE LA GUAJIRA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>DIVINIA MARIA RAMIREZ RODRIGUEZ
+                                                        <i>Rol en el evento: </i>Compilador de memorias , Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>JORGE LUIS GONZALEZ
+                                                        <i>Rol en el evento: </i>Compilador de memorias , Organizador , Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>LILI MARIA AARON ZUBIRIA
+                                                        <i>Rol en el evento: </i>Compilador de memorias , Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>LUIS ROBERTO ALGUERO AMAYA
+                                                        <i>Rol en el evento: </i>Compilador de memorias , Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>II ENCUENTRO DEPARTAMENTAL DE SEMILLEROS DE INVESTIGACION&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2017-06-08 00:00:00.0,&nbsp;
+                                                    2017-06-08 00:00:00.0 &nbsp;
+                                                    en MAICAO &nbsp; - MAICAO LA GUAJIRA &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Servicio Nacional de Aprendizaje SENA Regional Guajira
+                                                        <i>Tipo de vinculaci&oacute;n</i>Gestionadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JORGE LUIS GONZALEZ
+                                                        <i>Rol en el evento: </i>Asistente , Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>JORNADA PEDAG�GICA: VISIBILIDAD DE LA PRODUCCI�N CIENT�FICA, NECESIDAD E IMPORTANCIA.&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2018-08-13 00:00:00.0,&nbsp;
+                                                    2018-08-17 00:00:00.0 &nbsp;
+                                                    en SAN JUAN DEL CESAR &nbsp; - INSTITUTO NACIONAL DE FORMACI�N T�CNICA PROFESIONAL- INFOTEP &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>INSTITUTO NACIONAL DE FORMACI�N T�CNICA PROFESIONAL INFOTEP
+                                                        <i>Tipo de vinculaci&oacute;n</i>Gestionadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JORGE LUIS GONZALEZ
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>III ENCUENTRO DE SEMILLEROS DEPARTAMENTAL INVESTIGACI�N NODO GUAJIRA&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2018-06-06 00:00:00.0,&nbsp;
+                                                    2018-06-07 00:00:00.0 &nbsp;
+                                                    en RIOHACHA &nbsp; - UNIVERSIDAD DE LA GUAJIRA  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DE LA GUAJIRA UNIGUAJIRA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JORGE LUIS GONZALEZ
+                                                        <i>Rol en el evento: </i>Asistente , Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>5</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>VISION MUNDIAL DE LAS ENERGIAS RENOVABLES: UNA REFELEXION PARA LA GUAJIRA Y EL ROL E IMPORTANCIA DE LOS EGRESADOS EN LOS PROCESOS DE AUTOEVALUACION CON FINES DE ACREDITACION DE PROGRAMAS E INSTITUCIONALES.&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2018-08-17 00:00:00.0,&nbsp;
+                                                    2018-08-24 00:00:00.0 &nbsp;
+                                                    en SAN JUAN DEL CESAR &nbsp; - INSTITUTO NACIONAL DE FORMACI�N T�CNICA PROFESIONAL- INFOTEP &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>INSTITUTO NACIONAL DE FORMACI�N T�CNICA PROFESIONAL INFOTEP
+                                                        <i>Tipo de vinculaci&oacute;n</i>Gestionadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JORGE LUIS GONZALEZ
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producci�n bibliogr�fica - Art�culo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JORGE LUIS GONZALEZ,                    
+                                    
+                HEYNER ALEXANDER AROCA ARAUJO,                    
+                                    
+                ALVARO ONATE BOWEN,                    
+                
+                "Pensamiento sist�mico y simulaci�n microcontrolada en riego por goteo: revisi�n sistem�tica para el dise�o de modelos educativos-tecnol�gicos"
+                . En: &nbsp;<br>
+                Scientia Magna&nbsp;
+                <i>ISSN:</i>&nbsp;1556-6706&nbsp;
+                <i>ed:</i>&nbsp;<br>
+                <i>v.</i>5
+                <i>fasc.</i>
+                p.57
+                - 62
+                ,2025,
+                <i>&nbsp;DOI:&nbsp;</i>10.54502/msuceva.v5n1a6
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Artificial Intelligence, scientific research,                    
+                                    
+                Innovaci�n Tecnol�gica, Pol�ticas de innovaci,                    
+                                    
+                INFORMACION, AUTOMATIZACION, COMPUTADOR,                    
+                                    
+                CULTIVOS,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producci�n bibliogr�fica - Art�culo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JORGE LUIS GONZALEZ,                    
+                                    
+                DIANA LUCIA MENDOZA GARCES,                    
+                                    
+                JOSE ALFONSO YAGUNA NUNEZ,                    
+                
+                "ESTRUCTURA TE�RICA EN TORNO AL SISTEMA MICROCONTROLADO DE RIEGO POR GOTEO"
+                . En: Colombia&nbsp;<br>
+                Publicaci�n Art�culo En El Bolet�n Redipe 803&nbsp;
+                <i>ISSN:</i>&nbsp;2256-1536&nbsp;
+                <i>ed:</i>&nbsp;<br>
+                <i>v.</i>6
+                <i>fasc.</i>100
+                p.125
+                - 131
+                ,2017,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                SISTEMAS, MICROCONTROLADORES, RIEGO POR GOTEO,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producci�n bibliogr�fica - Art�culo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JORGE LUIS GONZALEZ,                    
+                                    
+                DIANA LUCIA MENDOZA GARCES,                    
+                                    
+                JOSE ALFONSO YAGUNA NUNEZ,                    
+                
+                "INNOVACION TECNOLOGICA EN EL PROCESO DE ALIMENTOS PARA GANADO BOVINO EN EL DEPARTAMENTO DE LA GUAJIRA"
+                . En: Colombia&nbsp;<br>
+                Ciencia e Ingenier�a&nbsp;
+                <i>ISSN:</i>&nbsp;2389-9484&nbsp;
+                <i>ed:</i>&nbsp;<br>
+                <i>v.</i>4
+                <i>fasc.</i>N/A
+                p.43
+                - 51
+                ,2017,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Innovaci�n Tecnol�gica, Pol�ticas de innovaci,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producci�n bibliogr�fica - Art�culo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JORGE LUIS GONZALEZ,                    
+                                    
+                HAROLD MORENO BONILLA,                    
+                                    
+                JAIRO FRANCISCO SEOANES LEON,                    
+                                    
+                OSVALDO RUEDA CARRENO,                    
+                
+                "Artificial Intelligence (AI) in Scientific Research"
+                . En: Colombia&nbsp;<br>
+                LETTERS IN HIGH ENERGY PHYSICS&nbsp;
+                <i>ISSN:</i>&nbsp;2632-2714&nbsp;
+                <i>ed:</i>&nbsp;Andromeda Publishing And Academic Services LTD<br>
+                <i>v.</i>2024
+                <i>fasc.</i>N/A
+                p.7481
+                - 7488
+                ,2024,
+                <i>&nbsp;DOI:&nbsp;</i>10.52783/lhep.2024.1366
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Artificial Intelligence, scientific research,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a></td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a>        
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td colspan="2"><h3 >Capitulos de libro</h3></td>
+            </tr>
+                
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Otro cap�tulo de libro publicado<br>
+                    JORGE LUIS GONZALEZ,                    
+                    
+
+                    "IMPLEMENTACION DEL E-MARKETING EN EL COMERCIO DE VILLANUEVA LA GUAJIRA"
+                    CIENCIA Y TECNOLOG�A COMO EJES TRANSVERSALES PARA EL DESARROLLO DE LA PAZ EN COLOMBIA
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-958-46-9262-7&nbsp;
+                    <i>ed:</i>&nbsp;
+                    <i>, v.</i>
+                    , p.406
+                    - 4012&nbsp;
+                    1
+                    ,2016
+                    
+                    
+                    <br><b>Palabras: </b><br>
+                                        
+                    INFORMATICA, TECNOLOGIA, OFIMATICA, WEB 2.0,                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Otras Ingenier�as y Tecnolog�as,                    
+                    
+                    
+                    
+                    <br><b>Sectores: </b><br>
+                                            
+                    Mercado de trabajo y mano de obra,                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Otro cap�tulo de libro publicado<br>
+                    JORGE LUIS GONZALEZ,                    
+                    
+                    Tipo: Otro cap�tulo de libro publicado<br>
+                    DIVINIA MARIA RAMIREZ RODRIGUEZ,                    
+                    
+                    Tipo: Otro cap�tulo de libro publicado<br>
+                    RAUL ENRIQUE MAYA PABON,                    
+                    
+
+                    "DESARROLLO DE BLOG E INTERACCION CON OVAS COMO ESTRATEGIA DIDACTICA EN LA ENSE�ANZA APRENDIZAJE DE LA LECTO-ESCRITURA EN LOS NI�OS DE PREESCOLAR DE LA INSTITUCION EDUCATIVA INSPROSSUR DEL MUNICIPIO DE VILLANUEVA-LA GUAJIRA"
+                    CIENCIA Y TECNOLOG�A COMO EJES TRANSVERSALES PARA EL DESARROLLO DE LA PAZ EN COLOMBIA
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-958-46-9262-7&nbsp;
+                    <i>ed:</i>&nbsp;
+                    <i>, v.</i>
+                    , p.195
+                    - 203&nbsp;
+                    1
+                    ,2016
+                    
+                    
+                    <br><b>Palabras: </b><br>
+                                        
+                    BLOG,                    
+                                        
+                    INTERACCI�N ,                    
+                                        
+                    OVAS,                    
+                                        
+                    ESTRATEGIAS DID�CTICAS ,                    
+                                        
+                    ENSE�ANZA - APRENDIZAJE,                    
+                                        
+                    LECTO - ESCRITURA,                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ciencias Sociales -- Ciencias de la Educaci�n -- Educaci�n General (Incluye Capacitaci�n, Pedagog�a),                    
+                    
+                    
+                    
+                    <br><b>Sectores: </b><br>
+                                            
+                    Educaci�n - Educaci�n superior,                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Otro cap�tulo de libro publicado<br>
+                    JORGE LUIS GONZALEZ,                    
+                    
+                    Tipo: Otro cap�tulo de libro publicado<br>
+                    DIVINIA MARIA RAMIREZ RODRIGUEZ,                    
+                    
+                    Tipo: Otro cap�tulo de libro publicado<br>
+                    LILI MARIA AARON ZUBIRIA,                    
+                    
+
+                    "SISTEMA MICROCONTROLADO DE RIEGO POR GOTEO Y FERTILIZACION PARA CULTIVOS DE MAIZ EN EL MUNICIPIO DEL MOLINO LA GUAJIRA"
+                    INVESTIGACI�N, CIENCIA Y TECNOLOG�A COMO EJES TRANSVERSALES PARA EL DESARROLLO DE LA PAZ EN COLOMBIA.
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-958-46-8972-6&nbsp;
+                    <i>ed:</i>&nbsp;Editorial Santillana
+                    <i>, v.</i>
+                    , p.230
+                    - 241&nbsp;
+                    1
+                    ,2016
+                    
+                    
+                    <br><b>Palabras: </b><br>
+                                        
+                    SISTEMAS, MICROCONTROLADORES, RIEGO POR GOTEO,                    
+                                        
+                    FERTILIZACION,                    
+                                        
+                    SISTEMA,                    
+                                        
+                    CULTIVOS,                    
+                                        
+                    MAIZ,                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ciencias Sociales -- Ciencias de la Educaci�n -- Educaci�n General (Incluye Capacitaci�n, Pedagog�a),                    
+                    
+                    
+                    
+                    <br><b>Sectores: </b><br>
+                                            
+                    Educaci�n - Educaci�n superior,                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    
+                    Tipo: Cap�tulo de libro<br>
+                    JORGE LUIS GONZALEZ,                    
+                    
+                    Tipo: Cap�tulo de libro<br>
+                    YEISY ELIBETH MENDOZA,                    
+                    
+
+                    "EVALUACI�N DEL DESEMPE�O Y VALORES ORGANIZACIONALES"
+                    pedagog�a,lengua y diversidad
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-1-945570-49-0&nbsp;
+                    <i>ed:</i>&nbsp;
+                    <i>, v.</i>
+                    , p.347
+                    - 359&nbsp;
+                    10
+                    ,2017
+                    
+                    
+                    <br><b>Palabras: </b><br>
+                                        
+                    Evaluaci�n del desempe�o, Valores Organizacio,                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ciencias Sociales -- Ciencias de la Educaci�n -- Educaci�n General (Incluye Capacitaci�n, Pedagog�a),                    
+                    
+                    
+                    
+                    <br><b>Sectores: </b><br>
+                                            
+                    Educaci�n - Educaci�n superior,                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    
+                    Tipo: Cap�tulo de libro<br>
+                    JORGE LUIS GONZALEZ,                    
+                    
+                    Tipo: Cap�tulo de libro<br>
+                    DIANA LUCIA MENDOZA GARCES,                    
+                    
+                    Tipo: Cap�tulo de libro<br>
+                    JOSE ALFONSO YAGUNA NUNEZ,                    
+                    
+
+                    "ESTRUCTURA TE�RICA EN TORNO AL SISTEMA MICROCONTROLADO DE RIEGO POR GOTEO"
+                    contrato y estratagema didactico.Educacion en contexto
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-1-945570-45-2&nbsp;
+                    <i>ed:</i>&nbsp;
+                    <i>, v.</i>
+                    , p.245
+                    - 255&nbsp;
+                    
+                    ,2017
+                    
+                    
+                    <br><b>Palabras: </b><br>
+                                        
+                    SISTEMAS, MICROCONTROLADORES, RIEGO POR GOTEO,                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Otras Ingenier�as y Tecnolog�as,                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Otro cap�tulo de libro publicado<br>
+                    JORGE LUIS GONZALEZ,                    
+                    
+                    Tipo: Otro cap�tulo de libro publicado<br>
+                    LILI MARIA AARON ZUBIRIA,                    
+                    
+                    Tipo: Otro cap�tulo de libro publicado<br>
+                    DIVINIA MARIA RAMIREZ RODRIGUEZ,                    
+                    
+
+                    "EDUCANDO PARA LA PAZ, A TRAV�S DE LA LUDICA Y ESTRATEGIAS DID�CTICAS CON LOS NI�OS Y NI�AS DE LOS CDI DE VILLANUEVA LA GUAJIRA."
+                    INVESTIGACION, CIENCIA Y TECNOLOGIA COMO EJES TRANSVERSALES PARA EL DESARROLLO DE LA PAZ EN COLOMBIA
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;958-46-8972-6&nbsp;
+                    <i>ed:</i>&nbsp;Universidad de la Guajira
+                    <i>, v.</i>
+                    , p.318
+                    - 335&nbsp;
+                    1
+                    ,2016
+                    
+                    
+                    <br><b>Palabras: </b><br>
+                                        
+                    PAZ, LUDICA, ESTRATEGIAS, NI�OS, CDI,                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Humanidades -- Otras Humanidades -- Otras Humanidades,                    
+                    
+                    
+                    
+                    <br><b>Sectores: </b><br>
+                                            
+                    Educaci�n - Educaci�n superior,                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    
+                    Tipo: Cap�tulo de libro<br>
+                    JORGE LUIS GONZALEZ,                    
+                    
+
+                    "Determinaci�n del efecto de un sistema micro controlado de riego por goteo en la fertilizaci�n y cultivo del aj�"
+                    Desarrollo e innovaci�n en ingenier�a.
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-958-53278-5-6&nbsp;
+                    <i>ed:</i>&nbsp;
+                    <i>, v.</i>
+                    , p.112
+                    - 126&nbsp;
+                    1
+                    ,2021
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Otras Ingenier�as y Tecnolog�as,                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Cap�tulo de libro<br>
+                    JORGE LUIS GONZALEZ,                    
+                    
+
+                    "PROCEDIMIETOS DE ESTUDIO EN EL APRENDIZAJE COLABORATIVO"
+                    la investigaci�n y la ciencia en postpandemia
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-958-49-5694-1&nbsp;
+                    <i>ed:</i>&nbsp;
+                    <i>, v.</i>
+                    , p.331
+                    - 350&nbsp;
+                    
+                    ,2022
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ingenier�a y Tecnolog�a -- Otras Ingenier�as y Tecnolog�as -- Otras Ingenier�as y Tecnolog�as,                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+
+</table>
+</td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a></td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiol�gica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiol�gica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        CAPACITACI�N A DAMAS ROSADAS Y FUNCIONARIOS DE SERVICIOS  GENERAL EN VILLANUEVA LA GUAJIRA<br>
+                        <i>Inicio:&nbsp;</i>Agosto&nbsp;
+                        2017                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Agosto&nbsp;
+                        2017
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El proyecto de extension tiene como objetivo principal el involucrar al gremio de damas rosadas a conocer y manejar herramientas tecnologicas o informaticas.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        PROCESO DE ARTICULACION INVESTIGATIVA Y DE EXTENSION, ORIENTADO A INTEGRAR LA CIENCIA TECNOLOGIA E INNOVACION EN LA ESCUELA BASICA Y MEDIA DEL SUR DE LA GUAJIRA Y FORTALECIMIENTO DE GRULAC Y CVLAC<br>
+                        <i>Inicio:&nbsp;</i>Agosto&nbsp;
+                        2016                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2016
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Procesos de investigaci�n articulados con la escuela normal superior de San Juan del Cesar para la creaci�n de Cvlac y Grulac a profesores investigadores<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n, desarrollo e Innovaci&oacute;n&nbsp;<br>
+                        TRABAJO SOCIAL CON GRUPO, UNA ALTERNATIVA PARA PROMOVER EL CAMBIO SOCIAL<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2016                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El presente proyecto, busca contribuir con la formaci�n profesional de los estudiantes del Programa Trabajo Social, en lo concerniente al proceso ense�anza-aprendizaje con grupos, basados en las teor�as de Gisela Konopka (1063) quien lo define como un �un m�todo de trabajo social que ayuda a los individuos a mejorar su funcionamiento social a trav�s de experiencias constructivas de grupo, y a enfrentarse con sus problemas personales, de grupo y de comunidad� y Natalio Kisnerman (1971), entre otros.
+Este inter�s surgi� a partir de la necesidad de desarrollar un proceso de practica de los estudiantes de IV semestre de trabajo social, para fortalecer la fase de intervenci�n, a trav�s de las t�cnicas y din�micas de grupo, aplicando los conocimientos impartidos en el aula de clases a grupos funcionales en las comunidades, fortaleciendo el crecimiento y desarrollo personal de los participantes, a trav�s de la interacci�n grupal.
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n, desarrollo e Innovaci&oacute;n&nbsp;<br>
+                        SISTEMA MICROCONTROLADO DE RIEGO POR GOTEO  Y FERTILIZACION PARA CULTIVO DE AJI EN MUNICIPIO DEL MOLINO  DEPARTAMENTO DE LA GUAJIRA<br>
+                        <i>Inicio:&nbsp;</i>Marzo&nbsp;
+                        2014                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Noviembre&nbsp;
+                        2015
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            La presente investigaci�n tuvo por objetivo general determinar el efecto del sistema micro controlado de riego por goteo para la fertilizaci�n y cultivo de aj�  en la Finca Saradila en el Municipio Molino del Departamento La Guajira de Colombia. El estudio para la variable sistema micro controlado de riego por goteo se apoy� en los postulados de autores como: Fern�ndez y Camacho (2008), Ruiz y Molina (2010), Soutter (2007), Clement y Galand (2009), En cuanto a la variable fertilizaci�n y el cultivo de Maiz, se sustent� en base a los te�ricos de: Dimitri (2010), Sarli (2009), Ogata (2006), Garc�a (2006), entre otros. La investigaci�n se tipifico como un estudio investigaci�n descriptiva, de campo experimental, con un dise�o dise�o pre-experimental, su poblaci�n estuvo constituida por diversas fuentes de informaci�n bibliogr�fica y relacionada con la Finca Saradila en el Municipio Molino del Departamento La Guajira de Colombia a partir de la Unidad de An�lisis del sistema de riego por goteo.  La t�cnica de recolecci�n de datos se utiliz� el  Sistema F�lder � Observaci�n; y como instrumento la ficha bibliogr�fica as� como la ficha resumen. La validez de estos instrumentos se llev� a cabo por medio del m�todo de triangulaci�n, la confiabilidad se realiz� a trav�s de la triangulaci�n de la informaci�n obtenida. Se concluy� que el sistema micro controlado de riego por goteo, es muy efectivo ya permite particularmente el poder ahorrar el agua a partir del control del riego y la fertilizaci�n del cultivo del Maiz. <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n, desarrollo e Innovaci&oacute;n&nbsp;<br>
+                        Factores psicosociales que inciden en el consumo de sustancias sicoactivas en los adolescentes <br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2016                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2016
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            La presente investigaci�n de corte descriptivo busc� identificar los factores psicosociales que inciden en el consumo de sustancias psicoactivas, en adolescentes entre 14 a 18 a�os, en el municipio de Urumita, pertenecientes a los estratos 1 y 2; cuyos objetivos espec�ficos plantean: Identificar los patrones familiares que inciden en los j�venes a acceder al consumo de estas sustancias; e Identificar qu� tipo de sustancias consumen los j�venes, para determinar los �ndices de consumo de cada una; y establecer el nivel de influencia que generan los amigos y los medios de comunicaci�n en la decisi�n de los j�venes para consumir sustancias psicoactivas y un objetivo propositivo que plantea dise�ar estrategias que apunten a minimizar esta problem�tica.
+Este inter�s surgi� a partir de hechos reales referente al consumo de sustancias alucin�genas, situaci�n que genera en la comunidad una problem�tica donde los m�s afectados son los adolescentes. Johnson et al. (2009).
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        IMPLEMENTACION DEL E-MARKETING AL COMERCIO DEL MUNICIPIO DE VILLANUEVA LA GUAJIRA<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2016                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Julio&nbsp;
+                        2016
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Este proyecto busca que los comerciantes del municipio de Villanueva comercialicen sus productos haciendo uso de nuevas tecnologias.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

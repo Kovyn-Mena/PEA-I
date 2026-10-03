@@ -1,0 +1,1993 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edici�n de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producci�n en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        FELIX MIGUEL&nbsp;MOVILLA&nbsp;CONTRERAS
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>MOVILLA CONTRERAS, FELIX MIGUEL</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Doctorado</b>
+                            Universidad Del Zulia<br />
+                            CIENCIAS HUMANAS<br />
+                            Marzode2011 - de <br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestr�a/Magister</b>
+                            Univ. Del Zulia<br />
+                            Matem�ticas Aplicadas<br />
+                            Enerode2006 - Diciembrede 2009<br />
+                            Estudio   Anal�tico  Para  la  Formulaci�n   de 	Una Soluci�n  Exacta  Manufacturada  de  la Ecuaciones de Navier-Stokes Expresadas en Variables Primitivas.</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Especializaci�n</b>
+                            UNIVERSIDAD DE PAMPLONA<br />
+                            ESPECIALIZACION EN EDUCACION MATEMATICA<br />
+                            Enerode1999 - de 2000<br />
+                            La Proporcionalidad. Una Herramienta de Vida para El Campesino de la Cierra Nevada de Santamarta</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD POPULAR DEL CESAR<br />
+                            LICENCIATURA EN MATEMATICAS Y FISICA<br />
+                            Enerode1990 - de 1996<br />
+                            Estrategias pedag�gicas Para la Ense�anza del Concepto de Relaciones en Octavo Grado de Educaci�n B�sica</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Secundario</b>
+                            Colegio de Educaci�n Media Aguas Blancas<br />
+                            <br />
+                            Enerode1984 - de 1989<br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Primaria</b>
+                            Escuela mixta de aguas blancas<br />
+                            <br />
+                            Enerode1978 - de 1983<br />
+                            </td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3>Formaci&oacute;n Complementaria</h3></td>
+                            </tr>   
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        Universidad Del Zulia<br />
+                        SEMINARIO<br />
+                        Marzode2011 - Septiembrede 2011<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        Universidad Del Zulia<br />
+                        SEMINARIO<br />
+                        Octubrede2011 - Mayode 2012<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        Universidad Del Zulia<br />
+                        SEMINARIO<br />
+                        Marzode2012 - Septiembrede 2012<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        Universidad Del Zulia<br />
+                        SEMINARIO<br />
+                        Septiembrede2012 - Abrilde 2013<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        Incontec International<br />
+                        SEMINARIO<br />
+                        Octubrede2011 - Noviembrede 2011<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        Incontec International<br />
+                        SEMINARIO<br />
+                        Octubrede2011 - Noviembrede 2011<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        Universidad Del Zulia<br />
+                        IDIOMA EXTRANJERO<br />
+                        Juliode2008 - Diciembrede 2008<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        COLEGIO MAYOR NUESTRA SE�ORA DEL ROSARIO<br />
+                        DIPLOMADO<br />
+                        Octubrede2008 - Diciembrede 2008<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        DIPLOMADO<br />
+                        Juliode2002 - Agostode 2002<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duraci�n</b>
+                        Universidad Del Zulia<br />
+                        SEMUNARIO<br />
+                        Marzode2014 - Octubrede 2014<br />
+                        </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>8&nbsp;horas Semanales
+                        Febrero de 2005            
+                        Enero de 2014<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administraci�n</span><br>
+                                            
+                        - &nbsp;Jefe de departamento            
+                        <i> - Cargo:</i>&nbsp;Jefe de departamento          
+                        Octubre de 2005            
+                         de <br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>SECRETARIA EDUCACION MUNICIPIO VALLEDUPAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>30&nbsp;horas Semanales
+                        Octubre de 1997            
+                        Septiembre de 2013<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administraci�n</span><br>
+                                            
+                        - &nbsp;Otro            
+                        <i> - Cargo:</i>&nbsp;Otro          
+                        Julio de 2010            
+                        Septiembre de 2013<br>
+
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Otro            
+                        <i> - Nombre del curso:</i>&nbsp; MATEMATICAS,&nbsp;40 
+                        Octubre 1997            
+                        Octubre 2005<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>ESCUELA COLOMBIANA DE EDUCACION SUPERIOR UNIVERSIDAD MARIANA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>8&nbsp;horas Semanales
+                        Febrero de 2011            
+                        Marzo de 2011<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Postgrado            
+                        <i> - Nombre del curso:</i>&nbsp; FUNDAMENTOS Y TENDENCIAS DE EDUCACION MATEMATICA,&nbsp;25 
+                        Febrero 2011            
+                        Marzo 2011<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>18&nbsp;horas Semanales
+                        Febrero de 1998            
+                        Diciembre de 2009<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; CALCULOS Y ECUACIONES DIFERENCIALES,&nbsp;40 
+                        Febrero 1998            
+                        Diciembre 2009<br>
+
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigaci�n</span><br>
+                        
+                        - &nbsp;
+                        Investigaci�n y Desarrollo
+                        <i> - Titulo:</i>&nbsp; Estudio de M�todos de Colocaci�n Basados en la Interpolaci�n de Funciones de Base Radial para Resolver las Ecuaciones de Navier � Stokes para Fluidos Viscosos e Incompresibles Explotando la Formulaci�n en Variables Primitivas.                            
+                        Febrero 2008            
+                        Junio 2009<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ciencias Sociales -- Ciencias de la Educaci�n -- Educaci�n General (Incluye Capacitaci�n, Pedagog�a)</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="5"><h3 >Idiomas</h3></td>
+                            </tr>    
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td><b>Habla</b></td>
+                                <td><b>Escribe</b></td>
+                                <td><b>Lee</b></td>
+                                <td><b>Entiende</b></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;Ingl�s</li></td>
+                    <td>Deficiente</td>
+                    <td>Deficiente</td>
+                    <td>Aceptable</td>
+                    <td>Deficiente</td>                                                        
+                </tr>    
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;MATEMATICAS APLICADAS, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;EDUCACION MATEMATICA, <i>Activa:</i>Si</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los �tems de producci�n con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la �ltima <i>Convocatoria Nacional para el Reconocimiento y Medici�n de Grupos de Investigaci�n, Desarrollo Tecnol�gico o de Innovaci�n y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a></td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutor�as - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            FELIX MIGUEL MOVILLA CONTRERAS,                    
+                            
+                            LA PROPORCIONALIDAD EN LA ESCUELA. UN ESTUDIO DE CASOS REALIZADO CON ESTUDIANTES DE LA ESCUELA DE FORMACI�N UNIVERSITARIA.&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            LICENCIATURA EN MATEMATICAS Y FISICA,
+                            &nbsp;2003.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            ORLANDO OROZCO&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): FELIX MIGUEL MOVILLA CONTRERAS,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educaci�n -- Educaci�n General (Incluye Capacitaci�n, Pedagog�a),
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutor�as - Trabajo de grado de maestr�a o especialidad cl�nica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            FELIX MIGUEL MOVILLA CONTRERAS,                    
+                            
+                            Estudio Anal�tico Para la Formulaci�n de Una Soluci�n Exacta Manufacturada de la Ecuaciones de Navier- Stokes Expresadas en Variables Primitivas&nbsp;
+                            Universidad Del Zulia&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            MAESTRIA EN MATEMATICA APLICADA,
+                            &nbsp;2007.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            FELIX MOVILLA&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): FELIX MIGUEL MOVILLA CONTRERAS,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Matem�tica -- Matem�ticas Aplicadas,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutor�as - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            FELIX MIGUEL MOVILLA CONTRERAS,                    
+                            
+                            LOS PROCESOS DE GENERALIZACI�N. UNA HERRAMIENTA POTENCIALIZADORA DEL PENSAMIENTO VARIACIONAL&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            LICENCIATURA EN MATEMATICAS Y FISICA,
+                            &nbsp;2003.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            WETMISTER MANYOMA&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): FELIX MIGUEL MOVILLA CONTRERAS,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educaci�n -- Educaci�n General (Incluye Capacitaci�n, Pedagog�a),
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a></td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a></td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>VIII CONGRESO VENEZOLANO DE EDUCACION MATEMATICA&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2013-10-01 00:00:00.0,&nbsp;
+                                                    2013-10-04 00:00:00.0 &nbsp;
+                                                    en SANTANA DE CORO &nbsp; - SANTA ANA DE CORO &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>CONOCIMIENTO PROFESIONAL DEL PROFESOR DE MATEM�TICAS. An�lisis desde su formaci�n inicial y permanente
+                                                        <i>Tipo de producto:</i>Producci�n t�cnica - Presentaci�n de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Universidad Nacional Experimental Francisco de Miranda
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>FELIX MIGUEL MOVILLA CONTRERAS
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>MECOM 2010. IX ARGENTINEAN CONGRESS ON COMPUTATIONAL MECHANICS Y II SOUTH AMERICAN CONGRESS ON COMPUTATIONAL MECHANICS CILAMCE 2010; XXXI IBERIAMERICANO Y LATINOAMERICANO; AMERICAN CONGRESS ON COMPUTATIONAL METHODS IN ENGINEE.&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2010-11-17 00:00:00.0,&nbsp;
+                                                    2010-11-20 00:00:00.0 &nbsp;
+                                                    en Buenos Aires &nbsp; - BUENOS AIRES &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Solution of the Navier-Stokes Equations Using Local Collocation of Radial Basis Functions. Comunicaciones Breves
+                                                        <i>Tipo de producto:</i>Producci�n t�cnica - Presentaci�n de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Asociaci�n Argentina De Mec�nica Computacional
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>FELIX MIGUEL MOVILLA CONTRERAS
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>RELME 28&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2014-08-14 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en BARRANQUILLA &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>FELIX MIGUEL MOVILLA CONTRERAS
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>I JORNADA BINACIONAL EN INVESTIGACI�N&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2014-11-29 00:00:00.0,&nbsp;
+                                                    2014-11-30 00:00:00.0 &nbsp;
+                                                    en Maracaibo &nbsp; - URBE &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>conocimiento profesional del profesor. Una mirada desde sus procesos de formaci�n y desarrollo profesional
+                                                        <i>Tipo de producto:</i>Producci�n t�cnica - Presentaci�n de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>FELIX MIGUEL MOVILLA CONTRERAS
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>5</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XV ENCUENTRO COLOMBIANO DE MATEM�TICA EDUCATIVA&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2014-10-06 00:00:00.0,&nbsp;
+                                                    2014-10-08 00:00:00.0 &nbsp;
+                                                    en BUCARAMANGA &nbsp; - UIS &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>FELIX MIGUEL MOVILLA CONTRERAS
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>6</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>ENCUENTRO COLOMBIANO DE MATEMATICA EDUCATIVA (ECME 15)&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2014-10-06 00:00:00.0,&nbsp;
+                                                    2014-10-08 00:00:00.0 &nbsp;
+                                                    en BUCARAMANGA &nbsp; - BUCARAMANGA &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Conocimiento did�ctico del contenido en profesores de educaci�n superior. Una mirada desde la virtualizaci�n de los objetos matem�ticos
+                                                        <i>Tipo de producto:</i>Producci�n t�cnica - Presentaci�n de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>FELIX MIGUEL MOVILLA CONTRERAS
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>7</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>VI CONGRESO INTERNACIONAL DE FORMACION Y MODELACION EN CIENCIAS BASICAS&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2014-05-07 00:00:00.0,&nbsp;
+                                                    2014-05-09 00:00:00.0 &nbsp;
+                                                    en MEDELL�N &nbsp; - UNIVERSIDAD DE MEDELLIN &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>TEOR�A DEL PENSAMIENTO MATEM�TICO AVANZADO
+                                                        <i>Tipo de producto:</i>Producci�n bibliogr�fica - Trabajos en eventos (Cap�tulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>FELIX MIGUEL MOVILLA CONTRERAS
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>JESUS VALENCIA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>OVIDIO RODOLFO BAQUERO BONILLA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>8</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>PENSAMIENTO DEL PROFESOR DE MATEM�TICAS. UNA MIRADA DESDE SU FORMACI�N INICIAL Y PR�CTICA&nbsp;
+                                                <i>Tipo de evento: </i>Simposio&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2012-12-13 00:00:00.0,&nbsp;
+                                                    2012-12-14 00:00:00.0 &nbsp;
+                                                    en Maracaibo &nbsp; - MARACAIBO &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>PENSAMIENTO DEL PROFESOR DE MATEM�TICAS. UNA MIRADA DESDE SU FORMACI�N INICIAL Y PR�CTICA
+                                                        <i>Tipo de producto:</i>Producci�n t�cnica - Presentaci�n de trabajo - Simposio
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Pensamiento del Profesor de Matem�ticas. Una Mirada Desde su Formaci�n Inicial y Pr�ctica
+                                                        <i>Tipo de producto:</i>Producci�n t�cnica - Presentaci�n de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>FELIX MIGUEL MOVILLA CONTRERAS
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>9</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>VI CONGRESO INTERNACIONAL DE FORMACION Y MODELACION EN CIENCIAS BASICAS&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2014-05-07 00:00:00.0,&nbsp;
+                                                    2014-05-09 00:00:00.0 &nbsp;
+                                                    en BOGOT�, D.C. &nbsp; - AUDITORIO UNIVERSIDAD DE MEDELLIN &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>LA EPISTEMOLOG�A DE LA INTEGRAL COMO RECURSO DID�CTICO EN EL EJERCICIO PROFESIONAL DEL PROFESOR DE MATEM�TICAS
+                                                        <i>Tipo de producto:</i>Producci�n bibliogr�fica - Trabajos en eventos (Cap�tulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>FELIX MIGUEL MOVILLA CONTRERAS
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>OVIDIO RODOLFO BAQUERO BONILLA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>10</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XXVIII REUNION LATINOMERICANA DE MATEMATICA EDUCATIVA - RELME 28&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2014-07-29 00:00:00.0,&nbsp;
+                                                    2014-08-01 00:00:00.0 &nbsp;
+                                                    en BARRANQUILLA &nbsp; - UNIVERSIDAD DEL ATLANTICO &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>VIRTUALIZACI�N DE LOS OBJETOS MATEM�TICOS COMO APORTES AL CONOCIMIENTO DID�CTICO DEL CONTENIDO EN PROFESORES DE EDUACACION SUPERIOR
+                                                        <i>Tipo de producto:</i>Producci�n bibliogr�fica - Trabajos en eventos (Cap�tulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>VIRTUALIZACI�N DE LOS OBJETOS MATEM�TICOS COMO APORTES AL CONOCIMIENTO DID�CTICO DEL CONTENIDO EN PROFESORES DE EDUACACION SUPERIOR
+                                                        <i>Tipo de producto:</i>Producci�n t�cnica - Presentaci�n de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>FELIX MIGUEL MOVILLA CONTRERAS
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>11</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>VI CONGRESO INTERNACIONAL DE FORMACION Y MODELACION EN CIENCIAS BASICAS&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2014-05-07 00:00:00.0,&nbsp;
+                                                    2014-05-09 00:00:00.0 &nbsp;
+                                                    en BOGOT�, D.C. &nbsp; - AUDITORIO UNIVERSIDAD DE MEDELLIN &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>LOS ESCENARIOS VIRTUALES COMO CATEGOR�A DEL CONOCIMIENTO PROFESIONAL DEL PROFESOR DE MATEM�TICAS 
+                                                        <i>Tipo de producto:</i>Producci�n t�cnica - Presentaci�n de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>LOS ESCENARIOS VIRTUALES COMO CATEGOR�A DEL CONOCIMIENTO PROFESIONAL DEL PROFESOR DE MATEM�TICAS
+                                                        <i>Tipo de producto:</i>Producci�n bibliogr�fica - Trabajos en eventos (Cap�tulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>FELIX MIGUEL MOVILLA CONTRERAS
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>12</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XXII CONGRESO NACIONAL DE FISICA&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2007-10-22 00:00:00.0,&nbsp;
+                                                    2007-10-26 00:00:00.0 &nbsp;
+                                                    en IBAGU� &nbsp; - UNIVERSIDAD EL TOLIMA &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>M�TODO MESHLESS BASADO EN LA COLOCACI�N SIM�TRICA RBF PARA RESOLVER LA ECUACI�N DE DIFUSI�N EN ESTADO TRANSIENTE
+                                                        <i>Tipo de producto:</i>Producci�n bibliogr�fica - Trabajos en eventos (Cap�tulos de memoria) - Resumen
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>FELIX MIGUEL MOVILLA CONTRERAS
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producci�n bibliogr�fica - Art�culo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                FELIX MIGUEL MOVILLA CONTRERAS,                    
+                                    
+                GAIL GUTIERREZ,                    
+                                    
+                JESUS VALENCIA,                    
+                                    
+                WHADY FELIPE FLOREZ ESCOBAR,                    
+                                    
+                JESUS MARIA VALENCIA BUSTAMANTE,                    
+                                    
+                GAIL ALBEIRO GUTIERREZ RAMIREZ,                    
+                
+                "M�todo de Colocaci�n Sim�trico RBF Para la Soluci�n Num�rica de la Ecuaci�n de Difusi�n en Estado Transiente"
+                . En: Colombia&nbsp;<br>
+                REVISTA COLOMBIANA DE FISICA&nbsp;
+                <i>ISSN:</i>&nbsp;0120-2650&nbsp;
+                <i>ed:</i>&nbsp;Pontificia Universidad Javeriana <br>
+                <i>v.</i>41
+                <i>fasc.</i>3
+                p.652
+                - 655
+                ,2009,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Metodos Meshless,                    
+                                    
+                Funciones de Base Radial,                    
+                                    
+                Ecuaci�n de Difusi�n,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a></td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a></td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%">
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 id="textos">Textos en publicaciones no cient&iacute;ficas</h3></td>
+            </tr>        
+               
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producci�n bibliogr�fica - Otro art�culo publicado - Peri�dico de noticias</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            FELIX MIGUEL MOVILLA CONTRERAS,                    
+                                
+            HUGO ENRIQUE GERARDO PARRA SANDOVAL,                    
+                                
+            OVIDIO RODOLFO BAQUERO BONILLA,                    
+            
+            "formaci�n inicial y pr�ctica del profesor. Analisis desde las caracterizaciones del pensmaiento del profesor"
+            En: Colombia. 
+            2012.
+            Agunkuya.
+            <i>ISSN:</i>&nbsp;2027-9574 
+            <i>p.</i>82 
+            - 95
+            v.2
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            PENSAMIENTO DEL PROFESOR DE MATEMATICAS,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Sociales -- Ciencias de la Educaci�n -- Educaci�n General (Incluye Capacitaci�n, Pedagog�a),                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a></td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiol�gica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiol�gica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%">
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Informes de investigaci&oacuten</h3></td>
+            </tr>    
+                
+            <tr>
+                <td>
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+            <li><b>Producci�n t�cnica - Informes de investigaci�n</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            FELIX MIGUEL MOVILLA CONTRERAS,                    
+            
+            informe de Estudio de los m�todos de colocaci�n basados en la interpolaci�n RBF para resolver las ecuaciones de Navier-Stokes para flujo viscoso e incompresible explotando alguno de los esquemas establecidos en una ecuaci�n de presi�n                
+            . En: Colombia,&nbsp;
+            ,2011,&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Sociales -- Ciencias de la Educaci�n -- Educaci�n General (Incluye Capacitaci�n, Pedagog�a),                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        estudio de m�todos de colocci�n basados en la interpolaci�n de funciones de base radial para resolver las ecuaciones de Navier-Stokes para flujo viscoso e incomprensible explotando la formulaci�n en variables primitivas<br>
+                        <i>Inicio:&nbsp;</i>Abril&nbsp;
+                        2009                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2010
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Pensamiento del profesor. Caracterizaciones y consideraciones desde su desarrollo te�rico.  <br>
+                        <i>Inicio:&nbsp;</i>Julio&nbsp;
+                        2013                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Agosto&nbsp;
+                        2015
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>
