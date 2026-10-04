@@ -175,6 +175,46 @@ def guardar_perfil_bd(doc_id: str, perfil: dict, ruta_bd: str) -> bool:
         return False
 
 
+def _buscar_snapshot_gruplac(nro_grupo: str) -> str:
+    """Busca un snapshot de GrupLAC tanto en la raíz como recursivamente en subcarpetas."""
+    snap_dir = os.path.join(PROJECT_ROOT, "data", "snapshots")
+    if not os.path.isdir(snap_dir):
+        return ""
+    cands = [
+        os.path.join(snap_dir, f"gruplac_{nro_grupo}.html"),
+        os.path.join(snap_dir, f"gruplac_{int(nro_grupo):014d}.html") if nro_grupo.isdigit() else "",
+        os.path.join(snap_dir, "gruplac_00000000002099.html") if "2099" in nro_grupo else ""
+    ]
+    for c in cands:
+        if c and os.path.exists(c):
+            return c
+    for root, _, files in os.walk(snap_dir):
+        for f in files:
+            if f.endswith(".html") and (nro_grupo in f or (len(nro_grupo) >= 4 and nro_grupo[-4:] in f)):
+                if f.startswith("gruplac"):
+                    return os.path.join(root, f)
+    return ""
+
+
+def _buscar_snapshot_cvlac(cod_rh: str) -> str:
+    """Busca un snapshot de CvLAC en data/snapshots/ o en cualquier subcarpeta de grupo."""
+    snap_dir = os.path.join(PROJECT_ROOT, "data", "snapshots")
+    if not os.path.isdir(snap_dir):
+        return ""
+    nom = f"cvlac_{cod_rh}.html"
+    nom_pad = f"cvlac_{int(cod_rh):010d}.html" if cod_rh.isdigit() else ""
+    if os.path.exists(os.path.join(snap_dir, nom)):
+        return os.path.join(snap_dir, nom)
+    if nom_pad and os.path.exists(os.path.join(snap_dir, nom_pad)):
+        return os.path.join(snap_dir, nom_pad)
+    for root, _, files in os.walk(snap_dir):
+        if nom in files:
+            return os.path.join(root, nom)
+        if nom_pad and nom_pad in files:
+            return os.path.join(root, nom_pad)
+    return ""
+
+
 class MotorIngesta:
     """
     Motor central de procesamiento de fuentes de datos.
@@ -204,13 +244,8 @@ class MotorIngesta:
         cod_grupo = f"COL{nro_grupo[-7:]}" if len(nro_grupo) >= 7 else f"COL{nro_grupo}"
 
         html_text = ""
-        # Verificar primero si existe snapshot oficial local en data/snapshots/
-        snap_candidates = [
-            os.path.join(PROJECT_ROOT, "data", "snapshots", f"gruplac_{nro_grupo}.html"),
-            os.path.join(PROJECT_ROOT, "data", "snapshots", f"gruplac_{int(nro_grupo):014d}.html") if nro_grupo.isdigit() else "",
-            os.path.join(PROJECT_ROOT, "data", "snapshots", "gruplac_00000000002099.html") if "2099" in nro_grupo else ""
-        ]
-        snapshot_local = next((p for p in snap_candidates if p and os.path.exists(p)), None)
+        # Verificar primero si existe snapshot oficial local en data/snapshots/ (búsqueda recursiva)
+        snapshot_local = _buscar_snapshot_gruplac(nro_grupo)
 
         if snapshot_local:
             print(f"[Scraping] Usando snapshot oficial local: {os.path.basename(snapshot_local)}")
@@ -317,9 +352,9 @@ class MotorIngesta:
                         cat = "Senior" if ("adith" in nom_raw.lower() or "patino" in _norm_txt(nom_raw)) else "Junior"
                         formacion = "Ingeniería de Sistemas y Computación"
 
-                        # Comprobar si existe snapshot de CvLAC para este investigador
-                        cv_snap_path = os.path.join(snap_dir, f"cvlac_{doc_inv}.html")
-                        if os.path.exists(cv_snap_path):
+                        # Comprobar si existe snapshot de CvLAC para este investigador (búsqueda recursiva)
+                        cv_snap_path = _buscar_snapshot_cvlac(doc_inv)
+                        if cv_snap_path and os.path.exists(cv_snap_path):
                             try:
                                 with open(cv_snap_path, "r", encoding="utf-8", errors="ignore") as f_cv:
                                     html_cv = f_cv.read()
@@ -484,11 +519,8 @@ class MotorIngesta:
             resumen["grupos"] += 1
 
         html_text = ""
-        snap_candidates = [
-            os.path.join(PROJECT_ROOT, "data", "snapshots", f"cvlac_{cod_rh}.html"),
-            os.path.join(PROJECT_ROOT, "data", "snapshots", f"cvlac_{int(cod_rh):010d}.html") if cod_rh.isdigit() else ""
-        ]
-        snapshot_local = next((p for p in snap_candidates if p and os.path.exists(p)), None)
+        # Buscar snapshot CvLAC en la raíz o en cualquier subcarpeta de grupo
+        snapshot_local = _buscar_snapshot_cvlac(cod_rh)
 
         if snapshot_local:
             print(f"[Scraping] Usando snapshot oficial local CvLAC: {os.path.basename(snapshot_local)}")
