@@ -49,28 +49,41 @@ El sistema resuelve el Taller 2 de Estructura de Datos implementando dos solucio
 ### 2.3 Entidad: Producto de Investigación
 | Variable | Tipo de Dato | E/S | Descripción y Reglas de Negocio |
 | :--- | :--- | :---: | :--- |
-| `id_producto` | `Cadena (Texto)` | Entrada | Código alfanumérico único (ej. `SCRAP-2099-001`). Clave primaria. |
-| `tipo` | `Cadena (Enum)` | Entrada | Tipología: `Articulo`, `Libro`, `Capitulo`, `Software`, `Patente`, `Trabajo de Grado`. |
+| `id_producto` | `Cadena (Texto)` | Entrada | Código alfanumérico único (ej. `PROD-2099-0001`). Clave primaria. |
+| `tipo` | `Cadena (Enum)` | Entrada | 15 Tipologías oficiales: `Articulo`, `Libro`, `Capitulo`, `Software`, `Patente`, `Trabajo de Grado`, `Tesis`, `Jurado`, `CursoCorto`, `Evento`, `Consultoria`, `Informe`, `Contenido`, `Regulacion`, `Prototipo`, `Diseno`. |
 | `titulo` | `Cadena (Texto)` | Entrada | Título oficial de la publicación o desarrollo tecnológico. |
 | `anio` | `Entero (Año)` | Entrada | Año de publicación oficial registrado ante MinCiencias. |
 | `categoria_minciencias`| `Cadena (Texto)` | Entrada | Calidad editorial / impacto (`A1`, `A`, `B`, `C`). |
-| `validado` | `Booleano (1/0)`| Entrada | Aval institucional y reconocimiento MinCiencias (`1` = Sí, `0` = No). |
+| `validado` | `Booleano (1/0)`| Entrada | Detección fidedigna MinCiencias del aval `chulo_1.jpg` (`1` = Avalado oficialmente en convocatoria, `0` = Pendiente / Sin aval). |
 | `codigo_grupo` | `Cadena (Texto)` | Entrada | Clave foránea al grupo donde se originó el producto. |
 | `id_investigador` | `Cadena (Texto)`| Entrada | Clave foránea al investigador autor principal real. |
 | `activo` | `Booleano (1/0)` | E/S | Estado: `1` (Activo en estadísticas), `0` (Desactivado). |
 | `cumple_ventana_obs` | `Booleano` | Salida | Indicador de pertinencia en la ventana de observación evaluada. |
 
-### 2.4 Módulo de Generación de Informes Oficiales PDF (ReportLab)
+### 2.4 Entidad: Perfil del Investigador (Hoja de Vida CvLAC Oficial)
+| Variable | Tipo de Dato | E/S | Descripción y Reglas de Negocio |
+| :--- | :--- | :---: | :--- |
+| `documento_id` | `Cadena (Texto)` | Entrada | Cédula o `cod_rh` CvLAC. Clave primaria y FK a `Investigadores` (`ON DELETE CASCADE`). |
+| `par_evaluador` | `Cadena (Enum)` | Entrada | Reconocimiento oficial MinCiencias (`Si` / `No`). |
+| `nombre_citaciones` | `Cadena (Texto)` | Entrada | Firma científica normalizada para citaciones bibliográficas. |
+| `nacionalidad` | `Cadena (Texto)` | Entrada | País de origen del investigador. |
+| `sexo` | `Cadena (Texto)` | Entrada | Sexo registrado en la ficha CvLAC. |
+| `scholar_url` | `Cadena (URL)` | Entrada | Enlace verificado al perfil académico de Google Scholar. |
+| `orcid` | `Cadena (URL)` | Entrada | Identificador persistente digital internacional ORCID. |
+| `formacion_academica` | `Cadena (Texto)` | Entrada | Máximo nivel educativo formal alcanzado (Doctorado, Maestría, Pregrado). |
+
+### 2.5 Módulo de Generación de Informes Oficiales PDF (ReportLab)
 El sistema integra generación autónoma de informes en formato PDF estilo GrupLAC (`src/python/core/reporte_pdf.py`):
 * **Identidad Institucional:** Paleta oficial UPC (`#006837`, `#ED1C24` y `#1e3a5f`).
 * **Ficha Técnica y Liderazgo:** Ficha de grupo, categorías y directores MinCiencias.
 * **Balance Modelo 2024:** 5 macro-familias (GNC, DTI, ASC, DPC, FRH) y puntaje IPP institucional.
-* **Integrantes y Catálogo:** Desglose de integrantes y catálogo cronológico de productos.
+* **Integrantes y Catálogo:** Desglose de integrantes y catálogo cronológico de productos con badges de validación oficial.
 
-### 2.5 Dataset Institucional Masivo de la UPC (61 Grupos y 3,335 Productos)
+### 2.6 Dataset Institucional Masivo de la UPC (62 Grupos y 3,351 Productos)
 Soporte dual de persistencia y análisis de datos:
-* **Modo Muestra Verificada:** Grupos insignia auditados (GISICO `COL0002099`, AITICE `COL0043834`, GISI `COL0005544`, BIOTEC `COL0012981`).
-* **Modo Institucional Completo:** Ingesta de los 61 grupos de la Universidad Popular del Cesar, 362 investigadores y 3,351 productos científicos normalizados (`data/import_pea_json.py`).
+* **Modo Muestra Verificada:** Grupos insignia auditados (GISICO `COL0002099`, AITICE `COL0043834`, FACEUPC `COL0003639`, GIELEHLA `COL0002668`).
+* **Modo Institucional Completo:** Ingesta de los 62 grupos de la Universidad Popular del Cesar, 362 investigadores y 3,351 productos científicos normalizados (`data/import_pea_json.py`).
+* **Respaldo Offline Robusto:** 90 snapshots oficiales (85 CvLAC + 5 GrupLAC) con búsqueda recursiva nativa en subcarpetas para contingencia total sin conexión a internet.
 
 ---
 

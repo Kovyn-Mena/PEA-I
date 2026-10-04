@@ -259,18 +259,34 @@ def build_document():
     doc.add_heading("2.3 Entidad: Producto de Investigación", level=2)
     tbl_prod = doc.add_table(rows=1, cols=4)
     data_prod = [
-        ["id_producto", "Cadena (Texto)", "Entrada", "Código alfanumérico único institucional/MinCiencias (ej. SCRAP-2099-001)."],
-        ["tipo", "Cadena (Enum)", "Entrada", "Tipología: Articulo, Libro, Capitulo, Software, Patente, Trabajo de Grado."],
+        ["id_producto", "Cadena (Texto)", "Entrada", "Código alfanumérico único institucional/MinCiencias (ej. PROD-2099-0001)."],
+        ["tipo", "Cadena (Enum)", "Entrada", "15 Tipologías oficiales: Articulo, Libro, Capitulo, Software, Patente, Trabajo de Grado, Tesis, Jurado, CursoCorto, Evento, Consultoria, Informe, Contenido, Regulacion, Prototipo, Diseno."],
         ["titulo", "Cadena (Texto)", "Entrada", "Título de la publicación o desarrollo tecnológico registrado."],
         ["anio", "Entero (Año)", "Entrada", "Año de publicación oficial (relevante para ventanas de observación)."],
         ["categoria_minciencias", "Cadena (Texto)", "Entrada", "Nivel de indexación: A1, A, B, C o Sin Categoría."],
-        ["validado", "Booleano (1/0)", "Entrada", "Aval institucional UPC y reconocimiento MinCiencias (1 = Sí, 0 = No)."],
+        ["validado", "Booleano (1/0)", "Entrada", "Detección fidedigna MinCiencias del aval chulo_1.jpg (1 = Avalado oficialmente en convocatoria, 0 = Pendiente/Sin aval)."],
         ["codigo_grupo", "Cadena (Texto)", "Entrada", "Clave foránea que vincula el producto al grupo."],
         ["id_investigador", "Cadena (Texto)", "Entrada", "Clave foránea que atribuye la obra a su autor principal real."],
         ["activo", "Booleano (1/0)", "E/S", "Estado lógico: 1 = Activo en estadísticas, 0 = Desactivado."],
         ["cumple_ventana_obs", "Booleano", "Salida", "Indicador dinámico si el producto cae en la ventana (últimos 2 o 5 años)."]
     ]
     format_table(tbl_prod, widths_var, headers_var, data_prod)
+    doc.add_paragraph().paragraph_format.space_after = Pt(8)
+
+    # Tabla Perfil Investigador CvLAC
+    doc.add_heading("2.4 Entidad: Perfil del Investigador (Hoja de Vida CvLAC Oficial)", level=2)
+    tbl_perfil = doc.add_table(rows=1, cols=4)
+    data_perfil = [
+        ["documento_id", "Cadena (Texto)", "Entrada", "Cédula de ciudadanía o código CvLAC (cod_rh). Clave primaria y FK a Investigadores."],
+        ["par_evaluador", "Cadena (Enum)", "Entrada", "Reconocimiento oficial MinCiencias como Par Evaluador (Si / No)."],
+        ["nombre_citaciones", "Cadena (Texto)", "Entrada", "Firma científica normalizada para citaciones bibliográficas internacionales."],
+        ["nacionalidad", "Cadena (Texto)", "Entrada", "País de origen reportado en el currículo vitae."],
+        ["sexo", "Cadena (Texto)", "Entrada", "Sexo registrado en la ficha oficial CvLAC."],
+        ["scholar_url", "Cadena (URL)", "Entrada", "Enlace verificado al perfil académico de Google Scholar."],
+        ["orcid", "Cadena (URL)", "Entrada", "Identificador persistente digital internacional ORCID."],
+        ["formacion_academica", "Cadena (Texto)", "Entrada", "Máximo nivel educativo formal alcanzado (Doctorado, Maestría, Pregrado)."]
+    ]
+    format_table(tbl_perfil, widths_var, headers_var, data_perfil)
     doc.add_paragraph().paragraph_format.space_after = Pt(12)
 
     # --- SECCIÓN 3: ESTRUCTURAS DE DATOS Y EL HIPERCUBO 3D (PUNTOS 8, 9, 14) ---

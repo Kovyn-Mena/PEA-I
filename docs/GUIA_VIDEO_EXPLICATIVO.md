@@ -98,6 +98,13 @@ Si explicas esos 5 puntos con seguridad siguiendo este guion, tu nota será un *
 > *Aquí tenemos la consulta del Hipercubo con búsqueda inteligente. Si escribo `gisico` o presiono directamente **ENTER**, el sistema localiza el grupo:*
 > - *Podemos ver al grupo GISICO (`COL0002099`), su líder el docente John Jairo Patiño Vanegas, sus investigadores adscritos como el profesor Adith Pérez, y la lista completa de productos vinculados.*
 > 
+> *(Regresa con `0`, entra a `2. Gestión de Investigadores` -> `3. Consultar Detalle` y escribe `adith` o su código `0000494917`):*
+> *Observen esta innovación, profesor: al consultar su perfil docente (`0000494917`), el sistema no solo muestra su categoría y formación, sino que recupera su Hoja de Vida CvLAC oficial enriquecida:*
+> - *• Par Evaluador MinCiencias: [SÍ (Reconocido)]*
+> - *• Perfil de Google Scholar verificado*
+> - *• Código digital internacional ORCID*
+> - *Y todo su historial de productos en el Hipercubo Ortogonal, señalando con exactitud si cuenta con el aval oficial (`chulo_1.jpg`) de MinCiencias.*
+> 
 > *(Regresa al menú principal con `0`, entra a `5. Resumen Estadístico y Filtro`):*
 > *Aquí cumplimos el **Punto 10 del taller**: podemos filtrar la producción por ventana de observación, por ejemplo los últimos 2 años o los últimos 5 años, evaluando dinámicamente la producción vigente según las convocatorias de MinCiencias.*
 > 
@@ -121,8 +128,9 @@ Si explicas esos 5 puntos con seguridad siguiendo este guion, tu nota será un *
 > *(Muestra el navegador):*
 > 1. *En el panel lateral izquierdo podemos buscar cualquier grupo de la UPC o filtrarlo por categorías MinCiencias (A1, A, B, C, Reconocidos).*
 > 2. *Al seleccionar un grupo (por ejemplo GISICO), vemos su ficha técnica institucional y un botón directo que dice **'📄 Descargar Informe PDF'**.*
-> 3. *Si hacemos clic en él, se abre el reporte oficial en PDF que generamos con ReportLab con los colores institucionales verde y rojo de la UPC, balance del Modelo MinCiencias 2024 (calculando el Índice de Producción Ponderada IPP en las 5 macro-familias: GNC, DTI, ASC, DPC y FRH).*
-> 4. *En el Dashboard general tenemos el histograma cronológico de publicaciones desde 1996 hasta 2026, la distribución de categorías y los indicadores de aval institucional."*
+>    *Al navegar a la pestaña **'Integrantes'**, miren cómo el visualizador destaca con la insignia dorada `⭐ Par Evaluador` a los docentes reconocidos por MinCiencias, e integra botones interactivos para abrir su perfil de `📘 Google Scholar` y su identificador global persistente `🆔 ORCID`.*
+> 3. *Si hacemos clic en 'Descargar Informe PDF', se abre el reporte oficial en PDF que generamos con ReportLab con los colores institucionales verde y rojo de la UPC, balance del Modelo MinCiencias 2024 (calculando el Índice de Producción Ponderada IPP en las 5 macro-familias: GNC, DTI, ASC, DPC y FRH).*
+> 4. *En el Dashboard general tenemos el histograma cronológico de publicaciones desde 1996 hasta 2026, la distribución de categorías y los indicadores de aval institucional fidedignos basados en `chulo_1.jpg`."*
 
 ---
 
