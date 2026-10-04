@@ -9,6 +9,7 @@
 #include <cstdlib>
 #include <filesystem>
 #include "Multilista.h"
+#include "GestorSQLite.h"
 
 // =====================================================================
 // PEA-i: PORTAL EJECUTIVO Y DASHBOARD DE CIENCIA ABIERTA (UPC)
@@ -75,11 +76,17 @@ private:
                 if (!primerInv) json << ",\n";
                 primerInv = false;
 
+                std::string parEval, scholar, orcid, formExtra;
+                bool tieneP = GestorSQLite::obtenerPerfilInvestigador(inv->documento_id, parEval, scholar, orcid, formExtra);
+
                 json << "        {\n";
                 json << "          \"documento\": \"" << escaparJSON(inv->documento_id) << "\",\n";
                 json << "          \"nombre\": \"" << escaparJSON(inv->nombre_completo) << "\",\n";
                 json << "          \"categoria\": \"" << escaparJSON(inv->categoria) << "\",\n";
                 json << "          \"formacion\": \"" << escaparJSON(inv->formacion_academica) << "\",\n";
+                json << "          \"par_evaluador\": \"" << (tieneP ? parEval : "No") << "\",\n";
+                json << "          \"scholar_url\": \"" << (tieneP ? escaparJSON(scholar) : "") << "\",\n";
+                json << "          \"orcid\": \"" << (tieneP ? escaparJSON(orcid) : "") << "\",\n";
                 json << "          \"activo\": " << (inv->activo ? "true" : "false") << "\n";
                 json << "        }";
                 inv = inv->sigInvestigador;
@@ -1041,12 +1048,17 @@ public:
             tbodyInv.innerHTML = "";
             (g.investigadores || []).forEach(inv => {
                 const tr = document.createElement("tr");
+                let badgePar = inv.par_evaluador === "Si" ? " <span class='badge-cat' style='background:#eab308; color:#000; font-weight:700; margin-left:6px;'>⭐ Par Evaluador</span>" : "";
+                let links = "";
+                if (inv.scholar_url) links += `<a href="${inv.scholar_url}" target="_blank" style="background:#0284c7; color:#fff; padding:2px 6px; border-radius:4px; font-size:0.75rem; text-decoration:none; margin-right:4px;">📘 Scholar</a>`;
+                if (inv.orcid) links += `<a href="${inv.orcid}" target="_blank" style="background:#10b981; color:#fff; padding:2px 6px; border-radius:4px; font-size:0.75rem; text-decoration:none;">🆔 ORCID</a>`;
+
                 tr.innerHTML = `
                     <td><code style="color:#38bdf8;">${inv.documento}</code></td>
-                    <td><b>${inv.nombre}</b></td>
+                    <td><b>${inv.nombre}</b>${badgePar}</td>
                     <td><span class="badge-cat">${inv.categoria || "Junior"}</span></td>
                     <td>${inv.formacion || "Maestría / Doctorado CTeI"}</td>
-                    <td>${inv.activo ? "<span style='color:#10b981;'>● Activo</span>" : "<span style='color:#94a3b8;'>Inactivo</span>"}</td>
+                    <td>${links ? links : (inv.activo ? "<span style='color:#10b981;'>● Activo</span>" : "<span style='color:#94a3b8;'>Inactivo</span>")}</td>
                 `;
                 tbodyInv.appendChild(tr);
             });

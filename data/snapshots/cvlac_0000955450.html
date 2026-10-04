@@ -1,0 +1,2229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=91CBE62069CBA3744730FE146DBA725F" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                <tr>    
+                                    <td colspan="2" class="messageText"><b>Par evaluador reconocido por Minciencias.</b></td>                            
+                                </tr>                        
+                                
+                                
+                                    <tr>
+                                        <td>Categor&iacute;a</td>
+                                        <td>
+                                            Investigador Junior (IJ) con vigencia
+                                            
+                                                hasta la publicación de los resultados de la siguiente convocatoria
+                                                
+                                            
+                                        </td>
+                                    </tr>
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        Ronald Alexander&nbsp;Vacca&nbsp;Ascanio
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>VACCA ASCANIO, RONALD ALEXANDER</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            FUNDACIÓN UNIVERSIDAD DEL NORTE<br />
+                            TELEMATICA Y TELECOMUNICACIONES<br />
+                            Enerode2015 - Marzode 2017<br />
+                            SISTEMA DE GESTION MOVIL PARA LA COBRANZA EN CAMPO</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD POPULAR DEL CESAR<br />
+                            Ingenierias<br />
+                            Febrerode2003 - Diciembrede 2008<br />
+                            Sistema de Informacion y Estadistica Para la Oficina de Epidemiologia de La Secretaria de Salud Municipal de Valledupar.</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Secundario</b>
+                            Colegio San Francisco De Asis<br />
+                            <br />
+                            Febrerode1997 - Diciembrede 2002<br />
+                            </td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3>Formaci&oacute;n Complementaria</h3></td>
+                            </tr>   
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Ingenierias<br />
+                        Septiembrede2007 - Octubrede 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Ingenieria<br />
+                        Marzode2008 - Abrilde 2008<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Ingenierias<br />
+                        Febrerode2009 - Marzode 2009<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Ingenierias<br />
+                        Febrerode2009 - Marzode 2009<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Ingenierias<br />
+                        Juliode2009 - Agostode 2009<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Ingenierias<br />
+                        Marzode2008 - Abrilde 2008<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Universidad De Santander - Campus Valledupar<br />
+                        Ingenieria<br />
+                        Agostode2006 - Septiembrede 2006<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Comunida Academica Microsoft<br />
+                        Ingenieria<br />
+                        Abrilde2007 - Abrilde 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Ingenerias<br />
+                        Juniode2007 - Juniode 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Ingenieria<br />
+                        Diciembrede2006 - Diciembrede 2006<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Ingenieria<br />
+                        Juniode2006 - Juniode 2006<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Universidad Autónoma De Colombia<br />
+                        Ingenieria<br />
+                        Abrilde2007 - Abrilde 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Ingenieria<br />
+                        Septiembrede2006 - Noviembrede 2006<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Ingenieria<br />
+                        Octubrede2005 - Octubrede 2005<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Ingenieria<br />
+                        Abrilde2004 - Abrilde 2004<br />
+                        </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Servicio Nacional De Aprendizaje Sena Regional Cesar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>8&nbsp;horas Semanales
+                        Febrero de 2018            
+                        Diciembre de 2018<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Junio de 2007            
+                        Diciembre de 2008<br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Pasantías
+                        <i> - Titulo:</i>&nbsp; Sistema de Informacion Y Estadistica Para La oficina de Epidemiologia de la Secretaria de Salud Muncipal  de Valledupar.                            
+                        Junio 2007            
+                        Octubre 2008<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Octubre de 2007            
+                        Noviembre de 2007<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Coordinador de curso            
+                        <i> - Cargo:</i>&nbsp;Coordinador de curso          
+                        Octubre de 2007            
+                        Noviembre de 2007<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Febrero de 2007            
+                        Junio de 2007<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Informatica II,&nbsp;80 
+                        Febrero 2007            
+                        Junio 2007<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;Sistemas de Informacion, <i>Activa:</i>No</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Inteligencia Artificial, <i>Activa:</i>No</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;APLICACIONES MOVILES, <i>Activa:</i>Si</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Reconocimientos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>FORMULA DE CAMBIO,COLCIENCIAS / EcosNord - Febrerode 2018</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>PREMIO A LA MEJOR PONENCIA(Primer Lugar en el Eje Temática: Turismo, Cultura y Empresarismo),Servicio Nacional De Aprendizaje Sena Regional Cesar - Agostode 2018</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>Proyecto ganador S'life Salvando Vidas Sobre Ruedas  elaborado en el marco del curso - taller Train-the-trainer: ernprendimiento e innovación basado en conocimiento,UNIVERSIDAD NACIONAL DE COLOMBIA - Noviembrede 2018</li></td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a></td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RONALD ALEXANDER VACCA ASCANIO,                    
+                            
+                            APLICACIÓN MOVIL Y WEB PARA LA GESTION DE PROCESOS INTERNOS EN UN SALON DE BELLEZA CASO: EUCARIS ROJAS BELLEZA INTEGRAL&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2019.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Aris Jhovannys Perea Cudris
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): RONALD ALEXANDER VACCA ASCANIO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos dirigidos/Tutorías de otro tipo</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RONALD ALEXANDER VACCA ASCANIO,                    
+                            
+                            DESARROLLO DE UN APLICATIVO WEB PARA EL CONTROL Y SEGUIMIENTO DE CLIENTES ASOCIADOS A LAS ESTACIONES DE BOMBEROS A NIVEL NACIONAL(GLOBAL)&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2023.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RONALD ALEXANDER VACCA ASCANIO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Civil -- Ingeniería Civil,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos dirigidos/Tutorías de otro tipo</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RONALD ALEXANDER VACCA ASCANIO,                    
+                            
+                            APLICATIVO WEB PARA LA GESTION DEL PROCESOS HOTELEROS EN OXOHOTEL WAYA GUAJIRA&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2022.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            JOSE ANDRES TURIZO JIMENEZ
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): RONALD ALEXANDER VACCA ASCANIO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a></td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a></td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>II SIMPOSIO DE INVESTIGACION, INNOVACION Y DESAROLLO TECNOLOGICO Y PRIMERA MUESTRA DE ROBOTICA SENA COMM- REGIONAL CESAR&nbsp;
+                                                <i>Tipo de evento: </i>Simposio&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2017-09-27 00:00:00.0,&nbsp;
+                                                    2017-09-28 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - CENTRO DE OPERACIÓN Y MANTENIMIENTO MINERO, CRA 19 ENTRE CALLE 14 Y 16 &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>APLICACIÓN MÓVIL PARA LECTURA DE SENSORES, CAPTURA DE IMAGEN Y VIDEO, MEDIANTE CELULAR UBICADO EN LA PLATAFORMA ESTRATOSFÉRICA NOEMA.
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>MEMORIA SIMPOSIO DE INVESTIGACION, II INNOVACION Y DESAROLLO TECNOLOGICO Y PRIMERA MUESTRA DE ROBOTICA SENA COMM- REGIONAL CESAR
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Servicio Nacional De Aprendizaje Sena Regional Cesar
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>RONALD ALEXANDER VACCA ASCANIO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>EUROSIM 2023 Congress&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2023-07-03 00:00:00.0,&nbsp;
+                                                    2023-07-05 00:00:00.0 &nbsp;
+                                                    en Amsterdam &nbsp; - Amsterdam &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>¿Augmented reality applied to the ¿Balneario Paso de la Danta¿ in Manaure Cesar, an interactive experience of ICT and cultural heritage
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>RONALD ALEXANDER VACCA ASCANIO
+                                                        <i>Rol en el evento: </i>Ponente , Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>II ENCUENTRO DE CIENCIA TECNOLOGIA E INNOVACION&nbsp;
+                                                <i>Tipo de evento: </i>Simposio&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2018-08-30 00:00:00.0,&nbsp;
+                                                    2018-08-31 00:00:00.0 &nbsp;
+                                                    en SAN ANDRÉS &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>DIFUSION DE ACTIVIDADES TURISTICAS DEL CABO DE LA VELA A TRAVES DE APLICACION MOVIL COMO ESTRATEGIA DE CONSERVACION DE LAS CONSTUMBRES DE LOS WAYUU
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Servicio Nacional de Aprendizaje 
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>RONALD ALEXANDER VACCA ASCANIO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                RONALD ALEXANDER VACCA ASCANIO,                    
+                                    
+                MARIBEL ROMERO MESTRE,                    
+                
+                "Tourism and Conservation Empowered by Augmented Reality: A Scientometric Analysis Based on the Science Tree Metaphor"
+                . En: Colombia&nbsp;<br>
+                SUSTAINABILITY&nbsp;
+                <i>ISSN:</i>&nbsp;1937-0709&nbsp;
+                <i>ed:</i>&nbsp;Mary Ann Liebert<br>
+                <i>v.</i>15
+                <i>fasc.</i>
+                p.1
+                - 32
+                ,2023,
+                <i>&nbsp;DOI:&nbsp;</i>10.3390/su152416847
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                augmented reality,                    
+                                    
+                sustainable tourism,                    
+                                    
+                cultural heritage,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                RONALD ALEXANDER VACCA ASCANIO,                    
+                                    
+                MARIBEL ROMERO MESTRE,                    
+                
+                "Exploring the History and Culture of Main Square Los Tupes with Augmented Reality in San Diego, Cesar."
+                . En: Singapur&nbsp;<br>
+                LECTURE NOTES ON DATA ENGINEERING AND COMMUNICATIONS TECHNOLOGIES&nbsp;
+                <i>ISSN:</i>&nbsp;2367-4512&nbsp;
+                <i>ed:</i>&nbsp;Springer International Publishing AG<br>
+                <i>v.</i>190
+                <i>fasc.</i>
+                p.253
+                - 263
+                ,2023,
+                <i>&nbsp;DOI:&nbsp;</i>10.1007/978-981-99-7947-9_19
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                cultural heritage,                    
+                                    
+                innovation in tourism,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                RONALD ALEXANDER VACCA ASCANIO,                    
+                                    
+                MARIBEL ROMERO MESTRE,                    
+                
+                "Platform Based on Augmented Reality to Support Cultural Tourism in the Department of Cesar, Colombia"
+                . En: Alemania&nbsp;<br>
+                LECTURE NOTES IN NETWORKS AND SYSTEMS&nbsp;
+                <i>ISSN:</i>&nbsp;2367-3389&nbsp;
+                <i>ed:</i>&nbsp;Springer International Publishing AG<br>
+                <i>v.</i>711
+                <i>fasc.</i>
+                p.598
+                - 612
+                ,2023,
+                <i>&nbsp;DOI:&nbsp;</i>10.1007/978-3-031-37717-4_38
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                augmented reality,                    
+                                    
+                cultural heritage,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                RONALD ALEXANDER VACCA ASCANIO,                    
+                                    
+                MARIBEL ROMERO MESTRE,                    
+                
+                "Sustainability in Hybrid Technologies for Heritage Preservation: A Scientometric Study"
+                . En: Colombia&nbsp;<br>
+                SUSTAINABILITY&nbsp;
+                <i>ISSN:</i>&nbsp;1937-0695&nbsp;
+                <i>ed:</i>&nbsp;Mary Ann Liebert<br>
+                <i>v.</i>16
+                <i>fasc.</i>5
+                p.1
+                - 37
+                ,2024,
+                <i>&nbsp;DOI:&nbsp;</i>10.3390/su16051991
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                RONALD ALEXANDER VACCA ASCANIO,                    
+                
+                "Augmented reality applied to the "Balneario Paso de la Danta" in Manaure Cesar, an interactive experience of ICT and cultural heritage."
+                . En: Colombia&nbsp;<br>
+                SIMULATION TRANSACTIONS OF THE SOCIETY FOR MODELING AND SIMULATION INTERNATIONAL&nbsp;
+                <i>ISSN:</i>&nbsp;1741-3133&nbsp;
+                <i>ed:</i>&nbsp;Sage<br>
+                <i>v.</i>14
+                <i>fasc.</i>
+                p.1
+                - 14
+                ,2023,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                RONALD ALEXANDER VACCA ASCANIO,                    
+                
+                "Aplicativo móvil para la gestión de procesos administrativos y operativos para una inmobiliaria en la ciudad de Valledupar"
+                . En: Colombia&nbsp;<br>
+                Serie Científica de la Universidad de las Ciencias Informáticas&nbsp;
+                <i>ISSN:</i>&nbsp;2306-2495&nbsp;
+                <i>ed:</i>&nbsp;<br>
+                <i>v.</i>15
+                <i>fasc.</i>
+                p.169
+                - 174
+                ,2022,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a></td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a></td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a></td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Libro de Formaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Producción bibliográfica - Libro - Libros de formación </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Nombre del libro: </i>Cabeza Propia,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2026 -   
+                            Septiembre,&nbsp;
+                            <i>Isbn: </i>979-8173846747,&nbsp;   
+                            <i>Medio de divulgaci&oacute;n: </i>Electrónico,&nbsp;   
+                            <i>Lugar de publicaci&oacute;n: </i>Colombia,&nbsp;   
+                            <i>Editorial: </i>Amazon.com books,&nbsp;  
+                            
+                                                           
+                                            <br><b>Areas: </b><br>
+                                                                    
+                                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a>
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Softwares</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        RONALD ALEXANDER VACCA ASCANIO,                    
+                                            
+                        KARINA PAOLA MEZA RESTREPO,                    
+                        
+                        APLICACIÓN MOVIL Y WEB PARA EL CONTROL EN TIEMPO REAL DE LA PUNTUACION PARA FESTIVALES Y CONCURSOS EN EL PAIS.,
+                        <i>Nombre comercial: </i>,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2018,&nbsp;
+                        .<i>plataforma: ,</i>&nbsp;
+                        .<i>ambiente: ,</i>                                
+                        
+                        
+                        <br><b>Palabras: </b><br>
+                                            
+                        TIEMPO REAL,                    
+                                            
+                        PLATAFORMA WEB,                    
+                                            
+                        FESTIVALES,                    
+                                            
+                        APLICACION WEB,                    
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Hardware y Arquitectura de Computadores,                    
+                        
+                        
+                        
+                        <br><b>Sectores: </b><br>
+                                                
+                        Desarrollo de programas (software) y prestación de servicios en informática - Desarrollo de programas (software),                    
+                                                
+                        Productos y servicios de recreación,culturales, artísticos y deportivos,                    
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        RONALD ALEXANDER VACCA ASCANIO,                    
+                                            
+                        CESAR AUGUSTO CORONEL SEGRERA,                    
+                        
+                        APLICACION MOVIL V-NOEMA,
+                        <i>Nombre comercial: </i>,
+                        <i>contrato/registro: </i>1793-2017,
+                        . En: Colombia,&nbsp;
+                        ,2017,&nbsp;
+                        .<i>plataforma: ,</i>&nbsp;
+                        .<i>ambiente: ,</i>                                
+                        
+                        
+                        <br><b>Palabras: </b><br>
+                                            
+                        APLICACION MOVIL,                    
+                                            
+                        ESTRATOSFERA,                    
+                                            
+                        VIDEO,                    
+                                            
+                        AUDIO,                    
+                                            
+                        HUMEDAD,                    
+                                            
+                        PRESION ATMOSFERICA,                    
+                                            
+                        TEMPERATURA,                    
+                                            
+                        ANDROID,                    
+                                            
+                        GPS,                    
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Hardware y Arquitectura de Computadores,                    
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Robótica y Control Automático,                    
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Telecomunicaciones,                    
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                        
+                        
+                        
+                        <br><b>Sectores: </b><br>
+                                                
+                        Desarrollo de programas (software) y prestación de servicios en informática - Desarrollo de programas (software),                    
+                                                
+                        Aeronáutica y espacio,                    
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        RONALD ALEXANDER VACCA ASCANIO,                    
+                                            
+                        KARINA PAOLA MEZA RESTREPO,                    
+                        
+                        APLICACIÓN MOVIL PARA EL CONTROL DE LUCES EN EL HOGAR,
+                        <i>Nombre comercial: </i>,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2018,&nbsp;
+                        .<i>plataforma: ,</i>&nbsp;
+                        .<i>ambiente: ,</i>                                
+                        
+                        
+                        <br><b>Palabras: </b><br>
+                                            
+                        TIEMPO REAL,                    
+                                            
+                        IOT,                    
+                                            
+                        APLICACION MOVIL,                    
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Telecomunicaciones,                    
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+                        <br><b>Sectores: </b><br>
+                                                
+                        Desarrollo de programas (software) y prestación de servicios en informática - Desarrollo de programas (software),                    
+                                                
+                        Fabricación de material electrónico y de aparatos y equipos de comunicación - Fabricación de material electrónico básico,                    
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        RONALD ALEXANDER VACCA ASCANIO,                    
+                        
+                        UPC PRO,
+                        <i>Nombre comercial: </i>UPC PRO,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2025,&nbsp;
+                        .<i>plataforma: ,</i>&nbsp;
+                        .<i>ambiente: ,</i>                                
+                        
+                        
+                        
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        RONALD ALEXANDER VACCA ASCANIO,                    
+                                            
+                        TONNY ENRIQUE JIMENEZ MARQUEZ,                    
+                                            
+                        AMILKAR SIERRA ROMANO,                    
+                        
+                        APLICACION MOVIL TU RUTA,
+                        <i>Nombre comercial: </i>TU RUTA,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2024,&nbsp;
+                        .<i>plataforma: ,</i>&nbsp;
+                        .<i>ambiente: ,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+            
+        </table>
+        </td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a>
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 id="base_tecnologica">Empresas de base tecnológica</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+            <li><b>Producción técnica - Empresa de base tecnológica - Start-up</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            RONALD ALEXANDER VACCA ASCANIO,                    
+            
+            SIASOLUTIONS,
+            <i>Nit&nbsp;</i>901077089-4, 
+            <i>Registrado ante la c&acute;mara el:</i>&nbsp;2017-05-05 00:00:00.0,
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            ANDROID,                    
+                                
+            APLICACION MOVIL,                    
+                                
+            AUDIO,                    
+                                
+            ESTRATOSFERA,                    
+                                
+            FESTIVALES,                    
+                                
+            GPS,                    
+                                
+            HUMEDAD,                    
+                                
+            IOT,                    
+                                
+            PLATAFORMA WEB,                    
+                                
+            PRESION ATMOSFERICA,                    
+                                
+            TEMPERATURA,                    
+                                
+            TIEMPO REAL,                    
+                                
+            VIDEO,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Hardware y Arquitectura de Computadores,                    
+                                    
+            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                                    
+            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                                    
+            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería Eléctrica y Electrónica,                    
+                                    
+            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Robótica y Control Automático,                    
+                                    
+            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Telecomunicaciones,                    
+            
+            
+            
+            <br><b>Sectores: </b><br>
+                                    
+            Desarrollo de programas (software) y prestación de servicios en informática - Consultoría en sistemas de informática,                    
+                                    
+            Desarrollo de programas (software) y prestación de servicios en informática - Desarrollo de programas (software),                    
+            
+
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+    <table width="100%" style="border:#999 1px solid" id="obras_productos">
+        <tr>
+            <td> <h3>Obras o productos</h3> </td>
+        </tr>
+        
+            <tr>
+                <td>
+                    <blockquote>
+
+                                                                                                                
+                                                                                
+                            
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                            
+
+                        
+                        <i>Nombre del producto:</i>
+                        EDUKIDS,
+
+                        <i>Disciplina:</i>
+                        Humanidades -- Arte -- Artes audiovisuales, 
+
+                        <i>Fecha de creación:</i>
+                        Mayo de 2017
+
+                        
+                            <br/>
+                            <h5>INSTANCIAS DE VALORACIÓN DE LA OBRA</h5>
+                            <ul>
+                                
+                                    <li>
+                                    Nombre del espacio o evento:
+                                    FORMULA DE CAMBIO,
+
+                                    Fecha de presentación:
+                                    2018-02-12,
+
+                                    Entidad convocante 1:
+                                    COLCIENCIAS / EcosNord
+                                    </li>
+                                
+                            </ul>
+                        
+                    </blockquote>                    
+                </td>                         
+            </tr>
+        
+    </table>
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Sistema de Posicionamiento de Antenas en Tiempo Real Utilizando Redes Neuronales.<br>
+                        <i>Inicio:&nbsp;</i>Julio&nbsp;
+                        2007                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Junio&nbsp;
+                        2008
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2008
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>24<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        TU RUTA<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2023                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2024
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            REALIZA LA CAPTURA Y ALMACENAMIENTO DE DATOS, PROCESA ESTOS DATOS GENERANDO INFORMACIÓN PERSONALIZADA, 
+REALIZA ANÁLISIS DE DATOS USANDO INTELIGENCIA ARTIFICIAL, PROTEGE INFORMACIÓN CONFIDENCIAL, REALIZA INFORMES Y 
+REPORTES, EXPORTA INFORMACIÓN PERSONALIZADA, CREA COPIAS DE SEGURIDAD, MONITOREA EN TIEMPO REAL EL ESTADO 
+DEL APLICATIVO, ANALIZA LOS DATOS PARA CREAR INFORMACIÓN ESTADÍSTICA, REALIZA VALIDACIONES DE SEGURIDAD E 
+INTEGRIDAD DE LA INFORMACIÓN.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        APLICACIÓN MOVIL Y WEB PARA EL CONTROL EN TIEMPO REAL DE LA PUNTUACION PARA FESTIVALES Y CONCURSOS EN EL PAIS.<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2018                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2018
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        APLICACIÓN MOVIL PARA EL CONTROL DE LUCES EN EL HOGAR<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2018                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2018
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        NAVE DE OBSERVACION ESTRATOSFERICA MEDIOAMBIENTAL PROYECTO DE INVESTIGACION ADSCRITO A SENNOVA<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2018                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2018
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        LEYENDAS VALLENATAS FRANCISCO EL HOMBRE<br>
+                        <i>Inicio:&nbsp;</i>Mayo&nbsp;
+                        2017                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2017
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        APLICACION MOVIL PARA PROMOVER EL TURISMO COMUNITARIO EN LA COMUNIDAD INDIGENA ARHUACA EN EL MUNICIPIO DE PUEBLO BELLO, DEPARTAMENTO DEL CESAR<br>
+                        <i>Inicio:&nbsp;</i>Octubre&nbsp;
+                        2021                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Este proyecto tiene como propósito desarrollar un aplicativo, donde se pueda tener
+una variedad de información de sitios de interés, tradiciones e historia, comidas típicas
+y religión de la comunidad indígena Arhuaca, en el municipio de Pueblo Bello. La
+aplicación busca que el turista tenga la mejor experiencia; además de promover el
+turismo para apoyar a las comunidades a conservar sus reservas naturales y
+culturales, aumentar su ingreso económico, mejorar la calidad de vida de sus
+habitantes, brindando la opción de promocionar sus negocios a través de la
+aplicación. El sistema ayudaría a que las personas se interesen por conocer la región
+(rutas culturales, gastronomía y artesanía) y tradiciones, además, de ayudar a
+impulsar el ecoturismo, turismo rural, turismo bienestar; favoreciendo la preservación
+de los recursos naturales y la valorización del patrimonio cultural.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Aplicativo móvil para la gestión de procesos administrativos y operativos para una inmobiliaria en la ciudad de Valledupar<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2022                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2022
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            En la actualidad, existen numerosas aplicaciones tanto web como móviles diseñadas para buscar viviendas en venta o alquiler. Además, las empresas de bienes raíces utilizan sistemas independientes que solo pueden ser accedidos por ellos mismos, lo que obliga a los usuarios o propietarios a visitar dichas inmobiliarias para llevar a cabo sus gestiones correspondientes.
+
+Si nos centramos en métodos más prácticos, existen aplicaciones móviles que permiten a los usuarios consultar inmuebles disponibles para alquilar o comprar. A partir de esta idea surge un proyecto con el objetivo de mejorar la calidad de vida de las personas, facilitando de manera más sencilla los procesos de arrendamiento y compra de propiedades. Tanto los arrendadores como los arrendatarios se beneficiarían de esta herramienta, que además permitiría a los propietarios administrar sus propiedades desde la misma aplicación. Esto incluiría la posibilidad de ofertar sus inmuebles, gestionar el proceso de arrendamiento y el de compra, sin necesidad de realizar un gran desembolso inicial en bienes inmuebles físicos. Todo esto se traduciría en ahorros significativos para los usuarios. Gracias a esta aplicación móvil, se reduciría el tiempo de respuesta en todas las etapas del proceso.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        FORTALECIMIENTO DE LA APROPIACIÓN SOCIAL DE LA CULTURA E IDENTIDAD CULTURAL HACIENDO USO DE REALIDAD AUMENTADA EN LOS PATRIMONIOS CULTURALES Y TURÍSTICOS DEL DEPARTAMENTO DEL CESAR CÓDIGO BPIN 2021000100363<br>
+                        <i>Inicio:&nbsp;</i>Noviembre&nbsp;
+                        2022                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Febrero&nbsp;
+                        2024
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            FORTALECIMIENTO DE LA APROPIACIÓN SOCIAL DE LA CULTURA E
+IDENTIDAD CULTURAL HACIENDO USO DE REALIDAD AUMENTADA EN LOS
+PATRIMONIOS CULTURALES Y TURÍSTICOS DEL DEPARTAMENTO DEL CESAR
+CÓDIGO BPIN 2021000100363<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        DIRECCION PROYECTO DE GRADO PROGRAMA INGENIERIA DE SISTEMA<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2022                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            DIRECCIONES DE TRABAJOS DE GRADO DEL PROGRAMA DE INGENIERIA DE SISTEMAS<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

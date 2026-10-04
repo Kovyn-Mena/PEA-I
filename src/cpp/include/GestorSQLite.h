@@ -178,6 +178,36 @@ public:
         sqlite3_close(db);
         return true;
     }
+
+    // Consulta los datos curriculares de la Hoja de Vida CvLAC (Punto enriquecido CvLAC)
+    static bool obtenerPerfilInvestigador(const std::string& doc, std::string& parEval,
+                                         std::string& scholar, std::string& orcid,
+                                         std::string& formacion,
+                                         const std::string& rutaBD = "data/pea_investigacion.db") {
+        sqlite3* db = nullptr;
+        if (sqlite3_open(rutaBD.c_str(), &db) != SQLITE_OK) return false;
+
+        const char* sql = "SELECT par_evaluador, scholar_url, orcid, formacion_academica FROM PerfilInvestigador WHERE documento_id = ?;";
+        sqlite3_stmt* stmt = nullptr;
+        bool hallado = false;
+        if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) == SQLITE_OK) {
+            sqlite3_bind_text(stmt, 1, doc.c_str(), -1, SQLITE_STATIC);
+            if (sqlite3_step(stmt) == SQLITE_ROW) {
+                const char* p = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0));
+                const char* s = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1));
+                const char* o = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 2));
+                const char* f = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 3));
+                parEval = p ? p : "No";
+                scholar = s ? s : "";
+                orcid = o ? o : "";
+                formacion = f ? f : "";
+                hallado = true;
+            }
+            sqlite3_finalize(stmt);
+        }
+        sqlite3_close(db);
+        return hallado;
+    }
 };
 
 #endif // GESTOR_SQLITE_H

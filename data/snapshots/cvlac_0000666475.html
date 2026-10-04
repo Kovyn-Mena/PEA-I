@@ -1,0 +1,2429 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=ACF685C4261207025AB292E6458C445B" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        Juan Guillermo&nbsp;Reales&nbsp;Alfaro
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>REALES ALFARO, JUAN GUILLERMO</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            UNIVERSIDAD DE ANTIOQUIA<br />
+                            Maestria en ciencias farmaceuticas:alimentos<br />
+                            Febrerode2010 - Juniode 2012<br />
+                            Obtención de etanol a partir de residuos agrícolas de la yuca</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD POPULAR DEL CESAR<br />
+                            INGENIERIA AGROINDUSTRIAL<br />
+                            Enerode2001 - de 2007<br />
+                            Evaluacion de la técnica atmósfera modificada en la conservación del mango (mangífera indica L.) variedad vallenato</td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3>Formaci&oacute;n Complementaria</h3></td>
+                            </tr>   
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        UNIVERSIDAD NACIONAL DE COLOMBIA SEDE BOGOTA<br />
+                        II Jornada de Actualización Avances de La Investig<br />
+                        Enerode2007 - de 2007<br />
+                        </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>21&nbsp;horas Semanales
+                        Febrero de 2008            
+                        Julio de 2009<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Quimica I,&nbsp;0 
+                        Marzo 2009            
+                        Julio 2009<br>
+
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; QUIMICA I,&nbsp;140 
+                        Agosto 2008            
+                        Diciembre 2008<br>
+
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; QUIMICA I,&nbsp;150 
+                        Febrero 2008            
+                        Junio 2008<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Febrero de 2013            
+                         de <br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Otra actividad técnico-científica relevante            
+                        <i> - Cargo:</i>&nbsp;Otra actividad técnico-científica relevante          
+                        Febrero de 2013            
+                         de <br>
+
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Epistemología y Metodología de la Investigación,&nbsp;50 
+                        Febrero 2013            
+                         <br>
+
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Fisicoquímica,&nbsp;24 
+                        Febrero 2013            
+                         <br>
+
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; Formulación proyecto para el fondo de regalías                            
+                        Febrero 2013            
+                         <br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Febrero de 2012            
+                        Diciembre de 2012<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Otra actividad técnico-científica relevante            
+                        <i> - Cargo:</i>&nbsp;Otra actividad técnico-científica relevante          
+                        Febrero de 2012            
+                         de <br>
+
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Fisicoquímica,&nbsp;21 
+                        Febrero 2012            
+                        Junio 2012<br>
+
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Operaciones Unitarias II
+Fisiología Postrecolección de Frutas y Hortalizas,&nbsp;15 
+                        Agosto 2012            
+                        Diciembre 2012<br>
+
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Química I,&nbsp;49 
+                        Febrero 2012            
+                        Junio 2012<br>
+
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; Polo científico ganadero                            
+                        Febrero 2012            
+                         <br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD DE ANTIOQUIA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Febrero de 2011            
+                        Enero de 2012<br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Pasantías
+                        <i> - Titulo:</i>&nbsp; Obtención de etanol a partir de residuos agrícolas de la yuca                            
+                        Febrero 2011            
+                        Enero 2012<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Marzo de 2009            
+                        Mayo de 2010<br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Pasantías
+                        <i> - Titulo:</i>&nbsp; Modelado de la velocidad de respiración del mango variedad Vallenato                            
+                        Marzo 2009            
+                        Mayo 2010<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Biat</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Agosto de 2007            
+                        Diciembre de 2007<br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; Evaluacion de la técnica atmosfera modificada en la conservación del mango (mangífera indica L.) variedad vallenato producido en la zona norte del municipio de Valledupar                            
+                        Agosto 2007            
+                        Diciembre 2007<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Biotecnología Industrial -- Tecnologías de Bioprocesamiento, Biocatálisis, Fermentación</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Biotecnología Industrial -- Bioproductos (Productos que se Manufacturan Usando Biotecnología), Biomateriales, Bioplásticos, Biocombustibles, Materiales Nuevos Bioderivados, Químicos Finos Bioredivados</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="5"><h3 >Idiomas</h3></td>
+                            </tr>    
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td><b>Habla</b></td>
+                                <td><b>Escribe</b></td>
+                                <td><b>Lee</b></td>
+                                <td><b>Entiende</b></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;Inglés</li></td>
+                    <td>Deficiente</td>
+                    <td>Deficiente</td>
+                    <td>Bueno</td>
+                    <td>Aceptable</td>                                                        
+                </tr>    
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;Nuevos Alimentos, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Tecnologías de la información y la comunicación en Agroindustria, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Alternativas terapéuticas y alimentarias, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Enzimas, Bioproductos y Aplicaciones, <i>Activa:</i>Si</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Reconocimientos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>Mejor ECAES en Ingenieria Agroindustrial,Instituto Colombiano para la Evaluación de la Educación - Noviembrede 2006</li></td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a></td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JUAN GUILLERMO REALES ALFARO,                    
+                            
+                            Evaluación de un recubrimiento comestible a base de gel de Alo de Vera y Almidón de yuca para la conservación de queso costeño&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2015.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            José Gregorio Lara Orozco&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JUAN GUILLERMO REALES ALFARO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Biotecnología Industrial -- Tecnologías de Bioprocesamiento, Biocatálisis, Fermentación,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JUAN GUILLERMO REALES ALFARO,                    
+                            
+                            EVALUACIÓN DE LA PRODUCCIÓN DE BIODIESEL DE JATROPHA CURCAS (VARIEDAD BRASIL) EMPLEANDO FOSFATO TRIPOTÁSICO COMO CATALIZADOR BÁSICO HETEROGÉNEO&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2015.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Kleyder Erley Ramírez Puerta y Paola Andrea Rincones Valera&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JUAN GUILLERMO REALES ALFARO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Biotecnología Industrial -- Tecnologías de Bioprocesamiento, Biocatálisis, Fermentación,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JUAN GUILLERMO REALES ALFARO,                    
+                            
+                            DESLIGNIFICACION ALCALINA DE CÁSCARAS DEL FRUTO DE JATROPHA CURCAS PARA LA PRODUCCIÓN DE ETANOL&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2015.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Jhonatan de Jesús Córdoba Padilla y Martha Liliana Paba Castilla&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JUAN GUILLERMO REALES ALFARO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Biotecnología Industrial -- Tecnologías de Bioprocesamiento, Biocatálisis, Fermentación,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos dirigidos/Tutorías de otro tipo</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JUAN GUILLERMO REALES ALFARO,                    
+                            
+                            CARACTERIZACIÓN DE LA CADENA  PRODUCTIVA DE LA MADERA (PRODUCCIÓN, TRANSFORMACIÓN Y COMERCIALIZACIÓN) EN EL MUNICIPIO DE VALLEDUPAR - CESAR.&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2012.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Nestor Hinojosa&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JUAN GUILLERMO REALES ALFARO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Biotecnología Industrial -- Tecnologías de Bioprocesamiento, Biocatálisis, Fermentación,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos dirigidos/Tutorías de otro tipo</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JUAN GUILLERMO REALES ALFARO,                    
+                            
+                            RECUBRIMIENTO COMESTIBLE AL PAPAYO (carica papaya maradol L.) Y TOMATE (Solanum lycopersicum L.) A PARTIR DEL CRISTAL DEL ALOE VERA (aloe barbadensis)&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2012.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Geovany Llanos&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JUAN GUILLERMO REALES ALFARO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Biotecnología Industrial -- Tecnologías de Bioprocesamiento, Biocatálisis, Fermentación,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos dirigidos/Tutorías de otro tipo</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JUAN GUILLERMO REALES ALFARO,                    
+                            
+                            OBTENCIÓN DE ETANOL A PARTIR DEL APROVECHAMIENTO DE LA BIOMASA CELULÓSICA PRESENTE EN EL JACINTO DE AGUA (Eichhornia crassipes).&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2011.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Giselle Arzuaga&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JUAN GUILLERMO REALES ALFARO , LIZETH TRUJILLO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Biotecnología Industrial -- Tecnologías de Bioprocesamiento, Biocatálisis, Fermentación,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Jurado en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JUAN GUILLERMO REALES ALFARO,                    
+                            
+                            <i>Titulo:&nbsp;</i>EVALUACION DE LA HERRAMIENTA DE PRODUCCION MAS LIMPIA (PML) COMO ALTERNATIVA QUE PERMITA EL APROVECHAMIENTO DE RESIDUOS LIQUIDOS (LACTOSUERO) DE LA EMPRESA LACTEOS SABELSA DEL MUNICIPIO DE VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA AGROINDUSTRIAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Pedro Pablo Londoño Jimenez &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Biotecnología Industrial -- Tecnologías de Bioprocesamiento, Biocatálisis, Fermentación,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JUAN GUILLERMO REALES ALFARO,                    
+                            
+                            <i>Titulo:&nbsp;</i>EFICIENCIA ALIMENTICIA DE TRES DIETAS BALANCEADAS CON SUBPRODUCTO AGROPECUARIOS UTILIZADAS PARA LEVANTE DE POSTLARVAS DE BOCACHICO (Prochilodus magdalenae) EN EL MUNICIPIO DE LA PAZ CESAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA AGROINDUSTRIAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>NESTOR JAVIER GOMEZ SUAREZ  y CRISTIAN PEREZ SANCHEZ &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Biotecnología Industrial -- Tecnologías de Bioprocesamiento, Biocatálisis, Fermentación,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Participaci&oacute;n en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Participación en comités de evaluación - Otra</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JUAN GUILLERMO REALES ALFARO,                    
+                            
+                            IX ENCUENTRO DEPARTAMENTAL DE SEMILLEROS DE INVESTIGACION Y JOVENES EMPRENDEDORES<br>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Biotecnología Industrial -- Tecnologías de Bioprocesamiento, Biocatálisis, Fermentación,                    
+                            
+                            
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a></td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Jornada de socialización de proyectos de investigación&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2015-11-04 00:00:00.0,&nbsp;
+                                                    2015-11-06 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Evaluación de un recubrimiento comestible a base de gel de aloe vera(Aloe barbadensis miller) y Almidon de yuca para la conservación del queso costeño
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JUAN GUILLERMO REALES ALFARO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>LUIS FERNANDO DIAZ CUADRO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>I Jornada de socialización de proyectos de investigación&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2015-11-04 00:00:00.0,&nbsp;
+                                                    2015-11-06 00:00:00.0 &nbsp;
+                                                    en NEIVA &nbsp; - Julio Villazón Baquero &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Evaluación de la producción de biodiesel de jatropha curcas (Variedad Brasil) empleando fosfato tripotasico como catalizador básico heteregeneo
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JUAN GUILLERMO REALES ALFARO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>KLEYDER ERLEY RAMIREZ PUERTA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>PAOLA ANDREA RINCONES VALERA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Jornada de socialización de proyectos de investigación&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2015-11-05 00:00:00.0,&nbsp;
+                                                    2015-11-06 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Evaluación de un recubrimiento comestible a base de gel de aloe vera(Aloe barbadensis miller) y Almidon de yuca para la conservación del queso costeño
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JUAN GUILLERMO REALES ALFARO
+                                                        <i>Rol en el evento: </i>Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>I Congreso Internacional de Conservación para la Industria Agroalimentaria&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2016-03-16 00:00:00.0,&nbsp;
+                                                    2016-03-18 00:00:00.0 &nbsp;
+                                                    en BOGOTÁ, D.C. &nbsp; - Universidad de Nariño &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Evaluación de las propiedades fisicoquímicas de películas comestibles de gel de Aloe Vera y Almidón de yuca
+                                                        <i>Tipo de producto:</i>Demás trabajos - Demás trabajos - Póster
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JUAN GUILLERMO REALES ALFARO
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>5</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>1 Jornada de socialización de proyectos de investigación&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2015-11-04 00:00:00.0,&nbsp;
+                                                    2015-11-06 00:00:00.0 &nbsp;
+                                                    en Ciudad de la Habana &nbsp; - Auditorio Julio Villazón Baquero &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Evaluación de la producción de biodiesel de jatropha curcas (Variedad Brasil) empleando fosfato tripotasico como catalizador básico heteregeneo
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JUAN GUILLERMO REALES ALFARO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>KLEYDER ERLEY RAMIREZ PUERTA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>PAOLA ANDREA RINCONES VALERA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>6</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>I Congreso Internacional en Investigación e Innovación en Ciencia y Tecnología de Alimentos&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2012-06-13 00:00:00.0,&nbsp;
+                                                    2012-06-15 00:00:00.0 &nbsp;
+                                                    en BOGOTÁ, D.C. &nbsp; - Auditorio Cafam la Floresta &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Efecto fisiológico de atmósferas modificadas en la conservación de la calidad de Mangífera Indica L. C.V. Vallenato
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Revista de la Facultad de Química Farmacéutica
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD NACIONAL DE COLOMBIA SEDE BOGOTA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JUAN GUILLERMO REALES ALFARO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>7</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>III JORNADA DE INVESTIGACION II ENCUENTRO UNIVERSIDAD EMPRESA I JORNADA FACE&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2012-09-26 00:00:00.0,&nbsp;
+                                                    2012-09-29 00:00:00.0 &nbsp;
+                                                    en AGUACHICA &nbsp; - UNIVERSIDAD POPULAR DEL CESAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Modelado de la Velocidad de Respiración del Mango en un sistema cerrado
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JUAN GUILLERMO REALES ALFARO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JUAN GUILLERMO REALES ALFARO,                    
+                
+                "EVALUACION DE LAS PROPIEDADES FISICOQUÍMICAS DE PELÍCULAS COMESTIBLES DE GEL DE ALOE VERA Y ALMIDÓN DE YUCA"
+                . En: Colombia&nbsp;<br>
+                VITAE&nbsp;
+                <i>ISSN:</i>&nbsp;0121-4004&nbsp;
+                <i>ed:</i>&nbsp;Universidad de Antioquia<br>
+                <i>v.</i>23
+                <i>fasc.</i>1
+                p.815
+                - 818
+                ,2016,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JUAN GUILLERMO REALES ALFARO,                    
+                                    
+                JESUS ALBERTO RODRIGUEZ LOPERENA,                    
+                                    
+                MARTHA LILIANA DIAZ BUSTAMANTE,                    
+                
+                "Evaluación Fisicoquímica del aceite crudo y refinado obtenido de las vísceras de bocachico y tilapia plateada"
+                . En: Colombia&nbsp;<br>
+                Revista Politécnica&nbsp;
+                <i>ISSN:</i>&nbsp;1900-2351&nbsp;
+                <i>ed:</i>&nbsp;Politecnico Colombiano Jaime Isaza Cadavid<br>
+                <i>v.</i>11
+                <i>fasc.</i>21
+                p.19
+                - 28
+                ,2015,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JUAN GUILLERMO REALES ALFARO,                    
+                                    
+                JOSE EDGAR ZAPATA MONTOYA,                    
+                                    
+                HADER IVAN CASTANO PELAEZ,                    
+                
+                "Evaluación de Tres Métodos de Pretratamiento Químico sobre la Deslignificación de Tallos de Yuca"
+                . En: Chile&nbsp;<br>
+                INFORMACION TECNOLOGICA&nbsp;
+                <i>ISSN:</i>&nbsp;0718-0764&nbsp;
+                <i>ed:</i>&nbsp;Centro de Información Tecnológica<br>
+                <i>v.</i>27
+                <i>fasc.</i>3
+                p.x
+                - x
+                ,2016,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JUAN GUILLERMO REALES ALFARO,                    
+                                    
+                HADER IVAN CASTANO PELAEZ,                    
+                                    
+                JOSE EDGAR ZAPATA MONTOYA,                    
+                
+                "Enzymatic hydrolysis of cassava stalk pretreated with the alkaline method"
+                . En: Colombia&nbsp;<br>
+                AGRONOMIA COLOMBIANA&nbsp;
+                <i>ISSN:</i>&nbsp;0120-9965&nbsp;
+                <i>ed:</i>&nbsp;Universidad Nacionalde Colombia<br>
+                <i>v.</i>33
+                <i>fasc.</i>2
+                p.238
+                - 243
+                ,2015,
+                <i>&nbsp;DOI:&nbsp;</i> http://dx.doi.org/10.15446/agron.colomb.v33n2.50115
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                HADER IVAN CASTANO PELAEZ,                    
+                                    
+                JUAN GUILLERMO REALES ALFARO,                    
+                                    
+                JOSE EDGAR ZAPATA MONTOYA,                    
+                
+                "SIMULTANEOUS SACCHARIFICATION AND FERMENTATION OF CASSAVA STEMS"
+                . En: Colombia&nbsp;<br>
+                DYNA&nbsp;
+                <i>ISSN:</i>&nbsp;0012-7353&nbsp;
+                <i>ed:</i>&nbsp;Universidad Nacionalde Colombia<br>
+                <i>v.</i>80
+                <i>fasc.</i>180
+                p.97
+                - 104
+                ,2013,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JUAN GUILLERMO REALES ALFARO,                    
+                                    
+                LIZETH TRUJILLO,                    
+                                    
+                GISELLE ARZUAGA LINDAO,                    
+                                    
+                HADER IVAN CASTANO PELAEZ,                    
+                                    
+                ANGEL POLO CORDOBA,                    
+                                    
+                GISELLE ARZUAGA LINDADO,                    
+                                    
+                LIZETH TAIRINA TRUJILLO DAZA,                    
+                                    
+                ANGEL DAVID POLO CORDOBA,                    
+                
+                "ACID HYDROLYSIS OF WATER HYACINTH TO OBTAIN FERMENTABLE SUGARS"
+                . En: Colombia&nbsp;<br>
+                CT F CIENCIA TECNOLOGIA Y FUTURO&nbsp;
+                <i>ISSN:</i>&nbsp;0122-5383&nbsp;
+                <i>ed:</i>&nbsp;Ecopetrol S.A.<br>
+                <i>v.</i>5
+                <i>fasc.</i>2
+                p.101
+                - 111
+                ,2013,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Corto (Resumen)</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JUAN GUILLERMO REALES ALFARO,                    
+                                    
+                ALDO FERNANDEZ VARELA,                    
+                
+                "Efecto fisiológico de atmósferas modificadas en la conservación de la calidad de Mangífera indica L. CV Vallenato"
+                . En: Colombia&nbsp;<br>
+                VITAE&nbsp;
+                <i>ISSN:</i>&nbsp;0121-4004&nbsp;
+                <i>ed:</i>&nbsp;Universidad de Antioquia<br>
+                <i>v.</i>19
+                <i>fasc.</i>1
+                p.135
+                - 137
+                ,2012,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JUAN GUILLERMO REALES ALFARO,                    
+                                    
+                ALDO FERNANDEZ VARELA,                    
+                
+                "Estudio del método de atmósfera modificada en la conservación de la calidad del mango"
+                . En: Colombia&nbsp;<br>
+                Revista Alimentos Hoy&nbsp;
+                <i>ISSN:</i>&nbsp;2027-291X&nbsp;
+                <i>ed:</i>&nbsp;Asociacion Colombiana De Ciencia Y Tecnologia De Alimentos Acta<br>
+                <i>v.</i>21
+                <i>fasc.</i>25
+                p.26
+                - 35
+                ,2012,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JUAN GUILLERMO REALES ALFARO,                    
+                                    
+                ALDO FERNANDEZ VARELA,                    
+                                    
+                ALDO ALEXANDER FERNANDEZ VARELA,                    
+                
+                "Physicochemical evaluation of Mangifera indica L. fruits c.v Vallenato preserved in modified atmosphere to extend its quality"
+                . En: Colombia&nbsp;<br>
+                REVISTA TECNICA DE LA FACULTAD DE INGENIERIA UNIVERSIDAD DEL ZULIA&nbsp;
+                <i>ISSN:</i>&nbsp;0254-0770&nbsp;
+                <i>ed:</i>&nbsp;Revista Tecnica de la Facultad de Ingeniera<br>
+                <i>v.</i>34
+                <i>fasc.</i>1
+                p.31
+                - 38
+                ,2011,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JUAN GUILLERMO REALES ALFARO,                    
+                
+                "Measurement of the transmittance of edible films of aloe vera (barbadensis miller) and cassava starch using optical fibers trifurcated"
+                . En: Colombia&nbsp;<br>
+                JOURNAL OF PHYSICS CONFERENCE SERIES&nbsp;
+                <i>ISSN:</i>&nbsp;1742-6596&nbsp;
+                <i>ed:</i>&nbsp;IOP Publishing Ltd<br>
+                <i>v.</i>792
+                <i>fasc.</i>1
+                p.12023
+                - 
+                ,2017,
+                <i>&nbsp;DOI:&nbsp;</i>10.1088/1742-6596/792/1/012023
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JUAN GUILLERMO REALES ALFARO,                    
+                
+                "EVALUACION DE LA TECNICA ATMOSFERA MODIFICADA EN LA CONSERVACION DEL MANGO (Mangífera Indica L.) VARIEDAD VALLENATO"
+                . En: Colombia&nbsp;<br>
+                Revista Cientifica Documentos De Ingenieria&nbsp;
+                <i>ISSN:</i>&nbsp;1692-8075&nbsp;
+                <i>ed:</i>&nbsp;Ediciones Unicesar<br>
+                <i>v.</i>6
+                <i>fasc.</i>3
+                p.57
+                - 68
+                ,2007,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Mango, atmósfera modificada, conservación, em,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JUAN GUILLERMO REALES ALFARO,                    
+                                    
+                GUSTAVO JOSE ROENES GALE,                    
+                
+                "POTENCIALIDAD DE ACACIA RIPARIA COMO ESPCIE FORRAJERA EN LA REGIÓN NORORIENTAL DEL CESAR, COLOMBIA"
+                . En: Colombia&nbsp;<br>
+                BIOAGRO&nbsp;
+                <i>ISSN:</i>&nbsp;1316-3361&nbsp;
+                <i>ed:</i>&nbsp;UNIV CENTROCCIDENTIAL LISANDRO ALVARADO<br>
+                <i>v.</i>31
+                <i>fasc.</i>2
+                p.159
+                - 164
+                ,2019,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JUAN GUILLERMO REALES ALFARO,                    
+                                    
+                GUSTAVO JOSE ROENES GALE,                    
+                
+                "Importancia de los cobertores vegetales transformados para la sustentabilidad ganadera en el noreste del Cesar, Colombia"
+                . En: Colombia&nbsp;<br>
+                Revista Colombiana De Ciencias Animal-Recia&nbsp;
+                <i>ISSN:</i>&nbsp;2027-4297&nbsp;
+                <i>ed:</i>&nbsp;Universidad de Sucre.<br>
+                <i>v.</i>10
+                <i>fasc.</i>1
+                p.51
+                - 60
+                ,2018,
+                <i>&nbsp;DOI:&nbsp;</i>10.24188/recia.v10.n1.2018.545
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Cambio climático; calentamiento global,                    
+                                    
+                Especies forrajeras,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a>
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Libros</h3></td>
+            </tr>
+                
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Libro - Libro resultado de investigación</b>
+            </li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            JUAN GUILLERMO REALES ALFARO,                    
+                                
+            JOSE EDGAR ZAPATA MONTOYA,                    
+                                
+            HADER IVAN CASTANO PELAEZ,                    
+                                
+            MARIANA CARDONA BETANCUR,                    
+                                
+            OSCAR FABIAN RIOS MARQUEZ,                    
+                                
+            ALEJANDRO ACOSTA CARDENAS,                    
+                                
+            CARLOS EDUARDO MEJIA GOMEZ,                    
+            
+            "Producción Biotecnológica De Etanol A Partir Del Cultivo De La Yuca"
+            En: Colombia
+            2015.&nbsp;
+            ed:Fondo Editorial ITM,&nbsp;
+            <i>ISBN:</i>&nbsp;978-958-8743-83-7&nbsp;
+            <i>v. </i>
+            <i>pags.</i>&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Biotecnología Industrial -- Bioproductos (Productos que se Manufacturan Usando Biotecnología), Biomateriales, Bioplásticos, Biocombustibles, Materiales Nuevos Bioderivados, Químicos Finos Bioredivados,                    
+                                    
+            Ingeniería y Tecnología -- Biotecnología Industrial -- Tecnologías de Bioprocesamiento, Biocatálisis, Fermentación,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a></td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a></td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Evaluacion de la técnica atmosfera modificada en la conservación del mango (mangífera indica L.) variedad vallenato producido en la zona norte del municipio de Valledupar<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2007                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Julio&nbsp;
+                        2007
+                        
+                        
+                        <i>Fin:&nbsp;</i>Julio&nbsp;
+                        2007
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>6<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Evaluación del potencial de la semilla de Jatropha curcas para la obtención de biodiesel<br>
+                        <i>Inicio:&nbsp;</i>Abril&nbsp;
+                        2014                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Efecto de un recubrimiento a base de gel mucilaginoso de penca de sábila Aloe barbadensis miller en la vida útil de Mango variedad Tommy Atkins y Piña (Ananas comosus) mínimamente procesados<br>
+                        <i>Inicio:&nbsp;</i>Marzo&nbsp;
+                        2014                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Caracterización de la riqueza taxonómica y bromatológica de la especie Acacia Angustissima con el fin de establecer su potencial nutricional en el ganado bovino<br>
+                        <i>Inicio:&nbsp;</i>Marzo&nbsp;
+                        2014                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

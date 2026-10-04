@@ -1,0 +1,1849 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=6F960A6B07874FE25E9DCDE2D4EE9DAE" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        JAIRO FRANCISCO&nbsp;SEOANES&nbsp;LEON
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>SEOANES LEON, JAIRO FRANCISCO</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            UNIVERSIDAD NACIONAL DE COLOMBIA SEDE BOGOTA<br />
+                            MAESTRIA EN INGENIERIA DE SISTEMAS Y COMPUTACION<br />
+                            Marzode2012 - Marzode 2015<br />
+                            Evaluación de la confianza en e-commerce en consumidores con niveles de educación profesional en la ciudad de Valledupar</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD POPULAR DEL CESAR<br />
+                            INGENIERIA DE SISTEMAS<br />
+                            Febrerode2002 - Mayode 2009<br />
+                            SISTEMA DE EVALUACION VIRTUAL COMO MODELO DE INDICARO DE LA CALIDAD DE LA EDUCACION </td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>RAMA JUDICIAL</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>&nbsp;horas Semanales
+                        Junio de 2009            
+                        Enero de 2015<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>&nbsp;horas Semanales
+                        Marzo de 2013            
+                        Enero de 2015<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Cursos de corta duraci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Otro</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                                            
+                            Modulo cloud computing,
+                            <i>Finalidad: </i>Actualización en temas de cloud computing dentro del diplomado de opcion de grado
+                            . En: Colombia&nbsp;
+                            ,2023,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;5 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            Aplicativo para el procesamiento de resultados en pruebas de suelo, agua y sistema foliar para los productores agropecuarios de la empresa UNIDAX&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2023.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Diego Andres Granados Cañate
+                            Agner de Jesus Villa Fabrega
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): JAIRO FRANCISCO SEOANES LEON,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            Practica empresarial: Implementación De Los Módulos De Administración De Despachos Judiciales, Usuarios Y Agendamiento Del Sistema De Gestión De Audiencias Del Centro De Servicios Judicial De Los Juzgados Penales De Valledupar&nbsp;
+                            Dirección Ejecutiva de Administración Judicial de Valledupar&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Ingeniería de Sistemas,
+                            &nbsp;2023.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Helmer Segundo Fuentes Alvarado
+                                                        
+                            
+                            
+                            Asesor(es): JAIRO FRANCISCO SEOANES LEON,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            practica empresarial: Desarrollo De Los Módulos De Gestión De Salas De Audiencia, Seguimiento De Audiencias Y Reportes Estadísticos Del Centro De Servicios De Los Juzgados Penales De Valledupar&nbsp;
+                            Dirección Ejecutiva de Administración Judicial de Valledupar&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Ingeniería de Sistemas,
+                            &nbsp;2023.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Ramiro González López
+                                                        
+                            
+                            
+                            Asesor(es): JAIRO FRANCISCO SEOANES LEON,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            SISTEMA DE INFORMACIÓN PARA EL CONTROL DE INVENTARIO DE EQUIPOS TECNOLÓGICOS DE LOS DESPACHOS JUDICIALES DEL DISTRITO JUDICIAL DE VALLEDUPAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2014.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            CARLOS ALFONSO MEJÍA ARPUSHANA - YEFERSON JOSÉ SILVA HERRERA&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JAIRO FRANCISCO SEOANES LEON,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            SOFTWARE PARA EL DESARROLLO DE HABILIDADES EN NIÑOS CON DEFICIENCIA COGNITIVA MODERADA EN EL AREA DE HABILITACION EN EL INSTITUTO DEPARTAMENTAL DE REHABILITACIÓN Y EDUCACIÓN ESPECIAL DEL CESAR IDREEC&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2013.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            GRANADOS CASALINS YESMIN PAOLA - PUMAREJO MAESTRE ALBERTO MARIO&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JAIRO FRANCISCO SEOANES LEON,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajo de grado de maestría o especialidad clínica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            APLICATIVO WEB PARA LA GESTION ADMINISTRATIVA DE LA OFERTA ACADEMICADE CURSOS EN LA UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ESPECIALIZACIÓN EN INGENIERÍA DE SOFTWARE,
+                            &nbsp;2025.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Bladimir Jesus Junior Vargas Rios
+                            JAMES DAVID VANSTRAHLEN MOLINA
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): JAIRO FRANCISCO SEOANES LEON,
+                               
+                            
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajo de grado de maestría o especialidad clínica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            
+                            DESARROLLO DE PLATAFORMA WEB PARA LA GENERACION Y PERSONALIZACION DE CODIGOS QR ADAPTADAS A LAS NECESIDADES DE PEQUEÑAS Y GRANDES EMPRESAS EN LA CIUDAD DE VALLEDUPAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ESPECIALIZACIÓN EN INGENIERÍA DE SOFTWARE,
+                            &nbsp;2024.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            DIEGO ANDRES VILLA CARDONA
+                            HEIVON MOLINA LOBO
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): JAIRO FRANCISCO SEOANES LEON,
+                               
+                            
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Monografía de conclusión de curso de perfeccionamiento/especialización</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            
+                            APLICATIVO WEB PARA LA GESTIÓN ADMINISTRATIVA DE LA OFERTA ACADÉMICA DE CURSOS EN LA UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ESPECIALIZACIÓN EN INGENIERÍA DE SOFTWARE,
+                            &nbsp;2025.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Bladimir Jesus Junior Vargas Rios
+                            JAMES DAVID VANSTRAHLEN MOLINA
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): JAIRO FRANCISCO SEOANES LEON,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Jurado en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            <i>Titulo:&nbsp;</i>IMPLEMENTACION DE RED SEMIPRIVADA PARA LA INTEGRACION DE LOS GRUPOS Y SEMILLEROS DE INVESTIGACION EN LA CIUDAD DE VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>FRANKLIN ARGOTES VIZCAINO - LUIS BERTYS REDONDO &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Civil -- Ingeniería Civil,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            <i>Titulo:&nbsp;</i>SISTEMA DE INFORMACION PARA LA GESTION DE LOS SERVICIOS MEDICOS ASISTENCIALES PRESTADOS EN LA IPS DE LA UNIVERSIDAD POPULAR DEL CESAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i> &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            <i>Titulo:&nbsp;</i>APLICATIVO MOVIL PARA PROMOVER EL TURISMO COMUINITARIO EN EL RESGUARDO INDIGENA KANKUAMO COMUNIDAD ATANQUEZ MUNICIPIO DE VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>ALBERTO ANTONIO PEREZ PATERNINA - LINEY ESTHER ARIAS MARTINEZ &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Civil -- Ingeniería Civil,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            <i>Titulo:&nbsp;</i>HERRAMIENTAS PARA EL ANALISIS DE REQUERIMIENTOS EN EL DESARROLLO DE SOFTWARE BASADO EN SERVICIOS                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>DEUDES DELROY MEZA PAEZ - OSCAR FABIAN RAMOS DIAZ &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Civil -- Ingeniería Civil,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            <i>Titulo:&nbsp;</i>APLICATIVO WEB MOVIL PARA LA GESTION DE LOS PROCESOS DEPORTIVOS Y EL ANALISIS DE RENDIMIENTO DE LOS JUGADORES DEL EQUIPO PROFESIONAL DE FUTBOL VALLEDUPAR FUTBOL CLUB S.A                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>RICARDO ANDRES CARMONA ARAUJO y DANIEL ALEXANDER DIVANTOQUE MOLINA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            <i>Titulo:&nbsp;</i>SISTEMA DE INFORMACIÓN PARA LA GESTIÓN DE LOS PROCESOS DEL CENTRO DE DOCUMENTACIÓN E INVESTIGACIÓN SOCIO JURÍDICA (CEDISJ)                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Jesús Andrés Cañaveral Flórez - Carlos Andrés Pavajeau Max &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            <i>Titulo:&nbsp;</i>DISEÑO DE ARQUITECTURA EMPRESARIAL PARA LA GESTIÓN ADMINISTRATIVA DE LA UNIVERSIDAD POPULAR DEL CESAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>BETTY LUCÍA FLÓREZ ORTIZ - YERLISS NINIETH HURTADO MONTES &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Civil -- Ingeniería Civil,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            <i>Titulo:&nbsp;</i>SISTEMA DE INFORMACIÓN PARA LA GESTIÓN HOTELERA; CASO DE ESTUDIO MARES HOTEL EN EL MUNICIPIO DE PUEBLO BELLO CESAR.                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>KAROL LICETH ROMERO IMBRETH - JAIME ANDRES ZULETA MENESES &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            <i>Titulo:&nbsp;</i>APLICACIÓN PARA DISPOSITIVOS MÓVILES USANDO REALIDAD AUMENTADA PARA EL MARKETING MÓVIL DEL CENTRO COMERCIAL OUTLET DEL BOSQUE DE LA CIUDAD DE CARTAGENA DE INDIAS DTyC                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>BREITNER ENRIQUE GONZALEZ ANGARITA - CARLOS ARTURO ROCA MUÑOZ &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            <i>Titulo:&nbsp;</i>APLICATIVO WEB PARA LA GESTION DE LOS PROCESOS ADMINISTRATIVOS Y CONTABLES DE LA EMPRESA PCSTARS EN LA CIUDAD DE VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>ISIDRO RAÚL QUINTERO GRANADILLO - ALESSIO ALAIN GRANADILLO VIDAL &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Curso de perfeccionamiento/especialización</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            <i>Titulo:&nbsp;</i>APLIACION WEB PARA LA GESTION DE LOS PROCESOS ADMINISTRATIVOS Y FINANCIEROS DE LA EMPRESA LIRA LECTURA INTELIGENTE SAS                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> ESPECIALIZACIÓN EN INGENIERÍA DE SOFTWARE&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>RICARDO ANDRES CARMONA ARAUJO - CARLOS ERNESTO ROMERO GONZALEZ &nbsp;                
+                            
+                            
+                            
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            <i>Titulo:&nbsp;</i>APLICACION WEB PARA LA GESTION ADMINISTRATIVA Y CADEMICA EN EL CENTRO EDUCATIVO PRINCIPE DE PAZ                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>OSCAR MANUEL CORTINA CURVELO - LEANDRO ALBERTO SANCHEZ CAMPIÑO &nbsp;                
+                            
+                            
+                            
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Curso de perfeccionamiento/especialización</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            <i>Titulo:&nbsp;</i>IMPLEMENTACION DEL MARCO DE TRABAJO SCRUM EN EL DESARROLLO DEL GESTOR DE CARPETA DIGITAL PARA LA CONTRATACION PUBLICA EN LA CORPORACION AUTONOMA REGIONAL DE CUNDINAMARCA (CAR)                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> ESPECIALIZACIÓN EN INGENIERÍA DE SOFTWARE&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>RAFAEL EDURADO PEDRAZA MOYA &nbsp;                
+                            
+                            
+                            
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Curso de perfeccionamiento/especialización</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            <i>Titulo:&nbsp;</i>IMPLEMENTACION DEL AMRCO METODOLOGICO AGIL SCRUM Y CULTURA DEVOPS PARA EL DESARROLLO DE LA GESTION DE LA EMPRESACESVI COLOMBIA S.A                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> ESPECIALIZACIÓN EN INGENIERÍA DE SOFTWARE&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>WILLIAN ANDRES YARURO CUAN &nbsp;                
+                            
+                            
+                            
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            <i>Titulo:&nbsp;</i>LABORATORIO DE REALIDAD VIRTUAL PARA EL APRENDIZAJE DE ESTRATEGIAS DE MERCHANDISING EN LA UNIVERSIDAD POPULAR DEL CESAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>LAURA DAYANA MERCADO - HELI CADENA ARENILLA &nbsp;                
+                            
+                            
+                            
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Curso de perfeccionamiento/especialización</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            <i>Titulo:&nbsp;</i>DAPP PARA TICKETING DE TRANSPORTE PUBLICO CON NTF E INFRAESTRUCTURA BLOCKCHAIN                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> ESPECIALIZACIÓN EN INGENIERÍA DE SOFTWARE&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>JAIDER LUIS DE LA ROSA CASTRO &nbsp;                
+                            
+                            
+                            
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            <i>Titulo:&nbsp;</i>PRACTICAS FORMATIVAS - IMPLEMENTACION DE UN APLICATIVO WEB PARA EL SISTEMA DE CONTROL DE TIEMPO Y ASISTENCIA Y UNA APLIACCION MOVIL PARA EL CONTROL DE TERMINALES PARA LA EMPRESA ORION SOLUTIONS S.A.                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Trabajo de grado/tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Samir Elias Fragozo Barbosa  &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JAIRO FRANCISCO SEOANES LEON,                    
+                            
+                            <i>Titulo:&nbsp;</i>TENDENCIAS TECNOLÓGICAS EN EL USO DE LAS REDES MULTIMEDIA PARA LOS MODELOS DE NEGOCIO EN VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Yeison Alfonso Iguaran Mejía - Luis Carlos Segrera Visbal &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a></td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>VII JORNADAS NACIONALES Y IV INTERNACIONALES DE INVESTIGACIÓN DE LA URBE&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2013-11-27 00:00:00.0,&nbsp;
+                                                    2013-11-30 00:00:00.0 &nbsp;
+                                                    en Maracaibo &nbsp; - Universidad Privada DR. RAFAEL BELLOSO CHACIN - URBE &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>EL B-LEARNING Y SUS EFECTOS EN PROCESOS DE APRENDIZAJE DE ESTUDIANTES DE ESCUELAS BÁSICAS SECUNDARIAS Y MEDIA VOCACIONAL: UNA REVISIÓN CONCEPTUAL
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JAIRO FRANCISCO SEOANES LEON
+                                                        <i>Rol en el evento: </i>Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JAIRO FRANCISCO SEOANES LEON,                    
+                                    
+                OSVALDO RUEDA CARRENO,                    
+                                    
+                JORGE LUIS GONZALEZ,                    
+                                    
+                HAROLD MORENO BONILLA,                    
+                
+                "Artificial Intelligence (AI) in Scientific Research"
+                . En: India&nbsp;<br>
+                LETTERS IN HIGH ENERGY PHYSICS&nbsp;
+                <i>ISSN:</i>&nbsp;2632-2714&nbsp;
+                <i>ed:</i>&nbsp;Andromeda Publishing And Academic Services LTD<br>
+                <i>v.</i>2024
+                <i>fasc.</i>
+                p.7481
+                - 7488
+                ,2024,
+                <i>&nbsp;DOI:&nbsp;</i>10.52783/lhep.2024.1366
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                scientific research,                    
+                                    
+                Artificial Intelligence,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                AMILKAR SIERRA ROMANO,                    
+                                    
+                TONNY ENRIQUE JIMENEZ MARQUEZ,                    
+                                    
+                OSVALDO RUEDA CARRENO,                    
+                                    
+                JAIRO FRANCISCO SEOANES LEON,                    
+                
+                "Instruments for Collecting Information in Quantitative Research"
+                . En: Inglaterra&nbsp;<br>
+                LETTERS IN HIGH ENERGY PHYSICS&nbsp;
+                <i>ISSN:</i>&nbsp;2632-2714&nbsp;
+                <i>ed:</i>&nbsp;Andromeda Publishing And Academic Services LTD<br>
+                <i>v.</i>2024
+                <i>fasc.</i>N/A
+                p.7746
+                - 7755
+                ,2024,
+                <i>&nbsp;DOI:&nbsp;</i>10.52783/lhep.2024.1496
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Data collection instruments,                    
+                                    
+                quantitative research,                    
+                                    
+                methodology,                    
+                                    
+                documentary analysis,                    
+                                    
+                validity and reliability,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a></td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a>        
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td colspan="2"><h3 >Capitulos de libro</h3></td>
+            </tr>
+                
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    JAIRO FRANCISCO SEOANES LEON,                    
+                    
+
+                    "CONSTRUCCIÓN Y EVALUACIÓN DE LOS RESULTADOS DE APRENDIZAJE: ANÁLISIS DE LOS LOGROS DEL PROGRAMA DE INGENIERÍA DE SISTEMAS DE LA UNIVERSIDAD POPULAR DEL CESAR"
+                     EDUCACIÓN DEL SIGLO XXI: INVESTIGACIÓN E INNOVACIÓN PARA  EL LIDERAZGO EDUCATIVO
+                    . En: España&nbsp;
+                    <i>ISBN:</i>&nbsp;978-84-1070-193-9&nbsp;
+                    <i>ed:</i>&nbsp;Dykinson, S. L. 
+                    <i>, v.</i>
+                    , p.223
+                    - 251&nbsp;
+                    
+                    ,2024
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+
+</table>
+</td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a>
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Documentos de trabajo</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Documento de trabajo (Working Paper)</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        JAIRO FRANCISCO SEOANES LEON,                    
+                        
+                        "Evaluación de la confianza en e-commerce en consumidores con niveles de educación profesional en la ciudad de Valledupar - See more at: http://www.bdigital.unal.edu.co/46220/#sthash.HcA6OtmT.dpuf"
+                        En: Colombia. 
+                        2014.
+                        
+                        
+                        
+                        
+                        <i>p. </i>
+                        
+                        
+                        <br><b>Palabras: </b><br>
+                                            
+                        Comercio Electronico,                    
+                                            
+                        Confianza de los consumidores,                    
+                                            
+                        Confidence factors,                    
+                                            
+                        Consumer confidence,                    
+                                            
+                        E-commerce,                    
+                                            
+                        Electronic Commerce,                    
+                                            
+                        Factores de confianza,                    
+                                            
+                        Information society,                    
+                                            
+                        Sistema de indicadores,                    
+                                            
+                        Sociedad de la información,                    
+                                            
+                        System indicators,                    
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,                    
+                        
+                        
+                        
+                    </blockquote>
+                </td>
+            </tr>
+            
+        </table>
+        </td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td></td>
+</tr>
+
+</body>
+</html>

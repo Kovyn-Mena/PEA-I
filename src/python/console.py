@@ -583,6 +583,21 @@ class ConsolaApp:
                     print(f"Formación: {inv.formacion_academica} | Grupo: {inv.codigo_grupo}")
                     print(f"Estado: {'ACTIVO' if inv.activo else 'DESACTIVADO'}")
 
+                    try:
+                        import sqlite3
+                        conn_p = sqlite3.connect(self.ruta_bd, timeout=3.0)
+                        cur_p = conn_p.cursor()
+                        cur_p.execute("SELECT par_evaluador, scholar_url, orcid FROM PerfilInvestigador WHERE documento_id = ?;", (inv.documento_id,))
+                        row_p = cur_p.fetchone()
+                        conn_p.close()
+                        if row_p:
+                            print("\n  -- Hoja de Vida CvLAC Oficial (MinCiencias) --")
+                            print(f"  • Par Evaluador MinCiencias: [{'SÍ (Reconocido)' if row_p[0] == 'Si' else 'No'}]")
+                            if row_p[1]: print(f"  • Google Scholar: {row_p[1]}")
+                            if row_p[2]: print(f"  • Código ORCID:  {row_p[2]}")
+                    except Exception:
+                        pass
+
                     print("\n  -- Producción Autorada (Hipercubo Ortogonal) --")
                     p = inv.primer_producto
                     if not p:

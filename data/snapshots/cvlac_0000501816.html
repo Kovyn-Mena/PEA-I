@@ -1,0 +1,1792 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=59334679DE68B23E37ED64AE35443CD6" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        OVIDIO RODOLFO&nbsp;BAQUERO&nbsp;BONILLA
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>BAQUERO BONILLA, OVIDIO RODOLFO</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            Univ. Del Zulia<br />
+                            programa matemàtica aplicada<br />
+                            Enerode2006 - Juliode 2010<br />
+                            Soluciòn Numèrica de Ecuaciones Diferenciales Parciales de Segundo Orden con Condiciones en las Fronteras Mediante Mètodos de Colocaciòn y Localizaciòn con Funciones de Base Radial</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Especialización</b>
+                            Fundación Universitaria del Área Andina. Sede Valledupar<br />
+                            INFORMÁTICA EDUCATIVA<br />
+                            Febrerode2020 - Agostode 2021<br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD POPULAR DEL CESAR<br />
+                            Matematicas y Fisica<br />
+                            Enerode1984 - de 1990<br />
+                            </td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3>Formaci&oacute;n Complementaria</h3></td>
+                            </tr>   
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Universidad Del Zulia<br />
+                        Ciencias Humanas<br />
+                        Septiembrede2011 - Mayode 2012<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Ecuaciones Diferenciales y la Mecánica Cuántica<br />
+                        Octubrede1996 - Octubrede 1996<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Enseñanza de la Ciencia<br />
+                        Septiembrede2004 - Septiembrede 2004<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Sistema y tecnología<br />
+                        Juliode2012 - Juliode 2012<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Universidad Del Zulia<br />
+                        Ciencias Humanas<br />
+                        Marzode2011 - Septiembrede 2011<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Universidad Del Zulia<br />
+                        Ciencias Humanas<br />
+                        Marzode2012 - Septiembrede 2012<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Universidad Del Zulia<br />
+                        Ciencias Humanas<br />
+                        Septiembrede2012 - Abrilde 2013<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Universidad Del Zulia<br />
+                        Ciencias Humanas<br />
+                        Marzode2008 - Noviembrede 2008<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Servicio Nacional De Aprendizaje Sena Regional Cesar<br />
+                        Sistema<br />
+                        Febrerode2004 - Abrilde 2004<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Sistema<br />
+                        Septiembrede2003 - Diciembrede 2003<br />
+                        </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>INSTITUCIÓN EDUCATIVA JOSE EUGENIO MARTINEZ</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>30&nbsp;horas Semanales
+                        Febrero de 1994            
+                         de Actual<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Docente          
+                        Febrero de 1994            
+                         de <br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>8&nbsp;horas Semanales
+                        Febrero de 2005            
+                         de Actual<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Profesor Auxiliar          
+                        Febrero de 2005            
+                         de <br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>COLEGIO PARROQUIAL EL CARMELO</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>25&nbsp;horas Semanales
+                        Febrero de 1992            
+                        Noviembre de 2004<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;docente          
+                        Febrero de 1992            
+                        Noviembre de 2004<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD DEL MAGDALENA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>8&nbsp;horas Semanales
+                        Febrero de 2001            
+                        Noviembre de 2001<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Docente          
+                        Febrero de 2001            
+                        Noviembre de 2001<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía)</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ciencias Naturales -- Matemática -- Matemáticas Aplicadas</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="5"><h3 >Idiomas</h3></td>
+                            </tr>    
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td><b>Habla</b></td>
+                                <td><b>Escribe</b></td>
+                                <td><b>Lee</b></td>
+                                <td><b>Entiende</b></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;Español</li></td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>                                                        
+                </tr>    
+                
+                            <tr>
+                                <td><li>&nbsp;Inglés</li></td>
+                    <td>Deficiente</td>
+                    <td>Aceptable</td>
+                    <td>Aceptable</td>
+                    <td>Aceptable</td>                                                        
+                </tr>    
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;Pensamiento y Lenguaje Variacional, <i>Activa:</i>Si</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a></td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            OVIDIO RODOLFO BAQUERO BONILLA,                    
+                            
+                             1	Unidad didáctica para el desarrollo del pensamiento variacional en estudiantes de octavo grado&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Matematicas y Fisica,
+                            &nbsp;2014.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            RICHARD ANDRES RAMIREZ MERCADO&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): OVIDIO RODOLFO BAQUERO BONILLA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Matemática -- Matemáticas Puras,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            OVIDIO RODOLFO BAQUERO BONILLA,                    
+                            
+                            Unidad didáctica para el desarrollo del pensamiento variacional en estudiantes de octavo grado&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Matematicas y Fisica,
+                            &nbsp;2014.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Niver Javier Aramendiz Sanjuan&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): OVIDIO RODOLFO BAQUERO BONILLA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Otras Humanidades -- Otras Humanidades,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a></td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a></td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Seminario-Taller Desarrollo Humano y Crecimiento Personal&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2001-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>SICOOCER
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>OVIDIO RODOLFO BAQUERO BONILLA
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Seminario Estándares y Competencia&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2004-07-09 00:00:00.0,&nbsp;
+                                                    2004-07-10 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Bilioteca Departamental &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Pastoral Educativa del Cesar
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>OVIDIO RODOLFO BAQUERO BONILLA
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Seminario Taller de Indicadores de Logros Nacionales, Institucionales, Plan de Estudio, Metodología para Proyectos y Asignaturas, Evaluación del Rendimiento Escolar&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:1996-10-11 00:00:00.0,&nbsp;
+                                                    1996-10-12 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Auditorio Colegio Santa Fe &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Grupo de Estudio Y Asesoria Pedagogica
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>OVIDIO RODOLFO BAQUERO BONILLA
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>VI CONGRESO INTERNACIONAL DE FORMACIÓN Y MODELACIÓN EN CIENCIAS BÁSICAS&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2014-05-07 00:00:00.0,&nbsp;
+                                                    2014-05-09 00:00:00.0 &nbsp;
+                                                    en MEDELLÍN &nbsp; - Universidad de Medellín &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Desarrollo de Competencias Matemáticas a través de la Modelación como Estrategia Metodológica de Enseñanza
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>DESARROLLO DE COMPETENCIAS MATEMÁTICAS A TRAVÉS DE LA MODELACIÓN COMO ESTRATEGIA METODOLÓGICA DE ENSEÑANZA
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>OVIDIO RODOLFO BAQUERO BONILLA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>5</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>VIII Congreso Venezolano de Educación Matemática (COVEM)&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2013-10-01 00:00:00.0,&nbsp;
+                                                    2013-10-04 00:00:00.0 &nbsp;
+                                                    en Santa Ana de Coro &nbsp; - UNIVERSIDAD NACIONAL FRANCISCO MIRANDA &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Caracterización de la Práctica Pedagógica del Profesor de Matemáticas Como Mediador en el Desarrollo del Pensamiento Variacional de los Estudiantes que Inician el Aprendizaje del Algebra Elemental
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>OVIDIO RODOLFO BAQUERO BONILLA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>6</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Serminario Segundo Encuentro Regional de Ciencias Física&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2004-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Auditorio Miguel Arroyo &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>OVIDIO RODOLFO BAQUERO BONILLA
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>7</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Seminario Competencia Lectora&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2001-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Auditorio Colegio Parroquial el Carmelo &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>FUNDACIÓN UNIVERSIDAD DEL NORTE
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>OVIDIO RODOLFO BAQUERO BONILLA
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>8</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Primer coloquio de matematicas costa atlantica&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:1996-10-03 00:00:00.0,&nbsp;
+                                                    1996-10-06 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Universidad Popular del Cesar &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>OVIDIO RODOLFO BAQUERO BONILLA
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>9</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XV Seminario del Nororiente de Profesores de Ciencias&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2005-10-14 00:00:00.0,&nbsp;
+                                                    2005-10-15 00:00:00.0 &nbsp;
+                                                    en BUCARAMANGA &nbsp; - Auditorio Universidad Autónoma de Bucaramanga &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD AUTONOMA DE BUCARAMANGA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>OVIDIO RODOLFO BAQUERO BONILLA
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>10</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Seminario-Taller de Fomento y Desarrollo Docencia en Investigación&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2000-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en BARRANQUILLA &nbsp; - Auditorio Escuela Nacional De Policía General Santander &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Dirección de Educación Policial - Policía Nacional De Colombia
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>OVIDIO RODOLFO BAQUERO BONILLA
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                GAIL ALBEIRO GUTIERREZ RAMIREZ,                    
+                                    
+                OVIDIO RODOLFO BAQUERO BONILLA,                    
+                                    
+                WHADY FLOREZ ESCOBAR,                    
+                
+                "Extending the local radial basis function collocation methods for solving semilinear partial differential equations"
+                . En: Inglaterra&nbsp;<br>
+                WIT TRANSACTIONS ON MODELLING AND SIMULATION&nbsp;
+                <i>ISSN:</i>&nbsp;1743-355X&nbsp;
+                <i>ed:</i>&nbsp;WIT Press<br>
+                <i>v.</i>XXXI
+                <i>fasc.</i>N/A
+                p.N/A
+                - 
+                ,2009,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                RBF interpolation,                    
+                                    
+                double collocation,                    
+                                    
+                domain decomposition methods,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a></td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a>        
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td colspan="2"><h3 >Capitulos de libro</h3></td>
+            </tr>
+                
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Otro capítulo de libro publicado<br>
+                    GAIL ALBEIRO GUTIERREZ RAMIREZ,                    
+                    
+                    Tipo: Otro capítulo de libro publicado<br>
+                    OVIDIO RODOLFO BAQUERO BONILLA,                    
+                    
+                    Tipo: Otro capítulo de libro publicado<br>
+                    WHADY FLOREZ ESCOBAR,                    
+                    
+
+                    "Extending the local radial basis function collocation methods for solving semilinear partial differential equations"
+                    Boundary Element Method & Mesh Reduction Methods
+                    . En: Inglaterra&nbsp;
+                    <i>ISBN:</i>&nbsp;978-1-84564-197-9&nbsp;
+                    <i>ed:</i>&nbsp;WIT Press
+                    <i>, v.</i>
+                    , p.117
+                    - 128&nbsp;
+                    
+                    ,2009
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+
+</table>
+</td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%">
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 id="textos">Textos en publicaciones no cient&iacute;ficas</h3></td>
+            </tr>        
+               
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Otro artículo publicado - Periódico de noticias</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            OVIDIO RODOLFO BAQUERO BONILLA,                    
+                                
+            FELIX MIGUEL MOVILLA CONTRERAS,                    
+                                
+            JHONYS ENRIQUE BOLANO OSPINO,                    
+            
+            "Formación inicial y práctica del profesor: análisis desde las caracterizaciones del pensamiento del profesor"
+            En: Colombia. 
+            2012.
+            Agunkuya.
+            <i>ISSN:</i>&nbsp;2027-9574 
+            <i>p.</i>80 
+            - 95
+            v.2
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            Pensamiento del profesor,                    
+                                
+            Formación inicial,                    
+                                
+            Práctica docente,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a></td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%">
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Informes de investigaci&oacuten</h3></td>
+            </tr>    
+                
+            <tr>
+                <td>
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+            <li><b>Producción técnica - Informes de investigación</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            OVIDIO RODOLFO BAQUERO BONILLA,                    
+            
+            informe final proyecto investigacion convocatoria 2012. Caracterización de la práctica pedagógica del profesor                
+            . En: Colombia,&nbsp;
+            ,2014,&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Caracterización de la Práctica Pedagógica del Profesor de Matemáticas Como Mediador en el Desarrollo del Pensamiento Variacional de los Estudiantes que Inician el Aprendizaje del Algebra Elemental<br>
+                        <i>Inicio:&nbsp;</i>Junio&nbsp;
+                        2012                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2014
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El análisis de los resultados de las pruebas Saber 3°, 5° y 9°, indican que en el municipio de Valledupar los estudiantes de la básica secundaria presentan falencias al recurrir a expresiones algebraicas para modelar situaciones sencillas de variación. Este factor motivó al grupo de investigación a revisar inicialmente la forma como los profesores de matemáticas están orientando la enseñanza  de la asignatura de álgebra y se propuso caracterizar la práctica pedagógica del profesor de matemáticas de las instituciones educativas oficiales del municipio de Valledupar, como mediador en el desarrollo del pensamiento variacional en estudiantes que inician estudios del álgebra elemental. En esta caracterización de la práctica del docente, se tuvo en cuenta las disposiciones del Ministerio de Educación Nacional colombiano a través de los Lineamientos Curriculares expedidos en 1998, los Estándares Básicos de Competencias en matemáticas promulgados en el 2006 y dos modelos pedagógicos que fueron: los lineamientos del programa de investigación  propuesto por Lee Shulman (1986), en donde se hace énfasis en el Conocimiento Pedagógico del Contenido, y el propuesto por Deborah Ball y colaboradores (2001),  que se considera como una adaptación del primero al campo de la educación matemática. La metodología de investigación obedeció a una estructura de tipo cualitativa, enmarcada dentro del enfoque epistemológico Introspectivo Vivencial. Se inició la investigación con ocho profesores que en el momento orientaban la asignatura de álgebra, de los cuales se finalizó con seis. Estos profesores permitieron que se revisaran los documentos de  planeación de la asignatura, participaron en una entrevista semiestructurada y facilitaron la observación del desarrollo de algunas de sus clases. Luego de sistematizar y categorizar los datos se realizó un proceso de triangulación entre lo que los profesores deben hacer, lo que dicen que hacen y lo que verdaderamente hacen en su práctica profesional. Como resultado del estudio se pudo concluir que en la mayoría de los profesores existe una representación difusa sobre la significación del álgebra elemental; ya que sólo la ven como una generalización de la aritmética. Ellos manifiestan que el desarrollo del pensamiento variacional le permite al estudiante identificar y caracterizar de manera natural fenómenos de variación y de cambio y de allí, a que sea capaz de modelarlos y transformarlos, pero  en el aula y los apuntes de los estudiantes sólo se observó el desarrollo de procedimientos algorítmicos. Algunos profesores resaltan  los errores conceptuales y procedimentales recurrentes en los estudiantes que se inicia en el estudio del álgebra, pero pocas son las acciones didácticas que implementa en el momento que los observa.  Además se considera necesario vincular a la Universidad Popular del Cesar mediante un nuevo proyecto, cuyo objetivo sea el de diseñar actividades de la mano con los profesores de álgebra, de tal manera que en sus prácticas pedagógicas se logre incentivar el desarrollo del pensamiento variacional en sus estudiantes y que estos logren relacionar este pensamiento con situaciones cotidianas y reales su entorno,  lo que le permitiría inferir sobre procesos más complejos.   <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        ORIENTACIONES PEDAGÓGICAS QUE PERMITAN A LOS DOCENTES DE MATEMÁTICAS DE LA BÁSICA SECUNDARIA DESARROLLAR EL PENSAMIENTO VARIACIONAL EN SUS ESTUDIANTES<br>
+                        <i>Inicio:&nbsp;</i>Agosto&nbsp;
+                        2020                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            
+La presente propuesta de investigación se concentra en estudiar un tema de interés para el gobierno, representado en el Ministerio de Educación Nacional (MEN), pues en los documentos formulados en los últimos años en torno a los que deben saber todos los estudiantes del país, se evidencia la necesidad de mejor los procesos de enseñanza de las matemáticas en las distintas escuelas del territorio nacional; es así como los lineamiento curriculares tienen como propósito orientan el quehacer de los profesores y estudiantes en cada una de las instituciones educativas. En tal sentido, y de manera paralela, la comunidad nacional de educadores matemáticos, desde la disciplina matemática educativa, viene realizando importantes aportes para el logro de este propósito nacional.
+ 
+En referencia a lo anterior este trabajo pretende estudiar los marcos conceptuales que tienen los profesores de matemáticas del nivel de básica secundaria sobre el pensamiento variacional y establecer estrategias de orden pedagógico que permitan potenciar el desarrollo de este pensamiento en sus estudiantes, con lo cual se permitirá, en gran medida, fortalecer el discurso de la matemática escolar en todos los niveles de nuestro sistema educativo, así como robustecer las escuelas matemáticas que vienen haciendo estudios en el campo del desarrollo del pensamiento y lenguaje variacional.
+
+Se tiene como constructos teóricos los desarrollados por dos reconocidos programas de investigación en el ámbito de la educación matemática como lo son el pensamiento del profesor en torno al conocimiento didáctico del contenido y la socioepistemología como enfoque emergente de las matemáticas educativas. El primero, entendido como la forma reflexiva y autónoma que el profesor integra el conocimiento del contenido, la didáctica y el contexto en los procesos de enseñanza de las matemáticas, y la segunda, como una aproximación teórica, que busca explicar fenómenos didácticos producidos en el campo de las matemáticas educativas a través del papel que juega la construcción social del conocimiento bajo un enfoque sistémico. Desde estas escuelas de pensamiento se pretende encontrar líneas de actuación de los profesores pertenecientes a la unidad de investigación que permitan describir sus marcos conceptuales asociados al pensamiento variacional.
+
+El presente trabajo se enmarca dentro del modelo de investigación cualitativo de cohorte etnográfico, en el que se tomará como unidad de trabajo tres (3) profesores activos del área de matemáticas instituciones oficiales adscritas a la Secretaría de Educación Municipal de Valledupar, de los cuales se tendrán en cuenta como elementos fundamentales el discurso del profesor y las características de algunas sesiones de clase (explicaciones del docente,  participaciones del estudiante y recursos utilizados en la construcción social e individual) cuando enseñan la noción de variación. Fundamentados en estos resultados se establecerán las orientaciones pedagógicas pertinentes para que los docentes de matemáticas fortalezcan el desarrollo del pensamiento variacional de sus estudiantes en el aula de clases. El plan de proyecto de investigación seguirá las siguientes etapas: 
+
+¿	Preparación de la investigación (Delimitación de la población, análisis de las fuentes documentales, definición de variables).
+¿	Obtención de los datos (selección de técnicas de recolección de datos, elaboración y validación de instrumentos, elección de la muestra, trabajo de campo). 
+¿	Procesamiento de la información (planillas de registros, cálculos estadísticos, tablas y gráficos). 
+¿	Análisis de datos (Interpretación y discusión de resultados, conclusiones, recomendaciones, redacción de informe).
+¿	Organización de actividades que permitan orientar pedagógicamente a los docentes de la básica secundaria en lo referente al desarrollo del pensamiento variacional de sus estudiantes
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

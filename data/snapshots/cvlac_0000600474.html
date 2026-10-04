@@ -1,0 +1,2742 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=C6497A51C26EB9C614B88D17D54DBB79" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                
+                                    <tr>
+                                        <td>Categor&iacute;a</td>
+                                        <td>
+                                            Investigador Junior (IJ) con vigencia
+                                            
+                                                hasta la publicación de los resultados de la siguiente convocatoria
+                                                
+                                            
+                                        </td>
+                                    </tr>
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        Tatiana Milena&nbsp;Juliao&nbsp;Lemus
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>JULIAO LEMUS, TATIANA MILENA</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Femenino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            Universidad Del Zulia<br />
+                            Geología petrolera<br />
+                            Juliode2007 - Octubrede 2010<br />
+                            Modelo Geoquímico con fines de Exploarción de Gas Metano Asociado a Carbones en El Sector Sur-Oeste de la Mina Paso Diablo, Cuenca Guasare, Estado Zulia</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD  INDUSTRIAL DE SANTANDER<br />
+                            GEOLOGIA<br />
+                            Septiembrede1993 - Mayode 2002<br />
+                            Modelo de Generación de Petróleo en la Subcuenca de Neiva, VSM, Colombia</td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Instituto Colombiano del Petróleo</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>48&nbsp;horas Semanales
+                        Enero de 2010            
+                         de <br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Centro de Investigación y Desarrollo Tecnologico del Carbón - CIDTEC</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Marzo de 2009            
+                        Noviembre de 2009<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Centro de Investigación y Desarrollo Tecnologico del Carbón - CIDTEC</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Marzo de 2007            
+                        Diciembre de 2007<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Centro de Investigación y Desarrollo Tecnologico del Carbón - CIDTEC</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>30&nbsp;horas Semanales
+                        Marzo de 2007            
+                        Noviembre de 2007<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;INVESTIGADOR          
+                        Marzo de 2007            
+                         de <br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>FUNDACION UNIVERSITARIA DEL AREA ANDINA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>8&nbsp;horas Semanales
+                        Enero de 2007            
+                        Junio de 2007<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Profesor Ocasional          
+                        Febrero de 2007            
+                        Junio de 2007<br>
+
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Profesor ocasional          
+                        Julio de 2005            
+                        Septiembre de 2005<br>
+
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; Docente en el Area de Mineralogía,&nbsp;30 
+                        Enero 2007            
+                        Junio 2007<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Sociedad Colombiana de Geologia</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Enero de 2003            
+                         de 2006<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Dirección y Administración            
+                        <i> - Cargo:</i>&nbsp;Dirección de actividades de las Geociencias en representación de la SCG          
+                        Octubre de 2006            
+                         de <br>
+
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Directora Capítulo Cesar Guajira          
+                        Octubre de 2006            
+                         de <br>
+
+                                            
+                        - &nbsp;Servicio Técnico Especializado            
+                        <i> - Cargo:</i>&nbsp;Geologa en fase de campo y elaboracion del informe final          
+                        Enero de 2004            
+                         de 2005<br>
+
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Geóloga de Campo y Oficina          
+                        Diciembre de 2004            
+                        Agosto de 2005<br>
+
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Logística          
+                        Enero de 2003            
+                         de 2006<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>ASOCIACION COLOMBIANA DE INGENIEROS DE MINAS</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Marzo de 2006            
+                        Septiembre de 2006<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Servicio Técnico Especializado            
+                        <i> - Cargo:</i>&nbsp;Fiscalización Minera          
+                        Marzo de 2006            
+                        Septiembre de 2006<br>
+
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Fiscalización Minera          
+                        Marzo de 2006            
+                        Septiembre de 2006<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>VICERRECTORIA DE INVESTIGACION - UPC</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Julio de 2005            
+                        Diciembre de 2005<br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp;                              
+                        Marzo 2007            
+                         <br>            
+
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp;                              
+                        Julio 2005            
+                        Diciembre 2005<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Programa tecnico de mineralogía</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Enero de 2003            
+                         de 2004<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Dirección y Administración            
+                        <i> - Cargo:</i>&nbsp;Coordinadora del programa tecnico en minería          
+                        Enero de 2003            
+                         de 2004<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>area de geología</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Enero de 2003            
+                         de 2004<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; Docente en las materias de Geología y mineralogía y Petrografía,&nbsp; 
+                        Enero 2003            
+                         2004<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UPARSISTEM</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>6&nbsp;horas Semanales
+                        Febrero de 2003            
+                        Junio de 2004<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Docente          
+                        Enero de 2003            
+                         de 2004<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Instituto Colombiano del Petróleo</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Marzo de 2001            
+                        Septiembre de 2001<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Tesis de grado          
+                        Marzo de 2001            
+                        Septiembre de 2001<br>
+
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Pasantías
+                        <i> - Titulo:</i>&nbsp;                              
+                        Marzo 2001            
+                        Septiembre 2001<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>DAMA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Enero de 1997            
+                         de 1997<br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; Evaluación geotecnica de deslizamientos en el municipio de pueblo bello, Cesar                            
+                        Enero 1997            
+                         1997<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Alcadía Municipal De Valledupar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Junio de 1997            
+                        Noviembre de 1997<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;participante en proyecto          
+                        Junio de 1997            
+                        Noviembre de 1997<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Geología</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="5"><h3 >Idiomas</h3></td>
+                            </tr>    
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td><b>Habla</b></td>
+                                <td><b>Escribe</b></td>
+                                <td><b>Lee</b></td>
+                                <td><b>Entiende</b></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;Inglés</li></td>
+                    <td>Aceptable</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>
+                    <td>Aceptable</td>                                                        
+                </tr>    
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;Geoquímica Orgánica, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Petrografía Orgánica, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;GEOQUÍMICA DEL CARBÓN Y DEL PETRÓLEO, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;GEOLOGÍA DEL PETRÓLEO, <i>Activa:</i>Si</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Reconocimientos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>Por la organización de eventos de alta calidad científica. Sociedad Colombiana de Geología ¿ XI Congreso Colombiano de Geología. , - Agostode 2007</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>Por una destacada participación en la Primera Expotécnica de Hidrocarburos 2008, el sentido de responsabilidad y compromiso en la transformación de la Educación Venezolana., - Agostode 2008</li></td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a></td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            TATIANA MILENA JULIAO LEMUS,                    
+                            
+                            Estimación de la variabilidad de la calidad del manto de carbón 160, mediante análisis geoestadístico, Bloque Norte ¿ Mina El Hatillo, departamento del Cesar&nbsp;
+                            FUNDACION UNIVERSITARIA DEL AREA ANDINA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Ingeniería en Minas,
+                            &nbsp;2011.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Melissa Ramírez; Alberto Quijano&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): TATIANA MILENA JULIAO LEMUS,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Ambiental -- Minería y Procesamiento de Minerales,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a></td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Participaci&oacute;n en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Participación en comités de evaluación - Otra</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            TATIANA MILENA JULIAO LEMUS,                    
+                            
+                            CARACTERIZACIÓN GEOQUÍMICA DE MANIFESTACIONES DE GRAFITO EN VENEZUELA<br>
+                            <i>en:&nbsp;</i> &nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Geología,                    
+                            
+                            
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a></td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Trámites minero ambientales&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2002-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Valledupar &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>corpocesar - gobernación del cesar
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>TATIANA MILENA JULIAO LEMUS
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>uso de las regalías del carbon en el departamento del cesar&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2004-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Valledupar &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Gobernacion del cesar- Contraloría de la república
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>TATIANA MILENA JULIAO LEMUS
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Geología del carbon, minería y medio ambiente&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2004-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Valledupar &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Sociedad colombiana de ingeniería capitulo Cesar-Guajira
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>TATIANA MILENA JULIAO LEMUS
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>I Encuentro Binacional de Minería.&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2005-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en RIOHACHA &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>¿Retos de la Investigación Tecnológica en Minería y Energía desde una Perspectiva Regional con Proyección Binacional¿
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Resumen
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>TATIANA MILENA JULIAO LEMUS
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>5</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>VII Semana Técnica de Geología e Ingeniería Geológica&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2006-09-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en SOGAMOSO &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Desarrollo Minero Integral de las Calizas del Cesar, Fase 1. Evaluación de la calidad del Yacimiento, Sector Codazzi ¿ La Jagua de Ibirico
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>TATIANA MILENA JULIAO LEMUS
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>6</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Primera Expotécnica Hidrocarburo 2008, "La Geología del Zulia".&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2008-08-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en MIRANDA &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Marco Geológico Regional de la Cuenca Carbonífera del Guasare, Edo. Zulia, Venezuela
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>TATIANA MILENA JULIAO LEMUS
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>7</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XIV Congreso Latinoamericano de Geología y XIII Congreso Colombiano de Geología&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2011-09-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en MEDELLÍN &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Estimación de la variación de la calidad del manto de carbón 160 en el bloque norte de la mina El Hatillo, departamento del Cesar, a partir de geoestadística, análisis próximos y petrográficos.
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Definición de paleoambientes de la Formación Cansona a partir de palinofacies, Cuenca Sinú ¿ San Jacinto
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Madurez térmica de la formación cansona en la cuenca Sinú ¿ San Jacinto evaluada a partir de pirólisis Rock ¿ Eval VI, petrografía orgánica y caracterización de extractos
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>TATIANA MILENA JULIAO LEMUS
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>8</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Twenty-Eighth Annual Meeting of The Society for Organic Petrology&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2011-08-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en  &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Coal Seams from Paleocene Marcelina Formation: Possible Petroleum Source Rock? Evidence From Organic Petrography, Western Venezuela
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Changes of Kerogen through The Hydrous Pyrolysis Process, Optical and Morphological Evidences
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Petrographic Characteristics of coals from the Cuervos Formation in the Cesar Basin, Colombia
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Resumen
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>TATIANA MILENA JULIAO LEMUS
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>9</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XII Congreso Latinoamericano de Geoquímica Orgánica. &nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2011-11-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en  &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Geochemical Evaluation of Coal Seams from Paleocene Marcelina Formation: Possible Petroleum Source Rocks? Paso Diablo Coal Mine: Western Venezuela
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>TATIANA MILENA JULIAO LEMUS
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>10</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Primera Semana de la Ciencia, La Tecnología y la innovación en el departamento del Cesar&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2006-11-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Estado de la Exploración del Gas Asociado a Carbón en la Cuenca Cesar Ranchería
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Resumen
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>TATIANA MILENA JULIAO LEMUS
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>11</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Seminario ¿Geología del Carbón, Minería y Medio Ambiente¿.&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2004-11-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Conceptos Básicos de Gas Asociado a Carbón
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>TATIANA MILENA JULIAO LEMUS
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>12</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Codigo de minas, desarrollo institucional&nbsp;
+                                                <i>Tipo de evento: </i>Taller&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2003-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Valledupar &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Gobernación del departamento del César
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>TATIANA MILENA JULIAO LEMUS
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>13</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>formulación de proyectos de ciencia y tecnología&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2004-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Valledupar &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Servicio Nacional de Aprendizaje Sena Sede Cali
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>TATIANA MILENA JULIAO LEMUS
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>14</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>foro "Geologia, Minería y desarrollo"&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2003-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Valledupar &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Sociedad Colombiana de Geologia
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>TATIANA MILENA JULIAO LEMUS
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>15</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>V congreso nacional de ciencia y tecnología del carbon&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2000-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Valledupar &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>TATIANA MILENA JULIAO LEMUS
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>16</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Octavo congreso latinoamericano de geoquímica orgánica&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2002-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en CARTAGENA DE INDIAS &nbsp; - Cartagena &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>TATIANA MILENA JULIAO LEMUS
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                TATIANA MILENA JULIAO LEMUS,                    
+                
+                "Optical parameters and microstructural properties of Solid Bitumens of high reflectance (Impsonites). Reflections on their use as an indicator of organic maturity"
+                . En: Colombia&nbsp;<br>
+                INTERNATIONAL JOURNAL OF COAL GEOLOGY&nbsp;
+                <i>ISSN:</i>&nbsp;0166-5162&nbsp;
+                <i>ed:</i>&nbsp;Elsevier<br>
+                <i>v.</i>229
+                <i>fasc.</i>
+                p.1
+                - 18
+                ,2020,
+                <i>&nbsp;DOI:&nbsp;</i>10.1016/103570
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                TATIANA MILENA JULIAO LEMUS,                    
+                
+                "Compositional, geochemical and petrophysical shale play characterization of the Upper Cretaceous in southern Middle Magdalena Valley (MMV) basin, Colombia"
+                . En: Colombia&nbsp;<br>
+                JOURNAL OF SOUTH AMERICAN EARTH SCIENCES&nbsp;
+                <i>ISSN:</i>&nbsp;0895-9811&nbsp;
+                <i>ed:</i>&nbsp;Elsevier<br>
+                <i>v.</i>109
+                <i>fasc.</i>
+                p.1
+                - 18
+                ,2021,
+                <i>&nbsp;DOI:&nbsp;</i>10.1016/103276
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                TATIANA MILENA JULIAO LEMUS,                    
+                
+                "Porosity development and the influence of pore size on the CH4 adsorption capacity of a shale oil reservoir (Upper Cretaceous) from Colombia. Role of solid bitumen."
+                . En: Colombia&nbsp;<br>
+                INTERNATIONAL JOURNAL OF COAL GEOLOGY&nbsp;
+                <i>ISSN:</i>&nbsp;0166-5162&nbsp;
+                <i>ed:</i>&nbsp;Elsevier<br>
+                <i>v.</i>159
+                <i>fasc.</i>
+                p.1
+                - 17
+                ,2016,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                TATIANA MILENA JULIAO LEMUS,                    
+                
+                "Testing reproducibility of vitrinite and solid bitumen reflectance measurements in North American unconventional source-rock reservoir petroleum systems."
+                . En: Colombia&nbsp;<br>
+                MARINE AND PETROLEUM GEOLOGY&nbsp;
+                <i>ISSN:</i>&nbsp;0264-8172&nbsp;
+                <i>ed:</i>&nbsp;ELSEVIER SCI LTD<br>
+                <i>v.</i>114
+                <i>fasc.</i>
+                p.1
+                - 17
+                ,2020,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                TATIANA MILENA JULIAO LEMUS,                    
+                
+                "Source-rock potential of the lowest coal seams of the Marcelina Formation at the Paso Diablo mine in the Venezuelan Guasare Basin: Evidence for the correlation of Amana oils with these Paleocene coals"
+                . En: Colombia&nbsp;<br>
+                INTERNATIONAL JOURNAL OF COAL GEOLOGY&nbsp;
+                <i>ISSN:</i>&nbsp;0166-5162&nbsp;
+                <i>ed:</i>&nbsp;Elsevier<br>
+                <i>v.</i>163
+                <i>fasc.</i>NA
+                p.149
+                - 165
+                ,2016,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                TATIANA MILENA JULIAO LEMUS,                    
+                
+                "The role of solid bitumen in the development of porosity in shale oil reservoir rocks of the Upper Cretaceous in Colombia"
+                . En: Colombia&nbsp;<br>
+                INTERNATIONAL JOURNAL OF COAL GEOLOGY&nbsp;
+                <i>ISSN:</i>&nbsp;0166-5162&nbsp;
+                <i>ed:</i>&nbsp;Elsevier<br>
+                <i>v.</i>147
+                <i>fasc.</i>
+                p.126
+                - 144
+                ,2015,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                TATIANA MILENA JULIAO LEMUS,                    
+                
+                "Optical parameters and microstructural properties of Solid Bitumens of high reflectance (Impsonites). Reflections on their use as an indicator of organic maturity"
+                . En: Colombia&nbsp;<br>
+                INTERNATIONAL JOURNAL OF COAL GEOLOGY&nbsp;
+                <i>ISSN:</i>&nbsp;0166-5162&nbsp;
+                <i>ed:</i>&nbsp;Elsevier<br>
+                <i>v.</i>229
+                <i>fasc.</i>
+                p.1
+                - 18
+                ,2020,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                TATIANA MILENA JULIAO LEMUS,                    
+                
+                "Paleoenvironmental reconstruction based on palynofacies analyses of the Cansona Formation (Late Cretaceous), Sinú-San Jacinto Basin, northwest Colombia."
+                . En: Colombia&nbsp;<br>
+                JOURNAL OF SOUTH AMERICAN EARTH SCIENCES&nbsp;
+                <i>ISSN:</i>&nbsp;0895-9811&nbsp;
+                <i>ed:</i>&nbsp;Elsevier<br>
+                <i>v.</i>69
+                <i>fasc.</i>NA
+                p.103
+                - 118
+                ,2016,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                TATIANA MILENA JULIAO LEMUS,                    
+                
+                "Methodology to define hydrocarbon potential in a Shale Reservoir based on Geochemical Data and Well Logs"
+                . En: Colombia&nbsp;<br>
+                CT F CIENCIA TECNOLOGIA Y FUTURO&nbsp;
+                <i>ISSN:</i>&nbsp;0122-5383&nbsp;
+                <i>ed:</i>&nbsp;Ecopetrol S.A.<br>
+                <i>v.</i>9
+                <i>fasc.</i>1
+                p.5
+                - 14
+                ,2019,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                TATIANA MILENA JULIAO LEMUS,                    
+                
+                "Desarrollo Minero Integral de las Calizas del Cesar, Fase I, Evaluación de la Calidad del Yacimiento, Sector Codazzi ¿ La Jagua de Ibirico."
+                . En: Colombia&nbsp;<br>
+                Revista Cientifica Documentos De Ingenieria&nbsp;
+                <i>ISSN:</i>&nbsp;1692-8075&nbsp;
+                <i>ed:</i>&nbsp;Ediciones Unicesar<br>
+                <i>v.</i>4
+                <i>fasc.</i>N/A
+                p.33
+                - 44
+                ,2006,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a></td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a>        
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td colspan="2"><h3 >Capitulos de libro</h3></td>
+            </tr>
+                
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    TATIANA MILENA JULIAO LEMUS,                    
+                    
+
+                    ". Shale Oil Resource Systems and Solid Bitumen"
+                    The Role of Organic Petrology in the Exploration of Conventional and Unconventional Hydrocarbon Systems
+                    . En: Emiratos Árabes Unidos&nbsp;
+                    <i>ISBN:</i>&nbsp;978-1-68108-464-0&nbsp;
+                    <i>ed:</i>&nbsp;
+                    <i>, v.</i>
+                    , p.169
+                    - 200&nbsp;
+                    
+                    ,2017
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Geología,                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+
+</table>
+</td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a></td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a>
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Productos tecnol&oacute;gicos</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+            <li><b>Producción técnica - Productos tecnológicos - Gen Clonado</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            TATIANA MILENA JULIAO LEMUS,                    
+                                
+            ROBERT EMILIO MARQUEZ ROMERO,                    
+                                
+            LUIS FERNANDO PENA PENA,                    
+            
+            Metodologías de Preparación de Muestras para Análisis de Petrografía Orgánica,
+            <i>Nombre comercial: </i>,
+            <i>contrato/registro: </i>,
+            . En: Colombia,&nbsp;
+            ,2012,&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Geología,                    
+            
+            
+            
+
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Definición de Facies Generadoras para la Formación La Luna en la parte Norte de la Cuenca del Valle Medio del Magdalena<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2012                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Septiembre&nbsp;
+                        2012
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Definición de las facies generadoras de la Formación la Luna a partir de secciones de afloramiento en la parte Norte de la Cuenca del Valle Medio del Magdalena a partir de data sedimentológica y geoquímica, con el fin de prospección de yacimientos no convencionales tipo Shale Gas<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Estrategias integradas para el desarrollo de Shale Plays en VMM y Catatumbo<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2012                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Diciembre&nbsp;
+                        2012
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>12<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Incorporación de las mejores tecnologías y prácticas operativas para maximizar la productividad y rentabilidad en las áreas de: geomecánica, perforación, modelamiento de producción, fracturamiento hidráulico, prevención del daño de formación, geoquímica, geoestadística, automatización y control, manejo de aguas y perforación de shale plays VMM y CAT. <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        ESTRATEGIAS INTEGRADAS PARA EL DESARROLLO DE SHALE PLAYS EN VMM Y EN CATATUMBO<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2012                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Modelo de generación de petroleo en el sector noreste de la subcuenca de neiva, valle superior del magdalena<br>
+                        <i>Inicio:&nbsp;</i>Marzo&nbsp;
+                        2001                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Marzo&nbsp;
+                        2002
+                        
+                        
+                        <i>Fin:&nbsp;</i>Marzo&nbsp;
+                        2002
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>12<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n, desarrollo e Innovaci&oacute;n&nbsp;<br>
+                        Evaluación geotecnica de deslizamientos en el municipio de pueblo bello, Cesar<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        1997                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Noviembre&nbsp;
+                        1997
+                        
+                        
+                        <i>Fin:&nbsp;</i>Noviembre&nbsp;
+                        1997
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>11<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Exploración de Gas Metano Asociado a Carbón en la Cuenca Guasare, Estado Zulia, Venezuela<br>
+                        <i>Inicio:&nbsp;</i>Octubre&nbsp;
+                        2007                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Diciembre&nbsp;
+                        2009
+                        
+                        
+                        <i>Fin:&nbsp;</i>Enero&nbsp;
+                        2009
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>15<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        INTERPRETACIÓN PALEOAMBIENTAL Y ANÁLISIS DE CALIDAD DE LOS MANTOS DE CARBÓN PRODUCTORES DEL BLOQUE NORTE - MINA ¿EL HATILLO¿ -  DEPARTAMENTO DEL CESAR<br>
+                        <i>Inicio:&nbsp;</i>Mayo&nbsp;
+                        2009                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Diciembre&nbsp;
+                        2009
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>7<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Modelo Geológico con fines de exploración de gas metano asociado a carbones en el Suroeste de la Mina Paso Diablo, Cuenca Guasare, Venezuela).<br>
+                        <i>Inicio:&nbsp;</i>Marzo&nbsp;
+                        2008                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Septiembre&nbsp;
+                        2009
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>18<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n, desarrollo e Innovaci&oacute;n&nbsp;<br>
+                        Los Trabajos de Exploración para material de Construcción, municipio de El Copey, Cesar<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2007                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Abril&nbsp;
+                        2007
+                        
+                        
+                        <i>Fin:&nbsp;</i>Abril&nbsp;
+                        2007
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>4<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n, desarrollo e Innovaci&oacute;n&nbsp;<br>
+                        Los Trabajos de Exploración para Caliza y Mármol en el municipio de Bosconia, Cesar. Programa de Trabajos y Obras para la empresa Minera de los Santos S.A.<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2007                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Abril&nbsp;
+                        2007
+                        
+                        
+                        <i>Fin:&nbsp;</i>Abril&nbsp;
+                        2007
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>3<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        ESTUDIO DE LA COMBUSTIÓN ESPONTÁNEA DE LOS CARBONES DEL YACIMIENTO EL HATILLO - CESAR <br>
+                        <i>Inicio:&nbsp;</i>Septiembre&nbsp;
+                        2008                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Septiembre&nbsp;
+                        2009
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>12<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

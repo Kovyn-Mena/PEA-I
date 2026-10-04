@@ -79,6 +79,15 @@ class CatalogoMinCiencias2024:
         elif any(k in t for k in ["diseno", "diseño"]):
             return cls._resultado("DTI", "DIS_IND", "Diseño industrial registrado", "2.2.2.3.1", "DTI-A", 8, 80)
 
+        elif any(k in t for k in ["regulacion", "regulación", "norma"]):
+            return cls._resultado("DTI", "REG_NORM", "Norma o regulación técnica", "2.2.2.4.1", "DTI-A", 7, 70)
+
+        elif any(k in t for k in ["informe"]):
+            return cls._resultado("DTI", "INF_TEC", "Informe técnico final de investigación", "2.2.2.5.1", "DTI-B", 5, 50)
+
+        elif any(k in t for k in ["consultoria", "consultoría"]):
+            return cls._resultado("DTI", "CONS_TEC", "Consultoría científico-tecnológica", "2.2.2.6.1", "DTI-B", 5, 50)
+
         # 3. FRH: Formación de Recurso Humano
         elif any(k in t for k in ["trabajo de grado", "tesis", "grado"]):
             if "doctor" in tit or "doc" in tit:
@@ -89,9 +98,18 @@ class CatalogoMinCiencias2024:
                 return cls._resultado("FRH", "APO", "Acompañamiento Programa Ondas", "2.2.4.7.1", "FRH-B", 5, 30)
             return cls._resultado("FRH", "TGP", "Trabajo de Grado de Pregrado sustentado", "2.2.4.3.1", "FRH-B", 4, 40)
 
+        elif any(k in t for k in ["jurado", "evaluador"]):
+            return cls._resultado("FRH", "JUR_EVAL", "Jurado o comité evaluador de tesis", "2.2.4.4.1", "FRH-B", 4, 40)
+
+        elif any(k in t for k in ["cursocorto", "curso"]):
+            return cls._resultado("FRH", "CUR_COR", "Curso de corta duración dictado", "2.2.4.5.1", "FRH-B", 3, 30)
+
         # 4. ASC: Apropiación Social del Conocimiento
         elif any(k in t for k in ["apropiacion", "apropiación", "innovacion social"]):
             return cls._resultado("ASC", "PROC_ASC", "Proceso de apropiación social CTeI", "2.2.3.1.1", "ASC-A", 8, 80)
+
+        elif any(k in t for k in ["contenido", "audiovisual"]):
+            return cls._resultado("ASC", "CONT_DIG", "Contenido digital o audiovisual", "2.2.3.2.1", "ASC-B", 4, 40)
 
         # 5. DPC: Divulgación Pública de la Ciencia
         elif any(k in t for k in ["evento", "ponencia", "conferencia", "taller", "documento de trabajo", "divulgacion", "divulgación"]):

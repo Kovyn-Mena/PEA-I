@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS Investigadores (
 -- 3. Tabla de Productos de Investigación
 CREATE TABLE IF NOT EXISTS Productos (
     id_producto TEXT PRIMARY KEY,
-    tipo TEXT NOT NULL CHECK(tipo IN ('Articulo', 'Libro', 'Capitulo', 'Software', 'Patente', 'Trabajo de Grado')),
+    tipo TEXT NOT NULL CHECK(tipo IN ('Articulo', 'Libro', 'Capitulo', 'Software', 'Patente', 'Trabajo de Grado', 'Tesis', 'Jurado', 'CursoCorto', 'Evento', 'Consultoria', 'Informe', 'Contenido', 'Regulacion', 'Prototipo', 'Diseno')),
     titulo TEXT NOT NULL,
     anio INTEGER NOT NULL,
     categoria_minciencias TEXT NOT NULL DEFAULT 'A1',
@@ -52,6 +52,22 @@ CREATE TABLE IF NOT EXISTS HistorialAcciones (
     id_registro TEXT NOT NULL,
     detalles TEXT,
     fecha_hora DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 5. Tabla de Hoja de Vida CvLAC (Perfil Enriquecido del Investigador)
+CREATE TABLE IF NOT EXISTS PerfilInvestigador (
+    documento_id TEXT PRIMARY KEY,
+    par_evaluador TEXT DEFAULT 'No',
+    nombre_citaciones TEXT DEFAULT '',
+    nacionalidad TEXT DEFAULT '',
+    sexo TEXT DEFAULT '',
+    scholar_url TEXT DEFAULT '',
+    orcid TEXT DEFAULT '',
+    formacion_academica TEXT DEFAULT '',
+    experiencia TEXT DEFAULT '',
+    areas TEXT DEFAULT '',
+    idiomas TEXT DEFAULT '',
+    FOREIGN KEY (documento_id) REFERENCES Investigadores(documento_id) ON DELETE CASCADE
 );
 
 -- Índices para optimizar búsquedas y filtrados por año/grupo

@@ -43,6 +43,138 @@ except ImportError:
     PYPDF_DISPONIBLE = False
 
 
+def _norm_txt(s: str) -> str:
+    """Normaliza texto eliminando acentos y espacios excesivos."""
+    import unicodedata
+    s = unicodedata.normalize("NFD", (s or "").lower())
+    s = "".join(c for c in s if unicodedata.category(c) != "Mn")
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def clasificar_marcador_gruplac(marcador: str) -> str:
+    """Clasifica los marcadores de producción de GrupLAC en las 15 tipologías oficiales."""
+    m = _norm_txt(marcador)
+    if any(k in m for k in ["revista especializada", "revista", "divulgacion", "divulgación", "noticias", "working paper", "corto (resumen)", "articulo", "artículo"]):
+        return "Articulo"
+    elif any(k in m for k in ["capitulo", "capítulo"]):
+        return "Capitulo"
+    elif any(k in m for k in ["libro resultado", "libros de formacion", "libros de formación", "otro libro", "libro"]):
+        return "Libro"
+    elif any(k in m for k in ["computacional", "software"]):
+        return "Software"
+    elif any(k in m for k in ["patente"]):
+        return "Patente"
+    elif any(k in m for k in ["pregrado", "trabajos de grado", "trabajo de grado"]):
+        return "Trabajo de Grado"
+    elif any(k in m for k in ["maestria", "maestría", "doctorado", "tesis"]):
+        return "Tesis"
+    elif any(k in m for k in ["jurado", "evaluador"]):
+        return "Jurado"
+    elif any(k in m for k in ["taller", "curso", "diplomado", "perfeccionamiento"]):
+        return "CursoCorto"
+    elif any(k in m for k in ["congreso", "encuentro", "seminario", "simposio", "evento", "ponencia", "foro"]):
+        return "Evento"
+    elif any(k in m for k in ["consultor"]):
+        return "Consultoria"
+    elif any(k in m for k in ["informe"]):
+        return "Informe"
+    elif any(k in m for k in ["contenido", "audiovisual", "red", "extension", "extensión", "responsabilidad social"]):
+        return "Contenido"
+    elif any(k in m for k in ["norma", "regulacion", "regulación"]):
+        return "Regulacion"
+    elif any(k in m for k in ["prototipo", "planta", "investigacion y desarrollo", "investigación y desarrollo", "spin-off", "innovacion", "innovación"]):
+        return "Prototipo"
+    elif any(k in m for k in ["diseno", "diseño"]):
+        return "Diseno"
+    return "Articulo"
+
+
+def parse_hoja_vida(html: str) -> dict:
+    """Extrae datos enriquecidos de la hoja de vida CvLAC oficial."""
+    soup = BeautifulSoup(html, "html.parser")
+    lines = [l.strip() for l in soup.get_text("\n").split("\n") if l.strip()]
+    unido = "\n".join(lines)
+
+    par = "Si" if "Par evaluador reconocido" in unido else "No"
+    m_sch = re.search(r'href="(https://scholar\.google[^"]*)"', html)
+    m_orc = re.search(r'href="(https://orcid\.org/[^"]*)"', html)
+
+    def _val_etiqueta(etiqueta: str) -> str:
+        for i, l in enumerate(lines):
+            if l.lower() == etiqueta.lower() and i + 1 < len(lines):
+                val = lines[i + 1]
+                if not val.startswith("Categor") and len(val) < 120:
+                    return val
+        return ""
+
+    formacion = ""
+    for nivel in ("Doctorado", "Maestr", "Pregrado"):
+        for i, l in enumerate(lines):
+            if l.startswith(nivel):
+                formacion = " | ".join(lines[i:i + 3])[:250]
+                break
+        if formacion:
+            break
+
+    return {
+        "par_evaluador": par,
+        "nombre_citaciones": _val_etiqueta("Nombre en citaciones"),
+        "nacionalidad": _val_etiqueta("Nacionalidad"),
+        "sexo": _val_etiqueta("Sexo"),
+        "scholar_url": m_sch.group(1) if m_sch else "",
+        "orcid": m_orc.group(1) if m_orc else "",
+        "formacion_academica": formacion,
+        "experiencia": "",
+        "areas": "",
+        "idiomas": ""
+    }
+
+
+def guardar_perfil_bd(doc_id: str, perfil: dict, ruta_bd: str) -> bool:
+    """Persiste los datos curriculares de CvLAC en la tabla PerfilInvestigador."""
+    try:
+        import sqlite3
+        conn = sqlite3.connect(ruta_bd, timeout=5.0)
+        cursor = conn.cursor()
+        cursor.execute("PRAGMA journal_mode = WAL;")
+        cursor.execute("PRAGMA busy_timeout = 5000;")
+        cursor.execute("""
+            INSERT INTO PerfilInvestigador (
+                documento_id, par_evaluador, nombre_citaciones, nacionalidad,
+                sexo, scholar_url, orcid, formacion_academica, experiencia, areas, idiomas
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(documento_id) DO UPDATE SET
+                par_evaluador = excluded.par_evaluador,
+                nombre_citaciones = excluded.nombre_citaciones,
+                nacionalidad = excluded.nacionalidad,
+                sexo = excluded.sexo,
+                scholar_url = excluded.scholar_url,
+                orcid = excluded.orcid,
+                formacion_academica = excluded.formacion_academica,
+                experiencia = excluded.experiencia,
+                areas = excluded.areas,
+                idiomas = excluded.idiomas;
+        """, (
+            doc_id,
+            perfil.get("par_evaluador", "No"),
+            perfil.get("nombre_citaciones", ""),
+            perfil.get("nacionalidad", ""),
+            perfil.get("sexo", ""),
+            perfil.get("scholar_url", ""),
+            perfil.get("orcid", ""),
+            perfil.get("formacion_academica", ""),
+            perfil.get("experiencia", ""),
+            perfil.get("areas", ""),
+            perfil.get("idiomas", "")
+        ))
+        conn.commit()
+        conn.close()
+        return True
+    except Exception as e:
+        print(f"[!] Error al persistir PerfilInvestigador para {doc_id}: {e}")
+        return False
+
+
 class MotorIngesta:
     """
     Motor central de procesamiento de fuentes de datos.
@@ -64,7 +196,7 @@ class MotorIngesta:
     # -----------------------------------------------------------------
     def parsear_gruplac(self, url: str, multi: Multilista) -> dict:
         """Descarga y extrae los datos de un grupo de investigación desde GrupLAC."""
-        resumen = {"grupos": 0, "investigadores": 0, "productos": 0, "modo": "ONLINE"}
+        resumen = {"grupos": 0, "investigadores": 0, "productos": 0, "validados": 0, "modo": "ONLINE"}
 
         # Extraer código de grupo de la URL (parámetro nro)
         match_cod = re.search(r'nro=(\d+)', url)
@@ -72,18 +204,32 @@ class MotorIngesta:
         cod_grupo = f"COL{nro_grupo[-7:]}" if len(nro_grupo) >= 7 else f"COL{nro_grupo}"
 
         html_text = ""
-        try:
-            print(f"[Scraping] Conectando a MinCiencias GrupLAC ({url})...")
-            resp = requests.get(url, headers=self.HEADERS, timeout=12, verify=False)
-            if resp.status_code == 200 and len(resp.text) > 1000:
-                html_text = resp.text
-            else:
-                raise Exception(f"HTTP Status {resp.status_code}")
-        except Exception as e:
-            print(f"[!] Aviso: No se pudo conectar a MinCiencias en vivo ({e}).")
-            print("[+] Activando Plan B: Usando dataset offline de respaldo para GrupLAC...")
-            resumen["modo"] = "OFFLINE_BACKUP"
-            return self._fallback_gruplac(cod_grupo, multi, resumen)
+        # Verificar primero si existe snapshot oficial local en data/snapshots/
+        snap_candidates = [
+            os.path.join(PROJECT_ROOT, "data", "snapshots", f"gruplac_{nro_grupo}.html"),
+            os.path.join(PROJECT_ROOT, "data", "snapshots", f"gruplac_{int(nro_grupo):014d}.html") if nro_grupo.isdigit() else "",
+            os.path.join(PROJECT_ROOT, "data", "snapshots", "gruplac_00000000002099.html") if "2099" in nro_grupo else ""
+        ]
+        snapshot_local = next((p for p in snap_candidates if p and os.path.exists(p)), None)
+
+        if snapshot_local:
+            print(f"[Scraping] Usando snapshot oficial local: {os.path.basename(snapshot_local)}")
+            with open(snapshot_local, "r", encoding="utf-8", errors="ignore") as f_snap:
+                html_text = f_snap.read()
+            resumen["modo"] = "OFFLINE_SNAPSHOT"
+        else:
+            try:
+                print(f"[Scraping] Conectando a MinCiencias GrupLAC ({url})...")
+                resp = requests.get(url, headers=self.HEADERS, timeout=8, verify=False)
+                if resp.status_code == 200 and len(resp.text) > 1000:
+                    html_text = resp.text
+                else:
+                    raise Exception(f"HTTP Status {resp.status_code}")
+            except Exception as e:
+                print(f"[!] Aviso: No se pudo conectar a MinCiencias en vivo ({e}).")
+                print("[+] Activando Plan B: Usando dataset offline de respaldo para GrupLAC...")
+                resumen["modo"] = "OFFLINE_BACKUP"
+                return self._fallback_gruplac(cod_grupo, multi, resumen)
 
         soup = BeautifulSoup(html_text, "html.parser")
 
@@ -97,7 +243,7 @@ class MotorIngesta:
         lider = "John Jairo Patiño Vanegas"
         td_lider = soup.find("td", string=re.compile(r"Líder|Lider", re.I))
         if td_lider and td_lider.find_next_sibling("td"):
-            lider = td_lider.find_next_sibling("td").get_text(strip=True)
+            lider = td_lider.find_next_sibling("td").get_text(strip=True).title()
 
         # 3. Clasificación
         clasificacion = "A1"
@@ -137,97 +283,136 @@ class MotorIngesta:
             g_existente.lider = lider
             g_existente.clasificacion = clasificacion
 
-        # 6. Integrantes del Grupo
-        integrantes_extraidos = []
-        for h in soup.find_all(["td", "h3", "strong"]):
-            if "integrantes" in h.get_text(strip=True).lower():
-                parent_table = h.find_parent("table")
-                if parent_table:
-                    for row in parent_table.find_all("tr")[1:]:
-                        cols = [td.get_text(strip=True).replace('\xa0', ' ') for td in row.find_all("td")]
-                        if cols and len(cols) >= 2:
-                            nom_raw = cols[0]
-                            nom_limpio = re.sub(r'^\d+\.-', '', nom_raw).strip()
-                            if nom_limpio and len(nom_limpio) > 3 and nom_limpio.lower() != "nombre":
-                                rol = cols[1] if len(cols) > 1 else "Integrante"
-                                integrantes_extraidos.append((nom_limpio, rol))
-                break
+        # 6. Integrantes del Grupo (con cod_rh de CvLAC y vinculación a PerfilInvestigador)
+        mapa_integrantes = {}
+        snap_dir = os.path.join(PROJECT_ROOT, "data", "snapshots")
+        id_lider_doc = "0000494917"
 
-        # Registrar los primeros integrantes (o los más destacados)
-        for idx, (nom_inv, _) in enumerate(integrantes_extraidos[:15], start=1):
-            doc_inv = f"INV{nro_grupo[-4:]}{idx:03d}"
-            if "adith" in nom_inv.lower():
-                doc_inv = "0000494917"
-            cat = "Senior" if idx == 1 or "adith" in nom_inv.lower() else "Junior"
-            if not multi.buscar_investigador(doc_inv):
-                multi.insertar_investigador(cod_grupo, doc_inv, nom_inv, cat, "Ingeniería de Sistemas", True)
+        for t in soup.find_all("table"):
+            th = " ".join(t.get_text(" ").split())
+            if "Vinculaci" in th and "Nombre" in th:
+                for tr in t.find_all("tr")[1:]:
+                    tds = [c.get_text(" ").strip() for c in tr.find_all(["td", "th"])]
+                    tds = [d for d in tds if d]
+                    if len(tds) >= 4 and tds[0] != "Nombre":
+                        nom_raw = re.sub(r"^\d+\.-\s*", "", tds[0]).strip()
+                        if not nom_raw or len(nom_raw) < 3:
+                            continue
+                        nom_tit = nom_raw.title()
+
+                        cod_rh = ""
+                        a_cv = tr.find("a", href=True)
+                        if a_cv:
+                            m_rh = re.search(r"cod_rh=(\d+)", a_cv.get("href", ""))
+                            if m_rh:
+                                cod_rh = m_rh.group(1)
+
+                        doc_inv = cod_rh if cod_rh else f"INV{nro_grupo[-4:]}{len(mapa_integrantes)+1:03d}"
+                        if "adith" in nom_raw.lower():
+                            doc_inv = "0000494917"
+                            id_lider_doc = doc_inv
+                        elif "patino" in _norm_txt(nom_raw) or "patiño" in nom_raw.lower():
+                            id_lider_doc = doc_inv
+
+                        cat = "Senior" if ("adith" in nom_raw.lower() or "patino" in _norm_txt(nom_raw)) else "Junior"
+                        formacion = "Ingeniería de Sistemas y Computación"
+
+                        # Comprobar si existe snapshot de CvLAC para este investigador
+                        cv_snap_path = os.path.join(snap_dir, f"cvlac_{doc_inv}.html")
+                        if os.path.exists(cv_snap_path):
+                            try:
+                                with open(cv_snap_path, "r", encoding="utf-8", errors="ignore") as f_cv:
+                                    html_cv = f_cv.read()
+                                perfil_cv = parse_hoja_vida(html_cv)
+                                if perfil_cv.get("formacion_academica"):
+                                    formacion = perfil_cv["formacion_academica"][:80]
+                                guardar_perfil_bd(doc_inv, perfil_cv, self.ruta_bd)
+                            except Exception:
+                                pass
+
+                        if not multi.buscar_investigador(doc_inv):
+                            multi.insertar_investigador(cod_grupo, doc_inv, nom_tit, cat, formacion, True)
+                            resumen["investigadores"] += 1
+
+                        mapa_integrantes[_norm_txt(nom_raw)] = doc_inv
+
+        # Si no se encontraron integrantes en la tabla, registrar al líder
+        if not mapa_integrantes:
+            if not multi.buscar_investigador(id_lider_doc):
+                multi.insertar_investigador(cod_grupo, id_lider_doc, lider, "Senior", "Ingeniería de Sistemas", True)
                 resumen["investigadores"] += 1
+            mapa_integrantes[_norm_txt(lider)] = id_lider_doc
 
-        # 7. Productos del Grupo (Artículos, Libros, Software)
-        id_inv_lider = "0000494917" if multi.buscar_investigador("0000494917") else f"INV{nro_grupo[-4:]}001"
+        # 7. Productos del Grupo (con aval oficial chulo_1.jpg y 15 tipologías)
         prod_count = 0
-
         for tr in soup.find_all("tr"):
-            text_tr = tr.get_text()
-            if any(k in text_tr for k in ["Artículos publicados", "Libros publicados", "Capítulos de libro", "Software"]):
-                parent_table = tr.find_parent("table")
-                if parent_table:
-                    for row in parent_table.find_all("tr")[1:]:
-                        tds = row.find_all("td")
-                        for td in tds:
-                            raw_txt = td.get_text(strip=True)
-                            if len(raw_txt) > 20 and not raw_txt.startswith("Nombre"):
-                                prod_count += 1
-                                id_prod = f"SCRAP-{nro_grupo[-4:]}-{prod_count:03d}"
-                                tipo = "Articulo"
-                                if "libro" in text_tr.lower(): tipo = "Libro"
-                                elif "software" in text_tr.lower(): tipo = "Software"
+            imgs = tr.find_all("img")
+            ch = [i.get("src", "") for i in imgs if "chulo_" in (i.get("src", ""))]
+            if not ch:
+                continue
 
-                                # Extraer título
-                                partes = raw_txt.split(":")
-                                titulo = partes[1].strip() if len(partes) > 1 else raw_txt
-                                titulo = titulo[:110]
+            tds = tr.find_all("td")
+            if len(tds) < 2:
+                continue
 
-                                # Extraer año
-                                m_anio = re.search(r'\b(20[0-2]\d|19[89]\d)\b', raw_txt)
-                                anio = int(m_anio.group(1)) if m_anio else 2024
+            is_validado = any("chulo_1" in c for c in ch)
+            raw = tds[1].get_text("\n")
 
-                                # Extraer autores reales de la publicación
-                                m_aut = re.search(r'Autores:\s*([^,\n\r]+)', raw_txt)
-                                nom_autor_primario = m_aut.group(1).strip() if m_aut else ""
-                                nom_autor_primario = re.sub(r'[\xa0\s]+', ' ', nom_autor_primario).strip()
+            # Clasificar tipología por marcador
+            m_m = re.search(r"^\d+\.-?\s*([^:\n]+):", raw)
+            marcador_str = m_m.group(1).strip() if m_m else ""
+            tipo = clasificar_marcador_gruplac(marcador_str) if marcador_str else "Articulo"
 
-                                # Asociar al investigador correspondiente
-                                id_inv_asociado = id_inv_lider
-                                if nom_autor_primario:
-                                    inv_encontrado = None
-                                    g_actual = multi.buscar_grupo(cod_grupo)
-                                    if g_actual:
-                                        cur_inv = g_actual.primer_investigador
-                                        while cur_inv:
-                                            palabras = nom_autor_primario.split()
-                                            if any(len(pal) > 3 and pal.lower() in cur_inv.nombre_completo.lower() for pal in palabras):
-                                                inv_encontrado = cur_inv
-                                                break
-                                            cur_inv = cur_inv.sig_investigador
-                                    
-                                    if inv_encontrado:
-                                        id_inv_asociado = inv_encontrado.documento_id
-                                    else:
-                                        # Registrar nuevo autor como investigador del grupo
-                                        doc_nuevo = f"INV{nro_grupo[-4:]}{abs(hash(nom_autor_primario)) % 1000:03d}"
-                                        if not multi.buscar_investigador(doc_nuevo):
-                                            multi.insertar_investigador(cod_grupo, doc_nuevo, nom_autor_primario.title(), "Junior", "Ingeniería de Sistemas", True)
-                                            resumen["investigadores"] += 1
-                                        id_inv_asociado = doc_nuevo
-
-                                if not multi.buscar_producto(id_prod):
-                                    multi.insertar_producto(cod_grupo, id_inv_asociado, id_prod, tipo, titulo, anio, "A1", True, True)
-                                    resumen["productos"] += 1
-                                if prod_count >= 50: # Límite representativo para velocidad
-                                    break
-                if prod_count >= 50:
+            # Extraer título limpio
+            m_tit = re.search(r'\"([^\"]{8,250})\"', raw)
+            if m_tit:
+                titulo = m_tit.group(1).strip()
+            else:
+                lines = [l.strip() for l in raw.split("\n") if len(l.strip()) > 3]
+                titulo = ""
+                for l in lines:
+                    if re.match(r"^\d+\.-?$", l):
+                        continue
+                    if re.match(r"^\d+\.-?\s*[^:]+:", l):
+                        subl = re.sub(r"^\d+\.-?\s*[^:]+:\s*", "", l).strip()
+                        if len(subl) > 8:
+                            titulo = subl
+                            break
+                        continue
+                    if l.endswith(":"):
+                        continue
+                    if any(k in l for k in ["Autores:", "Colombia,", "ISSN:", "DOI:", "Disponibilidad:", "Sitio web:", "Nombre comercial:"]):
+                        continue
+                    titulo = l
                     break
+            if not titulo:
+                titulo = "Producto Científico MinCiencias"
+            titulo = titulo[:110]
+
+            # Extraer año
+            m_anio = re.search(r'\b(20[0-2]\d|19[89]\d)\b', raw)
+            anio = int(m_anio.group(1)) if m_anio else 2024
+
+            # Extraer autor y emparejar con integrantes del grupo
+            m_aut = re.search(r"Autores:\s*([^,\n\r]+)", raw)
+            autor_raw = m_aut.group(1).strip() if m_aut else ""
+            autor_raw = re.sub(r"[\xa0\s]+", " ", autor_raw).strip()
+            norm_a = _norm_txt(autor_raw)
+
+            id_inv_asociado = id_lider_doc
+            if norm_a:
+                for nom_k, doc_k in mapa_integrantes.items():
+                    if norm_a in nom_k or nom_k in norm_a or any(len(w) > 4 and w in nom_k for w in norm_a.split()):
+                        id_inv_asociado = doc_k
+                        break
+
+            prod_count += 1
+            id_prod = f"PROD-{nro_grupo[-4:]}-{prod_count:04d}"
+            if not multi.buscar_producto(id_prod):
+                multi.insertar_producto(cod_grupo, id_inv_asociado, id_prod, tipo, titulo, anio, "A1", is_validado, True)
+                resumen["productos"] += 1
+                if is_validado:
+                    resumen["validados"] += 1
 
         return resumen
 
@@ -247,29 +432,38 @@ class MotorIngesta:
 
         invs = [
             ("INV2099001", "John Jairo Patiño Vanegas", "Asociado", "Maestría en Computación"),
-            ("0000494917", "Adith Bismarck Pérez Orozco", "Asociado", "Doctorado en Ingeniería de Sistemas"),
-            ("INV2099003", "Eydy Del Carmen Suarez Brieva", "Asociado", "Maestría en Sistemas"),
+            ("0000494917", "Adith Bismarck Pérez Orozco", "Senior", "Doctorado en Ingeniería de Sistemas"),
+            ("0000666106", "Eydy Del Carmen Suarez Brieva", "Asociado", "Maestría en Sistemas"),
             ("INV2099004", "Alfonso Enrique García Payares", "Junior", "Ingeniería de Sistemas"),
-            ("INV2099005", "Gloria Marina Rosado Galindo", "Asociado", "Ingeniería de Sistemas"),
-            ("INV2099006", "Heyner Alexander Aroca Araujo", "Junior", "Ingeniería de Sistemas")
+            ("0000441708", "Gloria Marina Rosado Galindo", "Asociado", "Ingeniería de Sistemas"),
+            ("0001404785", "Heyner Alexander Aroca Araujo", "Junior", "Ingeniería de Sistemas")
         ]
         for doc, nom, cat, form in invs:
             if not multi.buscar_investigador(doc):
                 multi.insertar_investigador(cod_grupo, doc, nom, cat, form, True)
                 resumen["investigadores"] += 1
 
+        # Poblar PerfilInvestigador para el docente Adith Pérez
+        guardar_perfil_bd("0000494917", {
+            "par_evaluador": "Si",
+            "scholar_url": "https://scholar.google.com/citations?user=7DUEVWAAAAAJ&hl=es",
+            "orcid": "https://orcid.org/0000-0002-2149-1625",
+            "formacion_academica": "Doctorado en Ingeniería de Sistemas | Maestría en Sistemas"
+        }, self.ruta_bd)
+
         prods = [
             ("FALLBACK-001", "0000494917", "Articulo", "Modelo de hipercubo para análisis multidimensional en MinCiencias", 2024, "A1", True),
-            ("FALLBACK-002", "INV2099003", "Software", "Sistema de analítica institucional de investigación universitaria", 2025, "A1", True),
+            ("FALLBACK-002", "0000666106", "Software", "Sistema de analítica institucional de investigación universitaria", 2025, "A1", True),
             ("FALLBACK-003", "INV2099001", "Articulo", "Epistemological Foundations of Quantitative Software Research", 2023, "A", True),
             ("FALLBACK-004", "0000494917", "Libro", "Fundamentos de Estructuras de Datos aplicadas a grafos y multilistas", 2022, "A1", True),
-            ("FALLBACK-005", "INV2099005", "Articulo", "Scientific Methods of Quantitative Research in Engineering", 2026, "A1", True),
-            ("FALLBACK-006", "INV2099006", "Articulo", "Pensamiento sistémico y simulación microcontrolada", 2025, "A", True)
+            ("FALLBACK-005", "0000441708", "Articulo", "Scientific Methods of Quantitative Research in Engineering", 2026, "A1", True),
+            ("FALLBACK-006", "0001404785", "Evento", "Pensamiento sistémico y simulación microcontrolada", 2025, "A", True)
         ]
         for id_p, doc_inv, tip, tit, an, cat, val in prods:
             if not multi.buscar_producto(id_p):
                 multi.insertar_producto(cod_grupo, doc_inv, id_p, tip, tit, an, cat, val, True)
                 resumen["productos"] += 1
+                if val: resumen["validados"] += 1
 
         return resumen
 
@@ -290,56 +484,59 @@ class MotorIngesta:
             resumen["grupos"] += 1
 
         html_text = ""
-        try:
-            print(f"[Scraping] Conectando a MinCiencias CvLAC ({url})...")
-            resp = requests.get(url, headers=self.HEADERS, timeout=12, verify=False)
-            if resp.status_code == 200 and len(resp.text) > 1000:
-                html_text = resp.text
-            else:
-                raise Exception(f"HTTP Status {resp.status_code}")
-        except Exception as e:
-            print(f"[!] Aviso: No se pudo conectar a CvLAC en vivo ({e}).")
-            print("[+] Activando Plan B: Usando dataset offline de respaldo para CvLAC...")
-            resumen["modo"] = "OFFLINE_BACKUP"
-            return self._fallback_cvlac(cod_rh, cod_grupo_def, multi, resumen)
+        snap_candidates = [
+            os.path.join(PROJECT_ROOT, "data", "snapshots", f"cvlac_{cod_rh}.html"),
+            os.path.join(PROJECT_ROOT, "data", "snapshots", f"cvlac_{int(cod_rh):010d}.html") if cod_rh.isdigit() else ""
+        ]
+        snapshot_local = next((p for p in snap_candidates if p and os.path.exists(p)), None)
+
+        if snapshot_local:
+            print(f"[Scraping] Usando snapshot oficial local CvLAC: {os.path.basename(snapshot_local)}")
+            with open(snapshot_local, "r", encoding="utf-8", errors="ignore") as f_snap:
+                html_text = f_snap.read()
+            resumen["modo"] = "OFFLINE_SNAPSHOT"
+        else:
+            try:
+                print(f"[Scraping] Conectando a MinCiencias CvLAC ({url})...")
+                resp = requests.get(url, headers=self.HEADERS, timeout=12, verify=False)
+                if resp.status_code == 200 and len(resp.text) > 1000:
+                    html_text = resp.text
+                else:
+                    raise Exception(f"HTTP Status {resp.status_code}")
+            except Exception as e:
+                print(f"[!] Aviso: No se pudo conectar a CvLAC en vivo ({e}).")
+                print("[+] Activando Plan B: Usando dataset offline de respaldo para CvLAC...")
+                resumen["modo"] = "OFFLINE_BACKUP"
+                return self._fallback_cvlac(cod_rh, cod_grupo_def, multi, resumen)
+
+        # Parsear Hoja de Vida CvLAC enriquecida
+        perfil_cv = parse_hoja_vida(html_text)
 
         soup = BeautifulSoup(html_text, "html.parser")
+        lines = [l.strip() for l in soup.get_text("\n").split("\n") if l.strip()]
 
         # 1. Nombre Completo
         nombre_investigador = "Adith Bismarck Pérez Orozco"
-        for td in soup.find_all("td"):
-            txt = td.get_text(strip=True)
-            if "Nombre" in txt and len(txt) < 15:
-                nxt = td.find_next_sibling("td")
-                if nxt and nxt.get_text(strip=True):
-                    nombre_investigador = nxt.get_text(strip=True).replace('\xa0', ' ').strip()
-                    break
+        for i, l in enumerate(lines):
+            if l == "Nombre" and i + 1 < len(lines):
+                nombre_investigador = lines[i + 1].replace("\xa0", " ").strip()
+                break
 
         # 2. Categoría MinCiencias
-        categoria = "Investigador Asociado (I)"
-        for td in soup.find_all("td"):
-            txt = td.get_text(strip=True)
-            if "Categoría" in txt and len(txt) < 15:
-                nxt = td.find_next_sibling("td")
-                if nxt and nxt.get_text(strip=True):
-                    raw_cat = nxt.get_text(strip=True)
-                    if "Senior" in raw_cat: categoria = "Senior"
-                    elif "Asociado" in raw_cat: categoria = "Asociado"
-                    elif "Junior" in raw_cat: categoria = "Junior"
-                    break
+        categoria = "Senior"
+        for i, l in enumerate(lines):
+            if l.startswith("Categor"):
+                seg = " ".join(lines[i:i + 3]).lower()
+                if "senior" in seg or "sénior" in seg or "emerito" in seg:
+                    categoria = "Senior"
+                elif "asociado" in seg:
+                    categoria = "Asociado"
+                elif "junior" in seg:
+                    categoria = "Junior"
+                break
 
         # 3. Formación Académica
-        formacion = "Doctorado en Ingeniería de Sistemas"
-        for h in soup.find_all(["h3", "strong"]):
-            if "formación académica" in h.get_text(strip=True).lower():
-                parent_table = h.find_parent("table")
-                if parent_table:
-                    for td in parent_table.find_all("td"):
-                        t_td = td.get_text(strip=True)
-                        if any(w in t_td for w in ["Doctorado", "Maestría", "Pregrado"]):
-                            formacion = t_td[:80]
-                            break
-                break
+        formacion = perfil_cv.get("formacion_academica") or "Doctorado en Ingeniería de Sistemas"
 
         # Registrar o actualizar Investigador
         inv_existente = multi.buscar_investigador(cod_rh)
@@ -350,26 +547,25 @@ class MotorIngesta:
             inv_existente.nombre_completo = nombre_investigador
             inv_existente.categoria = categoria
 
+        # Guardar en la tabla PerfilInvestigador
+        guardar_perfil_bd(cod_rh, perfil_cv, self.ruta_bd)
+
         # 4. Productos de CvLAC
+        texto_unido = "\n".join(lines)
+        partes_art = re.split(r"Publicado en revista especializada", texto_unido)
         prod_count = 0
-        for tr in soup.find_all("tr"):
-            if "Artículos" in tr.get_text():
-                parent_table = tr.find_parent("table")
-                if parent_table:
-                    for subtr in parent_table.find_all("tr")[1:]:
-                        txt_prod = subtr.get_text(strip=True)
-                        if len(txt_prod) > 25 and not "Categoría" in txt_prod:
-                            prod_count += 1
-                            id_p = f"CVLAC-{cod_rh[-4:]}-{prod_count:03d}"
-                            m_anio = re.search(r'\b(20[0-2]\d|19[89]\d)\b', txt_prod)
-                            anio = int(m_anio.group(1)) if m_anio else 2024
-                            titulo = txt_prod[:110]
-                            if not multi.buscar_producto(id_p):
-                                multi.insertar_producto(cod_grupo_def, cod_rh, id_p, "Articulo", titulo, anio, "A1", True, True)
-                                resumen["productos"] += 1
-                            if prod_count >= 15:
-                                break
-                if prod_count >= 15:
+        for blk in partes_art[1:]:
+            mt = re.search(r'"([^"]{8,480})"', blk)
+            ma = re.search(r",\s*((?:19|20)\d{2})\s*,", blk)
+            if mt:
+                prod_count += 1
+                anio = int(ma.group(1)) if ma and 1900 <= int(ma.group(1)) <= 2026 else 2024
+                id_p = f"CVLAC-{cod_rh[-4:]}-{prod_count:03d}"
+                titulo = mt.group(1).strip()[:110]
+                if not multi.buscar_producto(id_p):
+                    multi.insertar_producto(cod_grupo_def, cod_rh, id_p, "Articulo", titulo, anio, "A1", True, True)
+                    resumen["productos"] += 1
+                if prod_count >= 20:
                     break
 
         return resumen
@@ -386,6 +582,13 @@ class MotorIngesta:
                 True
             )
             resumen["investigadores"] += 1
+
+        guardar_perfil_bd(cod_rh, {
+            "par_evaluador": "Si",
+            "scholar_url": "https://scholar.google.com/citations?user=7DUEVWAAAAAJ&hl=es",
+            "orcid": "https://orcid.org/0000-0002-2149-1625",
+            "formacion_academica": "Doctorado en Ingeniería de Sistemas"
+        }, self.ruta_bd)
 
         prods = [
             (f"CVLAC-{cod_rh[-4:]}-001", "Articulo", "Algoritmos genéticos aplicados a la clasificación de grupos MinCiencias", 2024, "A1", True),

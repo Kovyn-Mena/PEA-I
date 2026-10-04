@@ -1,0 +1,2658 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=7162258F63546A492123F1F719DB139F" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        William&nbsp;Moreno&nbsp;Rios
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>MORENO RIOS, WILLIAM</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Especialización</b>
+                            UNIVERSIDAD EL BOSQUE<br />
+                            Gerencia de Proyectos<br />
+                            Enerode2010 - Marzode 2011<br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD  INDUSTRIAL DE SANTANDER<br />
+                            INGENIERIA QUIMICA<br />
+                            Enerode1991 - de 1997<br />
+                            Software de Simulación para el diseño de circuitos de bombeo de agua</td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3>Formaci&oacute;n Complementaria</h3></td>
+                            </tr>   
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Electronica de Potencia<br />
+                        Enerode2000 - de 2000<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Electronica básica<br />
+                        Enerode2000 - de 2000<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Bombas Calderas Compresores<br />
+                        Enerode1999 - de 1999<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Recuperación y Reciclaje de Refrigerantes<br />
+                        Enerode1999 - de 1999<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        <br />
+                        Hidraulica Básica<br />
+                        Enerode1999 - de 1999<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Centro Colombo Americano<br />
+                        Ingles<br />
+                        Enerode1995 - de 1997<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Neumatica<br />
+                        Enerode2001 - de 2001<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Lab view<br />
+                        Enerode2004 - de 2004<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        National Instruments<br />
+                        Sistemas SCADA con Lookout<br />
+                        Enerode2001 - de 2001<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        <br />
+                        Electrohidraulica<br />
+                        Enerode1999 - de 1999<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        Grupo de Investigación En Simulación y Control de Procesos<br />
+                        Programación de Controladores Lógicos Programables<br />
+                        Enerode2005 - de 2005<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        Asociación Colombiana De Ingenieria Sanitaria Y Ambiental - Acodal<br />
+                        Modelación Hidraulica de Redes de Acueducto<br />
+                        Enerode2005 - de 2005<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        Asociación Colombiana De Ingenieria Sanitaria Y Ambiental - Acodal<br />
+                        Actualización En Operación de Plantas de Potabiliz<br />
+                        Enerode2005 - de 2005<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        <br />
+                        Ingenieria<br />
+                        Enerode2000 - de 2000<br />
+                        </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Grupo de Investigación En Control y Simulación</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Febrero de 2000            
+                         de <br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; Desarrollo de un Simulador para establecer parametros  adecuados en el proceso de extracción de aceite de palma en oleoflorez ltda,  municipio de codazzi,  departamento del cesar,  colombia.                            
+                        Marzo 2004            
+                        Octubre 2005<br>            
+
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp;                              
+                        Febrero 2000            
+                         <br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Enero de 2000            
+                         de <br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Dirección y Administración            
+                        <i> - Cargo:</i>&nbsp;Editor de la Revista Documentos de Ingenieria          
+                        Junio de 2004            
+                         de <br>
+
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;profesor Asistente          
+                        Enero de 2000            
+                         de <br>
+
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Electiva I y II en Control y Regulación de  Procesos,&nbsp; 
+                        Junio 2002            
+                         <br>
+
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Modelamiento matemático,&nbsp; 
+                        Febrero 2002            
+                         <br>
+
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Simulación,&nbsp; 
+                        Febrero 2002            
+                         <br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Centro de Investigacion para el Desarrollo de la Ingenieria CIDI</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Septiembre de 2005            
+                         de <br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp;                              
+                        Septiembre 2005            
+                         <br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Grupo de Investigación En Simulación y Control</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Enero de 2001            
+                         de <br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Dirección y Administración            
+                        <i> - Cargo:</i>&nbsp;Director Grupo de Investigación en Simulación y Control de Procesos (Reconocido por COLCIENCIAS)          
+                        Octubre de 2002            
+                         de <br>
+
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; Fortalecimiento de Semillero de Modelamiento matematico y Simulación                            
+                        Enero 2003            
+                         2004<br>            
+
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; Laboratorio Virtual de Operaciones Unitarias                            
+                        Enero 2001            
+                         2003<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>VICERRECTORIA DE INVESTIGACION</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Febrero de 2004            
+                         de <br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Dirección y Administración            
+                        <i> - Cargo:</i>&nbsp;Coordinador del Programa de Semilleros de Investigación          
+                        Febrero de 2004            
+                         de <br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Grupo de Investigación En Simulación y Control de Procesos</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Junio de 2003            
+                        Diciembre de 2004<br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; Diseño e implementación del monitoreo y control automatico de una columna de destilación                            
+                        Marzo 2004            
+                         <br>            
+
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; Software para simular el proceso de pasterización de la leche en un intercambiador de Calor de Placas del programa de Ingeniería Agroindustrial de la Universidad Popular                            
+                        Junio 2003            
+                        Diciembre 2004<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD DE SANTANDER</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>6&nbsp;horas Semanales
+                        Enero de 2000            
+                        Octubre de 2003<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;profesor asistente          
+                        Enero de 2001            
+                        Octubre de 2003<br>
+
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Simulación,&nbsp; 
+                        Enero 2000            
+                         <br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>ECOPETROL S. A.</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Junio de 2002            
+                        Diciembre de 2002<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Ingeniero Químico          
+                        Junio de 2002            
+                        Diciembre de 2002<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Centro Industrial</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Febrero de 2000            
+                        Diciembre de 2002<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; Fundamentos en Control de Procesos,&nbsp; 
+                        Febrero 2000            
+                        Diciembre 2002<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>SERVICIO NACIONAL DE APRENDIZAJE SENA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>6&nbsp;horas Semanales
+                        Febrero de 2000            
+                        Diciembre de 2002<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Instructor          
+                        Febrero de 2000            
+                        Diciembre de 2002<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Ingeniería Química -- Ingeniería de Procesos</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería Eléctrica y Electrónica</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Ingeniería de Producción</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Ingeniería Química -- Ingeniería Química (Plantas y Productos)</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="5"><h3 >Idiomas</h3></td>
+                            </tr>    
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td><b>Habla</b></td>
+                                <td><b>Escribe</b></td>
+                                <td><b>Lee</b></td>
+                                <td><b>Entiende</b></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;Inglés</li></td>
+                    <td>Aceptable</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>
+                    <td>Aceptable</td>                                                        
+                </tr>    
+                
+                            <tr>
+                                <td><li>&nbsp;Portugués</li></td>
+                    <td>Bueno</td>
+                    <td>Aceptable</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>                                                        
+                </tr>    
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;Desarrollo de Software, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Control y Automatización, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;INVESTIGACION EN INGENIERIA, <i>Activa:</i>Si</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Reconocimientos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>Tesis Meritoria,UNIVERSIDAD  INDUSTRIAL DE SANTANDER - de 1997</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>Estudiante Distinguido,UNIVERSIDAD  INDUSTRIAL DE SANTANDER - de 1996</li></td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a></td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Iniciación Científica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM MORENO RIOS,                    
+                            
+                            Fortalecimiento de Semillero de Modelamiento y Simulación de la Universidad Popular del Cesar&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2003.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Semillero de Modelamiento y Simulación&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): SEMILLERO DE MODELAMIENTO SIMULACION , WILLIAM MORENO RIOS,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Ingeniería de Producción,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM MORENO RIOS,                    
+                            
+                            Diseño de un Prototipo para Ahorro de energía en el campus universitario de la Universidad Popular del Cesar&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis en curso&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2004.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Alex Banderas&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): ALEX BANDERAS , WILLIAM MORENO RIOS,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería Eléctrica y Electrónica,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM MORENO RIOS,                    
+                            
+                            Desarrollo deun simulador para establecer parametros de operación del proceso de extracción de la palma de aceite de la empresa oleoflores ltda en el municipio de codazi cesar&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis en curso&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2004.
+                            <i>Dirigi&oacute; como: </i>,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Edwin Mendoza Martinez&nbsp;                            
+                            
+                            0 meses, &nbsp;
+                            
+                            
+                            Tutor(es)/Cotutor(es): EDWIN MENDOZA MARTINEZ , WILLIAM MORENO RIOS,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería Eléctrica y Electrónica,
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Industrias extractivas - Otras industrias extractivas,                    
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM MORENO RIOS,                    
+                            
+                            Diseño e implementación de un simulador del proceso de pasterización con un intercambiador de placos&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis en curso&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2003.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Janer Onasis Campo&nbsp;                            
+                            
+                            0 meses, &nbsp;
+                            
+                            
+                            Tutor(es)/Cotutor(es): JANER ONASIS CAMPO , WILLIAM MORENO RIOS,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Ingeniería de Producción,
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Educación,                    
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM MORENO RIOS,                    
+                            
+                            DISEÑO E IMPLEMENTACIÓN DEL MONITOREO DE VARIABLES Y UN LAZO DE CONTROL AUTOMÁTICO PARA LA TORRE DE DESTILACIÓN DE LA PLANTA PILOTO DE LA UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2006.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Albert Danny Valencia Mena&nbsp;                            
+                            
+                            0 meses, &nbsp;
+                            
+                            
+                            Tutor(es)/Cotutor(es): ALBERT DANNY VALENCIA MENA , WILLIAM MORENO RIOS,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Ingeniería de Producción,
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Fabricación de coque, refinado de petróleo, elaboración de combustibles nucleares y producción de alcohol - Producción de alcohol,                    
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM MORENO RIOS,                    
+                            
+                            SIMULADOR PARA ESTABLECER PARÁMETROS DE OPERACIÓN ADECUADOS DEL PROCESO DE EXTRACCIÓN DEL ACEITE CRUDO DE PALMA EN OLEOFLORES LTDA. CODAZZI CESAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2005.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Wilmer Mejia Navarro&nbsp;                            
+                            
+                            0 meses, &nbsp;
+                            
+                            
+                            Tutor(es)/Cotutor(es): WILLIAM MORENO RIOS , WILMER MEJIA NAVARRO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Ingeniería de Producción,
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Industrias extractivas - Otras industrias extractivas,                    
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM MORENO RIOS,                    
+                            
+                            DISEÑO E IMPLEMENTACIÓN DEL MONITOREO DE VARIABLES Y UN LAZO DE CONTROL AUTOMÁTICO PARA LA TORRE DE DESTILACIÓN DE LA PLANTA PILOTO DE LA UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis en curso&nbsp;
+                            Ingenieria Electronica,
+                            &nbsp;2006.
+                            <i>Dirigi&oacute; como: </i>,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Albert Danny Valencia Mena&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): WILLIAM MORENO RIOS,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería Eléctrica y Electrónica,
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Fabricación de coque, refinado de petróleo, elaboración de combustibles nucleares y producción de alcohol - Producción de alcohol,                    
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            WILLIAM MORENO RIOS,                    
+                            
+                            Fortalecimiento del Semillero de Investigación en Modelamiento matematico y Simulación de la Universidad Popular del Cesar&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis en curso&nbsp;
+                            ,
+                            &nbsp;2002.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Semillero de Modelamiento y Simulación&nbsp;                            
+                            
+                            0 meses, &nbsp;
+                            
+                            
+                            Tutor(es)/Cotutor(es): SEMILLERO DE MODELAMIENTO SIMULACION , WILLIAM MORENO RIOS,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Ingeniería de Producción,                        
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería Eléctrica y Electrónica,                        
+                            Ingeniería y Tecnología -- Ingeniería Química -- Ingeniería de Procesos,
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Desarrollo de programas (software) y prestación de servicios en informática - Desarrollo de programas (software),                    
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Jurado en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            WILLIAM MORENO RIOS,                    
+                            
+                            <i>Titulo:&nbsp;</i>Aprovechamiento de Residuos sólidos Generados en el Proceso de Producción de Aceite Comestible en el Grupo Empresarial Hacienda Las Flores                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD DE SANTANDER&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA INDUSTRIAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Nidian Gomez &nbsp;                
+                            
+                            
+                            <br><b>Palabras: </b><br>
+                                                
+                            Aerobico,                    
+                                                
+                            Fertilizante,                    
+                                                
+                            humus,                    
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Químicas -- Química Orgánica,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            WILLIAM MORENO RIOS,                    
+                            
+                            <i>Titulo:&nbsp;</i>Diseño de una Bateria de prueba de perdidas de presiòn en Fluidos para el Laboratorio de Operaciones Unitarias de la Universidad Popular del Cesar                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA AGROINDUSTRIAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Ricardo Meza Fonseca &nbsp;                
+                            
+                            
+                            <br><b>Palabras: </b><br>
+                                                
+                            Fuidos,                    
+                                                
+                            Perdidas,                    
+                                                
+                            Diseño,                    
+                                                
+                            Bomba,                    
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Ingeniería de Producción,                    
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería Eléctrica y Electrónica,                    
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Química -- Ingeniería de Procesos,                    
+                            
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Captación, tratamiento y distribución de agua, limpieza urbana, aguas residuales y actividades conexas,                    
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a></td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%">
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 id="trabajos_tec" >Consultor&iacute;as</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>
+                                
+                                <b>Producción técnica - Consultoría Científico Tecnológica e Informe Técnico - Otra</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            WILLIAM MORENO RIOS,                    
+                            
+                            Calculo Hidraulico de La Red de Distribución de Agua Potable del Municipio de Becerril utilizando el Software EPANET,
+                            <i>Nombre comercial: </i>,
+                            <i>contrato/registro: </i>Resolución No 014 de Febrero 28 de 2005.,
+                            . En: Colombia,&nbsp;
+                            ,2005,&nbsp;
+                            6 meses &nbsp;
+                            p.80&nbsp;                
+                            
+                            
+                            <br><b>Palabras: </b><br>
+                                                
+                            Simulación,                    
+                                                
+                            Redes de Distribución,                    
+                                                
+                            EPANET,                    
+                                                
+                             Agua Potable,                    
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Ingeniería de Producción,                    
+                            
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Captación, tratamiento y distribución de agua, limpieza urbana, aguas residuales y actividades conexas,                    
+                            
+
+                        </blockquote>
+
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>
+                                
+                                <b>Producción técnica - Consultoría Científico Tecnológica e Informe Técnico - Otra</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            WILLIAM MORENO RIOS,                    
+                            
+                            Diseño del Sistema de potabilización y distribución de agua potable del corregimiento la sierrita del municipio de Chiriguana-Departamento del Cesar,
+                            <i>Nombre comercial: </i>,
+                            <i>contrato/registro: </i>,
+                            . En: Colombia,&nbsp;
+                            ,2005,&nbsp;
+                            4 meses &nbsp;
+                            p.80&nbsp;                
+                            
+                            
+                            <br><b>Palabras: </b><br>
+                                                
+                            EPANET,                    
+                                                
+                             Agua Potable,                    
+                                                
+                            Redes de Distribución,                    
+                                                
+                            Diseño,                    
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Ingeniería de Producción,                    
+                            
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Actividades de asesoramiento y consultoría a las empresas - Asesoramiento y consultoría en arquitectura e ingeniería,                    
+                            
+
+                        </blockquote>
+
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>IV SEMINARIO INTERNACIONAL EN MEDICIÓN Y CONTROL INDUSTRIAL&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2001-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en BOGOTÁ, D.C. &nbsp; - Club El Nogal &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Colsein
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM MORENO RIOS
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Seminario Pràctico&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2001-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en BOGOTÁ, D.C. &nbsp; - Colombia &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>ES INSTRUMENTACION
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM MORENO RIOS
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Ecuentro Regional de Ciencias Físicas&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2004-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Estudio del grado de pedicción de un modelo matematico del proceso de producción de vapor.
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM MORENO RIOS
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>II Encuentro Regional de Ciencia y Tecnología&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2004-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en SANTA MARTA &nbsp; - Universidad del Magdalena &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Servicio Nacional de Aprendizaje Sena Sede Cali
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM MORENO RIOS
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>5</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Encuentro Regional de Ciencias Físicas&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2004-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Universidad Popular del Cear &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM MORENO RIOS
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>6</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>V Seminario Sobre Sistemas Avanzados de Manufactura&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2000-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en BOGOTÁ, D.C. &nbsp; - Universidad Militar Nueva Granada &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD TECNOLÓGICA DE PEREIRA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM MORENO RIOS
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>7</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Primer Encuentro Regional de Ciencia y Tecnología&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2002-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en CARTAGENA DE INDIAS &nbsp; - Universidad Tecnologica del Bolivar &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Servicio Nacional de Aprendizaje Sena Sede Cali
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>WILLIAM MORENO RIOS
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                WILLIAM MORENO RIOS,                    
+                                    
+                RICARDO DURAN BARON,                    
+                
+                "Diseño y desarrollo de un simulador para un sistema de pasteurización controlado automaticamente."
+                . En: Colombia&nbsp;<br>
+                Perspectivas &nbsp;
+                <i>ISSN:</i>&nbsp;0121-3164&nbsp;
+                <i>ed:</i>&nbsp;Unicesar<br>
+                <i>v.</i>2
+                <i>fasc.</i>1
+                p.13
+                - 20
+                ,2002,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Simulación,                    
+                                    
+                Intercambiador,                    
+                                    
+                controlador,                    
+                                    
+                set-point,                    
+                                    
+                ganancia,                    
+                                    
+                perturbación,                    
+                
+
+                
+                
+                <br><b>Sectores: </b><br>
+                                        
+                Educación,                    
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                WILLIAM MORENO RIOS,                    
+                                    
+                GAIL GUTIERREZ RAMIRES,                    
+                                    
+                CARLOS ERNESTO VANOS,                    
+                
+                "DISEÑO Y SIMULACION DE UN CONTROLADOR DIFUSO PARA CONTROL DE NIVEL Y TEMPERATURA DE LIQUIDO EN UN TANQUE"
+                . En: Colombia&nbsp;<br>
+                Perspectivas &nbsp;
+                <i>ISSN:</i>&nbsp;0121-3164&nbsp;
+                <i>ed:</i>&nbsp;Unicesar<br>
+                <i>v.</i>2
+                <i>fasc.</i>2
+                p.17
+                - 25
+                ,2004,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                control,                    
+                                    
+                Modelamiento,                    
+                                    
+                Simulación,                    
+                                    
+                LOGICA DIFUSA,                    
+                
+
+                
+                
+                <br><b>Sectores: </b><br>
+                                        
+                Desarrollo de programas (software) y prestación de servicios en informática - Desarrollo de programas (software),                    
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                WILLIAM MORENO RIOS,                    
+                
+                "El uso de la simulación como herramienta de diseño y optimización de sistemas de distribución de agua potable"
+                . En: Colombia&nbsp;<br>
+                Revista Cientifica Documentos De Ingenieria&nbsp;
+                <i>ISSN:</i>&nbsp;1692-8075&nbsp;
+                <i>ed:</i>&nbsp;Ediciones Unicesar<br>
+                <i>v.</i>1
+                <i>fasc.</i>1
+                p.77
+                - 87
+                ,2004,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Simulación,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                WILLIAM MORENO RIOS,                    
+                                    
+                JOSE ALEJANDRO OROZCO OCHOA,                    
+                                    
+                JANER ONASIS CAMPO ZAMBRANO,                    
+                
+                "Diseño y desarrollo de un software para el proceso de pasteurización po medio de intercambiadores de calor de placas"
+                . En: Colombia&nbsp;<br>
+                Revista Cientifica Documentos De Ingenieria&nbsp;
+                <i>ISSN:</i>&nbsp;1692-8075&nbsp;
+                <i>ed:</i>&nbsp;Ediciones Unicesar<br>
+                <i>v.</i>2
+                <i>fasc.</i>1
+                p.63
+                - 70
+                ,2005,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Modelamiento,                    
+                                    
+                pasterización,                    
+                                    
+                simulador,                    
+                                    
+                intercambiadpr de placas,                    
+                
+
+                
+                
+                <br><b>Sectores: </b><br>
+                                        
+                Desarrollo de programas (software) y prestación de servicios en informática - Desarrollo de programas (software),                    
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Revisión (Survey)</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                WILLIAM MORENO RIOS,                    
+                
+                "Estudio del Grado de Predicción de un modelo Matematico y su Simulación para el Proceso de Producción de Vapor en la Caldera de La Universidad Popular del Cesar"
+                . En: Brasil&nbsp;<br>
+                REVISTA COLOMBIANA DE FISICA&nbsp;
+                <i>ISSN:</i>&nbsp;0120-2650&nbsp;
+                <i>ed:</i>&nbsp;Pontificia Universidad Javeriana <br>
+                <i>v.</i>
+                <i>fasc.</i>
+                p.
+                - 
+                ,2004,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Simulación,                    
+                                    
+                control,                    
+                                    
+                Regulación,                    
+                                    
+                Modelamiento,                    
+                                    
+                vAPOR,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a></td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a></td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a></td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a>
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Softwares</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        WILLIAM MORENO RIOS,                    
+                                            
+                        GAIL GUTIERREZ RAMIRES,                    
+                                            
+                        CARLOS ERNESTO VANOS,                    
+                        
+                        simulador de caldera pirotubular,
+                        <i>Nombre comercial: </i>,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2004,&nbsp;
+                        .<i>plataforma: Windows,</i>&nbsp;
+                        .<i>ambiente: Matlab,</i>                                
+                        
+                        
+                        <br><b>Palabras: </b><br>
+                                            
+                        Automatización,                    
+                                            
+                        Modelamiento,                    
+                                            
+                        Simulación,                    
+                                            
+                        vAPOR,                    
+                                            
+                        tendencias,                    
+                                            
+                        control,                    
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería Eléctrica y Electrónica,                    
+                                                
+                        Ingeniería y Tecnología -- Ingeniería Química -- Ingeniería Química (Plantas y Productos),                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        WILLIAM MORENO RIOS,                    
+                                            
+                        JANER ONASIS CAMPO,                    
+                        
+                        Simulador de Pasterizador de placas,
+                        <i>Nombre comercial: </i>,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2004,&nbsp;
+                        .<i>plataforma: Visual Basic,</i>&nbsp;
+                        .<i>ambiente: Windows,</i>                                
+                        
+                        
+                        <br><b>Palabras: </b><br>
+                                            
+                        pasterización,                    
+                                            
+                        intercambiador de placas,                    
+                                            
+                        proceso,                    
+                                            
+                        simulador,                    
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Ingeniería de Producción,                    
+                        
+                        
+                        
+                        <br><b>Sectores: </b><br>
+                                                
+                        Desarrollo de programas (software) y prestación de servicios en informática - Desarrollo de programas (software),                    
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        WILLIAM MORENO RIOS,                    
+                                            
+                        RICARDO DURAN BARON,                    
+                        
+                        Simulador de Pasterización,
+                        <i>Nombre comercial: </i>,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2001,&nbsp;
+                        .<i>plataforma: Lookout,</i>&nbsp;
+                        .<i>ambiente: Windows,</i>                                
+                        
+                        
+                        <br><b>Palabras: </b><br>
+                                            
+                        simulador,                    
+                                            
+                        control,                    
+                                            
+                        ganancia,                    
+                                            
+                        pasterización,                    
+                                            
+                        tendencias,                    
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Ingeniería de Producción,                    
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería Eléctrica y Electrónica,                    
+                        
+                        
+                        
+                        <br><b>Sectores: </b><br>
+                                                
+                        Educación,                    
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        WILLIAM MORENO RIOS,                    
+                                            
+                        OSCAR SANDY NEIRA LOPEZ,                    
+                        
+                        Diseño de Circuitos para Bombeo de Agua,
+                        <i>Nombre comercial: </i>,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,1997,&nbsp;
+                        .<i>plataforma: Visual Basic,</i>&nbsp;
+                        .<i>ambiente: Windows,</i>                                
+                        
+                        
+                        <br><b>Palabras: </b><br>
+                                            
+                        Redes,                    
+                                            
+                        Acueducto,                    
+                                            
+                        Planta,                    
+                                            
+                        Agua,                    
+                                            
+                        Presión,                    
+                                            
+                        Caudal,                    
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Ingeniería de Producción,                    
+                        
+                        
+                        
+                        <br><b>Sectores: </b><br>
+                                                
+                        Captación, tratamiento y distribución de agua, limpieza urbana, aguas residuales y actividades conexas,                    
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+            
+        </table>
+        </td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Laboratorio Virtual de Operaciones Unitarias<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2001                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Desarrollo de un Laboratorio Virtual de Operaciones Unitarias como herramienta Pedagogica para la enseñanza en Ingeniería<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Fortalecimiento de Semillero de Modelamiento matematico y Simulación<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2003                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Desarrollo de un Simulador de la Caldera de la Planta Piloto de La Universidad Popular del Cesar.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Software para simular el proceso de pasterización de la leche en un intercambiador de Calor de Placas del programa de Ingeniería Agroindustrial de la Universidad Popular<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2003                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Software para mejorar la aprehensión del proceso de pasterización por parte de los estudiantes del programa de ingenieria agroindustrial.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Diseño e implementación del monitoreo y control automatico de una columna de destilación<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2004                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Desarrollo de un Simulador para establecer parametros  adecuados en el proceso de extracción de aceite de palma en oleoflorez ltda,  municipio de codazzi,  departamento del cesar,  colombia.<br>
+                        <i>Inicio:&nbsp;</i>&nbsp;
+                                        
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

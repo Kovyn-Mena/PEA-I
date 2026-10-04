@@ -727,6 +727,15 @@ public:
                     std::cout << "Formación: " << inv->formacion_academica << " | Grupo: " << inv->codigo_grupo << "\n";
                     std::cout << "Estado: " << (inv->activo ? "ACTIVO" : "DESACTIVADO") << "\n";
 
+                    // Hoja de Vida CvLAC (Par evaluador, Scholar, ORCID)
+                    std::string parEval, scholar, orcid, formExtra;
+                    if (GestorSQLite::obtenerPerfilInvestigador(inv->documento_id, parEval, scholar, orcid, formExtra, rutaBD)) {
+                        std::cout << "\n  -- Hoja de Vida CvLAC Oficial (MinCiencias) --\n";
+                        std::cout << "  • Par Evaluador MinCiencias: [" << (parEval == "Si" ? "SÍ (Reconocido)" : "No") << "]\n";
+                        if (!scholar.empty()) std::cout << "  • Google Scholar: " << scholar << "\n";
+                        if (!orcid.empty())   std::cout << "  • Código ORCID:  " << orcid << "\n";
+                    }
+
                     std::cout << "\n  -- Producción Autorada (Hipercubo Ortogonal) --\n";
                     NodoProducto* p = inv->primerProducto;
                     if (!p) std::cout << "     (Sin productos asociados)\n";

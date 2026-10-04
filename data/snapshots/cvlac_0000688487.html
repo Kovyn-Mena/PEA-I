@@ -1,0 +1,1939 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=521B64F080A3A6BDD2606AC28AF53F1C" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        Harold&nbsp;Moreno&nbsp;Bonilla
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>MORENO BONILLA, HAROLD</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Doctorado</b>
+                            Universidad Privada Dr. Rafael Belloso Chacín<br />
+                            POSTGRADO/DOCTORADO<br />
+                            Marzode2014 - Febrerode 2019<br />
+                            INTELIGENCIA DE NEGOCIOS EN EL DESEMPEÑO DE LA GESTIÓN TECNOLÓGICA EN EMPRESAS DE SERVICIOS PÚBLICOS DOMICILIARIOS</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            Universidad Dr. Rafael Belloso Chacín<br />
+                            POSTGRADO EN TELEMATICA<br />
+                            Marzode2004 - Noviembrede 2006<br />
+                            Calculo del índice de atenuación troposférica en radio-enlaces para el Departamento del Cesar Colombia.</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            Fundacion Universidad Incca De Colombia<br />
+                            INGENIERIA DE SISTEMAS<br />
+                            Agostode1991 - Noviembrede 2003<br />
+                            Guía instructiva multimedia para el ensamblaje, reparación y mantenimiento de computadoras.</td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3>Formaci&oacute;n Complementaria</h3></td>
+                            </tr>   
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Oracle<br />
+                        TECNOLOGÍA<br />
+                        Marzode2021 - Marzode 2021<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Ministerio de las TIC-Computadores para Educar<br />
+                        PENSAMIENTO COMPUTACIONAL PARA NIÑOS<br />
+                        Septiembrede2021 - Octubrede 2021<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD CATOLICA LUIS AMIGO<br />
+                        Ingeniería y Arquitectura<br />
+                        Marzode2022 - Mayode 2022<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD DE PAMPLONA<br />
+                        PEDAGOGÍA<br />
+                        Juniode2006 - Noviembrede 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        CONVENIO DE ASOCIACION TURISMO CARIBE PARA EL FORTALECIMIENTO DE LA FORMACION TECNICA Y TECNOLOGICA Y DESARROLLO PRODUCTIVO EN TURISMO DE LA COSTA CARIBE<br />
+                        Capacitación<br />
+                        Agostode2009 - Octubrede 2009<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Ministerio de Tecnologías de la Información y las Comunicaciones<br />
+                        CIUDADANO DIGITAL<br />
+                        Septiembrede2014 - Noviembrede 2014<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Universidad Dr. Rafael Belloso Chacín<br />
+                        Telecomunicación<br />
+                        Septiembrede2005 - Enerode 2006<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        CENTRO BIOTECNOLOGICO DEL CARIBE - SENA - REGIONAL CESAR<br />
+                        tecnologia<br />
+                        Marzode2010 - Mayode 2010<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Corporación PENSER<br />
+                        PEDAGOGÍA<br />
+                        Marzode2021 - Marzode 2021<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        EDUCACIÓN CONTÍNUA<br />
+                        Febrerode2004 - Juniode 2004<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Facultad de Ingeniería<br />
+                        Juliode2020 - Diciembrede 2020<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        EDUCACIÓN CONTINUA<br />
+                        Enerode2016 - Juliode 2016<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        UNIVERSIDAD SANTO TOMAS<br />
+                        FORMACIÓN DOCENTE<br />
+                        Febrerode2017 - Juliode 2017<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        Ministerio de Tecnologías de la Información y las Comunicaciones<br />
+                        COMPUTADORES PARA EDUCAR<br />
+                        Octubrede2015 - Abrilde 2016<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Otros</b>
+                        Google for Education<br />
+                        Computing Fundations<br />
+                        Juliode2022 - Juliode 2022<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Otros</b>
+                        Amazon AWS<br />
+                        INTRODUCCIÓ A AWS<br />
+                        Enerode2022 - Enerode 2022<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Otros</b>
+                        Google for Education<br />
+                        Computing Fundations<br />
+                        Agostode2022 - Agostode 2022<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Otros</b>
+                        Google for Education<br />
+                        Computing Fundations<br />
+                        Agostode2022 - Agostode 2022<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Otros</b>
+                        Google for Education<br />
+                        Computing Fundations<br />
+                        Agostode2022 - Agostode 2022<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Otros</b>
+                        Google for Education<br />
+                        Computing Fundations<br />
+                        Juliode2022 - Juliode 2022<br />
+                        </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>18&nbsp;horas Semanales
+                        Febrero de 2025            
+                        Junio de 2025<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Algoritmo y Fundamentos de Programación,&nbsp;71 
+                        Febrero 2025            
+                        Junio 2025<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Educativa Manuel Rodríguez Torices</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>26&nbsp;horas Semanales
+                        Enero de 2008            
+                         de Actual<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>18&nbsp;horas Semanales
+                        Febrero de 2024            
+                        Junio de 2024<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>16&nbsp;horas Semanales
+                        Agosto de 2023            
+                        Diciembre de 2023<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>16&nbsp;horas Semanales
+                        Febrero de 2023            
+                        Junio de 2023<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>16&nbsp;horas Semanales
+                        Febrero de 2022            
+                        Julio de 2022<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>16&nbsp;horas Semanales
+                        Febrero de 2022            
+                        Julio de 2022<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Informática 2 - Microsoft Excel,&nbsp;20 
+                        Febrero 2022            
+                        Julio 2022<br>
+
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Informática 1  - Nuevas Tecnologías,&nbsp;20 
+                        Febrero 2022            
+                        Julio 2022<br>
+
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Seminario de Investigación,&nbsp;40 
+                        Febrero 2022            
+                        Julio 2022<br>
+
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Metodología de la Investigación,&nbsp;38 
+                        Febrero 2022            
+                        Julio 2022<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>18&nbsp;horas Semanales
+                        Febrero de 2013            
+                        Diciembre de 2021<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Seminario de Investigación,&nbsp;28 
+                        Marzo 2022            
+                        Junio 2022<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Telecomunicaciones</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;TECNOLOGÍAS DE LA INFORMACIÓN y LA COMUNICACIÓN, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;TECNOLOGÍAS DE LA INFORMACIÓN y LA COMUNICACIÓN, <i>Activa:</i>Si</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Cursos de corta duraci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Especialización</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            HAROLD MORENO BONILLA,                    
+                                            
+                            MODALIDAD DE GRADO,
+                            <i>Finalidad: </i>desarrollando el Módulo MODALIDAD DE GRADO de la especialziacion en Ingenieria de  Software.
+                            . En: Colombia&nbsp;
+                            ,2022,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;1 semanas&nbsp;
+                            
+                            
+                            <br><b>Palabras: </b><br>
+                                                
+                            INGENIERÍA DE SOFTWARE,                    
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Desarrollo de programas (software) y prestación de servicios en informática - Otras actividades de prestación de servicios en informática,                    
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Perfeccionamiento</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            HAROLD MORENO BONILLA,                    
+                                            
+                            DESARROLLO DE LAS SOLUCIÓN EN LA NUBE - CLOUD COMPUTING,
+                            <i>Finalidad: </i>Actualización y/o Profundización, como opción de Grado en el Programa de Ingeniería de Sistemas de la Facultad de Ingeniería y Tecnológicas, Dictando el módulo de DESARROLLO DE SOLUCIONES EN LA NUBE - CLOUD COMPUTING, número de horas 40 horas
+                            . En: Colombia&nbsp;
+                            ,2023,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;1 semanas&nbsp;
+                            
+                            
+                            <br><b>Palabras: </b><br>
+                                                
+                            COMPUTACIÓN EN LA NUBE,                    
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Perfeccionamiento</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            HAROLD MORENO BONILLA,                    
+                                            
+                            DESARROLLO DE LAS SOLUCIÓN EN LA NUBE - CLOUD COMPUTING,
+                            <i>Finalidad: </i>Actualización y/o Profundización, como opción de Grado en el Programa de Ingeniería de Sistemas de la Facultad de Ingeniería y Tecnológicas, Dictando el módulo de DESARROLLO DE SOLUCIONES EN LA NUBE - CLOUD COMPUTING, número de horas 40 horas
+                            . En: Colombia&nbsp;
+                            ,2024,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;1 semanas&nbsp;
+                            
+                            
+                            <br><b>Palabras: </b><br>
+                                                
+                            COMPUTACIÓN EN LA NUBE,                    
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Desarrollo de programas (software) y prestación de servicios en informática - Otras actividades de prestación de servicios en informática,                    
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Perfeccionamiento</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            HAROLD MORENO BONILLA,                    
+                                            
+                            CURSO DE FORMACIÓN DOCENTE,
+                            <i>Finalidad: </i>Mejorar la calidad de la educación impartida por los docentes a través de una educación inclusiva y docente reflexivo
+                            . En: Colombia&nbsp;
+                            ,2017,&nbsp;
+                            ,Icetex - Instituto Colombiano De Crédito Educativo.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;15 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            HAROLD MORENO BONILLA,                    
+                                            
+                            DIPLOMADO EN DOCENCIA UNIVERSITARIA,
+                            <i>Finalidad: </i>mejorar el ejercicio docente Universitario
+                            . En: Colombia&nbsp;
+                            ,2016,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;15 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            HAROLD MORENO BONILLA,                    
+                                            
+                            FUNDAMENTOS DE PROGRAMACION MOVIL,
+                            <i>Finalidad: </i>los estudiantes desarrollen las competencias necesarias y adquieran las habilidades básicas requeridas para el desarrollo de aplicaciones para dispositivos móviles, mediante el uso de herramientas de desarrollo e integración con bases de datos de acceso en tiempo real (Firebase - Realtime).
+                            . En: Colombia&nbsp;
+                            ,2024,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;3 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos dirigidos/Tutorías de otro tipo</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            HAROLD MORENO BONILLA,                    
+                            
+                            APLICATIVO WEB MOVIL PARA EL MANEJO DE LOS PROCESOS DE ORIENTACIÓN ESCOLAR DE LA INSTITUCIÓN EDUCATIVA MANUEL RODRÍGUEZ TORICES EN EL MUNICIPIO DE SAN DIEGO CESAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERÍA Y TECNOLOGÍA,
+                            &nbsp;2023.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            JUAN CARLOS MURGAS AMAYA
+                            EDER ALFONSO FLOREZ TINOCO
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): HAROLD MORENO BONILLA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            HAROLD MORENO BONILLA,                    
+                            
+                            SISTEMA DE INFORMACIÓN PARA LA ASIGNACIÓN DE TURNOS Y ATENCIÓN AL CLIENTE EN MR HARRYS VALLEDUPAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2015.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            JOSÉ ALBERTO SOLANO BOLAÑO y ESCILDA MARIA DEL TORO CORREA&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): HAROLD MORENO BONILLA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            HAROLD MORENO BONILLA,                    
+                            
+                            SISTEMA DE INFORMACION PARA EL APOYO A LA GESTION EN LA ADMINISTRACIÓN DE LOS CONDOMINIOS DE VALLEDUPAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2016.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            EDGAR ANDRES MUÑOZ VILLERO - LINA MARCELA ROCHA ALBA&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): HAROLD MORENO BONILLA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Jurado en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            HAROLD MORENO BONILLA,                    
+                            
+                            <i>Titulo:&nbsp;</i>SISTEMA DE INFORMACION PARA LA GESTION DE PROCESOS DE INTERACCION DE LOS CLIENTES DE LA EMPRESA AUTOVIDRIOS COLOMBIA EN SANTA MARTA-MAGDALENA                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>ELYTH RODRIGUEZ ARAGON &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            HAROLD MORENO BONILLA,                    
+                            
+                            <i>Titulo:&nbsp;</i>SISTEMA DE INFORMACIÓN PARA LA GESTIÓN DE LOS PROCESOS DE ORIENTACIÓN ESCOLAR EN LA INSTITUCIÓN EDUCATIVA TÉCNICO UPAR DEL MUNICIPIO DE VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>LUIS EDUARDO VILLA REBOLLEDO - SASKIA MARGOTH MELÉNDEZ SAUMETH &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            HAROLD MORENO BONILLA,                    
+                            
+                            <i>Titulo:&nbsp;</i>SITIO WEB INTERACTIVO PARA LA E.S.E HOSPITAL DONALDO SAÚL MORÓN MANJARRÉZ DEL MUNICIPIO DE LA JAGUA DEL PILAR - GUAJIRA                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>JOSÉ EDUARDO JÍMENEZ PABA - CARLOS JAVITH PALENCIA CARBAL &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            HAROLD MORENO BONILLA,                    
+                            
+                            <i>Titulo:&nbsp;</i>SISTEMA DE INFORMACIÓN PARA LA GESTIÓN COMERCIAL DE LA EMPRESA HIERROS VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>VICTOR HUGO TURIZO MEDINA - ALVARO JUNIOR COBO JÁCOME &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            HAROLD MORENO BONILLA,                    
+                            
+                            <i>Titulo:&nbsp;</i>DISEÑO DE SEGURIDAD PARA LA RED DE TRANSMISIÓN DE DATOS EN EL CENTRO DE CIRUGÍA LAPAROSCÓPICA Y ENDOSCÓPICA DIGESTIVA DEL CESAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>FREDY ROLANDO CUELLO QUINTERO - REINALDO ENRIQUE RUIZ DUARTE &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            HAROLD MORENO BONILLA,                    
+                            
+                            <i>Titulo:&nbsp;</i>DISEÑO DE UNA RED WIMAX PARA CONECTAR LAS SEDES DE LA UNIVERSIDAD POPULAR DEL CESAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>DANIEL ALBERTO BARRERA NAVARRO &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            HAROLD MORENO BONILLA,                    
+                            
+                            <i>Titulo:&nbsp;</i>APLICACIÓN MÓVIL PARA EL ACCESO A RECURSOS Y SERVICIOS ACADÉMICOS DE LA UNIVERSIDAD POPULAR DEL CESAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>PEDRO DANIEL PIMIENTA MORALES - DIEGO FERNANDO VIDES CARVAL &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            HAROLD MORENO BONILLA,                    
+                            
+                            <i>Titulo:&nbsp;</i>SISTEMA DE CONTROL DE ASISTENCIA PARA LOS DOCENTES Y PERSONAL ADMINISTRATIVOS DE LA INSTITUCIÓN EDUCATIVA SAN JOSE DE LA PAZ - CESAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>JHONANTAN BRACHO DAZA - JORGE IVAN ESCOBAR SALCEDO &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            HAROLD MORENO BONILLA,                    
+                                                
+                            AMILKAR SIERRA ROMANO,                    
+                            
+                            <i>Titulo:&nbsp;</i>SISTEMA DE INFORMACION PARA EL SEGUIMIENTO DE REHABILITACION INFANTIL DEL CENTRO NEUROCIENCIA CLINICA - CENIC                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>HABIB FABIAN FRANCO MEJIA - GLADYS LEONOR NIÑO TORRES &nbsp;                
+                            
+                            
+                            <br><b>Palabras: </b><br>
+                                                
+                            NEUROCIENCIA,                    
+                                                
+                            SISTEMAS DE INFORMACIÓN,                    
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            HAROLD MORENO BONILLA,                    
+                            
+                            <i>Titulo:&nbsp;</i>SISTEMA DE INFORMACIÓN PARA SERVICIOS DE MENSAJERIA Y PEDIDOS A DOMICILIO PARA LA EMPRESA "DOMIRAPID" EN LA CIUDAD DE VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>HERNAN MANUEL CASTILLA ECHEVERRIA - ADRIAN RAFAEL CASTILLO PEDROZA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            HAROLD MORENO BONILLA,                    
+                            
+                            <i>Titulo:&nbsp;</i>PLANEACION ESTRATEGICA DE TECNOLOGIA DE INFORMACION (PETI) PARA LA EMPRESA CONSTRUEQUIPOS J.E.S.A.S. DE VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>VICTOR HUGO MONTERO ARAUJO &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            HAROLD MORENO BONILLA,                    
+                            
+                            <i>Titulo:&nbsp;</i>SISTEMA DE MESA DE AYUDA PARA EL SERVICIO DE SOPORTE TECNICO DEL HOSPITAL ROSARIO PUMAREJO DE LÓPEZ                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>DAYNER JAVIER ACOSTA SALAS - JAIRO ANDRES RINCON SANCHEZ &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            HAROLD MORENO BONILLA,                    
+                            
+                            <i>Titulo:&nbsp;</i>SISTEMA DE INFORMACIÓN PARA LA ADMINISTRACIÓN DEL INVENTARIO DE LOS EQUIPOS TECNOLÓGICOS DE LOS DESPACHOS DEL DISTRITO JUDICIAL DE VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>INGENIERO, MAGISTER JAIRO SEHONES &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            HAROLD MORENO BONILLA,                    
+                            
+                            <i>Titulo:&nbsp;</i>SISTEMA DE INFORMACIÓN PARA LA GESTIÓN GIROCAMA EN LA SECRETARÍA DE SALUD DEPARTAMENTAL DEL CESAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>FREDIS EDUARDO BLANCO PALCIOS/ARMANDO DE JESÚS FRAGOZO MORALES  &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a></td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a></td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                MAIRA ALEJANDRA DIAZ MEJIA,                    
+                                    
+                JORGE IVAN HINOJOSA CALDERON,                    
+                                    
+                HAROLD MORENO BONILLA,                    
+                                    
+                OSVALDO RUEDA CARRENO,                    
+                
+                "Gestión de la innovación, madurez de los procesos y competitividad en las PYMES: un enfoque PLS-SEM en economías emergentes"
+                . En: España&nbsp;<br>
+                EUROPEAN PUBLIC AND SOCIAL INNOVATION REVIEW&nbsp;
+                <i>ISSN:</i>&nbsp;2529-9824&nbsp;
+                <i>ed:</i>&nbsp;HISIN (History of Information Systems)<br>
+                <i>v.</i>11
+                <i>fasc.</i>N/A
+                p.1
+                - 22
+                ,2026,
+                <i>&nbsp;DOI:&nbsp;</i>10.31637/epsir-2026-11
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Gestión de la innovación,                    
+                                    
+                Madurez de procesos,                    
+                                    
+                Competitividad organizacional,                    
+                                    
+                Pymes,                    
+                                    
+                PLS-SEM,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                OSVALDO RUEDA CARRENO,                    
+                                    
+                JAIRO FRANCISCO SEOANES LEON,                    
+                                    
+                JORGE LUIS GONZALEZ,                    
+                                    
+                HAROLD MORENO BONILLA,                    
+                
+                "INTELIGENCIA ARTIFICIAL EN LA PRODUCCIÓN CIENTÍFICA"
+                . En: Colombia&nbsp;<br>
+                LETTERS IN HIGH ENERGY PHYSICS&nbsp;
+                <i>ISSN:</i>&nbsp;2632-2714&nbsp;
+                <i>ed:</i>&nbsp;Andromeda Publishing And Academic Services LTD<br>
+                <i>v.</i>2024
+                <i>fasc.</i>N/A
+                p.1
+                - 8
+                ,2024,
+                <i>&nbsp;DOI:&nbsp;</i>10.52783/lhep.2024.1366
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                INTELIGENCIA ARTIFICIAL,                    
+                                    
+                INVESTIGACIÓN CIENTÍFICA,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a></td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a></td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a></td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td></td>
+</tr>
+
+</body>
+</html>

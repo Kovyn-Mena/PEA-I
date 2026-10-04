@@ -1,0 +1,1997 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=653DC4DFB65F49BE3D07D8930E2EF0CE" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        Ricardo David&nbsp;Pertuz&nbsp;Mercado
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>PERTUZ MERCADO, RICARDO DAVID</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            Universidad Del Zulia<br />
+                            Facultad de Humanidades<br />
+                            Febrerode2008 - Diciembrede 2011<br />
+                            ESTRATEGIAS QUE PROMUEVEN EL APRENDIZAJE DE LAS TÉCNICAS DE GRAVIMETRÍA Y VOLUMETRÍA</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD DEL ATLÁNTICO <br />
+                            INGENIERIA QUIMICA<br />
+                            Enerode1986 - de 1993<br />
+                            </td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3>Formaci&oacute;n Complementaria</h3></td>
+                            </tr>   
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Compu Staff<br />
+                        Entrenamiento en Productos Microsoft<br />
+                        Enerode1998 - de 1998<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        FUNDACION UNIVERSITARIA DEL AREA ANDINA<br />
+                        Ambientes Virtuales<br />
+                        Abrilde2016 - Mayode 2016<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD DEL MAGDALENA<br />
+                        Seminario Taller de los Laboratorios de ciencias<br />
+                        Enerode1995 - de 1995<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Cooperativismo Basico<br />
+                        Enerode2004 - de 2004<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Uso de Herramientas de Informatica en la Educacion<br />
+                        Enerode2003 - de 2003<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Didactica en la Educacion superior<br />
+                        Enerode2003 - de 2003<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Gobernación De Magdalena<br />
+                        II Encuentro Dptal de Experiencias Pilotos en Edu.<br />
+                        Enerode1997 - de 1997<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Gobernación De Magdalena<br />
+                        Proyectos Ambientales Escolares (PRAES)<br />
+                        Enerode1997 - de 1997<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD DEL MAGDALENA<br />
+                        Capacitacion en el Area de Quimica<br />
+                        Enerode1995 - de 1995<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD  INDUSTRIAL DE SANTANDER<br />
+                        Administración y Liderazgo<br />
+                        Enerode1992 - de 1992<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD  INDUSTRIAL DE SANTANDER<br />
+                        Tecnologia del Carbón<br />
+                        Enerode1992 - de 1992<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        <br />
+                        Tecnologia de Alimentos<br />
+                        Enerode1991 - de 1991<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        <br />
+                        Tecnologia del Gas Natural<br />
+                        Enerode1991 - de 1991<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        <br />
+                        Protección de Plantas Quimicas<br />
+                        Enerode1992 - de 1992<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        <br />
+                        Instrumentacion y Simulacion de Procesos<br />
+                        Enerode1992 - de 1992<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        FUNDACION UNIVERSITARIA DEL AREA ANDINA<br />
+                        Vicerrectoria Academica<br />
+                        Juliode2015 - Agostode 2015<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        FUNDACION UNIVERSITARIA DEL AREA ANDINA<br />
+                        División de Investigacion<br />
+                        Juliode2015 - Agostode 2015<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        FUNDACION UNIVERSITARIA DEL AREA ANDINA<br />
+                        Vicerrectoria Academica<br />
+                        Juniode2014 - Juliode 2014<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Asociación Colombiana de Facultades de Ingeniería - ACOFI<br />
+                        Ciencias Basicas<br />
+                        Juniode2015 - Juniode 2015<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Fundación Universitaria del Área Andina. Sede Valledupar<br />
+                        INGENIERÍA CIVIL<br />
+                        Abrilde2016 - Mayode 2016<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Diplomado en Pedagogia Universitaria<br />
+                        Enerode2002 - de 2002<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        FUNDACION UNIVERSITARIA DEL AREA ANDINA<br />
+                        La Virtualidad<br />
+                        Abrilde2016 - Mayode 2016<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Diplomado en Pedagogia de la Educacion Superior<br />
+                        Enerode2000 - de 2000<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Otros</b>
+                        Ministerio de Ciencia, Tecnología e Innovación.<br />
+                        Colciencias<br />
+                        Septiembrede2015 - Septiembrede 2015<br />
+                        </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>FUNDACION UNIVERSITARIA DEL AREA ANDINA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semestrales
+                        Febrero de 2014            
+                         de <br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Febrero de 2000            
+                         de <br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Profesor de Tiempo Completo Ocasional          
+                        Febrero de 2000            
+                         de <br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Departamento de Ingenieria Agroindustrial</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Febrero de 2000            
+                        Diciembre de 2004<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Dirección y Administración            
+                        <i> - Cargo:</i>&nbsp;Director del Centro de Investigaciones para el Desarrollo de las Ingenierias (CIDI)          
+                        Febrero de 2004            
+                        Diciembre de 2004<br>
+
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; Quimica General,&nbsp; 
+                        Febrero 2000            
+                         <br>
+
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; Tecnica de Analisis Quimico,&nbsp; 
+                        Febrero 2000            
+                         <br>
+
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; Analisis Instrumental,&nbsp; 
+                        Febrero 2000            
+                         <br>
+
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; Quimica Organica,&nbsp; 
+                        Febrero 2000            
+                         <br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Departamento de Medio Ambiente</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Junio de 2000            
+                        Diciembre de 2003<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; Biociencias,&nbsp; 
+                        Junio 2000            
+                        Diciembre 2003<br>
+
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; Quimica Ambiental,&nbsp; 
+                        Junio 2000            
+                        Diciembre 2003<br>
+
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; Bioseguridad,&nbsp; 
+                        Junio 2000            
+                        Diciembre 2003<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Humanar del Cesar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Junio de 2000            
+                        Diciembre de 2003<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Profesor Titular          
+                        Junio de 2000            
+                        Diciembre de 2003<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Liceo Moderno de Valledupar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>9&nbsp;horas Semanales
+                        Febrero de 2000            
+                        Diciembre de 2000<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Profesor Catedratico          
+                        Febrero de 2000            
+                        Diciembre de 2000<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Area de Quimica y Biologia</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Febrero de 2000            
+                        Diciembre de 2000<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; Biologia, Quimica General y Organica,&nbsp; 
+                        Febrero 2000            
+                        Diciembre 2000<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Departamento de Matematicas</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Agosto de 1999            
+                        Noviembre de 1999<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; Matematicas,&nbsp; 
+                        Agosto 1999            
+                        Noviembre 1999<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Instituto Tecnico Villa Corelca</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Agosto de 1999            
+                        Noviembre de 1999<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Profesor Titular          
+                        Agosto de 1999            
+                        Noviembre de 1999<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Area de Quimica</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Febrero de 1995            
+                        Agosto de 1999<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; Quimica General y Organica,&nbsp; 
+                        Febrero 1995            
+                        Agosto 1999<br>
+
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; Biologia,&nbsp; 
+                        Febrero 1995            
+                        Agosto 1999<br>
+
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; Creacion de un restaurante escolar, para mejorar el problema de malnutricion de los estudiantes                            
+                        Febrero 1998            
+                        Agosto 1999<br>            
+
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp;                              
+                        Febrero 1998            
+                        Agosto 1999<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Colegio de Bachillerato Agropecuario</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Febrero de 1995            
+                        Agosto de 1999<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Profesor Titular          
+                        Febrero de 1995            
+                        Agosto de 1999<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ciencias Naturales -- Ciencias Químicas -- Química Analítica</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ciencias Naturales -- Ciencias Químicas -- Química Orgánica</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;Mejoramineto en la calidad de vida de los estudiantes, <i>Activa:</i>No</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Reconocimientos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>Docente Emerito,FUNDACION UNIVERSITARIA DEL AREA ANDINA - Diciembrede 2016</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>Innegables cualidades de compromiso, responsabilidad, dedicación en la labor de formación de profesionales de Microbiología ,UNIVERSIDAD POPULAR DEL CESAR - Mayode 2013</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>TEACHER OF THE YEAR 2016,RED ILUMNO - Septiembrede 2016</li></td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Cursos de corta duraci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Perfeccionamiento</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            RICARDO DAVID PERTUZ MERCADO,                    
+                                            
+                            Entrenamiento de profesores y estudiantes de algunos colegios del municipio de valledupar en las pruebas saber de Quimica,
+                            <i>Finalidad: </i>Mejorar los resultados de la prueba Saber de Quimica
+                            . En: Colombia&nbsp;
+                            ,2013,&nbsp;
+                            ,.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;24 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Químicas -- Química Analítica,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Perfeccionamiento</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            RICARDO DAVID PERTUZ MERCADO,                    
+                                            
+                            Entrenamiento de profesores y estudiantes de algunos colegios del municipio de valledupar en las pruebas saber de Quimica,
+                            <i>Finalidad: </i>
+                            . En: Colombia&nbsp;
+                            ,2013,&nbsp;
+                            ,.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;24 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Químicas -- Química Analítica,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Perfeccionamiento</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            RICARDO DAVID PERTUZ MERCADO,                    
+                                            
+                            Entrenamiento de profesores y estudiantes de algunos colegios del municipio de valledupar en las pruebas saber de Quimica,
+                            <i>Finalidad: </i>
+                            . En: Colombia&nbsp;
+                            ,2013,&nbsp;
+                            ,.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;24 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Químicas -- Química Analítica,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RICARDO DAVID PERTUZ MERCADO,                    
+                            
+                            IMPLEMENTACION DE UN CORRELADOR OPTICO PARA IDENTIFICAR SECUENCIAS DE DNA EN BACTERIAS BIORREMEDIADORAS DE SUELO EN EL MUNICIPIO DE AGUSTIN CODAZZI&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis en curso&nbsp;
+                            MICROBIOLOGIA,
+                            &nbsp;2005.
+                            <i>Dirigi&oacute; como: </i>,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            YIRLEEN QUIROZ - ALEX  ANAYA - YURI MEZA&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RICARDO DAVID PERTUZ MERCADO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RICARDO DAVID PERTUZ MERCADO,                    
+                            
+                            Evaluación de la producción y calidad del aceite esencial obtenido de Limonaria (Cymbopogon Citratus) cultivada en dos suelos disturbados acondicionados con biochar y compost.&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2018.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RICARDO DAVID PERTUZ MERCADO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Químicas -- Química Analítica,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Jurado en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RICARDO DAVID PERTUZ MERCADO,                    
+                            
+                            <i>Titulo:&nbsp;</i>ELABORACION DE UN ALIMENTO CONCENTRADO DESTINADO A LA SUPLEMENTACION DE VACAS LECHERAS (HOLSTEIN X CEBU) EN EL NORTE DEL CESAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA AGROINDUSTRIAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>FERNANDO JOSE MONTES MOLINA &nbsp;                
+                            
+                            
+                            <br><b>Palabras: </b><br>
+                                                
+                            CELULOSA,                    
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Ingeniería de Producción,                    
+                            
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Productos y procesos biotecnológicos - Productos y procesos biotecnológicos vinculados a la salud humana o de los animales,                    
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RICARDO DAVID PERTUZ MERCADO,                    
+                            
+                            <i>Titulo:&nbsp;</i>EXTRACCION DE ACEITE CRUDO DE LA SEMILLA DE MARACUYA VARIEDAD AMARILLA CULTIVADA EN LA REGION NOR - ORIENTAL DEL DEPARTAMENTO DEL CESAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA AGROINDUSTRIAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>VICTOR JUAN RODRIGUEZ BRACHO &nbsp;                
+                            
+                            
+                            <br><b>Palabras: </b><br>
+                                                
+                            EXTRACCION DE ACEITE,                    
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Ingeniería de Producción,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RICARDO DAVID PERTUZ MERCADO,                    
+                            
+                            <i>Titulo:&nbsp;</i>EVALUACION DE UN ALIMENTO CONCENTRADO PARA POLLOS DE ENGORDE ELABORADO CON MATERIAS PRIMAS REGIONALES EN EL MUNICIPIO DE VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA AGROINDUSTRIAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>ANA MARGARITA PIMIENTA Y ADRIANA PIMIENTA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Químicas -- Química Analítica,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RICARDO DAVID PERTUZ MERCADO,                    
+                            
+                            <i>Titulo:&nbsp;</i>ESTUDIO FISICOQUIMICO E INDUSTRIALIZACION DE LA PULPA DE COROZO (bACTRIS MINOR)                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA AGROINDUSTRIAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>DAIRO DAVID DAZA OVALLE Y FERNANDO ALBERTO QUIROZ PEREZ &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Químicas -- Química Analítica,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RICARDO DAVID PERTUZ MERCADO,                    
+                            
+                            <i>Titulo:&nbsp;</i>ESTUDIO DE FACTIBILIDAD PARA LA PRODUCCION Y COMERCIALIZACION DE ALCOHOL CARBURANTE EN EL DEPARTAMENTO DEL CESAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA AGROINDUSTRIAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>YENFAIR ANTONIO COLPAS SANCHEZ E IVAN JOSE RAMIREZ &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Químicas -- Química Analítica,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RICARDO DAVID PERTUZ MERCADO,                    
+                            
+                            <i>Titulo:&nbsp;</i>OBTENCION DE BIOETANOL A PARTIR DE ALMIDON DE YUCA COMO COMBUSTIBLE OXIGENANTE DE LA GASOLINA                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA AGROINDUSTRIAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>WILLIAM CAMARILLO - HENRY QUITIAQUEZ Y DAVINSON TROCONES &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Ingeniería de Producción,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RICARDO DAVID PERTUZ MERCADO,                    
+                            
+                            <i>Titulo:&nbsp;</i>OBTENCION DE BIOETANOL A PARTIR DE MAIZ (Blanco, Amarillo y Cariaco) PARA COMPARACIONES DE RENDIMIENTO Y CALIDAD CON EL DE ALMIDON DE YUCA EN EL MUNICIPIO DE VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA AGROINDUSTRIAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>IBETH MAESTRE GUERRA Y MANUEL MANCILLA RENGIFO &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Ingeniería de Producción,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RICARDO DAVID PERTUZ MERCADO,                    
+                            
+                            <i>Titulo:&nbsp;</i>EXTRACCION DE CELULOSA A PARTIR DE RACIMO DE FRUTOS VACIOS DE LA PALMA ACEITERA (Elaeis guineensis) PARA LA ELABORACIÓN DE PLATOS BIODEGRADABLES                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA AGROINDUSTRIAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>YIMMIS PEREZ ROJAS &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Químicas -- Química Analítica,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RICARDO DAVID PERTUZ MERCADO,                    
+                            
+                            <i>Titulo:&nbsp;</i>ESTUDIO COMPARATIVO DE LAS CARACTERÍSTICAS SENSORIALES Y FISICOQUIMICAS DEL CHOCOLATE OBTENIDO POR LIOFILIZACION Y SECADO NATURAL DEL CACAO (Theorama cacao L) EN LA CIUDAD DE VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA AGROINDUSTRIAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i> &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Químicas -- Química Analítica,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RICARDO DAVID PERTUZ MERCADO,                    
+                            
+                            <i>Titulo:&nbsp;</i>ELABORACIÓN DE UN PRODUCTO TIPO GALLETA CON HARINA DE CHACHAFRUTO (erythina edulis) Y CASCARA DE NARANJA (citrus sinenser) CON PROPIEDADES FUNCIONALES                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA AGROINDUSTRIAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>OSWALDO MORALES &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Químicas -- Química Analítica,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RICARDO DAVID PERTUZ MERCADO,                    
+                            
+                            <i>Titulo:&nbsp;</i>OPTIMIZACIÓN DE LA DIETA ALIMENTARIA CON EL SUMINISTRO DE DIFERENTES MEZCLAS ALIBLES, EN LA OBTENCIÓN DE BIOGAS EN EXCRETAS PORCINAS EN LA CIUDAD DE VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA AGROINDUSTRIAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>ABDO BARRERA MEJIA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Químicas -- Química Analítica,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Participaci&oacute;n en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Participación en comités de evaluación - Otra</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RICARDO DAVID PERTUZ MERCADO,                    
+                            
+                            COMITE DE EVALUACION DE PROYECTOS DE GRADO EN EL PROGRAMA DE INGENIERIA AGROINDUSTRIAL<br>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Ingeniería de Producción,                    
+                            
+                            
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a></td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a></td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                RICARDO DAVID PERTUZ MERCADO,                    
+                
+                "Una estrategia pedagógica como mejoramiento del estilo de aprendizaje en una enseñanza desarrolladora basado en métodos participativos"
+                . En: Cuba&nbsp;<br>
+                Revista Cubana de Educación Superior&nbsp;
+                <i>ISSN:</i>&nbsp;0257-4314&nbsp;
+                <i>ed:</i>&nbsp;Universidad de La Habana<br>
+                <i>v.</i>38
+                <i>fasc.</i>N/A
+                p.1
+                - 8
+                ,2019,
+                <i>&nbsp;DOI:&nbsp;</i>10.1145/1067268
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a>
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Libros</h3></td>
+            </tr>
+                
+            <tr>
+                <td><li>
+                
+                <b>Producción bibliográfica - Libro - Otro libro publicado</b>
+            </li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            RICARDO DAVID PERTUZ MERCADO,                    
+            
+            "Fundamentos De Analisis Quimico Cuantitativo"
+            En: Colombia
+            2006.&nbsp;
+            ed:Publicidad Exterior&nbsp;
+            <i>ISBN:</i>&nbsp;978-958-98150-0-7&nbsp;
+            <i>v. </i>500
+            <i>pags.</i>&nbsp;188
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            Analisis Quimico,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias Químicas -- Química Orgánica,                    
+            
+            
+            
+            <br><b>Sectores: </b><br>
+                                    
+            Educación,                    
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a></td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a></td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a>
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3>Dem&aacute;s trabajos</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+            <li><b>Demás trabajos - Demás trabajos</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            RICARDO DAVID PERTUZ MERCADO,                    
+            
+            EXTRACIÓN DEL ECEITE ESENCIAL, DE LAS HOJAS Y RAMAS DEL (GUAZUMA ULMIFOLIA) PARA LA ELABORACIÓN DE UN SHAMPOO EN LOS LABORATORIOS DE LA UNIVERSIDAD POPULAR DEL CESAR ¿ VALLEDUPAR.¿
+            . En: Colombia,&nbsp;
+            ,2019,&nbsp;
+            <i>finalidad: </i>Participe en la Convocatoria Interna de Financiación de Proyectos de Investigación de Semilleros 2019, como tutor del semillero de investigacion avalado por la universidad llamado: Microremediadores agroindustriales y ambiemtales y director del proyecto&nbsp;
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias Químicas -- Química Analítica,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Creacion de un restaurante escolar, para mejorar el problema de malnutricion de los estudiantes<br>
+                        <i>Inicio:&nbsp;</i>&nbsp;
+                                        
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        CARACTERÍSTICAS SOCIALES Y ECONÓMICAS RELACIONADAS CON EL SANEAMIENTO BÁSICO, Y ESTUDIO GEOLÓGICO - GEOTÉNICO DEL CORREGIMIENTO DE CARACOLI <br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2017                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Mayo&nbsp;
+                        2017
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El presente trabajo tiene como fin tener una aproximación acerca de las distintas problemáticas que viene padeciendo el corregimiento de  Caracolí en el municipio de Valledupar, en lo referente al consumo de agua potable ya que no disponen de una planta de acueducto para el procesamiento de este recurso, lo cual ha contribuido a que se presenten problemas de salud en la población, tales como: dolores estomacales, diarrea, vomito e infecciones en la piel, etc. Tampoco se cuenta con un sistema de alcantarillado, ni con ningún plan de manejo de residuos sólidos entre otras, lo cual tiene afectado y preocupados grandemente a los pobladores, de esta región del departamento del Cesar quienes les solicitan al municipio soluciones inmediatas para vivir en condiciones en dignas como lo consagra la constitución y la ley.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

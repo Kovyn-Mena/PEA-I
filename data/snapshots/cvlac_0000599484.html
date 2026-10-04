@@ -1,0 +1,2104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=1898DF770FBE5B218A3D426ADC2BA01B" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        Alvaro&nbsp;Oñate&nbsp;Bowen
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>OÑATE BOWEN, ALVARO</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            UNIVERSIDAD NACIONAL DE COLOMBIA SEDE BOGOTA<br />
+                            MAGISTER EN INGENIERÍA - INGENIERÍA DE SISTEMAS Y COMPUTACIÓN <br />
+                            Enerode2014 - Abrilde 2017<br />
+                            ANALISIS DE LA DESERCIÓN Y PERMANENCIA ACADÉMICA EN
+LA EDUCACIÓN SUPERIOR APLICANDO MINERÍA DE DATOS</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Especialización</b>
+                            FUNDACIÓN UNIVERSIDAD DEL NORTE<br />
+                            EN GERENCIA DE PROYECTOS DE INGENIERIA<br />
+                            Enerode2009 - Marzode 2010<br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD POPULAR DEL CESAR<br />
+                            INGENIERIA DE SISTEMAS<br />
+                            Enerode1998 - de 2002<br />
+                            Analisis y Diseño e Implementacion de un Sistema de Informacion de la Division de Bienestar Universitario de la Universidad Popular del Cesar en la Cuidad de Valledupar</td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3>Formaci&oacute;n Complementaria</h3></td>
+                            </tr>   
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Pedagogia Universitaria<br />
+                        Enerode2002 - Agostode 2002<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Universidad Tecnológica de Bolívar<br />
+                        CURSO TUTORIA EN AMBIENTES VIRTUALES DE APRENDIZAJE<br />
+                        Enerode2010 - Juniode 2010<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        METODOLOGIA DE INVESTIGACION <br />
+                        Marzode2012 - Marzode 2012<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Capacitación Docente sobre Modelos Pedagógicos, Estrategias de Enseñanza y Evaluación de Competencias de Aprendizaje.<br />
+                        Febrerode2012 - Febrerode 2012<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        BDGIINSTITUTE<br />
+                        Certificación de BIG DATA SCIENTIST<br />
+                        Mayode2017 - Mayode 2017<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        ARCITURA<br />
+                        Professional Arcitura The IT Education Company<br />
+                        Marzode2017 - Abrilde 2018<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        DataCamp<br />
+                        Inteligencia Artificial<br />
+                        Febrerode2020 - Noviembrede 2020<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        DataCamp<br />
+                        Introduction to Python <br />
+                        Febrerode2020 - Agostode 2020<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        DataCamp<br />
+                        Supervised Learning in R Classification<br />
+                        Febrerode2020 - Noviembrede 2020<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        DataCamp<br />
+                        Supervised Learning in R: Regression<br />
+                        Enerode2020 - Diciembrede 2020<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        DataCamp<br />
+                        Unsupervised Learning in R<br />
+                        Marzode2020 - Diciembrede 2020<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        DataCamp<br />
+                        Image Processing in Python<br />
+                        Enerode2020 - Octubrede 2020<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        DataCamp<br />
+                        Time Series Analysis in Python<br />
+                        Febrerode2020 - Juniode 2020<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Asociación Colombiana de Facultades de Ingeniería - ACOFI<br />
+                        Resultados de aprendizaje para programas de ingeniería<br />
+                        Noviembrede2020 - Noviembrede 2020<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Elservier<br />
+                        Certificate of Attendance<br />
+                        Juliode2021 - Juliode 2021<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD DE ANTIOQUIA<br />
+                        CURSO PARES ACADEMICOS<br />
+                        Octubrede2021 - Octubrede 2021<br />
+                        </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Agosto de 2010            
+                         de Actual<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Coordinador de programa            
+                        <i> - Cargo:</i>&nbsp;Jefe Dto. de Ing de sistemas          
+                        Agosto de 2010            
+                        Enero de <br>
+
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; ELECTIVA DE MINERÍA DE DATOS, PROGRAMACIÓN DE COMPUTADORES Y BASE DE DATOS ,&nbsp;20 
+                        Agosto 2010            
+                        Febrero 2018<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ciencias Naturales -- Computación y Ciencias de la Información -- Ciencias de la Computación</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía)</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="5"><h3 >Idiomas</h3></td>
+                            </tr>    
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td><b>Habla</b></td>
+                                <td><b>Escribe</b></td>
+                                <td><b>Lee</b></td>
+                                <td><b>Entiende</b></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;Español</li></td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>                                                        
+                </tr>    
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;SISTEMAS DE INFORMACIÓN , <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;SISTEMAS INTELIGENTES , <i>Activa:</i>Si</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a></td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajo de grado de maestría o especialidad clínica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            ALVARO ONATE BOWEN,                    
+                            
+                            DESARROLLO DE UN ANÁLISIS DE SENTIMIENTOS SOBRE LAS TENDENCIAS DE LA RED SOCIAL TWITTER UTILIZANDO TÉCNICAS DE ANALÍTICA DE DATOS&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ING DE SISTEMAS,
+                            &nbsp;2020.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): ALVARO ONATE BOWEN,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajo de grado de maestría o especialidad clínica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            ALVARO ONATE BOWEN,                    
+                            
+                            &#61607;	INTEGRACIÓN Y AUTOMATIZACIÓN DE BASES DE DATOS DISPUESTAS POR LAS MARCAS ALIADAS DE UNA ENTIDAD BANCARIA PARA SOLICITUD DE TARJETA DE CRÉDITO, UTILIZANDO INFORMÁTICA POWER CENTER&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ING DE SISTEMAS,
+                            &nbsp;2020.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): ALVARO ONATE BOWEN,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            ALVARO ONATE BOWEN,                    
+                            
+                            APLICATIVO WEB DE PSICO-ORIENTACIÓN PARA LA PREVENCIÓN DE LA VIOLENCIA ESCOLAR EN LA INSTITUCIÓN EDUCATIVA CASD SIMÓN BOLÍVAR&nbsp;
+                            INSTITUCION EDUCATIVA CASD SIMON BOLIVAR &nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SECUNDARIA,
+                            &nbsp;2016.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            YARIAN ALBERTO MORÓN MAESTRE &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): ALVARO ONATE BOWEN,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos dirigidos/Tutorías de otro tipo</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            ALVARO ONATE BOWEN,                    
+                            
+                            MODELO DESCRIPTIVO Y PREDICTIVO DE MINERÍA DE DATOS PARA REALIZAR ESTUDIOS DE MERCADO A TRAVÉS DE REDES SOCIALES&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2015.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            KEVIN ANDREY ROSALES FERREIRA&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): ALVARO ONATE BOWEN,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Computación y Ciencias de la Información -- Ciencias de la Computación,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a></td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Par evaluador</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES,&nbsp;                
+                                        
+                                        2020,&nbsp;
+                                        Diciembre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES,&nbsp;                
+                                        
+                                        2020,&nbsp;
+                                        Octubre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES,&nbsp;                
+                                        
+                                        2020,&nbsp;
+                                        Octubre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES,&nbsp;                
+                                        
+                                        2020,&nbsp;
+                                        Octubre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES,&nbsp;                
+                                        
+                                        2020,&nbsp;
+                                        Diciembre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                    
+                        </table>    
+                        </td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Congreso Nacional de Tecnologia en Redes y Telematica&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2003-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en BARRANQUILLA &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Eventos de Colombia E.U-EVENCO
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ALVARO ONATE BOWEN
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Enfoques Tecnologicos de la Ingeniria de Sistemas, Una Vision Nacional e Internecional&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2004-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en  &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Universidad Tecnológica de Bolívar
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ALVARO ONATE BOWEN
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>IX Congreso Nacional de Estudiantes de Ingenieria de Sistemas&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2000-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en BOGOTÁ, D.C. &nbsp; - Centro de Convenciones Gonzalo Jimenez de Quesada &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DISTRITAL FRANCISCO JOSÉ DE CALDAS
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ALVARO ONATE BOWEN
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>LA CONCIENCIA DE LA RED&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2004-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en MANIZALES &nbsp; - Universidad de Manizales &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Universidad De Manizales - Umanizales
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ALVARO ONATE BOWEN
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>5</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Seminario Taller Router Basico Cisco&nbsp;
+                                                <i>Tipo de evento: </i>Seminario&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2003-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en Valleduapar &nbsp; - Sede Campus Universitario &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ALVARO ONATE BOWEN
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>6</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Computacion Movil&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2003-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en CALI &nbsp; - Universidad Santiago de Cali &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD SANTIAGO DE CALI
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ALVARO ONATE BOWEN
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>7</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Torneo Internacional Universitario TuApp 2023&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2023-11-15 00:00:00.0,&nbsp;
+                                                    2023-11-17 00:00:00.0 &nbsp;
+                                                    en Ibarra &nbsp; - Pontificia Universidad Católica del Ecuador Ibarra junto con la Universidad de Investigación de Tecnología Experimental Yachay y la Universidad Técnica del Norte son los anfitriones del evento final del torneo universitario de Apps Tuapp 2023 &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Aplicativo Móvil para la Predicción de Delitos en la Ciudad de Valledupar ¿ VIGIS
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ALVARO ONATE BOWEN
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>8</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>A2IOT¿2021: 2nd International Workshop on Artificial Intelligence & Internet of Things&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2021-08-09 00:00:00.0,&nbsp;
+                                                    2021-08-12 00:00:00.0 &nbsp;
+                                                    en Leuven &nbsp; - Leuven, Belgium &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>GlyphReader App: A support game for the application of the Orton- Gillingham Method with DataMining Techniques
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ALVARO ONATE BOWEN
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>9</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>2nd International Workshop on Artificial Intelligence & Internet of Things&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2021-08-09 00:00:00.0,&nbsp;
+                                                    2021-08-12 00:00:00.0 &nbsp;
+                                                    en Leuven &nbsp; - Leuven, Belgium &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Strengthening the teaching of the narrative genre: story and fable in primary school children in the Department of Magdalena ¿ Colombia
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ALVARO ONATE BOWEN
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                ALVARO ONATE BOWEN,                    
+                                    
+                PAOLA PATRICIA ARIZA COLPAS,                    
+                                    
+                MARLON ALBERTO PINERES MELO,                    
+                
+                "Exploring the History and Culture of Main Square Los Tupes with Augmented Reality in San Diego, Cesar"
+                . En: Alemania&nbsp;<br>
+                SPRINGERBRIEFS IN COMPUTER SCIENCE&nbsp;
+                <i>ISSN:</i>&nbsp;2191-5776&nbsp;
+                <i>ed:</i>&nbsp;Springer Nature<br>
+                <i>v.</i>1
+                <i>fasc.</i>N/A
+                p.253
+                - 263
+                ,2023,
+                <i>&nbsp;DOI:&nbsp;</i>10.1007/978-981-99-7947-9_19
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                GESTIÓN TECNOLÓGICA,                    
+                                    
+                Learning software,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                ALVARO ONATE BOWEN,                    
+                                    
+                MIGUEL ALBERTO URINA TRIANA,                    
+                                    
+                ANA ISABEL OVIEDO CARRASCAL,                    
+                                    
+                MARLON ALBERTO PINERES MELO,                    
+                                    
+                PAOLA PATRICIA ARIZA COLPAS,                    
+                                    
+                EYDY DEL CARMEN SUAREZ BRIEVA,                    
+                                    
+                CARLOS ANDRES COLLAZOS MORALES,                    
+                
+                "Machine Learning approach applied to Human Activity Recognition ¿ An application to the VanKasteren dataset"
+                . En: Bélgica&nbsp;<br>
+                PROCEDIA COMPUTER SCIENCE&nbsp;
+                <i>ISSN:</i>&nbsp;1877-0509&nbsp;
+                <i>ed:</i>&nbsp;ELSEVIER B. V.<br>
+                <i>v.</i>191
+                <i>fasc.</i>
+                p.367
+                - 372
+                ,2021,
+                <i>&nbsp;DOI:&nbsp;</i>10.1016/j.procs.2021.07.069
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Activity Dail,                    
+                                    
+                Activity Recognitio,                    
+                                    
+                HAR,                    
+                                    
+                Human Activity Recognition,                    
+                                    
+                Learning software,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                ALVARO ONATE BOWEN,                    
+                                    
+                PAOLA PATRICIA ARIZA COLPAS,                    
+                                    
+                MARLON ALBERTO PINERES MELO,                    
+                                    
+                CARLOS ANDRES COLLAZOS MORALES,                    
+                
+                ""GlyphReader App: A support game for the application of the Orton Gillingham Method with DataMining Techniques"
+                . En: Bélgica&nbsp;<br>
+                PROCEDIA COMPUTER SCIENCE&nbsp;
+                <i>ISSN:</i>&nbsp;1877-0509&nbsp;
+                <i>ed:</i>&nbsp;ELSEVIER B. V.<br>
+                <i>v.</i>191
+                <i>fasc.</i>
+                p.373
+                - 378
+                ,2021,
+                <i>&nbsp;DOI:&nbsp;</i>10.1016/j.procs.2021.07.069
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Activity Recognitio,                    
+                                    
+                Story and Fable,                    
+                                    
+                Teaching,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                ALVARO ONATE BOWEN,                    
+                                    
+                EYDY DEL CARMEN SUAREZ BRIEVA,                    
+                                    
+                PAOLA PATRICIA ARIZA COLPAS,                    
+                                    
+                JOHANNA KARINA GARCIA RESTREPO,                    
+                                    
+                JORGE LUIS DIAZ MARTINEZ,                    
+                
+                "Predictive model for the identification of activities of daily living (ADL) in indoor environments using classification techniques basedon Machine Learning"
+                . En: Bélgica&nbsp;<br>
+                PROCEDIA COMPUTER SCIENCE&nbsp;
+                <i>ISSN:</i>&nbsp;1877-0509&nbsp;
+                <i>ed:</i>&nbsp;ELSEVIER B. V.<br>
+                <i>v.</i>191
+                <i>fasc.</i>
+                p.361
+                - 366
+                ,2021,
+                <i>&nbsp;DOI:&nbsp;</i>10.1016/j.procs.2021.07.069
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Human Activity Recognition,                    
+                                    
+                Machine Learning,                    
+                                    
+                HAR,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                ALVARO ONATE BOWEN,                    
+                                    
+                HILDA ROSA GUERRERO CUENTAS,                    
+                                    
+                OLGA MARTINEZ PALMERA,                    
+                                    
+                RAMON ENRIQUE RAMAYO GONZALEZ,                    
+                                    
+                BELINA ANNERY HERRERA TAPIAS,                    
+                                    
+                MARLON ALBERTO PINERES MELO,                    
+                                    
+                PAOLA PATRICIA ARIZA COLPAS,                    
+                                    
+                EYDY DEL CARMEN SUAREZ BRIEVA,                    
+                                    
+                CARLOS ANDRES COLLAZOS MORALES,                    
+                
+                "Strengthening the teaching of the narrative genre: story and fable in primary school children in the Department of Magdalena ¿ Colombia. A commitment to the use of ICT Games and BayesianLogisticRegression"
+                . En: Bélgica&nbsp;<br>
+                PROCEDIA COMPUTER SCIENCE&nbsp;
+                <i>ISSN:</i>&nbsp;1877-0509&nbsp;
+                <i>ed:</i>&nbsp;ELSEVIER B. V.<br>
+                <i>v.</i>191
+                <i>fasc.</i>
+                p.379
+                - 384
+                ,2021,
+                <i>&nbsp;DOI:&nbsp;</i>10.1016/j.procs.2021.07.069
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Narrative Genre,                    
+                                    
+                Learning software,                    
+                                    
+                Teaching,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a></td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a>        
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td colspan="2"><h3 >Capitulos de libro</h3></td>
+            </tr>
+                
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    ALVARO ONATE BOWEN,                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    MARIA DEL CARMEN JIMENEZ BARRIOSNUEVO,                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    JAIRO FRANCISCO SEOANES LEON,                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    JOHN JAIRO PATINO VANEGAS,                    
+                    
+
+                    "CONSTRUCCIÓN Y EVALUACIÓN DE LOS RESULTADOS DE APRENDIZAJE: ANÁLISIS DE LOS LOGROS DEL PROGRAMA DE INGENIERÍA DE SISTEMAS DE LA UNIVERSIDAD POPULAR DEL CESAR"
+                     EDUCACIÓN DEL SIGLO XXI: INVESTIGACIÓN E INNOVACIÓN PARA  EL LIDERAZGO EDUCATIVO
+                    . En: España&nbsp;
+                    <i>ISBN:</i>&nbsp;978-84-1070-193-9&nbsp;
+                    <i>ed:</i>&nbsp;Dykinson, S. L. 
+                    <i>, v.</i>
+                    , p.223
+                    - 251&nbsp;
+                    1
+                    ,2024
+                    
+                    
+                    <br><b>Palabras: </b><br>
+                                        
+                    Educación,                    
+                                        
+                    Innovación,                    
+                                        
+                    Investigación,                    
+                                        
+                    Resultados de Aprendizaje(RA),                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    MARIA DEL CARMEN JIMENEZ BARRIOSNUEVO,                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    ALVARO ONATE BOWEN,                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    MARIA JOHANA CARVAJALINO QUINTERO,                    
+                    
+
+                    "DESAFIANDO LA TRADICIÓN: INNOVACIÓN EN FLEXIBILIZACIÓN CURRICULAR EN EL PROGRAMA DE INGENIERÍA DE SISTEMAS - EXPERIENCIAS DE LIDERAZGO Y GESTIÓN EN LA UNIVERSIDAD POPULAR DEL CESAR"
+                     EDUCACIÓN DEL SIGLO XXI: INVESTIGACIÓN E INNOVACIÓN PARA  EL LIDERAZGO EDUCATIVO
+                    . En: España&nbsp;
+                    <i>ISBN:</i>&nbsp;978-84-1070-193-9&nbsp;
+                    <i>ed:</i>&nbsp;Dykinson, S. L. 
+                    <i>, v.</i>
+                    , p.21
+                    - 36&nbsp;
+                    1
+                    ,2024
+                    
+                    
+                    <br><b>Palabras: </b><br>
+                                        
+                    Liderazgo Educativo,                    
+                                        
+                    Educación,                    
+                                        
+                    Investigación,                    
+                                        
+                    Innovación,                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    MARIA JOHANA CARVAJALINO QUINTERO,                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    ALVARO ONATE BOWEN,                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    MARIA DEL CARMEN JIMENEZ BARRIOSNUEVO,                    
+                    
+
+                    "LA INVESTIGACIÓN COMPONENTE ESENCIAL PARA EL EMPRENDIMIENTO DIGITAL EN UNIVERSIDADES PÚBLICAS DE COLOMBIA. CASO DE ESTUDIO EL PROGRAMA DE INGENIERÍA DE SISTEMAS EN LA UNIVERSIDAD POPULAR DEL CESAR"
+                    INVESTIGACIÓN E INNOVACIÓN SOBRE COMPETENCIAS DOCENTES Y FORMACIÓN DEL PROFESORADO
+                    . En: España&nbsp;
+                    <i>ISBN:</i>&nbsp;978-84-1070-189-2&nbsp;
+                    <i>ed:</i>&nbsp;Editorial DYKINSON, S.L. Meléndez Valdés, 61 ¿ 28015 Madrid
+                    <i>, v.</i>
+                    , p.105
+                    - 108&nbsp;
+                    1
+                    ,2024
+                    
+                    
+                    <br><b>Palabras: </b><br>
+                                        
+                    Formación del Profesorado,                    
+                                        
+                    Competencia Docente,                    
+                                        
+                    Educación,                    
+                                        
+                    Innovación,                    
+                                        
+                    Investigación,                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+
+</table>
+</td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a></td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%">
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Otra producci&oacute;n blibliogr&aacute;fica</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+            <li>
+                <b>Producción bibliográfica - Otra producción bibliográfica - Otra</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            ALVARO ONATE BOWEN,                    
+            
+            "Relación Universidad-Empresa-Estado"
+            En: Colombia. 
+            2012.
+            
+            
+            
+            
+            <i>p. </i>
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Computación y Ciencias de la Información -- Ciencias de la Computación,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td></td>
+</tr>
+
+</body>
+</html>

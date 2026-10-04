@@ -1,0 +1,2992 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=393A08F7D15286ECF841E5E3403411A4" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                <tr>    
+                                    <td colspan="2" class="messageText"><b>Par evaluador reconocido por Minciencias.</b></td>                            
+                                </tr>                        
+                                
+                                
+                                    <tr>
+                                        <td>Categor&iacute;a</td>
+                                        <td>
+                                            Investigador Junior (IJ) con vigencia
+                                            
+                                                hasta la publicación de los resultados de la siguiente convocatoria
+                                                
+                                            
+                                        </td>
+                                    </tr>
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        Omar Alfredo&nbsp;Figueroa&nbsp;Moreno
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>FIGUEROA MORENO, OMAR ALFREDO</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Doctorado</b>
+                            UNIVERSIDAD DE ANTIOQUIA<br />
+                            DOCTORADO EN INGENIERIA AMBIENTAL<br />
+                            Agostode2015 - Diciembrede 2023<br />
+                            Análisis de los mecanismos cinéticos asociados a la hidrólisis enzimática de proteínas de sangre bovino y su relación con la actividad biológica de los hidrolizados obtenidos
+
+</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            UNIVERSIDAD DE ANTIOQUIA<br />
+                            Ciencias Farmacéuticas: Alimentos<br />
+                            Febrerode2010 - Abrilde 2013<br />
+                            MODELAMIENTO DE LA CINÉTICA DE HIDRÓLISIS ENZIMÁTICA DE PROTEÍNAS DE PLASMA ENTERO BOVINO</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD POPULAR DEL CESAR<br />
+                            ingenieria Agroinductrial<br />
+                            Enerode2002 - de 2007<br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Secundario</b>
+                            Colegio Manuel German Cuello ANEXO UPC<br />
+                            <br />
+                            Enerode1994 - de 1999<br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Primaria</b>
+                            Institución Educativa de Aguas Blancas<br />
+                            <br />
+                            Enerode1989 - de 1993<br />
+                            </td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3>Formaci&oacute;n Complementaria</h3></td>
+                            </tr>   
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Analisis cuantitativo y cualitativo de datos<br />
+                        Enerode2007 - de 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Ministerio De La Protección Social<br />
+                        Reducción de la Accidentalidad Ocupacional<br />
+                        Enerode2007 - de 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        UNIVERSIDAD DE PAMPLONA<br />
+                        VII semana alimentaria<br />
+                        Enerode2005 - de 2005<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Segunda Jornada de Investigación Agroindustrial<br />
+                        Enerode2007 - de 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        UNIVERSIDAD DE SAN BUENAVENTURA CALI<br />
+                        Visión agroindustrial para el desarrollo horto-fru<br />
+                        Enerode2006 - de 2006<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Sem. de Inocuidad Alimentaria y Gestion de calidad<br />
+                        Enerode2005 - de 2005<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        Primera jornada de investigacion agroindustrial<br />
+                        Enerode2005 - de 2005<br />
+                        </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD DE LA GUAJIRA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Febrero de 2014            
+                         de <br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Centro de Investigacion y Desarrollo Tecnologico del Cesar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Enero de 2006            
+                         de <br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Otra actividad técnico-científica relevante            
+                        <i> - Cargo:</i>&nbsp;Miembro activo Grupo de investigación          
+                        Enero de 2008            
+                         de <br>
+
+                                            
+                        - &nbsp;Otra actividad técnico-científica relevante            
+                        <i> - Cargo:</i>&nbsp;Colaboracion y apoyo en la realizacion de proyectos de investigacion          
+                        Enero de 2006            
+                         de <br>
+
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; Charlas educativas PROCESAMIENTO DE LACTEOS a nivel de secundaria Departamento del  Cesar,&nbsp; 
+                        Enero 2007            
+                         2007<br>
+
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; Rediseño, construcción y puesta en marcha de una maquina para elaboracion de mantequilla                            
+                        Enero 2007            
+                         2007<br>            
+
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; Estudio de las propiedades fisicoquimicas y termodinamicas de la crema lactea utilizada en la elaboracion de mantequilla en la empresa COOLESAR                            
+                        Enero 2007            
+                         2007<br>            
+
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp;                              
+                        Enero 2007            
+                         2007<br>            
+
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; Aprovechamiento del contenido proteico presente en la lenteja (Lens Culinaris) como materia prima alternativa para la elaboración de un producto embutido                            
+                        Enero 2006            
+                         2006<br>            
+
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp;                              
+                        Enero 2006            
+                         2006<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Enero de 2006            
+                         de <br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Miembro Investigador          
+                        Enero de 2006            
+                         de <br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>14&nbsp;horas Semanales
+                        Junio de 2012            
+                        Diciembre de 2013<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Operaciones de transferencia de masas; Seminario de Investigación,&nbsp;100 
+                        Junio 2012            
+                        Diciembre 2013<br>
+
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; EVALUACIÓN DE ACTIVIDAD BIOLÓGICA (ANTIOXIDANTE Y ANTIHIPERTENSIVA) DE HIDROLIZADOS ENZIMÁTICOS DE  PROTEÍNAS DE SANGRE BOVINA                            
+                        Junio 2013            
+                        Diciembre 2013<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>FUNDACION UNIVERSITARIA DEL AREA ANDINA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>30&nbsp;horas Semanales
+                        Marzo de 2012            
+                        Diciembre de 2013<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Otra actividad técnico-científica relevante            
+                        <i> - Cargo:</i>&nbsp;Otra actividad técnico-científica relevante          
+                        Marzo de 2012            
+                        Diciembre de 2013<br>
+
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Fundamentos de Investigación; Investigación Cuantitativa; Formulación de proyecto de Grado,&nbsp;200 
+                        Marzo 2012            
+                        Diciembre 2013<br>
+
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; IMPLEMENTACIÓN DE UN PROGRAMA DE I+D+I PARA LA VALORIZACIÓN DEL CARBÓN, COMO ALTERNATIVA DE DESARROLLO ECONÓMICO DEL PAÍS, CON CENTRO DE OPERACIÓN EN LA GUAJIRA                            
+                        Enero 2013            
+                        Octubre 2013<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD DE ANTIOQUIA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>10&nbsp;horas Semanales
+                        Febrero de 2011            
+                        Junio de 2012<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Laboratorio de Operaciones Unitarias III; Asesor en Formulación de productos Alimenticios,&nbsp;60 
+                        Febrero 2011            
+                        Junio 2012<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Marzo de 2009            
+                        Mayo de 2010<br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Pasantías
+                        <i> - Titulo:</i>&nbsp; MODELAMIENTO DE LA CINÉTICA DE HIDRÓLISIS ENZIMÁTICA DE PROTEÍNAS DE PLASMA ENTERO BOVINO                            
+                        Marzo 2009            
+                        Mayo 2010<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD DE ANTIOQUIA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Marzo de 2009            
+                        Mayo de 2010<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>DANE Rioacha</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Enero de 2008            
+                         de 2008<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; Manejo del Codigo Industrial Internacional Uniforme (CIIU),&nbsp; 
+                        Enero 2008            
+                         2008<br>
+
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; Codificacion de actividades economicas,&nbsp; 
+                        Enero 2008            
+                         2008<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Departamento Administrativo Nacional De Estadistica. - Dane</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Febrero de 2008            
+                        Mayo de 2008<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Crítico y codificador de ECH          
+                        Febrero de 2008            
+                        Mayo de 2008<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Área de Mantenimiento</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Enero de 2006            
+                        Septiembre de 2007<br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; Rediseño, construccion y puesta en mercha de una maquina para la alaboracion de mantequilla                            
+                        Febrero 2007            
+                        Septiembre 2007<br>            
+
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp;                              
+                        Enero 2006            
+                        Septiembre 2007<br>            
+
+                        
+                        - &nbsp;
+                        Pasantías
+                        <i> - Titulo:</i>&nbsp;                              
+                        Enero 2006            
+                        Diciembre 2006<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Cooperativa Integral Lechera del Cesar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Febrero de 2006            
+                        Septiembre de 2007<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Diseño de equipo produccion de mantequilla          
+                        Enero de 2007            
+                        Septiembre de 2007<br>
+
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;PRACTICANTE AREA DE DISEÑO          
+                        Febrero de 2006            
+                        Diciembre de 2006<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Ingeniería Química -- Ingeniería Química (Plantas y Productos)</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Ingeniería Mecánica -- Ingeniería Mecánica</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ciencias Agrícolas -- Biotecnología Agrícola -- Biotecnología Agrícola y de Alimentos</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="5"><h3 >Idiomas</h3></td>
+                            </tr>    
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td><b>Habla</b></td>
+                                <td><b>Escribe</b></td>
+                                <td><b>Lee</b></td>
+                                <td><b>Entiende</b></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;Inglés</li></td>
+                    <td></td>
+                    <td></td>
+                    <td>Aceptable</td>
+                    <td></td>                                                        
+                </tr>    
+                
+                            <tr>
+                                <td><li>&nbsp;Español</li></td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>                                                        
+                </tr>    
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;Control de calidad y procesamiento de productos lacteos, <i>Activa:</i>No</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Investigacion en ciencias alimentarias, <i>Activa:</i>No</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Diseño de equipos de procesos alimentarios, <i>Activa:</i>No</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Analisis Fisicoquimicos y Microbiologicos de productos Alimenticios, <i>Activa:</i>No</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Diseño y normalizacion de nuevos productos, <i>Activa:</i>No</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Diseño y construccion de equipos, <i>Activa:</i>No</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Reconocimientos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>reconoce los logros obtenidos como egresado en el ámbito académico, investigativo y profesional,UNIVERSIDAD POPULAR DEL CESAR - Noviembrede 2009</li></td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a></td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            OMAR ALFREDO FIGUEROA MORENO,                    
+                            
+                            EVALUACIÓN DEL POTENCIAL ANTIOXIDANTE Y CARACTERIZACIÓN DE FRACCIONES PEPTIDICAS OBTENIDAS MEDIANTE HIDROLISIS ENZIMATICA DE LACTOSUERO Y PLASMA BOVINO&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2017.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): OMAR ALFREDO FIGUEROA MORENO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Civil -- Ingeniería Civil,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            OMAR ALFREDO FIGUEROA MORENO,                    
+                            
+                            EVALUACIÓN DE LAS CONDICIONES DEL SECADO MIXTO DE Eisenia foetida PARA LA PRODUCCIÓN DE SU HARINA. COMO PERSPECTIVA DE USO ALIMENTICIO EN DIETAS PARA ANIMALES&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2023.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Cristian David Ramírez  Amaris
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): OMAR ALFREDO FIGUEROA MORENO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            OMAR ALFREDO FIGUEROA MORENO,                    
+                            
+                            EVALUACION DE LA ACTIVIDAD BIOLOGICA DE HIDROLIZADOS ENZIMATICOS DE HEMOGLOBINA BOVINA EN EL DEPARTAMENTO DEL CESAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ingenieria Agroinductrial,
+                            &nbsp;2015.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            MARIA ANGELICA GARCIA BUITRAGO&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): OMAR ALFREDO FIGUEROA MORENO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Química -- Ingeniería Química (Plantas y Productos),
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            OMAR ALFREDO FIGUEROA MORENO,                    
+                            
+                            PRODUCCIÓN DE PÉPTIDOS ANTIOXIDANTES MEDIANTE HIDRÓLISIS ENZIMÁTICA DE PROTEÍNAS DE MOSCA SOLDADO NEGRO (Hermetia illucens)&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2024.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Jesús Manuel Lozano Parejo
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): JOSE EDGAR ZAPATA MONTOYA , OMAR ALFREDO FIGUEROA MORENO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Biotecnología Industrial -- Tecnologías de Bioprocesamiento, Biocatálisis, Fermentación,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            OMAR ALFREDO FIGUEROA MORENO,                    
+                            
+                            PRODUCCIÓN DE PÉPTIDOS ANTIOXIDANTES MEDIANTE HIDRÓLISIS ENZIMÁTICA DE PROTEÍNAS DE MOSCA SOLDADO NEGRO (Hermetia illucens)&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2022.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Jesús Manuel Lozano Parejo
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): OMAR ALFREDO FIGUEROA MORENO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Civil -- Ingeniería Civil,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            OMAR ALFREDO FIGUEROA MORENO,                    
+                            
+                            Evaluación del Efecto de Inclusión de viseras de pescado en Dietas para la alimentación de gallinas ponedoras de raza Isa Brown&nbsp;
+                            UNIVERSIDAD DE LA GUAJIRA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA INDUSTRIAL,
+                            &nbsp;2021.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): LATIFE DEL ROSARIO LUQUEZ PEREZ , OMAR ALFREDO FIGUEROA MORENO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Biotecnología Industrial -- Biotecnología Industrial,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Jurado en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            OMAR ALFREDO FIGUEROA MORENO,                    
+                            
+                            <i>Titulo:&nbsp;</i>ELABORACIÓN DE UN GEL TRANSPORTADOR DE ONDAS ULTRASONICAS A PARTIR DE CRISTALES DE SABILA                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> ingenieria Agroinductrial&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>XAVIER DIAZ OSORIO, LUIS ALBERTO DURAN &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Química -- Ingeniería Química (Plantas y Productos),                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            OMAR ALFREDO FIGUEROA MORENO,                    
+                            
+                            <i>Titulo:&nbsp;</i>Evaluación de la influencia de la deshidratación osmotica en combinación con secado por aire caliente sobre los compuestos fenólicos presentes en el uvito brasilero (Syzygium cumini) en la ciudad de valledupar                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Trabajo de grado/tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA AGROINDUSTRIAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>ANDRES FELIPE MONTERO, JUAN CARLOS AMAYA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Par evaluador</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>UNIVERSIDAD POPULAR DEL CESAR,&nbsp;                
+                                        
+                                        2012,&nbsp;
+                                        Octubre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>UNIVERSIDAD POPULAR DEL CESAR,&nbsp;                
+                                        
+                                        2012,&nbsp;
+                                        Octubre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>UNIVERSIDAD POPULAR DEL CESAR,&nbsp;                
+                                        
+                                        2012,&nbsp;
+                                        Octubre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                    
+                        </table>    
+                        </td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Ediciones/revisiones</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>
+                                
+                                <b>Producción técnica - Editoración o revisión - Revista</b>
+                            </li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            OMAR ALFREDO FIGUEROA MORENO,                    
+                            
+                            Revista Agunkuya,
+                            <i>Nombre comercial: </i>,
+                            <i>contrato/registro: </i>,
+                            . En: Colombia,&nbsp;
+                            ,2013,&nbsp;
+                            Fundaciòn Universitaria del Área Andina&nbsp;
+                            p.35&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Congreso Iberoamericano de Ingeniería de Alimentos CIBIA 2011 (Perú).&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2011-10-23 00:00:00.0,&nbsp;
+                                                    2011-10-26 00:00:00.0 &nbsp;
+                                                    en Peru &nbsp; - perú &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>MODELAMIENTO DE LA CINÉTICA ENZIMÁTICA DE PROTEÍNAS DE PLASMA DE BOVINO ENTERO EN UN REACTOR BATCH
+                                                        <i>Tipo de producto:</i>Demás trabajos - Demás trabajos - Póster
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>CIBIA VIII
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>OMAR ALFREDO FIGUEROA MORENO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Congreso latinoamericano de ingeniería y ciencias aplicadas&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2012-03-28 00:00:00.0,&nbsp;
+                                                    2012-03-30 00:00:00.0 &nbsp;
+                                                    en VILLETA &nbsp; - UNC &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>HIDROLISIS ENZIMÁTICA DE PROTEÍNAS DE PLASMA ENTERO DE BOVINO: OPTIMIZACIÓN DE LAS CONDICIONES DE HIDRÓLISIS EMPLEANDO METODOLOGÍA DE SUPERFICIE DE RESPUESTA
+                                                        <i>Tipo de producto:</i>Demás trabajos - Demás trabajos - Póster
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Universidad Nacional de Cuyo
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>OMAR ALFREDO FIGUEROA MORENO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Jornada de socialización de resultados de proyectos de investigación&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2015-11-05 00:00:00.0,&nbsp;
+                                                    2015-11-06 00:00:00.0 &nbsp;
+                                                    en MEDELLÍN &nbsp; - Valledupar &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>VALORACIÓN DE HIDROLIZADOS PROTEICOS CON PROPIEDADES ANTIOXIDANTES A PARTIR DE SANGRE DE BOVINO
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>VALORACIÓN DE HIDROLIZADOS PROTEICOS CON PROPIEDADES ANTIOXIDANTES A PARTIR DE SANGRE DE BOVINO
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JESUS ALFREDO MORALES GARCIA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>OMAR ALFREDO FIGUEROA MORENO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>X Congreso Iberoamericano de Ingeniería de Alimentos CIBIA&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2015-10-07 00:00:00.0,&nbsp;
+                                                    2015-10-09 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Montevideo &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Hidrolisis enzimática de proteínas de sangre bovina: optimización y actividad enzimática de fracciones peptídicas obtenidas por ultrafiltración
+                                                        <i>Tipo de producto:</i>Demás trabajos - Demás trabajos - Póster
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>OMAR ALFREDO FIGUEROA MORENO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>5</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Encuentro internacional de Investigación (INFOTEP) &nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2013-05-02 00:00:00.0,&nbsp;
+                                                    2013-05-03 00:00:00.0 &nbsp;
+                                                    en SAN JUAN DEL CESAR &nbsp; - San Juan del Cesar &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>DESARROLLO DE LA POLIGENERACIÓN A PARTIR DE CARBÓN PARA LA PRODUCCIÓN SIMULTÁNEA DE QUÍMICOS DE ALTO VALOR AGREGADO Y ELECTRICIDAD EN EL DEPARTAMENTO DE LA GUAJIRA, COLOMBIA
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>IMPLEMENTACIÓN DE UN PROGRAMA DE I+D+I PARA LA VALORIZACIÓN DEL CARBÓN, COMO ALTERNATIVA DE DESARROLLO ECONÓMICO DEL PAÍS, CON CENTRO DE OPERACIÓN EN LA GUAJIRA.
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Instituto Nacional De Formación Tecnica Profesional
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>OMAR ALFREDO FIGUEROA MORENO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>6</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Agenda de Ciencia y tecnologia Cesar&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2005-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en  &nbsp; - La Jagua de Ibirico &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Gobernación del departamento del César
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>OMAR ALFREDO FIGUEROA MORENO
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>7</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Agenda de Ciencia y Tecnologia del Cesar&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2005-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Gobernación del departamento del César
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>OMAR ALFREDO FIGUEROA MORENO
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>8</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>CATUMBARÍ III CONGRESO INTERNACIONAL&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2020-11-18 00:00:00.0,&nbsp;
+                                                    2020-11-20 00:00:00.0 &nbsp;
+                                                    en OCAÑA &nbsp; - VIRTUAL  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>EVALUACIÓN DEL ENSILADO DE VISCERAS DE TILAPIA ROJA EN DIETAS PARA GALLINAS PONEDORAS DE LA LINEA ISA BROWN
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DE LA GUAJIRA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>OMAR ALFREDO FIGUEROA MORENO
+                                                        <i>Rol en el evento: </i>Compilador de memorias , Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>9</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>IX Jornada de Socialización de Resultados de Investigación_UNICESAR&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2025-11-05 00:00:00.0,&nbsp;
+                                                    2025-11-05 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - UNIVERSIDAD POPULAR DEL CESAR SEDE HURTADO  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>DESARROLLO DE UN SISTEMA INTEGRADO DE COSECHA Y VALORIZACIÓN FUNCIONAL DE LA CEREZA DEL BOSQUE SINTRÓPICO EN LA GUAJIRA
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>OMAR ALFREDO FIGUEROA MORENO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>10</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XVI Congreso Internacional Multidisciplinario de investigación&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2023-10-24 00:00:00.0,&nbsp;
+                                                    2023-10-27 00:00:00.0 &nbsp;
+                                                    en Ciudad Nezahualcóyotl &nbsp; - Escuela Nacional de Estudios Profesionales Aragón &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Análisis de los efectos de la relación enzima-sustrato sobre la actividad antioxidante de hidrolizados de plasma bovino
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DE LA GUAJIRA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>OMAR ALFREDO FIGUEROA MORENO
+                                                        <i>Rol en el evento: </i>Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Redes de conocimiento especializado</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        
+                                        <i>Nombre de la red </i>RED NACIONAL PARA LA REVALORACIÓN DE RESIDUOS AGROINDUSTRIALES (RONOVAR)&nbsp;
+                                        <i>Tipo de red</i>Virtual,&nbsp;
+                                        <i>Creada el:2022-02-02 00:00:00.0,&nbsp;
+                                             &nbsp;
+                                            en MEDELLÍN &nbsp; 
+                                            <i>con </i>  participantes&nbsp;
+                                    </blockquote>                    
+                                </td>                         	
+                            </tr>	            
+                                    
+                        </table>    
+                        </td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                OMAR ALFREDO FIGUEROA MORENO,                    
+                                    
+                JOSE EDGAR ZAPATA MONTOYA,                    
+                
+                "Optimización de la Hidrólisis Enzimática de Proteínas de Plasma Bovino"
+                . En: Chile&nbsp;<br>
+                INFORMACION TECNOLOGICA&nbsp;
+                <i>ISSN:</i>&nbsp;0718-0764&nbsp;
+                <i>ed:</i>&nbsp;Centro de Información Tecnológica<br>
+                <i>v.</i>27
+                <i>fasc.</i>
+                p.1
+                - 5
+                ,2016,
+                <i>&nbsp;DOI:&nbsp;</i>http://dx.doi.org/10.4067/S0718-07642013000100005
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                MODELOS BIOQUÍMICOS,                    
+                                    
+                PLASMA BOVINO,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                OMAR ALFREDO FIGUEROA MORENO,                    
+                                    
+                JADER DARIO ALEAN VALLE,                    
+                                    
+                JOSE EDGAR ZAPATA MONTOYA,                    
+                
+                "Kinetic-conceptual model of the hydrolysis of bovine plasma proteins - ALCALASE® 2.9L: The role of inhibition by product"
+                . En: Países Bajos&nbsp;<br>
+                HELIYON&nbsp;
+                <i>ISSN:</i>&nbsp;2405-8440&nbsp;
+                <i>ed:</i>&nbsp;Cell Press<br>
+                <i>v.</i>9
+                <i>fasc.</i>10
+                p.
+                - 
+                ,2023,
+                <i>&nbsp;DOI:&nbsp;</i>10.1016/j.heliyon.2023.e21002
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                ALCALASA,                    
+                                    
+                CINÉTICA ENZIMÁTICA,                    
+                                    
+                MODELOS BIOQUÍMICOS,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                OMAR ALFREDO FIGUEROA MORENO,                    
+                                    
+                GAIL ALBEIRO GUTIERREZ RAMIREZ,                    
+                                    
+                JOSE EDGAR ZAPATA MONTOYA,                    
+                
+                "MODELAMIENTO DE LA CINÉTICA DE HIDRÓLISIS ENZIMÁTICA DE PROTEÍNAS DEL PLASMA BOVINO"
+                . En: Colombia&nbsp;<br>
+                Revista Eia&nbsp;
+                <i>ISSN:</i>&nbsp;1794-1237&nbsp;
+                <i>ed:</i>&nbsp;ESCUELA DE INGENIERÍA DE ANTIOQUIA<br>
+                <i>v.</i>17
+                <i>fasc.</i>N/A
+                p.71
+                - 84
+                ,2012,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                HIDRÓLISIS ENZIMATICA,                    
+                                    
+                CINÉTICA ENZIMÁTICA,                    
+                                    
+                MODELOS BIOQUÍMICOS,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                OMAR ALFREDO FIGUEROA MORENO,                    
+                                    
+                JOSE EDGAR ZAPATA MONTOYA,                    
+                                    
+                LEIDY JOHANNA GOMEZ SAMPEDRO,                    
+                
+                "ACTIVIDAD ANTIOXIDANTE DE HIDROLIZADOS ENZIMÁTICOS DE PLASMA BOVINO OBTENIDOS POR EFECTO DE ALCALASA® 2.4 L"
+                . En: Chile&nbsp;<br>
+                INFORMACION TECNOLOGICA&nbsp;
+                <i>ISSN:</i>&nbsp;0718-0764&nbsp;
+                <i>ed:</i>&nbsp;Centro de Información Tecnológica<br>
+                <i>v.</i>24
+                <i>fasc.</i>1
+                p.33
+                - 42
+                ,2013,
+                <i>&nbsp;DOI:&nbsp;</i>10.4067/S0718-07642013000100005 
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                ALCALASA,                    
+                                    
+                HIDRÓLISIS ENZIMATICA,                    
+                                    
+                PLASMA BOVINO,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                OMAR ALFREDO FIGUEROA MORENO,                    
+                                    
+                JOSE EDGAR ZAPATA MONTOYA,                    
+                
+                "Efecto de la inclusión de ensilado químico de vísceras de tilapia roja (Oreochromis spp.) en dietas para pollos de engorde sobre los parámetros productivos y sanguíneos"
+                . En: Chile&nbsp;<br>
+                INFORMACION TECNOLOGICA&nbsp;
+                <i>ISSN:</i>&nbsp;0718-0764&nbsp;
+                <i>ed:</i>&nbsp;Centro de Información Tecnológica<br>
+                <i>v.</i>32
+                <i>fasc.</i>3
+                p.79
+                - 88
+                ,2021,
+                <i>&nbsp;DOI:&nbsp;</i>10.4067/S0718-07642021000300079
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                aves de corral,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JOSE EDGAR ZAPATA MONTOYA,                    
+                                    
+                OMAR ALFREDO FIGUEROA MORENO,                    
+                
+                "Aplicación de la metodología de huella ecológica como indicador de sostenibilidad en el uso de ensilaje de pescado en dietas para alimentación de aves"
+                . En: Chile&nbsp;<br>
+                INFORMACION TECNOLOGICA&nbsp;
+                <i>ISSN:</i>&nbsp;0718-0764&nbsp;
+                <i>ed:</i>&nbsp;Centro de Información Tecnológica<br>
+                <i>v.</i>32
+                <i>fasc.</i>5
+                p.199
+                - 208
+                ,2021,
+                <i>&nbsp;DOI:&nbsp;</i>10.4067/S0718-07642021000500199
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                huella ecológica,                    
+                                    
+                aves de corral,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                OMAR ALFREDO FIGUEROA MORENO,                    
+                                    
+                JOSE EDGAR ZAPATA MONTOYA,                    
+                                    
+                JESUS ALFREDO MORALES GARCIA,                    
+                
+                "Optimización de Hidrólisis Enzimática de la Fracción Globular de Sangre Bovina por Metodología de Superficie Respuesta y Evaluación de sus Propiedades Antioxidantes"
+                . En: Chile&nbsp;<br>
+                INFORMACION TECNOLOGICA&nbsp;
+                <i>ISSN:</i>&nbsp;0718-0764&nbsp;
+                <i>ed:</i>&nbsp;Centro de Información Tecnológica<br>
+                <i>v.</i>28
+                <i>fasc.</i>N/A
+                p.75
+                - 86
+                ,2017,
+                <i>&nbsp;DOI:&nbsp;</i>10.4067/S0718-07642017000200009
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                HIDRÓLISIS ENZIMATICA,                    
+                                    
+                PLASMA BOVINO,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                OMAR ALFREDO FIGUEROA MORENO,                    
+                                    
+                JOSE EDGAR ZAPATA MONTOYA,                    
+                
+                "Efecto de la Relación Enzima-Sustrato en Péptidos Bioactivos Obtenidos mediante Hidrolisis Enzimática de Lactosuero por Alcalasa® 2.4L."
+                . En: Chile&nbsp;<br>
+                INFORMACION TECNOLOGICA&nbsp;
+                <i>ISSN:</i>&nbsp;0718-0764&nbsp;
+                <i>ed:</i>&nbsp;Centro de Información Tecnológica<br>
+                <i>v.</i>311
+                <i>fasc.</i>3
+                p.3
+                - 12
+                ,2020,
+                <i>&nbsp;DOI:&nbsp;</i>10.4067/S0718-07642020000300003
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                CINÉTICA ENZIMÁTICA,                    
+                                    
+                MODELOS BIOQUÍMICOS,                    
+                                    
+                ALCALASA,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                OMAR ALFREDO FIGUEROA MORENO,                    
+                                    
+                JOSE EDGAR ZAPATA MONTOYA,                    
+                
+                "Hidrólisis Enzimática de la Proteína de Vísceras de Trucha Arco Íris (Oncorhynchus mykiss): Efecto del tipo de Enzima, Temperatura, pH y Velocidad de Agitación"
+                . En: Chile&nbsp;<br>
+                INFORMACION TECNOLOGICA&nbsp;
+                <i>ISSN:</i>&nbsp;0718-0764&nbsp;
+                <i>ed:</i>&nbsp;Centro de Información Tecnológica<br>
+                <i>v.</i>30
+                <i>fasc.</i>6
+                p.63
+                - 72
+                ,2019,
+                <i>&nbsp;DOI:&nbsp;</i>10.4067/S0718-07642019000600063
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Revisión (Survey)</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                OMAR ALFREDO FIGUEROA MORENO,                    
+                                    
+                JOSE EDGAR ZAPATA MONTOYA,                    
+                
+                "BYPRODUCTS OF AQUACULTURE PROCESSES: DEVELOPMENT AND PROSPECTIVE USES. REVIEW"
+                . En: Colombia&nbsp;<br>
+                VITAE&nbsp;
+                <i>ISSN:</i>&nbsp;0121-4004&nbsp;
+                <i>ed:</i>&nbsp;Universidad de Antioquia<br>
+                <i>v.</i>25
+                <i>fasc.</i>3
+                p.134
+                - 146
+                ,2018,
+                <i>&nbsp;DOI:&nbsp;</i>http://dx.doi.org/10.17533/udea.vitae.v25n3a02
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                CINÉTICA ENZIMÁTICA,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                OMAR ALFREDO FIGUEROA MORENO,                    
+                
+                "Evaluación de sustratos sobre los parámetros productivos de la lombriz roja californiana (Eisenia fetida)"
+                . En: Chile&nbsp;<br>
+                INFORMACION TECNOLOGICA&nbsp;
+                <i>ISSN:</i>&nbsp;0718-0764&nbsp;
+                <i>ed:</i>&nbsp;Centro de Información Tecnológica<br>
+                <i>v.</i>34
+                <i>fasc.</i>2
+                p.11
+                - 20
+                ,2023,
+                <i>&nbsp;DOI:&nbsp;</i>10.4067/s0718-07642023000200011
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JOSE EDGAR ZAPATA MONTOYA,                    
+                                    
+                OMAR ALFREDO FIGUEROA MORENO,                    
+                
+                "Evaluación de sustratos sobre los parámetros productivos de la lombriz roja californiana (Eisenia fetida)"
+                . En: Chile&nbsp;<br>
+                INFORMACION TECNOLOGICA&nbsp;
+                <i>ISSN:</i>&nbsp;0718-0764&nbsp;
+                <i>ed:</i>&nbsp;Centro de Información Tecnológica<br>
+                <i>v.</i>34
+                <i>fasc.</i>2
+                p.11
+                - 20
+                ,2023,
+                <i>&nbsp;DOI:&nbsp;</i>10.4067/s0718-07642023000200011
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Abono orgánico ,                    
+                                    
+                aves de corral,                    
+                                    
+                precompostaje,                    
+                                    
+                residuos orgánicos,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a></td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a></td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a></td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a>
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Softwares</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        OMAR ALFREDO FIGUEROA MORENO,                    
+                                            
+                        JADER DARIO ALEAN VALLE,                    
+                        
+                        SIMULADOR DE PROCESOS DE RUPTURA Y CRECIMIENTO EN POBLACIONES DE ELEMENTOS NO UNIFORMES - MBPP 1.0-,
+                        <i>Nombre comercial: </i>SIMULADOR DE PROCESOS DE RUPTURA Y CRECIMIENTO EN POBLACIONES DE ELEMENTOS NO UNIFORMES - MBPP 1.0-,
+                        <i>contrato/registro: </i>040,
+                        . En: Colombia,&nbsp;
+                        ,2019,&nbsp;
+                        .<i>plataforma: ,</i>&nbsp;
+                        .<i>ambiente: ,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+            
+        </table>
+        </td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Rediseño, construccion y puesta en mercha de una maquina para la alaboracion de mantequilla<br>
+                        <i>Inicio:&nbsp;</i>&nbsp;
+                                        
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Estudio de las propiedades fisicoquimicas y termodinamicas de la crema lactea utilizada en la elaboracion de mantequilla en la empresa COOLESAR<br>
+                        <i>Inicio:&nbsp;</i>&nbsp;
+                                        
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Rediseño, construcción y puesta en marcha de una maquina para elaboracion de mantequilla<br>
+                        <i>Inicio:&nbsp;</i>&nbsp;
+                                        
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Aprovechamiento del contenido proteico presente en la lenteja (Lens Culinaris) como materia prima alternativa para la elaboración de un producto embutido<br>
+                        <i>Inicio:&nbsp;</i>&nbsp;
+                                        
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        EVALUACIÓN DE ACTIVIDAD BIOLÓGICA (ANTIOXIDANTE Y ANTIHIPERTENSIVA) DE HIDROLIZADOS ENZIMÁTICOS DE  PROTEÍNAS DE SANGRE BOVINA<br>
+                        <i>Inicio:&nbsp;</i>Octubre&nbsp;
+                        2013                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Octubre&nbsp;
+                        2014
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            EVALUACIÓN DE ACTIVIDAD BIOLÓGICA (ANTIOXIDANTE Y ANTIHIPERTENSIVA) DE HIDROLIZADOS ENZIMÁTICOS DE  PROTEÍNAS DE SANGRE BOVINA<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        MODELAMIENTO Y SIMULACIÓN DE LA CINÉTICA DE HIDRÓLISIS ENZIMÁTICA DE PROTEÍNAS DEL PLASMA DE SANGRE BOVINA<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2009                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2012
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            MODELAMIENTO Y SIMULACIÓN DE LA CINÉTICA DE HIDRÓLISIS ENZIMÁTICA DE PROTEÍNAS DEL PLASMA DE SANGRE BOVINA<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        MODELO INTEGRADO PARA LA REVALORACIÓN DE RESIDUOS DE LAS INDUSTRIAS PISCÍCOLA Y AVÍCOLA BASADO EN UN ENFOQUE AGROAMBIENTAL<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2017                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2022
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            En el presente proyecto, se propone la elaboración de alimentos para gallinas de la raza Leghorn y pollos de engorde de la raza Hubbard de la línea Ross, utilizando ensilados de subproductos piscícolas (vísceras y rechazos) como fuente de proteínas, provenientes del cultivo de Tilapia Roja (Oreochomis spp.). Los niveles de proteína en las dietas serán ajustados con proteína de lombriz roja californiana (Eisenia foetida), la cual será alimentada con la gallinaza producida de la crianza de las aves en el mismo proyecto. Para mejorar los niveles de proteína y reducir el porcentaje de grasa en los subproductos piscícolas, estos se desengrasarán previamente al proceso de ensilaje.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Producción de fracciones peptídicas con potencial Bioactivo (antioxidante, antihipertensivo y antimicrobiana) a partir de hidrolizados enzimáticos provenientes de residuos agroindustriales: Sangre bovina y Lactosuero<br>
+                        <i>Inicio:&nbsp;</i>Abril&nbsp;
+                        2016                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Febrero&nbsp;
+                        2019
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El presente proyecto investigativo abordó la producción y caracterización de péptidos bioactivos a partir de plasma sanguíneo bovino (PB) y lactosuero bovino (LB), mediante hidrólisis enzimática y ultrafiltración de membranas, enfocándose en su actividad antioxidante, antihipertensiva y antimicrobiana. Esta iniciativa responde a problemas críticos en Colombia relacionados con la gestión inadecuada de residuos de mataderos y queserías, que generan altos niveles de contaminación y representan un desafío ambiental y de salud pública.
+
+La ejecución se llevó a cabo en colaboración con el Grupo de Nutrición y Tecnología de Alimentos (NUTEC) de la Universidad de Antioquia, que aportó infraestructura y experiencia técnica. Inicialmente, se definieron las condiciones óptimas para la hidrólisis enzimática, empleando la enzima Alcalasa 2.4 L. Se estableció que la concentración de sustrato influye significativamente en el rendimiento y grado de hidrólisis (GH), siendo los mejores resultados de actividad biológica alcanzados a los 75 minutos de reacción, con un GH entre el 12-16%. Las fracciones peptídicas de PB (3-10 kDa) y LB (<1 kDa) mostraron destacada actividad antioxidante y antihipertensiva, mientras que la actividad antimicrobiana no fue concluyente.
+
+El proyecto integró estudiantes de pregrado y posgrado, quienes realizaron estancias investigativas y contribuyeron a la publicación de resultados en revistas científicas y eventos académicos internacionales como el Congreso Iberoamericano de Ingeniería de Alimentos (CIBIA). Además, el desarrollo incluyó la creación de un software innovador para modelar dinámicas de ruptura de péptidos, actualmente en proceso de registro de derechos de autor.
+
+Entre los logros destacan la publicación de artículos en revistas indexadas, la formación de capital humano en investigación y la articulación con iniciativas nacionales, como la convocatoria 745 de Colciencias, que permitió la continuidad y escalamiento del proyecto. Este esfuerzo multidisciplinario reafirma la importancia de la investigación aplicada como herramienta para abordar problemas ambientales y generar soluciones con impacto técnico, social y académico.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

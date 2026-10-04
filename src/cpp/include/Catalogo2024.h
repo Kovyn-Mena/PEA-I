@@ -67,6 +67,15 @@ public:
         else if (t.find("diseno") != std::string::npos || t.find("diseño") != std::string::npos) {
             return { "DTI", "DIS_IND", "DTI-A", 8, 80 };
         }
+        else if (t.find("regulacion") != std::string::npos || t.find("regulación") != std::string::npos || t.find("norma") != std::string::npos) {
+            return { "DTI", "REG_NORM", "DTI-A", 7, 70 };
+        }
+        else if (t.find("informe") != std::string::npos) {
+            return { "DTI", "INF_TEC", "DTI-B", 5, 50 };
+        }
+        else if (t.find("consultoria") != std::string::npos || t.find("consultoría") != std::string::npos) {
+            return { "DTI", "CONS_TEC", "DTI-B", 5, 50 };
+        }
         // 3. FRH: Formación de Recurso Humano
         else if (t.find("grado") != std::string::npos || t.find("tesis") != std::string::npos) {
             if (tit.find("doctor") != std::string::npos || tit.find("doc") != std::string::npos)
@@ -77,9 +86,18 @@ public:
                 return { "FRH", "APO", "FRH-B", 5, 30 };
             return { "FRH", "TGP", "FRH-B", 4, 40 };
         }
+        else if (t.find("jurado") != std::string::npos || t.find("evaluador") != std::string::npos) {
+            return { "FRH", "JUR_EVAL", "FRH-B", 4, 40 };
+        }
+        else if (t.find("cursocorto") != std::string::npos || t.find("curso") != std::string::npos) {
+            return { "FRH", "CUR_COR", "FRH-B", 3, 30 };
+        }
         // 4. ASC: Apropiación Social del Conocimiento
         else if (t.find("apropiacion") != std::string::npos || t.find("apropiación") != std::string::npos) {
             return { "ASC", "PROC_ASC", "ASC-A", 8, 80 };
+        }
+        else if (t.find("contenido") != std::string::npos || t.find("audiovisual") != std::string::npos) {
+            return { "ASC", "CONT_DIG", "ASC-B", 4, 40 };
         }
         // 5. DPC: Divulgación Pública de la Ciencia
         else if (t.find("evento") != std::string::npos || t.find("ponencia") != std::string::npos || t.find("documento") != std::string::npos) {

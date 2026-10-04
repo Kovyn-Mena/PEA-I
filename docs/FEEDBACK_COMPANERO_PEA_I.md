@@ -1,15 +1,10 @@
 # 📋 Auditoría y Feedback Técnico — Proyecto PEA-i (Taller 2)
-**Destinatario:** Damián José (`dinomass835@gmail.com`)  
-**Remitente:** Kovyn Mena (`kbmena@unicesar.edu.co`)  
-**Asignatura:** Estructura de Datos (2026-I) — Universidad Popular del Cesar  
-**Docente:** Ing. Adith Bismarck Pérez Orozco  
-**Fecha:** Octubre de 2026  
 
 ---
 
-## 🤝 1. Apreciación Inicial del Trabajo Realizado
+## 1. Apreciación Inicial del Trabajo Realizado
 
-Damián, primero que todo, **felicitaciones por el trabajo de ingeniería inversa y scraping que hiciste en la rama de ingesta**:
+Primero que todo, **felicitaciones por el trabajo de ingeniería inversa y scraping que hiciste en la rama de ingesta**:
 * La extracción de la **Hoja de Vida de CvLAC** (par evaluador, Google Scholar, ORCID, formación y experiencia) en la tabla `perfil_investigador` está excelente.
 * La detección del **aval institucional con `chulo_1.jpg`** para marcar productos como `Validado` resuelve de forma muy inteligente un vacío de datos.
 * El mapeo del **código institucional 947 de la UPC con los 66 grupos** y el sistema de caché en archivos ZIP para no saturar MinCiencias demuestran un nivel técnico muy alto.
@@ -21,7 +16,7 @@ A continuación te detallo **qué falta exactamente, por qué es obligatorio y c
 
 ---
 
-## 🚦 2. Matriz de Cumplimiento Frente a la Rúbrica Oficial
+## 2. Matriz de Cumplimiento Frente a la Rúbrica Oficial
 
 | # | Requisito del Taller (Guía Oficial) | Estado en tu repo | Impacto / Riesgo |
 |:--:|---|:---:|---|
@@ -65,7 +60,7 @@ A continuación te detallo **qué falta exactamente, por qué es obligatorio y c
 
 ---
 
-### ⚠️ 3. El Modelo MinCiencias 2024 y el Cálculo de IPP (Punto 5)
+### 3. El Modelo MinCiencias 2024 y el Cálculo de IPP (Punto 5)
 * **Lo que pasa actualmente:**  
   En el archivo `MODELO_FALTANTE_Punto5.md` escribiste:
   > *"El enunciado remite a 'el siguiente documento: Modelo', pero dicho documento no fue suministrado... Para no bloquear los puntos 1–4 y 6, se adopta el modelo estándar SCIENTI GrupLAC/CvLAC".*
@@ -83,7 +78,7 @@ A continuación te detallo **qué falta exactamente, por qué es obligatorio y c
 
 ---
 
-### 💻 4. Portabilidad del `Makefile` (Rutas C:/msys64 Hardcodeadas)
+###4. Portabilidad del `Makefile` (Rutas C:/msys64 Hardcodeadas)
 * **Lo que pasa actualmente:**  
   En el `Makefile` tienes escrito:
   ```makefile
@@ -105,7 +100,7 @@ A continuación te detallo **qué falta exactamente, por qué es obligatorio y c
 
 ---
 
-### 🧪 5. Suite de Pruebas Unitarias Automatizadas de TDAs (Punto 13)
+###  5. Suite de Pruebas Unitarias Automatizadas de TDAs (Punto 13)
 * **Lo que pasa actualmente:**  
   En tu `Makefile`, la regla `make test` solo hace esto:
   ```makefile
@@ -121,7 +116,7 @@ A continuación te detallo **qué falta exactamente, por qué es obligatorio y c
 
 ---
 
-### 📄 6. Informes Oficiales en PDF y Documento Word (`.docx`)
+###  6. Informes Oficiales en PDF y Documento Word (`.docx`)
 * **Lo que pasa actualmente:**  
   * Solo cuentas con `data/muestra_upc.pdf` (un PDF de entrada con dos filas de ejemplo generado con fpdf2).
   * No hay generador de informes ejecutivos institucionales en PDF para los grupos.
@@ -151,5 +146,3 @@ Para que el grupo asegure el **5.0 / 5.0** sin retrabajar ni desgastarnos:
 
 2. **Empaquetado Limpio:**
    - Asegurarnos de que el ZIP final pese ~2.5 MB, compile con un simple `make` en cualquier sistema operativo y contenga el documento técnico Word (`.docx`) listo para radicar.
-
-Quedo atento para que coordinemos la integración y la grabación del video explicativo. ¡Vamos por ese 5.0!
