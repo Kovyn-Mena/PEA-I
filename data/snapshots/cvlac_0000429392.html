@@ -1,0 +1,1707 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=7E523EF065E317D5BFD4414A869F904A" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        Lorena&nbsp;SUAREZ&nbsp;SIERRA
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>SUAREZ SIERRA, LORENA</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Femenino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td><h3 >Redes sociales acad&eacute;micas</h3></td>
+                                </tr>
+                                    
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        
+                                        <a target="_blank" href="https://www.researchgate.net/profile/Lorena-Suarez-Sierra" style="color: #007A81">ResearchGate</a>
+                                    </td>
+                                </tr>
+                                    
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        
+                                        <a target="_blank" href="https://www.linkedin.com/in/lorena-patricia-suárez-sierra-6a10419b" style="color: #007A81">Linkedln</a>
+                                    </td>
+                                </tr>
+                                
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            Universidad Oberta de Cataluña<br />
+                            Maestría en Seguridad Informática<br />
+                            Septiembrede2005 - Octubrede 2009<br />
+                            PLAN  DE IMPLEMENTACIÓN DE LA ISO/IEC 27001: 2005 
+ORGANIZACION UNIVERSITARIA UPC
+</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Especialización</b>
+                            UNIVERSIDAD DE SANTANDER<br />
+                            GERENCIA EN EMPRESAS<br />
+                            Febrerode1999 - Noviembrede 2000<br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            Fundacion Universitaria De Boyaca<br />
+                            INGENIERIA DE SISTEMAS<br />
+                            Enerode1992 - de 1998<br />
+                            APLICACION DE LA REALIDAD VIRTUAL EN NIÑOS AUTISTAS EDUCABLES ENTRE 70 Y 75</td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3>Formaci&oacute;n Complementaria</h3></td>
+                            </tr>   
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD NACIONAL ABIERTA Y A DISTANCIA<br />
+                        Tutor virtual<br />
+                        Marzode2011 - Mayode 2011<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        UNIVERSIDAD NACIONAL ABIERTA Y A DISTANCIA<br />
+                        Diseño de Objeto Virtual de Aprendizaje<br />
+                        Juniode2010 - Agostode 2010<br />
+                        </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>&nbsp;horas Semanales
+                        Agosto de 2003            
+                         de <br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>18&nbsp;horas Semanales
+                        Agosto de 2002            
+                        Noviembre de Actual<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Otra actividad técnico-científica relevante            
+                        <i> - Cargo:</i>&nbsp;Otra actividad técnico-científica relevante          
+                        Enero de 2011            
+                        Abril de 2011<br>
+
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Informática II,&nbsp;90 
+                        Enero 2006            
+                        Diciembre 2010<br>
+
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Programación 
+,&nbsp;60 
+                        Agosto 2002            
+                        Diciembre 2005<br>
+
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; Modulo guía proyecto y anteproyecto de Grado, Programa Ingeniería de Sistemas                            
+                        Enero 2011            
+                        Julio 2011<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD NACIONAL ABIERTA Y A DISTANCIA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Febrero de 1999            
+                         de Actual<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Coordinador de programa            
+                        <i> - Cargo:</i>&nbsp;Coordinador de programa          
+                        Febrero de 1999            
+                        Diciembre de 2003<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ciencias Naturales -- Computación y Ciencias de la Información -- Ciencias de la Computación</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="5"><h3 >Idiomas</h3></td>
+                            </tr>    
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td><b>Habla</b></td>
+                                <td><b>Escribe</b></td>
+                                <td><b>Lee</b></td>
+                                <td><b>Entiende</b></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;Inglés</li></td>
+                    <td>Aceptable</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>                                                        
+                </tr>    
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;Diseño y desarrollo de Proyectos tecnológicos de investigación, <i>Activa:</i>No</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Cursos de corta duraci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Especialización</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            LORENA SUAREZ SIERRA,                    
+                                            
+                            Sistema de Gestión de Seguridad Informática,
+                            <i>Finalidad: </i>Curso académico, especialización en Seguridad Informàtica
+                            . En: Colombia&nbsp;
+                            ,2013,&nbsp;
+                            ,UNIVERSIDAD NACIONAL ABIERTA Y A DISTANCIA.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;16 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Desarrollo de programas (software) y prestación de servicios en informática - Consultoría en sistemas de informática,                    
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            LORENA SUAREZ SIERRA,                    
+                                            
+                            Seguridad en Sistemas Operativos,
+                            <i>Finalidad: </i>Curso académico, especialización en Seguridad Informàtica
+                            . En: Colombia&nbsp;
+                            ,2013,&nbsp;
+                            ,UNIVERSIDAD NACIONAL ABIERTA Y A DISTANCIA.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;16 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Desarrollo de programas (software) y prestación de servicios en informática - Otras actividades de prestación de servicios en informática,                    
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            LORENA SUAREZ SIERRA,                    
+                                            
+                            Proyecto de aula,
+                            <i>Finalidad: </i>Curso orientado a la formaciòn de docentes del Departamento del Cesar en TIC's para la docencia y lograr  aplicabilidad a través del proyecto  de aula.
+                            . En: Colombia&nbsp;
+                            ,2013,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;12 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            LORENA SUAREZ SIERRA,                    
+                                            
+                            Paradigmas de programación,
+                            <i>Finalidad: </i>Afianzar el estudios de los paradigmas de programación para el desarrollo de software
+                            . En: Colombia&nbsp;
+                            ,2017,&nbsp;
+                            ,Fundacion Universidad Incca De Colombia.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;12 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            LORENA SUAREZ SIERRA,                    
+                                            
+                            Acceso e Interconexión de Redes,
+                            <i>Finalidad: </i>Brindar formación de asignatura a los estudiantes de la Especialización en Telemática
+                            . En: Colombia&nbsp;
+                            ,2016,&nbsp;
+                            ,UNIVERSIDAD MANUELA BELTRAN.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;8 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            LORENA SUAREZ SIERRA,                    
+                                            
+                            Transporte de Información y Telecomunicaciones,
+                            <i>Finalidad: </i>Brindar la formación a estudiantes sobre direccionamiento de transporte y redes de información 
+                            . En: Colombia&nbsp;
+                            ,2016,&nbsp;
+                            ,.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;0 semanas&nbsp;
+                            
+                            
+                            <br><b>Palabras: </b><br>
+                                                
+                            Clases de redes,                    
+                                                
+                            Transmisión de datos,                    
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos dirigidos/Tutorías de otro tipo</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            LORENA SUAREZ SIERRA,                    
+                            
+                            Sistema de información como soporte al procedimiento de virtualización de módulos y/o Asinaturas de la Universidad Popular del Cesar&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2013.
+                            <i>Dirigi&oacute; como: </i>,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            EDER EDINSON RUIZ PLATA &nbsp;                            
+                            
+                            
+                            Asesor(es): LORENA SUAREZ SIERRA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a></td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a></td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>V Congreso Iberoamericano Soporte del Conocimiento con la tecnología &nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2013-10-15 00:00:00.0,&nbsp;
+                                                    2013-10-16 00:00:00.0 &nbsp;
+                                                    en Lima &nbsp; - Universidad San Martín de Porres &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Implementación de una plataforma virtual interactiva generadora de cultura de aprendizaje mediada por las tecnologías, en profesores y estudiantes de la educación media en la institución consuelo araujo noguera
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>LORENA SUAREZ SIERRA
+                                                        <i>Rol en el evento: </i>Asistente , Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a></td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a></td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a></td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a>
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Documentos de trabajo</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Documento de trabajo (Working Paper)</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        LORENA SUAREZ SIERRA,                    
+                        
+                        "Políticas de Derechos de Autor Universidad Popular del Cesar"
+                        En: Colombia. 
+                        2013.
+                        
+                        
+                        
+                        
+                        <i>p. </i>
+                        
+                        
+                        <br><b>Palabras: </b><br>
+                                            
+                        Políticas,                    
+                                            
+                        Seguridad informática,                    
+                                            
+                        Derechos de autor,                    
+                                            
+                        Leyes,                    
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+                    </blockquote>
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Documento de trabajo (Working Paper)</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        LORENA SUAREZ SIERRA,                    
+                        
+                        "Guión para diseño de recusos digitales"
+                        En: Colombia. 
+                        2013.
+                        
+                        
+                        
+                        
+                        <i>p. </i>
+                        
+                        
+                        <br><b>Palabras: </b><br>
+                                            
+                        Imagenes,                    
+                                            
+                        Recusos digitales,                    
+                                            
+                        Video,                    
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Ingeniería de Producción,                    
+                        
+                        
+                        
+                    </blockquote>
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Documento de trabajo (Working Paper)</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        LORENA SUAREZ SIERRA,                    
+                        
+                        "LINEAMIENTOS DE COMUNICACIÓN PARA LA VIRTUALIZACION DE PROGRAMAS CON METODOLOGIA VIRTUAL (E-LEARNIG) Y A DISTANCIA EN LA UNIVERSIDAD POPULAR DEL CESAR (UPC)"
+                        En: Colombia. 
+                        2013.
+                        
+                        
+                        
+                        
+                        <i>p. </i>
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+                    </blockquote>
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Documento de trabajo (Working Paper)</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        LORENA SUAREZ SIERRA,                    
+                        
+                        "Modulo Consultaría en Sistemas y Tecnología de la Información"
+                        En: Colombia. 
+                        2017.
+                        
+                        
+                        
+                        
+                        <i>p. </i>
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+                    </blockquote>
+                </td>
+            </tr>
+            
+        </table>
+        </td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%">
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Otra producci&oacute;n blibliogr&aacute;fica</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+            <li>
+                <b>Producción bibliográfica - Otra producción bibliográfica - Otra</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            LORENA SUAREZ SIERRA,                    
+            
+            "Modulo de curso Sistema de Gestión de la Seguridad de la información"
+            En: Colombia. 
+            2013.
+            
+            
+            
+            
+            <i>p. </i>
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%">
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 id="normas">Normas y Regulaciones</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+            <li><b>Producción técnica - Regulación, norma, reglamento o legislación - Técnica - Básica</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            LORENA SUAREZ SIERRA,                    
+            
+            Norma sobre lineamientos comunicativos para virtualización de modulos y/o asignaturas,
+            <i>Nombre comercial: </i>,
+            <i>contrato/registro: </i>,
+            . En: Colombia,&nbsp;
+            ,2012,&nbsp;
+            .<i>ed: </i>&nbsp;
+             meses &nbsp;
+            p.&nbsp;
+            .<i>regulaci&oacute;n: </i>&nbsp;
+            .<i>tipo: </i>&nbsp; 
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%">
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Informes de investigaci&oacuten</h3></td>
+            </tr>    
+                
+            <tr>
+                <td>
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+            <li><b>Producción técnica - Informes de investigación</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            LORENA SUAREZ SIERRA,                    
+                                
+            EDGAR ENRIQUE HERRERA MORALES,                    
+            
+            Implementación de una plataforma virtual interactiva generadora de cultura de aprendizaje mediada por tecnologías a profesores y estudiantes de la educación media en la Institución Consuelo Araujo Noguera                
+            . En: Colombia,&nbsp;
+            ,2013,&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a>
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3>Dem&aacute;s trabajos</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+            <li><b>Demás trabajos - Demás trabajos</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            LORENA SUAREZ SIERRA,                    
+            
+            Modulo de curso académico Sistema de Gestión de Seguridad Informática
+            . En: Colombia,&nbsp;
+            ,2013,&nbsp;
+            <i>finalidad: </i>&nbsp;
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+            
+            
+            
+            <br><b>Sectores: </b><br>
+                                    
+            Desarrollo de programas (software) y prestación de servicios en informática - Consultoría en sistemas de informática,                    
+            
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td>
+                    
+            <li><b>Demás trabajos - Demás trabajos</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            LORENA SUAREZ SIERRA,                    
+            
+            Modulo de curso Herramientas Informáticas
+            . En: Colombia,&nbsp;
+            ,2005,&nbsp;
+            <i>finalidad: </i>Material didáctico de aprendizaje, dirigido a estudiantes de Pregrado &nbsp;
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td>
+                    
+            <li><b>Demás trabajos - Demás trabajos</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            LORENA SUAREZ SIERRA,                    
+            
+            Modulo de curso Herramientas Telemáticas
+            . En: Colombia,&nbsp;
+            ,2005,&nbsp;
+            <i>finalidad: </i>Material didáctico de aprendizaje, dirigido a estudiantes de Pregrado de la UNAD&nbsp;
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td>
+                    
+            <li><b>Demás trabajos - Demás trabajos</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            LORENA SUAREZ SIERRA,                    
+            
+            Modulo de curso Redes Básicos
+            . En: Colombia,&nbsp;
+            ,2005,&nbsp;
+            <i>finalidad: </i>Modulo didáctico para estudiantes universitarios&nbsp;
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Computación y Ciencias de la Información -- Ciencias de la Computación,                    
+            
+            
+            
+            <br><b>Sectores: </b><br>
+                                    
+            Educación - Educación superior,                    
+            
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td>
+                    
+            <li><b>Demás trabajos - Demás trabajos</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            LORENA SUAREZ SIERRA,                    
+            
+            Ponencia "TECNOLOGIA 4G Vs 5G"
+            . En: Colombia,&nbsp;
+            ,2016,&nbsp;
+            <i>finalidad: </i>Participación en Ponencia en II seminario Internacionacional "Aplicación de nuevas tecnologías para el desarrollo sostenible de la Región"&nbsp;
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Diseño y Solución de la Red de Área Metropolitana Para el Sector Académico de la Ciudad de Valledupar.<br>
+                        <i>Inicio:&nbsp;</i>Octubre&nbsp;
+                        2007                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Abril&nbsp;
+                        2008
+                        
+                        
+                        <i>Fin:&nbsp;</i>Mayo&nbsp;
+                        2008
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>6<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Solución propuesta para el diseño de la Red de área Metropolitana entre instituciones de educación secundaria y universitaria.  Propuesta realizada en la UNAD.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n, desarrollo e Innovaci&oacute;n&nbsp;<br>
+                        Implementación de una plataforma virtual interactiva generadora de cultura de aprendizaje mediada por tecnologías a profesores  y estudiantes de la educación media en la Institución Consuelo Araujo Noguera<br>
+                        <i>Inicio:&nbsp;</i>Agosto&nbsp;
+                        2012                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Julio&nbsp;
+                        2013
+                        
+                        
+                        <i>Fin:&nbsp;</i>Agosto&nbsp;
+                        2013
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>10<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Con el presente proyecto se pretende afrontar esta problemática, mediante la implementación una plataforma virtual interactiva como modelo piloto en la Institución Pública Consuelo Araujo Noguera que permita generar  una cultura de aprendizaje mediada por las tecnologías en los profesores y estudiantes; así mismo permitir que desde una plataforma educativa aun corto y mediano plazo se pueda consolidar una de red de profesores y estudiantes de los diferentes colegios públicos del departamento del Cesar si la implementación llegase a extenderse a las demás instituciones de la ciudad y el departamento del Cesar, para aprovechar los talentos insterinstitucionales que se generan en los diferentes actores académicos. 
+
+En este orden, se pretende diseñar e Implementar por lo menos dos cursos virtuales estándares de áreas relevantes de la educación media basados en competencias, proponer lineamientos pedagógicos y comunicativos necesarios para la implementación de nuevos cursos virtuales por parte de los profesores capacitados para el diseño y montaje de contenidos didácticos con  el objetivo de dar una continuidad y fortalecimiento al proyecto.  Dejar una plataforma virtual implementada que sirva para implementación o consecución de futuros proyectos institucionales mediado por tecnologías. 
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

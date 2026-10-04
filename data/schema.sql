@@ -85,3 +85,20 @@ CREATE TABLE IF NOT EXISTS HistorialAcciones (
     json_datos TEXT NOT NULL,
     fecha_hora DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+-- 8. Hoja de vida CvLAC por investigador (S37, 1:1 con Investigadores)
+CREATE TABLE IF NOT EXISTS perfil_investigador (
+    cod_rh VARCHAR(50) PRIMARY KEY,
+    par_evaluador VARCHAR(10) DEFAULT '',
+    nombre_citaciones VARCHAR(255) DEFAULT '',
+    nacionalidad VARCHAR(100) DEFAULT '',
+    sexo VARCHAR(20) DEFAULT '',
+    scholar_url TEXT DEFAULT '',
+    orcid VARCHAR(100) DEFAULT '',
+    formacion_academica TEXT DEFAULT '',
+    formacion_complementaria TEXT DEFAULT '',
+    experiencia TEXT DEFAULT '',
+    areas TEXT DEFAULT '',
+    idiomas VARCHAR(600) DEFAULT '',
+    FOREIGN KEY (cod_rh) REFERENCES Investigadores(cod_rh) ON DELETE CASCADE
+);

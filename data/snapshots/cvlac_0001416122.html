@@ -1,0 +1,2923 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=32C5F4CF91B2B54CCD00C0AC08245899" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        yury jose&nbsp;posada&nbsp;romero
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>posada, yury</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td><h3 >Identificadores de autor</h3></td>
+                                </tr>
+                                    
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        
+                                        <a target="_blank" href="https://orcid.org/0000-0002-6654-230X" style="color: #007A81">Open Researcher and Contributor ID (ORCID)</a>
+                                    </td>
+                                </tr>
+                                
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            Universidad Privada Dr. Rafael Belloso Chacín<br />
+                            gerencia de proyectos de investigacion y desarrollo<br />
+                            Marzode2013 - Mayode 2015<br />
+                            análisis de la aplicación de las políticas publicas de innovación en el municipio de Valledupar</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Especialización</b>
+                            PONTIFICIA UNIVERSIDAD JAVERIANA<br />
+                            integracion en el sistema internacional<br />
+                            Agostode2009 - Juniode 2010<br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            Universidad Jorge Tadeo Lozano<br />
+                            RELACIONES INTERNACIONALES<br />
+                            Febrerode1995 - Juniode 2002<br />
+                            </td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Febrero de 2011            
+                        Diciembre de 2024<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Fundación Universitaria del Área Andina. Sede Valledupar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Agosto de 2016            
+                        Diciembre de 2024<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ciencias Sociales -- Economía y Negocios -- Economía</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Reconocimientos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>Certificación ,ASOCIAACION DE MARAÑONEROS DE LA COSTA CARIBE - Diciembrede 2022</li></td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a></td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajo de grado de maestría o especialidad clínica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            PLAN ESTRATÉGICO DE MARKETING PARA LAS EMPRESAS QUE OFERTAN SERVICIOS ECOTURÍSTICOS EN EL MUNICIPIO DE VALLEDUPAR ¿ CESAR.&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            COMERCIO INTERNACIONAL,
+                            &nbsp;2022.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): YURY JOSE POSADA ROMERO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Economía,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            Inteligencia de mercados internacionales: marañores y sus derivados&nbsp;
+                            Fundación Universitaria del Área Andina. Sede Valledupar&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ADMINISTRACIÓN DE EMPRESAS ,
+                            &nbsp;2021.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            María Verónica Acuña Andrades
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): YURY JOSE POSADA ROMERO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Negocios y Management,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            DISEÑO DE UN PROGRAMA DE VOLUNTARIADO PARA EL PROGRAMA DE COMERCIO INTERNACIONAL DE LA UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            COMERCIO INTERNACIONAL,
+                            &nbsp;2021.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Brigith Carolina Sierra Cabana
+                            Jenny Patricia Madariaga Albarracín
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): ANDREA MARCELA MENDEZ SANCHEZ , YURY JOSE POSADA ROMERO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Otras Ciencias Sociales -- Ciencias Sociales, Interdisciplinaria,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            ANÁLISIS DE LA APLICACIÓN DEL ARANCEL EXTERNO COMÚN EN LA CAN&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            COMERCIO INTERNACIONAL,
+                            &nbsp;2016.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Edwin Ortiz &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): YURY JOSE POSADA ROMERO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Economía,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            PLAN DE NEGOCIOS PARA LA PRODUCCIÓN Y COMERCIALIZACIÓN DE YOGURT GRIEGO A BASE DE CAFÉ DIRIGIDO A CONSUMIDORES EN LA CIUDAD DE VALLEDUPAR.&nbsp;
+                            Universidad del Areandina &nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            administración de empresas,
+                            &nbsp;2017.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            sandra tellez, kelly montaño&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): YURY JOSE POSADA ROMERO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Economía,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            PRACTICAS EMPRESARIALES REALIZADAS EN EL CONTROL DE INVERSION EN EL AREA DE ADMINISTRACION DE LA FEDERACION DE GANADEROS DEL CESAR "FEGACESAR" EN LA CIUDAD DE VALLEDUPAR&nbsp;
+                            Fundación Universitaria del Área Andina. Sede Valledupar&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ADMINISTRACIÓN DE EMPRESAS ,
+                            &nbsp;2016.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            HELER QUINTERO&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): YURY JOSE POSADA ROMERO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Economía,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            INFORME DE LA OFICINA CENTRO DE INFORMACION EMPRESARIAL PROCOLOMBIA, BVC, DANE, DE LA CAMARA DE COMERCIO DE VALLEDUPAR&nbsp;
+                            Fundación Universitaria del Área Andina. Sede Valledupar&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ADMINISTRACIÓN DE EMPRESAS ,
+                            &nbsp;2018.
+                            <i>Dirigi&oacute; como: </i>,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            CAROLINA PARRA&nbsp;                            
+                            
+                            
+                            Asesor(es): YURY JOSE POSADA ROMERO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Negocios y Management,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            INFORME DE PRACTICAS EMPRESARIALES EN EL ÁREA DE FORMULACIÓN Y EVALUACIÓN DE PROYECTOS DE INVERSIÓN AGROPECUARIA DE LA FEDERACION DE GANADEROS DEL CESAR "FEGACESAR" EN LA CIUDAD DE VALLEDUPAR, CESAR&nbsp;
+                            Fundación Universitaria del Área Andina. Sede Valledupar&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ADMINISTRACIÓN DE EMPRESAS ,
+                            &nbsp;2018.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            JORGE MARTINEZ&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): YURY JOSE POSADA ROMERO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Economía,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            PRACTICAS EMPRESARIALES REALIZADAS EN EL AREA DE TALENTO HUMANO DE LA FEDERACION DE GANADEROS DEL CESAR "FEGACESAR" EN LA CIUDAD DE VALLEDUPAR&nbsp;
+                            Fundación Universitaria del Área Andina. Sede Valledupar&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ADMINISTRACIÓN DE EMPRESAS ,
+                            &nbsp;2017.
+                            <i>Dirigi&oacute; como: </i>,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            INDRIS DAVID&nbsp;                            
+                            
+                            
+                            Asesor(es): YURY JOSE POSADA ROMERO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Negocios y Management,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            INFORME DE PRACTICAS DEL AREA ADMINISTRATIVA EN JM PARQUEADERO DEL CENTRO COMERCIAL ORBE PLAZA DE LA CIUDAD DE VALLEDUPAR&nbsp;
+                            Fundación Universitaria del Área Andina. Sede Valledupar&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ADMINISTRACIÓN DE EMPRESAS ,
+                            &nbsp;2018.
+                            <i>Dirigi&oacute; como: </i>,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            LISETH NARVAEZ&nbsp;                            
+                            
+                            
+                            Asesor(es): YURY JOSE POSADA ROMERO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Negocios y Management,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            PRACTICAS EMPRESARIALES REALIZADAS EN EL AREA DE RECURSOS HUMANOS DE LA FEDERACION DE GANADEROS DEL CESAR "FEGACESAR"&nbsp;
+                            Fundación Universitaria del Área Andina. Sede Valledupar&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ADMINISTRACIÓN DE EMPRESAS ,
+                            &nbsp;2018.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            DIANA CARDONA&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): YURY JOSE POSADA ROMERO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Economía,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            INFORME DE LA OFICINA CENTRO DE INFORMACION EMPRESARIAL PROCOLOMBIA, BVC, DANE, DE LA CAMARA DE COMERCIO DE VALLEDUPAR&nbsp;
+                            Fundación Universitaria del Área Andina. Sede Valledupar&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ADMINISTRACIÓN DE EMPRESAS ,
+                            &nbsp;2018.
+                            <i>Dirigi&oacute; como: </i>,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            ANDRES ARIAS&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): YURY JOSE POSADA ROMERO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Economía,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            PRACTICAS EMPRESARIALES EN EL AREA DE RECURSOS HUMANOS EN LA FEDERACION DE GANADEROS DEL CESAR "FEGACESAR" EN LA CIUDAD DE VALLEDUPAR&nbsp;
+                            Fundación Universitaria del Área Andina. Sede Valledupar&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ADMINISTRACIÓN DE EMPRESAS ,
+                            &nbsp;2017.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            DIANA ROA&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): YURY JOSE POSADA ROMERO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Economía,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Jurado en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            <i>Titulo:&nbsp;</i>Emprendimiento social: Caso S&M tienda de empaques                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> COMERCIO INTERNACIONAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Sandra Milena Rivera &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Negocios y Management,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            <i>Titulo:&nbsp;</i>ESTRUCTURA ORGANIZACIONAL DE CENTRO DE INVESTIGACIÓN EN EL ÁREA DE CIENCIAS SOCIALES, ECONÓMICAS Y DE COMERCIO INTERNACIONAL PARA EL DESARROLLO EMPRESARIAL EN VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> COMERCIO INTERNACIONAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>DANECT PATRICIA PÉREZ CARO &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Negocios y Management,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            <i>Titulo:&nbsp;</i>ANÁLISIS DE LA CADENA DE DISTRIBUCIÓN EN EL PROCESO DE PRODUCCIÓN Y COMERCIALIZACIÓN DE PANELA ORGÁNICA PULVERIZADA                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> COMERCIO INTERNACIONAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>VERÓNICA PATRICIA BARRIOS LARA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Negocios y Management,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            <i>Titulo:&nbsp;</i>PLAN ESTRATÉGICO PARA FORTALECER LOS PROCESOS LOGÍSTICOS DE LA COMERCIALIZADORA DE CAFÉ KUMA EN EL MUNICIPIO DE VALLEDUPAR - CESAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> COMERCIO INTERNACIONAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>MARÍA CAMILA PRADO SARABIA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Negocios y Management,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            <i>Titulo:&nbsp;</i>Análisis de los procesos de Reintegro y reembolso de divisasen los Intermediarios del Mercado Cambiario Ubicados en el municipio de Valledupar                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> COMERCIO INTERNACIONAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Liseth Paola Fuentes LLanos &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Negocios y Management,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Par evaluador</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>UNIVERSIDAD POPULAR DEL CESAR,&nbsp;                
+                                        
+                                        2019,&nbsp;
+                                        Diciembre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                    
+                        </table>    
+                        </td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%">
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 id="trabajos_tec" >Consultor&iacute;as</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Producción técnica - Consultoría Científico Tecnológica e Informe Técnico - Desarrollo de productos</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            Asesoría y consultoria para la asociacion de marañoneros de la costa caribe,
+                            <i>Nombre comercial: </i>,
+                            <i>contrato/registro: </i>RS-V20,
+                            . En: Colombia,&nbsp;
+                            ,2022,&nbsp;
+                            2 meses &nbsp;
+                            p.&nbsp;                
+                            
+                            
+                            <br><b>Palabras: </b><br>
+                                                
+                            innovación ,                    
+                                                
+                            Asociatividad ,                    
+                                                
+                            Estrategia,                    
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Negocios y Management,                    
+                            
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Productos y servicios de recreación,culturales, artísticos y deportivos,                    
+                            
+
+                        </blockquote>
+
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Producción técnica - Consultoría Científico Tecnológica e Informe Técnico - Análisis de competitividad</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            asesor¿a t¿cnico cient¿fica en los procesos de la ejecuci¿n del ejercicio de la auditoria financiera, implementando procesos de auditoria y control interno,
+                            <i>Nombre comercial: </i>,
+                            <i>contrato/registro: </i>305-140-PRO04-FOR01,
+                            . En: Colombia,&nbsp;
+                            ,2017,&nbsp;
+                            5 meses &nbsp;
+                            p.3&nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Economía,                    
+                            
+                            
+                            
+
+                        </blockquote>
+
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Producción técnica - Consultoría Científico Tecnológica e Informe Técnico - Análisis de competitividad</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            asesoria tecnico cientifica en los procesos de la financiera, pimplementando procesos de auditoria y control interno,
+                            <i>Nombre comercial: </i>,
+                            <i>contrato/registro: </i>305-140 PRO04 -FOR01,
+                            . En: Colombia,&nbsp;
+                            ,2017,&nbsp;
+                            12 meses &nbsp;
+                            p.0&nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Economía,                    
+                            
+                            
+                            
+
+                        </blockquote>
+
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Producción técnica - Consultoría Científico Tecnológica e Informe Técnico - Análisis de competitividad</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            YURY JOSE POSADA ROMERO,                    
+                            
+                            asesorias en el fortalecimiento de la competencia de ingles en los alumnos de 10 grado del colegio Francisco Molina Sanchez,
+                            <i>Nombre comercial: </i>,
+                            <i>contrato/registro: </i>305-140-PRO04-FOR01,
+                            . En: Colombia,&nbsp;
+                            ,2017,&nbsp;
+                            4 meses &nbsp;
+                            p.0&nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Economía,                    
+                            
+                            
+                            
+
+                        </blockquote>
+
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>VII simposio internacional, VIII nacional de investigacion Y XIV premio investigadores &nbsp;
+                                                <i>Tipo de evento: </i>Simposio&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2016-10-05 00:00:00.0,&nbsp;
+                                                    2016-10-06 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - universidad del areandina &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Aplicación de las políticas públicas de innovación en la ciudad de Valledupar
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Universidad del Areandina 
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YURY JOSE POSADA ROMERO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>segundo encuentro internacional de jóvenes investigadores&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2016-09-01 00:00:00.0,&nbsp;
+                                                    2016-09-02 00:00:00.0 &nbsp;
+                                                    en Londres &nbsp; - institución educativa san jose &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>PLAN DE NEGOCIOS PARA LA PRODUCCIÓN Y COMERCIALIZACIÓN DE YOGURT GRIEGO A BASE DE CAFÉ DIRIGIDO A CONSUMIDORES EN LA CIUDAD DE VALLEDUPAR.
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Universidad del Areandina 
+                                                        <i>Tipo de vinculaci&oacute;n</i>Gestionadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YURY JOSE POSADA ROMERO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Tercer encuentro de proyectos de aula&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2024-04-25 00:00:00.0,&nbsp;
+                                                    2024-04-25 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - universidad del areandina &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Fundación Universitaria del Área Andina. Sede Valledupar
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YURY JOSE POSADA ROMERO
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>V ENCUENTRO DE INTERNACIONAL DE EXPERIENCIAS SIGNIFICATIVAS DE INVESTIGACION-FACE&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2024-11-06 00:00:00.0,&nbsp;
+                                                    2024-11-08 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - UNIVERSIDAD POPULAR DEL CESAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Herramientas de contabilidad en productores rurales: Revisión sistemática de la literatura
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Gestionadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YURY JOSE POSADA ROMERO
+                                                        <i>Rol en el evento: </i>Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>5</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Segundo encuentro de proyectos de aula&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2023-11-22 00:00:00.0,&nbsp;
+                                                    2023-11-22 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - universidad del areandina &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Fundación Universitaria del Área Andina. Sede Valledupar
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YURY JOSE POSADA ROMERO
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>6</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Cuarto encuentro de proyectos de aula&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2024-11-13 00:00:00.0,&nbsp;
+                                                    2024-11-13 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - universidad del areandina &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Fundación Universitaria del Área Andina. Sede Valledupar
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YURY JOSE POSADA ROMERO
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>7</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>VI ENCUENTRO DE INTERNACIONAL DE EXPERIENCIAS SIGNIFICATIVAS DE INVESTIGACION-FACE&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2025-11-04 00:00:00.0,&nbsp;
+                                                    2025-11-06 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - UNIVERSIDAD POPULAR DEL CESAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Capital social en asociaciones rurales: Revisión sistemática de la literatura
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YURY JOSE POSADA ROMERO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>8</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>IV ENCUENTRO DE INTERNACIONAL DE EXPERIENCIAS SIGNIFICATIVAS DE INVESTIGACION-FACE&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2023-11-07 00:00:00.0,&nbsp;
+                                                    2023-11-09 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - UNIVERSIDAD POPULAR DEL CESAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YURY JOSE POSADA ROMERO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>9</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>ENCUENTRO INTERNACIONAL DE EXPERIENCIAS SIGNIFICATIVAS EN INVESTIGACIÓN DE LA FACULTAD DE CIENCIAS ADMINISTRATIVAS, CONTABLES Y ECONOMICAS&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2020-11-25 00:00:00.0,&nbsp;
+                                                    2020-11-27 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - UNIVERSIDAD POPULAR DEL CESAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>DISEÑO DE UN PROGRAMA DE VOLUNTARIADO PARA EL PROGRAMA DE COMERCIO INTERNACIONAL DE LA UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>DISEÑO DE UN PROGRAMA DE VOLUNTARIADO PARA EL PROGRAMA DE COMERCIO INTERNACIONAL DE LA UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YURY JOSE POSADA ROMERO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>10</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>II ENCUENTRO INTERNACIONAL DE EXPERIENCIAS SIGNIFICATIVAS EN INVESTIGACIÓN DE LA FACULTAD DE CIENCIAS ADMINISTRATIVAS, CONTABLES Y ECONOMICAS&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2021-11-23 00:00:00.0,&nbsp;
+                                                    2021-11-25 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - UNIVERSIDAD POPULAR DEL CESAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>MOTIVACIONES DE ENTRADA A UN VOLUNTARIADO UNIVERSITARIO DE LOS ESTUDIANTES DEL PROGRAMA DE COMERCIO INTERNACIONAL DE LA UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YURY JOSE POSADA ROMERO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>11</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>VI ENCUENTRO LATINOAMERICANO DE SEMILLEROS, GRUPOS Y LIDERES DE INVESTIGACION 2022&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2022-09-13 00:00:00.0,&nbsp;
+                                                    2022-09-16 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - FUNDACION UNIVERSITARIA DEL AREANDINA &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>INTELIGENCIA DE MERCADOS INTERNACIONALES: MARAÑONES Y SUS DERIVADOS
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Fundación Universitaria del Área Andina. Sede Valledupar
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YURY JOSE POSADA ROMERO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>12</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>III ENCUENTRO DE INTERNACIONAL DE EXPERIENCIAS SIGNIFICATIVAS DE INVESTIGACION-FACE&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2022-11-29 00:00:00.0,&nbsp;
+                                                    2022-12-01 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - UNIVERSIDAD POPULAR DEL CESAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YURY JOSE POSADA ROMERO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>13</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>V encuentro de poster- productos de investigaciones desde el aula de la facultad de ciencias administrativas, contables y economicas&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2019-12-05 00:00:00.0,&nbsp;
+                                                    2019-12-05 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Universidad popular del cesar &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YURY JOSE POSADA ROMERO
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>14</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>tercer encuentro latinoamericano de semilleros, jovenes investigadores&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2018-09-07 00:00:00.0,&nbsp;
+                                                    2018-09-07 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Universidad de Santander udes &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Fundación Universitaria Del Área Andina
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YURY JOSE POSADA ROMERO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Apropiación social del conocimiento - Proceso de Apropiación Social del Conocimiento para el fortalecimiento o solución de asuntos de interés social </b>
+                            </li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            
+                            <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                            
+                            <i>Nombre del producto: </i>Innovación para emprendedores,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2022 -   
+                            Agosto,&nbsp;
+                            <i>Medio de verificaci&oacute;n: </i>https://www.areandina.edu.co/,&nbsp;   
+                            <i>Licencia creative: </i>Atribución-No Comercial,&nbsp;   
+                            <i>Formato: </i>PDF (.pdf),&nbsp;   
+                            <i>Proyecto vinculado: </i>INNOVACIÓN EN LOS PROCESOS DE COMERCIALIZACIÓN DE LOS EMPRENDIMIENTOS CREADOS POR LOS ESTUDIANTES DE AREANDINA SEDE VALLEDUPAR   
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Apropiación social del conocimiento - Proceso de Apropiación Social del Conocimiento para el fortalecimiento o solución de asuntos de interés social </b>
+                            </li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            
+                            <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                            
+                            <i>Nombre del producto: </i>MAGNET: A UN ESCALÓN DEL SIGUIENTE NIVEL,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2023 -   
+                            Abril,&nbsp;
+                            <i>Medio de verificaci&oacute;n: </i>https://www.instagram.com/areandinadmonvup?igsh=OHBpcmVxYTQwMXJ5,&nbsp;   
+                            <i>Licencia creative: </i>Atribución-Compartir Igual,&nbsp;   
+                            <i>Formato: </i>PDF (.pdf),&nbsp;   
+                            <i>Proyecto vinculado: </i>Emprende e Innova   
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Apropiación social del conocimiento - Proceso de Apropiación Social del Conocimiento para el fortalecimiento o solución de asuntos de interés social </b>
+                            </li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            
+                            <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                            
+                            <i>Nombre del producto: </i>l II Encuentro de Proyectos de Aula,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2023 -   
+                            Noviembre,&nbsp;
+                            <i>Medio de verificaci&oacute;n: </i>https://www.instagram.com/areandinadmonvup/profilecard/?igsh=OHBpcmVxYTQwMXJ5,&nbsp;   
+                            <i>Licencia creative: </i>Atribución-Compartir Igual,&nbsp;   
+                            <i>Formato: </i>PDF (.pdf),&nbsp;   
+                            <i>Proyecto vinculado: </i>Emprende e Innova   
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Apropiación social del conocimiento - Proceso de Apropiación Social del Conocimiento para el fortalecimiento o solución de asuntos de interés social </b>
+                            </li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            
+                            <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                            
+                            <i>Nombre del producto: </i>Innovación para emprendedores,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2022 -   
+                            Agosto,&nbsp;
+                            <i>Medio de verificaci&oacute;n: </i>https://www.instagram.com/areandinavalledupar?igsh=MTZhMmQydGpqejE3cA%3D%3D,&nbsp;   
+                            <i>Licencia creative: </i>Atribución-No Comercial,&nbsp;   
+                            <i>Formato: </i>PDF (.pdf),&nbsp;   
+                            <i>Proyecto vinculado: </i>INNOVACIÓN EN LOS PROCESOS DE COMERCIALIZACIÓN DE LOS EMPRENDIMIENTOS CREADOS POR LOS ESTUDIANTES DE AREANDINA SEDE VALLEDUPAR   
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Fortalecimiento de cadenas productivas</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Apropiación social del conocimiento - Proceso de Apropiación Social del Conocimiento para el fortalecimiento de cadenas </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Nombre del producto: </i>Fortalecimiento de las cadenas productivas Asomarcar,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2022 -   
+                            Diciembre,&nbsp;
+                            <i>Medio de verificaci&oacute;n: </i>https://www.facebook.com/yuri.posada.39?locale=es_ES,&nbsp;   
+                            <i>Licencia creative: </i>Atribución-No Derivadas,&nbsp;   
+                            <i>Formato: </i>PDF (.pdf),&nbsp;   
+                            <i>Proyecto vinculado: </i>Emprende e Innova   
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                RUBEN DARIO MARRUFO MARRUFO,                    
+                                    
+                YURY JOSE POSADA ROMERO,                    
+                                    
+                YANETH PEREZ PRADO,                    
+                
+                "Reconocimiento de activos intangibles como factor clave de éxito en las micro, pequeñas y medianas empresas"
+                . En: Venezuela&nbsp;<br>
+                ESPACIOS&nbsp;
+                <i>ISSN:</i>&nbsp;0798-1015&nbsp;
+                <i>ed:</i>&nbsp;Revista espacios<br>
+                <i>v.</i>40
+                <i>fasc.</i>32
+                p.11
+                - 23
+                ,2019,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Activos intangibles,                    
+                                    
+                Capital ,                    
+                                    
+                Factor Clave ,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                YURY JOSE POSADA ROMERO,                    
+                
+                "Análisis del proceso de elaboración de la agenda pública de turismo en el municipio de Valledupar"
+                . En: Venezuela&nbsp;<br>
+                ESPACIOS&nbsp;
+                <i>ISSN:</i>&nbsp;0798-1015&nbsp;
+                <i>ed:</i>&nbsp;Revista espacios<br>
+                <i>v.</i>41
+                <i>fasc.</i>01
+                p.22
+                - 28
+                ,2020,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                políticas publicas,                    
+                                    
+                Turismo,                    
+                                    
+                Agenda publica,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                YURY JOSE POSADA ROMERO,                    
+                
+                "Administración de costo como estrategias de inversión en el sector carbonífero venezolano"
+                . En: Venezuela&nbsp;<br>
+                ESPACIOS&nbsp;
+                <i>ISSN:</i>&nbsp;0798-1015&nbsp;
+                <i>ed:</i>&nbsp;Revista espacios<br>
+                <i>v.</i>39
+                <i>fasc.</i>48
+                p.3
+                - 3
+                ,2018,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Administración ,                    
+                                    
+                Costo,                    
+                                    
+                Estrategia,                    
+                                    
+                Inversión ,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a></td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a></td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a>
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Documentos de trabajo</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Documento de trabajo (Working Paper)</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        YURY JOSE POSADA ROMERO,                    
+                        
+                        "Caracterización de la oferta turística cultural en la ciudad de Valledupar"
+                        En: Colombia. 
+                        2020.
+                        
+                        
+                        
+                        
+                        <i>p. </i>
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ciencias Sociales -- Economía y Negocios -- Economía,                    
+                        
+                        
+                        
+                    </blockquote>
+                </td>
+            </tr>
+            
+        </table>
+        </td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%">
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Informes de investigaci&oacuten</h3></td>
+            </tr>    
+                
+            <tr>
+                <td>
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+            <li><b>Producción técnica - Informes de investigación</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            YURY JOSE POSADA ROMERO,                    
+                                
+            MARIA DEL MAR RESTREPO VILLARROEL,                    
+                                
+            JORGE ANDRES CERCHIARO IBANEZ,                    
+            
+            Análisis del Proceso de Elaboración de la Agenda Publica de Turismo en la Ciudad de Valledupar                
+            . En: Colombia,&nbsp;
+            ,2018,&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Sociales -- Economía y Negocios -- Economía,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Semillero de Investigación Laburo 2018<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2018                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2018
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Esta investigación tiene como objetivo principal analizar el proceso de elaboración de la agenda pública de turismo en el municipio de Valledupar, Cesar, Colombia. La evidencia empírica supone una situación problemática en el proceso de inscripción de los temas en la agenda pública de turismo de la ciudad. Esta agenda pública carece de la articulación con las estrategias del plan sectorial de turismo 2014-2018 ¿Turismo para la Construcción de la Paz¿. Por otro lado, es necesario que la agenda pública de Turismo de la ciudad tenga en cuenta la voz de los actores turísticos locales, para generar un mayor impacto con dichas políticas públicas. Para su desarrollo se consideró una investigación descriptiva no experimental, transversal y de campo, por medio de la cual se consultara a una población de 16 secretarios de la alcaldía y de gerentes de las empresas del municipio. La información se obtendrá mediante un cuestionario que será aplicado a estos funcionarios.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Semillero de Investigación Laburo 2020<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2020                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2020
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Según la Organización Mundial del Turismo (OMT, 2018), el turismo es un fenómeno social, cultural y económico relacionado con el movimiento de las personas a lugares que se encuentran fuera de su lugar de residencia habitual por motivos personales o de negocios/profesionales. Estas personas se denominan visitantes (que pueden ser turistas o excursionistas; residentes o no residentes) y el turismo tiene que ver con sus actividades, de las cuales algunas implican un gasto turístico. El turismo es una actividad transversal en la economía de los países al involucrar una gran cantidad de actores de diferentes sectores. De allí que sea una de las actividades que más genera empleo en la economía del mundo. Según la OMT (2018), 1 de cada 11 empleos son generados por el turismo. Colombia no es la excepción a estas características del turismo. Es el sector de mayor crecimiento económico en el país según el Dane (Departamento Administrativo Nacional de Estadística), y recoge dentro de sí un gran tejido de pequeñas y medianas empresas lo que confirma su carácter multiempresarial. La evidencia empírica muestra que esta oferta turística no es lo suficientemente competitiva dado que los productos turísticos existentes no responden a las expectativas de los turistas nacionales y extranjeros. Saraniemi & Kylanen (2011), entienden a los destinos como espacios creados a partir de la interacción social, del intercambio de valores y significados, y no de bienes físicos. Para estos autores, como se dijo, los destinos turísticos son mercados multiculturales globalizados en los cuales varios actores producen, mantienen, negocian y transforman significados mientras crean la cultura de cada destino. En consecuencia, la preocupación central del marketing de destinos no es la administración de las mejores prácticas de marketing, sino entender el mercado en su naturaleza simbólica y discursiva. El objetivo general de la investigacion consiste en caracterizar la oferta de turismo cultural  en la Ciudad de Valledupar.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Semillero de Investigación Laburo 2022<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2022                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2022
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El objeto de este proyecto es diseñar estrategias de innovación para los procesos de comercialización de los
+emprendimientos creados por los estudiantes del programa de administración de empresas. La evidencia
+empírica muestra que estas unidades productivas han sufrido los estragos propios del cierre económico
+durante la pandemia por efecto del covid-19. Estos emprendimientos deben incrementar sus capacidades
+innovadoras sobre todo en sus procesos de comercialización. Las ventas por internet, la atención al cliente
+online, el uso de dispositivos móviles y de medios de pago alternativos son estrategias para que estos
+emprendimientos se puedan consolidad en el mercado. Se basa en los postulados de Arias (2015), en su
+estudio de la capacidad de innovación de proceso y desempeño innovador: efecto mediador de la capacidad de innovación de producto. Los resultados arrojaron que las capacidades de innovación de productos son
+necesarias para que las mejoras en los procesos se vean reflejadas en los productos y puedan ser explotadas
+comercialmente, de este modo se dinamizaría el desempeño innovador. La investigacion esta es de tipo
+descriptivo de diseño no experimental transversal y de campo. De corte cuantitativo ya que como nos dice
+(Hernández, Fernández y Batista). La poblacion a estudio corresponde a los 24 emprendimientos
+formalizados surgidos en el programa de Administracion de Empresas de la universidad del Areandina sede
+Valledupar.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Semillero de Investigación Laburo 2024<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2024                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Septiembre&nbsp;
+                        2024
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El objetivo  del proyecto es analizar el contexto de la cadena de valor del marañón en el marco de la transición energética justa en Colombia y especificamente en el departamento del Cessar. La transformación de una economía agropecuaria a una economía minera trajo importantes cambios en el departamento. Un primer elemento que surge es que la economía cesarense es hoy muy dependiente de factores externos, como el precio internacional del carbón. Según (Publico, 2022), la asignación de regalías para el bienio 2023-2024 para el departamento del Cesar será de 1 billón, 352 mil, 266 millones 543 mil, 237 pesos. En 2015, los 25 municipios del departamento se recibieron regalías. Los objetivos de desarrollo sostenible de la ONU, en el marco de la agenda 2030, tendientes a la reducción de emisiones de dióxido de carbono representan un reto para países en desarrollo como Colombia y específicamente para el departamento del Cesar como gran productor de Carbón. en un escenario postcarbon el departemento tiene una vocación agropecuaria para hacer frente al proceso de transición energética; cuenta con las tierras disponibles y otras ventajas comparativas tradicionales. Es preciso la generación de las ventajas competitivas necesarias en sectores con alto potencial en los mercados nacionales e internacionales en un proceso de inclusión social y de adaptación al cambio climático. Existe un potencial productor en el denominado caribe seco colombiano que comprende los departamentos de magdalena, Atlántico, Cesar, Guajira; y el caribe húmedo Córdoba y Sucre (Orduz & Rodriguez, 2022).<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Semillero de Investigación Laburo 2021<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2021                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2021
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            La inteligencia de mercados internacionales nos permite la utilización de la información recolectada, en este caso de fuentes secundarias, para responder a inquietudes como ¿Cuál es el mejor mercado para exportar mi producto?, ¿Qué mercados debo priorizar), ¿es viable el mercado priorizado? La inteligencia de mercados no es un fin per se, esta información servirá para tomar decisiones y fijar objetivos empresariales.
+El marañón, anacardo o caju se puede exportar como materia prima (con cascara) posición arancelaria 080131. También se puede comercializar con un primer procesado que implica (secado, descascarillado, desollado de la segunda piel pegado al fruto), en este caso la posición arancelaria es 080132. Para las exportaciones de derivados del marañón las empresas deben aplicar procesos que generen valor agregado al producto, esto es, tostado, salado y envasado para su consumo final ya sea como aperitivo, en barras de cereales o incorporado a una bebida. Según el informe de la UNCTAC ¿Commodities at a Glance¿, (2020), los precios de los derivados del producto sueles ser hasta 8,5 veces superior al precio de marañón como materia prima. Para este trabajo analizaremos este producto, cuya subpartida arancelaria es 200819.
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Analisis del proceso de elaboracion de la agenda publica de turismo en la ciudad de Valledupar<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2018                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Noviembre&nbsp;
+                        2018
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El propósito general de esta investigación fue analizar el proceso de elaboración de la agenda pública de turismo en el municipio de Valledupar (Colombia).  El turismo es una actividad transversal en la economía de los países al involucrar una gran cantidad de actores de diferentes sectores. La evidencia empírica supone una situación problemática en el proceso de inscripción de los temas en la agenda pública de turismo. Como base teórica se ha utilizado la herramienta de análisis el ¿Ciclo de las Políticas Públicas¿, propuesto por Jones (Jones, 1970), entre otros.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        INNOVACIÓN EN LOS PROCESOS DE COMERCIALIZACIÓN DE LOS EMPRENDIMIENTOS CREADOS POR LOS ESTUDIANTES DE AREANDINA SEDE VALLEDUPAR<br>
+                        <i>Inicio:&nbsp;</i>Agosto&nbsp;
+                        2022                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Agosto&nbsp;
+                        2022
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El objeto de este proyecto es diseñar estrategias de innovación para los procesos de comercialización de los
+emprendimientos creados por los estudiantes del programa de administración de empresas. La evidencia
+empírica muestra que estas unidades productivas han sufrido los estragos propios del cierre económico
+durante la pandemia por efecto del covid-19. Estos emprendimientos deben incrementar sus capacidades
+innovadoras sobre todo en sus procesos de comercialización. Las ventas por internet, la atención al cliente
+online, el uso de dispositivos móviles y de medios de pago alternativos son estrategias para que estos
+emprendimientos se puedan consolidad en el mercado. Se basa en los postulados de Arias (2015), en su
+estudio de la capacidad de innovación de proceso y desempeño innovador: efecto mediador de la capacidad
+de innovación de producto. Los resultados arrojaron que las capacidades de innovación de productos son
+necesarias para que las mejoras en los procesos se vean reflejadas en los productos y puedan ser explotadas
+comercialmente, de este modo se dinamizaría el desempeño innovador. La investigación esta es de tipo
+descriptivo de diseño no experimental transversal y de campo. De corte cuantitativo ya que como nos dice
+(Hernández, Fernández y Batista). La población a estudio corresponde a los 24 emprendimientos
+formalizados surgidos en el programa de Administración de Empresas de la universidad del Areandina sede
+Valledupar<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Emprende e Innova<br>
+                        <i>Inicio:&nbsp;</i>Junio&nbsp;
+                        2019                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2024
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

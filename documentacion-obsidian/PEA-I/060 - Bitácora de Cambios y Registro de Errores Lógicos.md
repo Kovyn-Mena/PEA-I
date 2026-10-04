@@ -148,6 +148,78 @@ Archivos raíz perdidos al copiar el repo (papelera y disco revisados: sin copia
 
 ---
 
+## Sesión 31 — migrar_encoding.py pendiente S30 (ejecutado)
+
+- **Archivo:** `scripts/migrar_encoding.py` (nuevo): rescrape limpio a temporal con `codificacion_respuesta` + UPDATE in place por rh/código + fuzzy en productos (umbral 0.82; fallback coautoría grupo+anio 0.90, sin tocar rh) + refresh `gisico_semillas.json`/CSVs + backup `.bak-*` + `foreign_key_check`.
+- **Nros:** `00000000002099` GISICO + `00000000002668` AITICE + `00000000003639` GIELEHLA (deducidos de `snapshots/gruplac_*.html`).
+- **Resultado BD real:** antes 1 líder + 56 inv + 132 prod con � → después 0 + 0 + 4. Investigadores 56/56, grupos 1/1 (GIELEHLA `Araújo`), productos 128/132 (118 directos + 10 por coautoría).
+- **Restan 4 irrecuperables** (ids 23,24,25,26 GISICO, sin contraparte limpia en GrupLAC fresco ni en CvLAC de sus 10 rh; scores 0.21–0.35, ej. `Investigaci?n` suelto): se dejan intactos y documentados, no se borran. `g++ -Wall -Wextra` limpio; `FK check` OK.
+- **Fase CvLAC probada:** 10 rh con raro rescrapeados en vivo (0 artículos nuevos) → confirma que esos 4 no son CvLAC-origen sino artefactos del parseo viejo.
+
+## Sesión 32 — "Grupo ya existente" + zips únicos (reporte del usuario)
+
+- **Reclamo justo:** cargar GISICO 2 veces generaba 2.º zip (`grupo_GISICO.zip` + `grupo_COL0018706.zip`; igual en AITICE/GIELEHLA). Causa: zip nombrado por `codigo` + código que migró de sigla a COL + `scrape_grupo` que seguía tras `existente` + C++ sin pre-chequeo.
+- **Fix:** `existe_grupo_en_bd()` offline (índice/snapshot/nombre, tolerante a �) al inicio de `scrape_grupo` → `grupo ya existente [COL] ... zip=...` sin red; `empaquetar_grupo()` reutiliza zip vigente; `CODIGOS_LEGACY` + `limpiar_zips_huerfanos()` (auto al final de cada scrape); flags `--forzar/--existe-grupo/--limpiar-zips`; C++ `flujoCargaGrupoUPC()` pre-chequea con `salidaPython()` y avisa sin scrapear.
+- **Verificado:** `--existe-grupo 2099` y `--scrape-grupo 2099` → ya existente, 0 red; `zip/` de 6 a 3 COL; `py_compile` + `g++ -Wall -Wextra` limpios.
+- **Docs (regla de oro):** nota nueva `035`, `024` (contrato CLI S32).
+
+## Sesión 33 — Mensaje "ya existente" más claro (segundo reporte del usuario)
+
+- **Reclamo justo:** el aviso funcionaba pero confundía — Python decía
+  "ya existente" y C++ remataba "[Datos cargados con exito.]" sin haber
+  cargado nada; además `menuBuscarGrupo()` (carga con `--universidad`)
+  ni pasaba por el pre-chequeo.
+- **Fix:** Python avisa en 2 líneas (`CODIGO/GRUPO/ZIP` + `No se descargo
+  nada nuevo...`); C++ helper `cargarGrupoDesdeSCIENTI()` en ambos flujos:
+  reenvía `[PYTHON]`, y ante duplicado cierra con `[AVISO] Este grupo ya
+  estaba cargado... Todo sigue igual.` sin recarga prometida.
+- **Verificado:** `--scrape-grupo 2099 --universidad ...` → aviso, 0 red,
+  `zip/` sigue en 3; `g++ -Wall -Wextra` limpio.
+
+## Sesión 34 — Submenú tras búsqueda sin carga (reporte del usuario, grave)
+
+- **Error:** decir sí en el arranque + buscar un grupo ya existente (o
+  cancelar/fallar la búsqueda) entraba al menú principal con la RAM vacía
+  en automático, sin datos ni aviso. Agravado por S33 (el helper no
+  recargaba ante duplicado) + `iniciar()` sin guardián.
+- **Fix (idea del usuario, misma lógica del No):** `menuBuscarGrupo()`
+  retorna `bool`; `iniciar()` envuelto en bucle — si no hubo carga nueva,
+  submenú espejo del No: 1 volver a buscar (repite el si/no inicial),
+  2 precargar SQLite, 3 sin datos explícito. El vacío solo entra por
+  elección consciente (opción 3 o Nota 10-2), nunca en automático.
+  Menú 7 sin cambios (RAM ya cargada: aviso y se conserva).
+- **Verificado:** `g++ -Wall -Wextra` limpio; test interactivo pendiente
+  (el binario usa `_getch`, no admite stdin por tubería).
+
+## Sesión 35 — Producción completa por tipos (reporte del usuario)
+
+- **Pedido:** la ficha GrupLAC trae miembros + productos por tipos; al cargar un grupo deben entrar ambos. Brecha: el parser solo cubría biblio (~146/450 en GIELEHLA); eventos/tesis/consultorías/informes/cursos/jurados se perdían (~2/3) y encima `1. X:` con punto simple era invisible al regex.
+- **Fix Python:** parser consciente de sección (6 secciones, resuelve `Otro:`/`Taller:`) + 11 tipos propios (`Evento/Tesis/Consultoria/Informe/CursoCorto/Jurado/Contenido/Compilacion/Regulacion`, todos ≤11 col) + año `desde AAAA` + autoría por rol (Tutor(es)/Cotutor(es) → Tesis 0→50 en GIELEHLA). Sin tocar esquema (VARCHAR sin CHECK). Decisión usuario: estricto, lo sin autor no se guarda.
+- **Fix C++ (opción B):** `esTipoValido()` 15 valores + prompt; TIPO 11→12 en 3 tablas; pie por tipo en `listarProductosDeGrupo()`; `[tipo]` en `verDetalleGrupo()`. `g++ -Wall -Wextra` limpio.
+- **Backfill `--forzar` 3 grupos:** 248→**1161 productos** (Jurado 257, Articulo 247, Software 195, Tesis 140, Capitulo 118, CursoCorto 106, Libro 97, Compilacion 1); Evento/Informe/Consultoria/Contenido/Regulacion en 0 (ficha sin persona; ~610 sin_autor reportados). `foreign_key_check` vacío; `zip/` intacto en 3 COL.
+- **Docs (regla de oro):** `034` reescrita (tabla 15 tipos), `010` p.2, `025` (TIPO 12 + pie), Hub (BD actual + todas las notas enlazadas), `035` con links a `034`/`024`.
+
+## Sesión 36 — Chulito GrupLAC → Validado (pregunta del usuario)
+- **Pregunta:** el ítem 39 trae chulito — es `chulo_1.jpg` (187 en GIELEHLA vs 185 `chulo_0`): **avalado MinCiencias última convocatoria**, justo el campo `estado_validacion` que dejábamos todo en `Pendiente`.
+- **Fix:** `mapa_chulos()` por `<tr>` (img en el `<td>` previo) con clave (marcador, título, año — el año evita falsos por eventos homónimos de años distintos) + `validacion` en el dict + `guardar_producto()` actualiza `Pendiente→Validado` en re-scrape (retorno `actualizado`, sin duplicar) + contador `validados=` en el reporte. De paso: helper `_titulo_bloque()` (nunca toma la línea `N. Marcador:` como título) y `_anio_bloque()` compartidos (BD verificada: 0 títulos-marcador).
+- **Backfill `--forzar` 3 grupos:** 0 nuevos (idempotente) + **307 a Validado** (146 Articulo, 75 Software, 40 Tesis, 26 Capitulo, 20 Libro); 854 siguen `Pendiente`. `foreign_key_check` vacío. Sin cambios C++ (columna VALID 11 ya cabe).
+
+## Sesión 37 — Hoja de vida CvLAC por integrante (pedido del usuario)
+
+- **Pedido:** al cargar un grupo, descargar también lo individual de cada integrante (ej. CvLAC `cod_rh=0000447650`, Carmen Araújo): Par evaluador, categoría, citaciones, nacionalidad, sexo, Scholar/ORCID, formación, experiencia, áreas, idiomas.
+- **Fix Python:** `parse_hoja_vida()` (etiquetas + secciones, sección más larga gana al menú duplicado) + tabla nueva `perfil_investigador` 1:1 (FK cascada, en `schema.sql` + `conectar()`, sin tocar lo existente) + `scrape_cvlac()` la guarda (REPLACE) + `scrape_grupo(..., con_cvlac=True)` la descarga por cada rh (con `commit` previo, nunca tumba la carga) + flag `--sin-cvlac` + blindaje S31 (jamás pisar limpio con �) + `migrar_encoding` con `con_cvlac=False`.
+- **Fix C++:** `GestorSQLite::verPerfilInvestigador()` (lee directo de SQLite, la RAM sigue con TDAs puros) + opción investigadores-2 la muestra tras el detalle.
+- **Incidente y reparación:** los snapshots CvLAC viejos (era S30, con �) re-ensuciaron 21 nombres + 133 títulos `Artículo`; blindaje + `migrar_encoding` (nombres 21→0) + borrado quirúrgico de `Artículo` con � (133, re-derivables) + snapshots sucios a `bak-sucio-s30/` + red limpia.
+- **Backfill `--forzar` 3 grupos:** **236/236 perfiles** (0 �; 25 par=Sí, 28 Scholar, 38 ORCID), productos 1161→1755 (artículos CvLAC limpios), nombres 0 �, `foreign_key_check` vacío.
+- **Refinamiento 2 (pedido del usuario):** productos basura en el detalle (`Publicado en revista especializada:` sin título, duplicados por mayúsculas/puntuación) + CV sin header de redes + sin topes + palabras pegadas + idiomas frágil.
+  - Parser blindado (`_es_titulo_marcador()`); BD: 159 marker-titles + 3 `Revisión (Survey):` + 64 duplicados borrados con backup (1755→1532; se prefiere limpio→Validado→menor id; FK vacío).
+  - CV estilo currículo final: header REDES SOCIALES E IDENTIFICADORES, **flujo de muestra** (solo secciones con datos; topes áreas 300 / formación 5 viñetas o 1200 / complementaria 600 / experiencia 1500 con `(...)`), `espaciar()` (`Septiembrede2007`→`Septiembre de 2007`, nunca URLs), `truncarVisual()` en cortes, idiomas con fallback sin encabezados. Correo vacío → `No`; Nacionalidad/Sexo en líneas propias.
+  - `py_compile` + `g++ -Wall -Wextra` limpios; parse sin regresión (563/495/675).
+- **Orden CV (pedido del usuario):** investigador arriba → banner HOJA DE VIDA → adscripciones/productos → formulario (`verCabeceraInvestigador` + `verCuerpoInvestigador`; `verDetalleInvestigador` los reutiliza).
+- **Datos básicos a DATOS PERSONALES (pedido del usuario):** Correo/Categoría/CvLAC salen del encabezado `===` y abren la sección con etiquetas alineadas (`etiquetaCV()`); correo vacío → `No`.
+- **CV sin productos (pedido del usuario, dos veces):** la hoja de vida no lista productos ni adscripciones (eso vive en las vistas del grupo); solo currículo personal y formación.
+- **Incidente (causa del "todo sigue igual"):** el usuario probaba con una instancia vieja aún corriendo (`Taller2_KM_PO_XX.exe` bloqueaba la copia al recompilar) — regla: cerrar TODO antes de probar; ambos exes se sincronizan al mismo binario.
+
 ## 🐛 Bugs
 | ID | Bug | Estado |
 |:--:|-----|:------:|
@@ -161,3 +233,5 @@ Archivos raíz perdidos al copiar el repo (papelera y disco revisados: sin copia
 | BUG-09 (nuevo, detectado por el usuario) | "Solo corre con Ctrl+Shift+B": el ▶ compila a `Taller2_KM_PO_XX.exe` (otro nombre) y lo deja corriendo invisible → `Permission denied` en cada rebuild ("no compila") | **corregido S15**: proceso fantasma (PID 21556) terminado, rebuild OK; regla: cerrar la consola del programa antes de recompilar |
 | BUG-10 (nuevo, detectado por el usuario) | `UnicodeEncodeError` en `--scrape-grupo` desde C++: la tubería hereda consola cp1252 y los � de SCIENTI tumbaban el print final (exit 1). En mis pruebas no salía porque siempre fijaba `PYTHONIOENCODING=utf-8` | **corregido S22**: `sys.stdout/stderr.reconfigure(utf-8, replace)` en el `.py` + `set PYTHONIOENCODING=utf-8&&` en el `popen` de C++; verificado sin la variable (exit 0) |
 | BUG-08 (nuevo) | `pea_investigacion.db` bloqueado por otro proceso (no `pea_cpp.exe`; sospecha SQLite Viewer) impide borrar el archivo | workaround S14: reseed in-place; **recomendación: cerrar la pestaña del .db en VS Code antes de re-sembrar** |
+| BUG-11 (nuevo, detectado por el usuario) | Doble carga GISICO generaba 2.º zip (`grupo_GISICO.zip` + `grupo_COL0018706.zip`): zip por código + código migrado sigla→COL + scrape que seguía tras `existente` + C++ sin pre-chequeo | **corregido S32**: pre-chequeo offline `existe_grupo_en_bd()` → `grupo ya existente`, zip reutilizado, legacy limpiados, flags `--forzar/--existe-grupo/--limpiar-zips`, C++ avisa antes del `popen` |
+| BUG-12 (nuevo, detectado por el usuario, grave) | Arranque con sí + grupo ya existente (o búsqueda cancelada/fallida) entraba al menú sin datos en automático: `iniciar()` sin guardián + S33 sin recarga | **corregido S34**: `menuBuscarGrupo()` retorna bool + `iniciar()` en bucle con submenú 1-buscar otro (repite si/no) / 2-precargar SQLite / 3-sin datos explícito |

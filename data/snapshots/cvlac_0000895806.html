@@ -1,0 +1,1958 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=120AC5E16D632D87761307D329F7B75A" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                
+                                    <tr>
+                                        <td>Categor&iacute;a</td>
+                                        <td>
+                                            Investigador Junior (IJ) con vigencia
+                                            
+                                                hasta la publicación de los resultados de la siguiente convocatoria
+                                                
+                                            
+                                        </td>
+                                    </tr>
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        Alberto&nbsp;RIVADENEIRA&nbsp;HOYOS
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>RIVADENEIRA HOYOS, ALBERTO</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            UNIVERSIDAD SANTO TOMAS<br />
+                            MAESTRÍA EN DIDÁCTICA<br />
+                            Agostode2016 - Diciembrede 2018<br />
+                            Didáctica no parametral para la mejora de las habilidades lectoras en los estudiantes indígenas del grado sexto de la institución educativa Virgen del Carmen.</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Especialización</b>
+                            UNIVERSIDAD DE SANTANDER<br />
+                            tecnología de información y la comunicación <br />
+                            Marzode2013 - Noviembrede 2014<br />
+                            DISEÑO DE UNA ESTRATEGIA DIDÁCTICA COMPUTACIONAL UTILIZANDO PLATAFORMA SISTEMA DE GESTIÓN DE APRENDIZAJE EN LA ASIGNATURA DE ESPAÑOL GRADO NOVENO</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD POPULAR DEL CESAR<br />
+                            LICENCIATURA EN LENGUA CASTELLANE E INGLÉS<br />
+                            Enerode2000 - de 2005<br />
+                            </td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Virgen del Carmen</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>22&nbsp;horas Semanales
+                        Agosto de 2010            
+                         de Actual<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Docencia/Enseñanza secundaria            
+                        <i> - Nombre del curso:</i>&nbsp; Lengua castellana e Inglés,&nbsp;200 
+                        Agosto 2010            
+                        Enero <br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>35&nbsp;horas Semanales
+                        Enero de 2005            
+                         de <br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;investigador          
+                        Enero de 2005            
+                         de <br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>VICERRECTORIA DE INVESTIGACION</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Enero de 2005            
+                         de <br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp;                              
+                        Enero 2005            
+                         <br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>18&nbsp;horas Semanales
+                        Enero de 2026            
+                        Diciembre de 2026<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>18&nbsp;horas Semanales
+                        Enero de 2025            
+                        Diciembre de 2025<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>18&nbsp;horas Semanales
+                        Enero de 2024            
+                        Diciembre de 2024<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>18&nbsp;horas Semanales
+                        Enero de 2023            
+                        Diciembre de 2023<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>18&nbsp;horas Semanales
+                        Enero de 2022            
+                        Diciembre de 2022<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>18&nbsp;horas Semanales
+                        Febrero de 2021            
+                        Diciembre de 2021<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; PRÁCTICAS PROFESIONALES DOCENTE ,&nbsp;8 
+                        Febrero 2020            
+                        Diciembre 2020<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>18&nbsp;horas Semanales
+                        Febrero de 2020            
+                        Diciembre de 2020<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; PRACTICAS PROFESIONALES ,&nbsp;8 
+                        Febrero 2020            
+                        Diciembre 2020<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>18&nbsp;horas Semanales
+                        Marzo de 2014            
+                        Diciembre de 2015<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; LENGUA INGLESA NIVELES I, II, III, IV,&nbsp;180 
+                        Marzo 2014            
+                        Diciembre 2015<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>INSTITUCIÓN TÉCNICA AGRÍCOLA PUEBLO BELLO</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>8&nbsp;horas Semanales
+                        Abril de 2007            
+                        Julio de 2010<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Docencia/Enseñanza secundaria            
+                        <i> - Nombre del curso:</i>&nbsp; lengua castellana e inglés,&nbsp;250 
+                        Abril 2007            
+                        Julio 2010<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>institución educativa arsenio gutierrez barbosa</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>24&nbsp;horas Semanales
+                        Octubre de 2006            
+                        Diciembre de 2006<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;docente titular          
+                        Octubre de 2006            
+                        Diciembre de 2006<br>
+
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;docente titular          
+                        Octubre de 2006            
+                        Diciembre de 2006<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>institución educativa frandepausan</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>25&nbsp;horas Semanales
+                        Marzo de 2006            
+                        Agosto de 2006<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;docente          
+                        Marzo de 2006            
+                        Agosto de 2006<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Humanidades -- Idiomas y Literatura -- Lingüística</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="5"><h3 >Idiomas</h3></td>
+                            </tr>    
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td><b>Habla</b></td>
+                                <td><b>Escribe</b></td>
+                                <td><b>Lee</b></td>
+                                <td><b>Entiende</b></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;Inglés</li></td>
+                    <td>Aceptable</td>
+                    <td>Bueno</td>
+                    <td>Aceptable</td>
+                    <td>Aceptable</td>                                                        
+                </tr>    
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;sociolingüística, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;INVESTIGACIÓN ACCIÓN , <i>Activa:</i>Si</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Reconocimientos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>PONENTE,UPC - Noviembrede 2019</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>FORO EDUCACIÓN RURAL NACIONAL,Ministerio De Educación Nacional - Mineducación - Octubrede 2018</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>PONENTE FORO DE LENGUAJE 2020,UNIVERSIDAD POPULAR DEL CESAR - Noviembrede 2020</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>Experiencia educación rural,Ministerio De Educación Nacional - Mineducación - Octubrede 2018</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>ponente foro educación ,UNIVERSIDAD POPULAR DEL CESAR - Noviembrede 2019</li></td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a></td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a></td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Jurado en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            ALBERTO RIVADENEIRA HOYOS,                    
+                            
+                            <i>Titulo:&nbsp;</i>DE LECTORES A ESCRITORES: ESTRATEGIAS PEDAGÓGICAS PARA POTENCIAR EL INTERÉS POR LA LECTURA Y LA ESCRITURA EN JÓVENES DE SECUNDARIA                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> LICENCIATURA EN LITERATURA Y LENGUA CASTELLANA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>NAYELIS MILENA DÍAZ CAMPO &nbsp;                
+                            
+                            
+                            
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Participaci&oacute;n en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Participación en comités de evaluación - Otra</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            ALBERTO RIVADENEIRA HOYOS,                    
+                            
+                            ENLACE CULTURAL ENTRE LAS COMUNIDADES WAYUU Y KANKUAMA RESALTANDO TRADICIONES REPRESENTATIVAS COMO ARTESANIAS Y BAILES TIPICOS QUE REFLEJAN LA IMPORTANCIA DE LA DIVERSIDAD CULTURAL<br>
+                            <i>en:&nbsp;</i> FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,                    
+                            
+                            
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Participación en comités de evaluación - Otra</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            ALBERTO RIVADENEIRA HOYOS,                    
+                            
+                            EL VALOR DE LA RESPONSABILIDAD SOCIAL UNIVERSITARIA EN LA FORMACION DE ENFERMERIA<br>
+                            <i>en:&nbsp;</i> FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,                    
+                            
+                            
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Participación en comités de evaluación - Otra</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            ALBERTO RIVADENEIRA HOYOS,                    
+                            
+                            EL FACILISMO, COMO FACTOR FALIBLE EN LA EDUCACION SUPERIOR.<br>
+                            <i>en:&nbsp;</i> FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,                    
+                            
+                            
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Participación en comités de evaluación - Otra</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            ALBERTO RIVADENEIRA HOYOS,                    
+                            
+                            ESTUDIO TRANSVERSAL DE LAS ACTITUDES HACIA LA CIENCIA Y LA INVESTIGACION EN ESTUDIANTES DE CIENCIAS NATURALES Y EDUCACION AMBIENTAL DE LA UNIVERSIDAD POPULAR DEL CESAR<br>
+                            <i>en:&nbsp;</i> FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,                    
+                            
+                            
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Participación en comités de evaluación - Otra</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            ALBERTO RIVADENEIRA HOYOS,                    
+                            
+                            EVALUACION DE LOS NIVELES DE RESILIENCIA EN LAS FAMILIAS ASISTENTES AL CENTRO DE DESARROLLO INTEGRAL PADRE ABRAHAM DE SINCELEJO EN EL AÑO 2020<br>
+                            <i>en:&nbsp;</i> FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,                    
+                            
+                            
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Par evaluador</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Material para publicaci&oacute;n cient&iacute;fica&nbsp;
+                                        
+                                        <i>Revista: </i> REVISTA LASIRC,&nbsp;
+                                        
+                                        2020,&nbsp;
+                                        Octubre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                    
+                        </table>    
+                        </td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>FORO DE LENGUAJE 2020&nbsp;
+                                                <i>Tipo de evento: </i>Simposio&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2020-11-25 00:00:00.0,&nbsp;
+                                                    2020-11-25 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - VIRTUAL  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>CARACTERIZACIÓN DE LA I.E VIRGEN DEL CARMEN EN EL MARCO DE UNA CALIDAD EDUCATIVA EN TIEMPOS DE PANDEMIA
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ALBERTO RIVADENEIRA HOYOS
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>EDUCACIÒN RURAL NUESTRO DESAFIO POR LA EXCELENCIA&nbsp;
+                                                <i>Tipo de evento: </i>Simposio&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2018-10-11 00:00:00.0,&nbsp;
+                                                    2018-10-12 00:00:00.0 &nbsp;
+                                                    en BOGOTÁ, D.C. &nbsp; - UNIVERSIDAD LIBRE DE COLOMBIA  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>DIDÀCTICA NO PARAMETRAL PARA MEJORAR LAS HABILIDADES LECTORAS DE INDÌGENAS CAMPESINOS Y COLONOS
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Ministerio De Educación Nacional - Mineducación
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ALBERTO RIVADENEIRA HOYOS
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>SEGUNDO CONGRESO INTERNACIONAL VIRTUAL DE INVESTIGADORES&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2020-10-24 00:00:00.0,&nbsp;
+                                                    2020-10-24 00:00:00.0 &nbsp;
+                                                    en LA PAZ &nbsp; - VIRTUAL  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>HACIA UNA EDUCACIÒN RURAL INTERCULTURAL
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ALBERTO RIVADENEIRA HOYOS
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>FORO DE LENGUAJE 2019&nbsp;
+                                                <i>Tipo de evento: </i>Simposio&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2019-10-24 00:00:00.0,&nbsp;
+                                                    2019-10-24 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - UNIVERSIDAD POPULAR DEL CESAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>DIDÁCTICA NO PARAMETRAL PARA UNA EDUCACIÓN INTERCULTURAL
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ALBERTO RIVADENEIRA HOYOS
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>5</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>SOCIALIZANDO NUEVAS PERSPECTIVAS DIDÀCTICAS&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2017-11-17 00:00:00.0,&nbsp;
+                                                    2017-11-17 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - COLEGIO SANTA FÈ DE VALLEDUPAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>DIDÀCTICA NO PARAMETRAL PARA MEJORAR LAS HABILIDADES LECTORAS DE INDÌGENAS CAMPESINOS Y COLONOS
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Universidad Santo Tomás De Aquino - Sede Bogotá - Usta
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ALBERTO RIVADENEIRA HOYOS
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                ALBERTO RIVADENEIRA HOYOS,                    
+                
+                "INITIAL TRAINING OF TEACHERS IN BACHELOR'S DEGREES: A DIDACTIC OBSTACLE TO PROFESSIONAL PERFORMANCE IN BASIC PRIMARY EDUCATION"
+                . En: Colombia&nbsp;<br>
+                RUSSIAN LAW JOURNAL&nbsp;
+                <i>ISSN:</i>&nbsp;2312-3605&nbsp;
+                <i>ed:</i>&nbsp;Supporting Academic Initiatives Foundation<br>
+                <i>v.</i>11
+                <i>fasc.</i>5
+                p.1231
+                - 1236
+                ,2023,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                initial  teacher  training,                    
+                                    
+                Didactic  obstacles,                    
+                                    
+                Teaching  work  in primary education,                    
+                                    
+                mathematics  teaching,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                ALBERTO RIVADENEIRA HOYOS,                    
+                
+                "QUANTITATIVE, QUALITATIVE, AND MIXED METHODS APPROACHES IN SCIENTIFIC REASERCH : CONCEPTUAL FOUNDATIONS, DIFFERENCES APPLICATIONS."
+                . En: Colombia&nbsp;<br>
+                INTERNATIONAL JOURNAL OF APPLIED MATHEMATICS&nbsp;
+                <i>ISSN:</i>&nbsp;1314-8060&nbsp;
+                <i>ed:</i>&nbsp;Diogenes Co. Ltd.<br>
+                <i>v.</i>38
+                <i>fasc.</i>
+                p.595
+                - 604
+                ,2025,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a></td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a></td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%">
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 id="textos">Textos en publicaciones no cient&iacute;ficas</h3></td>
+            </tr>        
+               
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Otro artículo publicado - Revista de divulgación</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            ALBERTO RIVADENEIRA HOYOS,                    
+            
+            "HACIA UNA EDUCACIÓN RURAL INTERCULTURAL"
+            En: Colombia. 
+            2020.
+             REVISTA LASIRC.
+            <i>ISSN:</i>&nbsp;2711-1814 
+            <i>p.</i>283 
+            - 290
+            v.1
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            investigación acción ,                    
+                                
+            aprendizaje ,                    
+                                
+            Didáctica no parametral,                    
+                                
+            enseñanza,                    
+                                
+            Habilidades ,                    
+                                
+            interculturalidad,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Humanidades -- Otras Humanidades -- Otras Humanidades,                    
+                                    
+            Ciencias Sociales -- Ciencias de la Educación -- Educación Especial (para Estudiantes Dotados y Aquellos con Dificultades del Aprendizaje),                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+   
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Otro artículo publicado - Revista de divulgación</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            ALBERTO RIVADENEIRA HOYOS,                    
+            
+            "CARACTERIZACIÓN DE LA I.E VIRGEN DEL CARMEN EN EL MARCO DE UNA CALIDAD EDUCATIVA EN TIEMPOS DE PANDEMIA"
+            En: Colombia. 
+            2020.
+            Foro De Lenguaje.
+            <i>ISSN:</i>&nbsp;2339-4706 
+            <i>p.</i>8 
+            - 19
+            v.15
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            CURRÌCULO,                    
+                                
+            CULTURA ,                    
+                                
+            CONTEXTO,                    
+                                
+            INTERDISCIPLINARIEDAD,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+   
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Otro artículo publicado - Revista de divulgación</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            ALBERTO RIVADENEIRA HOYOS,                    
+            
+            "DIDÁCTICA NO PARAMETRAL PARA UNA EDUCACIÓN INTERCULTURAL"
+            En: Colombia. 
+            2019.
+            Foro De Lenguaje.
+            <i>ISSN:</i>&nbsp;2339-4706 
+            <i>p.</i>8 
+            - 19
+            v.14
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            aprendizaje ,                    
+                                
+            Didáctica no parametral,                    
+                                
+            enseñanza,                    
+                                
+            Habilidades ,                    
+                                
+            interculturalidad,                    
+                                
+            investigación acción ,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Sociales -- Ciencias de la Educación -- Educación Especial (para Estudiantes Dotados y Aquellos con Dificultades del Aprendizaje),                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a>
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Documentos de trabajo</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Documento de trabajo (Working Paper)</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        ALBERTO RIVADENEIRA HOYOS,                    
+                        
+                        "EL USO DE LOS MARCADORES DISCURSIVOS EN EL HABLA DE VALLEDUPAR"
+                        En: Colombia. 
+                        2006.
+                        
+                        
+                        
+                        
+                        <i>p. </i>
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Humanidades -- Idiomas y Literatura -- Lingüística,                    
+                        
+                        
+                        
+                        <br><b>Sectores: </b><br>
+                                                
+                        Educación,                    
+                                                
+                        Desarrollo Urbano,                    
+                                                
+                        Actividades de asesoramiento y consultoría a las empresas - Ensayos de materiales y productos análisis de calidad,                    
+                        
+                    </blockquote>
+                </td>
+            </tr>
+            
+        </table>
+        </td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        DIDÁCTICA NO PARAMETRAL PARA MEJORAR HABILIDADES LECTORAS LECTORAS EN INDÍGENAS, CAMPESINOS Y COLONOS DE LA I.E VIRGEN DEL CARMEN (VEREDA LA MESA-VALLEDUPAR)<br>
+                        <i>Inicio:&nbsp;</i>Agosto&nbsp;
+                        2016                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Septiembre&nbsp;
+                        2018
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Se presenta un proceso investigativo desde la línea de la investigación acción, donde se enmarca un transcurrir que es direccionado por etapas, el conjunto de ellas representa los ciclos de la espiral de este tipo de investigación, en la cual se inicia por la planeación, donde se conocen las especificidades del contexto y la problemática que las caracteriza.  
+Seguido se presenta el diseño metodológico y el diseño didáctico, que es donde se toman determinaciones para organizar un diseño que, amparado en estrategias, técnicas de enseñanza y un conjunto de actividad que actúen de manera positiva para que a través de las transformaciones de enseñanza se obtenga mejores resultados en el aprendizaje.
+Posterior, se muestran los resultados que proyectó el análisis realizado en una matriz categorial, en la cual se plasmaron en los propósitos para mejorar de manera continua cada vez que se implemente el siguiente ciclo, con el fin de optimizar el diseño didáctico y consolidar los procesos de enseñanza y aprendizaje en la institución.    
+En síntesis, el proceso demostró la necesidad de seguir un proceso de enseñanza a través de las direcciones organizadas, con la intención de mejorar los procesos académicos y mostrar los impactos que este diseño ha generado en la institución y manifestar las innovaciones de enseñar en contextos particulares. Por último, se muestran las conclusiones desde la mirada objetiva de los investigadores, donde se hace énfasis en los propósitos para notar los alcances y las limitantes, además se especifican los referentes y los respectivos anexos que demuestran la veracidad del trabajo investigativo.  
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Las novelas literarias como herramientas de enseñanza para mejorar el pensamiento crítico. <br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2022                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Octubre&nbsp;
+                        2025
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            La experiencia significativa ¿Las novelas literarias como herramientas de enseñanza para mejorar el pensamiento crítico¿ es una estrategia de enseñanza que pretende mejorar las prácticas docentes y fortalecer las habilidades de lectura y el análisis critico de los estudiantes de grado décimo de la I.E Virgen del Carmen (La Mesa).
+En este sentido, la aplicación de la estrategia durante dos años permitió el progreso de los estudiantes en la asignatura de lectura crítica en las pruebas saber once del año 2023, pasando de un promedio de 49 a 56 y en el consolidado total se pasó de 220.5 a 249.7, lo cual quedó demostrado que los resultados fueron notorios y sustentados en pruebas externas e internas.  <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        INTERPRETANDO LA REALIDAD A TRAVÉS DE LOS TEXTOS<br>
+                        <i>Inicio:&nbsp;</i>Agosto&nbsp;
+                        2025                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2025
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            La competencia interpretativa en la lectura es un pilar fundamental del sistema educativo y representa una oportunidad de mejora significativa en el desempeño académico de los estudiantes de básica media. En la Institución Educativa CASD Simón Bolívar, las observaciones diagnósticas han revelado que los estudiantes presentan áreas a optimizar en su capacidad para ir más allá de la información literal de los textos, esto se manifiesta como carencias en la interpretación de textos narrativos en Lengua Castellana y como la necesidad de afianzar vocabulario y estrategias de lectura en el área de inglés.
+Ante esta situación, el presente Proyecto Pedagógico de Aula tiene como objetivo central fortalecer la competencia interpretativa en los estudiantes de los grados 6, 7, 8, 9 y 10. Para lograrlo, se propone la implementación de un conjunto de 5 diferentes estrategias metodológicas, diseñadas para articularse de manera dinámica en ambas áreas.
+El proyecto se basa en la concepción de que la lectura es una habilidad necesaria para la vida cotidiana y académica y que, mediante varias estrategias, los estudiantes pueden desarrollar el pensamiento crítico necesario para interpretar de forma autónoma la realidad a través de los textos.
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        VIAJEROS DE LA NARRATIVA<br>
+                        <i>Inicio:&nbsp;</i>Agosto&nbsp;
+                        2025                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2025
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                              Este proyecto pedagógico tiene como propósito fortalecer la comprensión lectora en el nivel interpretativo en los grados 5-03, 7-01 (inglés) y 605 (lengua castellana) de la Institución Educativa Manuel Germán Cuello, ubicada en Valledupar. A partir de la identificación de dificultades en la comprensión de ideas principales y secundarias, así como en el reconocimiento del sentido global de textos narrativos y descriptivos, se implementa una secuencia de actividades, coherentes con los Estándares Básicos de Competencias (2006) y los Derechos Básicos de Aprendizaje (2016) del MEN. El proyecto se fundamenta en la necesidad de promover procesos pedagógicos que favorezcan el análisis, la inferencia, la deducción y otras habilidades cognitivas esenciales para la comprensión lectora. Las actividades incluyen metodologías variadas, el uso de textos narrativos, esquemas gráficos y lecturas dramatizadas, con el fin de mejorar la interpretación tanto en lengua castellana como en inglés. Finalmente, se evalúa la eficacia de las estrategias aplicadas mediante una rúbrica que permite valorar los avances en el proceso de comprensión interpretativa de los estudiantes.     <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

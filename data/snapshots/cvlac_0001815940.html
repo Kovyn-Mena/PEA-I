@@ -1,0 +1,1171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=3F01EC7D93365D129DA32FAACE43ADB5" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        Carolina&nbsp;Parodi&nbsp;Garrido
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>PARODI GARRIDO, CAROLINA</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Femenino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Especialización</b>
+                            UNIVERSIDAD PEDAGÓGICA NACIONAL<br />
+                            Docencia del Español como Lengua Propia<br />
+                            Agostode2005 - Juliode 2006<br />
+                            Los imaginarios culturales en cien años de soledad</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD POPULAR DEL CESAR<br />
+                            Lengua Castellana e Inglés<br />
+                            Febrerode2000 - Diciembrede 2004<br />
+                            Los Imaginarios Culturales en Cien Años de Soledad</td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Febrero de 2018            
+                         de <br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Fundacion Colegio Bilingue Valledupar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Agosto de 2008            
+                        Enero de 2016<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD DE PAMPLONA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>8&nbsp;horas Semanales
+                        Agosto de 2010            
+                        Noviembre de 2010<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>COLEGIO SANTA FE</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>30&nbsp;horas Semanales
+                        Enero de 2007            
+                        Noviembre de 2007<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Humanidades -- Idiomas y Literatura -- Estudios Generales del Lenguaje</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a></td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a></td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a></td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a></td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a></td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a></td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a></td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a></td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a></td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        El centro literario como estrategia para el fortalecimiento de las competencias comunicativas en los estudiantes de básica y media de la I:E Alfonso López Pumarejo de la Jornada de la mañana.<br>
+                        <i>Inicio:&nbsp;</i>Agosto&nbsp;
+                        2018                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2018
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            A través de este proyecto se busca intervenir pedagógicamente por
+medio de un centro literario donde se implementaron estrategias como: talleres y capacitaciones
+lúdicas las cuales fueron impartidas para instruir e incentivar a los estudiantes en la producción de
+texto narrativos y líricos, donde se plasmen las ideas y sentimientos de los estudiantes
+fortaleciendo las competencias que necesitan para el desarrollo de su nivel académico. ya que si
+no se trabaja la escritura creativa en los estudiantes no se fortalecerá tal habilidad y las
+repercusiones se verán reflejadas en las pruebas de estado.
+Por esto surge la necesidad de hacer algo al respecto para que los estudiantes puedan tener
+conocimiento de la correcta escritura, y cambie su modo de ver la literatura como una asignatura aburrida, también para que sus competencias sean desarrolladas y tengan el nivel que impone los
+lineamientos curriculares y los estándares básicos de competencia que demanda el MEN. A causa
+de lo planteado anteriormente nace la siguiente pregunta: ¿De qué manera el centro literario
+contribuye a fortalecer las competencias comunicativas en los estudiantes de básica secundaria de
+la institución educativa Alfonso López Pumarejo?<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        DESCANSOS RECREATIVOS PARA EL APROVECHAMIENTO DEL TIEMPO LIBRE Y EL FORTALECIMIENTO DEL NIVEL DE INGLÉS EN LOS ESTUDIANTES DE LA INSTITUCIÓN EDUCATIVA OSWALDO QUINTANA  QUINTANA.<br>
+                        <i>Inicio:&nbsp;</i>Agosto&nbsp;
+                        2019                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2019
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            En la Institución Educativa Oswaldo Quintana Quintana, se presentan unos inconvenientes en relación al aprendizaje y enseñanza del inglés ya que lo primero que se observa es que no se cuenta con aula de bilingüismo en donde el estudiante pueda practicar las habilidades del inglés, esto hace que las clases se impartan de manera tradicional y generalmente aburridas, otro aspecto a destacar es la carga académica
+de inglés ya que solo hay un total de 3 horas semanales, siendo esto insuficiente como para
+alcanzar un nivel apropiado en la competencia comunicativa de la lengua extranjera. Por estas
+razones es evidente en las aulas de clases un total desinterés y un bajo desempeño en el inglés
+en todos los grados, desde primaria hasta bachillerato, causando la falta de aplicación de
+actividades didácticas para la enseñanza de esta lengua y por los pocos espacios de
+interacción fuera del horario establecido, por lo tanto, se hace necesario enfocarse en mejorar
+el proceso de exposición al idioma inglés. Por consiguiente, se interviene con la
+implementación de actividades recreativas durante los descansos para fortalecer el nivel de
+inglés de los estudiantes de la Institución Educativa Oswaldo Quintana Quintana.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        DOTACIÓN DE LA BIBLIOTECA ESCOLAR PARA INCENTIVAR LA LECTURA EN LOS ESTUDIANTES DE LA INSTITUCIÓN EDUCATIVA OSWALDO QUINTANA QUINTANA DE VALLEDUPAR (CESAR)<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2019                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2019
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El proyecto pedagógico tuvo como objetivo dotar la biblioteca para incentivar la lectura los
+estudiantes de la Institución Educativa Oswaldo Quintana Quintana de Valledupar (Cesar).
+En cuanto a la delimitación temporal y espacial, la presente intervención se realizó entre el
+mes de abril, hasta agosto de 2019, utilizando como sustentación teórica el paradigma
+constructivista, bajo los conceptos psicopedagógicos actuales de Lectura y de Escritura
+formulados principalmente por Centelles (2005).
+La metodología de trabajo estuvo sustentada en una serie de actividades de indagación
+sobre tendencias de lectura, uso de recursos bibliográficos entre el alumnado y la
+socialización de los objetivos del proceso entre los diferentes estamentos de la comunidad
+educativa y otros entes oficiales y privados.
+Entre los resultados obtenidos se evidenció un alto compromiso interinstitucional para
+apoyar la dotación de la biblioteca del plantel en mención, mediante la entrega de útiles
+escolares y textos de variada temática para favorecer a comunidades tan apartadas como la
+urbanización Lorenzo Morales de Valledupar (Colombia).<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Proyecto Docentics<br>
+                        <i>Inicio:&nbsp;</i>Agosto&nbsp;
+                        2019                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2019
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Este proyecto interviene en que la aplicación de las TICs dentro de un marco académico es imperante en la realidad contemporánea puesto que abarca una serie de factores y entes reguladores concebidos para orientar, guiar y asesorar la interacción del estudiante con la realidad tecnológica, Es por ello que, para una mayor comprensión del estudiantado desde un enfoque ulterior a este, es necesario que el docente sea
+consciente de lo basta que puede ser la tecnología y el internet relacionadas al desarrollo
+humano dentro y fuera del campo educativo, implicando la sociedad, específicamente a los
+padres de familia como segundo agente de apoyo en un enfoque extracurricular. Es por ello que
+la población tomada mediante este proyecto está referida a ambos campos: a la cotidianidad y la
+académica como forma de conectar y establecer un refuerzo de los saberes a través de este medio
+que año tras año se vuelve una extensión del ser humano.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Estrategias pedagógicas para desarrollar la competencia comunicativa en los estudiantes de los grados sexto, noveno y décimo de la I.E Alfonso López Pumarejo Jornada Mañana<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2018                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2018
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El aprendizaje basado en una estrategia didáctica es una innovación en la enseñanza que representa un redescubrimiento aplicable a nuestra época y a nuestras áreas de enseñanza en el salón de clase. El presente trabajo representa una investigación-acción aplicada en el aula de inglés en la Institución Educativa Alfonso López Pumarejo de la ciudad de Valledupar durante el año lectivo 2018 con estudiantes de la básica secundaria y media vocacional.
+Consiste en el desarrollo de las clases de inglés a través de la pedagogía por un club de inglés. En dicha investigación se utilizan herramientas de recolección de datos tales como el diario pedagógico y un examen de diagnóstico para establecer los cambios significativos que se evidenciaban en los estudiantes en el aprendizaje del inglés al implementar un club de inglés.
+En este trabajo se incluye los intereses y necesidades de los estudiantes y profesores desarrollados a través de prácticas y actividades significativas con todos los pasos y actividades que estos incluyen. También se analiza la importancia del material educativo referente al proyecto, el uso de medios tecnológicos y la inclusión de los estudiantes en la toma de decisiones y la construcción de saberes, como también el impacto de la competencia comunicativa en inglés con estudiantes que al final se muestran motivados por aprender la lengua extranjera, desarrollan aprendizajes referentes a la lengua, la cultura, la investigación, la autoevaluación y la autonomía dado que el trabajo por proyectos en inglés es un camino para desarrollar aprendizajes significativos en la escuela.
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Reforzar el pensamiento crítico con la implementación del modelo de las naciones unidas (ONU) en los estudiantes del colegio Rafael Valle Meza jornada mañana.<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2018                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2018
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Este trabajo intentara desarrollar el pensamiento crítico en los estudiantes de la institución Educativa Rafael Valle Meza. Por medio de la implementación de modelo de las naciones unidas (ONU) ya que es una herramienta eficaz que permite una visión general de las distintas problemáticas que se general a nivel mundial, es decir; motiva al estudiante a investigar, a dar soluciones pacíficas a las distintas situaciones que se vive.
+Se podrá evidenciar el desarrollo o avance de los estudiantes participantes desde su inicio hasta el fin del proyecto, mediante la producción textual, expresión corporal, la oralidad, persuasión dentro del discurso, todo esto bajo un ambiente de tolerancia y respeto.
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        CRECIENDO EN COMUNICACIÓN INGLESA: SPEAKING ENGLISH WITH  ¿REX¿<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2019                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2019
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El presente proyecto de intervención pedagógica consiste en fortalecer el idioma inglés en
+la básica secundaria de la Institución Educativa Técnica La Esperanza, en lo referente, a las
+habilidades comunicativas que se desarrollan con el idioma. Esta intervención está
+encaminada a brindar algunas soluciones a extender el interés por aprender el idioma inglés a
+través de actividades lúdicas, con el fin de atraer a los estudiantes al conocimiento de este y
+además, a que estos sean partícipes de su propio aprendizaje. Esta intervención está
+enmarcada dentro de un marco social, y debido a esto, aclaramos el carácter cualitativo que
+se desenvolverá a lo largo del desarrollo de esta indagación.
+La relevancia de esta intervención radica en que los estudiantes aprendan una segunda
+lengua (inglés), no de manera tradicional, sino de una manera divertida y entretenida.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        ESTRATEGIAS DIDÁCTICAS  PARA EL FORTALECIMIENTO DEL PENSAMIENTO CRÍTICO DE LOS ESTUDIANTES DE LA INSTITUCIÓN EDUCATIVA LOPERENA GARUPAL<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2018                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2018
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                             Este proyecto de intervención fue desarrollado en un colegio oficial de Valledupar, donde estudiantes participaron a través de diferentes actividades usando temas vistos en clase para conocer las fortalezas y debilidades de ellos con respecto al conocimiento de las habilidades de pensamiento crítico y fortalecer dichas habilidades por medio de diferentes estrategias didácticas, como por ejemplo: Análisis y solución de problemas, interpretación y expresión a partir de imágenes, símbolos o lenguaje no verbal y el instrumento de conocimiento de la realidad a través de símbolos.
+En el contenido de este proyecto se plantean tres propuestas aplicables al aula y orientadas a desarrollar habilidades de pensamiento crítico. Dichas propuestas se han llevado a cabo durante un lapso de cuatro semanas, con los estudiantes de la básica secundaria y media académica.
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        MEJORAMIENTO DE LAS COMPETENCIAS COMUNICATIVAS A TRAVÉS DE ESTRATEGIAS LÚDICAS EN LA INSTITUCIÓN EDUCATIVA MILCIADES CANTILLO COSTA<br>
+                        <i>Inicio:&nbsp;</i>Agosto&nbsp;
+                        2018                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2018
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Este proyecto de intervención, va dirigido a los estudiantes de la Institución Educativa
+Milciades Cantillo Costa, jornada mañana, indaga sobre una problemática que se evidencia
+a partir de la carencia de conocimientos básicos y necesarios al interactuar en la lengua
+inglesa, haciendo que la comunicación sufra una ruptura significativa en el aprendizaje de
+la lengua. Uno de estos factores que contribuyen a evidenciar esta falencia es la falta de
+vocabulario, la cual es expuesta en la clase de inglés, ya que al responder algunos
+cuestionamientos hechos por los docentes su comunicación es interrumpida y poco fluida,
+por lo tanto, los estudiantes deben preguntar constantemente por el significado de palabras
+en inglés a su profesor, a sus compañeros o deben recurrir al uso del diccionario. Cuando
+finalmente, pueden emitir la frase, la comunicación ya se ha visto interrumpida. Esta falta
+de vocabulario hace que su comunicación sea limitada e incoherente, esto a su vez hace que
+el estudiante se muestre inseguro frente a la adquisición de una nueva lengua.
+
+Para la realización de esta investigación se tuvo en cuenta el enfoque de enseñanza
+en lengua extranjera (enfoque comunicativo) puesto que basados en el diagnóstico inicial y
+analizando cada uno de los estudiantes de la Institución este enfoque recopila características
+y técnicas que involucran el entorno situacional entre las metodologías desarrolladas en
+clase y el ambiente comunicativo. Las tareas y actividades didácticas corroboraron el
+planeamiento y desarrollo de acciones sustentadas en unidades didácticas hechas por los
+investigadores de este proyecto, las cuales permitieron un mejor progreso de los contenidos
+de la clase de inglés según las necesidades elementales, en este caso el vocabulario.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        VALLENATA CULTURE TIME<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2019                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2019
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Los estudiantes practicantes del programa de Lengua
+Castellana e Inglés de la Universidad Popular del Cesar, evidenciaron situaciones que
+demuestran que los estudiantes de la Institución Educativa Eduardo Suárez Orcasita
+presentan dificultades en el uso y adquisición del inglés como lengua extranjera.
+Esta intervención pedagógica realizada por los practicantes del programa de
+Licenciatura en Lengua Castellana e Inglés será relevante porque propondrá
+estrategias contextualizadas a la región Caribe (Valledupar); usando la lengua inglesa
+como medio fundamental para propiciar espacios culturales, espacios en donde la
+interacción social refuerce los aspectos identitarios de los estudiantes de la I.E
+EDUARDO SUÁREZ ORCASITA y generen un interés por el aprendizaje de una
+segunda lengua (inglés). Además, se espera que los estudiantes de la I.E (grados 7,
+8, 9 y 10) reduzcan el promedio de insuficiencia a nivel académico en la asignatura
+de inglés.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        IMPACTO DE LA VIOLENCIA INTRAFAMILIAR EN EL RENDIMIENTO ACADEMICO DE LOS ESTUDIANTES DE NOVENO GRADO DE LA ¿INSTITUCION EDUCATIVA EDUARDO SUÁREZ ORCASITA¿ DE LA CIUDAD DE VALLEDUPAR<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2018                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2018
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Esta investigación se realizó con el propósito de promover posibles soluciones a la problemática del fracaso escolar que se evidencia en los estudiantes de la Institución Educativa Eduardo Suárez Orcasita de la ciudad de Valledupar, debido al bajo rendimiento académico y a una variable asociada con el maltrato verbal y físico en el marco de la convivencia escolar. De este modo, se propone la implementación de estrategias con la colaboración de los profesores, directivos docentes e incluye el trabajo con los padres de familia como actores importantes en el proceso de mejoramiento. La metodología utilizada, abordada entre lo cuantitativo y lo cualitativo, parte de una posición teórica deductiva y conlleva a una selección de técnicas concretas acerca del procedimiento para realizar las tareas vinculadas en la investigación. Esta exploración la realizaremos mediante la aplicación de encuestas y entrevistas con todos los estamentos de la comunidad educativa, durante el período comprendido entre el 10 de febrero y el 16 de junio del 2018. Al final se han dejado conclusiones y recomendaciones que conllevaron a la creación de un equipo de trabajo que apoyará a los responsables en la ejecución del proyecto de la institución educativa.
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

@@ -19,6 +19,8 @@
 #include <cstdio>
 #include <ctime>
 #include <vector>
+#include <map>
+#include <algorithm>
 #include <sqlite3.h>
 
 #ifdef _WIN32
@@ -154,11 +156,94 @@ static string filaTabla(const vector<string>& celdas, const vector<size_t>& anch
 }
 
 // Titulo a todo el ancho de la tabla.
-static string tituloTabla(const string& s, const vector<size_t>& anchos) {
+string tituloTabla(const string& s, const vector<size_t>& anchos) {
     size_t tot = 0;
     for (size_t i = 0; i < anchos.size(); i++) tot += anchos[i];
     if (!anchos.empty()) tot += 3 * (anchos.size() - 1);
     return "|" + celdaV(s, tot) + "|";
+}
+
+// --- Hoja de vida estilo currículo (S37): párrafos justificados por palabras
+// (mide ancho visual: tildes multibyte no descuadran) + secciones con viñetas.
+static void imprimirBloque(const string& texto, size_t ancho = 100, const string& prefijo = "  ") {
+    string linea;
+    size_t i = 0;
+    while (i < texto.size()) {
+        while (i < texto.size() && texto[i] == ' ') i++;
+        size_t j = i;
+        while (j < texto.size() && texto[j] != ' ') j++;
+        if (j == i) break;
+        string palabra = texto.substr(i, j - i);
+        string prueba = linea.empty() ? palabra : linea + " " + palabra;
+        if (anchoVisual(prueba) > ancho && !linea.empty()) {
+            cout << prefijo << sinRaros(linea) << "\n";
+            linea = palabra;
+        } else {
+            linea = prueba;
+        }
+        i = j;
+    }
+    if (!linea.empty()) cout << prefijo << sinRaros(linea) << "\n";
+}
+
+// S37: separa palabras pegadas del HTML SCIENTI ("Septiembrede2007" ->
+// "Septiembre de 2007", "paraLa" -> "para La"). Solo texto libre: jamás URLs.
+static string espaciar(const string& s) {
+    string o;
+    size_t i = 0;
+    while (i < s.size()) {
+        unsigned char a = static_cast<unsigned char>(s[i]);
+        // "deYYYY" tras minúscula -> " de YYYY".
+        if ((a == 'd' || a == 'D') && i > 0 && i + 6 <= s.size()
+            && (s[i+1] == 'e' || s[i+1] == 'E')
+            && s[i+2] >= '0' && s[i+2] <= '9' && s[i+3] >= '0' && s[i+3] <= '9'
+            && s[i+4] >= '0' && s[i+4] <= '9' && s[i+5] >= '0' && s[i+5] <= '9'
+            && s[i-1] >= 'a' && s[i-1] <= 'z') {
+            o += " de ";
+            o.append(s, i + 2, 4);
+            i += 6;
+            continue;
+        }
+        o += s[i];
+        if (i + 1 < s.size()) {
+            unsigned char b = static_cast<unsigned char>(s[i+1]);
+            bool aMin = (a >= 'a' && a <= 'z');
+            bool bMay = (b >= 'A' && b <= 'Z');
+            bool bDig = (b >= '0' && b <= '9');
+            if (aMin && (bMay || bDig)) o += ' ';
+        }
+        i++;
+    }
+    return o;
+}
+
+// Etiqueta alineada "  Label                   : " (labels ASCII: ancho = bytes).
+static string etiquetaCV(const string& s) {
+    string e = "  " + s;
+    while (e.size() < 29) e += ' ';
+    return e + ": ";
+}
+
+// Parte un texto en ítems que empiezan con alguna de las marcas (niveles académicos).
+static vector<string> partirPorMarcas(const string& texto, const vector<string>& marcas) {
+    vector<size_t> cortes;
+    for (size_t i = 0; i < marcas.size(); i++) {
+        size_t p = 0;
+        while ((p = texto.find(marcas[i], p)) != string::npos) {
+            if (p == 0 || texto[p - 1] == ' ') cortes.push_back(p);
+            p += marcas[i].size();
+        }
+    }
+    sort(cortes.begin(), cortes.end());
+    vector<string> items;
+    for (size_t k = 0; k < cortes.size(); k++) {
+        size_t fin = (k + 1 < cortes.size()) ? cortes[k + 1] : texto.size();
+        string it;
+        for (size_t p = cortes[k]; p < fin; p++) it += texto[p];
+        while (!it.empty() && it[it.size() - 1] == ' ') it.erase(it.size() - 1);
+        if (!it.empty()) items.push_back(it);
+    }
+    return items;
 }
 
 // ============================================================================
@@ -789,8 +874,8 @@ public:
     }
 
     void listarProductosPorVentanaAnios(int anioInicio, int anioFin) const {
-        // Tablas anchas (~110). Headers ASCII.
-        const vector<size_t> W = {5, 50, 11, 5, 6, 14};
+        // Tablas anchas (~111). Headers ASCII. S35: TIPO a 12 (Consultoria/Compilacion).
+        const vector<size_t> W = {5, 50, 12, 5, 6, 14};
         cout << "\n" << bordeTabla(W, '=') << "\n";
         cout << tituloTabla("FILTRO PRODUCCION CIENTIFICA", W) << "\n";
         cout << tituloTabla("Ventana: " + to_string(anioInicio) + " - " + to_string(anioFin), W) << "\n";
@@ -953,8 +1038,8 @@ public:
     }
 
     void listarProductos(bool incluirInactivos = false) const {
-        // Tablas anchas (~111). Headers ASCII.
-        const vector<size_t> W = {5, 34, 11, 5, 11, 6, 4, 10};
+        // Tablas anchas (~112). Headers ASCII. S35: TIPO a 12.
+        const vector<size_t> W = {5, 34, 12, 5, 11, 6, 4, 10};
         cout << "\n" << bordeTabla(W, '=') << "\n";
         cout << tituloTabla("LISTADO DE PRODUCTOS (por grupo)", W) << "\n";
         cout << bordeTabla(W, '=') << "\n";
@@ -990,13 +1075,15 @@ public:
         NodoGrupo* g = cabeceraGrupos;
         while (g != nullptr && g->codigo_grupo != cod) g = g->sigGrupo;
         if (g == nullptr) { cout << "[ERROR] Grupo no encontrado.\n"; return; }
-        const vector<size_t> W = {5, 44, 11, 5, 11, 6, 4};
+        // S35: TIPO a 12 + pie con conteo por tipo.
+        const vector<size_t> W = {5, 44, 12, 5, 11, 6, 4};
         cout << "\n" << bordeTabla(W, '=') << "\n";
         cout << tituloTabla("PRODUCTOS DE: " + g->nombre, W) << "\n";
         cout << bordeTabla(W, '=') << "\n";
         cout << filaTabla({"ID", "TITULO", "TIPO", "CAT", "VALID", "ANIO", "EST"}, W) << "\n";
         cout << bordeTabla(W, '-') << "\n";
         int count = 0;
+        map<string, int> porTipo;
         NodoProducto* p = g->primProducto;
         while (p != nullptr) {
             if (p->activo || incluirInactivos) {
@@ -1009,11 +1096,34 @@ public:
                 f.push_back(to_string(p->anio_publicacion));
                 f.push_back(p->activo ? "ACT" : "INA");
                 cout << filaTabla(f, W) << "\n";
+                porTipo[p->tipo_producto]++;
                 count++;
             }
             p = p->sigProductoGrupo;
         }
         cout << bordeTabla(W, '-') << "\nTotal: " << count << endl;
+        // S35: pie elegante con conteo por tipo (orden canónico, solo presentes).
+        {
+            const char* orden[] = {"Articulo", "Libro", "Capitulo", "Software", "Patente",
+                                   "Evento", "Tesis", "Consultoria", "Informe", "CursoCorto",
+                                   "Jurado", "Contenido", "Compilacion", "Regulacion"};
+            string linea;
+            int enLinea = 0;
+            cout << bordeTabla(W, '-') << "\n";
+            for (size_t i = 0; i < sizeof(orden) / sizeof(orden[0]); i++) {
+                map<string, int>::const_iterator it = porTipo.find(orden[i]);
+                if (it == porTipo.end()) continue;
+                if (!linea.empty()) linea += "  ";
+                linea += string(orden[i]) + ":" + to_string(it->second);
+                if (++enLinea == 4) {
+                    cout << tituloTabla(linea, W) << "\n";
+                    linea.clear();
+                    enLinea = 0;
+                }
+            }
+            if (!linea.empty()) cout << tituloTabla(linea, W) << "\n";
+            cout << bordeTabla(W, '-') << "\n";
+        }
     }
 
     void verDetalleGrupo(const string& cod) const {
@@ -1034,25 +1144,37 @@ public:
         cout << "--- Productos ---\n";
         NodoProducto* p = g->primProducto;
         while (p != nullptr) {
-            cout << " * (" << p->id_producto << ") " << p->titulo << " [" << p->categoria << "/" << p->estado_validacion << "/" << p->anio_publicacion << "]"
+            cout << " * (" << p->id_producto << ") " << p->titulo << " [" << p->tipo_producto << "/" << p->categoria << "/" << p->estado_validacion << "/" << p->anio_publicacion << "]"
                  << (p->activo ? "" : " INACTIVO") << endl;
             p = p->sigProductoGrupo;
         }
     }
 
-    void verDetalleInvestigador(const string& rh) const {
-        bool hallado = false;
+    // S37: cabecera del investigador (solo ===). Los datos básicos viven en
+    // DATOS PERSONALES de la hoja de vida (verPerfilInvestigador).
+    bool verCabeceraInvestigador(const string& rh) const {
         NodoGrupo* g = cabeceraGrupos;
         while (g != nullptr) {
             NodoInvestigador* inv = g->primInvestigador;
             while (inv != nullptr) {
                 if (inv->cod_rh == rh) {
-                    if (!hallado) {
-                        cout << "\n=== INVESTIGADOR [" << inv->cod_rh << "] " << inv->nombre_completo << " ===\n";
-                        cout << "Correo: " << inv->correo << "\nCategoria: " << inv->categoria_minciencias
-                             << "\nCvLAC: " << inv->cvlac_url << endl;
-                        hallado = true;
-                    }
+                    cout << "\n=== INVESTIGADOR [" << inv->cod_rh << "] " << inv->nombre_completo << " ===\n";
+                    return true;
+                }
+                inv = inv->sigInvestigador;
+            }
+            g = g->sigGrupo;
+        }
+        cout << "[ERROR] Investigador no encontrado.\n";
+        return false;
+    }
+
+    void verCuerpoInvestigador(const string& rh) const {
+        NodoGrupo* g = cabeceraGrupos;
+        while (g != nullptr) {
+            NodoInvestigador* inv = g->primInvestigador;
+            while (inv != nullptr) {
+                if (inv->cod_rh == rh) {
                     cout << " Adscrito a [" << g->codigo_grupo << "] " << g->nombre
                          << (inv->activo ? "" : " (INACTIVO en este grupo)") << endl;
                     NodoProducto* p = inv->primProducto;
@@ -1065,7 +1187,11 @@ public:
             }
             g = g->sigGrupo;
         }
-        if (!hallado) cout << "[ERROR] Investigador no encontrado.\n";
+    }
+
+    void verDetalleInvestigador(const string& rh) const {
+        if (!verCabeceraInvestigador(rh)) return;
+        verCuerpoInvestigador(rh);
     }
 
     void verDetalleProducto(int id) const {
@@ -1204,6 +1330,139 @@ public:
             sqlite3_finalize(stmtP);
         }
         return true;
+    }
+
+    // S37: hoja de vida CvLAC del investigador (tabla perfil_investigador).
+    // Se lee directo de SQLite (detalle relacional, ver nota 023): la RAM
+    // conserva solo TDAs puros. Presentación estilo currículo por secciones.
+    // Los básicos (correo/categoría/CvLAC) vienen de la RAM y abren DATOS PERSONALES.
+    bool verPerfilInvestigador(const string& rh, const string& correo,
+                               const string& categoria, const string& cvlac) {
+        if (db == nullptr) return false;
+        sqlite3_stmt* st;
+        const char* sql = "SELECT par_evaluador, nombre_citaciones, nacionalidad, sexo,"
+                          " scholar_url, orcid, formacion_academica, formacion_complementaria,"
+                          " experiencia, areas, idiomas FROM perfil_investigador WHERE cod_rh=?;";
+        if (sqlite3_prepare_v2(db, sql, -1, &st, nullptr) != SQLITE_OK) return false;
+        sqlite3_bind_text(st, 1, rh.c_str(), -1, SQLITE_TRANSIENT);
+        bool hay = false;
+        if (sqlite3_step(st) == SQLITE_ROW) {
+            hay = true;
+            string par = colText(st, 0), citas = colText(st, 1), nac = colText(st, 2);
+            string sexo = colText(st, 3), sch = colText(st, 4), orc = colText(st, 5);
+            string form = colText(st, 6), fcomp = colText(st, 7);
+            string exp = colText(st, 8), areas = colText(st, 9), idi = colText(st, 10);
+            cout << "  DATOS PERSONALES\n";
+            cout << "----------------------------------------------------------------------\n";
+            cout << etiquetaCV("Correo") << (correo.empty() ? "No" : correo) << "\n";
+            cout << etiquetaCV("Categoria") << (categoria.empty() ? "No" : categoria) << "\n";
+            cout << etiquetaCV("CvLAC") << (cvlac.empty() ? "No" : cvlac) << "\n";
+            cout << etiquetaCV("Par evaluador MinCiencias") << (par.empty() ? "No registrado" : par) << "\n";
+            if (!citas.empty()) cout << etiquetaCV("Nombre en citaciones") << sinRaros(citas) << "\n";
+            if (!nac.empty()) cout << etiquetaCV("Nacionalidad") << sinRaros(nac) << "\n";
+            if (!sexo.empty()) cout << etiquetaCV("Sexo") << sinRaros(sexo) << "\n";
+            if (!sch.empty() || !orc.empty()) {
+                cout << "----------------------------------------------------------------------\n";
+                cout << "  REDES SOCIALES E IDENTIFICADORES\n";
+                cout << "----------------------------------------------------------------------\n";
+                if (!sch.empty()) cout << etiquetaCV("Google Scholar") << sch << "\n";
+                if (!orc.empty()) cout << etiquetaCV("ORCID") << orc << "\n";
+            }
+            if (!areas.empty()) {
+                cout << "----------------------------------------------------------------------\n";
+                cout << "  AREAS DE ACTUACION\n";
+                cout << "----------------------------------------------------------------------\n";
+                string a2 = espaciar(areas);
+                // Flujo de muestra: lo que excede la estructura se desprecia.
+                if (a2.size() > 300) a2 = truncarVisual(a2, 300) + " (...)";
+                imprimirBloque(a2);
+            }
+            if (!form.empty()) {
+                cout << "----------------------------------------------------------------------\n";
+                cout << "  FORMACION ACADEMICA\n";
+                cout << "----------------------------------------------------------------------\n";
+                string f2 = espaciar(form);
+                vector<string> niveles;
+                niveles.push_back("Doctorado"); niveles.push_back("Especialización");
+                niveles.push_back("Especializacion"); niveles.push_back("Pregrado");
+                niveles.push_back("Perfeccionamiento");
+                vector<string> items = partirPorMarcas(f2, niveles);
+                if (items.size() <= 1) {
+                    if (anchoVisual(f2) > 1200) f2 = truncarVisual(f2, 1200) + " (...)";
+                    imprimirBloque(f2, 100, "  > ");
+                } else {
+                    size_t tope = items.size() > 5 ? 5 : items.size();
+                    for (size_t i = 0; i < tope; i++) imprimirBloque(items[i], 96, "  > ");
+                    if (items.size() > 5)
+                        cout << "  (...) +" << (items.size() - 5) << " Items mas en CvLAC\n";
+                }
+            }
+            if (!fcomp.empty()) {
+                cout << "----------------------------------------------------------------------\n";
+                cout << "  FORMACION COMPLEMENTARIA\n";
+                cout << "----------------------------------------------------------------------\n";
+                string fc = espaciar(fcomp);
+                if (anchoVisual(fc) > 600) fc = truncarVisual(fc, 600) + " (...)";
+                imprimirBloque(fc, 100, "  > ");
+            }
+            if (!exp.empty()) {
+                cout << "----------------------------------------------------------------------\n";
+                cout << "  EXPERIENCIA PROFESIONAL\n";
+                cout << "----------------------------------------------------------------------\n";
+                string e2 = espaciar(exp);
+                if (anchoVisual(e2) > 1500) e2 = truncarVisual(e2, 1500) + " (...)";
+                imprimirBloque(e2);
+            }
+            if (!idi.empty()) {
+                cout << "----------------------------------------------------------------------\n";
+                cout << "  IDIOMAS\n";
+                cout << "----------------------------------------------------------------------\n";
+                // "Habla Escribe Lee Entiende <idioma> <4 niveles> ..." por grupos de 5.
+                vector<string> tok;
+                {
+                    string cur;
+                    for (size_t i = 0; i <= idi.size(); i++) {
+                        if (i == idi.size() || idi[i] == ' ') {
+                            if (!cur.empty()) { tok.push_back(cur); cur.clear(); }
+                        } else cur += idi[i];
+                    }
+                }
+                size_t base = 0;
+                for (size_t i = 0; i + 3 < tok.size(); i++) {
+                    if (tok[i] == "Habla" && tok[i+1] == "Escribe" && tok[i+2] == "Lee" && tok[i+3] == "Entiende") {
+                        base = i + 4;
+                        break;
+                    }
+                }
+                if (base > 0 && base < tok.size()) {
+                    for (size_t i = base; i < tok.size();) {
+                        if (i + 4 >= tok.size()) break;
+                        cout << "  - " << sinRaros(tok[i]) << ": Habla " << sinRaros(tok[i+1])
+                             << " / Escribe " << sinRaros(tok[i+2]) << " / Lee " << sinRaros(tok[i+3])
+                             << " / Entiende " << sinRaros(tok[i+4]) << "\n";
+                        i += 5;
+                    }
+                } else {
+                    // Sin cuarteto reconocible: se quitan encabezados sueltos y
+                    // se muestra lo disponible (flujo de muestra, sin combinar).
+                    string resto;
+                    for (size_t i = 0; i < tok.size(); i++) {
+                        if (tok[i] == "Habla" || tok[i] == "Escribe" || tok[i] == "Lee" ||
+                            tok[i] == "Entiende" || tok[i] == "Idiomas") continue;
+                        if (!resto.empty()) resto += " ";
+                        resto += tok[i];
+                    }
+                    if (!resto.empty()) imprimirBloque(resto);
+                }
+            }
+            cout << "======================================================================\n";
+            if (par.empty() && citas.empty() && form.empty() && exp.empty())
+                cout << "(Perfil basico: recargue el grupo con red para la hoja completa.)\n";
+        } else {
+            cout << "(Sin perfil CvLAC: recargue el grupo con red para descargarla.)\n";
+        }
+        sqlite3_finalize(st);
+        return hay;
     }
 
     // ---- Altas ----
@@ -1493,6 +1752,10 @@ public:
         cout << "----------------------------------------------------------------------\n";
 
         // PRIMERO: desea cargar un grupo (por NOMBRE desde SCIENTI) o seguir con lo actual.
+        // S34: bucle — si la búsqueda no deja carga nueva, submenú espejo del No
+        // (1 buscar otro -> repite este si/no; 2 precargar SQLite; 3 sin datos explícito).
+        // Nunca se entra al menú principal con la RAM vacía en automático.
+        while (true) {
         char resp = '\0';
         while (resp != 's' && resp != 'n') {
             string r = leerTexto("Desea cargar algun grupo de investigacion de la universidad popular del cesar? (si/no) + ENTER: ", false);
@@ -1509,7 +1772,31 @@ public:
 
         if (resp == 's') {
             // Buscador por NOMBRE: verifica en SCIENTI, permite escoger universidad y carga.
-            menuBuscarGrupo();
+            bool ok = menuBuscarGrupo();
+            if (ok) {
+                menuPrincipal();
+                return;
+            }
+            // Sin carga nueva (duplicado/fallo/cancelado): mismo esquema del No, buscar primero.
+            cout << "----------------------------------------------------------------------\n";
+            cout << " [SIN CARGA] No se cargo ningun grupo nuevo.\n";
+            cout << " 1. Volver a buscar otro grupo\n";
+            cout << " 2. Precargar datos de la Universidad desde SQLite (data/pea_investigacion.db)\n";
+            cout << " 3. Iniciar con estructuras vacias en memoria RAM (Ejecutar sin datos)\n";
+            cout << "----------------------------------------------------------------------\n";
+            char sub = '\0';
+            while (sub != '1' && sub != '2' && sub != '3') {
+                sub = leerOpcion(" Seleccione una opcion [1-3] + ENTER: ");
+                if (sub != '1' && sub != '2' && sub != '3') cout << "[AVISO] Opcion invalida. Escriba 1, 2 o 3 y pulse ENTER.\n";
+            }
+            if (sub == '1') continue; // repite el si/no del comienzo
+            if (sub == '2') {
+                cout << "[INFO] Precargando Hipercubo 3D desde SQLite...\n";
+                gestorBD.cargarEnMultilista(multilista);
+            } else {
+                crearSistemaVacio("arranque sin datos (eleccion explicita)");
+            }
+            pausar();
             menuPrincipal();
             return;
         }
@@ -1535,23 +1822,60 @@ public:
 
         pausar();
         menuPrincipal();
+        return;
+        }
     }
 
-    // Flujo reutilizable de carga por grupo (misma logica del arranque).
-    // Verifica existencia ("Grupo no existente") y universidad ("universidad no encontrada").
-    void flujoCargaGrupoUPC() {
-        string nro = leerTexto(" nro GrupLAC (ENTER = GISICO 00000000002099): ", true);
-        if (nro.empty()) nro = "00000000002099";
-        string univ = leerTexto(" Universidad (ENTER = sin filtro): ", true);
-        cout << "\n[Cargando datos...]\n";
-        colaIngesta.encolar("URL_SCIENTI", "nro=" + nro);
-        string args = "--scrape-grupo \"" + nro + "\"";
-        if (!univ.empty()) args += " --universidad \"" + univ + "\"";
-        GestorInterop::ejecutarScriptPython(args);
+    // Ejecuta --scrape-grupo capturando la salida: si Python informa
+    // "ya existente", muestra un aviso claro y NO promete "datos cargados".
+    // Retorna true solo si hubo carga nueva (y recarga la RAM).
+    bool cargarGrupoDesdeSCIENTI(const string& args, const string& etiqueta) {
+        cout << "\n[Cargando datos " << etiqueta << "...]\n";
+        colaIngesta.encolar("URL_SCIENTI", args);
+        string out = GestorInterop::salidaPython(args);
+        {
+            string cur;
+            for (size_t i = 0; i <= out.size(); i++) {
+                if (i == out.size() || out[i] == '\n') {
+                    if (!cur.empty()) cout << "  [PYTHON] " << cur << "\n";
+                    cur.clear();
+                } else if (out[i] != '\r') cur += out[i];
+            }
+        }
+        if (out.find("ya existente") != string::npos) {
+            cout << "\n[AVISO] Este grupo ya estaba cargado en el sistema.\n";
+            cout << "        No se descargo nada nuevo ni se duplico informacion.\n";
+            cout << "        Todo sigue igual.\n";
+            pausarEnter("Presione ENTER para continuar...");
+            return false;
+        }
         cout << "\n[RECARGA] Sincronizando Hipercubo 3D en RAM desde SQLite...\n";
         gestorBD.cargarEnMultilista(multilista);
         cout << "\n[Datos cargados con exito.]\n";
         pausarEnter("Presione ENTER para continuar...");
+        return true;
+    }
+
+    // Flujo reutilizable de carga por grupo (misma logica del arranque).
+    // Verifica existencia ("Grupo no existente") y universidad ("universidad no encontrada").
+    // S32: si el nro ya está cargado, avisa "grupo ya existente" y no re-scrapea
+    // (antes generaba un 2.º zip: grupo_GISICO.zip + grupo_COL0018706.zip).
+    void flujoCargaGrupoUPC() {
+        string nro = leerTexto(" nro GrupLAC (ENTER = GISICO 00000000002099): ", true);
+        if (nro.empty()) nro = "00000000002099";
+        string chk = GestorInterop::salidaPython("--existe-grupo \"" + nro + "\"");
+        if (chk.find("ya existente") != string::npos) {
+            cout << "\n[AVISO] Este grupo ya estaba cargado en el sistema.\n";
+            cout << "        " << chk;
+            cout << "        No se descargo nada nuevo ni se duplico informacion.\n";
+            cout << "        Todo sigue igual.\n";
+            pausarEnter("Presione ENTER para continuar...");
+            return;
+        }
+        string univ = leerTexto(" Universidad (ENTER = sin filtro): ", true);
+        string args = "--scrape-grupo \"" + nro + "\"";
+        if (!univ.empty()) args += " --universidad \"" + univ + "\"";
+        cargarGrupoDesdeSCIENTI(args, "del grupo");
     }
 
     static string leerLinea(const string& prompt) {
@@ -1587,9 +1911,13 @@ public:
     static bool esValidacionValida(const string& v) {
         return v == "Validado" || v == "Pendiente" || v == "Rechazado";
     }
+    // 15 tipos propios S35 (todos <=12 col, sin tilde). Sin CHECK en BD: VARCHAR libre.
     static bool esTipoValido(const string& v) {
         return v == "Articulo" || v == "Libro" || v == "Software" || v == "Patente" ||
-               v == "Capitulo"; // capitulos GrupLAC: valor propio, no Libro (S28)
+               v == "Capitulo" || // capitulos GrupLAC: valor propio, no Libro (S28)
+               v == "Evento" || v == "Tesis" || v == "Consultoria" || v == "Informe" ||
+               v == "CursoCorto" || v == "Jurado" || v == "Contenido" ||
+               v == "Compilacion" || v == "Regulacion";
     }
     static bool esCategoriaInvValida(const string& v) {
         return v == "Emergente" || v == "Junior" || v == "Asociado" || v == "Senior" ||
@@ -1661,7 +1989,7 @@ public:
         return leerTextoVal(" Validacion (Validado/Pendiente/Rechazado): ", permitirVacio, esValidacionValida, "Opciones: Validado/Pendiente/Rechazado.");
     }
     static string leerTipoProd(bool permitirVacio) {
-        return leerTextoVal(" Tipo (Articulo/Libro/Software/Patente/Capitulo): ", permitirVacio, esTipoValido, "Opciones: Articulo/Libro/Software/Patente/Capitulo (sin tilde).");
+        return leerTextoVal(" Tipo (Articulo/Libro/Software/Patente/Capitulo/Evento/Tesis/Consultoria/Informe/CursoCorto/Jurado/Contenido/Compilacion/Regulacion): ", permitirVacio, esTipoValido, "Opciones: 15 tipos S35 (sin tilde).");
     }
     static string leerCorreo(bool permitirVacio) {
         return leerTextoVal(" Correo: ", permitirVacio, esCorreoValido, "Debe contener @ y dominio (ej. x@unicesar.edu.co).");
@@ -1948,7 +2276,8 @@ public:
 
     // Buscador por nombre: SCIENTI -> candidatos (nro + universidad) -> elige -> carga.
     // Si no hay coincidencias: grupo no existente. Si hay varias universidades: el usuario escoge.
-    void menuBuscarGrupo() {
+    // Retorna true solo si quedo un grupo nuevo cargado (S34: el arranque decide con esto).
+    bool menuBuscarGrupo() {
         limpiarPantalla();
         cout << "--- BUSCAR GRUPO POR NOMBRE EN SCIENTI ---\n";
         string q = leerTexto(" Nombre a buscar (ej. GISICO): ", false);
@@ -1976,7 +2305,7 @@ public:
             cout << "[AVISO] Grupo no existente (sin coincidencias para \"" << q << "\").\n";
             cout << "Sugerencia: indexe mas instituciones con --grupos-institucion (hoy: las ya indexadas).\n";
             pausar();
-            return;
+            return false;
         }
         cout << "\nCoincidencias (escoja por numero; 0 cancela):\n";
         {
@@ -1994,17 +2323,12 @@ public:
             cout << bordeTabla(W, '-') << "\n";
         }
         int pick = leerEntero(" Opcion [0-" + to_string(cands.size()) + "]: ", 0, (int)cands.size(), false, 0);
-        if (pick == 0) { cout << "[CANCELADO].\n"; pausar(); return; }
+        if (pick == 0) { cout << "[CANCELADO].\n"; pausar(); return false; }
         CandidatoGrupo elegido = cands[(size_t)pick - 1];
-        cout << "\n[Cargando datos de " << elegido.nombre.substr(0, 40) << " / " << elegido.inst.substr(0, 30) << "...]\n";
-        colaIngesta.encolar("URL_SCIENTI", "nro=" + elegido.nro);
+        string etiqueta = elegido.nombre.substr(0, 40) + " / " + elegido.inst.substr(0, 30);
         string args = "--scrape-grupo \"" + elegido.nro + "\"";
         if (!elegido.inst.empty()) args += " --universidad \"" + elegido.inst + "\"";
-        GestorInterop::ejecutarScriptPython(args);
-        cout << "\n[RECARGA] Sincronizando Hipercubo 3D en RAM desde SQLite...\n";
-        gestorBD.cargarEnMultilista(multilista);
-        cout << "\n[Datos cargados con exito.]\n";
-        pausarEnter("Presione ENTER para continuar...");
+        return cargarGrupoDesdeSCIENTI(args, "de " + etiqueta);
     }
 
     // Muestra los grupos por NUMERO (sin codigos) y devuelve el codigo interno elegido.
@@ -2124,7 +2448,21 @@ public:
                 if (grp.empty()) { cout << "[CANCELADO].\n"; pausar(); }
                 else { multilista.listarInvestigadoresDeGrupo(grp); pausar(); }
             }
-            else if (opt == '2') { string rh = leerTexto(" cod_rh: ", false); multilista.verDetalleInvestigador(rh); pausar(); }
+            else if (opt == '2') {
+                // S37: hoja de vida = solo currículo (sin lista de productos;
+                // los productos se ven en las vistas del grupo, no en el CV).
+                string rh = leerTexto(" cod_rh: ", false);
+                if (multilista.verCabeceraInvestigador(rh)) {
+                    cout << "\n======================================================================\n";
+                    cout << "  HOJA DE VIDA (CvLAC)  [rh " << rh << "]\n";
+                    cout << "----------------------------------------------------------------------\n";
+                    NodoInvestigador* ni = multilista.buscarInvestigador(rh);
+                    string cm = ni ? ni->correo : "", ct = ni ? ni->categoria_minciencias : "";
+                    string cv = ni ? ni->cvlac_url : "";
+                    gestorBD.verPerfilInvestigador(rh, cm, ct, cv);
+                }
+                pausar();
+            }
             else if (opt == '3') {
                 string grp = elegirGrupo("Seleccione el grupo destino");
                 if (grp.empty()) { cout << "[CANCELADO].\n"; pausar(); continue; }

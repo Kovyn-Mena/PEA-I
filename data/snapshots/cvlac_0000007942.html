@@ -1,0 +1,3323 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=D9B8B68C4AA099B941DA4B368FB47FE0" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        Jhenifer Mailec&nbsp;Rincón&nbsp;Guevara
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>RINCÓN GUEVARA, JHENIFER MAILEC</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Femenino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td><h3 >Identificadores de autor</h3></td>
+                                </tr>
+                                    
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        
+                                        <a target="_blank" href="https://orcid.org/0000-0002-0956-668X" style="color: #007A81">Open Researcher and Contributor ID (ORCID)</a>
+                                    </td>
+                                </tr>
+                                
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Doctorado</b>
+                            UNIVERSIDAD DEL MAGDALENA<br />
+                            Doctorado en Ciencias de la Educación - Rudecolombia<br />
+                            Agostode2021 - Agostode 2025<br />
+                            Escenarios de innovación desde la gestión pedagógica para el fortalecimiento de la cultura digital: una lectura comprensiva y propositiva desde un estudio de caso</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            UNIVERSIDAD SANTO TOMAS<br />
+                            MAESTRIA EN EDUCACION<br />
+                            Marzode2012 - Noviembrede 2014<br />
+                            Las prácticas pedagógicas en el contexto de la cultura digital permean aprendizajes significativos</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD DE PAMPLONA<br />
+                            Licenciatura Lengua Castellana y Comunicación<br />
+                            Juniode2008 - Diciembrede 2011<br />
+                            El ensayo y la canción vallenata como estrategia didáctica para potenciar la composición escrita a partir del patrimonio cultural tangible inmueble de la ciudad de Valledupar, con los  estudiantes de los grados 11° del sector oficial</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Perfeccionamiento</b>
+                            UNIVERSIDAD DEL MAGDALENA<br />
+                            USO DE MEDIACIONES TECNOLÓGICAS EN AMBIENTES ESCOLARES NO PRESENCIALES<br />
+                            Juniode2020 - Octubrede 2020<br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Perfeccionamiento</b>
+                            UNIVERSIDAD DEL VALLE<br />
+                            DIPLOMADO EN COMUNIDADES DE APRENDIZAJE<br />
+                            Agostode2020 - Noviembrede 2020<br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Perfeccionamiento</b>
+                            Corporación Universitaria de Cataluña<br />
+                            CURSO MEDIOS DIGITALES<br />
+                            Abrilde2020 - Mayode 2020<br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Técnico - nivel superior</b>
+                            Escuela Normal Superior Maria Inmaculada <br />
+                            NORMALISTA SUPERIOR<br />
+                            Enerode2006 - Diciembrede 2007<br />
+                            </td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3>Formaci&oacute;n Complementaria</h3></td>
+                            </tr>   
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD DE ANTIOQUIA<br />
+                        DIDÁCTICA Y NUEVAS TECNOLOGÍAS<br />
+                        Febrerode2013 - Juliode 2013<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Otros</b>
+                        UNIVERSIDAD DE LOS ANDES<br />
+                        Formación de Investigadores en Educación- Maestros y maestras que investigan<br />
+                        Abrilde2021 - Octubrede 2021<br />
+                        </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Secretaría de Educación Municipal de Valledupar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>30&nbsp;horas Semanales
+                        Agosto de 2011            
+                         de Actual<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Otro            
+                        <i> - Cargo:</i>&nbsp;Tutor pedagógico en el programa Todos a Aprender           
+                        Febrero de 2014            
+                        Enero de <br>
+
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; LOS PROYECTOS DE AULA EN EL GRADO TRANSICIÓN                            
+                        Febrero 2016            
+                        Noviembre 2016<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD DE PAMPLONA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>6&nbsp;horas Semanales
+                        Marzo de 2015            
+                         de <br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>18&nbsp;horas Semanales
+                        Febrero de 2016            
+                         de Actual<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Coordinador de curso            
+                        <i> - Cargo:</i>&nbsp;Coordinación de la práctica de los programas Licenciatura en Español e Inglés y Literatura y Lengua          
+                        Febrero de 2020            
+                        Enero de <br>
+
+                                            
+                        - &nbsp;Otro            
+                        <i> - Cargo:</i>&nbsp;Miembro del Comité Curricular de la Licenciatura de Español e Inglés Resolución 012 de 11 de septiembre de 2019          
+                        Febrero de 2020            
+                        Enero de <br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Institución Educativa Joaquín Ochoa Maestre</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>30&nbsp;horas Semanales
+                        Agosto de 2011            
+                        Julio de 2015<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Otra actividad técnico-científica relevante            
+                        <i> - Cargo:</i>&nbsp;Docente de Básica Primaria          
+                        Agosto de 2011            
+                        Julio de 2015<br>
+
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; INCIDENCIA DEL NIVEL DE LECTURA CRÍTICA EN LOS PROCESOS ACADÉMICOS DE LOS NIÑOS DEL GRADO TERCERO                            
+                        Febrero 2012            
+                        Noviembre 2012<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>COLEGIO SANTA FE</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>22&nbsp;horas Semanales
+                        Febrero de 2008            
+                        Noviembre de 2009<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía)</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Humanidades -- Idiomas y Literatura -- Estudios Generales del Lenguaje</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;EDUCACIÓN, DIDÁCTICA Y PEDAGOGÍA, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Formación docente, <i>Activa:</i>Si</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Reconocimientos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>Reconocer y exaltar a la docente JHENIFER MAILEC RINCON GUEVARA por su gestión, compromiso, respaldo y cooperación en los procesos de creación de programas,, renovación de registros calificados, proceso de autoevaluación y acreditación por alta calidad,UNIVERSIDAD POPULAR DEL CESAR - Noviembrede 2018</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>Proceso evaluativo excelente y mención de honor a sus prácticas pedagógicas investigativas,Normal Superior María Inmaculada Manaure - Diciembrede 2007</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>Mención de Honor por Rendimiento Académico,UNIVERSIDAD DE PAMPLONA - Diciembrede 2011</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>Participante del Programa de Becas de Excelencia Doctoral del Bicentenario,Ministerio de Ciencia, Tecnología e Innovación - Minciencias - Juliode 2021</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>Investigador de Grupo Reconocido  en el Ranking Mejores Grupos FRH-2023,Sapiens Research SAS - Juniode 2023</li></td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Cursos de corta duraci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            JHENIFER MAILEC RINCON GUEVARA,                    
+                                            
+                            LOS PROYECTOS DE AULA EN EL GRADO TRANSICIÓN,
+                            <i>Finalidad: </i>Presentar a los docentes la metodología de trabajo por proyectos para el grado transición; como estrategia didáctica en la cual se  expliciten los aprendizajes en la perspectiva del aporte al desarrollo integral del niños y niñas en el grado transición en el marco del  programa Todos a Aprender 2.0.
+                            . En: Colombia&nbsp;
+                            ,2016,&nbsp;
+                            ,Ministerio De Educación Nacional - Mineducación.&nbsp;
+                            participaci&oacute;n: Otro
+                            ,&nbsp;0 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            JHENIFER MAILEC RINCON GUEVARA,                    
+                                            
+                            COMUNIDADES DE APRENDIZAJE 2.0,
+                            <i>Finalidad: </i>Presentar los objetivos, componentes y lineamientos de las Comunidades de Aprendizaje, desde la perspectiva de formación del Programa Todos a Aprender 2.0.
+                            . En: Colombia&nbsp;
+                            ,2016,&nbsp;
+                            ,Ministerio De Educación Nacional - Mineducación.&nbsp;
+                            participaci&oacute;n: Otro
+                            ,&nbsp;0 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            JHENIFER MAILEC RINCON GUEVARA,                    
+                                            
+                            MANUALES DE LECTURA Y COMPOSICIÓN EN ESPAÑOL COMO HERRAMIENTA DE TRABAJO EN EL AULA,
+                            <i>Finalidad: </i>Utilizar la guía de uso para el Maestro de los Manuales de Lectura y Composición en Español para identificar los elementos del marco conceptual referidos  a la comprensión de lectura y a la relación entre el desarrollo cognitivo y el desarrollo de habilidades linguísticas 
+                            . En: Colombia&nbsp;
+                            ,2016,&nbsp;
+                            ,Ministerio De Educación Nacional - Mineducación.&nbsp;
+                            participaci&oacute;n: Otro
+                            ,&nbsp;0 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            JHENIFER MAILEC RINCON GUEVARA,                    
+                                            
+                            APRENDIZAJE COOPERATIVO: Habilidades Sociales,
+                            <i>Finalidad: </i>Los profesores podrán incorporar en el aula el desarrollo de habilidades sociales a través del trabajo con Aprendizaje  Cooperativo, reflejado en las planeaciones de clase en donde tendrán en cuenta objetivos académicos y el desarrollo de  habilidades sociales.
+                            . En: Colombia&nbsp;
+                            ,2016,&nbsp;
+                            ,Ministerio De Educación Nacional - Mineducación.&nbsp;
+                            participaci&oacute;n: Otro
+                            ,&nbsp;0 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            JHENIFER MAILEC RINCON GUEVARA,                    
+                                            
+                            La magia de la lectura,
+                            <i>Finalidad: </i>Presentar el conocimiento didáctico del contenido relacionado con la comprensión de un texto
+                            . En: Colombia&nbsp;
+                            ,2016,&nbsp;
+                            ,Ministerio De Educación Nacional - Mineducación.&nbsp;
+                            participaci&oacute;n: Otro
+                            ,&nbsp;0 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            JHENIFER MAILEC RINCON GUEVARA,                    
+                                            
+                            TALLER ACOMPAÑAMIENTO EN EL AULA,
+                            <i>Finalidad: </i>Los profesores podrán utilizar el instrumento del Marco para la Enseñanza como referente que indique su nivel y progreso en  su práctica pedagógica permanente.
+                            . En: Colombia&nbsp;
+                            ,2016,&nbsp;
+                            ,Ministerio De Educación Nacional - Mineducación.&nbsp;
+                            participaci&oacute;n: Otro
+                            ,&nbsp;0 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            JHENIFER MAILEC RINCON GUEVARA,                    
+                                            
+                            Acompañamiento en aula,
+                            <i>Finalidad: </i>Conocer qué es y para qué se utiliza el Marco para la Enseñanza, e identificar sus aportes para el  mejoramiento permanente de la práctica pedagógica.
+                            . En: Colombia&nbsp;
+                            ,2016,&nbsp;
+                            ,Ministerio De Educación Nacional - Mineducación.&nbsp;
+                            participaci&oacute;n: Otro
+                            ,&nbsp;0 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JHENIFER MAILEC RINCON GUEVARA,                    
+                            
+                            Estrategias para el rendimiento académico utilizadas por estudiantes de la Universidad Popular del Cesar y del Magdalena&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            LINCENCITURA EN LENGUA CASTELLANA E INGLÉS,
+                            &nbsp;2022.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Benjamín Obeth Manotas Pizarro
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): JHENIFER MAILEC RINCON GUEVARA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajo de grado de maestría o especialidad clínica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JHENIFER MAILEC RINCON GUEVARA,                    
+                            
+                            Diseño de una estrategia didáctica para la orientación vocacional de estudiantes de la IE E.S.O para consolidar su proyecto profesional&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Maestría en Educación del Sistema de Universidades Estatales del Caribe Colombiano Sue Caribe,
+                            &nbsp;2021.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Ligia Maria Monterroza Contreras
+                            Rebeca Isabel Monterroza Villalba
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): JHENIFER MAILEC RINCON GUEVARA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JHENIFER MAILEC RINCON GUEVARA,                    
+                            
+                            LA LúDICA COMO ESTRATEGIA PEDAGóGICA PARA FOMENTAR EL HáBITO LECTOR DE LOS EDUCANDOS DEL GRADO 8 02 DE LA INSTITUCIÓN EDUCATIVA ENRíQUE PUPO MARTíNEZ&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            LINCENCITURA EN LENGUA CASTELLANA E INGLÉS,
+                            &nbsp;2016.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            DAYANA LORENA AVILA DAZA&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JHENIFER MAILEC RINCON GUEVARA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Estudios Generales del Lenguaje,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JHENIFER MAILEC RINCON GUEVARA,                    
+                            
+                            Educación Inclusiva en el marco del post-conflicto: La Paz y Manaure (Cesar- Colombia)&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            LINCENCITURA EN LENGUA CASTELLANA E INGLÉS,
+                            &nbsp;2018.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Katherine Zambrano Carreño
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): JHENIFER MAILEC RINCON GUEVARA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JHENIFER MAILEC RINCON GUEVARA,                    
+                            
+                            PRODUCCIÓN DE TEXTOS INFORMATIVOS EMPLEADOS EN LA ORGANIZACIÓN DE LA EMISORA ESTUDIANTIL APLICADO POR LOS ALUMNOS DEL GRADO DÉCIMO DE LA INSTITUCIÓN EDUCATIVA ALFONSO LÓPEZ PUMAREJO&nbsp;
+                            UNIVERSIDAD DE PAMPLONA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Licenciatura Lengua Castellana y Comunicación,
+                            &nbsp;2015.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            FLOR ELENA OLIVO PUMAREJO&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JHENIFER MAILEC RINCON GUEVARA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Jurado en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Maestría</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JHENIFER MAILEC RINCON GUEVARA,                    
+                            
+                            <i>Titulo:&nbsp;</i>CARACTERIZACIÓN DE LOS MECANISMOS ALTERNATIVOS DE SOLUCIÓN DE CONFLICTOS CASO: ESTUDIANTES DE 11° DE LA INSTITUCIÓN EDUCATIVA FRANCISCO DE PAULA SANTANDER, MUNICIPIO EL SUDAN BOLÍVAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> MAESTRÍA EN EDUCACIÓN PARA EL DESARROLLO SOCIOCULTURAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>DANELSY CECILIA PINEDA MORALES, JOSE CARLOS CARIACIOLO IGLESIAS &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Maestría</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JHENIFER MAILEC RINCON GUEVARA,                    
+                            
+                            <i>Titulo:&nbsp;</i>IMPLEMENTACIÓN DE UNA COMUNIDAD VIRTUAL DE APRENDIZAJE PARA EL RECONOCIMIENTO DE LA IDENTIDAD CULTURAL INDÍGENA WIWA EN I. E. RURAL HUGUES MANUEL LACOUTURE                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> MAESTRÍA EN EDUCACIÓN PARA EL DESARROLLO SOCIOCULTURAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>CARLOS ANDRES VEGA MOJICA, ENER IBETH DIAZ MENDOZA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Maestría</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JHENIFER MAILEC RINCON GUEVARA,                    
+                            
+                            <i>Titulo:&nbsp;</i>IMPLEMENTACIÓN DEL E-BOOK COMO RECURSO DIDÁCTICO CON RELACIÓN A LA IDENTIDAD CULTURAL DESDE LA EDUCACIÓN ARTÍSTICA EN ESTUDIANTES DEL GRADO NOVENO EN LA INSTITUCIÓN EDUCATIVA RURAL DE BUENAVISTA.                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> MAESTRÍA EN EDUCACIÓN PARA EL DESARROLLO SOCIOCULTURAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>RAFAEL NIÑO JAIMES, EDNA ROCIO OROZCO UCROS &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Maestría</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JHENIFER MAILEC RINCON GUEVARA,                    
+                            
+                            <i>Titulo:&nbsp;</i>DIVERCIENCIAS 4 TURISMO REALIDAD- VIRTUAL DIVER TOURS COMO ESTRATEGIA LÚDICO PEDAGÓGICO DE APRENDIZAJE PARA EL DESARROLLO SOCIOCULTURAL                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> MAESTRÍA EN EDUCACIÓN PARA EL DESARROLLO SOCIOCULTURAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>SANDRA MIREYA NOSSA QUIROGA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Maestría</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JHENIFER MAILEC RINCON GUEVARA,                    
+                            
+                            <i>Titulo:&nbsp;</i>LA REALIDAD VIRTUAL ¿DIVERCIENCIAS 5¿ COMO ESTRATEGIA LÚDICO - PEDAGÓGICA PARA EL APRENDIZAJE DE LAS CIENCIAS SOCIALES EN NIÑOS DE 6 A 9 AÑOS DE LA FUNDACIÓN DA AMOR ¿FUNDAMOR¿.                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> MAESTRÍA EN EDUCACIÓN PARA EL DESARROLLO SOCIOCULTURAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>LORENA MARCELA INFANTE HERNANDEZ, JACQUELIN MALDONADO PERILLA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Maestría</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JHENIFER MAILEC RINCON GUEVARA,                    
+                            
+                            <i>Titulo:&nbsp;</i>Diseño De Un Aplicativo Web Como Recurso Didáctico Para La Planeación De Clases En La Práctica Profesional Docente: Licenciatura En Lengua Castellana E Inglés                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> Maestría en Educación del Sistema de Universidades Estatales del Caribe Colombiano Sue Caribe&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>YEIMIS CATALINA CERVANTES TÁMARA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Maestría</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JHENIFER MAILEC RINCON GUEVARA,                    
+                            
+                            <i>Titulo:&nbsp;</i>DIDÁCTICA PARA EL APRENDIZAJE DE LA HISTORIA PRECOLOMBINA MEDIANTE LAS ARTES PLÁSTICAS EN BÁSICA PRIMARIA EN LA INSTITUCIÓN EDUCATIVA RICARDO GONZÁLEZ                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Trabajo de grado/tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> Maestría en Educación del Sistema de Universidades Estatales del Caribe Colombiano Sue Caribe&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>ANDREA CAROLINA ALVAREZ SUÁREZ &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JHENIFER MAILEC RINCON GUEVARA,                    
+                            
+                            <i>Titulo:&nbsp;</i>Textos multimodales como estrategia dinamizadora de las competencias lectora y escritora                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> LINCENCITURA EN LENGUA CASTELLANA E INGLÉS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>DIANA MARGARITA DE LA CRUZ RAMIREZ   ANA ISABEL RUIZ RAMOS  &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Estudios Generales del Lenguaje,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a></td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>IV COLOQUIO INTERNACIONAL EN EDUCACIÓN, INTERCULTURALIDAD Y TERRITORIO&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2023-09-14 00:00:00.0,&nbsp;
+                                                    2023-09-15 00:00:00.0 &nbsp;
+                                                    en SANTA MARTA &nbsp; - Universidad del Magdalena  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>POLÍTICAS EDUCATIVAS EN EL CAMPO DE LAS TIC EN COLOMBIA
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DEL MAGDALENA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JHENIFER MAILEC RINCON GUEVARA
+                                                        <i>Rol en el evento: </i>Organizador , Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>II Coloquio internacional sobre gestión pedagógica e innovación educativa: tendencias que definirán el futuro de la educación&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2023-06-21 00:00:00.0,&nbsp;
+                                                    2023-06-23 00:00:00.0 &nbsp;
+                                                    en No Informado &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Tendencias que enrutan la educación: una mirada desde la gestión pedagógica
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DE CARTAGENA 
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JHENIFER MAILEC RINCON GUEVARA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>IV CONGRESO INTERNACIONAL SOLEI&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2024-05-23 00:00:00.0,&nbsp;
+                                                    2024-05-24 00:00:00.0 &nbsp;
+                                                    en SANTA MARTA &nbsp; - Universidad del Magdalena  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>La Revolución de las TIC en la gestión pedagógica de Organizaciones Educativas
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DEL MAGDALENA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JHENIFER MAILEC RINCON GUEVARA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>II CONGRESO INTERNACIONAL EN TEMAS Y PROBLEMAS DE INVESTIGACIÓN EN EDUCACIÓN, SOCIEDAD, CIENCIA Y TECNOLOGÍA&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2013-09-19 00:00:00.0,&nbsp;
+                                                    2013-09-21 00:00:00.0 &nbsp;
+                                                    en BOGOTÁ, D.C. &nbsp; - UNIVERSIDAD SANTO TOMÁS &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>LA IMPORTANCIA DE INCORPORAR LAS TIC EN LA PRÁCTICA DOCENTE PARA GENERAR APRENDIZAJES SIGNIFICATIVOS EN LOS ESTUDIANTES
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Universidad Santo Tomás De Aquino - Sede Bogotá - Usta
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JHENIFER MAILEC RINCON GUEVARA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>5</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>II CONGRESO INTERNACIONAL EN TEMAS Y PROBLEMAS DE INVESTIGACIÓN EN EDUCACIÓN, SOCIEDAD, CIENCIA Y TECNOLOGÍA&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2013-09-19 00:00:00.0,&nbsp;
+                                                    2013-09-21 00:00:00.0 &nbsp;
+                                                    en BOGOTÁ, D.C. &nbsp; - UNIVERSIDAD SANTO TOMÁS &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>LA IMPORTANCIA DE INCORPORAR LAS TIC EN LA PRÁCTICA DOCENTE PARA GENERAR APRENDIZAJES SIGNIFICATIVOS EN LOS ESTUDIANTES
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Universidad Santo Tomás De Aquino - Sede Bogotá - Usta
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JHENIFER MAILEC RINCON GUEVARA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>6</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>III congreso nacional e internacional de experiencias significativas de las prácticas pedagógicas y educativas&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2025-05-21 00:00:00.0,&nbsp;
+                                                    2025-05-23 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Universidad Popular del Cesar &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JHENIFER MAILEC RINCON GUEVARA
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>7</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>IV CONGRESO INTERNACIONAL DE INVESTIGACIÓN Y EDUCACIÓN PARA LA PAZ, EN DEMOCRACIA Y VALORES MAESTRÍA EN EDUCACIÓN SUE CARIBE&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2022-11-17 00:00:00.0,&nbsp;
+                                                    2022-11-18 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - UNIVERSIDAD POPULAR DEL CESAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>EDUCACIÓN INCLUSIVA PARA LA PAZ Y LA RECONCILIACIÓN
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ALCIDES CALEB MANOTAS PIZARRO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>AURELIA PATRICIA QUINONEZ GRANADOS
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>JHENIFER MAILEC RINCON GUEVARA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>8</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>1er. Congreso Internacional de Investigación Educativa "El Espíritu investigador en la escuela"&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2022-05-26 00:00:00.0,&nbsp;
+                                                    2022-05-27 00:00:00.0 &nbsp;
+                                                    en BUCARAMANGA &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Los espacios socioeducativos y el rol del docente investigador en escenarios sociopedagógicos
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DE LOS ANDES
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JHENIFER MAILEC RINCON GUEVARA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>9</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>INTERNATIONAL COLLOQUIUM The Impact of Covid-19 on Education&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2020-08-18 00:00:00.0,&nbsp;
+                                                    2020-08-20 00:00:00.0 &nbsp;
+                                                    en CARTAGENA DE INDIAS &nbsp; - Universidad de Cartagena &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DE CARTAGENA 
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JHENIFER MAILEC RINCON GUEVARA
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>10</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>II ENCUENTRO DE POSTERS ACADÉMICOS EN EL MARCO DEL III ENCUENTRO DE FORMACIÓN DE FORMADORES DEL PROGRAMA TODOS A APRENDER DEL MINISTERIO DE EDUCACIÓN&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2019-06-28 00:00:00.0,&nbsp;
+                                                    2019-06-28 00:00:00.0 &nbsp;
+                                                    en BOGOTÁ, D.C. &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>PRÁCTICAS DE ENSEÑANZA DE LA LENGUA ESCRITA
+                                                        <i>Tipo de producto:</i>Demás trabajos - Demás trabajos - Póster
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Ministerio De Educación Nacional - Mineducación
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JHENIFER MAILEC RINCON GUEVARA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>11</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XVI FORO INTERNACIONAL SOBRE LA EVALUACIÓN DE LA CALIDAD DE LA INVESTIGACIÓN Y DE LA EDUCACIÓN SUPERIOR (FECIES)&nbsp;
+                                                <i>Tipo de evento: </i>Simposio&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2019-05-29 00:00:00.0,&nbsp;
+                                                    2019-05-31 00:00:00.0 &nbsp;
+                                                    en Santiago de Compostela &nbsp; - Monasterio San Martín Pinario &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>LOS PROGRAMAS DE FORMACIÓN DOCENTE, ESCENARIO SOCIOPEDAGÓGICO PARA EL ENCUENTRO DE SABERES
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Comunicación
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>CARMEN BEATRIZ ARAUJO QUIROZ
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>JHENIFER MAILEC RINCON GUEVARA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JHENIFER MAILEC RINCON GUEVARA,                    
+                
+                "Los espacios socioeducativos y el rol del docente investigador en escenarios sociopedago&#769;gicos"
+                . En: Colombia&nbsp;<br>
+                Revista Internacional Magisterio Educación Y Pedagogía&nbsp;
+                <i>ISSN:</i>&nbsp;1692-4053&nbsp;
+                <i>ed:</i>&nbsp;Cooperativa Editorial  Magisterio<br>
+                <i>v.</i>116
+                <i>fasc.</i>
+                p.44
+                - 45
+                ,2023,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JHENIFER MAILEC RINCON GUEVARA,                    
+                                    
+                AURELIA PATRICIA QUINONEZ GRANADOS,                    
+                
+                "Prácticas pedagógicas en el contexto de la cultura digital para generar aprendizajes significativos en los estudiantes"
+                . En: Colombia&nbsp;<br>
+                Revista Interamericana De Investigación Educación Y Pedagogía&nbsp;
+                <i>ISSN:</i>&nbsp;1657-107X&nbsp;
+                <i>ed:</i>&nbsp;Editorial Universidad Santo Tomas<br>
+                <i>v.</i>10
+                <i>fasc.</i>1
+                p.1
+                - 32
+                ,2017,
+                <i>&nbsp;DOI:&nbsp;</i>http://dx.doi.org/10.15332/s1657-107X.2142
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JHENIFER MAILEC RINCON GUEVARA,                    
+                
+                "la importancia de incoporar las TIC en la práctica docente para generar aprendizajes significativos en los estudiantes""
+                . En: Colombia&nbsp;<br>
+                Memorias Ii Congreso Internacional En Temas Y Problemas De Investigación En Educación, Sociedad, Ciencia Y Tecnología&nbsp;
+                <i>ISSN:</i>&nbsp;2346-2558&nbsp;
+                <i>ed:</i>&nbsp;Ediciones Usta
+Universidad Santo Tomás<br>
+                <i>v.</i>1
+                <i>fasc.</i>2
+                p.1
+                - 5
+                ,2013,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JHENIFER MAILEC RINCON GUEVARA,                    
+                
+                "Gestión pedagógica e innovación: Configurando escenarios digitales deseables en la educación colombiana"
+                . En: &nbsp;<br>
+                REVISTA DE CIENCIAS SOCIALES&nbsp;
+                <i>ISSN:</i>&nbsp;1315-9518&nbsp;
+                <i>ed:</i>&nbsp;Universidad Del Zulia<br>
+                <i>v.</i>32
+                <i>fasc.</i>NA
+                p.249
+                - 259
+                ,2026,
+                <i>&nbsp;DOI:&nbsp;</i>10.31876/rcs.v32i2.45568
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JHENIFER MAILEC RINCON GUEVARA,                    
+                
+                "¿El fracaso escolar: una reflexión alternativa a la literatura clásica académica.¿"
+                . En: Venezuela&nbsp;<br>
+                Encuentros&nbsp;
+                <i>ISSN:</i>&nbsp;2610-8046&nbsp;
+                <i>ed:</i>&nbsp;Rafael Maria Baralt National Experimental University<br>
+                <i>v.</i>24
+                <i>fasc.</i>N/A
+                p.222
+                - 233
+                ,2025,
+                <i>&nbsp;DOI:&nbsp;</i>10.5281/zenodo.15420713
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                ALCIDES CALEB MANOTAS PIZARRO,                    
+                                    
+                JHENIFER MAILEC RINCON GUEVARA,                    
+                                    
+                CARMEN BEATRIZ ARAUJO QUIROZ,                    
+                
+                "Diseño e Implementación de una Secuencia Didáctica Sociocultural paraLa preservación de la música tradicional vallenata en la educación secundariaEducación: Un estudio de caso en Cesar"
+                . En: Colombia&nbsp;<br>
+                JOURNAL OF POSTHUMANISM&nbsp;
+                <i>ISSN:</i>&nbsp;2634-3584&nbsp;
+                <i>ed:</i>&nbsp;Transnational Press London Ltd<br>
+                <i>v.</i>5
+                <i>fasc.</i>
+                p.3929
+                - 3934
+                ,2025,
+                <i>&nbsp;DOI:&nbsp;</i>10.63332/joph.v5i6.2559
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a></td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a>        
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td colspan="2"><h3 >Capitulos de libro</h3></td>
+            </tr>
+                
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    JHENIFER MAILEC RINCON GUEVARA,                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    CARMEN BEATRIZ ARAUJO QUIROZ,                    
+                    
+
+                    "Los programas de formación docente; Escenario sociopedagógico para el encuentro de saberes"
+                    XVI FORO INTERNACIONAL SOBRE LA EVALUACIÓN DE LA CALIDAD DE LA INVESTIGACIÓN Y DE LA EDUCACIÓN SUPERIOR (FECIES)
+                    . En: España&nbsp;
+                    <i>ISBN:</i>&nbsp;978-84-09-12235-6&nbsp;
+                    <i>ed:</i>&nbsp;
+                    <i>, v.</i>
+                    , p.371
+                    - 371&nbsp;
+                    
+                    ,2019
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    JHENIFER MAILEC RINCON GUEVARA,                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    CARMEN BEATRIZ ARAUJO QUIROZ,                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    ELDA MAVET CASTRO SIERRA,                    
+                    
+
+                    "Los programas de formación docente; Escenario sociopedagógico para el encuentro de saberes"
+                    XVI FORO INTERNACIONAL SOBRE LA EVALUACIÓN DE LA CALIDAD DE LA INVESTIGACIÓN Y DE LA EDUCACIÓN SUPERIOR (FECIES)
+                    . En: España&nbsp;
+                    <i>ISBN:</i>&nbsp;978-84-09-12235-6&nbsp;
+                    <i>ed:</i>&nbsp;
+                    <i>, v.</i>
+                    , p.371
+                    - 371&nbsp;
+                    
+                    ,2019
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    JHENIFER MAILEC RINCON GUEVARA,                    
+                    
+
+                    "La relación dialógica entre la formación inicial del profesorado y la práctica docente"
+                    Construcción del saber pedagógico: Investigación en escuelas normales superiores y otras instituciones educativas
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-958-798-320-3&nbsp;
+                    <i>ed:</i>&nbsp;Alfaomega Ediciones Uniandes
+                    <i>, v.</i>
+                    , p.181
+                    - 208&nbsp;
+                    
+                    ,2023
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    JHENIFER MAILEC RINCON GUEVARA,                    
+                    
+
+                    "Evaluación y perspectivas de las políticas de las Tecnologías de la Información y las Comunicaciones en la educación de América Latina: un análisis bibliométrico"
+                    Educación(es), Territorios y Tecnologías: Desafíos interculturales en el siglo XXI
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-958-15-0825-9&nbsp;
+                    <i>ed:</i>&nbsp;servicio Nacional de Aprendizaje - SENA
+                    <i>, v.</i>
+                    , p.217
+                    - 233&nbsp;
+                    
+                    ,2024
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    JHENIFER MAILEC RINCON GUEVARA,                    
+                    
+
+                    "Hacia una Gestión Pedagógica Eficiente en la Revolución de las Tecnologías de la Información y la Comunicación (TIC) en las Escuelas: vacíos teóricos y oportunidades de investigación en Colombia"
+                    Pedagogía, Innovación e Interculturalidad: Prácticas en el entorno escolar, institucional y comunitario
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-958-15-0855-6&nbsp;
+                    <i>ed:</i>&nbsp;Servicio Nacional de Aprendizaje
+                    <i>, v.</i>
+                    , p.272
+                    - 287&nbsp;
+                    
+                    ,2024
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    JHENIFER MAILEC RINCON GUEVARA,                    
+                    
+
+                    "Estado del arte de la gestión educativa: una revisión bibliométrica y crítica desde América Latina y el Caribe"
+                    EDUCAPRENDIZAJE
+                    . En: &nbsp;
+                    <i>ISBN:</i>&nbsp;978-958-98001-5-7&nbsp;
+                    <i>ed:</i>&nbsp;UNIHORIZONTE
+                    <i>, v.</i>
+                    , p.91
+                    - 116&nbsp;
+                    
+                    ,2026
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+
+</table>
+</td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a></td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Producción bibliográfica - Libro - Libros de divulgación y/o Compilación de divulgación </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Nombre del libro: </i>PRÁCTICAS Y TENDENCIAS EN LA EDUCACIÓN: Miradas otras desde la gestión pedagógica,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2024 -   
+                            Julio,&nbsp;
+                            <i>Isbn: </i>978-958-508-280-9,&nbsp;   
+                            <i>Medio de divulgaci&oacute;n: </i>Papel,&nbsp;   
+                            <i>Lugar de publicaci&oacute;n: </i>Colombia,&nbsp;   
+                            <i>Editorial: </i>,&nbsp;  
+                            
+                                                           
+                                            <br><b>Areas: </b><br>
+                                                                    
+                                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%">
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Otra producci&oacute;n blibliogr&aacute;fica</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+            <li>
+                <b>Producción bibliográfica - Otra producción bibliográfica - Otra</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            JHENIFER MAILEC RINCON GUEVARA,                    
+            
+            "PRÁCTICAS DE ENSEÑANZA DE LA LENGUA ESCRITA"
+            En: Colombia. 
+            2019.
+            
+            
+            
+            
+            <i>p. </i>
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            https://www.magisterio.com.co/sites/default/f,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%">
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 id="trabajos_tec" >Informes técnicos</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+            <li><b>Producción técnica - Consultoría Científico Tecnológica e Informe Técnico - Informe técnico</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            JHENIFER MAILEC RINCON GUEVARA,                    
+                                
+            CARMEN BEATRIZ ARAUJO QUIROZ,                    
+                                
+            JHOJAN JIMENEZ QUINTERO,                    
+            
+            Informe Técnico de la gestión de Organización y Administración de las prácticas pedagógicas y educativas del programa de Licenciatura enLiteratura y Lengua Castellana,
+            <i>Nombre comercial: </i>,
+            <i>contrato/registro: </i>2061,
+            . En: Colombia,&nbsp;
+            ,2018,&nbsp;
+             meses &nbsp;
+            p.38&nbsp;                
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+            
+            
+            
+
+        </blockquote>
+
+    </td>
+</tr>
+    
+            <tr>
+                <td>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+            <li><b>Producción técnica - Consultoría Científico Tecnológica e Informe Técnico - Informe técnico</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            JHENIFER MAILEC RINCON GUEVARA,                    
+                                
+            CARMEN BEATRIZ ARAUJO QUIROZ,                    
+                                
+            JHOJAN JIMENEZ QUINTERO,                    
+            
+            Informe Técnico de la Organización y Administración de las prácticas pedagógicas y educativas del programa de Licenciatura en Español e Inglés,
+            <i>Nombre comercial: </i>,
+            <i>contrato/registro: </i>236,
+            . En: Colombia,&nbsp;
+            ,2017,&nbsp;
+             meses &nbsp;
+            p.40&nbsp;                
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+            
+            
+            
+
+        </blockquote>
+
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Lectura inclusiva para todos: Estrategia Pedagógica en el desarrollo de las competencias ciudadanas<br>
+                        <i>Inicio:&nbsp;</i>Julio&nbsp;
+                        2016                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Noviembre&nbsp;
+                        2016
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            En el marco de la investigación educativa, son varios los modelos pedagógicos que se han diseñado y adoptado a lo largo del tiempo con el propósito de mejorar el proceso de enseñanza- aprendizaje. Estos se configuran a partir de las características del contexto, los estudiantes, las necesidades y el personal afín a la enseñanza. Uno de estos métodos de gran impacto en las últimas décadas, es el trabajo por proyectos pedagógicos, el cual está encaminado a fortalecer el trabajo colaborativo dentro del aula por medio de la investigación, la construcción significativa del conocimiento y el espíritu investigativo. El presente proyecto tuvo como objetivo Desarrollar a través de la lectura las competencias comunicativas y ciudadanas<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Espacios de interacción del docente en formación con padres de familia desde el contexto de gestión de aprendizajes<br>
+                        <i>Inicio:&nbsp;</i>Septiembre&nbsp;
+                        2020                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2020
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Comprensión del contexto social y cultural del establecimiento educativo para promover escenarios que faciliten y potencien los aprendizajes en el aula<br>
+                        <i>Inicio:&nbsp;</i>Septiembre&nbsp;
+                        2020                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2020
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El presente trabajo tuvo como propósito comprender la enseñanza y aprendizaje como un escenario donde confluyen diferentes factores que le afectan.  Se generaron espacios de interacción del docente en formación con padres de familia desde el contexto de gestión de aprendizajes, por ejemplo para hacer seguimiento al aprendizaje de los estudiantes.  Fue una oportunidad de comprender el contexto social y cultural del establecimiento educativo para promover escenarios que faciliten y potencien los aprendizajes en el aula.  
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Lenguaje Creativo: Espacios de expresión y aprendizaje IE Leonidas- Sede Hogar del Niño<br>
+                        <i>Inicio:&nbsp;</i>Marzo&nbsp;
+                        2022                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2022
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        El fortalecimiento de la enseñanza de la lectura por medio de la conciencia fonológica en el grado primero  <br>
+                        <i>Inicio:&nbsp;</i>Marzo&nbsp;
+                        2022                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2022
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Promoviendo la oratoria en el aula: Una experiencia educativa para mejorar la fluidez verbal en estudiantes de noveno grado.<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2023                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2023
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Educación Inclusiva y Diversidad <br>
+                        <i>Inicio:&nbsp;</i>Agosto&nbsp;
+                        2023                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Noviembre&nbsp;
+                        2023
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Descubriendo los textos descriptivos en las canciones vallenatas<br>
+                        <i>Inicio:&nbsp;</i>Agosto&nbsp;
+                        2023                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Noviembre&nbsp;
+                        2023
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        La Historieta como estrategia didáctica para la producción textual y la resolución de conflictos en décimo grado a través de las TIC<br>
+                        <i>Inicio:&nbsp;</i>Agosto&nbsp;
+                        2023                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Noviembre&nbsp;
+                        2023
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Procesos de Lectura a partir de la variedad de textos en las diferentes áreas del saber<br>
+                        <i>Inicio:&nbsp;</i>Julio&nbsp;
+                        2016                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Noviembre&nbsp;
+                        2016
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Estrategias cognitivo- discursivas para mejorar la producción oral y escrita a través de una página web en los grados octavo y décimo<br>
+                        <i>Inicio:&nbsp;</i>Julio&nbsp;
+                        2016                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Noviembre&nbsp;
+                        2016
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El presente proyecto tuvo como objetivo fortalecer la producción oral y escrita en los estudiantes de los grados 10-01 y 8-03 de la institución educativa Manuel German Cuello Gutiérrez a través del uso de  estrategias cognitiva-discursiva a través de una página web escolar. Para lo cual, se llevó a cabo la siguiente ruta: Distinción de los diversos tipos de textos que circulan en el ámbito académico. Reflexión acerca de las diversas estructuras y funciones de los textos. 
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Gestión Administrativa y curricular de las Prácticas Pedagógicas y Educativas del Programa de Lincenciatura en Español e Inglés<br>
+                        <i>Inicio:&nbsp;</i>Marzo&nbsp;
+                        2016                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Noviembre&nbsp;
+                        2017
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            En el marco del componente de las didácticas de las disciplinas, el programa de Licenciatura en Español e Inglés asume la práctica educativa y pedagógica como la interrelación teoría - práctica con el fin de evitar las viejas concepciones ¿transmisionista¿ y ¿aplicacionista¿ del conocimiento en los contextos reales de aprendizajes (Rodríguez, 2005). Además, esta interrelación tiene como objeto comprender que tanto la teoría como la práctica se dan paralela y mutuamente en función de apoyo y complemento; por lo que busca un acercamiento comprensivo de construcción colectiva afín con la formación de profesionales de la educación capaces de familiarizarse con nuevos hechos y contextos.
+
+
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        GESTIÓN ADMINISTRATIVA Y CURRICULAR DE LAS PRÁCTICAS PEDAGÓGICAS Y EDUCATIVAS DEL PROGRAMA DE LICENCIATURA EN LITERATURA Y LENGUA CASTELLANA<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2017                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2018
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            En consonancia con los lineamientos contemplados en el Decreto 2450 del 2015, la Resolución 02041 del 2016 emanados del MEN y su relación con el modelo pedagógico cognitivista, constructivista, contextual promovido por la Institución, el componente de didácticas de las disciplinas orienta las prácticas de la Licenciatura bajo el enfoque de formación basado en competencias. Este enfoque insta a una nueva mirada de la formación inicial docente ya que el estudiante no sólo aprende y desarrolla las competencias en el Programa; sino que estas son el logro del empeño y del ejercicio del futuro docente. Por ello, los contenidos que se establecen para la formación del docente se puntualizan para la sistematización y validación de la información durante el proceso de enseñanza aprendizaje; además, cabe señalar que estos contenidos no son percibidos como el cúmulo de información o transmisión de conocimiento que el estudiante necesita para su ejercicio docente.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        EL AULA COMO ESCENARIO DE INTERACCIÓN COMUNICATIVA <br>
+                        <i>Inicio:&nbsp;</i>Septiembre&nbsp;
+                        2020                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2020
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Con este trabajo se reconoció  el aula de clases como un escenario de interacción comunicativa donde se reproducen y recontextualizan representaciones sociales.  Se realizó un análisis del discurso pedagógico del docente, se  contrastó  con la teoría y con la filosofía del establecimiento educativo MANUEL MURILLO TORO para lograr la comprensión  como se desarrolla el currículo, el currículo oculto y el aprendizaje efectivo en el estudiante. <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Planeación, organización y seguimiento de unidades didácticas en la clase de español<br>
+                        <i>Inicio:&nbsp;</i>Septiembre&nbsp;
+                        2020                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2020
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Con  este trabajo se materializó el acompañamiento del docente de aula y del docente de prácticas se inició el proceso de asumir el rol de docente.  Su propósito de intervención se basó en la formación en procesos de gestión de aprendizajes en el aula.  Esto es, generar los espacios de planeación, organización y seguimiento a la ejecución de unidades didácticas en lenguaje con el acompañamiento y apoyo del docente de aula. 
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        La evaluación como proceso formativo en los contextos de gestión de aprendizajes<br>
+                        <i>Inicio:&nbsp;</i>Septiembre&nbsp;
+                        2020                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2020
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Desde esta intervención en el escenario de práctica el estudiante universitario construyó instrumentos de evaluación a partir de su formación disciplinar y las características del contexto.  También fue el espacio para analizar los resultados de evaluación y establecer metas de mejoramiento y/o proyectos de aula como proceso de gestión de los aprendizajes en el aula.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Análisis de instrumentos de evaluación para la clase de español de acuerdo a las características del contexto<br>
+                        <i>Inicio:&nbsp;</i>Septiembre&nbsp;
+                        2020                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2020
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

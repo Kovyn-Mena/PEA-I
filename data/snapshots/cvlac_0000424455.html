@@ -1,0 +1,3592 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=FE446021448A282963D2667FBCF0E421" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        AUGUSTO ALBERTO&nbsp;DAVID&nbsp;MEZA
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>DAVID MEZA, AUGUSTO ALBERTO</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td><h3 >Redes sociales acad&eacute;micas</h3></td>
+                                </tr>
+                                    
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        
+                                        <a target="_blank" href="https://www.linkedin.com/feed/" style="color: #007A81">Linkedln</a>
+                                    </td>
+                                </tr>
+                                
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            Universidad Rafael Belloso Chacín<br />
+                            Gerencia de Proyectos de Investigación y Desarrollo<br />
+                            Septiembrede2013 - Noviembrede 2015<br />
+                            SISTEMA DE INFORMACIÓN PARA LA GESTIÓN DEL CONOCIMIENTO EN  LAS UNIVERSIDADES PÚBLICAS DEL CESAR</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Especialización</b>
+                            FUNDACIÓN UNIVERSIDAD DEL NORTE<br />
+                            ESPECIALIZACION EN REDES DE COMPUTADORES<br />
+                            Juliode2001 - Septiembrede 2002<br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD DISTRITAL FRANCISCO JOSÉ DE CALDAS<br />
+                            INGENIERIA DE SISTEMAS<br />
+                            Juliode1993 - Marzode 1999<br />
+                            DISEÑO DE UN SISTEMA DE INFORMACION PARA CONFECCIONES MARIA ELVIRA APLICANDO PLANEACION ESTRATEGICA DE SISTEMAS Y TECNOLOGIAS DE INFORMACIÓN </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Secundario</b>
+                            COLEGIO NACIONAL LOPERENA<br />
+                            <br />
+                            Febrerode1987 - Diciembrede 1992<br />
+                            </td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3>Formaci&oacute;n Complementaria</h3></td>
+                            </tr>   
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        Formación en Ambientes Virtuales de Aprendizaje<br />
+                        Septiembrede2021 - Octubrede 2021<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Huawei Technologies Colombia S.A.S.<br />
+                        Taller De Python Para Ciencia De Datos<br />
+                        Agostode2022 - Septiembrede 2022<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Servicio Nacional de Aprendizaje-SENA<br />
+                        Ingles Americano Nivel IV<br />
+                        Juliode2012 - Septiembrede 2012<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Fundación SARAKI<br />
+                        AMÉRICA INCLUSIVA<br />
+                        Marzode2022 - Abrilde 2022<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Evenco CC<br />
+                        Curso de Construcción de redes e integración de servicios<br />
+                        Octubrede2006 - Octubrede 2006<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD CATOLICA LUIS AMIGO<br />
+                        Curso Fundamentos de programación con Python<br />
+                        Marzode2022 - Mayode 2022<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        UNIVERSIDAD NACIONAL ABIERTA Y A DISTANCIA<br />
+                        FORMACION DE FORMADORES<br />
+                        Febrerode2008 - Septiembrede 2008<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        UNIVERSIDAD NACIONAL DE COLOMBIA SEDE MEDELLÍN<br />
+                        CISCO CCNA1<br />
+                        Juniode2014 - Septiembrede 2014<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        UNIVERSIDAD NACIONAL DE COLOMBIA SEDE MEDELLÍN<br />
+                        CISCO CCNA2<br />
+                        Juliode2014 - Septiembrede 2014<br />
+                        </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Febrero de 2000            
+                        Julio de 2026<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; REDES Y COMUNICACIONES
+ALGORITMOS Y FUNDAMENTOS DE PROGRAMACIÓN
+PROGRAMACIÓN I,&nbsp;100 
+                        Febrero 2000            
+                        Julio 2026<br>
+
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; LIDER SEMILLERO DE INVESTIGACIÓN RETEAITICE                             
+                        Febrero 2016            
+                        Julio 2026<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>SERVICIO NACIONAL DE APRENDIZAJE SENA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Abril de 2019            
+                        Diciembre de 2022<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>15&nbsp;horas Semanales
+                        Enero de 2017            
+                        Diciembre de 2021<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Servicio Técnico Especializado            
+                        <i> - Cargo:</i>&nbsp;Adminidstrador sitio web institucional          
+                        Enero de 2017            
+                        Diciembre de 2021<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD NACIONAL ABIERTA Y A DISTANCIA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>25&nbsp;horas Semanales
+                        Febrero de 2000            
+                        Septiembre de 2008<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;TUTOR          
+                        Febrero de 2000            
+                         de <br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;TIC, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;REDES Y TELEMATICA , <i>Activa:</i>Si</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Reconocimientos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>Instructor nivel Experto,Cisco Networking Academy - Diciembrede 2021</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>Galardonados por Excelencia como Instructor 2022,Cisco Networking Academy - Diciembrede 2022</li></td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Cursos de corta duraci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                                            
+                            CCNA R&S: Introduction to Networks,
+                            <i>Finalidad: </i>Capacitar a los estudiantes del curso de redes y comunicaciones 
+                            . En: Colombia&nbsp;
+                            ,2022,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;12 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                                            
+                            CCNA R&S: Routing and Switching Essentials,
+                            <i>Finalidad: </i>Capacitar a los estudiantes del curso de redes y comunicaciones 
+                            . En: Colombia&nbsp;
+                            ,2018,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;8 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                                            
+                            CCNA R&S: Introduction to Networks,
+                            <i>Finalidad: </i>Capacitar a los estudiantes del curso de redes y comunicaciones 
+                            . En: Colombia&nbsp;
+                            ,2020,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;12 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                                            
+                            CCNA R&S: Introduction to Networks,
+                            <i>Finalidad: </i>Capacitar a los estudiantes del curso de redes y comunicaciones 
+                            . En: Colombia&nbsp;
+                            ,2017,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;8 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                                            
+                            CCNA R&S: Introduction to Networks,
+                            <i>Finalidad: </i>Capacitar a los estudiantes del curso de redes y comunicaciones 
+                            . En: Colombia&nbsp;
+                            ,2020,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;12 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                                            
+                            CCNA R&S: Introduction to Networks,
+                            <i>Finalidad: </i>Capacitar a los estudiantes del curso de redes y comunicaciones 
+                            . En: Colombia&nbsp;
+                            ,2019,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;12 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                                            
+                            CCNA R&S: Introduction to Networks,
+                            <i>Finalidad: </i>Capacitar a los estudiantes del curso de redes y comunicaciones 
+                            . En: Colombia&nbsp;
+                            ,2021,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;0 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                                            
+                            CCNA R&S: Introduction to Networks,
+                            <i>Finalidad: </i>Capacitar a los estudiantes del curso de redes y comunicaciones 
+                            . En: Colombia&nbsp;
+                            ,2022,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;12 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                                            
+                            CCNA R&S: Introduction to Networks,
+                            <i>Finalidad: </i>Capacitar a los estudiantes del curso de redes y comunicaciones 
+                            . En: Colombia&nbsp;
+                            ,2018,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;12 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                                            
+                            CCNA R&S: Introduction to Networks,
+                            <i>Finalidad: </i>Capacitar a los estudiantes del curso de redes y comunicaciones 
+                            . En: Colombia&nbsp;
+                            ,2019,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;12 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                                            
+                            CCNA R&S: Introduction to Networks,
+                            <i>Finalidad: </i>Capacitar a los estudiantes del curso de redes y comunicaciones 
+                            . En: Colombia&nbsp;
+                            ,2021,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;0 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                                            
+                            CCNA R&S: Introduction to Networks,
+                            <i>Finalidad: </i>Capacitar a los estudiantes del curso de redes y comunicaciones 
+                            . En: Colombia&nbsp;
+                            ,2018,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;12 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                                            
+                            CCNA R&S: Routing and Switching Essentials,
+                            <i>Finalidad: </i>Capacitar a los estudiantes del curso de redes y comunicaciones 
+                            . En: Colombia&nbsp;
+                            ,2018,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;8 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                                            
+                            CCNA R&S: Introduction to Networks,
+                            <i>Finalidad: </i>Capacitar a los estudiantes del curso de redes y comunicaciones 
+                            . En: Colombia&nbsp;
+                            ,2023,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;12 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                                            
+                            CCNA R&S: Routing and Switching Essentials,
+                            <i>Finalidad: </i>Entrenamiento CCNA 2 de CISCO
+                            . En: Colombia&nbsp;
+                            ,2017,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;8 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                                            
+                            CCNA R&S: Introduction to Networks,
+                            <i>Finalidad: </i>Entrenamiento CCNA 1 de CISCO para estudiantes de ingeniería de sistemas y miembros del semillero RETEAITICE
+                            . En: Colombia&nbsp;
+                            ,2017,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;8 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            APLICATIVO WEB PARA LA ADMINISTRACIÓN DE LOS SISTEMAS DE INFORMACION DEL CENTRO DE INVESTIGACION PARA EL DESARROLLO DE LA INGENIERIA CIDI DE LA UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2012.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            ALEXANDER VILLALBA BERNA &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): AUGUSTO ALBERTO DAVID MEZA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            DISEÑO DE UN PROTOCOLO DE COMUNICACIONES DE ALTA VELOCIDAD PARA TRANSMISIÓN DE DATOS EN REDES DE ÁREA LOCAL&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2011.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            ERIK MENDOZA GUTIERREZ&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): AUGUSTO ALBERTO DAVID MEZA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            ESTUDIO TECNICO ECONOMICO PARA DETERMINAR EL ESTADO ACTUAL DE LAS REDES DE VOZ Y DATOS DE LA CIUDAD DE VALLEDUPAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2011.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            LISANDRO MORANTES COTES &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): AUGUSTO ALBERTO DAVID MEZA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            SITIO WEB INTERACTIVO PARA LA E.S.E HOSPITAL DONALDO SAUL MORON MANJARREZ DEL MUNICIPIO DE LA JAGUA DEL PILAR GUAJIRA&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2015.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): AUGUSTO ALBERTO DAVID MEZA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Civil -- Ingeniería Civil,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            DISEÑO DE UNA WIMAX SOPORTADA EN TECNOLOGÍA IPV6 PARA LA CIUDAD DE VALLEDUPAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2017.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): AUGUSTO ALBERTO DAVID MEZA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Civil -- Ingeniería Civil,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            AUDITORIA AL AREA SISTEMA DE FUNCIONAMIENTO SYS-812 EN LA SECRETARIA DE SALUD MUNICIPAL EN EL MUNICIPIO AGUSTIN CODAZZI&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2010.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            JORGE LUIS CUELLO MERA,MIGUEL F. BARRIOS PAYARES&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): AUGUSTO ALBERTO DAVID MEZA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            DISEÑO Y SOLUCION DE LA RED DE AREA METROPOLITANA DE LA CUIDAD DE VALLEDUPAR UTILIZANDO TECNOLOGIA DE REDES ENMALLADAS Y WIMAX&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2010.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            MARYURIS PEDIAÑA RICO, JACQUELINE SANTOS SUAREZ&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): AUGUSTO ALBERTO DAVID MEZA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            DESARROLLO Y MONTAJE DEL SITIO WEB DINAMICO PARA LA ADMINISTRACION DE LA INFORMACION DEL HOSPITAL MARINO ZULETA RAMIREZ DEL MUNICIPIO DE LA PAZ CESAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2009.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            MAYETSI MERCADO NAVARRO, KAREN ALEJANDRA MOLINA&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): AUGUSTO ALBERTO DAVID MEZA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            AUDITORIA A LA APLICACIÓN EN FUNCIONAMIENTO DEL SISTEMA DE INFORMACION DE LA OFICINA DE LA RED JUNTOS EN LA GOBERNACION DEL CESAR.&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2009.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            JENNFER MURILLO ACOSTA, JESUS RAMIRO ZULETA RONDON.&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): AUGUSTO ALBERTO DAVID MEZA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            DESARROLLO DE UN SOFTWARE PARA EL CONTROL DE LA INFORMACION VEHICULAR EN LA OFICINA DE TRANSITO Y TRANSPORTE DE FONSECA LA GUAJIRA&nbsp;
+                            UNIVERSIDAD NACIONAL ABIERTA Y A DISTANCIA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2007.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            NEYITH JOSE CORSO SOLANO &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): AUGUSTO ALBERTO DAVID MEZA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            DESARROLLO E IMPLEMENTACIÓN DE UNA RED SEMIPRIVADA TIPO EXTRANET PARA LA INTERCONEXIÓN DE LOS PROGRAMAS DE INGENIERIA DE SISTEMAS DE LAS UNIVERSIDADES DE LA CIUDAD DE VALLEDUPAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2010.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            DEIMER CASTRILLO, RANIER DIAZ&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): AUGUSTO ALBERTO DAVID MEZA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            DISEÑO Y SOLUCION DEL SISTEMA INTEGRAL DE ENERGIA SOLAR CONTROLADO MEDIANTE UN SOFTWARE INTERACTIVO PARA LA UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2010.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            RAFAEL F. SANDOVAL NARDEY , JEIMAN JOSE FIGUEROA AVILA&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): AUGUSTO ALBERTO DAVID MEZA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            DESARROLLO Y MONTAJE DEL SITIO WEB DINAMICO PARA EL PROGRAMA DE INGENIERIA AGROINDUSTRIAL DE LA UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2010.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            LEONELA ISABEL TETE DE AVILA , CARLOS ALBERTO LAFAURIE DURAN&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): AUGUSTO ALBERTO DAVID MEZA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            DESARROLLO E IMPLEMENTACION DE UN SISTEMA VIA WEB PARA LOS PROCESOS ACADEMICOS DEL COLEGIO BILINGÜE FISHER KIDS&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2010.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            DIANA GUTIERREZ MERCADO, LENIN NUÑEZ REALES&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): AUGUSTO ALBERTO DAVID MEZA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            DESARROLLO Y PUBLICACION DEL SITIO WEB DINAMICO PARA LA ADMINISTRACION DEL PROGRAMA DE INGENIERIA ELECTRONICA DE LA UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2009.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            JOHANA M. CALDERON GUTIERREZ,  ERIKA P. OSORIO CALDERON&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): AUGUSTO ALBERTO DAVID MEZA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            DESARROLLO E IMPLEMENTACION DE UN SISTEMA INTERFAZ CON UN SOFTWARE DE CONTROL PARA MESAS DE CALIBRACION Y PRUEBAS DE MEDIDORES ELECTRICOS PARA IMECTRO PROCESOS INDUSTRIALES.&nbsp;
+                            UNIVERSIDAD NACIONAL ABIERTA Y A DISTANCIA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2007.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            ALDEMAR JOSE MENDOZA &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): AUGUSTO ALBERTO DAVID MEZA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            ANALISIS, DISEÑO E IMPLEMENTACION DE UNA INTRANET COORPORATIVA PARA LA EMPRESA DE ATENCION PREHOSPITALARIA Y SEGURIDAD INDUSTRIAL APREHSI LTDA DE LA CUIDAD DE VALLEDUPAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2010.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            JEAN CARLOS ANGARITA LUQUEZ, CARLOS A. PUERTA SANTIAGO&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): AUGUSTO ALBERTO DAVID MEZA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Jurado en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>INTRANET CORPORATIVA PARA LA ADMINISTRACIÓN DE LAS TRANSACCIONES COMERCIALES DE LA EMPRESA SLMCONSTRUCCIONES DE LA CIUDAD DE VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>EDWIN SILVA SALAS  &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>GUIA DE CAMPO Y SIMULADOR PARA EL DISEÑO E INSTALACION DE REDE DE AREA LOCAL CON CALIDAD DE SERVICIOS                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>CARLOS AMOROCHO ACOSTA         &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>SISTEMA EN AMBIENTE WEB PARA LA GESTION DEL RECURSO HUMANO Y CONTRATISTAS DE LOS ENTES TERRITORIALES                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>JOSE LUIS MARTINEZ MENDOZA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>DISEÑO DE SEGURIDAD PARA LA RED DE TRANSMISION DE DATOS EN EL CENTRO DE CIRUGIA LAPAROSCOPICA Y ENDOSCOPICA DIGESTIVA DEL CESAR, VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>REINALDO ENRIQUE RUIZ DUARTE &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>APLICATIVO WEB PARA LA ADMINISTRACIÓN DE LAS TRANSACCIONES COMERCIALES DE LA EMPRESA JRH CENTRO DE SERVICIOS DE LA CIUDAD DE VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>LUIS ENRIQUE NIEVES &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>DISEÑO DE UNA RED WIMAX PARA CONECTAR LAS SEDES DE LA UNIVERSIDAD POPULAR DEL CESAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>DANIEL ALBERTO BARRERA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>SISTEMA DE INFORMACIÓN PARA LA GESTIÓN ADMINISTRATIVA DE LOS SERVICIOS EN LA ASOCIACIÓN SINDICAL DE PROFESIONALES MÉDICOS Y EJECUTORES DE LA SALUD DEL CESAR Y LA GUAJIRA (ASPESALUD),                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>KEVIN HARVEY MENDOZA CARRILLO Y VÍCTOR ALFONSO ARROYO MIZAR &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Civil -- Ingeniería Civil,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>SISTEMA DE ADMINISTRACIÓN DE NOTIFICACIONES PARA LA AUTOMATIZACIÓN DE TAREAS EN LA EMPRESA ECOPETROL                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>JEORDY OSKAR MORA VEGA, &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Civil -- Ingeniería Civil,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>Aplicación Móvil para el acceso a servicios de la Biblioteca Miguel Ángel Vargas Zapata en la Universidad Popular Del Cesar                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>ALVARO CAMILO BRACHO CALDERON Y AMAYRIANYS KARINA RIOS MORA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Civil -- Ingeniería Civil,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>Diseño de una Red de Siguiente Generación (NGN) soportada en Tecnología ATM/IP para el sector educativo de la ciudad de Valledupar                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Juan Luquez Anteliz, Nayerlis Caballero Mora &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Civil -- Ingeniería Civil,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>-	Diseño de un Modelo en Infraestructura SDN usando el Protocolo Openflow en las Plataformas Abiertas Onos Y Opendaylight a través de la Herramienta de Configuración de Minenet para Laboratorios de Redes y Telecomunicaciones                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>CASTRO YANCY ALVARO DE JESUS,  PESCA TAFUR CARLOS ALFREDO &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Civil -- Ingeniería Civil,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>Diseño de un Sistema de Conectividad para Proveer Acceso a Internet Al Municipio de Astrea Cesar                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>FABIAN JESUS CABANA MARRIAGA Y JEAN CARLOS ROJAS GOMEZ &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Civil -- Ingeniería Civil,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>Sistema de Información para servicios de mensajería y pedidos a domicilio para la empresa DOMIRAPID en la ciudad de Valledupar                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>HERNÁN MANUEL CASTILLA ECHEVERRÍA Y ADRIÁN RAFAEL CASTILLO PEDROZA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Civil -- Ingeniería Civil,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>SISTEMA DE INFORMACIÓN PARA LA GESTIÓN DE LOS PROCESOS DE SERVICIO AL CLIENTE Y ADMINISTRACIÓN DE K-TUS RESTAURANTE                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>MAIRA ALEJANDRA BARRIOS GÁMEZ, INDIRA MILENA CARO JULIO &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Civil -- Ingeniería Civil,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>Diagnóstico de La Incidencia en la Salud Pública que Tienen los Operadores de Servicio Móvil sobre el Área Metropolitana de Valledupar                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>CERELIS MAESTRE BATISTA, MICHAEL MARTÍNEZ CHINCHILLA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingeniería Civil -- Ingeniería Civil,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>CENTRAL TELEFONICA EN LA PLATAFORMA ASTERISK PARA LAS COMUNICACIONES EN LAS EMPRESAS CON SERVICIOS DE TELEFONIA CORPORATIVA                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>DAVID ARTURO MANOTAS &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>DESARROLLO Y MONTAJE DE UN SITIO WEB DINAMICO PARA LA ADMINISTRACION DE LOS PROCESOS DE LA COOPERATIVA MULTIACTIVA DE PROFESORES Y EMPLEADOS DE LA UNIVERSIDAD POPULAR DEL CESAR - COOPDOCENTES                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>ALFONSO GARCIA PALLARES &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>DESARROLLO DE UNA APLICACIÓN WEB DE LA COOPERATIVA DE TRANSPORTADORES DE LA PROVINCIA COOPROVINCIA EN EL MUNICIPIO DE SAN JUAN DEL CESAR -GUAJIRA                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD NACIONAL ABIERTA Y A DISTANCIA&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>GEOVANNY CATALAN  &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>DESARROLLO E IMPLEMENTACION DE UN SOFTWARE EN PLATAFORMA WEB PARA EL CONTROL DE LOS PROCESOS ACTAS DE CAMPAÑA, PODA, MANTENIMIENTO E INVENTARIO DE MATERIALES, PARA LA EMPRESA ACCIONES ELECTRICAS DE LA COSTA S.A.                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>CESAR CLEMENTE ACOSTA  &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>SISTEMA DE INFORMACION PARA LA AUTOMATIZACION DEL MANEJO DEL ARCHIVO CENTRAL Y GESTION DE LA E.S.E HOSPITAL SAN JOSE DE MAICAO LA GUAJIRA                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>ELDER RIVERO GUTIERREZ &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>DISEÑO Y SOLUCION DE UNA RED SENSORIAL PARA LA ADMINISTRACION AUTOMATICA DEL ENCENDIDO Y APAGADO DE LOS AIRES ACONDICIONADOS Y LUCES DE SALONES Y OFICINAS DE LA UNIVERSIDAD POPULAR DEL CESAR SEDE SABANAS                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>ELDER RIVERO GUTIERREZ &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>DESARROLLO Y PUESTA EN MARCHA DE UN SITIO WEB PARA LA COMERCIALIZADORA Y PROMOCION DE LOS PRODUCTO DE LA EMPRESA PAN PAN VALLENATO UBICADO EN EL MUNICIPIO DE AGUSTIN CODAZZI , CESAR¿.                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD NACIONAL ABIERTA Y A DISTANCIA&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>GEOVANNY CATALAN               &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>DISEÑO E IMPLEMENTACION DE UN SISTEMA ADMINISTRADOR DE CONTENIDOS, PROCESOS ACADEMICOS Y ADMINISTRATIVOS EN AMBIENTE WEB PARA EL COLEGIO MARIA MONTESSORI DE VALLEDUPAR.                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>OSWALDO RUEDA CARREÑO &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>DESARROLLO DE UN SISTEMA DE INFORMACION WEB, PARA EL REGISTRO DE CITAS MEDICAS EN LA LIGA CONTRA EL CANCER CAPITULO MAICAO                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>LUIS VALENCIA BUSTAMANTE &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>SISTEMA DE GESTION PARA RUTAS, EMPALMES Y CLIENTES CORPORATIVOS EN LA RED DE FIBRA OPTICA DE TELMEX ADMINISTRADA POR DICO TELECOMUNICACIONES EN LA CUIDAD DE BARRANQUILLA                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>ARMANDO VEGA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>DESARROLLO DE UN SITIO WEB INTERACTIVO PARA EL FESTIVAL CUNA DE ACORDEONES DE VILLANUEVA GUAJIRA.                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD NACIONAL ABIERTA Y A DISTANCIA&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>FELIX VILLERO MAESTRE &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>DISEÑO E IMPLEMENTACION DE UN APLICATIVO WEB PARA EL ENTRENAMIENTO DE LAS PRACTICAS DE LABORATORIO DE LAS ASIGNATURAS DE TELEMATICA Y REDES EN LA UNIVERSIDAD POPULAR DEL CESAR UTILIZABNDO OBJETOS VIRTUALES DE DE APRENDIZAJE " OVAS"                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>ARMANDO LUIS COTES &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>DESARROLLO E IMPLEMENTACION DE UN SITIO WEB PARA LA ADMINISTRACION DE LOS SISTEMAS DE INFORMACION Y PUBLICACION DEL PORTAFOLIO DE SERVICIOS DE LA EMPRESA INTERSERVICIOS NACIONAL E.U EN LA CUIDAD DE VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>ROBERTO FERNANDEZ RAMIREZ &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>APLICATIVO MÓVIL PARA LA GESTIÓN Y DIFUSIÓN DE VENTAS DE GANADO VACUNO EN LA FINCA PREVENCIÓN, EN MONGUÍ ¿ LA GUAJIRA                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>JORGE GONZALEZ &nbsp;                
+                            
+                            
+                            
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            <i>Titulo:&nbsp;</i>APLICATIVO WEB PARA LA GESTIÓN Y OPTIMIZACIÓN DE LA BÚSQUEDA DE EJEMPLARES HISTÓRICOS Y ACTUALES PARA EL PERIÓDICO EL PILÓN DE LA CIUDAD DE VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA DE SISTEMAS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>ALVARO OÑATE &nbsp;                
+                            
+                            
+                            
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Participaci&oacute;n en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Participación en comités de evaluación - Otra</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            AUGUSTO ALBERTO DAVID MEZA,                    
+                            
+                            SISTEMA DE INFORMACIÓN PARA LA GESTIÓN COMERCIAL DE LA EMPRESA HIERROS VALLEDUPAR<br>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                            
+                            
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Par evaluador</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2025,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2025,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2025,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2025,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2025,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2025,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2025,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2025,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2025,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2025,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2025,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2025,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2025,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                    
+                        </table>    
+                        </td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>SEGUNDO FIN DE SEMANA TECNOLOGICO&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2005-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - CEAD VALLEDUPAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD NACIONAL ABIERTA Y A DISTANCIA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>AUGUSTO ALBERTO DAVID MEZA
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>TERCER FIN DE SEMANA TECNOLOGICO Y ALIMENTARIO&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2006-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - CEAD VALLEDUPAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD NACIONAL ABIERTA Y A DISTANCIA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>AUGUSTO ALBERTO DAVID MEZA
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>PRIMER FIN DE SEMANA TECNOLOGICO&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2004-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - CEAD VALLEDUPAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD NACIONAL ABIERTA Y A DISTANCIA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>AUGUSTO ALBERTO DAVID MEZA
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XXII ENCUENTRO DEPARTAMENTAL DE SEMILLEROS DE INVESTIGACION- REDCOLSI&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2025-05-13 00:00:00.0,&nbsp;
+                                                    2025-05-16 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - GIMNASIO BILINGUE JEAN PIAGET &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>SISTEMA DE INFORMACIÓN EN AMBIENTE WEB PARA LA INCLUSION Y LA INTERCULTURALIDAD EN LA UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>AUGUSTO ALBERTO DAVID MEZA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a></td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a></td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a></td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a>
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Documentos de trabajo</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Documento de trabajo (Working Paper)</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        AUGUSTO ALBERTO DAVID MEZA,                    
+                        
+                        "MODULO REDES LOCALES AVANZADO"
+                        En: Colombia. 
+                        2007.
+                        
+                        
+                        
+                        
+                        <i>p. </i>
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+                        
+                        
+                        
+                    </blockquote>
+                </td>
+            </tr>
+            
+        </table>
+        </td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a>
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Productos tecnol&oacute;gicos</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+            <li><b>Producción técnica - Productos tecnológicos - Otro </b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            AUGUSTO ALBERTO DAVID MEZA,                    
+            
+            ANALISIS, DISEÑO Y SOLUCION DE LA RED DE AREA METROPOLITANA PARA EL SECTOR ACADEMICO DE LA CIUDAD DE VALLEDUPAR,
+            <i>Nombre comercial: </i>,
+            <i>contrato/registro: </i>,
+            . En: Colombia,&nbsp;
+            ,2006,&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Automatización y Sistemas de Control,                    
+            
+            
+            
+
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Estudio técnico Económico para determinar el estado actual de las redes de voz y datos de la ciudad  de Valledupar<br>
+                        <i>Inicio:&nbsp;</i>Agosto&nbsp;
+                        2011                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Abril&nbsp;
+                        2012
+                        
+                        
+                        <i>Fin:&nbsp;</i>Julio&nbsp;
+                        2012
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>8<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n, desarrollo e Innovaci&oacute;n&nbsp;<br>
+                        ANÁLISIS, DISEÑO Y SOLUCION DE LA RED DE ÁREA METROPOLITANA PARA EL SECTOR ACADEMICO DE LA CIUDAD DE VALLEDUPAR<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2006                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Octubre&nbsp;
+                        2006
+                        
+                        
+                        <i>Fin:&nbsp;</i>Febrero&nbsp;
+                        2007
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>12<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El  desarrollo de este proyecto, tiene como objetivo principal la realización del Análisis, diseño y solución de la red de área metropolitana para el sector académico de la ciudad de Valledupar utilizando la tecnología de redes que mejor se adapte a los requerimientos del municipio.
+.
+La intención de realizar este proyecto nace por conocimiento propio y preciso de la situación en que se encuentra la ciudad de Valledupar,  y fue así como se propuso la conexión de los diferentes sectores del municipio por medio de una tecnología como Gigabit Ethernet, teniendo muy buena acogida la idea y siendo aprobada y avalada por la comunidad.
+
+Desde ese momento, se comenzó  a trabajar en dicha investigación la que se compone de tres grandes etapas: El análisis, el diseño y la de solución del sistema propuesto.
+
+La parte inicial del análisis se afronto realizando una serie de investigaciones para un conocimiento total de la zona urbana del municipio de Valledupar,  a través de observaciones directas y entrevistas formales con los pobladores del municipio..   
+
+En el diseño del sistema propuesto, se escogieron los elementos de red apropiados para la realización del proyecto teniendo en cuenta los estándares internacionales y tecnología de punta del mercado, lógico ajustado a los requerimientos técnicos y a la capacidad económica del municipio
+
+Finalmente, se presenta un presupuesto detallado, describiendo el costo de la inversión que el municipio necesitaría para implementar este proyecto en el momento que las autoridades pertinentes lo decidan, por parte del grupo, se recomienda la implementación de este sistema, lógico, teniendo en cuenta las justificaciones pertinentes.
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        DISEÑO DE UNA RED INTELIGENTE PARA LA ADMINISTRACIÓN DE UN SISTEMA INTEGRAL DE ENERGIA SOLAR PARA LA ZONA URBANA DEL MUNICIPIO DE VALLEDUPAR-CESAR<br>
+                        <i>Inicio:&nbsp;</i>Diciembre&nbsp;
+                        2011                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2012
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            DISEÑO DE UNA RED INTELIGENTE PARA LA ADMINISTRACIÓN DE UN SISTEMA INTEGRAL DE ENERGIA SOLAR PARA LA ZONA URBANA DEL MUNICIPIO DE VALLEDUPAR-CESAR<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        CONSULTORIO VIRTUAL EN LÍNEA PARA EL APOYO A LOS PROCESOS  DE ORIENTACIÓN DE BIENESTAR UNIVERSITARIO DE LA UNIVERSIDAD POPULAR DEL CESAR<br>
+                        <i>Inicio:&nbsp;</i>Julio&nbsp;
+                        2013                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Octubre&nbsp;
+                        2014
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Es claro que hoy en día, las comunicaciones son el factor más importante para unir al mundo y sobre todo para mantenernos conectados unos con otros. La necesidad de las personas de comunicarse hace que las redes estén más inundadas de información y que cada vez sean más dinámicas y vistosas para los usuarios.
+El objetivo de un consejero virtual experto en línea es la optimización de procesos de atención psicológica mediante el uso de un software fácil de manejar y que usa los últimos adelantos tecnológicos. El Consejero Virtual que se pretende desarrollar está dirigido al área de Bienestar Universitario de la Universidad popular del Cesar y a todos los usuarios que desean adaptar su gestión a los nuevos avances tecnológicos.
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        SISTEMA DE INFORMACIÓN EN AMBIENTE WEB PARA LA INCLUSION Y LA INTERCULTURALIDAD EN LA UNIVERSIDAD POPULAR DEL CESAR<br>
+                        <i>Inicio:&nbsp;</i>Abril&nbsp;
+                        2024                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            LA PROPUESTA ACTUAL PRETENDE DESARROLLAR UN SISTEMA DE INFORMACIÓN EN AMBIENTE WEB PARA LA INCLUSIÓN Y LA INTERCULTURALIDAD EN LA UNIVERSIDAD POPULAR DEL CESAR, QUE PERMITIRÁ A LA COMUNIDAD UNIVERSITARIA DISPONER DE UNA INFORMACIÓN VERAZ SOBRE LAS PERSONAS CON DISCAPACIDAD, PERMITIENDO A LA ADMINISTRACIÓN EJECUTAR ADECUADAMENTE PROGRAMAS Y PROYECTOS EN FAVOR DE ESTA POBLACIÓN.
+INICIALMENTE SE DESARROLLARA UN SISTEMA EN AMBIENTE WEB PARA EL REGISTRO Y SEGUIMIENTO DE LAS PERSONAS CON DISCAPACIDAD O PERTENECIENTES A ALGÚN TIPO DE POBLACIÓN ÉTNICA QUE FORMEN PARTE DE LA COMUNIDAD ACADÉMICA DE LA UNIVERSIDAD POPULAR DEL CESAR, QUE PERMITAN A LA INSTITUCIÓN LA PLANIFICACIÓN DE ACCIONES PERTINENTES EN LA ATENCIÓN DE LAS NECESIDADES DE ESTA POBLACIÓN. 
+POSTERIORMENTE, SE CONSTRUIRÁ UN ESPACIO VIRTUAL CON HERRAMIENTAS SÍNCRONAS Y ASÍNCRONAS PARA LA ATENCIÓN Y COMUNICACIÓN CON LA POBLACIÓN ESTUDIANTIL QUE TENGA ALGUNA CONDICIÓN ESPECIAL YA SEA FÍSICA, DE ETNIA O DE CUALQUIER OTRA.
+TAMBIÉN SE REALIZARÁ UN APLICATIVO QUE PERMITA LA PUBLICACIÓN DE ENLACES DE DESCARGA DE HERRAMIENTAS, NOTICIAS E INFORMACIÓN PERTINENTE A LA INCLUSIÓN E INTERCULTURALIDAD DE LA UNIVERSIDAD POPULAR DEL CESAR.
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

@@ -1,0 +1,3120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=7A82191E049312F424454F363CAF59A9" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                <tr>    
+                                    <td colspan="2" class="messageText"><b>Par evaluador reconocido por Minciencias.</b></td>                            
+                                </tr>                        
+                                
+                                
+                                    <tr>
+                                        <td>Categor&iacute;a</td>
+                                        <td>
+                                            Investigador Junior (IJ) con vigencia
+                                            
+                                                hasta la publicación de los resultados de la siguiente convocatoria
+                                                
+                                            
+                                        </td>
+                                    </tr>
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        Yessica&nbsp;Perdomo&nbsp;Useche
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>Yessica L. Perdomo Useche</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Femenino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Doctorado</b>
+                            UNIVERSIDAD DE CARTAGENA <br />
+                            Doctorado en Ambiente y Desarrollo Sostenible<br />
+                            Marzode2025 - de <br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            Fundación Universitaria del Área Andina. Sede Valledupar<br />
+                            Maestria Gestión Ambiental<br />
+                            Marzode2020 - Enerode 2023<br />
+                            Diseño e implementación de un programa de educación ambiental como estrategia de empoderamiento social en jóvenes del departamento del Cesar</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD DEL TOLIMA<br />
+                            BIOLOGIA<br />
+                            Juliode2011 - Diciembrede 2016<br />
+                            </td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Fundación Universitaria del Área Andina. Sede Valledupar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Febrero de 2024            
+                        Diciembre de 2024<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Otra actividad técnico-científica relevante            
+                        <i> - Cargo:</i>&nbsp;Líder curricular y de internacionalización del programa          
+                        Febrero de 2024            
+                        Diciembre de 2024<br>
+
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Postgrado            
+                        <i> - Nombre del curso:</i>&nbsp; Seminario de Investigación 2,&nbsp;26 
+                        Febrero 2024            
+                        Diciembre 2024<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Agosto de 2023            
+                        Diciembre de 2023<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Geografía y Patrimonio turistico; Ecoturismo,&nbsp;30 
+                        Agosto 2023            
+                        Diciembre 2023<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Fundación Universitaria del Área Andina. Sede Valledupar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Marzo de 2023            
+                        Diciembre de 2023<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Postgrado            
+                        <i> - Nombre del curso:</i>&nbsp; Seminario II,&nbsp;20 
+                        Marzo 2023            
+                        Junio 2023<br>
+
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Gerencia en Sistemas Integrados de Gestión ,&nbsp;15 
+                        Marzo 2023            
+                        Junio 2023<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Servicio Nacional De Aprendizaje Sena Regional Cesar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Febrero de 2022            
+                        Diciembre de 2022<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Servicio Nacional De Aprendizaje Sena Regional Cesar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Febrero de 2021            
+                        Noviembre de 2021<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Servicio Nacional De Aprendizaje Sena Regional Cesar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Febrero de 2020            
+                        Noviembre de 2020<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Servicio Nacional De Aprendizaje Sena Regional Cesar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Marzo de 2019            
+                        Noviembre de 2019<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Docencia/Enseñanza secundaria            
+                        <i> - Nombre del curso:</i>&nbsp; Tecnico en Manejo ambiental,&nbsp;30 
+                        Marzo 2019            
+                        Noviembre 2019<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD DEL TOLIMA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>30&nbsp;horas Semanales
+                        Julio de 2011            
+                        Junio de 2016<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ciencias Naturales -- Ciencias Biológicas -- Micología</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ciencias Agrícolas -- Otras Ciencias Agrícolas -- Otras Ciencias Agrícolas</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;Microbiología agrícola y ambiental, <i>Activa:</i>Si</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Reconocimientos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>Certificado por participación, trayectoria y dedicación en la formación de semilleros de investigación en la facultad de ciencias administrativas, económicas y contables de la Universidad Popular del Cesar,UNIVERSIDAD POPULAR DEL CESAR - Juniode 2024</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>Mejor poster de estudiante en el III Simposio Internacional de Investigadores de Micorrizas en Sur America. ,Instituto Amazónico De Investigaciones Científicas - Sinchi - Agostode 2023</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>Tesis meritoria,UNIVERSIDAD DEL TOLIMA - Juliode 2017</li></td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a></td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajo de grado de maestría o especialidad clínica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YESSICA PERDOMO USECHE,                    
+                            
+                            DISEÑO DE LA ESTRATEGIA DE CARBONO NEUTRO POR LAS ESPECIES FORESTALES APROVECHADAS EN EL PROYECTO VALLEYVILLE SAN DIEGO ¿ CESAR&nbsp;
+                            Fundación Universitaria del Área Andina. Sede Valledupar&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Maestria Gestión Ambiental,
+                            &nbsp;2023.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            ANDRY JOSE SALGADO RESTREPO
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): ANTONIO RUDAS MUNOZ , YESSICA PERDOMO USECHE,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajo de grado de maestría o especialidad clínica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YESSICA PERDOMO USECHE,                    
+                            
+                            EVALUACIÓN DE LA INCLUSIÓN DE LAS MIPYMES EN LA GESTIÓN INTEGRAL DE RESIDUOS SÓLIDOS EN EL MARCO DE LA ECONOMÍA CIRCULAR. ALBANÍA EXPERIENCIA LA GUAJIRA&nbsp;
+                            Fundación Universitaria del Área Andina. Sede Valledupar&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Maestria Gestión Ambiental,
+                            &nbsp;2023.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            jaime orlando garcia jaraba
+                            Celeste Maria Coronado Blanco
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): YESSICA PERDOMO USECHE,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos dirigidos/Tutorías de otro tipo</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YESSICA PERDOMO USECHE,                    
+                            
+                            Evaluación de la calidad hotelera de la ciudad de Valledupar haciendo uso de la IA y el modelo SERVPERF&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ADMINISTRACIÓN DE EMPRESAS TURISTICAS Y HOTELERAS,
+                            &nbsp;2023.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): YESSICA PERDOMO USECHE,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajo de grado de maestría o especialidad clínica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YESSICA PERDOMO USECHE,                    
+                            
+                            Diagnóstico del impacto sonoro producido por el tráfico en el tramo vial comprendido desde la avenida circunvalar calle 110 con carrera 38 hasta la avenida murillo calle 45 con carrera 38 (estudio de caso febrero 2023)&nbsp;
+                            Fundación Universitaria del Área Andina. Sede Valledupar&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Maestria Gestión Ambiental,
+                            &nbsp;2023.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            William Jose Bermejo Rolong
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): ENEIDA CERA RODRIGUEZ , YESSICA PERDOMO USECHE,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos dirigidos/Tutorías de otro tipo</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YESSICA PERDOMO USECHE,                    
+                            
+                            Encuentro de calidad: Un analisis del sector gastronómico de Valledupar&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ADMINISTRACIÓN DE EMPRESAS TURISTICAS Y HOTELERAS,
+                            &nbsp;2023.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): YESSICA PERDOMO USECHE,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajo de grado de maestría o especialidad clínica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YESSICA PERDOMO USECHE,                    
+                            
+                            ESTUDIO DE LA CALIDAD DEL AGUA DEL RIO CESAR ENTRE LOS PUNTOS DE ZAMBRANO (LA GUAJIRA Y LAS PITILLAS (CESAR))&nbsp;
+                            Fundación Universitaria del Área Andina. Sede Valledupar&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Maestria Gestión Ambiental,
+                            &nbsp;2021.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Jean Carlos  Ospino Jimenez
+                            MARIA ISABEL  TELLEZ  LUNA
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): YESSICA PERDOMO USECHE,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Oceanografía, Hidrología y Recursos del Agua,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajo de grado de maestría o especialidad clínica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YESSICA PERDOMO USECHE,                    
+                            
+                            EFECTO DE LAS MEZCLAS DE BIOCHAR, HONGOS FORMADORES DE MICORRIZAS ARBUSCULARES, Y BIODIGESTATOS COMO ESTIMULANTES DE CRECIMIENTO VEGETAL&nbsp;
+                            Fundación Universitaria del Área Andina. Sede Valledupar&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Maestria Gestión Ambiental,
+                            &nbsp;2024.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Hildelina Ochoa Bermudez
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): YESSICA PERDOMO USECHE,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajo de grado de maestría o especialidad clínica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YESSICA PERDOMO USECHE,                    
+                            
+                            ZONIFICACIÓN AMBIENTAL PARA LA PRIORIZACION DE ÁREAS DE RESTAURACIÓN ECOLÓGICA EN EL VALLE DEL CAUCA, COLOMBIA&nbsp;
+                            Fundación Universitaria del Área Andina. Sede Valledupar&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Maestria Gestión Ambiental,
+                            &nbsp;2023.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Christian de Jesús Sánchez Elizalde
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): YESSICA PERDOMO USECHE,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajo de grado de maestría o especialidad clínica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YESSICA PERDOMO USECHE,                    
+                            
+                            ESTRATEGIA PEDAGÓGICA PARA CONSERVACIÓN Y PROTECCIÓN DE SERVICIOS ECOSISTÉMICOS DEL ARROYO CAROLINA, MUNICIPIO PLANETA RICA, CÓRDOBA&nbsp;
+                            Fundación Universitaria del Área Andina. Sede Valledupar&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Maestria Gestión Ambiental,
+                            &nbsp;2023.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Evangelina Amaya Santiago
+                            JOHANIS VASQUEZ PADILLA
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): YESSICA PERDOMO USECHE,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajo de grado de maestría o especialidad clínica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YESSICA PERDOMO USECHE,                    
+                            
+                            ESTRATEGIA EDUCATIVA PARA LA ADOPCIÓN DE HERRAMIENTAS DE MANEJO DEL PAISAJE ¿ HMP - EN PALMICULTORES DE PEQUEÑA Y MEDIANA ESCALA DEL NÚCLEO PALMAGRO S.A&nbsp;
+                            Fundación Universitaria del Área Andina. Sede Valledupar&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Maestria Gestión Ambiental,
+                            &nbsp;2023.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Kely Vanessa Díaz Arce
+                            Eliecer David Torres Ponce
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): YESSICA PERDOMO USECHE,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajo de grado de maestría o especialidad clínica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YESSICA PERDOMO USECHE,                    
+                            
+                            CONVIRTIENDO LAS BASURAS EN OPORTUNIDADES: GESTIÓN DE RESIDUOS SÓLIDOS EN INSTITUCIONES EDUCATIVAS RURALES&nbsp;
+                            Fundación Universitaria del Área Andina. Sede Valledupar&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Maestria Gestión Ambiental,
+                            &nbsp;2023.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Liyeismes Paternina Martinez
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): YESSICA PERDOMO USECHE,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a></td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Par evaluador</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>UNIVERSIDAD POPULAR DEL CESAR,&nbsp;                
+                                        
+                                        2025,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundación Universidad Areandina ,&nbsp;                
+                                        
+                                        2026,&nbsp;
+                                        Enero &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Material para publicaci&oacute;n cient&iacute;fica&nbsp;
+                                                                        
+                                        <i>Editorial: </i>CENTRO DE INVESTIGACIÓN Y DESARROLLO CIENTÍFICO DE LA FUNDACIÓN UNIVERSITARIA DEL ÁREA ANDINA SECCIONAL PEREIRA,&nbsp;
+                                        
+                                        2024,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                    
+                        </table>    
+                        </td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XVIII Encuentro de Ciencias Naturales 2025 "Sembrando ciencia, cosechando futuro"&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2025-10-28 00:00:00.0,&nbsp;
+                                                    2025-10-28 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Universidad Popular del Cesar &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Gestionadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YESSICA PERDOMO USECHE
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>CIGAIM2025 - 2do Congreso Internacional: Gestión Ambiental e Industrial de la Minería&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2025-09-23 00:00:00.0,&nbsp;
+                                                    2025-09-25 00:00:00.0 &nbsp;
+                                                    en RIOHACHA &nbsp; - Universidad de la Guajira &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Caracterización socioeconómica de la minería artesanal o de subsistencia en el Departamento del Cesar
+                                                        <i>Tipo de producto:</i>Demás trabajos - Demás trabajos - Póster
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Gestionadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YESSICA PERDOMO USECHE
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>IX Congreso Latinoamericano de Micología&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2017-08-22 00:00:00.0,&nbsp;
+                                                    2017-08-25 00:00:00.0 &nbsp;
+                                                    en Lima &nbsp; -  DISTRITO DE MIRAFLORES - LIMA - PERÚ &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Hongos Formadores de Micorrizas Arbusculares potenciales en la recuperación de áreas impactadas por la minería de oro, en Colombia
+                                                        <i>Tipo de producto:</i>Demás trabajos - Demás trabajos - Póster
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DEL TOLIMA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>HERIK JOHAN GUZMAN LASSO LASSO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>MARYEIMY VARON LOPEZ
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>YESSICA PERDOMO USECHE
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XVIII Congreso Colombiano de la Ciencia del Suelo&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2016-10-05 00:00:00.0,&nbsp;
+                                                    2016-10-08 00:00:00.0 &nbsp;
+                                                    en VILLA DE LEYVA &nbsp; - Villa del Leyva &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>CARACTERIZACIÓN DE LA VEGETACIÓN Y LAS MICORRIZAS ARBUSCULARES EN UN ÁREA DE MINERIA DE ORO
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DEL TOLIMA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>HERIK JOHAN GUZMAN LASSO LASSO
+                                                        <i>Rol en el evento: </i>Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>MARYEIMY VARON LOPEZ
+                                                        <i>Rol en el evento: </i>Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>YESSICA PERDOMO USECHE
+                                                        <i>Rol en el evento: </i>Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>5</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>CIGAIM2025 - 2do Congreso Internacional: Gestión Ambiental e Industrial de la Minería&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2025-09-23 00:00:00.0,&nbsp;
+                                                    2025-09-25 00:00:00.0 &nbsp;
+                                                    en RIOHACHA &nbsp; - Universidad de La Guajira. &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Desarrollo turístico como estrategia clave en procesos de transición y cierre minero.
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Fundación Universitaria del Área Andina. Sede Valledupar
+                                                        <i>Tipo de vinculaci&oacute;n</i>Gestionadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YESSICA PERDOMO USECHE
+                                                        <i>Rol en el evento: </i>Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>6</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>III Simposio Internacional de Investigadores de Micorrizas en Sur America&nbsp;
+                                                <i>Tipo de evento: </i>Simposio&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2023-08-28 00:00:00.0,&nbsp;
+                                                    2023-08-30 00:00:00.0 &nbsp;
+                                                    en LETICIA &nbsp; - Instituto SINCHI &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Diseño e implementación de un programa de educación ambiental como estrategia de empoderamiento social en jóvenes del departamento del Cesar.
+                                                        <i>Tipo de producto:</i>Demás trabajos - Demás trabajos - Póster
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Fundación Universitaria del Área Andina. Sede Valledupar
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YESSICA PERDOMO USECHE
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>7</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>5to. Coloquio Internacional: Retos de la agricultura sostenible&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2023-11-04 00:00:00.0,&nbsp;
+                                                    2023-11-04 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Fundación Universitaria del Areandina &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Fundación Universitaria del Área Andina. Sede Valledupar
+                                                        <i>Tipo de vinculaci&oacute;n</i>Gestionadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YESSICA PERDOMO USECHE
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>8</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>6to. Coloquio Internacional: Por un futuro sin residuos&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2024-05-18 00:00:00.0,&nbsp;
+                                                    2024-05-18 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Fundación Universitaria del Areandina &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Fundación Universitaria del Área Andina. Sede Valledupar
+                                                        <i>Tipo de vinculaci&oacute;n</i>Gestionadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YESSICA PERDOMO USECHE
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>9</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>X Congreso Iberoamericano sobre uso sustentable de la biodiversidad y manejo de areas protegidas&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2024-05-27 00:00:00.0,&nbsp;
+                                                    2024-05-31 00:00:00.0 &nbsp;
+                                                    en Ciudad de México &nbsp; - Universidad centro panamericano de estudios superiores  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Estrategia educativa para la conservación y protección de los servicios ecosistémicos de una microcuenca en el corregimiento Carolina, Colombia
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Fundación Universitaria del Área Andina. Sede Valledupar
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>EVANGELINA AMAYA SANTIAGO
+                                                        <i>Rol en el evento: </i>Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>JOHANIS VASQUEZ PADILLA
+                                                        <i>Rol en el evento: </i>Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>YESSICA PERDOMO USECHE
+                                                        <i>Rol en el evento: </i>Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>10</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>III Congreso Internacional de Investigación en Turismo 2024 Un turismo para la equidad, el desarrollo sustentable, incluyente y el buen vivir.&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2024-05-08 00:00:00.0,&nbsp;
+                                                    2024-05-10 00:00:00.0 &nbsp;
+                                                    en BOGOTÁ, D.C. &nbsp; - Universidad Externado de Colombia &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>MODELO DE SOSTENIBILIDAD PARA EL DESARROLLO DEL AVITURISMO EN UN ECOPARQUE
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>YESSICA PERDOMO USECHE
+                                                        <i>Rol en el evento: </i>Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>11</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>4to. Coloquio Internacional Avances en la transición minero energética y cambio climático en el departamento del Cesar&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2023-05-30 00:00:00.0,&nbsp;
+                                                    2023-05-30 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Auditorio Pablo Oliveros - Fundación Universitaria del Areandina &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Fundación Universitaria del Área Andina. Sede Valledupar
+                                                        <i>Tipo de vinculaci&oacute;n</i>Gestionadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>AIDA SANES ORREGO
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>ANTONIO RUDAS MUNOZ
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>JOSE NELSON ANGULO ARGOTE
+                                                        <i>Rol en el evento: </i>Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>LUIS CARLOS DIAZ MUEGUE
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>YESSICA PERDOMO USECHE
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>
+                                
+                                <b>Apropiación social del conocimiento - Proceso de Apropiación Social del Conocimiento para el fortalecimiento o solución de asuntos de interés social </b>
+                            </li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            
+                            <i>Nombre del producto: </i>Diseño de una estrategia de sensibilización de la salud del suelo para los productores de la Junta de acción comunal de la Vereda El Palmar Abajo del Corregimiento de Azúcar Buena la Mesa,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2025 -   
+                            Noviembre,&nbsp;
+                            <i>Medio de verificaci&oacute;n: </i>https://drive.google.com/drive/folders/1GJXGYML2vDlW2bx9cUxBWzYTbvtFKEze?usp=drive_link,&nbsp;   
+                            <i>Licencia creative: </i>Atribución-No Comercial,&nbsp;   
+                            <i>Formato: </i>PDF (.pdf),&nbsp;   
+                            <i>Proyecto vinculado: </i>EFECTO DE LA MEZCLA BIOCHAR-MICORRIZA EN CULTIVOS DE CAFÉ COMO ESTRATEGIA SOCIAL Y SOSTENIBLE EN ZONA RURAL DEL MUNICIPIO DE VALLEDUPAR.   
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Fortalecimiento de cadenas productivas</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Apropiación social del conocimiento - Proceso de Apropiación Social del Conocimiento para el fortalecimiento de cadenas </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Nombre del producto: </i>Taller de Cocreación En el marco del proyecto EFECTO DE LAS MEZCLAS DE BIOCHAR, HONGOS FORMADORES DE MICORRIZAS Y BIODIGESTATOS COMO ESTIMULANTES DE CRECIMIENTO VEGETAL con código CV2024-GIMA-V-13297,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2024 -   
+                            Mayo,&nbsp;
+                            <i>Medio de verificaci&oacute;n: </i>https://drive.google.com/drive/folders/1jN4nlXmasiP57yOpjDQSn8Ctksj3urbu?usp=drive_link,&nbsp;   
+                            <i>Licencia creative: </i>Atribución-No Comercial,&nbsp;   
+                            <i>Formato: </i>PDF (.pdf)/UA, PDF (.pdf)/A,&nbsp;   
+                            <i>Proyecto vinculado: </i>EFECTO DE LAS MEZCLAS DE BIOCHAR, HONGOS FORMADORES DE MICORRIZAS Y BIODIGESTATOS COMO ESTIMULANTES DE CRECIMIENTO VEGETAL   
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>
+                                
+                                <b>Apropiación social del conocimiento - Proceso de Apropiación Social del Conocimiento para el fortalecimiento de cadenas </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Nombre del producto: </i>Co creación de un Plan de negocio para Producción Comunitaria de Biofertilizante Micorrícico Nativo para el Fortalecimiento de Cadenas Productivas Agrícolas en la Vereda Azúcar Buena La Mesa,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2025 -   
+                            Noviembre,&nbsp;
+                            <i>Medio de verificaci&oacute;n: </i>https://drive.google.com/drive/folders/1QEMM1jZuoqX7PDrEMiD-aCgq9sZ6NmqA?usp=drive_link,&nbsp;   
+                            <i>Licencia creative: </i>Atribución-No Comercial,&nbsp;   
+                            <i>Formato: </i>PDF (.pdf),&nbsp;   
+                            <i>Proyecto vinculado: </i>EFECTO DE LA MEZCLA BIOCHAR-MICORRIZA EN CULTIVOS DE CAFÉ COMO ESTRATEGIA SOCIAL Y SOSTENIBLE EN ZONA RURAL DEL MUNICIPIO DE VALLEDUPAR.   
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Producciones de contenido digital Audiovisual</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>
+                                
+                                <b>Divulgación pública de la ciencia - Producciones de contenido digital - Audiovisuales - Cápsulas de video </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Nombre del producto: </i>CE CREA _ La Jagua de Ibirico Cesar,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2026 -   
+                            Agosto,&nbsp;
+                            <i>Ciudad: </i>LA JAGUA DE IBIRICO-CESAR-Colombia,&nbsp;   
+                            <i>Medio de verificaci&oacute;n: </i>https://www.instagram.com/reel/DcL0UU7BbPi/?stkn=MWdlOTlzYWxndmVjbA==,&nbsp;   
+                            <i>Ruta de circulaci&oacute;n: </i>Con cobertura regional/ departamental,&nbsp;   
+                            <i>Proyecto vinculado: </i>Proyecto Marco Programa Integral para la Innovación, la Competitividad y el Desarrollo Turístico Territorial del Departamento del Cesar   
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                HERIK JOHAN GUZMAN LASSO LASSO,                    
+                                    
+                YESSICA PERDOMO USECHE,                    
+                                    
+                HILDA ROCIO MOSQUERA MOSQUERA,                    
+                                    
+                URLEY ADRIAN PEREZ MONCADA,                    
+                                    
+                MARYEIMY VARON LOPEZ,                    
+                
+                "Characterization of vegetation and the arbuscular mycorrhizal fungi community in soils impacted by gold mining in Colombia"
+                . En: Colombia&nbsp;<br>
+                CIENCIA TECNOLOGIA AGROPECUARIA&nbsp;
+                <i>ISSN:</i>&nbsp;0122-8706&nbsp;
+                <i>ed:</i>&nbsp;Colombian Corporation of Agricultural Research (Corpoica)<br>
+                <i>v.</i>23
+                <i>fasc.</i>3
+                p.1
+                - 20
+                ,2022,
+                <i>&nbsp;DOI:&nbsp;</i>10.21930/rcta.vol23_num3|_art:2394
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Gestión ambiental,                    
+                                    
+                botanical composition,                    
+                                    
+                soil,                    
+                                    
+                spore abundance,                    
+                                    
+                spore richness,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Corto (Resumen)</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                YESSICA PERDOMO USECHE,                    
+                                    
+                HAMILTON JULIAN BARBOSA VINASCO,                    
+                                    
+                DIANA MARCELA BELTRAN PEDROZA,                    
+                
+                "Efecto de la combinación auxina citoquinina en el cultivo in vitro de Passiflora edulis"
+                . En: Brasil&nbsp;<br>
+                Revista De La Asociación Colombiana De Ciencias Biológicas&nbsp;
+                <i>ISSN:</i>&nbsp;0120-4173&nbsp;
+                <i>ed:</i>&nbsp;Asociacion Colombiana De Ciencias Biologicas<br>
+                <i>v.</i>26
+                <i>fasc.</i>
+                p.231
+                - 231
+                ,2014,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Passiflora,                    
+                                    
+                Auxina,                    
+                                    
+                Evaluación de impacto ambiental,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                FIDEL MESA ARGUELLO,                    
+                                    
+                DAGY ENRIQUE CABARCAS SAUMETH,                    
+                                    
+                YESSICA PERDOMO USECHE,                    
+                                    
+                CESAR MARIN,                    
+                                    
+                LUIS ALBERTO QUINTERO LOPEZ,                    
+                
+                "Effects Of Biochar And Mycorrhizae In Dry Forest Ecosystems. A Literature Review"
+                . En: Colombia&nbsp;<br>
+                EVOLUTIONARY STUDIES IN IMAGINATIVE CULTURE&nbsp;
+                <i>ISSN:</i>&nbsp;2472-9876&nbsp;
+                <i>ed:</i>&nbsp;Academic Studies Press<br>
+                <i>v.</i>10
+                <i>fasc.</i>1
+                p.22
+                - 40
+                ,2026,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                MARIA ANGELA BAQUERO LUQUEZ,                    
+                                    
+                ASTRID CAROLINA CERVERA MOLINARES,                    
+                                    
+                YESSICA PERDOMO USECHE,                    
+                
+                "Prototipo virtual educativo para la gestión de residuos sólidos en MiPymes: aplicación en tres sectores piloto de Valledupar (caribe colombiano)"
+                . En: Colombia&nbsp;<br>
+                Gestión Y Ambiente&nbsp;
+                <i>ISSN:</i>&nbsp;2357-5905&nbsp;
+                <i>ed:</i>&nbsp;Universidad Nacionalde Colombia<br>
+                <i>v.</i>28
+                <i>fasc.</i>2
+                p.37
+                - 44
+                ,2026,
+                <i>&nbsp;DOI:&nbsp;</i>10.15446/ga.v28n2.120059
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                TATIANA CAROLINA FRAGOZO GUTIERREZ,                    
+                                    
+                YESSICA PERDOMO USECHE,                    
+                
+                "Social and Environmental Responsibility of Maritime Activities in Colombia and China from a Comparative Law Perspective"
+                . En: Colombia&nbsp;<br>
+                VNIVERSITAS&nbsp;
+                <i>ISSN:</i>&nbsp;0041-9060&nbsp;
+                <i>ed:</i>&nbsp;Pontificia Universidad Javeriana <br>
+                <i>v.</i>74
+                <i>fasc.</i>
+                p.
+                - 
+                ,2025,
+                <i>&nbsp;DOI:&nbsp;</i>10.11144/Javeriana.vj74.serm
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Revisión (Survey)</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                YESICA LEON RUEDAS,                    
+                                    
+                YESSICA PERDOMO USECHE,                    
+                
+                "Revisión sistemática sobre las estrategias de permacultura en la adaptación y mitigación al cambio climático"
+                . En: Colombia&nbsp;<br>
+                Gestión Y Ambiente&nbsp;
+                <i>ISSN:</i>&nbsp;2357-5905&nbsp;
+                <i>ed:</i>&nbsp;Universidad Nacionalde Colombia<br>
+                <i>v.</i>27
+                <i>fasc.</i>
+                p.1
+                - 13
+                ,2025,
+                <i>&nbsp;DOI:&nbsp;</i>10.15446/ga.v27n2.113089
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                JEAN CARLOS OSPINO JIMENEZ,                    
+                                    
+                YESSICA PERDOMO USECHE,                    
+                                    
+                MARIA ISABEL TELLEZ LUNA,                    
+                                    
+                NESTOR FELICIANO PLATA ALFARO,                    
+                
+                "Concentración de nitratos y fosfatos en el río Cesar entre Zambrano (La Guajira) y las Pitillas (Cesar)"
+                . En: Colombia&nbsp;<br>
+                Revista De Investigación Agraria Y Ambiental&nbsp;
+                <i>ISSN:</i>&nbsp;2145-6453&nbsp;
+                <i>ed:</i>&nbsp;Departamento De Publicaciones De La Unad<br>
+                <i>v.</i>16
+                <i>fasc.</i>
+                p.281
+                - 297
+                ,2025,
+                <i>&nbsp;DOI:&nbsp;</i>10.22490/21456453.7820
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                LIYEISMES PATERNINA MARTINEZ,                    
+                                    
+                YESSICA PERDOMO USECHE,                    
+                
+                "Convirtiendo las basuras en oportunidades: gestión de residuos solidos en institución educativa rural."
+                . En: Colombia&nbsp;<br>
+                Gestión Y Ambiente&nbsp;
+                <i>ISSN:</i>&nbsp;2357-5905&nbsp;
+                <i>ed:</i>&nbsp;Universidad Nacionalde Colombia<br>
+                <i>v.</i>27
+                <i>fasc.</i>2
+                p.1
+                - 16
+                ,2025,
+                <i>&nbsp;DOI:&nbsp;</i>10.15446/ga.v27n2.118992
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a></td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a></td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%">
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 id="textos">Textos en publicaciones no cient&iacute;ficas</h3></td>
+            </tr>        
+               
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Otro artículo publicado - Periódico de noticias</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            JAIME ORLANDO GARCIA JARABA,                    
+                                
+            CELESTE MARIA CORONADO BLANCO,                    
+                                
+            YESSICA PERDOMO USECHE,                    
+            
+            "Evaluación de la inclusión de las Mipymes en la gestión integral de residuos sólidos en el marco de la economía circular Albania Experiencia La Guajira."
+            En: Colombia. 
+            2024.
+            6. Revista Ciencias Naturales una Mirada a Nuevos Conocimientos.
+            <i>ISSN:</i>&nbsp;2500-8714 
+            <i>p.</i>59 
+            - 64
+            v.1
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            Mipymes,                    
+                                
+            Economía circular,                    
+                                
+            GIRS,                    
+                                
+            Educación ambiental,                    
+                                
+            Inclusión.,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a>
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Documentos de trabajo</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción bibliográfica - Documento de trabajo (Working Paper)</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        YESSICA PERDOMO USECHE,                    
+                        
+                        "EFECTOS DEL BIOCHAR Y MICORRIZAS EN ECOSISTEMAS DE BOSQUE SECO ¿ UNA REVISIÓN BIBLIOGRÁFICA."
+                        En: Colombia. 
+                        2024.
+                        
+                        
+                        
+                        
+                        <i>p. </i>
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,                    
+                        
+                        
+                        
+                    </blockquote>
+                </td>
+            </tr>
+            
+        </table>
+        </td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a>
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3>Innovaci&oacute;n de proceso o procedimiento</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+            <li><b>Producción técnica - Innovación de proceso o procedimiento</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            YESSICA PERDOMO USECHE,                    
+                                
+            ANTONIO RUDAS MUNOZ,                    
+                                
+            AIDA SANES ORREGO,                    
+                                
+            LUISA FERNANDA AREVALO NAVARRO,                    
+                                
+            MARIA DEL CARMEN JIMENEZ BARRIOSNUEVO,                    
+                                
+            LUIS CARLOS DIAZ MUEGUE,                    
+            
+            ALINEACIÓN CURRICULAR DE LOS SEMINARIOS DE INVESTIGACIÓN,
+            <i>Nombre comercial: </i>,
+            <i>contrato/registro: </i>,
+            . En: Colombia,&nbsp;
+            ,2023,&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,                    
+            
+            
+            
+
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td>
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+            <li><b>Producción técnica - Innovación de proceso o procedimiento</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            JORGE ANDRES CONTRERAS ESCORCIA,                    
+                                
+            YESSICA PERDOMO USECHE,                    
+                                
+            LILIANA ASTRID IBANEZ ROJAS,                    
+                                
+            GIOVANNA ELVIRA ANGULO BLANQUICETT,                    
+                                
+            MARTHA LILIANA AVENDANO CAMARGO,                    
+                                
+            OSWALDO ANDRES DAZA AMARA,                    
+                                
+            JORGE ANDREY LEON BARBOSA,                    
+                                
+            MARIANO ALFONSO SIERRA PEREZ,                    
+                                
+            CARMEN CECILIA GALVIS NUNEZ,                    
+            
+            Elaboración del documento de economía circular empresarial en la ¿Empresa de Contadores Auditores y Revisores Fiscales Sociedad por Acciones Simplificada ¿ EMCARF SAS¿,
+            <i>Nombre comercial: </i>,
+            <i>contrato/registro: </i>,
+            . En: Colombia,&nbsp;
+            ,2023,&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,                    
+            
+            
+            
+
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td>
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+            <li><b>Producción técnica - Innovación de proceso o procedimiento</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            YESSICA PERDOMO USECHE,                    
+                                
+            MARIA DEL CARMEN JIMENEZ BARRIOSNUEVO,                    
+                                
+            AIDA SANES ORREGO,                    
+                                
+            ANTONIO RUDAS MUNOZ,                    
+                                
+            LUIS CARLOS DIAZ MUEGUE,                    
+                                
+            DANIEL ANDRES COTES GARCIA,                    
+            
+            Procesos de conservación y multiplicación del frailejón Espeletia perijaensis,
+            <i>Nombre comercial: </i>,
+            <i>contrato/registro: </i>,
+            . En: Colombia,&nbsp;
+            ,2023,&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,                    
+            
+            
+            
+
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td>
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+            <li><b>Producción técnica - Innovación de proceso o procedimiento</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            YESSICA PERDOMO USECHE,                    
+                                
+            LUISA FERNANDA AREVALO NAVARRO,                    
+                                
+            AIDA SANES ORREGO,                    
+                                
+            ANTONIO RUDAS MUNOZ,                    
+                                
+            LUIS CARLOS DIAZ MUEGUE,                    
+                                
+            MARIA DEL CARMEN JIMENEZ BARRIOSNUEVO,                    
+            
+            Modificación sustancial postgrado,
+            <i>Nombre comercial: </i>,
+            <i>contrato/registro: </i>,
+            . En: Colombia,&nbsp;
+            ,2023,&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,                    
+            
+            
+            
+
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td>
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+            <li><b>Producción técnica - Innovación de proceso o procedimiento</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            YESSICA PERDOMO USECHE,                    
+                                
+            LUISA FERNANDA AREVALO NAVARRO,                    
+                                
+            MARIA DEL CARMEN JIMENEZ BARRIOSNUEVO,                    
+                                
+            AIDA SANES ORREGO,                    
+                                
+            ANTONIO RUDAS MUNOZ,                    
+                                
+            LUIS CARLOS DIAZ MUEGUE,                    
+            
+            Elaboración del documento maestro para la obtención del registro calificado del programa MAESTRÍA EN GESTIÓN AMBIENTAL,
+            <i>Nombre comercial: </i>,
+            <i>contrato/registro: </i>,
+            . En: Colombia,&nbsp;
+            ,2019,&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,                    
+            
+            
+            
+
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td>
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+            <li><b>Producción técnica - Innovación de proceso o procedimiento</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            YESSICA PERDOMO USECHE,                    
+                                
+            JORGE ANDRES CONTRERAS ESCORCIA,                    
+                                
+            LILIANA ASTRID IBANEZ ROJAS,                    
+                                
+            GIOVANNA ELVIRA ANGULO BLANQUICETT,                    
+                                
+            OSWALDO ANDRES DAZA AMARA,                    
+                                
+            JORGE ANDREY LEON BARBOSA,                    
+                                
+            MARIANO ALFONSO SIERRA PEREZ,                    
+                                
+            CARMEN CECILIA GALVIS NUNEZ,                    
+            
+            Elaboración del documento de sostenibilidad empresarial de NANOGROUP S.A.S,
+            <i>Nombre comercial: </i>,
+            <i>contrato/registro: </i>,
+            . En: Colombia,&nbsp;
+            ,2023,&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,                    
+            
+            
+            
+
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td>
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+            <li><b>Producción técnica - Innovación de proceso o procedimiento</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            YESSICA PERDOMO USECHE,                    
+                                
+            DANIEL ANDRES COTES GARCIA,                    
+                                
+            MARIA DEL CARMEN JIMENEZ BARRIOSNUEVO,                    
+                                
+            LUISA FERNANDA AREVALO NAVARRO,                    
+                                
+            AIDA SANES ORREGO,                    
+                                
+            ANTONIO RUDAS MUNOZ,                    
+                                
+            LUIS CARLOS DIAZ MUEGUE,                    
+            
+            Elaboración del proyecto educativo institucional del programa de MAESTRÍA EN GESTIÓN AMBIENTAL,
+            <i>Nombre comercial: </i>,
+            <i>contrato/registro: </i>,
+            . En: Colombia,&nbsp;
+            ,2023,&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,                    
+            
+            
+            
+
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%">
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Informes de investigaci&oacuten</h3></td>
+            </tr>    
+                
+            <tr>
+                <td>
+            <li><b>Producción técnica - Informes de investigación</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            YESSICA PERDOMO USECHE,                    
+            
+            INFORME FINAL PROYECTO: EFECTO DE LAS MEZCLAS DE BIOCHAR, HONGOS FORMADORES DE MICORRIZAS Y BIODIGESTATOS COMO ESTIMULANTES DE CRECIMIENTO VEGETAL                
+            . En: Colombia,&nbsp;
+            ,2024,&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td>
+            <li><b>Producción técnica - Informes de investigación</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            YESSICA PERDOMO USECHE,                    
+            
+            INFORME FINAL: Efecto de la Mezcla Biochar-Micorriza en Cultivos de Café Como Estrategia Social y Sostenible en Zona Rural Del Municipio de Valledupar                
+            . En: Colombia,&nbsp;
+            ,2025,&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+        <table width="100%" style="border:#999 1px solid" id="talleres">
+            <tr>
+                <td><h3 >Talleres Creativos</h3></td>
+            </tr>
+            
+            <tr>
+                <td><li>
+                <blockquote>
+                    
+                    Nombre del taller: Taller de co-creación para la gestión ambiental sostenible hotelera. ,Tipo de taller: null,Participaci&oacute;n: null <br>
+                    Fecha de inicio: 2026-09-26 00:00:00.0,Fecha de finalizaci&oacute;n: 2026-09-26 00:00:00.0<br>
+                    Lugar de realización: Hotel Sonesta Valledupar<br>
+                    &Aacute;mbito: Local,Distinci&oacute;n obtenida: Presentaci&oacute;n p&uacute;blica, Mecanismo de selecci&oacute;n: Evaluaci&oacute;n por pares 
+                </blockquote>                     
+            </li> 
+    </td>                         
+</tr>
+
+
+            <tr>
+                <td><li>
+                <blockquote>
+                    
+                    Nombre del taller: de Co-Creación en elmarco de la investigación de Diseño de una estrategia de Marketing Digital para el impulso del turismo gastronómico en la ciudad de Valledupar ,Tipo de taller: null,Participaci&oacute;n: null <br>
+                    Fecha de inicio: 2024-11-29 00:00:00.0,Fecha de finalizaci&oacute;n: 2024-11-29 00:00:00.0<br>
+                    Lugar de realización: Camara de Comercio de Valledupar<br>
+                    &Aacute;mbito: Local,Distinci&oacute;n obtenida: Presentaci&oacute;n p&uacute;blica, Mecanismo de selecci&oacute;n: Invitaci&oacute;n por parte de expertos 
+                </blockquote>                     
+            </li> 
+    </td>                         
+</tr>
+
+
+</table>
+
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n-Creaci&oacute;n&nbsp;<br>
+                        ABUNDANCIA Y DIVERSIDAD DE HONGOS FORMADORES DE MICORRIZAS ARBUSCULARES (HFMA) ASOCIADAS A LA VEGETACIÓN CIRCUNDANTE EN UN  ÁREA DE MINERÍA DEL MUNICIPIO DE SANTA-ISABEL, TOLIMA<br>
+                        <i>Inicio:&nbsp;</i>Octubre&nbsp;
+                        2015                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Mayo&nbsp;
+                        2017
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            La minería genera un impacto sobre los suelos, hábitat que soporta la cadena trófica. A pesar de ser evidentes los cambios en el suelo y la cobertura vegetal por la acción minera, poco se conoce sobre los organismos en estos ambientes. Los Hongos Formadores de Micorrizas Arbusculares (HFMA), son fundamentales por establecer relaciones simbióticas con la mayoría de las plantas, característica esencial para la recuperación de los suelos. El objetivo de este estudio fue caracterizar la abundancia y diversidad de la vegetación y HFMA en una zona afectada por la minería de oro en Santa Isabel-Tolima. La vegetación fue evaluada en dos áreas; una adyacente a los depósitos mineros y con vegetación nativa (SI-N) y otra intermedia con desechos mineros e inicio de sucesión vegetal natural (SI-SV) y los HFMA en el área SI-N y el área de desechos de minería (SI-M). La vegetación se cuantificó por la metodología RAP y los HFMA por el método de tamizado en húmedo a partir de suelo directo y cultivos trampa. Identificando 605 individuos, pertenecientes a 29 familias, 46 géneros y 54 especies vegetales y de HFMA 13 especies y 11 géneros, siendo 23 veces mayor en el área SIN, con Glomus microcarpum, como el más frecuente en ambas áreas. La diversidad, se determinó mediante los números de Hills, donde el área SI-N fue mayor en la vegetación (Q1: 11,94) y el área SI-M en los HFMA (Q1: 4,17). Se destacan las especies vegetales Baccharis latifolia, Agrostis sp, y Miconia sp y los HFMA del genero Glomus por ser potenciales en la fitorremediación.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        EFECTO DE LAS MEZCLAS DE BIOCHAR, HONGOS FORMADORES DE MICORRIZAS Y BIODIGESTATOS COMO ESTIMULANTES DE CRECIMIENTO VEGETAL<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2024                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Octubre&nbsp;
+                        2024
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            En Colombia, la agricultura intensiva es una de las actividades de mayor impacto económico en el país. A pesar de ser evidentes los cambios en la cobertura vegetal, estructura de los suelos, biodiversidad, entre otros; es una actividad que suple las necesidades básicas de la población, razón por la cual debe replantearse bajo nuevas prácticas agrícolas que generen menor impacto al suelo y protejan los servicios ecosistémicos que este provee. Poco se conoce sobre la dinámica de los microrganismos que se encuentran en el Bosque seco tropical (Bs-T), sin embargo existen interacciones importantes que sustentan el ecosistema, entre las más relevantes la simbiosis entre las plantas y los Hongos Formadores de Micorrizas,  presentes en el 90% de las especies vegetales, cuya interacción es esencial para el crecimiento de las plantas, aumentar la tolerancia a patógenos, disponibilidad de agua, y nutrientes como: nitrógeno y micronutrientes, y resistencia a contaminantes del suelo, características que los convierten en una de las principales alternativas biológicas para la recuperación suelos. Se ha identificado que la actividad de los HFM es potenciada al combinarlos con Biochar, debido a que este  aumenta la colonización de micorrizas, la  producción de glomalina y mejora la estructura del suelo, razón por la cual este proyecto, tiene como objetivo evidenciar el potencial de la mezclar  Biochar, HFM nativos y
+Biosoil, en el crecimiento vegetal, con el fin de avanzar en una productividad agrícola sostenible. A partir del diseño muestral serán evaluadas las proporciones más eficientes para el proceso, con el fin de identificar las mezcla que mejor se adapte a las condiciones de Caribe seco y que pueda ser un punto de partida para la implementación de prácticas agrícolas sostenibles en el departamento del Cesar. 
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        BIOFERTILIZANTE PRODUCTO DE LA BIODIGESTIÓN ANAEROBIA DE EXCRETAS BOVINAS PARA LA RECUPERACIÓN DE SUELOS AFECTADOS POR LA MINERÍA<br>
+                        <i>Inicio:&nbsp;</i>Agosto&nbsp;
+                        2023                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Octubre&nbsp;
+                        2025
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Por medio de esta acta se establecen los compromisos y condiciones de ejecución del
+proyecto titulado ESCALAMIENTO "BIOFERTILIZANTE PRODUCTO DE LA BIODIGESTIÓN
+ANAEROBIADE EXCRETAS BOVINAS PARA LA RECUPERACIÓN DE SUELOSAFECTADOS POR
+LA MINERÍA" con código CVINNO2023-GIMA-V-13242 de la ciudad VALLEDUPAR, adscrito
+a los grupos de investigación: GRUPO DE INVESTIGACIÓN MINERO AMBIENTAL - GIMA
+COL0104232 (Grupo responsable del proyecto), , y grupos de investigación externos . De
+los programas académicos: 1103P3724C Ingeneria de Minas VAL (Unidad responsable del
+proyecto), . Con un presupuesto aprobado de $37,220,000.00, el proyecto tendrá como
+fecha de inicio 01-08-2023 y fecha de terminación 01-08-2024.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        EFECTO DE LA MEZCLA BIOCHAR-MICORRIZA EN CULTIVOS DE CAFÉ COMO ESTRATEGIA SOCIAL Y SOSTENIBLE EN ZONA RURAL DEL MUNICIPIO DE VALLEDUPAR.<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2025                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Octubre&nbsp;
+                        2025
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El uso de fertilizantes minerales en la agricultura se ha visto incrementado para suplir la demanda alimentaria planetaria, que cada vez es mayor. Esto ha provocado que la salinidad del suelo agrícola aumente, la asimilación de nutrientes por parte de las plantas haya disminuido y las materias primas utilizadas se estén mermando de tal manera que la producción de los fertilizantes esté en riesgo. En la actualidad, para superar algunos de los inconvenientes de estos fertilizantes, se están empleando nuevas prácticas agrícolas que generen menor impacto al suelo y protejan los servicios ecosistémicos que este provee. Basándose en el uso de materiales orgánicos renovables, lo cual es un avance significativo hacia la economía circular que reincorpora los materiales de desecho al ciclo de producción en integra la actividad de los consorcios microbianos con las plantas, tal como es el caso de los HFM es potenciada al combinarlos con Biochar, debido a que este aumenta la colonización de micorrizas, la producción de glomalina y mejora la estructura del suelo, el crecimiento vegetal, con el fin de avanzar en una productividad agrícola sostenible.
+
+
+El aumento en la demanda de café en las últimas décadas y el interés del consumo de un café de calidad diferenciada (Vegro & de Almeida, 2020), hace necesario mejorar la comprensión de los procesos de cultivo para garantizar una producción sostenible de café de mejor calidad. En este sentido el departamento del Cesar consta de dos grandes pilares para su estabilidad y desarrollo, como es la innovación y la productividad agrícola, de manera que directa o indirectamente lideren el crecimiento y generen empleo.
+
+para ésto el modelo de negocio sostenible y la innovación transformadora como búsqueda de transferencias de conocimientos que busca esta propuesta, consiste en estructurar, promover, ejecutar el proyecto de producción de biofertilizantes a base de mezclas de biochar, hongos formadores de micorrizas y biodigestatos como estimulantes de crecimiento vegetal que involucre y estimule la participación comunitaria en pro del desarrollo económico, ambiental y social y que a su vez garantice productos de calidad y un mejoramiento en la calidad de vida de las poblaciones rurales y urbanas del departamento del Cesar.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Proyecto Marco Programa Integral para la Innovación, la Competitividad y el Desarrollo Turístico Territorial del Departamento del Cesar<br>
+                        <i>Inicio:&nbsp;</i>Julio&nbsp;
+                        2026                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El proyecto "CESAR DESTINO INNOVADOR ¿ CE CREA" constituye un Programa Integral para la Innovación, la Competitividad y el Desarrollo Turístico Territorial del Departamento del Cesar, concebido como un Proyecto Marco de investigación, extensión y proyección social liderado por el Programa de Administración de Empresas Turísticas y Hoteleras de la Universidad Popular del Cesar. Su propósito es fortalecer las capacidades institucionales y territoriales para impulsar un modelo de desarrollo turístico sostenible, competitivo e innovador en los veinticinco municipios del departamento durante el periodo 2026¿2030. El programa responde a los desafíos que enfrenta el sector turístico regional, relacionados con la limitada articulación entre actores, las brechas en competitividad, innovación, sostenibilidad, transformación digital, gestión del patrimonio y posicionamiento de destinos. En este contexto, propone un modelo de gobernanza colaborativa denominado CE CREA, fundamentado en la articulación Universidad¿Empresa¿Estado¿Sociedad, como mecanismo para integrar capacidades, conocimiento científico, experiencia empresarial, gestión pública y saberes comunitarios en la construcción de soluciones para el desarrollo territorial. Desde un enfoque de investigación aplicada e innovación social, el proyecto desarrolla estrategias orientadas a fortalecer la planificación turística, la formulación de proyectos, la apropiación social del conocimiento, la transferencia tecnológica y la consolidación de procesos de cooperación interinstitucional. Su estructura se organiza en cinco líneas estratégicas: innovación turística y transformación digital; sostenibilidad turística y territorial; cultura, patrimonio e identidad territorial; marketing territorial y posicionamiento de destinos; y comunicación estratégica con apropiación social del conocimiento. El Proyecto Marco permitirá generar conocimiento científico aplicado, fortalecer la investigación interdisciplinaria, consolidar redes de cooperación entre la academia y los actores del territorio, y apoyar la formulación de proyectos que contribuyan al mejoramiento de la competitividad turística del departamento del Cesar. Asimismo, busca posicionar a la Universidad Popular del Cesar como un referente regional en investigación, innovación y extensión para el desarrollo turístico territorial, mediante un modelo replicable de articulación y cocreación que promueva la diversificación económica, la sostenibilidad y el fortalecimiento de las capacidades locales.
+ <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

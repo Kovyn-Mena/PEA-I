@@ -1,0 +1,3219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=914EF521FB17BF4FD75F25293C239689" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        Rodrigo De Jesus&nbsp;Aponte&nbsp;Penso
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>APONTE PENSO, RODRIGO DE JESUS</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Doctorado</b>
+                            Universidad Dr. Rafael Belloso Chacín<br />
+                            DOCTORADO EN CIENCIAS POLITÍCAS<br />
+                            Agostode2010 - Mayode 2013<br />
+                            Participación ciudadana en la gestión local de Colombia</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            Universidad Rafael Belloso Chacín<br />
+                            MAESTRIA EN CIENCIAS DE LA EDUCACION MENCION GERENCIA EDUCATIVA<br />
+                            Agostode2008 - Mayode 2011<br />
+                            GESTIÓN DE LAS FUNCIONES BÁSICAS UNIVERSITARIAS PRESENTES EN LA INSTITUCIÓN PRIVADA RAFAEL BELLOSO CHACIN (MARACAIBO VENEZUELA) Y LA INSTITUCIÓN PÚBLICA UNIVERSIDAD POPULAR DEL CESAR (VALLEDUPAR COLOMBIA).</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Especialización</b>
+                            UNIVERSIDAD SANTO TOMAS<br />
+                            ESPECIALIZACION EN DOCENCIA UNIVERSITARIA<br />
+                            Enerode1999 - de 2000<br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD SANTO TOMAS<br />
+                            SOCIOLOGO<br />
+                            Enerode1984 - de 1987<br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Perfeccionamiento</b>
+                            UNIVERSIDAD DE SANTANDER<br />
+                            DIPLOMADO EN TECNICAS DE INVESTIGACIÓN<br />
+                            Enerode2000 - de 2000<br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Perfeccionamiento</b>
+                            UNIVERSIDAD DE SANTANDER<br />
+                            DIPLOMADO EN GERENCIA ESTRATEGICA<br />
+                            Enerode1997 - de 1997<br />
+                            </td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>&nbsp;horas Semanales
+                        Septiembre de 2005            
+                         de <br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>INVESTIGACIÓN</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Enero de 2003            
+                        Junio de 2007<br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp;                              
+                        Enero 2003            
+                        Junio 2007<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Departamento de Psicologia</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Enero de 2006            
+                        Diciembre de 2006<br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; ESTUDIOS SOCIOMETRICOS, GENERO Y RENDIMIENTO ACADEMICO                            
+                        Enero 2006            
+                        Diciembre 2006<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>AUXILIAR DE INVESTIGACIÓN</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Enero de 2003            
+                        Diciembre de 2003<br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp;                              
+                        Enero 2003            
+                        Diciembre 2003<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD SANTO TOMAS</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Enero de 2002            
+                        Diciembre de 2002<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;CATADRATICO          
+                        Enero de 2002            
+                        Diciembre de 2002<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>JEFATURA DE DEPARTAMENTO DE SOCIOLOGÍA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Enero de 1986            
+                        Diciembre de 1987<br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; DIANOSTICO PARA EL PLAN DE VIVIENDA PARA AUTOGESTIÓN                            
+                        Enero 1986            
+                        Diciembre 1987<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ciencias Sociales -- Sociología -- Sociología</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;Educación Y Sociedad:, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Sociedad y Violencia:, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;SOCIOLOGIA, <i>Activa:</i>No</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;CIENCIAS SOCIALES, <i>Activa:</i>No</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Cursos de corta duraci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                                            
+                            TALLER DE POLÍTICAS PÚBLICAS PARA LA POBLACIÓN DESPLAZADA,
+                            <i>Finalidad: </i>CAPACITAR A LA POBLACIÓN DESPLAZADA EN POLÍTICAS PÚBLICAS 
+                            . En: Colombia&nbsp;
+                            ,2011,&nbsp;
+                            ,AGORA, INVESTIGAMOS, INTERVENIMOS, DIVULGAMOS.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;0 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                                            
+                            ANIMADOR PARA LA CONFORMACIÓN DE GRUPOS Y SENSIBILIZACIÓN DE LA POBLACIÓN DESPLAZADA EN LA IMPORTANCIA PARA EL DESARROLLO COMUNITARIO EN EL MUNICIPIO DE VALLEDUPAR.,
+                            <i>Finalidad: </i>CAPACITAR A LA POBLACIÓN EN LA IMPORTANCIA DEL DESARROLLO COMUNITARIO
+                            . En: Colombia&nbsp;
+                            ,2010,&nbsp;
+                            ,AGORA, INVESTIGAMOS, INTERVENIMOS, DIVULGAMOS.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;1 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                                            
+                            ESTRUCTURA DE PRESENTACIÓN DE TRABAJOS MONOGRÁFICOS EN LOS PROGRAMAS DE DERECHO Y SOCIOLOGÍA.,
+                            <i>Finalidad: </i>CAPACITAR A LOS ESTUDIANTES PARA LA PRESENTACIÓN ADECUADA DE MONOGRAFÍAS SEGÚN EL PROTOCOLO DEL CENTRO DE DOCUMENTACIÓN E INVESTIGACIÓN SOCIOJURIDICAS
+                            . En: Colombia&nbsp;
+                            ,2010,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;0 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            Diagnostico para el plan de vivienda para autogestión&nbsp;
+                            UNIVERSIDAD SANTO TOMAS&nbsp;
+                            Estado: Tesis en curso&nbsp;
+                            SOCIOLOGO,
+                            &nbsp;1987.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            RODRIGO APONTE&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Desarrollo Urbano,                    
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            Caracterización de la Deserción Estudiantil en los programas de pregrado de la Universidad Popular del Cesar Cohorte 2008-1&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2014.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Arlet José Useche Córdoba&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            INCIDENCIA DE LAS REDES SOCIALES EN EL COMPORTAMIENTO DE LOS ESTUDIANTES DE LA FACULTAD DE DERECHO CIENCIAS POLÍTICAS Y SOCIALES DE LA UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2013.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Jan Moreno Rodríguez y Carlos Ramírez Pinto&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            "FACTORES GENERADORES DE LA VIOLENCIA CONTRA LA MUJER EN LOS HOGARES DEL BARRIO LA NEVADA DE LA CIUDAD DE VALLEDUPAR"&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2012.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Rosangela Mendoza Arciniega y Heidi Antonia Mindiola&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            "CONSERVACIÓN DEL PATRIMONIO CULTURAL INTANGIBLE EN LA CABECERA MUNICIPAL DE SAN DIEGO"&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2013.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Maite Liliana Mejía Daza Y Silvana Michel Amaya Herrera&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            "DESCRIPCIÓN DEL PROCESO DE ACULTURACIÓN DE LOS MIEMBROS DEL RESGUARDO INDÍGENA CAICEMAPA DE LA COMUNIDAD WAYUU DEL DEPARTAMENTO DE LA GUAJIRA"&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2012.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Clara Alicia Pérez Romo Y Elvert José Zuleta Suarez&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            "CARACTERIZACIÓN SOCIOECONÓMICA DEL BARRIO EL CARMEN"&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2013.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Dayana Gonzalez Pana y Jennifer López Suarez&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            "LA SEGURIDAD CIUDADANA EN LA CIUDAD DE VALLEDUPAR DESDE UNA PERSPECTIVA SOCIOLÓGICA"&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2012.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Martha Dangond Escobar&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            MORTALIDAD ACADÉMICA EN LOS ALUMNOS DE 8 Y 9 GRADO DEL COLEGIO RAFAEL VALLEMEZA DE LA CIUDAD DE VALLEDUPAR CESAR"&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2011.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Duber Alfonso Muñoz Fontalvo y Edith María Bolívar Palacio&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            "IMPACTO DE LOS SUBSIDIOS FEDES-CESAR EN LOS ESTUDIANTES DE LA UNIVERSIDAD POPULAR DEL CESAR DEL AÑO 2008-2011"&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2013.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Mileydis Lorenza Cañon Botello Y Ana Leonor Charry Torres&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            "PROCESO DE CAPACITACIÓN BRINDADA POR LA PASTORAL SOCIAL PARA LA GENERACIÓN DE INGRESOS A LAS FAMILIAS EN SITUACIÓN DE DESPLAZAMIENTO EN LA CIUDAD DE VALLEDUPAR"&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2012.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Ana María Carranza Ditta Y Yogenis Pacheco Pineda&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            "INFLUENCIA DE LA RELIGIÓN EN LA CONVIVENCIA ENTRE LOS MIEMBROS DE LAS IGLESIAS CATÓLICA Y PENTECOSTAL UNIDA DE COLOMBIA QUE HABITAN EN EL BARRIO FUNDADORES DE LA CIUDAD DE VALLEDUPAR"&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2012.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Jhonatan Fonseca Rodríguez Y Jorge Julio Manjarrez Díaz&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            "IMPACTO SOCIAL DE LA ACUMULACIÓN DE BASURA EN EL BARRIO 21 DE ENERO"&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2013.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Karina Fragozo Pedrozo y Ana Dangond Murgas&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            "CARACTERIZACIÓN DEL ROL LABORAL DE LA MUJER EN LA UNIVERSIDAD POPULAR DEL CESAR DE LA CIUDAD DE VALLEDUPAR"&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2012.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Ángela Sofía Méndez Guerra Y Jeniffer Sánchez Rojas&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            "LAS TECNOLOGÍAS DE INFORMACIÓN Y COMUNICACIÓN TIC´S COMO HERRAMIENTA DIDÁCTICA DE LOS PROCESOS ACADÉMICOS DE LA INSTITUCIÓN EDUCATIVA AGUSTÍN CODAZZI"&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2012.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Yurlexi García Martínez&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            "FACTORES SOCIOECONÓMICOS QUE CONDUCEN A LA INDIGENCIA EN NIÑOS DE 7 A 12 AÑOS UBICADOS EN EL SECTOR DE LA GALERÍA POPULAR DE LA CIUDAD DE VALLEDUPAR"&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2012.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Luis Alberto Mejía Y Marta Jiménez Ferreira&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            PERCEPCIÓN CULTURAL DE LA COMUNIDAD INDIGENA DE SIMUNURWA FRENTE A LOS SERVICIOS DEL REGIMEN DE SALUD SUBSIDIADO, EDINSON IZQUIERDO PEREZ&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2010.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            EDINSON IZQUIERDO PEREZ&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            EL PAPEL DE LA EDUCACIÓN COMO ELEMENTO DE TRANSFORMACIÓN SOCIAL, EN EL POST ¿ CONFLICTO EN EL MUNICIPIO DE VALLEDUPAR ¿ CESAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis en curso&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2020.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            TRASHUMANCIA ELECTORAL COMO PRACTICA DE LA CULTURA POLITICA EN EL MUNICIPIO DE LA JAGUA DEL PILAR DURANTE LOS AÑOS 2010-2015&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis en curso&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2020.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            IMPACTO SOCIECONOMICO DE LA MIGRACION VENEZOLANA EN LOS TRABAJADORES INFORMALES DE LA GALERIA EN VALLEDUPAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis en curso&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2019.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajo de grado de maestría o especialidad clínica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            NIVEL DE INCLUSIÓN EN LAS PRÁCTICAS PEDAGÓGICAS DESARROLLADAS POR LOS DOCENTES DEL PROGRAMA DE SOCIOLOGÍA DE LA UNIVERSIDAD&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Maestría en Educación,
+                            &nbsp;2018.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Maelis Herrera Perez
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            RESPONSABILIDAD SOCIAL CORPORATIVA (RSC) Y POLÍTICAS Y PUBLICAS REALIZADA POR COMFACESAR EN EL DESARROLLO DEL BIENESTAR SOCIAL DE LA POBLACIÓN VALDUPARENSE&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2019.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            IMPACTO DE LOS ACTORES ECONOMICOS EN EL AREA DE INFLUENCIA DEL BALNEARIO HURTADO DEL RIO GUATAPURI&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            SOCIOLOGIA,
+                            &nbsp;2019.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): RODRIGO DE JESUS APONTE PENSO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Jurado en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                                                
+                            ARLET JOSE USECHE CORDOBA,                    
+                            
+                            <i>Titulo:&nbsp;</i>Caracterización de la Deserción Estudiantil en los programas de pregrado de la Universidad Popular del Cesar Cohorte 2008-1                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> SOCIOLOGIA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Arlet José Useche Córdoba &nbsp;                
+                            
+                            
+                            <br><b>Palabras: </b><br>
+                                                
+                            Educación,                    
+                                                
+                            SOCIOLOGÍA,                    
+                                                
+                            Deserción,                    
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                                                    
+                            Ciencias Sociales -- Sociología -- Temas Especiales (Estudios de Género, Temas Sociales, Estudios de la Familia),                    
+                            
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Educación - Educación superior,                    
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            <i>Titulo:&nbsp;</i>LA SEGURIDAD CIUDADANA EN VALLEDUPAR DESDE UNA PERSPECTIVA SOCIOLOGICA                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Trabajo de grado/tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> SOCIOLOGIA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>MARTHA DANGOND ESCOBAR &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            <i>Titulo:&nbsp;</i>INFLUENCIA DEL CONFLICTO ARMADO EN LA DINAMICA SOCIECONOMICA, EL CASO DEL MUNICIPIO DEL COPEY CESAR 1995-2005                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Trabajo de grado/tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> SOCIOLOGIA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>MARIA LOURDE FORERO PUMAREJO Y KELLYS KETTYL VASQUEZ &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            <i>Titulo:&nbsp;</i>Movilidad social de los habitantes de La Nevada y Divino Niño por el incremento de los servicios públicos en Valledupar                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> DERECHO&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Maira Alejandra Simanca Quintana y Diana Nelixa de Armas Aislant &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            <i>Titulo:&nbsp;</i>CONDICIÓN SOCIOECONOMICA DEL CORREGIMIENTO DE SAN JOSE DE ORIENTE MUNICIPIO DE LA PAZ DEPARTAMENTO DEL CESAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Trabajo de grado/tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> SOCIOLOGIA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>UVER ARNALDO GONZALEZ ARAGON Y KELLY ROMAN CONTRERAS &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            <i>Titulo:&nbsp;</i>"IMPACTO SOCIAL DEL PROGRAMA FAMILIAS EN ACCIÓN, EN LAS FAMILIAS DESPLAZADAS Y REUBICADAS EN EL BARRIO CHIRIKI DE LA CIUDAD DE VALLEDUPAR "                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> SOCIOLOGIA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Ana Isabel Jiménez Ortega &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            <i>Titulo:&nbsp;</i>"CONOCIMIENTO DE LA PLANIFICACIÓN FAMILIAR, ENTRE LOS ADOLESCENTES DEL GRADO 9 A 11 DE LA INSTITUCIÓN EDUCATIVA LOPERENA ESPERANZA ¿ JORNADA DE LA TARDE VALLEDUPAR 2011"                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> SOCIOLOGIA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Ingrid De La Cruz y Andrea Coronado &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            <i>Titulo:&nbsp;</i>"CARACTERIZACIÓN DEL NÚCLEO FAMILIAR DE LOS TRABAJADORES DE DRUMOND RESIDENTES EN LA COMUNA 4 Y 5 DE VALLEDUPAR"                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> SOCIOLOGIA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Víctor Maldonado Ramírez y María José López Nieto &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            <i>Titulo:&nbsp;</i>"ESTADO SOCIOECONÓMICO DEL CORREGIMIENTO SAN JOSÉ DE ORIENTE MUNICIPIO DE LA PAZ DEPARTAMENTO DEL CESAR 2009-2010"                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> SOCIOLOGIA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Uber González Aragon Y Kelly Román Contreras &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            <i>Titulo:&nbsp;</i>CALIDAD DE VIDA DE PACIENTES PORTADORES DE VIH/SIDA DURANTE EL TRATAMIENTO ANTIRRETROVIRAL EN VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Trabajo de grado/tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> SOCIOLOGIA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Ana Karith Dangond Martinez &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            <i>Titulo:&nbsp;</i>"PRINCIPIO DE LEGALIDAD APLICADO A LOS MECANISMOS DE PARTICIPACIÓN CIUDADANA EN EL SISTEMA JURÍDICO COLOMBIANO"                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> DERECHO&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Andrés De Ángel Martínez &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            <i>Titulo:&nbsp;</i>"CARNAVAL DE VALLEDUPAR: UN ANÁLISIS COMPARATIVO ENTRE LA CULTURA TRADICIONAL Y LAS GENERACIONES ACTUALES (1970-2009)"                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> SOCIOLOGIA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Oscar Armando Daza Moya &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            <i>Titulo:&nbsp;</i>"INCIDENCIAS DE LAS IDEOLOGÍAS DE LAS TRIBUS URBANAS EMOS EN LAS RELACIONES Y EL RENDIMIENTO ACADÉMICO DE LOS ESTUDIANTES DE LA JORNADA DE LA MAÑANA DEL INSTITUTO TÉCNICO JOSÉ EUGENIO MARTÍNEZ DE LA CIUDAD DE VALLEDUPAR"                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> SOCIOLOGIA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Yarisleis Angarita Donado y Julio Cesar Blanco Barrios &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            <i>Titulo:&nbsp;</i>"ANÁLISIS COMPARATIVO ENTRE LA CONCILIACIÓN COMO NORMA FRENTE AL PALABRERO INDÍGENA WAYUU"                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> SOCIOLOGIA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Angelica Maestre Beltran &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            <i>Titulo:&nbsp;</i>"DIAGNOSTICO SOCIOECONÓMICO DEL MUNICIPIO DE AGUACHICA EN EL DEPARTAMENTO DEL CESAR"                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> SOCIOLOGIA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>José Carlos Pérez Yancy &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            <i>Titulo:&nbsp;</i>PERCEPCIÓN CULTURAL DE LA COMUNIDAD INDIGENA DE SIMUNURWA FRENTE A LOS SERVICIOS DEL REGIMEN DE SALUD SUBSIDIADO                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> SOCIOLOGIA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>EDINSON IZQUIERDO PEREZ.   &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            <i>Titulo:&nbsp;</i>"FACTORES SOCIOECONÓMICOS QUE CONDUCEN A LA INDIGENCIA EN NIÑOS DE 7 A 12 AÑOS, UBICADOS EN EL SECTOR DE LA GALERIA POPULAR DE LA CIUDAD DE VALLEDUPAR"                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> SOCIOLOGIA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>LUIS ALBERTO MEJIA MORELO, MARTHA ISABEL JIMENEZ FERREIRA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            <i>Titulo:&nbsp;</i>"NIVELES DE ESCOLARIDAD Y CONDUCTAS DELICTIVAS DE LOS INTERNOS DEL ESTABLECIMIENTO PENITENCIARIO DE ALTA Y MEDIANA SEGURIDAD DE LA CIUDAD DE VALLEDUPAR"                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> SOCIOLOGIA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>NINI YOHANA GONZALEZ CHAPARRO Y EDWIN OLIVO TEJADA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            <i>Titulo:&nbsp;</i>"ANÀLISIS JURÌDICO DE LOS CONYUGUES EN EL HABER RELATIVO CONSAGRADO EN LA CONSTITUCIÒN COLOMBIANA                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> SOCIOLOGIA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>IVAN MAYA PABON &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            <i>Titulo:&nbsp;</i>ANALISIS DE LOS IMAGINARIOS EXISTENTES DESDE LOS JOVENES FRENTE A LOS ROLES Y LA PERSPECTIVA DE GENERO EN LA PATERNIDAD Y MATERNIDAD EN EL EMBARAZO DE ADOLESCENTES EN LA COMUNA 2 DEL MUNICIPIO DE VALLEDUPAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Trabajo de grado/tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> SOCIOLOGIA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>ANGY CECILIA PADILLA LOPEZ y CANDY PAOLA REALES OROZCO &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            RODRIGO DE JESUS APONTE PENSO,                    
+                            
+                            <i>Titulo:&nbsp;</i>Cultura Política del Departamento del Cesar                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Trabajo de grado/tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> DERECHO&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i> &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Sociología -- Sociología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Par evaluador</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Material para publicaci&oacute;n cient&iacute;fica&nbsp;
+                                                                        
+                                        <i>Editorial: </i>Publicaciones Universidad Distrital Francisco Jose De Caldas,&nbsp;
+                                        
+                                        2018,&nbsp;
+                                        Enero &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Material para publicaci&oacute;n cient&iacute;fica&nbsp;
+                                                                        
+                                        <i>Editorial: </i>Publicaciones Universidad Distrital Francisco Jose De Caldas,&nbsp;
+                                        
+                                        2020,&nbsp;
+                                        Noviembre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                    
+                        </table>    
+                        </td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>I ENCUENTRO MUNICIPAL DE PROFESIONALES ESTUDIANTES E INVESTIGADORES "CIUDAD VALLEDUPAR"&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2005-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - VALLEDUPAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UPC
+                                                        <i>Tipo de vinculaci&oacute;n</i>Gestionadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>RODRIGO DE JESUS APONTE PENSO
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XXI INTERNATIONAL CONFERENCE ON LEARNING (XXI CONGRESO INTERNACIONAL DE EDUCACIÓN Y APRENDIZAJE)&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2014-07-15 00:00:00.0,&nbsp;
+                                                    2014-07-17 00:00:00.0 &nbsp;
+                                                    en New York County &nbsp; - Lander College For Women - New Yor USA &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>"El taller como estrategia metodológica para estimular la investigación en el proceso de enseñanza - aprendizaje, en la educación superior: investigación".
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>LANDER COLLEGE FOR WOMEN
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Gestionadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>RODRIGO DE JESUS APONTE PENSO
+                                                        <i>Rol en el evento: </i>Asistente , Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XXIX CONGRESO ALAS CHILE - Crisis y Emergencias Sociales en América Latina&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2013-09-29 00:00:00.0,&nbsp;
+                                                    2013-10-04 00:00:00.0 &nbsp;
+                                                    en Santiago de Chile &nbsp; - Universidad De Chile - Santiago de Chile &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Participación Ciudadana en la Gestión Local en la República de Colombia 1991-2013.
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DE CHILE
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Gestionadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>RODRIGO DE JESUS APONTE PENSO
+                                                        <i>Rol en el evento: </i>Asistente , Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>III ENCUENTRO INTERNACIONAL TEORÍA Y PRÁCTICA POLÍTICA&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2013-12-11 00:00:00.0,&nbsp;
+                                                    2013-12-13 00:00:00.0 &nbsp;
+                                                    en Mar del Plata &nbsp; - Universidad Nacional De Mar Del Plata - Argentina &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>El taller como estrategia metodológica para estimular la participación estudiantil en la gestión educativa en el entorno de la educación superior pública de Valledupar
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Universidad Nacional De Mar Del Plata
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Gestionadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>RODRIGO DE JESUS APONTE PENSO
+                                                        <i>Rol en el evento: </i>Asistente , Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>5</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>II ENCUENTRO REGIONAL DE ESTUDIANTES DE SOCIOLOGÍA&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2005-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - UNIVERSIDA POPULAR DEL CESAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>RODRIGO DE JESUS APONTE PENSO
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>6</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XXXIV CONGRESO DE LA ASOCIACION LATINOAMERICANA Y CARIBEÑA DE SOCIOLOGIA ALAS RD-CARIBE 2024&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2024-11-03 00:00:00.0,&nbsp;
+                                                    2024-11-08 00:00:00.0 &nbsp;
+                                                    en Santo Domingo &nbsp; - UNIVERSIDAD AUTONOMA DE SANTO DOMINGO &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>RODRIGO DE JESUS APONTE PENSO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>7</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XIV CONGRESO NACIONAL DE SOCIOLOGÍA&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2023-12-04 00:00:00.0,&nbsp;
+                                                    2023-12-06 00:00:00.0 &nbsp;
+                                                    en BARRANQUILLA &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Rol de la cooperación internacional en la etapa de dejación de armas en el proceso de paz en Colombia
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>RODRIGO DE JESUS APONTE PENSO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                RODRIGO DE JESUS APONTE PENSO,                    
+                
+                "Relación entre estatus sociométrico, Género y Rendimiento Académico"
+                . En: Colombia&nbsp;<br>
+                PSICOLOGIA DESDE EL CARIBE&nbsp;
+                <i>ISSN:</i>&nbsp;0123-417X&nbsp;
+                <i>ed:</i>&nbsp;UNIVERSIDAD DEL  NORTE<br>
+                <i>v.</i>17
+                <i>fasc.</i>N/A
+                p.176
+                - 195
+                ,2006,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                AUTOGESTIÒN,                    
+                                    
+                GENERO,                    
+                                    
+                RENDIMIENTO ACADEMICO,                    
+                                    
+                SOCIOLOGÍA,                    
+                                    
+                SOCIOMETRIA,                    
+                                    
+                VIVIENDA,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                RODRIGO DE JESUS APONTE PENSO,                    
+                
+                "ARTICULO PUBLICADO TITULADO: DOCENCIA, INVESTIGACIÓN Y EXTENSIÓN: FUNCIONES BÁSICAS DE LA EDUCACIÓN SUPERIOR"
+                . En: Colombia&nbsp;<br>
+                Revista De Humanidades Y Sociología&nbsp;
+                <i>ISSN:</i>&nbsp;2215-8383&nbsp;
+                <i>ed:</i>&nbsp;Ediciones Unicesar<br>
+                <i>v.</i>1
+                <i>fasc.</i>1
+                p.1
+                - 136
+                ,2010,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a>
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Libros</h3></td>
+            </tr>
+                
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Libro - Libro resultado de investigación</b>
+            </li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            RODRIGO DE JESUS APONTE PENSO,                    
+                                
+            JOSEFINA CUELLO DAZA,                    
+            
+            "INVESTIGACIÓN, DOCENCIA Y EXTENSIÓN: TRES FUNCIONES BÁSICAS PARA UN MARCO DE ACCIÓN"
+            En: Colombia
+            2016.&nbsp;
+            ed:fondo de publicaciones universidad popular del cesar &nbsp;
+            <i>ISBN:</i>&nbsp;978-958-8409-68-9&nbsp;
+            <i>v. </i>
+            <i>pags.</i>&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                                    
+            Ciencias Sociales -- Sociología -- Temas Especiales (Estudios de Género, Temas Sociales, Estudios de la Familia),                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a>        
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td colspan="2"><h3 >Capitulos de libro</h3></td>
+            </tr>
+                
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    RODRIGO DE JESUS APONTE PENSO,                    
+                    
+
+                    "INTERPRETAR EL SIGNIFICADO DEL VOTO EN BLANCO EN EL ENTORNO NACIONAL"
+                    investigaciones e Ingnierias
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-958-5493-47-6&nbsp;
+                    <i>ed:</i>&nbsp;
+                    <i>, v.</i>
+                    , p.43
+                    - 56&nbsp;
+                    
+                    ,2020
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ciencias Sociales -- Sociología -- Sociología,                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+
+</table>
+</td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%">
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 id="textos">Textos en publicaciones no cient&iacute;ficas</h3></td>
+            </tr>        
+               
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Otro artículo publicado - Revista de divulgación</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            RODRIGO DE JESUS APONTE PENSO,                    
+            
+            "Docencia, investigación y extensión: funciones básicas de la educación superior"
+            En: Colombia. 
+            2010.
+            Revista De Humanidades Y Sociología.
+            <i>ISSN:</i>&nbsp;2215-8383 
+            <i>p.</i>89 
+            - 98
+            v.1
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                                    
+            Ciencias Sociales -- Sociología -- Sociología,                    
+                                    
+            Ciencias Sociales -- Sociología -- Temas Especiales (Estudios de Género, Temas Sociales, Estudios de la Familia),                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a></td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        DIAGNOSTICO PARA EL PLAN DE VIVIENDA PARA AUTOGESTIÓN<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2011                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Noviembre&nbsp;
+                        2012
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        ESTUDIOS SOCIOMETRICOS, GENERO Y RENDIMIENTO ACADEMICO<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2004                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2006
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        EL TALLER COMO ESTRATEGIA METODOLÓGICA PARA ESTIMULAR LA  INVESTIGACIÓN EN EL PROCESO DE ENSEÑANZA-APRENDIZAJE EN EL AULA DE CLASES DE LA EDUCACIÓN MEDIAY SUPERIOR<br>
+                        <i>Inicio:&nbsp;</i>Octubre&nbsp;
+                        2011                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Julio&nbsp;
+                        2012
+                        
+                        
+                        <i>Fin:&nbsp;</i>Agosto&nbsp;
+                        2012
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>12<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Institucionalmente la estrategia metodológica del taller debe propiciar cambios de actitud entre los estudiantes y docentes que son los sujetos protagonistas del proceso de enseñanza-aprendizaje, teniendo como consecuencia lógica la producción de conocimiento científico, en  contexto educativos específicos, (media y superior) que posibiliten cambios sustanciales para la sociedad.
+
+
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Participación Ciudadana en la Gestión Local en la República de Colombia 1991-2013.<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2013                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            La investigación analizo la Participación ciudadana en la gestión local en Colombia durante el período 1991 ¿ 2012. Las bases teóricas se basaron en enfoques de Coronel (2005), Cunill (2003), Chávez (2003), La Ley 134 de 1994, Constitución Nacional de Colombia. Crosby (2007), Nader Orfele (2011). Detectándose  cambios en el ordenamiento jurídico que apunta a una reconfiguración del Estado en lo  local, como factor relevante para transformar las relaciones con la ciudadanía en una perspectiva democrática. Donde la participación ciudadana facilita el ejercicio político en la gestión local a través de unos de sus tantos mecanismos; las Juntas Administradoras Locales JAL, percibiendo la sociedad civil cada vez con mayor claridad que puede incidir en las decisiones públicas en su entorno local.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

@@ -1,0 +1,2018 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=21706BF7CD8F008E97B5E6C183CACAA9" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        Malio Fernando&nbsp;Bolívar&nbsp;Palacio
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>BOLÍVAR PALACIO, MALIO FERNANDO</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td><h3 >Redes sociales acad&eacute;micas</h3></td>
+                                </tr>
+                                    
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        
+                                        <a target="_blank" href="https://scholar.google.es/citations?hl=es&user=ahOqIHIAAAAJ" style="color: #007A81">Google Scholar</a>
+                                    </td>
+                                </tr>
+                                    
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        
+                                        <a target="_blank" href="https://www.linkedin.com/in/maliobolivarpalacio" style="color: #007A81">Linkedln</a>
+                                    </td>
+                                </tr>
+                                
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td><h3 >Identificadores de autor</h3></td>
+                                </tr>
+                                    
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        
+                                        <a target="_blank" href="https://orcid.org/0000-0002-1066-5538" style="color: #007A81">Open Researcher and Contributor ID (ORCID)</a>
+                                    </td>
+                                </tr>
+                                
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            INSTITUTO TECNOLÓGICO Y DE ESTUDIOS SUPERIORES DE MONTERREY (ITESM)<br />
+                            Maestría en Tecnología Educativa<br />
+                            Marzode2014 - Noviembrede 2016<br />
+                            Desarrollo de competencias tecnológicas y habilidades colaborativas en 
+docentes universitarios, a través de capacitación en línea.</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            UNIVERSIDAD AUTONOMA DE BUCARAMANGA<br />
+                            MAESTRIA EN TECNOLOGIA EDUCATIVA Y MEDIOS INNOVADORES PARA LA EDUCACION<br />
+                            Marzode2014 - Diciembrede 2016<br />
+                            Desarrollo de competencias tecnológicas y habilidades colaborativas en 
+docentes universitarios, a través de capacitación en línea.</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD POPULAR DEL CESAR<br />
+                            INGENIERIA DE SISTEMAS<br />
+                            Enerode2001 - Diciembrede 2007<br />
+                            Software para la estandarización de productos cárnicos cocidos y escaldados</td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Julio de 2020            
+                        Diciembre de 2021<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Septiembre de 2013            
+                        Enero de Actual<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Otra actividad técnico-científica relevante            
+                        <i> - Cargo:</i>&nbsp;Desarrollador de contenido WEB educativo e instrumentos de medición          
+                        Junio de 2014            
+                        Junio de 2015<br>
+
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Catedra UPECISTA,&nbsp;25 
+                        Enero 2014            
+                        Junio 2014<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Centro de Investigación y Educación Abierta y a Distancia para Latinoamérica y el Caribe</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Agosto de 2017            
+                        Diciembre de 2017<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Valledupar Digital</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Enero de 2016            
+                        Octubre de 2016<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Consorcio T&T Cátedra</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Marzo de 2016            
+                        Junio de 2016<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía)</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;Estrategias de Aprendizaje y medios digitales para ambientes educativos soportados en TIC, <i>Activa:</i>Si</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Reconocimientos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>Mentor por su acompañamiento en la fase Descubrimiento de Negocios Digitales,Apps.CO - Diciembrede 2019</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>MENTOR CON EL SELLO APPS.CO,Apps.CO - Diciembrede 2018</li></td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Cursos de corta duraci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Perfeccionamiento</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            MALIO FERNANDO BOLIVAR PALACIO,                    
+                                            
+                            Docente virtual Moodle,
+                            <i>Finalidad: </i>Perfeccionamiento docente en la metodologia b-learning  de la institución educativa
+                            . En: Colombia&nbsp;
+                            ,2015,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;12 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Monografía de conclusión de curso de perfeccionamiento/especialización</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            MALIO FERNANDO BOLIVAR PALACIO,                    
+                            
+                            DESARROLLO DE ESTRATEGIAS PEDAGOGICAS A TRAVES DE LAS TIC PARA MEJORAR LA MANIPULACION DE MUJERES ARHUACAS ADSCRITAS AL PROGRAMA PAE EN EL CENTRO EDUCATIVO GUNARUWA&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ESPECIALIZACIÓN PEDAGOGÍA AMBIENTAL,
+                            &nbsp;2018.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            MARTHA ORTIZ MAESTRE&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): MALIO FERNANDO BOLIVAR PALACIO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Otras Ciencias Naturales -- Otras Ciencias Naturales,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Monografía de conclusión de curso de perfeccionamiento/especialización</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            MALIO FERNANDO BOLIVAR PALACIO,                    
+                            
+                            DESARROLLO DE ESTRATEGIAS PEDAGOGICAS A TRAVES DE LAS TIC PARA MEJORAR LA MANIPULACION DE MUJERES ARHUACAS ADSCRITAS AL PROGRAMA PAE EN EL CENTRO EDUCATIVO GUNARUWA&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ESPECIALIZACIÓN PEDAGOGÍA AMBIENTAL,
+                            &nbsp;2018.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            MARTHA ORTIZ MAESTRE&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): MALIO FERNANDO BOLIVAR PALACIO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Otras Ciencias Naturales -- Otras Ciencias Naturales,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a></td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Par evaluador</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>UNIVERSIDAD DEL NORTE,&nbsp;                
+                                        
+                                        2018,&nbsp;
+                                        Marzo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                    
+                        </table>    
+                        </td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%">
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 id="trabajos_tec" >Consultor&iacute;as</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>
+                                
+                                <b>Producción técnica - Consultoría Científico Tecnológica e Informe Técnico - Desarrollo de productos</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            MALIO FERNANDO BOLIVAR PALACIO,                    
+                            
+                            CONVOCATORIA A EQUIPOS DE EMPRENDEDORES ITERACIÓN XII - PILOTO TRANSFERENCIA MARCO METODOLÓGICO DE LA FASE DE DESCUBRIMIENTO DE NEGOCIOS DIGITALES DE APPS.CO,
+                            <i>Nombre comercial: </i>,
+                            <i>contrato/registro: </i>Convenio de interadministrativo,
+                            . En: Colombia,&nbsp;
+                            ,2018,&nbsp;
+                            3 meses &nbsp;
+                            p.&nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                            
+
+                        </blockquote>
+
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XII Congreso Internacional sobre Competencias y Educación, COINCOM2023&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2023-11-28 00:00:00.0,&nbsp;
+                                                    2023-11-30 00:00:00.0 &nbsp;
+                                                    en CARTAGENA DE INDIAS &nbsp; -  hotel  Corales de Indias, en la ciudad de Cartagena de Indias, Colombia. &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Preservación de la identidad de los indígenas del norte del Cesar con etnoeducación mediada por TIC
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>MALIO FERNANDO BOLIVAR PALACIO
+                                                        <i>Rol en el evento: </i>Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>VI Congreso Nacional de Evaluadores, con el tema ¿Compromiso de la Calidad rumbo a la excelencia en la sociedad 5.0?&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2020-10-01 00:00:00.0,&nbsp;
+                                                    2020-10-02 00:00:00.0 &nbsp;
+                                                    en Ciudad de México &nbsp; - Virtual &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Desarrollo de competencias digitales y colaborativas en docentes universitarios a través del diseño de materiales didácticos, mediante el uso de Recursos Educativos Abiertos
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>MALIO FERNANDO BOLIVAR PALACIO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>7 Congreso Internacional de Innovación Educativa&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2020-12-14 00:00:00.0,&nbsp;
+                                                    2020-12-18 00:00:00.0 &nbsp;
+                                                    en Monterrey &nbsp; - Virtual &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Desarrollo de habilidades tecnológicas y habilidades colaborativas en docentes universitarios, a través de capacitación en modalidad b-learning
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>MALIO FERNANDO BOLIVAR PALACIO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XV congreso nacional de investigación educativa COMIE 2019&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2019-11-18 00:00:00.0,&nbsp;
+                                                    2019-11-22 00:00:00.0 &nbsp;
+                                                    en Acapulco &nbsp; - Universidad Autónoma de Guerrero &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Desarrollo de competencias tecnológicas y habilidades colaborativas en docentes universitarios, a través de capacitación en línea
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Consejo Mexicano de Investigación Educativa
+                                                        <i>Tipo de vinculaci&oacute;n</i>Gestionadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>MALIO FERNANDO BOLIVAR PALACIO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>MARIA DEL CARMEN JIMENEZ BARRIOSNUEVO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Producciones de contenido digital Audiovisual</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Divulgación pública de la ciencia - Producciones de contenido digital - Audiovisuales - Cápsulas de video </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Nombre del producto: </i>Blackboard collaborate Estudiantes con Moodle,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2020 -   
+                            Mayo,&nbsp;
+                            <i>Ciudad: </i>VALLEDUPAR-CESAR-Colombia,&nbsp;   
+                            <i>Medio de verificaci&oacute;n: </i>https://www.youtube.com/watch?v=JgLRL5XzvzI&ab_channel=CentrodeFormacionenNuevasTecnologias,&nbsp;   
+                            <i>Ruta de circulaci&oacute;n: </i>Con cobertura sobre todo el territorio nacional,&nbsp;   
+                            <i>Proyecto vinculado: </i>Apropiación de herramientas TIC para el uso pedagógico en la Universidad Popular del Cesar en tiempos de pandemia   
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Divulgación pública de la ciencia - Producciones de contenido digital - Audiovisuales - Cápsulas de video </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Nombre del producto: </i>Blackboard collaborate Rol Docente en Moodle,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2020 -   
+                            Mayo,&nbsp;
+                            <i>Ciudad: </i>VALLEDUPAR-CESAR-Colombia,&nbsp;   
+                            <i>Medio de verificaci&oacute;n: </i>https://www.youtube.com/watch?v=tmK686yxRBM&ab_channel=CentrodeFormacionenNuevasTecnologias,&nbsp;   
+                            <i>Ruta de circulaci&oacute;n: </i>Con cobertura sobre todo el territorio nacional,&nbsp;   
+                            <i>Proyecto vinculado: </i>Apropiación de herramientas TIC para el uso pedagógico en la Universidad Popular del Cesar en tiempos de pandemia   
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Divulgación pública de la ciencia - Producciones de contenido digital - Audiovisuales - Cápsulas de video </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Nombre del producto: </i>Crear una actividad en Classroom,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2020 -   
+                            Marzo,&nbsp;
+                            <i>Ciudad: </i>VALLEDUPAR-CESAR-Colombia,&nbsp;   
+                            <i>Medio de verificaci&oacute;n: </i>https://www.youtube.com/watch?v=wDq6FtbVay4&ab_channel=CentrodeFormacionenNuevasTecnologias,&nbsp;   
+                            <i>Ruta de circulaci&oacute;n: </i>Con cobertura sobre todo el territorio nacional,&nbsp;   
+                            <i>Proyecto vinculado: </i>Apropiación de herramientas TIC para el uso pedagógico en la Universidad Popular del Cesar en tiempos de pandemia   
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Divulgación pública de la ciencia - Producciones de contenido digital - Audiovisuales - Cápsulas de video </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Nombre del producto: </i>Crear material educativo y compartirlo en Classroom,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2020 -   
+                            Marzo,&nbsp;
+                            <i>Ciudad: </i>VALLEDUPAR-CESAR-Colombia,&nbsp;   
+                            <i>Medio de verificaci&oacute;n: </i>https://www.youtube.com/watch?v=XqUKPweRXBQ&t=81s&ab_channel=CentrodeFormacionenNuevasTecnologias,&nbsp;   
+                            <i>Ruta de circulaci&oacute;n: </i>Con cobertura sobre todo el territorio nacional,&nbsp;   
+                            <i>Proyecto vinculado: </i>Apropiación de herramientas TIC para el uso pedagógico en la Universidad Popular del Cesar en tiempos de pandemia   
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Desarrollos web</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Divulgación pública de la ciencia - Desarrollos web: Páginas web-blogs, micrositios, aplicativos móviles + estrategia de Redes Sociales </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>                            
+                            <i>Nombre del producto: </i>NOOC- Uso del aulaweb UPC - Rol docentes,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2020 -   
+                            Julio,&nbsp;
+                            <i>Ciudad: </i>VALLEDUPAR-CESAR-Colombia,&nbsp;   
+                            <i>Medio de verificaci&oacute;n: </i>https://aulaweb.unicesar.edu.co/pluginfile.php/285261/mod_resource/content/29/prueba_1/index.html,&nbsp;   
+                            <i>Ruta de circulaci&oacute;n: </i>Con cobertura sobre todo el territorio nacional,&nbsp;   
+                            <i>Proyecto vinculado: </i>Apropiación de herramientas TIC para el uso pedagógico en la Universidad Popular del Cesar en tiempos de pandemia   
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Divulgación pública de la ciencia - Desarrollos web: Páginas web-blogs, micrositios, aplicativos móviles + estrategia de Redes Sociales </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>                            
+                            <i>Nombre del producto: </i>NOOC- Uso del aulaweb UPC - Rol estudiante,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2020 -   
+                            Julio,&nbsp;
+                            <i>Ciudad: </i>VALLEDUPAR-CESAR-Colombia,&nbsp;   
+                            <i>Medio de verificaci&oacute;n: </i>https://aulaweb.unicesar.edu.co/pluginfile.php/218178/mod_resource/content/24/index.html,&nbsp;   
+                            <i>Ruta de circulaci&oacute;n: </i>Con cobertura sobre todo el territorio nacional,&nbsp;   
+                            <i>Proyecto vinculado: </i>Apropiación de herramientas TIC para el uso pedagógico en la Universidad Popular del Cesar en tiempos de pandemia   
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Divulgación pública de la ciencia - Desarrollos web: Páginas web-blogs, micrositios, aplicativos móviles + estrategia de Redes Sociales </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>                            
+                            <i>Nombre del producto: </i>Herramientas didácticas para el uso pedagógico,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2020 -   
+                            Junio,&nbsp;
+                            <i>Ciudad: </i>VALLEDUPAR-CESAR-Colombia,&nbsp;   
+                            <i>Medio de verificaci&oacute;n: </i>https://aulaweb.unicesar.edu.co/pluginfile.php/208172/mod_resource/content/45/menu/inicio.html,&nbsp;   
+                            <i>Ruta de circulaci&oacute;n: </i>Con cobertura sobre todo el territorio nacional,&nbsp;   
+                            <i>Proyecto vinculado: </i>Apropiación de herramientas TIC para el uso pedagógico en la Universidad Popular del Cesar en tiempos de pandemia   
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Divulgación pública de la ciencia - Desarrollos web: Páginas web-blogs, micrositios, aplicativos móviles + estrategia de Redes Sociales </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>                            
+                            <i>Nombre del producto: </i>HERRAMIENTAS DIGITALES EDUCATIVAS,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2021 -   
+                            Mayo,&nbsp;
+                            <i>Ciudad: </i>VALLEDUPAR-CESAR-Colombia,&nbsp;   
+                            <i>Medio de verificaci&oacute;n: </i>https://aulaweb.unicesar.edu.co/mod/resource/view.php?id=274622&redirect=1,&nbsp;   
+                            <i>Ruta de circulaci&oacute;n: </i>Con cobertura sobre todo el territorio nacional,&nbsp;   
+                            <i>Proyecto vinculado: </i>Desarrollo de modelos instruccionales mediados por las TIC y herramientas digitales para fortalecer los procesos académicos de la Universidad Popular del Cesar   
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Corto (Resumen)</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                MALIO FERNANDO BOLIVAR PALACIO,                    
+                
+                "DISEÑO GRÁFICO, INGENIO PARA ENSEÑAR ÉTICA Y BIOÉTICA EN ENFERMERÍA"
+                . En: Ecuador&nbsp;<br>
+                Enfermería Investiga&nbsp;
+                <i>ISSN:</i>&nbsp;2550-6692&nbsp;
+                <i>ed:</i>&nbsp;<br>
+                <i>v.</i>6
+                <i>fasc.</i>2
+                p.60
+                - 65
+                ,2021,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                bioética,                    
+                                    
+                diseño,                    
+                                    
+                ingeniería,                    
+                                    
+                pedagogía,                    
+                                    
+                enfermería,                    
+                                    
+                ética,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a></td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a>        
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td colspan="2"><h3 >Capitulos de libro</h3></td>
+            </tr>
+                
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    MALIO FERNANDO BOLIVAR PALACIO,                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    NORBERTO DIAZ PLATA,                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    MARIA DEL CARMEN JIMENEZ BARRIOSNUEVO,                    
+                    
+
+                    "Preservación de la identidad de pueblos indígenas del norte del Cesar con etnoeducación mediada por tecnologías"
+                    Conocimiento en acción para la educación, la ciencia y la sociedad
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-628-97116-3-9&nbsp;
+                    <i>ed:</i>&nbsp;Centro Internacional de Marketing Territorial para la Educación y el Desarrollo CIMTED
+                    <i>, v.</i>
+                    , p.140
+                    - 165&nbsp;
+                    1
+                    ,2026
+                    
+                    
+                    <br><b>Palabras: </b><br>
+                                        
+                    didáctica de las ciencias,                    
+                                        
+                    América Latina,                    
+                                        
+                    competencias,                    
+                                        
+                    Cultura Indígena,                    
+                                        
+                    diversidad cultural,                    
+                                        
+                    EDUCACIÓN,                    
+                                        
+                    Etnobotánica,                    
+                                        
+                    innovación pedagógica,                    
+                                        
+                    Preservación cultural,                    
+                                        
+                    Saberes ancestrales,                    
+                                        
+                    ética,                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                    
+                    
+                    
+                    <br><b>Sectores: </b><br>
+                                            
+                    Educación - Formación permanente y otras actividades de enseñanza, incluso educación a distancia y educación especial,                    
+                                            
+                    Educación - Educación superior,                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+
+</table>
+</td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a>
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Documentos de trabajo</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Documento de trabajo (Working Paper)</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        MALIO FERNANDO BOLIVAR PALACIO,                    
+                                            
+                        MARIA DEL CARMEN JIMENEZ BARRIOSNUEVO,                    
+                                            
+                        NORBERTO DIAZ PLATA,                    
+                        
+                        "DOCUMENTO MAESTRO ESPECIALIZACIÓN EN TIC PARA EL DISEÑO DE ESTRATEGIAS DIDÁCTICAS EN EDUCACIÓN"
+                        En: Colombia. 
+                        2017.
+                        
+                        
+                        
+                        
+                        <i>p. </i>
+                        
+                        
+                        <br><b>Palabras: </b><br>
+                                            
+                        TIC,                    
+                                            
+                        EDUCACIÓN,                    
+                                            
+                        INNOVACIÓN,                    
+                                            
+                        UNIVERSIDAD,                    
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                        
+                        
+                        
+                    </blockquote>
+                </td>
+            </tr>
+            
+        </table>
+        </td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Libro de Formaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Producción bibliográfica - Libro - Libros de formación </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Nombre del libro: </i>Lecto-Escritura Grado Segundo,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2019 -   
+                            Octubre,&nbsp;
+                            <i>Isbn: </i>978-958-5493-35-3,&nbsp;   
+                            <i>Medio de divulgaci&oacute;n: </i>Electrónico,&nbsp;   
+                            <i>Lugar de publicaci&oacute;n: </i>Colombia,&nbsp;   
+                            <i>Editorial: </i>UNIVERSIDAD POPULAR DELCESAR,&nbsp;  
+                            
+                                                           
+                                            <br><b>Areas: </b><br>
+                                                                    
+                                            Humanidades -- Idiomas y Literatura -- Lingüística,                    
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción bibliográfica - Libro - Libros de formación </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Nombre del libro: </i>Lecto-Escritura Grado Primero,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2019 -   
+                            Octubre,&nbsp;
+                            <i>Isbn: </i>978-958-5493-34-6,&nbsp;   
+                            <i>Medio de divulgaci&oacute;n: </i>,&nbsp;   
+                            <i>Lugar de publicaci&oacute;n: </i>Colombia,&nbsp;   
+                            <i>Editorial: </i>UNIVERSIDAD POPULAR DELCESAR,&nbsp;  
+                            
+                                                           
+                                            <br><b>Areas: </b><br>
+                                                                    
+                                            Humanidades -- Idiomas y Literatura -- Lingüística,                    
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Producción bibliográfica - Libro - Libros de divulgación y/o Compilación de divulgación </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Nombre del libro: </i>Lecto-Escritura Grado Primero,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2019 -   
+                            Octubre,&nbsp;
+                            <i>Isbn: </i>978-958-5493-34-6,&nbsp;   
+                            <i>Medio de divulgaci&oacute;n: </i>Electrónico,&nbsp;   
+                            <i>Lugar de publicaci&oacute;n: </i>Colombia,&nbsp;   
+                            <i>Editorial: </i>UNIVERSIDAD POPULAR DELCESAR,&nbsp;  
+                            
+                                                           
+                                            <br><b>Areas: </b><br>
+                                                                    
+                                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción bibliográfica - Libro - Libros de divulgación y/o Compilación de divulgación </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Nombre del libro: </i>Lecto-Escritura Grado Segundo,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2019 -   
+                            Octubre,&nbsp;
+                            <i>Isbn: </i>978-958-5493-35-3,&nbsp;   
+                            <i>Medio de divulgaci&oacute;n: </i>Electrónico,&nbsp;   
+                            <i>Lugar de publicaci&oacute;n: </i>Colombia,&nbsp;   
+                            <i>Editorial: </i>UNIVERSIDAD POPULAR DELCESAR,&nbsp;  
+                            
+                                                           
+                                            <br><b>Areas: </b><br>
+                                                                    
+                                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción bibliográfica - Libro - Libros de divulgación y/o Compilación de divulgación </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Nombre del libro: </i>lectoescritura grado 3,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2022 -   
+                            Noviembre,&nbsp;
+                            <i>Isbn: </i>978-958-5493-78-0,&nbsp;   
+                            <i>Medio de divulgaci&oacute;n: </i>Electrónico,&nbsp;   
+                            <i>Lugar de publicaci&oacute;n: </i>Colombia,&nbsp;   
+                            <i>Editorial: </i>UNIVERSIDAD POPULAR DELCESAR,&nbsp;  
+                            
+                                                           
+                                            <br><b>Areas: </b><br>
+                                                                    
+                                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a>
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Softwares</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        MALIO FERNANDO BOLIVAR PALACIO,                    
+                        
+                        ETHNOKANKU,
+                        <i>Nombre comercial: </i>ETHNOKANKU,
+                        <i>contrato/registro: </i>076,
+                        . En: Colombia,&nbsp;
+                        ,2024,&nbsp;
+                        .<i>plataforma: El aplicativo móvil "EthnoKanku" fue desarrollado para plataformas Android, empleando el framework Flutter, lo que permite su futura portabilidad a sistemas iOS. Se diseñó como una aplicación móvil autónoma, funcional tanto en línea como fuera de línea (offline), ideal para zonas rurales con acceso limitado a internet. La base de datos local se implementó con SQLite, y se integraron componentes multimedia (imágenes, audio, textos) para enriquecer la experiencia educativa. ,</i>&nbsp;
+                        .<i>ambiente: El entorno de desarrollo utilizado fue Android Studio, con integración de herramientas de control de versiones mediante Git. El ambiente de ejecución está destinado a dispositivos móviles con sistema operativo Android, versión 8.0 (Oreo) en adelante. El contenido se adaptó al contexto intercultural, incluyendo elementos visuales y lingüísticos propios del Cabildo Indígena de Atánquez.,</i>                                
+                        
+                        
+                        <br><b>Palabras: </b><br>
+                                            
+                        Aplicativo móvil,                    
+                                            
+                        Cultura Indígena,                    
+                                            
+                        Etnobotánica,                    
+                                            
+                        Preservación cultural,                    
+                                            
+                        Saberes ancestrales,                    
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                                                
+                        Ciencias Naturales -- Ciencias Biológicas -- Botánica y Ciencias de las Plantas,                    
+                        
+                        
+                        
+                        <br><b>Sectores: </b><br>
+                                                
+                        Educación - Educación secundaria de formación general,                    
+                                                
+                        Salud humana - Cuidado a la salud de las personas,                    
+                                                
+                        Productos y servicios de recreación,culturales, artísticos y deportivos,                    
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+            
+        </table>
+        </td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a>
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 id="base_tecnologica">Empresas de base tecnológica</h3></td>
+            </tr>
+                
+            <tr>
+                <td><li><b>Producción técnica - Empresa de base tecnológica - Start-up</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            MALIO FERNANDO BOLIVAR PALACIO,                    
+                                
+            MARIA DEL CARMEN JIMENEZ BARRIOSNUEVO,                    
+                                
+            MARIA JOHANA CARVAJALINO QUINTERO,                    
+            
+            Convergencia e Innovación Digital,
+            <i>Nit&nbsp;</i>901092704-9, 
+            <i>Registrado ante la c&acute;mara el:</i>&nbsp;2017-06-27 00:00:00.0,
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            Asesoría empresarial,                    
+                                
+            Emprendimiento digital,                    
+                                
+            Ambientes formativos con TIC,                    
+                                
+            Ambientes colaborativos con TIC,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+            
+            
+            
+            <br><b>Sectores: </b><br>
+                                    
+            Desarrollo de programas (software) y prestación de servicios en informática - Desarrollo de programas (software),                    
+                                    
+            Desarrollo de programas (software) y prestación de servicios en informática - Consultoría en sistemas de informática,                    
+            
+
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n, desarrollo e Innovaci&oacute;n&nbsp;<br>
+                        Apropiación de herramientas TIC para el uso pedagógico en la Universidad Popular del Cesar en tiempos de pandemia<br>
+                        <i>Inicio:&nbsp;</i>Marzo&nbsp;
+                        2020                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2020
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Acoger la Directiva Presidencial No. 2 del 12 de Marzo de 2020 a través del cual se señalan medidas para evitar el contagio del virus y garantizar la prestación de los servicios públicos, el trabajo en casa por medio del uso de las TIC<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        BIODISTRITO AGROINDUSTRIAL SOSTENIBLE DEL CESAR (BDAS)<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2021                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2021
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Dotar de la infraestructura física, tecnológica y académica necesaria a la actual Granja de la Universidad Popular del Cesar, para transformarla en un centro de capacitación, transferencia de tecnologías y sede alterna de investigación interdisciplinaria, con énfasis en el desarrollo sostenible y la agroecología.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Desarrollo de modelos instruccionales mediados por las TIC y herramientas digitales para fortalecer los procesos académicos de la Universidad Popular del Cesar<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2021                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Febrero&nbsp;
+                        2023
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Con este proyecto se pretende desarrollar modelos instruccionales mediados por las TIC y herramientas digitales para fortalecer los procesos académicos de la Universidad Popular del Cesar, a través del Centro de Formación en Nuevas Tecnologías para la Educación Virtual ¿ CEFONTEV -, construyendo libros, cartillas, guías, plantillas, virtualizando asignaturas, desarrollando cursos, talleres de formación y soporte a usuario final, para convertirlos en productos de Investigación.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Aplicativo móvil para la conservación de la etnobotánica como medio para la preservación cultural de cabildo indígena de chiskwinya, municipio Atánquez, departamento del Cesar<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2023                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Debido a la pérdida del conocimiento ancestral sobre plantas medicinales en el Cabildo Indígena de Chiskuinya, se hace necesario la aplicación de este proyecto de investigación que busca preservar dicho conocimiento tradicional de las plantas medicinales, rescatando así los saberes en etnobotánica y la cultura ancestral en el resguardo. Con el uso del aplicativo móvil se espera que los jóvenes aumenten su motivación respecto al aprendizaje de la etnobotánica y que de esta forma continúen explorando los conceptos y aplicándolos a la cotidianidad. Con ello, no solo se logrará una conceptualización y un rescate cultural, sino que también se producirá un efecto renacentista en la botánica del Cabildo Indígena.
+La presente investigación tiene como objetivo promover la importancia sobre la apropiación del conocimiento de las plantas medicinales con un enfoque de conservación de la cultura ancestral en el Cabildo Indígena de Chiskuinya del Municipio Atanquez, del departamento del Cesar. Este trabajo se fundamenta en planteamientos de Gaoue et al. (2017); Pérez et al. (2017); Da Silva y Freixo (2020); Reyes et al. (2014); Kovalski y Obara (2013) entre otros, que insisten en la necesidad de rescatar la etnobotánica en los pueblos indígenas debido a su riqueza cultural y a su utilidad en la medicina tradicional.
+El estudio se realizará desde un enfoque cuantitativo que ayudará a probar las relaciones causales que tienen las TIC en el conocimiento de plantas medicinales en un grupo étnico, de igual forma, se utilizarán dos técnicas para recolectar datos, cuestionario de evaluación y encuestas. Así mismo, se empleará el método descriptivo para conocer las características del fenómeno, además, se emplearán análisis de datos de tendencia central y dispersión, donde como punto inicial se caracterizarán los conocimientos sobre plantas medicinales y su relación con la cultura del Cabildo Indígena para establecer los criterios de construcción del plan de solución. El proceso se dividirá en varias fases: la primera consiste en determinar cómo afecta actualmente la pérdida del conocimiento de la etnobotánica al cabildo indígena; posteriormente se determinarán los requerimientos necesarios para el desarrollo del aplicativo móvil que se implementará como tratamiento en la muestra; luego se ejecutarán las acciones de socialización prueba e implementación de la solución; y finalmente se evaluarán los resultados obtenidos producto del tratamiento aplicado. 
+Con la realización de este estudio se obtendrán los siguientes productos: publicación de un artículo de investigación en revistas indexada tipo top de orden nacional o internacional; ponencia nacional o internacional en un evento de divulgación de ciencia y tecnología; aplicativo móvil para la conservación de la etnobotánica como medio para la preservación cultural; un documento tipo informe con la evaluación del impacto que tiene el uso de TIC a través de aplicativos móviles; y un proyecto de extensión y responsabilidad social CTI denominado ¿Implementación de un aplicativo móvil enfocado a conservar la cultura de etnobotánica dentro del Cabildo Indígena de Chiskuinya¿. Por lo anterior el costo total de este proyecto se estima en $ 30.000.000 treinta Millones de pesos M/CTE<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

@@ -1,0 +1,3886 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=696530A9C67E5A7799FAE32C237E2927" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        Luis Carlos&nbsp;RINCONES&nbsp;MARTINEZ
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>RINCONES MARTINEZ, LUIS CARLOS</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td><h3 >Identificadores de autor</h3></td>
+                                </tr>
+                                    
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        
+                                        <a target="_blank" href="https://orcid.org/0009-0006-9469-9087" style="color: #007A81">Open Researcher and Contributor ID (ORCID)</a>
+                                    </td>
+                                </tr>
+                                
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            UNIVERSIDAD NACIONAL DE COLOMBIA SEDE BOGOTA<br />
+                            MICROBIOLOGIA<br />
+                            Febrerode2005 - Juliode 2009<br />
+                            DETECCIÓN Y CARACTERIZACIÓN MOLECULAR DE XANTHOMONAS CAMPESTRIS PV PHASEOLI  Y XANTHOMONAS CAMPESTRIS PV PHASEOLI VARIEDAD FUSCANS  PATÓGENOS EN FRIJOL, MEDIANTE ANÁLISIS DE SECUENCIAS CONSENSO (ERIC) Y SECUENCIAS EN MOSAICO DEL ELEMENTO BOX
+
+</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            Universidad De Santander - Campus Valledupar<br />
+                            Bacteriologia<br />
+                            Febrerode1996 - Mayode 2001<br />
+                            PARAMETROS HEMATOLOGICOS NORMALES EN BOVINOS DOBLE PROPOSITO DESDE EL NACIMIENTO HASTA EL DESTETE EN EL MUNICIPIO DE CODAZZI, CESAR.</td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3>Formaci&oacute;n Complementaria</h3></td>
+                            </tr>   
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Universidad De Santander - Campus Valledupar<br />
+                        INVESTIGACION<br />
+                        Octubrede2002 - Octubrede 2002<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Seap-Cinep<br />
+                        Justicia Comunitaria<br />
+                        Enerode2002 - de 2002<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        PONTIFICIA UNIVERSIDAD JAVERIANA<br />
+                        MICROBIOLOGIA Y BIOLOGIA MOLECULAR "METAGENOMICA"<br />
+                        Juniode2009 - Juniode 2009<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        COLEGIO NACIONAL DE BACTERIOLOGIA <br />
+                        BACTERIOLOGIA<br />
+                        Octubrede2009 - Octubrede 2009<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD METROPOLITANA<br />
+                        BACTERIOLOGIA<br />
+                        Octubrede2000 - Octubrede 2000<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Universidad De Santander - Campus Valledupar<br />
+                        BACTERIOLOGIA<br />
+                        Juniode2001 - Juniode 2001<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        PONTIFICIA UNIVERSIDAD JAVERIANA<br />
+                        INGENIERIAS BIOMEDICAS<br />
+                        Octubrede2006 - Octubrede 2006<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        INSTITUTO NACIONAL DE  VIGILANCIA DE MEDICAMENTOS Y ALIMENTOS<br />
+                        GENETICA<br />
+                        Noviembrede2008 - Noviembrede 2008<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        COLEGIO NACIONAL DE BACTERIOLOGIA <br />
+                        BACTERIOLOGIA<br />
+                        Octubrede2007 - Octubrede 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Fundacion Red Colombiana de Semilleros de Investigacion RedColsi -  Nodo Bucaramanga<br />
+                        INVESTIGACION<br />
+                        Septiembrede2003 - Septiembrede 2003<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Colegio de Bacteriologos del Cesar. COBACES<br />
+                        INMUNOLOGIA<br />
+                        Abrilde2000 - Abrilde 2000<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Colegio de Bacteriologos del Cesar. COBACES<br />
+                        BACTERIOLOGIA<br />
+                        Agostode2001 - Agostode 2001<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD METROPOLITANA<br />
+                        Diagnostico Molecular Por El Laboratorio<br />
+                        Enerode2000 - de 2000<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD JAVERIANA, UNIVERSIDAD DE LOS ANDES, COLEGIO MAYOR DE CUNDINAMARCA, ASOCIACION COLOMBIANA DE ESTUDIANTES DE BACTERIOLOGIA<br />
+                        BACTERIOLOGIA<br />
+                        Abrilde1998 - Abrilde 1998<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD JAVERIANA, UNIVERSIDAD DE LOS ANDES, COLEGIO MAYOR DE CUNDINAMARCA, ASOCIACION COLOMBIANA DE ESTUDIANTES DE BACTERIOLOGIA<br />
+                        BACTERIOLOGIA<br />
+                        Abrilde1999 - Mayode 1999<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD JAVERIANA, UNIVERSIDAD DE LOS ANDES, COLEGIO MAYOR DE CUNDINAMARCA, ASOCIACION COLOMBIANA DE ESTUDIANTES DE BACTERIOLOGIA<br />
+                        BACTERIOLOGIA<br />
+                        Mayode2000 - Mayode 2000<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD  INDUSTRIAL DE SANTANDER<br />
+                        BACTERIOLOGIA<br />
+                        Mayode1997 - Mayode 1997<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        CENTRO INTERNACIONAL DE INGENIERIA GENETICA Y BIOTECNOLOGIA<br />
+                        METAGENOMICA Y BIOINFORMATICA<br />
+                        Juniode2009 - Juniode 2009<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        ORGANIZACIÓN HOLANDESA PARA LA INVESTIGACIÓN APLICADA <br />
+                        BIOPROCESOS Y BIOTECNOLOGIA<br />
+                        Noviembrede2014 - Noviembrede 2014<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Universidad de la Florida<br />
+                        BIOREFINERIA Y BIOPROCESOS<br />
+                        Agostode2015 - Agostode 2015<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        INSTITUTO NACIONAL DE SALUD<br />
+                        PARASITOLOGIA Y BIOLOGIA MOLECULAR SALUD PUBLICA<br />
+                        Mayode2014 - Mayode 2014<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        COLEGIO NACIONAL DE BACTERIOLOGIA <br />
+                        BACTERIOLOGIA<br />
+                        Octubrede2008 - Octubrede 2008<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        Tec Alianza<br />
+                        EMPRENDIMIENTO<br />
+                        Mayode2016 - Juliode 2016<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        VIRCELL MICROBIOLOGIST<br />
+                        MICROBIOLOGIA Y BIOLOGIA MOLECULAR<br />
+                        Diciembrede2013 - Diciembrede 2013<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        Universidad De Santander - Campus Valledupar<br />
+                        DIPLOMADO EN INVESTIGACION, ADMINISTRACION Y DOCENCIA<br />
+                        Agostode2001 - Noviembrede 2001<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Extensión</b>
+                        Universidad De Santander - Campus Valledupar<br />
+                        IDIOMAS INGLES<br />
+                        Octubrede2003 - Octubrede 2004<br />
+                        </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Agosto de 2024            
+                         de Actual<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>ESTACION DE CUARENTENA VEGETAL</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Febrero de 2006            
+                         de <br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Servicio Técnico Especializado            
+                        <i> - Cargo:</i>&nbsp;PROTOCOLOS PARA DIAGNOSTICO BIOQUIMICO DE BACTERIAS FITOPATOGENAS DE LOS GENEROS: ERWINIA, PSEUDOMONA, XANTHOMONAS, CORINEBACTERYUM, AGROBACTERYUM, EN CULTIVOS DE FRESA, FRIJOL, ORQUIDEA, CRISANTEMO Y BULBOS          
+                        Febrero de 2006            
+                         de <br>
+
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp;                              
+                        Febrero 2006            
+                         <br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Agosto de 2009            
+                         de <br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; BIOLOGIA MOLECULAR,&nbsp;54 
+                        Agosto 2009            
+                         <br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD DE SANTANDER</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>24&nbsp;horas Semanales
+                        Mayo de 2002            
+                         de <br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;PRESIDENTE ASOCIACION DE EGRESADOS Y ASESOR D          
+                        Mayo de 2002            
+                         de <br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Instituto Colombiano Agropecuario - Ica.</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Febrero de 2006            
+                         de <br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;BACTERIOLOGO          
+                        Febrero de 2006            
+                         de <br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Gobernación del departamento del César</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Agosto de 2009            
+                         de <br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; CREACION DEL AREA DE APOYO DIAGNOSTICO EN BIOLOGIA MOLECULAR E INVESTIGACION DEL LABORATORIO DE SALUD PUBLICA                            
+                        Agosto 2009            
+                         <br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>LABORATORIO NACIONAL DE DIAGNOSTICO Y ANALISIS MOLECULAR - LANAM</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Febrero de 2006            
+                         de <br><br>   
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp;                              
+                        Febrero 2006            
+                         <br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Bacteriologia</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Mayo de 2002            
+                         de <br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Dirección y Administración            
+                        <i> - Cargo:</i>&nbsp;PRESIDENTE DE LA JUNTA DIRECTIVA DE LA ASOCIACION DE EGRESADOS DE UDES          
+                        Mayo de 2002            
+                         de <br>
+
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp;                              
+                        Junio 2002            
+                         <br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>SERVICIO NACIONAL DE APRENDIZAJE SENA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>15&nbsp;horas Semanales
+                        Enero de 2010            
+                         de Actual<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Ministerio de Ciencia, Tecnología e Innovación.</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Septiembre de 2023            
+                        Diciembre de 2023<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Laboratorio de Salud Pública Departamento del César</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Agosto de 2009            
+                        Diciembre de 2013<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Servicio Nacional De Aprendizaje Sena Regional Cesar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Marzo de 2008            
+                        Marzo de 2009<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>INSTITUTO TECNICO DEL CARIBE</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>12&nbsp;horas Semanales
+                        Julio de 2002            
+                        Diciembre de 2002<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;PROFESOR CATEDRATICO          
+                        Julio de 2002            
+                        Diciembre de 2002<br>
+
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Otro            
+                        <i> - Nombre del curso:</i>&nbsp; UROANALISIS,&nbsp; 
+                        Julio 2002            
+                        Diciembre 2002<br>
+
+                                       
+                        - &nbsp;
+                        Otro            
+                        <i> - Nombre del curso:</i>&nbsp; INTRODUCCION AL LABORATORIO CLINICO E INDUSTRIAL,&nbsp; 
+                        Julio 2002            
+                        Diciembre 2002<br>
+
+                                       
+                        - &nbsp;
+                        Otro            
+                        <i> - Nombre del curso:</i>&nbsp; BANCO DE SANGRE,&nbsp; 
+                        Julio 2002            
+                        Diciembre 2002<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Servicios Daza Internacional Corporacion</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>54&nbsp;horas Mensuales
+                        Diciembre de 2000            
+                        Mayo de 2001<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;APLICACION DEL SISTEMA DE CALIDAD HACCP          
+                        Diciembre de 2000            
+                        Mayo de 2001<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Grupo Haccp</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Diciembre de 2000            
+                        Mayo de 2001<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; CONTROL DE PLAGAS,&nbsp; 
+                        Diciembre 2000            
+                        Mayo 2001<br>
+
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; MANIPULACION DE ALIMENTOS,&nbsp; 
+                        Diciembre 2000            
+                        Mayo 2001<br>
+
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; BUENAS PRATICAS DE MANUFACTURA,&nbsp; 
+                        Diciembre 2000            
+                        Mayo 2001<br>
+
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; SANEAMIENTO Y DESINFECCION,&nbsp; 
+                        Diciembre 2000            
+                        Mayo 2001<br>
+
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; SISTEMAS DE CALIDAD (HACCP),&nbsp; 
+                        Diciembre 2000            
+                        Mayo 2001<br>
+
+                                       
+                        - &nbsp;
+                        Capacitación/Entrenamientos dictados            
+                        <i> - Nombre del curso:</i>&nbsp; MICROBIOLGIA DE ALIMENTOS,&nbsp; 
+                        Diciembre 2000            
+                        Mayo 2001<br>
+
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Pasantías
+                        <i> - Titulo:</i>&nbsp;                              
+                        Diciembre 2000            
+                        Mayo 2001<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Control de Calidad</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Agosto de 1998            
+                        Julio de 2000<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Servicio Técnico Especializado            
+                        <i> - Cargo:</i>&nbsp;ANALISIS MICROBIOLOGICO DEL PROCESO DE TRATAMIENTO DE AGUA Y EMBOTELLADO          
+                        Agosto de 1998            
+                        Julio de 2000<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>EMBOTELLADORA ROMAN S.A.</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Agosto de 1998            
+                        Julio de 2000<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;SERVICIO DE ANALISI MICROBIOLOGICOS          
+                        Agosto de 1998            
+                        Julio de 2000<br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Departamento de Control de Calidad</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Septiembre de 1998            
+                        Mayo de 2000<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Servicio Técnico Especializado            
+                        <i> - Cargo:</i>&nbsp;CAPACITACION EN BUENAS PRACTICAS DE MANUFACTURA SANEAMINETO Y DESINFECCION          
+                        Octubre de 1998            
+                        Junio de 1999<br>
+
+                                            
+                        - &nbsp;Servicio Técnico Especializado            
+                        <i> - Cargo:</i>&nbsp;AUDITORIAS INTERNAS          
+                        Septiembre de 1998            
+                        Febrero de 2000<br>
+
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; CONTROL Y SEGUIMIENTO  MICROBIOLGICO DE LOS DISPENSADORES DE AGUA SANTA CLARA DE LA CIUDAD DE VALLEDUPAR                            
+                        Febrero 2000            
+                        Mayo 2000<br>            
+
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; ANALISIS MICROBIOLOGICO E IDENTIFICACION DE PUNTOS CRITICOS DE CONTROL EN EL TRATAMIENTO DE AGUA DE LA EMBOTELLADORA ROMAN S.A. VALLEDUPAR                            
+                        Diciembre 1998            
+                        Marzo 1999<br>            
+
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; DETERMINACION  MICROBIOLOGICA DEL AGUA CLUB-K Y ESTANDARIZACION DE LA VIDA UTIL COMO REQUISITO PARA LA CODIFICACION DEL EMPAQUE                            
+                        Diciembre 1998            
+                        Marzo 1999<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ciencias Naturales -- Ciencias Biológicas -- Genética y Herencia</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ciencias Médicas y de la Salud -- Ciencias de la Salud -- Enfermedades Infecciosas</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Biotecnología Industrial -- Bioproductos (Productos que se Manufacturan Usando Biotecnología), Biomateriales, Bioplásticos, Biocombustibles, Materiales Nuevos Bioderivados, Químicos Finos Bioredivados</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Biotecnología Industrial -- Biotecnología Industrial</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Biotecnología Industrial -- Tecnologías de Bioprocesamiento, Biocatálisis, Fermentación</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="5"><h3 >Idiomas</h3></td>
+                            </tr>    
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td><b>Habla</b></td>
+                                <td><b>Escribe</b></td>
+                                <td><b>Lee</b></td>
+                                <td><b>Entiende</b></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;Inglés</li></td>
+                    <td>Aceptable</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>                                                        
+                </tr>    
+                
+                            <tr>
+                                <td><li>&nbsp;Español</li></td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>                                                        
+                </tr>    
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;Biología celular y molecular de enfermedades crónicas, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Desarrollo e implementación de metodologías diagnósticas, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;BACTERIOLOGIA, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;MICROBIOLOGIA APLICADA, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;MICROBIOLOGIA DE ALIMENTOS CONTROL DE CALIDAD, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;MICROBIOLOGIA AGROINDUSTRIAL, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;ANALISIS MOLECULAR, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;FITOPATOLOGIA, <i>Activa:</i>Si</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Reconocimientos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>TERCER PREMIO NACIONAL DE INVESTIGACION EN EL LABORATORIO ,COLEGIO NACIONAL DE BACTERIOLOGIA  - Octubrede 2008</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>MERITO ACADEMICO: ESTUDIANTE DISTINGUIDO,UNIVERSITARIA DE SANTANDER, UDES, VALLEDUPAR - de 2001</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>MENCION DE HONOR:LIDERAGO PROFESIONAL,UNIVERSIDAD DE SANTANDER - de 2001</li></td>
+                </tr>
+                    
+                            <tr>
+                                <td><li>MERITO ACADEMICO: MONITOR DE LABORATORIO,UNIVERSIDAD DE SANTANDER - de 1997</li></td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Cursos de corta duraci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Especialización</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            LUIS CARLOS RINCONES MARTINEZ,                    
+                                            
+                            Pasantía a TNO (Netherlands Organisation for Applied Scientific Research),
+                            <i>Finalidad: </i>Intercambio y transferencia de tecnología para el proyecto Programa para la diversificación de productos derivados de la industria palmera en el Departamento del Cesar: producción de ácido succínico, itacónico y fumárico a partir de glicerol y material lignocelulósico
+                            . En: Países Bajos&nbsp;
+                            ,2014,&nbsp;
+                            ,SERVICIO NACIONAL DE APRENDIZAJE SENA.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;2 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Especialización</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            LUIS CARLOS RINCONES MARTINEZ,                    
+                                            
+                            Pasantía a TNO (Netherlands Organisation for Applied Scientific Research),
+                            <i>Finalidad: </i>Intercambio y transferencia de tecnología para el proyecto Programa para la diversificación de productos derivados de la industria palmera en el Departamento del Cesar: producción de ácido succínico, itacónico y fumárico a partir de glicerol y material lignocelulósico
+                            . En: Países Bajos&nbsp;
+                            ,2014,&nbsp;
+                            ,SERVICIO NACIONAL DE APRENDIZAJE SENA.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;2 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Perfeccionamiento</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            LUIS CARLOS RINCONES MARTINEZ,                    
+                                            
+                            curso en biología Molecular PCR- SPEED oligo,
+                            <i>Finalidad: </i>PERFECCIONAMIENTO EN REACCION EN CADENA DE LA POLIMERASA PCR-SPEED OLIGO
+                            . En: España&nbsp;
+                            ,2013,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;1 semanas&nbsp;
+                            
+                            
+                            <br><b>Palabras: </b><br>
+                                                
+                            ADN,                    
+                                                
+                            BIOLOGIA MOLECULAR,                    
+                                                
+                            ENFERMEDAD,                    
+                                                
+                            PCR,                    
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Especialización</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            LUIS CARLOS RINCONES MARTINEZ,                    
+                                            
+                            Pasantía a TNO (Netherlands Organisation for Applied Scientific Research),
+                            <i>Finalidad: </i>Intercambio y transferencia de tecnología para el proyecto Programa para la diversificación de productos derivados de la industria palmera en el Departamento del Cesar: producción de ácido succínico, itacónico y fumárico a partir de glicerol y material lignocelulósico
+                            . En: Países Bajos&nbsp;
+                            ,2014,&nbsp;
+                            ,SERVICIO NACIONAL DE APRENDIZAJE SENA.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;2 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            LUIS CARLOS RINCONES MARTINEZ,                    
+                                            
+                            transferencia de tecnología en fermentaciones para obtención de ácido succino, fumarico e itaconico a partir de glicerol y productos lignocelulosicos,
+                            <i>Finalidad: </i>conocer los procesos de fermentación de microorganismos aislados a partir del glicerol para la producción de acidos succinico, fumarico e itaconico
+                            . En: Países Bajos&nbsp;
+                            ,2014,&nbsp;
+                            ,SERVICIO NACIONAL DE APRENDIZAJE SENA.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;2 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            LUIS CARLOS RINCONES MARTINEZ,                    
+                            
+                            PRODUCCION DE BIOABONO A PARTIR DE LA COMPOSTACION DE CISCO DE CAFE, RAQUIS DE PALMA AFRICANA Y BOVINAZA COMO ALTERNATIVA AGROINDUSTRIAL, EN LA CIUDAD DE VALLEDUPAR&nbsp;
+                            &nbsp;
+                            Estado: Tesis en curso&nbsp;
+                            ,
+                            &nbsp;2002.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            MILENA TERESA IBAÑES MEDINA&nbsp;                            
+                            
+                            0 meses, &nbsp;
+                            
+                            
+                            Tutor(es)/Cotutor(es): LUIS CARLOS RINCONES MARTINEZ , MILENA TERESA IBANES MEDINA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                        
+                            Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,                        
+                            Ciencias Médicas y de la Salud -- Medicina Clínica -- Otros Temas de Medicina Clínica,
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Agricultura, pecuaria, silvicultura, explotación forestal - Producción vegetal,                    
+                                                    
+                            Salud humana - Desarrollo de productos tecnológicos para la salud humana,                    
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajo de grado de maestría o especialidad clínica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            LUIS CARLOS RINCONES MARTINEZ,                    
+                            
+                            FACTORES DE VIRULENCIA EN ESPECIES DE Vibrio ASOCIADOS A MOLUSCOS BIVALVOS Y SU RELACIÓN CON LA CALIDAD MICROBIOLOGICA&nbsp;
+                            Universidad Del Zulia&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            MICROBIOLOGIA,
+                            &nbsp;2012.
+                            <i>Dirigi&oacute; como: </i>Coturor/asesor,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            JUAN CARLOS PRADA HERRERA&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): LUIS CARLOS RINCONES MARTINEZ,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Médicas y de la Salud -- Ciencias de la Salud -- Salud Pública,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Jurado en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            LUIS CARLOS RINCONES MARTINEZ,                    
+                            
+                            <i>Titulo:&nbsp;</i>CARACTERIZACIÓN EPIDEMIOLÓGICA DE TUBERCULOSIS EN EL MUNICIPIO DE VALLEDUPAR EN EL AÑO 2018                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INSTRUMENTACIÓN QUIRURGICA &nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>SHYRLEY GARCIA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            LUIS CARLOS RINCONES MARTINEZ,                    
+                            
+                            <i>Titulo:&nbsp;</i>FACTORES DE RIESGO ASOCIADOS A LA DIABETES TIPO II EN LOS ESTUDIANTES DE LA FACULTAD DE CIENCIAS DE LA SALUD DE LA UNIVERSIDAD POPULAR DEL CESAR. VALLEDUPAR, I SEMESTRE 2019.                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INSTRUMENTACIÓN QUIRURGICA &nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Leydi Garcia, Laudith Lozano &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Participaci&oacute;n en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Participación en comités de evaluación - Otra</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            LUIS CARLOS RINCONES MARTINEZ,                    
+                                                
+                            EDGAR FABIAN GOMEZ,                    
+                                                
+                            CLARA INES ALVARADO,                    
+                                                
+                            KATHERINE MANDOM,                    
+                                                
+                            WILBER CARRASCAL,                    
+                                                
+                            GUSTAVO ARIZA,                    
+                                                
+                            PAULINA APONTE,                    
+                                                
+                            YESITH TRIANA,                    
+                                                
+                            ALEXIS AMARA DITA,                    
+                            
+                            EVALUACION DE PROPUESTAS DE MEJORAMIENTO DE EDUCACION CONTINUADA Y CIENTIFICA, POLITICAS DE LOS EGRESADOS DE UDES VALLEDUPAR<br>
+                            <i>en:&nbsp;</i> &nbsp;
+                            
+                            
+                            <br><b>Palabras: </b><br>
+                                                
+                            ASOCIACION DE EGRESADOS,                    
+                                                
+                            JUNTA DIRECTIVA,                    
+                                                
+                            EDUCACION CONTINUADA,                    
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,                    
+                                                    
+                            Ciencias Médicas y de la Salud -- Medicina Clínica -- Otros Temas de Medicina Clínica,                    
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+                            
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Actividades de asesoramiento y consultoría a las empresas,                    
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Participación en comités de evaluación - Profesor titular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            LUIS CARLOS RINCONES MARTINEZ,                    
+                            
+                            La Investigación Formativa Camino para la Investigación Científica<br>
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,                    
+                            
+                            
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Par evaluador</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>UNIVERSIDAD NACIONAL DE COLOMBIA,&nbsp;                
+                                        
+                                        2022,&nbsp;
+                                        Junio &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>UNIVERSIDAD NACIONAL DE COLOMBIA,&nbsp;                
+                                        
+                                        2024,&nbsp;
+                                        Junio &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>UNIVERSIDAD NACIONAL DE COLOMBIA,&nbsp;                
+                                        
+                                        2021,&nbsp;
+                                        Junio &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>UNIVERSIDAD NACIONAL DE COLOMBIA,&nbsp;                
+                                        
+                                        2021,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>UNIVERSIDAD NACIONAL DE COLOMBIA,&nbsp;                
+                                        
+                                        2022,&nbsp;
+                                        Junio &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Ministerio de Ciencia, Tecnología e Innovación.,&nbsp;                
+                                        
+                                        2024,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>UNIVERSIDAD NACIONAL DE COLOMBIA,&nbsp;                
+                                        
+                                        2022,&nbsp;
+                                        Julio &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>UNIVERSIDAD NACIONAL DE COLOMBIA,&nbsp;                
+                                        
+                                        2021,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                    
+                        </table>    
+                        </td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%">
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 id="trabajos_tec" >Consultor&iacute;as</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>
+                                
+                                <b>Producción técnica - Consultoría Científico Tecnológica e Informe Técnico - Otra</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            LUIS CARLOS RINCONES MARTINEZ,                    
+                            
+                            DETECCIÓN Y CARACTERIZACION MOLECULAR de Xanthomonas campestris pv phaseoli y Xanthomonas campestris pv phaseoli variedad fuscan PATÓGENOS EN FRIJOL (Phaseolus sp. L), MEDIANTE LAS TECNICAS DE REACCION EN CADENA DE LA POLIMERASA (PCR) Y (Secuencias Consenso Intergénicas Repetidas Enterobacteriales,
+                            <i>Nombre comercial: </i>Xanthomonas campestris ,
+                            <i>contrato/registro: </i>UNIVERSIDAD NACIONAL - INSTITUTO COLOMBIANO AGROPECUARIO ICA - CENTRO INTERNACIONAL DE AGRICULTURA TROPICAL,
+                            . En: Colombia,&nbsp;
+                            ,2008,&nbsp;
+                            24 meses &nbsp;
+                            p.81&nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,                    
+                            
+                            
+                            
+
+                        </blockquote>
+
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>TERCER CONGRESO NACIONAL DE ESTUDIANTES DE BACTERIOLOGIA Y VII ENCUENTRO NACIONAL DE ESTUDIANTES&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2000-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en BARRANQUILLA &nbsp; - HOTEL PUERTA DEL SOL &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>ACEBAC
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>LUIS CARLOS RINCONES MARTINEZ
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>III CONGRESO NACIONAL DE ESTUDIANTES DE BACTERIOLGIA&nbsp;
+                                                <i>Tipo de evento: </i>Taller&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2000-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en BARRANQUILLA &nbsp; - TRIPLE AAA &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>ACEBAC
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>LUIS CARLOS RINCONES MARTINEZ
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>SEGUNDO CONGRESO NACIONAL DE ESTUDIANTES DE BACTERIOLGIA Y VI ENCUENTRO NACIONAL&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:1999-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en MEDELLÍN &nbsp; - TEATRO CAMILO TORRES &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>ACEBAC
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>LUIS CARLOS RINCONES MARTINEZ
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>SIMPOSIO DE ENFERMEDADES TROPICALES&nbsp;
+                                                <i>Tipo de evento: </i>Simposio&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2001-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - HOTEL VAJAMAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>COBACES
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>LUIS CARLOS RINCONES MARTINEZ
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>5</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>TALLER BIOQUIMICA CLINICA Y UROANALIISIS&nbsp;
+                                                <i>Tipo de evento: </i>Taller&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2002-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - GOBERNACION DEL CESAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>COBACES
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>LUIS CARLOS RINCONES MARTINEZ
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>6</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>SIMPOSIO DE INMUNOLOGIA&nbsp;
+                                                <i>Tipo de evento: </i>Simposio&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2000-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - HOTEL VAJAMAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Colegio de Bacteriologos del Cesar. COBACES
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>LUIS CARLOS RINCONES MARTINEZ
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>7</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>PRIMER CONGRESO NACIONAL DE ESTUDIANTES DE BACTERIOLOGIA Y V ENCUENTRO NACIONAL DE ESTUDIANTES&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:1998-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en BOGOTÁ, D.C. &nbsp; - GOBERNACION DE CUNDINAMARCA &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>ACEBAC asociacion  colombiana de estudiantes bacteriologia
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>LUIS CARLOS RINCONES MARTINEZ
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>8</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>PRIMER CONGRESO NACIONAL DE ESTUDIANTES DE BACTERIOLGIA, ACEBAC,&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:1998-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en BOGOTÁ, D.C. &nbsp; - GOBERNACION DE CUNDINAMARCA &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD JAVERIANA, UNIVERSIDAD DE LOS ANDES, COLEGIO MAYOR DE CUNDINAMARCA, ASOCIACION COLOMBIANA DE ESTUDIANTES DE BACTERIOLOGIA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>LUIS CARLOS RINCONES MARTINEZ
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>9</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>12° Congreso Internacional del Colegio Nacional de Bacteriología CNB - Colombia&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2012-11-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en CALI &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>DIAGNOSTICO DE Mycobaterium tuberculoso MEDIANTE PCR SPEED-OLIGO EN EL DEPARTAMENTO DEL CESAR
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Resumen
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>PERFIL DE SUSCEPTIBILIDAD DE BACTERIAS AISLADAS EN VIAS URINARIAS DE PACIENTES DIABETICOS QUE ASISTEN A UN LABORATORIO CLINICO EN LA CIUDAD DE VALLEDUPAR, CESAR
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Resumen
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>LUIS CARLOS RINCONES MARTINEZ
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>10</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>SIMPOSIO DE BIOLOGIA MLECULAR ALTERNATIVAS DE DIAGNOSTICO POR EL LABORATORIO&nbsp;
+                                                <i>Tipo de evento: </i>Simposio&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2000-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en BARRANQUILLA &nbsp; - HOTEL PUERTA DEL SOL &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD METROPOLITANA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>LUIS CARLOS RINCONES MARTINEZ
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>11</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>PRIMERA JORNADA DE INVESTIGACION UDES VALLEDUPAR, LA INVESTIGACION FORMATIVA BASE PARA LA INVESTIGACION CIENTIFICA&nbsp;
+                                                <i>Tipo de evento: </i>Simposio&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2002-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - HOTEL VAJAMAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DE SANTANDER
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>LUIS CARLOS RINCONES MARTINEZ
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>12</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>PRIMERA JORNADA DE INVESTIGACION, LA INVESTIGACION FROMATIVA BASE PARA LA INVESTIGACION CIENTIFICA&nbsp;
+                                                <i>Tipo de evento: </i>Simposio&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2002-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - HOTEL VAJAMAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DE SANTANDER
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>LUIS CARLOS RINCONES MARTINEZ
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>13</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>TERCER CONGRESO NACIONAL DE BACTERIOLOGIA Y IV ENCUENTRO NACIONAL DE ESTUDIANTES&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:1997-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en BUCARAMANGA &nbsp; - AUDITORIO LUIS .A. CALVO &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD  INDUSTRIAL DE SANTANDER
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>LUIS CARLOS RINCONES MARTINEZ
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>14</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>PRIMERAS OLIMPIADAS ACADEMICAS DE ESTUDANTES DE BACTERIOLOGIA&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2002-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en MEDELLÍN &nbsp; - TEATRO CAMILO TORRES &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DE ANTIOQUIA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>LUIS CARLOS RINCONES MARTINEZ
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>15</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>TERCER CONGRESO INTERNACIONAL DEL COLEGIO NACIONAL DE BACTERIOLOGOS&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2002-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en CALI &nbsp; - HOTEL INTERCONTINENTAL &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>COLEGIO NACIONAL DE BACTERIOLOGIA 
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>LUIS CARLOS RINCONES MARTINEZ
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>16</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Enséname Quimica&nbsp;
+                                                <i>Tipo de evento: </i>Simposio&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2024-09-27 00:00:00.0,&nbsp;
+                                                    2024-09-27 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - Universidad Popular del Cesar &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>¿Creación de contenidos académicos para la química orgánica con el apoyo de la inteligencia artificial y el trabajo en equipo de los estudiantes para el fortalecimiento del proceso de enseñanza aprendizaje¿
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>LUIS CARLOS RINCONES MARTINEZ
+                                                        <i>Rol en el evento: </i>Organizador , Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Redes de conocimiento especializado</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        
+                                        <i>Nombre de la red </i>RED NACIONAL DE CONSEJOS DEPARTAMENTALES DE CIENCIA, TECNOLOGIA E INNOVACIÓN - CODECTI&nbsp;
+                                        <i>Tipo de red</i>Real,&nbsp;
+                                        <i>Creada el:2022-10-20 00:00:00.0,&nbsp;
+                                             &nbsp;
+                                            en CALI &nbsp; 
+                                            <i>con </i>  participantes&nbsp;
+                                    </blockquote>                    
+                                </td>                         	
+                            </tr>	            
+                                    
+                        </table>    
+                        </td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Corto (Resumen)</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                LUIS CARLOS RINCONES MARTINEZ,                    
+                
+                "Diagnostico Molecular de Mycobacterium tuberculosis, Mediante el uso de la técnica PCR- SPEED Oligo en el Departamento del Cesar"
+                . En: Colombia&nbsp;<br>
+                Memorias&nbsp;
+                <i>ISSN:</i>&nbsp;0124-4361&nbsp;
+                <i>ed:</i>&nbsp;Universidad
+Cooperativa de Colombia<br>
+                <i>v.</i>1
+                <i>fasc.</i>N/A
+                p.2
+                - 2
+                ,2012,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                LUIS CARLOS RINCONES MARTINEZ,                    
+                
+                "Diseño y Construcción de Dispositivo de Medición de Consumo Energético de Bajo Coste Para Instalaciones Industriales: Evaluación y Caso de Estudio Para Empresa Transportadora de Productos Alimenticios en Bogotá."
+                . En: Colombia&nbsp;<br>
+                DISENA&nbsp;
+                <i>ISSN:</i>&nbsp;2452-4298&nbsp;
+                <i>ed:</i>&nbsp;Pontificia Universidad Católica de Chile<br>
+                <i>v.</i>8
+                <i>fasc.</i>1
+                p.55
+                - 63
+                ,2023,
+                <i>&nbsp;DOI:&nbsp;</i>10.23850/2389-9573
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Sensor microcontrolador placa de circuito imp,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a>
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Libros</h3></td>
+            </tr>
+                
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Libro - Libro resultado de investigación</b>
+            </li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            LUIS CARLOS RINCONES MARTINEZ,                    
+            
+            "Deteccion y Caracterización molecular de Xanthomonas campestris patovar phaseoli y Xanthomonas campestris pv phaseoli variedad fuscans patógenos en fríjol (phaseolus sp. L), mediante análisis de secuencias consenso intergenicas repetidas enterobacteriales (ERIC) y secuencias en mosaico box (BOX)"
+            En: Colombia
+            2009.&nbsp;
+            ed:Biosystems&nbsp;
+            <i>ISBN:</i>&nbsp;978-958-99202-0-6&nbsp;
+            <i>v. </i>0
+            <i>pags.</i>&nbsp;81
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Libro - Libro resultado de investigación</b>
+            </li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            LUIS CARLOS RINCONES MARTINEZ,                    
+            
+            "Deteccion y Caracterización molecular de Xanthomonas campestris patovar phaseoli y Xanthomonas campestris pv phaseoli variedad fuscans patógenos en fríjol (phaseolus sp. L), mediante análisis de secuencias consenso intergenicas repetidas enterobacteriales (ERIC) y secuencias en mosaico box (BOX)"
+            En: Colombia
+            2009.&nbsp;
+            ed:Biosystems El Bando Creativo&nbsp;
+            <i>ISBN:</i>&nbsp;978-958-99202-0-6&nbsp;
+            <i>v. </i>
+            <i>pags.</i>&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td><li>
+                
+                <b>Producción bibliográfica - Libro - Libro resultado de investigación</b>
+            </li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            LUIS CARLOS RINCONES MARTINEZ,                    
+            
+            "Deteccion y Caracterización molecular de Xanthomonas campestris patovar phaseoli y Xanthomonas campestris pv phaseoli variedad fuscans patógenos en fríjol (phaseolus sp. L), mediante análisis de secuencias consenso intergenicas repetidas enterobacteriales (ERIC) y secuencias en mosaico box (BOX)"
+            En: Colombia
+            2009.&nbsp;
+            ed:Biosystems&nbsp;
+            <i>ISBN:</i>&nbsp;978-958-99202-0-6&nbsp;
+            <i>v. </i>
+            <i>pags.</i>&nbsp;
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            ADN,                    
+                                
+            Frijol,                    
+                                
+            Xanthomonas ,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Agrícolas -- Biotecnología Agrícola -- Biotecnología Agrícola y de Alimentos,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td><li>
+                
+                <b>Producción bibliográfica - Libro - Libro resultado de investigación</b>
+            </li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            LUIS CARLOS RINCONES MARTINEZ,                    
+            
+            "PROCESOS DE LA INVESTIGACION EN LAS CIENCIAS DE LA SALUD"
+            En: Colombia
+            2019.&nbsp;
+            ed:Ediciones Unicesar&nbsp;
+            <i>ISBN:</i>&nbsp;978-958-5493-28-5&nbsp;
+            <i>v. </i>
+            <i>pags.</i>&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td><li>
+                
+                <b>Producción bibliográfica - Libro - Libro resultado de investigación</b>
+            </li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            LUIS CARLOS RINCONES MARTINEZ,                    
+            
+            "LA SALUD PUBLICA RESPONSABILIDAD DE TODOS"
+            En: Colombia
+            2019.&nbsp;
+            ed:Ediciones Unicesar&nbsp;
+            <i>ISBN:</i>&nbsp;978-958-5493-31-15&nbsp;
+            <i>v. </i>
+            <i>pags.</i>&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td><li>
+                
+                <b>Producción bibliográfica - Libro - Libro resultado de investigación</b>
+            </li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            LUIS CARLOS RINCONES MARTINEZ,                    
+            
+            "LA INVESTIGACIÓN FORMATIVA CAMINO PARA LA INVESTIGACIÓN CIENTÍFICA"
+            En: Colombia
+            2019.&nbsp;
+            ed:Ediciones Unicesar&nbsp;
+            <i>ISBN:</i>&nbsp;978-958-5493-29-2&nbsp;
+            <i>v. </i>
+            <i>pags.</i>&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a>        
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td colspan="2"><h3 >Capitulos de libro</h3></td>
+            </tr>
+                
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    LUIS CARLOS RINCONES MARTINEZ,                    
+                    
+
+                    "MARCO LEGAL DEL COMITÉ DE INVESTIGACIÓN DE LA FACULTAD CIENCIAS DE LA SALUD"
+                    PROCESOS DE LA INVESTIGACIÓN EN LAS CIENCIAS DE LA SALUD
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-958-5493-28-5&nbsp;
+                    <i>ed:</i>&nbsp;
+                    <i>, v.</i>
+                    , p.11
+                    - 14&nbsp;
+                    1
+                    ,2019
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+
+</table>
+</td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%">
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 id="textos">Textos en publicaciones no cient&iacute;ficas</h3></td>
+            </tr>        
+               
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Otro artículo publicado - Periódico de noticias</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            LUIS CARLOS RINCONES MARTINEZ,                    
+            
+            "PERFIL DE SUSCEPTIBILIDAD DE BACTERIAS AISLADASEN VIAS URINARIAS DE 120 PACIENTES DIABETICOS QUE ASISTEN A UN LABORATORIO CLINICO DE LA CIUDAD DE VALLEDUPAR, CESAR 2012"
+            En: Colombia. 
+            2012.
+            Memorias Congreso Internacional Del Colegio Nacional De Bacteriología Issn 2322-9853.
+            <i>ISSN:</i>&nbsp;2322-9853 
+            <i>p.</i>3 
+            - 5
+            v.3
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+   
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Otro artículo publicado - Revista de divulgación</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            LUIS CARLOS RINCONES MARTINEZ,                    
+            
+            "Optimización de Distribución de Medicamentos en Fundación Oftalmológica del Caribe mediante Tecnología de Dispensación Automatizada"
+            En: Colombia. 
+            2023.
+            Revista SENNOVA.
+            <i>ISSN:</i>&nbsp;2619-3973 
+            <i>p.</i>1 
+            - 20
+            v.8
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            DISPENSACION,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a></td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Producción bibliográfica - Libro - Libros de divulgación y/o Compilación de divulgación </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Nombre del libro: </i>PROCESOS DE LA INVESTIGACION EN LAS CIENCIAS DE LA SALUD,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2019 -   
+                            Marzo,&nbsp;
+                            <i>Isbn: </i>978-958-5493-28-5,&nbsp;   
+                            <i>Medio de divulgaci&oacute;n: </i>Papel,&nbsp;   
+                            <i>Lugar de publicaci&oacute;n: </i>Colombia,&nbsp;   
+                            <i>Editorial: </i>Ediciones Unicesar,&nbsp;  
+                            
+                                                           
+                                            <br><b>Areas: </b><br>
+                                                                    
+                                            Ciencias Médicas y de la Salud -- Ciencias de la Salud -- Salud Pública,                    
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción bibliográfica - Libro - Libros de divulgación y/o Compilación de divulgación </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Nombre del libro: </i>MEMORIAS DE LA VI JORNADA DE INVESTIGACION E INTERNACIONALIZACION DE LA FACULTAD DE CIENCIAS DE LA SALUD,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2019 -   
+                            Agosto,&nbsp;
+                            <i>Isbn: </i>978-958-5493-31-5,&nbsp;   
+                            <i>Medio de divulgaci&oacute;n: </i>Electrónico,&nbsp;   
+                            <i>Lugar de publicaci&oacute;n: </i>Colombia,&nbsp;   
+                            <i>Editorial: </i>Ediciones Unicesar,&nbsp;  
+                            
+                                                           
+                                            <br><b>Areas: </b><br>
+                                                                    
+                                            Ciencias Médicas y de la Salud -- Ciencias de la Salud -- Salud Pública,                    
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción bibliográfica - Libro - Libros de divulgación y/o Compilación de divulgación </b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            <i>Nombre del libro: </i>LA INVESTIGACIÓN FORMATIVA CAMINO A LA INVESTIGACIÓN CIENTIFICA,&nbsp;   
+                            <i>Fecha de presentaci&oacute;n: </i>2019 -   
+                            Octubre,&nbsp;
+                            <i>Isbn: </i>978-958-5493-29-2,&nbsp;   
+                            <i>Medio de divulgaci&oacute;n: </i>Papel,&nbsp;   
+                            <i>Lugar de publicaci&oacute;n: </i>Colombia,&nbsp;   
+                            <i>Editorial: </i>Ediciones Unicesar,&nbsp;  
+                            
+                                                           
+                                            <br><b>Areas: </b><br>
+                                                                    
+                                            Ciencias Médicas y de la Salud -- Ciencias de la Salud -- Salud Pública,                    
+                                            
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a>
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Productos tecnol&oacute;gicos</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+            <li><b>Producción técnica - Productos tecnológicos - Otro </b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            LUIS CARLOS RINCONES MARTINEZ,                    
+            
+            Detección y Catedorización de Xanthomonas campestris Pv Phaseoli en frijol ( phaseolus sp L.), mediante las técnicas de reacción en cadena de polimerasa (PCR) y DNA polimorfico amplificado al azar (RAPDS),
+            <i>Nombre comercial: </i>,
+            <i>contrato/registro: </i>,
+            . En: Colombia,&nbsp;
+            ,2005,&nbsp;
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            MICROBIOLOGIA,                    
+                                
+            INVESTIGACION CIENTIFICA,                    
+                                
+            reaccion en cadena de polimerasa,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+            
+            
+            
+
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a>
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3>Dem&aacute;s trabajos</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+            <li><b>Demás trabajos - Demás trabajos</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+            
+            Valorización agroindustrial en la palmicultura del Cesar a partir de microorganismos nativos aislados del glicerol
+            . En: Costa Rica,&nbsp;
+            ,2025,&nbsp;
+            <i>finalidad: </i>Ponencia oral que se presentó en el XI Congreso Internacional de Ingeniería Agroindustrial, celebrado del 17 al  21 de noviembre de 2025 en la Universidad Técnica Nacional (UTN) resultados de proyecto de investigaciòn.&nbsp;
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Agrícolas -- Biotecnología Agrícola -- Biotecnología Agrícola y de Alimentos,                    
+            
+            
+            
+            <br><b>Sectores: </b><br>
+                                    
+            Productos y procesos biotecnológicos - Productos y procesos biotecnológicos vinculados a la salud humana o de los animales,                    
+            
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td>
+                    
+            <li><b>Demás trabajos - Demás trabajos</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            LUIS CARLOS RINCONES MARTINEZ,                    
+            
+            PONENCIA, LA BIOTECNOLOGIA Y SUS IMPLICACIONES EN LA INGENIERIA AGROINDUSTRIAL
+            . En: Colombia,&nbsp;
+            ,2024,&nbsp;
+            <i>finalidad: </i>&nbsp;
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td>
+                    
+            <li><b>Demás trabajos - Demás trabajos</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            LUIS CARLOS RINCONES MARTINEZ,                    
+            
+            Antecedentes, actividades para la conformación de la Red Nacional de actores territoriales de CTeI - Competitividad y sus implicaciones en el fortalecimiento de los Ecosistemas de CTeI y Competitividad de Colombia
+            . En: Colombia,&nbsp;
+            ,2024,&nbsp;
+            <i>finalidad: </i>&nbsp;
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias Biológicas -- Biología Celular y Microbiología,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td>
+                    
+            <li><b>Demás trabajos - Demás trabajos</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            LUIS CARLOS RINCONES MARTINEZ,                    
+            
+            ¿Creación de contenidos académicos para la química orgánica con el apoyo de la inteligencia artificial y el trabajo en equipo de los estudiantes para el fortalecimiento del proceso de enseñanza aprendizaje¿.
+            . En: Colombia,&nbsp;
+            ,2024,&nbsp;
+            <i>finalidad: </i>El seminario "ENSEÑAME DE QUIMICA", desarrollado bajo la estrategia de Clases Espejo, enriqueció significativamente la comunidad académica de la Universidad Popular del Cesar. Gracias a la participación de tres destacados expertos en química orgánica, estudiantes, docentes y la institución en genera&nbsp;
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Ingeniería Química -- Ingeniería Química (Plantas y Productos),                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        ANALISIS MICROBIOLOGICO E IDENTIFICACION DE PUNTOS CRITICOS DE CONTROL EN EL TRATAMIENTO DE AGUA DE LA EMBOTELLADORA ROMAN S.A. VALLEDUPAR<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        1998                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            ESTE PROYECTO SE BASO EN LA IDENTIFIACION DE LOS PUNTOS CRITICOS EN EL TRATAMIENTO DE AGUA DE LA EMBOTELLADORA ROMAN.S.A DE VALLEDUPAR, COCA-COLA, EN EL CUAL SE ENCUENTRAN: RECEPTOR DE AGUA MUNICIPAL, CLORACION POR ALBERCAS, FILTRO DE ARENA, FILTRO CARBON, FLOCULADOR, FILTROS PULIDORES.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n, desarrollo e Innovaci&oacute;n&nbsp;<br>
+                        DESARROLLO E IMPLEMENTACIÓN DEL CENTRO DE INVESTIGACIÓN PARA EL ESTUDIO DE ENFERMEDADES INFECCIOSAS Y CÁNCER, CESAR-CARIBE<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2019                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            EL DESARROLLO DE NUEVAS INVESTIGACIONES Y LA IMPLEMENTACION DE NUEVAS TECNOLOGIAS EN EL ESTUDIO NDE ENFERMEDADES INFECCIOSAS Y CANCER, SE CONVIERTE EN ALTERNATIVA PARA LAS REGIONES  QUE BUSCAN EL DESARROLLO Y MEJORAMIENTO DE LA SALUD Y CALIDAD DE VIDA DE SUS HABITANTES<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        DETERMINACION  MICROBIOLOGICA DEL AGUA CLUB-K Y ESTANDARIZACION DE LA VIDA UTIL COMO REQUISITO PARA LA CODIFICACION DEL EMPAQUE<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        1998                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            EL PROYECTO CONSISTIO EN CONOCER LA VIDA UTIL DEL AGUA CLUB-K, COMO FORMA PARA REALIZAR UNA CODIFICACION DEL PRODUCTO Y PODER ESTABLECER HASTA CUANDO SE PODRIA CONSUMIR, EN UNAS CONDICONES DE ALMACENAMIENTO ENTRE 2-8ºC.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        CONTROL Y SEGUIMIENTO  MICROBIOLGICO DE LOS DISPENSADORES DE AGUA SANTA CLARA DE LA CIUDAD DE VALLEDUPAR<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2000                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            EL PROYECTO BUSCO HACER UN CONTROL MICROBIOLOGICO, DEBIDO A QUEJAS DE ALGUNOS CLIENTES CONSUMIDORES DEL PRODUCTO EN MENCION.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        DETECCIÓN Y CARACTERIZACION MOLECULAR de Xanthomonas campestris pv phaseoli  y Xanthomonas campestris pv phaseoli variedad fuscan PATÓGENOS EN FRIJOL (Phaseolus sp. L), MEDIANTE LAS TECNICAS DE  REACCION EN CADENA DE LA POLIMERASA (PCR) Y (ERIC) Y BOX<br>
+                        <i>Inicio:&nbsp;</i>Julio&nbsp;
+                        2006                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Agosto&nbsp;
+                        2008
+                        
+                        
+                        <i>Fin:&nbsp;</i>Noviembre&nbsp;
+                        2008
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>24<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            La detección y caracterización de Xanthomonas campestris pv phaseoli y la variedad fuscan a través de métodos moleculares (primers específicos y los elementos ERIC y BOX  que se encuentran ampliamente distribuidas en el genoma de las bacterias fitopatógenas<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n, desarrollo e Innovaci&oacute;n&nbsp;<br>
+                        IMPLEMENTACION DE ACCIONES PARA EL DIAGNOSTICO DE LA ENFERMEDAD DE CHAGAS Y TUBERCULOSIS MEDIANTE EL USO DE BIOLOGIA MOLECULAR EN EL DEPARTAMENTO DEL CESAR<br>
+                        <i>Inicio:&nbsp;</i>Mayo&nbsp;
+                        2012                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Mayo&nbsp;
+                        2016
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>48<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n, desarrollo e Innovaci&oacute;n&nbsp;<br>
+                        IMPLEMENTACION DE ACCIONES PARA EL DIAGNOSTICO DE LA ENFERMEDAD DE CHAGAS Y TUBERCULOSIS MEDIANTE EL USO DE BIOLOGIA MOLECULAR EN EL DEPARTAMENTO DEL CESAR<br>
+                        <i>Inicio:&nbsp;</i>Mayo&nbsp;
+                        2012                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Mayo&nbsp;
+                        2016
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>48<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n, desarrollo e Innovaci&oacute;n&nbsp;<br>
+                        Programa para la diversificación de productos derivados de la industria palmera en el Departamento del Cesar: producción de ácido succínico  y fumárico a partir de glicerol y productos lignocelulósicos: Subproyecto: Aislamiento e identificación de microor<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2014                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Octubre&nbsp;
+                        2017
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Objetivos:
+ 
+Objetivo general
+ 
+Evaluar tecnologías que sirvan para la formación técnica del departamento del Cesar y evaluación económica para la producción de precursores químicos a partir de glicerol y material lignocelulósico.
+ 
+ 
+Objetivos específicos
+ 
+1. Realizar aislamientos de microorganismos en zonas aledañas a las palmeras con capacidad de degradar lignocelulosa y sintetizar ácido succínico, itacónico y fumárico
+ 
+2. Diseñar y construir una planta piloto para la producción y purificación de ácido succínico, itacónico y fumárico a partir de glicerol y material lignocelulósico
+ 
+3. Desarrollar tecnologías para la producción de ácido succínico, itacónico y fumárico a partir de glicerol y material lignocelulósico
+ 
+4. Realizar una evaluación económica de cada una de las tecnologías para determinar la viabilidad de las anteriores
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n, desarrollo e Innovaci&oacute;n&nbsp;<br>
+                        DIAGNOSTICO DE Tripanosoma cruzi y Tripanosoma rangeli DESARROLLANDO UN NUEVO METODO MOLECULAR<br>
+                        <i>Inicio:&nbsp;</i>Mayo&nbsp;
+                        2014                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2017
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El modelo de gestión para el desarrollo del proyecto está planteado en un modelo básico con procesos de estimación de necesidades, formulación del proyecto mismo propuesto por la Universidad Popular del Cesar, el INS y Vircell como cooperantes en todo el proceso de formulación, desarrollo de un nuevo metod basado en el estudio del ADN del agente etiologico de la enfermedad de Chagas, capacitación y publicación de resultados, además se capacitara a la población en estudio y a la población de la red pública de laboratorios en el diagnóstico de la enfermedad de Chagas por biología molecular.
+
+Se cuenta con el apoyo de la población indigine a traves de sus Empresas prestadoras de salud en los casos de la toma de muestra para analisis en sus pueblos, ya sea para muestras humanas o de triatominos.
+
+El proceso de estimación de necesidades implica conocer los problemas de salud pública prevalentes, la identificación de equipos y materiales requeridos, que nos ayudara a racionalizar los insumos en salud pública.
+
+En el proceso de formulación, incluye la identificación del problema, el planteamiento de objetivos y metas con cumplimiento, la elaboración de una metodología, la elaboración de un presupuesto que englobe las necesidades de todo el proyecto en sus componentes de ciencia, tecnología e innovación con formación de posgrado (doctorado) para una persona quien lleven a cabo la investigación, cuantificación de necesidades de equipos y reactivos.
+
+El proceso de publicación de los productos estará bajo acuerdos de propiedad intelectual entre las partes: Universidad Popular del Cesar - Instituto Nacional de Salud y Vircell Microbiologist, se garantizará la socialización de los resultados en la red pública de laboratorios del departamento del Cesar en referencia al tema en estudio, se realizará publicación en eventos locales, nacionales e internacionales delos productos.
+
+Se realiza verificación técnica de los equipos adquiridos, observando el modelo, referencia, especificaciones técnicas, documentación, manuales, registro sanitario, mediante inspección visual, constatando que el equipo se encuentre calibrado, que tenga certificado de calibración, otorgado por una entidad autorizada, para esto contamos con personal profesional y técnico idóneo y el equipo de interventoría externa.
+
+El talento humano será entrenado en una Universidad del país en formación Doctoral (1) para lograr el buen funcionamiento y la oportunidad en la investigación del tema de estudio, fortaleciendo el nivel de formación en alto nivel de los docentes de la UPC.
+
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Segunda Fase: Prueba de concepto para desarrollo de una tecnología para la producción de ácido bio-succínico y ácido bio-itacónico a partir de glicerol como subproducto de la planta para producción de biodiesel Oleoflores ¿Hacienda las Flores¿ en el Depar<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2015                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2015
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            La producción de biodiesel en el país ha aumentado en los últimos años gracias a la presencia de industrias dedicadas su producción. Dicho proceso produce una gran cantidad de glicerol como subproducto, el cual es utilizado principalmente en la producción de artículos de aseo y desengrasantes, generándose aún más ganancias gracias a la venta de dos productos importantes en el comercio internacional. Sin embargo, la sobreproducción de glicerol hace difícil la venta total de la producción, lo que ocasiona inconvenientes en el mercado, generándose pérdidas imprevistas (Energía, 2009). Por tal razón, la búsqueda de compuestos de alto valor agregado que puedan ser producidos a partir de glicerol se ha presentado actualmente, para lograr así satisfacer la oferta y obtener más ganancias por la venta de este nuevo producto. El ácido itacónico ha sido uno de los principales candidatos para ser el compuesto a producir, dado que se biosintetiza a través de microorganismos y éstos podrían utilizar el glicerol como principal fuente de carbono. Además, este ácido presenta propiedades importantes que permiten reemplazar algunos materiales como el ácido acrílico en la producción de plásticos y resinas (Werpy & Petersen, 2004). Debido a lo anterior, la demanda de este ácido orgánico ha crecido en los últimos años, generada por el temor del posible agotamiento de compuestos provenientes del petróleo. El conocimiento del rendimiento de dicho proceso podría generar iniciativas en las empresas productoras de biodiesel para adaptar sus plantas presentes a través del país y así lograr sintetizar un nuevo producto muy apreciado en la industria actualmente.
+El ácido itacónico es un metabolito orgánico insaturado compuesto de una cadena de hidrocarburos de cinco carbonos. Este ácido es estable a condiciones básicas, neutrales o ácidas con temperaturas moderadas (Li, Pfelzer, Zuijderwijk, & Punt, 2012). Además de su aplicación en plásticos, el ácido itacónico también se utiliza como copolímero con ácido acrílico y en sistemas estireno-butadieno (Bonnarme, y colaboradores, 1995). También puede ser utilizado en la manufactura de detergentes, tratamientos de agua, dispersantes y adhesivos. Su capacidad de formar copolímeros se debe a la presencia de los dos grupos carboxilo en su estructura, generando la estabilidad del látex y una mejor adhesión (Li, Pfelzer, Zuijderwijk, & Punt, 2012). Según diferentes estudios del mercado mundial de ácido itacónico, se prevé que llegará a un total de US$398.3 millones para el 2017, dada la creciente disminución de recursos provenientes de combustibles fósiles además de la necesidad de fabricar productos amigables con el medio ambiente (PRWEB, 2011). El mercado potencial de ácido itacónico actualmente se centra en China, India, Rusia y otros países de Europa Oriental (PRWEB, 2011).
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

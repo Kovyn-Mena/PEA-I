@@ -1,0 +1,1759 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+    <title>GrupLAC</title>
+    <meta content="no-cache" http-equiv="pragma">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.min.css" type="text/css" rel="stylesheet">
+    <link href="/gruplac/css/main.css" rel="stylesheet" type="text/css">
+    
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+    
+    <script src="/gruplac/jscript/validaciones.js"></script>
+        
+    
+    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.js"></script>    
+    <script type="text/javascript" src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+    <style>
+        .tables{
+            border:none;
+            text-align:center;
+            vertical-align:middle;
+        }
+        
+        .titulo_tabla{
+            font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+            font-weight:bold;
+            font-size:16px;
+            color:#007A81;
+            padding-top:20px;
+        }
+        
+        .encabezado{
+            font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+            font-size:13px;
+            font-weight:bold;
+            background-color:#4dbcdc;
+            color:#fff;
+            padding:7px;
+            border:none;
+            border-right:solid 1px #fff;
+        }
+        .encabezado_sb{
+            font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+            font-size:13px;
+            font-weight:bold;
+            background-color:#4dbcdc;
+            color:#fff;
+            padding:7px;
+            border:hidden;            
+        }
+        
+        td .sinBorde {
+            border:0;
+        }
+
+        td .rellenoAzul {
+            background-color:#DAEEF3;
+        }
+
+        td .rellenoVerde {
+            background-color:#EBF1DE;
+        }
+        
+    </style> 
+	
+</head>
+
+<body>
+    <table width="95%">
+        <tr>
+            <td id="bodyPrincipal">
+                                                        
+                <!--MIRAR DATOS DE LA CONVOCATORIA -->
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+<script>
+    //Variables Perfil Integrante
+    var dataIntegrantes = new Array();
+    var categoriasIntegrantes = new Array();
+    //Variables Perfil colaboracion
+    var dataColaboracion = new Array();
+    var categoriasColaboracion = new Array();
+    //Variables Perfil nuevo conocimiento
+    var dataNuevoCono = new Array();
+    var categoriasNuevoCono = new Array();
+    //Variables Perfil Desarrollo tecnologico e innovacion
+    var dataDesaTecno = new Array();
+    var categoriasDesaTecno = new Array();
+    //Variables Perfil Apropiacion Social
+    var dataAproSocial = new Array();
+    var categoriasAproSocial = new Array();
+    //Variables Perfil Formacion Recurso Humano
+    var dataFormaRH = new Array();
+    var categoriasFormaRH = new Array();
+    //Variables Perfil Trayectoria, Permanencia y estabilidad
+    var dataTrayectoria = new Array();
+    var categoriasTrayectoria = new Array();</script>
+    
+
+    
+        <!-- INFORMACION DEL GRUPO -->
+        
+        <!-- Datos del grupo -->
+                   
+            <br/>
+            <table width="100%" border="1">
+                <tr>
+                    <td align="center" colspan="2" class="encabezado" style="font-size:1.7em">
+                        <strong> Perfiles del grupo de investigaci&oacute;n, Desarrollo Tecnol&oacute;gico y/o de Innovaci&oacute;n</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" class="sinBorde" colspan="2" style="font-size:1.5em; padding:10px">
+                        <strong>FACEUPC</strong>
+                    </td>
+                </tr>
+                <tr><td colspan="2" class="sinBorde">&nbsp;</td><tr>
+                <tr>
+                    <td class="sinBorde" style="font-size:1.2em">
+                        <strong>Gran &Aacute;rea:</strong>
+                    </td>
+                    <td class="sinBorde" style="font-size:1.2em">
+                        Ciencias Sociales
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sinBorde" style="font-size:1.2em">
+                        <strong>&Aacute;rea:</strong>
+                    </td>
+                    <td class="sinBorde" style="font-size:1.2em">
+                        Economía y Negocios -- Negocios y Management
+                    </td>
+                </tr>
+                
+                    
+                
+                
+                <tr>
+                    <td class="sinBorde">
+                        <strong>CCRG:</strong>
+                    </td>
+                    <td class="sinBorde">
+                        COL0049121
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sinBorde">
+                        <strong>Fecha de creaci&oacute;n:</strong>
+                    </td>
+                    <td class="sinBorde">
+                        Agosto
+                        de
+                        2003.
+                        Lugar:
+                        VALLEDUPAR
+                        /
+                        CESAR
+                        /
+                        Región Caribe
+                        /
+                        Colombia 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sinBorde">
+                        <strong>L&iacute;der:</strong>
+                    </td>
+                    <td class="sinBorde">
+                        YIMY GORDON HERNANDEZ
+                    </td>
+                </tr>       
+                <tr>
+                    <td class="sinBorde">
+                        <strong>Instituciones:</strong>
+                    </td>
+                    <td class="sinBorde">
+                        (1) UNIVERSIDAD POPULAR DEL CESAR (Avalado) | (2) UNIVERSIDAD FRANCISCO DE PAULA SANTANDER (No avalado)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sinBorde">
+                        <strong>Programa Nacional:</strong>
+                    </td>
+                    <td class="sinBorde">
+                        Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación 
+                    </td>
+                </tr>
+                <tr>
+                    <td nowrap class="sinBorde">
+                        <strong>Programa Nacional Secundario:</strong>
+                    </td>
+                    <td class="sinBorde">
+                        No Aplica
+                    </td>
+                </tr>
+            </table>
+        
+        
+
+        <br/>
+        <br/>
+
+        <table width="100%">
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+                <td class="encabezado" style="font-size:1.5em" align="center">
+                    <strong>Resultado de los perfiles</strong>
+                </td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+                <td>
+                    <p align="justify">                        
+                        A continuaci&oacute;n, se presentan los perfiles calculados para el Grupo de Investigaci&oacute;n, Desarrollo Tecnol&oacute;gico e Innovaci&oacute;n, 
+                        de acuerdo con el total de grupos participantes para esta gran área de conocimiento, con base en la información registrada a 
+                        y actualizados a 06 de diciembre 2024.  (fecha de cierre de la Convocatoria 957 de 2024). 
+                        <br/><br/>
+                            
+                        Los perfiles se calcularon por &aacute;rea de conocimiento y en la tabla encontrar&aacute; el valor de los cuartiles para cada indicador por subtipo de producto, el valor obtenido para cada producto (de acuerdo con los pesos relativos), y el cuartil donde est&aacute; ubicado el grupo en su &aacute;rea de conocimiento, de acuerdo con el indicador obtenido.<br/><br/>
+                        <strong>Nota:</strong> Min y Max denotan el m&iacute;nimo y m&aacute;ximo del conjunto de datos, sin tomar las observaciones que tengan el valor 0. Los valores de los cuartiles calculados para cada uno de los indicadores de producci&oacute;n se realiza sobre la poblaci&oacute;n de grupos que constituyen la misma &aacute;rea de conocimiento.<br/><br/>
+
+                        <strong>Recuerde:</strong> El porcentaje de las graficas, es con respecto al valor m&aacute;ximo de cada indicador obtenido en el &aacute;rea de conocimiento.
+                    </p>
+                </td>
+            </tr>
+            
+            <!--PERFIL INTEGRANTES-->
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+                <td>
+                    <table width="100%">
+                        <tr>
+                            <td class="encabezado" style="font-size:1.3em">
+                                <strong>Perfil de integrantes</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                
+                                    <table class="tables" width="100%" border="1" cellspacing="0" cellpadding="1">
+                                        <tr>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td colspan="5" class="encabezado" align="center">Cuartiles para el &Aacute;rea de conocimiento</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="encabezado"><strong>Tipo de integrante</strong></td>
+                                            <td class="encabezado"><strong>abreviatura</strong></td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado"><strong>M&iacute;nimo</strong></td>
+                                            <td class="encabezado" nowrap><strong>Cuartil 4:</strong></td>
+                                            <td class="encabezado" nowrap><strong>Cuartil 3:</strong></td>
+                                            <td class="encabezado" nowrap><strong>Cuartil 2:</strong></td>
+                                            <td class="encabezado"><strong>M&aacute;ximo:</strong></td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado"><strong>Valor del indicador para el Grupo</strong></td>
+                                            <td class="encabezado"><strong>Cuartil de ubicaci&oacute;n del Grupo</strong></td>
+                                        </tr>
+                                          
+                                            
+                                                <tr>
+                                                    <td> Investigador em&eacute;rito </td>
+                                                    <td>IE</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.0</td>
+                                                    <td class="rellenoVerde"><strong>0</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasIntegrantes.push('IE');
+                                                    dataIntegrantes.push(0.0);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Investigador s&eacute;nior </td>
+                                                    <td>IS</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>1.0</td>
+                                                    <td>1.0</td>
+                                                    <td>1.0</td>
+                                                    <td>3.0</td>
+                                                    <td>43.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">1.0</td>
+                                                    <td class="rellenoVerde"><strong>2</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasIntegrantes.push('IS');
+                                                    dataIntegrantes.push(2.33);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Investigador asociado </td>
+                                                    <td>I</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>1.0</td>
+                                                    <td>1.0</td>
+                                                    <td>2.0</td>
+                                                    <td>3.0</td>
+                                                    <td>13.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">2.0</td>
+                                                    <td class="rellenoVerde"><strong>2</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasIntegrantes.push('I');
+                                                    dataIntegrantes.push(15.38);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Investigador junior </td>
+                                                    <td>IJ</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>1.0</td>
+                                                    <td>2.0</td>
+                                                    <td>3.0</td>
+                                                    <td>5.0</td>
+                                                    <td>197.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">6.0</td>
+                                                    <td class="rellenoVerde"><strong>1</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasIntegrantes.push('IJ');
+                                                    dataIntegrantes.push(3.05);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Estudiante de doctorado </td>
+                                                    <td>ED</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>1.0</td>
+                                                    <td>1.0</td>
+                                                    <td>2.0</td>
+                                                    <td>3.0</td>
+                                                    <td>42.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">2.0</td>
+                                                    <td class="rellenoVerde"><strong>2</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasIntegrantes.push('ED');
+                                                    dataIntegrantes.push(4.76);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Estudiante de maestr&iacute;a o especialidad cl&iacute;nica </td>
+                                                    <td>EM</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>1.0</td>
+                                                    <td>1.0</td>
+                                                    <td>1.0</td>
+                                                    <td>2.0</td>
+                                                    <td>13.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">2.0</td>
+                                                    <td class="rellenoVerde"><strong>1</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasIntegrantes.push('EM');
+                                                    dataIntegrantes.push(15.38);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Joven investigador </td>
+                                                    <td>JI</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.0</td>
+                                                    <td class="rellenoVerde"><strong>0</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasIntegrantes.push('JI');
+                                                    dataIntegrantes.push(0.0);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Estudiante de pregrado </td>
+                                                    <td>EP</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>1.0</td>
+                                                    <td>1.0</td>
+                                                    <td>1.0</td>
+                                                    <td>2.0</td>
+                                                    <td>33.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">2.0</td>
+                                                    <td class="rellenoVerde"><strong>1</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasIntegrantes.push('EP');
+                                                    dataIntegrantes.push(6.06);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Integrante vinculado con doctorado </td>
+                                                    <td>IVD</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>1.0</td>
+                                                    <td>1.0</td>
+                                                    <td>2.0</td>
+                                                    <td>3.0</td>
+                                                    <td>126.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">1.0</td>
+                                                    <td class="rellenoVerde"><strong>3</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasIntegrantes.push('IVD');
+                                                    dataIntegrantes.push(0.79);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Integrante vinculado con maestr&iacute;a o especialidad cl&iacute;nica </td>
+                                                    <td>IVM</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>1.0</td>
+                                                    <td>2.0</td>
+                                                    <td>3.0</td>
+                                                    <td>6.0</td>
+                                                    <td>39.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">10.0</td>
+                                                    <td class="rellenoVerde"><strong>1</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasIntegrantes.push('IVM');
+                                                    dataIntegrantes.push(25.64);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Integrante vinculado con pregrado </td>
+                                                    <td>IVP</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>1.0</td>
+                                                    <td>1.0</td>
+                                                    <td>2.0</td>
+                                                    <td>3.0</td>
+                                                    <td>19.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">6.0</td>
+                                                    <td class="rellenoVerde"><strong>1</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasIntegrantes.push('IVP');
+                                                    dataIntegrantes.push(31.58);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Integrante vinculado con especializaci&oacute;n </td>
+                                                    <td>IVE</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>1.0</td>
+                                                    <td>1.0</td>
+                                                    <td>1.0</td>
+                                                    <td>2.0</td>
+                                                    <td>13.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">2.0</td>
+                                                    <td class="rellenoVerde"><strong>1</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasIntegrantes.push('IVE');
+                                                    dataIntegrantes.push(15.38);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Integrante vinculado </td>
+                                                    <td>IV</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>1.0</td>
+                                                    <td>1.0</td>
+                                                    <td>1.0</td>
+                                                    <td>3.0</td>
+                                                    <td>44.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">25.0</td>
+                                                    <td class="rellenoVerde"><strong>1</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasIntegrantes.push('IV');
+                                                    dataIntegrantes.push(56.82);
+                                                </script>
+                                            
+                                            
+                                            
+                                        
+                                    </table>
+                                
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div id="containerIntegrantes" style="min-width: 310px; height: 570px; margin: 0 auto"></div>
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </td>
+            </tr>
+
+            <!--PERFIL COLABORACION-->
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+                <td>
+                    <table width="100%">
+                        <tr>
+                            <td class="encabezado" style="font-size:1.3em">
+                                <strong>Perfil de colaboraci&oacute;n</strong>
+                            </td>
+                        </tr>
+                        <tr><td>&nbsp;</td></tr>
+                        <tr>
+                            <td>
+                                <p>
+                                    <strong>Indicador de cohesi&oacute;n (IC):</strong> Es el valor que permite evidenciar la colaboraci&oacute;n &#45;coautor&iacute;as&#45; a nivel interno de los integrantes del Grupo de Investigaci&oacute;n, Desarrollo Tecnol&oacute;gico o Innovaci&oacute;n. <br/>
+                                    <strong>Indicador de cooperaci&oacute;n (ICOOP):</strong> Con el que se busca evidenciar el trabajo conjunto &#45;coautor&iacute;a&#45; entre grupos. 
+                                </p>
+                            </td>
+                        </tr>
+                        <tr><td>&nbsp;</td></tr>
+                        <tr>
+                            <td>
+                                
+                                    <table class="tables" width="100%" border="1" cellspacing="0" cellpadding="1">
+                                        <tr>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td colspan="5" class="encabezado" align="center">Cuartiles para el &Aacute;rea de conocimiento</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="encabezado"><strong>Indicador</strong></td>
+                                            <td class="encabezado"><strong>abreviatura</strong></td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado"><strong>M&iacute;nimo</strong></td>
+                                            <td class="encabezado" nowrap><strong>Cuartil 4:</strong></td>
+                                            <td class="encabezado" nowrap><strong>Cuartil 3:</strong></td>
+                                            <td class="encabezado" nowrap><strong>Cuartil 2:</strong></td>
+                                            <td class="encabezado"><strong>M&aacute;ximo:</strong></td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado"><strong>Valor del indicador para el Grupo</strong></td>
+                                            <td class="encabezado"><strong>Cuartil de ubicaci&oacute;n del Grupo</strong></td>
+                                        </tr>
+                                          
+                                            
+                                                <tr>
+                                                    <td> Indicador de cohesi&oacute;n </td>
+                                                    <td>IC</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.01</td>
+                                                    <td>0.22</td>
+                                                    <td>0.38</td>
+                                                    <td>0.63</td>
+                                                    <td>5.86</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.78</td>
+                                                    <td class="rellenoVerde"><strong>1</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasColaboracion.push('IC');
+                                                    dataColaboracion.push(13.31);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Indicador de colaboraci&oacute;n </td>
+                                                    <td>ICOOP</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.01</td>
+                                                    <td>0.23</td>
+                                                    <td>0.43</td>
+                                                    <td>0.75</td>
+                                                    <td>9.67</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.62</td>
+                                                    <td class="rellenoVerde"><strong>2</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasColaboracion.push('ICOOP');
+                                                    dataColaboracion.push(6.41);
+                                                </script>
+                                            
+                                            
+                                            
+                                        
+                                    </table>
+                                
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div id="containerColaboracion" style="min-width: 310px; height: 230px; margin: 0 auto"></div>
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </td>
+            </tr>                        
+            
+    
+        <!--PERFIL TRAYECTORIA, PERMANENCIA, ESTABILIDAD-->
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+     
+   
+            <!--PERFIL NUEVO CONOCIMIENTO-->
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+                <td>
+                    <table width="100%">
+                        <tr>
+                            <td class="encabezado" style="font-size:1.3em">
+                                <strong>Perfil de productos resultado de actividades de generaci&oacute;n de nuevo conocimiento</strong>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                
+                                    <table class="tables" width="100%" border="1" cellspacing="0" cellpadding="1">
+                                        <tr>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td colspan="5" class="encabezado" align="center">Cuartiles para el &Aacute;rea de conocimiento</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="encabezado"><strong>Subtipo de producto</strong></td>
+                                            <td class="encabezado"><strong>abreviatura</strong></td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado"><strong>M&iacute;nimo</strong></td>
+                                            <td class="encabezado" nowrap><strong>Cuartil 4:</strong></td>
+                                            <td class="encabezado" nowrap><strong>Cuartil 3:</strong></td>
+                                            <td class="encabezado" nowrap><strong>Cuartil 2:</strong></td>
+                                            <td class="encabezado"><strong>M&aacute;ximo:</strong></td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado"><strong>Valor del indicador para el Grupo</strong></td>
+                                            <td class="encabezado"><strong>Cuartil de ubicaci&oacute;n del Grupo</strong></td>
+                                        </tr>
+                                          
+                                            
+                                                <tr>
+                                                    <td> Art&iacute;culos de investigaci&oacute;n A </td>
+                                                    <!--Esta locura se hace porque fue un requerimiento a ultima hora de Colc :s-->
+                                                    
+                                                    
+                                                        <td>ART_A</td>
+                                                    
+                                                    <td>&nbsp;</td>
+                                                    <td>0.2</td>
+                                                    <td>2.38</td>
+                                                    <td>5.43</td>
+                                                    <td>10.98</td>
+                                                    <td>72.14</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">12.93</td>
+                                                    <td class="rellenoVerde"><strong>1</strong></td>
+                                                </tr>
+                                                <script>
+            
+            
+            categoriasNuevoCono.push('ART_A');
+            
+                                                            dataNuevoCono.push(17.92);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Art&iacute;culos de investigaci&oacute;n B </td>
+                                                    <!--Esta locura se hace porque fue un requerimiento a ultima hora de Colc :s-->
+                                                    
+                                                        <td>ART_D</td>
+                                                    
+                                                    
+                                                    <td>&nbsp;</td>
+                                                    <td>1.64</td>
+                                                    <td>3.36</td>
+                                                    <td>5.01</td>
+                                                    <td>9.53</td>
+                                                    <td>34.7</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">8.93</td>
+                                                    <td class="rellenoVerde"><strong>2</strong></td>
+                                                </tr>
+                                                <script>
+            
+            categoriasNuevoCono.push('ART_D');
+            
+            
+                                                            dataNuevoCono.push(25.73);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Notas cient&iacute;ficas </td>
+                                                    <!--Esta locura se hace porque fue un requerimiento a ultima hora de Colc :s-->
+                                                    
+                                                        <td>N</td>
+                                                    
+                                                    
+                                                    <td>&nbsp;</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.0</td>
+                                                    <td class="rellenoVerde"><strong>0</strong></td>
+                                                </tr>
+                                                <script>
+            
+            categoriasNuevoCono.push('N');
+            
+            
+                                                            dataNuevoCono.push(0.0);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Libros de investigaci&oacute;n </td>
+                                                    <!--Esta locura se hace porque fue un requerimiento a ultima hora de Colc :s-->
+                                                    
+                                                        <td>LIB</td>
+                                                    
+                                                    
+                                                    <td>&nbsp;</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.0</td>
+                                                    <td class="rellenoVerde"><strong>0</strong></td>
+                                                </tr>
+                                                <script>
+            
+            categoriasNuevoCono.push('LIB');
+            
+            
+                                                            dataNuevoCono.push(0.0);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Libros de investigaci&oacute;n C </td>
+                                                    <!--Esta locura se hace porque fue un requerimiento a ultima hora de Colc :s-->
+                                                    
+                                                        <td>LIB_C</td>
+                                                    
+                                                    
+                                                    <td>&nbsp;</td>
+                                                    <td>1.34</td>
+                                                    <td>2.51</td>
+                                                    <td>4.52</td>
+                                                    <td>7.62</td>
+                                                    <td>35.63</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">10.5</td>
+                                                    <td class="rellenoVerde"><strong>1</strong></td>
+                                                </tr>
+                                                <script>
+            
+            categoriasNuevoCono.push('LIB_C');
+            
+            
+                                                            dataNuevoCono.push(29.47);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Cap&iacute;tulos de investigaci&oacute;n </td>
+                                                    <!--Esta locura se hace porque fue un requerimiento a ultima hora de Colc :s-->
+                                                    
+                                                        <td>CAP</td>
+                                                    
+                                                    
+                                                    <td>&nbsp;</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.0</td>
+                                                    <td class="rellenoVerde"><strong>0</strong></td>
+                                                </tr>
+                                                <script>
+            
+            categoriasNuevoCono.push('CAP');
+            
+            
+                                                            dataNuevoCono.push(0.0);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Cap&iacute;tulos de investigaci&oacute;n C </td>
+                                                    <!--Esta locura se hace porque fue un requerimiento a ultima hora de Colc :s-->
+                                                    
+                                                        <td>CAP_C</td>
+                                                    
+                                                    
+                                                    <td>&nbsp;</td>
+                                                    <td>1.82</td>
+                                                    <td>4.7</td>
+                                                    <td>8.75</td>
+                                                    <td>13.35</td>
+                                                    <td>36.27</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">19.17</td>
+                                                    <td class="rellenoVerde"><strong>1</strong></td>
+                                                </tr>
+                                                <script>
+            
+            categoriasNuevoCono.push('CAP_C');
+            
+            
+                                                            dataNuevoCono.push(52.85);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Productos Tecnol&oacute;gicos Patentados </td>
+                                                    <!--Esta locura se hace porque fue un requerimiento a ultima hora de Colc :s-->
+                                                    
+                                                        <td>PAT</td>
+                                                    
+                                                    
+                                                    <td>&nbsp;</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.0</td>
+                                                    <td class="rellenoVerde"><strong>0</strong></td>
+                                                </tr>
+                                                <script>
+            
+            categoriasNuevoCono.push('PAT');
+            
+            
+                                                            dataNuevoCono.push(0.0);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Variedades Vegetales y Animales </td>
+                                                    <!--Esta locura se hace porque fue un requerimiento a ultima hora de Colc :s-->
+                                                    
+                                                        <td>VV</td>
+                                                    
+                                                    
+                                                    <td>&nbsp;</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.0</td>
+                                                    <td class="rellenoVerde"><strong>0</strong></td>
+                                                </tr>
+                                                <script>
+            
+            categoriasNuevoCono.push('VV');
+            
+            
+                                                            dataNuevoCono.push(0.0);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Obras o productos de investigaci&oacute;n creaci&oacute;n de Arte, Arquitectura y Dise&ntilde;o </td>
+                                                    <!--Esta locura se hace porque fue un requerimiento a ultima hora de Colc :s-->
+                                                    
+                                                        <td>AAD</td>
+                                                    
+                                                    
+                                                    <td>&nbsp;</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.0</td>
+                                                    <td class="rellenoVerde"><strong>0</strong></td>
+                                                </tr>
+                                                <script>
+            
+            categoriasNuevoCono.push('AAD');
+            
+            
+                                                            dataNuevoCono.push(0.0);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Libros de formaci&oacute;n Q1 </td>
+                                                    <!--Esta locura se hace porque fue un requerimiento a ultima hora de Colc :s-->
+                                                    
+                                                        <td>FOR</td>
+                                                    
+                                                    
+                                                    <td>&nbsp;</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.0</td>
+                                                    <td class="rellenoVerde"><strong>0</strong></td>
+                                                </tr>
+                                                <script>
+            
+            categoriasNuevoCono.push('FOR');
+            
+            
+                                                            dataNuevoCono.push(0.0);
+                                                </script>
+                                            
+                                            
+                                            
+                                        
+                                    </table>
+                                
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div id="containerNuevoCono" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </td>
+            </tr>
+            
+            <script type="text/javascript">
+
+                function renderChart(divId, chartType, chartTitle, chartData, categories){
+                var options = createOption(divId, chartType, chartTitle, categories);
+                options.series = [{
+                name: chartTitle,
+                        data: chartData
+                }];
+                var chart = new Highcharts.Chart(options);
+                }
+
+                function createOption(divId, chartType, chartTitle, categories){
+
+                var options = {
+                colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
+                        chart: {
+                        renderTo: divId,
+                                type: chartType
+                        },
+                        title: {
+                        text: chartTitle
+                        },
+                        xAxis: {
+                        categories: categories,
+                                title: {
+                                text: null
+                                }
+                        },
+                        yAxis: {
+                        min: 0,
+                                max: 100,
+                                title: {
+                                text: 'Porcentaje',
+                                        align: 'high'
+                                },
+                                labels: {
+                                overflow: 'justify'
+                                }
+                        },
+                        plotOptions: {
+                        bar: {
+                        dataLabels: {
+                        enabled: true
+                        }
+                        }
+                        },
+                        tooltip: {
+                        valueSuffix: '%'
+                        },
+                        /*legend: {
+                         layout: 'vertical',
+                         align: 'right',
+                         verticalAlign: 'top',
+                         x: -40,
+                         y: 100,
+                         floating: true,
+                         borderWidth: 1,
+                         backgroundColor: '#FFFFFF',
+                         shadow: true
+                         },*/
+                        credits: {
+                        enabled: false
+                        },
+                        series: []
+                };
+                return options;
+                };
+            </script>
+            
+            <!--PERFIL INNOVACION Y DESARROLLO TECNOLOGICO-->
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+                <td>
+                    <table width="100%">
+                        <tr>
+                            <td class="encabezado" style="font-size:1.3em">
+                                <strong>Perfil de productos resultado de actividades de Desarrollo Tecnol&oacute;gico e Innovaci&oacute;n</strong>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                
+                                    <table class="tables" width="100%" border="1" cellspacing="0" cellpadding="1">
+                                        <tr>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td colspan="5" class="encabezado" align="center">Cuartiles para el &Aacute;rea de conocimiento</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="encabezado"><strong>Subtipo de producto</strong></td>
+                                            <td class="encabezado"><strong>abreviatura</strong></td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado"><strong>M&iacute;nimo</strong></td>
+                                            <td class="encabezado" nowrap><strong>Cuartil 4:</strong></td>
+                                            <td class="encabezado" nowrap><strong>Cuartil 3:</strong></td>
+                                            <td class="encabezado" nowrap><strong>Cuartil 2:</strong></td>
+                                            <td class="encabezado"><strong>M&aacute;ximo:</strong></td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado"><strong>Valor del indicador para el Grupo</strong></td>
+                                            <td class="encabezado"><strong>Cuartil de ubicaci&oacute;n del Grupo</strong></td>
+                                        </tr>
+                                          
+                                            
+                                                <tr>
+                                                    <td> Productos Tecnol&oacute;gicos Certificados o Validados </td>
+                                                    <td>TEC</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.73</td>
+                                                    <td>1.35</td>
+                                                    <td>2.19</td>
+                                                    <td>3.76</td>
+                                                    <td>21.29</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">3.76</td>
+                                                    <td class="rellenoVerde"><strong>1</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasDesaTecno.push('TEC');
+                                                    dataDesaTecno.push(17.66);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Productos Empresariales </td>
+                                                    <td>EMP</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.55</td>
+                                                    <td>2.22</td>
+                                                    <td>5.15</td>
+                                                    <td>11.6</td>
+                                                    <td>117.09</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">5.84</td>
+                                                    <td class="rellenoVerde"><strong>2</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasDesaTecno.push('EMP');
+                                                    dataDesaTecno.push(4.99);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Regulaciones, Normas y Reglamentos T&eacute;cnicos </td>
+                                                    <td>RNL</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.0</td>
+                                                    <td class="rellenoVerde"><strong>0</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasDesaTecno.push('RNL');
+                                                    dataDesaTecno.push(0.0);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Conceptos t&eacute;cnicos </td>
+                                                    <td>CON</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.0</td>
+                                                    <td class="rellenoVerde"><strong>0</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasDesaTecno.push('CON');
+                                                    dataDesaTecno.push(0.0);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Registros de Acuerdos de licencia para la explotaci&oacute;n de obras de AAD protegidas por derechos de autor </td>
+                                                    <td>MR</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.0</td>
+                                                    <td class="rellenoVerde"><strong>0</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasDesaTecno.push('MR');
+                                                    dataDesaTecno.push(0.0);
+                                                </script>
+                                            
+                                            
+                                            
+                                        
+                                    </table>
+                                
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div id="containerDesaTecno" style="min-width: 310px; height: 350px; margin: 0 auto"></div>
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </td>
+            </tr>
+            
+            <!--PERFIL APROPIACION SOCIAL-->
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+                <td>
+                    <table width="100%">
+                        <tr>
+                            <td class="encabezado" style="font-size:1.3em">
+                                <strong>Perfil de productos resultado de actividades de Apropiaci&oacute;n Social del Conocimiento y Divulgación Pública de la Ciencia</strong>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                
+                                    <table class="tables" width="100%" border="1" cellspacing="0" cellpadding="1">
+                                        <tr>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td colspan="5" class="encabezado" align="center">Cuartiles para el &Aacute;rea de conocimiento</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="encabezado"><strong>Subtipo de producto</strong></td>
+                                            <td class="encabezado"><strong>abreviatura</strong></td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado"><strong>M&iacute;nimo</strong></td>
+                                            <td class="encabezado" nowrap><strong>Cuartil 4:</strong></td>
+                                            <td class="encabezado" nowrap><strong>Cuartil 3:</strong></td>
+                                            <td class="encabezado" nowrap><strong>Cuartil 2:</strong></td>
+                                            <td class="encabezado"><strong>M&aacute;ximo:</strong></td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado"><strong>Valor del indicador para el Grupo</strong></td>
+                                            <td class="encabezado"><strong>Cuartil de ubicaci&oacute;n del Grupo</strong></td>
+                                        </tr>
+                                          
+                                            
+                                                <tr>
+                                                    <td> Procesos de apropiaci&oacute;n social del conocimiento </td>
+                                                    <td>PASC</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.0</td>
+                                                    <td class="rellenoVerde"><strong>0</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasAproSocial.push('PASC');
+                                                    dataAproSocial.push(0.0);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Circulaci&oacute;n de Conocimiento Especializado </td>
+                                                    <td>CCE</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.36</td>
+                                                    <td>15.07</td>
+                                                    <td>25.22</td>
+                                                    <td>37.67</td>
+                                                    <td>114.07</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">57.38</td>
+                                                    <td class="rellenoVerde"><strong>1</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasAproSocial.push('CCE');
+                                                    dataAproSocial.push(50.3);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Divulgaci&oacute;n p&uacute;blica de la ciencia </td>
+                                                    <td>DP</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.0</td>
+                                                    <td class="rellenoVerde"><strong>0</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasAproSocial.push('DP');
+                                                    dataAproSocial.push(0.0);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Producci&oacute;n bibliogr&aacute;fica </td>
+                                                    <td>PBB</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.55</td>
+                                                    <td>1.88</td>
+                                                    <td>3.34</td>
+                                                    <td>5.93</td>
+                                                    <td>32.51</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">9.13</td>
+                                                    <td class="rellenoVerde"><strong>1</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasAproSocial.push('PBB');
+                                                    dataAproSocial.push(28.08);
+                                                </script>
+                                            
+                                            
+                                            
+                                        
+                                    </table>
+                                
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div id="containerAproSocial" style="min-width: 310px; height: 350px; margin: 0 auto"></div>
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </td>
+            </tr>
+            
+            
+            <!--PERFIL FORMACION RECURSO HUMANO-->
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+                <td>
+                    <table width="100%">
+                        <tr>
+                            <td class="encabezado" style="font-size:1.3em">
+                                <strong>Perfil de productos resultado de actividades relacionadas con la Formaci&oacute;n del Recurso Humano en CTI</strong>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                
+                                    <table class="tables" width="100%" border="1" cellspacing="0" cellpadding="1">
+                                        <tr>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td colspan="5" class="encabezado" align="center">Cuartiles para el &Aacute;rea de conocimiento</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="encabezado"><strong>Subtipo de producto</strong></td>
+                                            <td class="encabezado"><strong>abreviatura</strong></td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado"><strong>M&iacute;nimo</strong></td>
+                                            <td class="encabezado" nowrap><strong>Cuartil 4:</strong></td>
+                                            <td class="encabezado" nowrap><strong>Cuartil 3:</strong></td>
+                                            <td class="encabezado" nowrap><strong>Cuartil 2:</strong></td>
+                                            <td class="encabezado"><strong>M&aacute;ximo:</strong></td>
+                                            <td class="encabezado">&nbsp;</td>
+                                            <td class="encabezado"><strong>Valor del indicador para el Grupo</strong></td>
+                                            <td class="encabezado"><strong>Cuartil de ubicaci&oacute;n del Grupo</strong></td>
+                                        </tr>
+                                          
+                                            
+                                                <tr>
+                                                    <td> Tesis de Doctorado </td>
+                                                    <td>TD</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.91</td>
+                                                    <td>0.91</td>
+                                                    <td>2.33</td>
+                                                    <td>4.28</td>
+                                                    <td>16.18</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">5.29</td>
+                                                    <td class="rellenoVerde"><strong>1</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasFormaRH.push('TD');
+                                                    dataFormaRH.push(32.69);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Trabajo de Grado de Maestr&iacute;a </td>
+                                                    <td>TM</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.91</td>
+                                                    <td>2.94</td>
+                                                    <td>6.2</td>
+                                                    <td>11.37</td>
+                                                    <td>42.19</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">5.49</td>
+                                                    <td class="rellenoVerde"><strong>3</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasFormaRH.push('TM');
+                                                    dataFormaRH.push(13.01);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Trabajo de grado de pregrado </td>
+                                                    <td>TG</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.91</td>
+                                                    <td>4.78</td>
+                                                    <td>9.45</td>
+                                                    <td>14.82</td>
+                                                    <td>40.28</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">8.05</td>
+                                                    <td class="rellenoVerde"><strong>3</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasFormaRH.push('TG');
+                                                    dataFormaRH.push(19.99);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Proyectos de investigaci&oacute;n y Desarrollo </td>
+                                                    <td>PID</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.36</td>
+                                                    <td>1.18</td>
+                                                    <td>2.2</td>
+                                                    <td>3.76</td>
+                                                    <td>32.12</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">4.73</td>
+                                                    <td class="rellenoVerde"><strong>1</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasFormaRH.push('PID');
+                                                    dataFormaRH.push(14.73);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Proyectos de investigaci&oacute;n &#43; creaci&oacute;n </td>
+                                                    <td>PIC</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.0</td>
+                                                    <td class="rellenoVerde"><strong>0</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasFormaRH.push('PIC');
+                                                    dataFormaRH.push(0.0);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Proyectos de investigaci&oacute;n, Desarrollo e Innovaci&oacute;n (ID+I) </td>
+                                                    <td>PF</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.0</td>
+                                                    <td class="rellenoVerde"><strong>0</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasFormaRH.push('PF');
+                                                    dataFormaRH.push(0.0);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Proyectos de extensi&oacute;n y responsabilidad social en CTI </td>
+                                                    <td>PERS</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.0</td>
+                                                    <td class="rellenoVerde"><strong>0</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasFormaRH.push('PERS');
+                                                    dataFormaRH.push(0.0);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Apoyo a Programas de Formaci&oacute;n </td>
+                                                    <td>AP</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.0</td>
+                                                    <td class="rellenoVerde"><strong>0</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasFormaRH.push('AP');
+                                                    dataFormaRH.push(0.0);
+                                                </script>
+                                            
+                                            
+                                            
+                                          
+                                            
+                                                <tr>
+                                                    <td> Acompa&ntilde;amientos y asesor&iacute;as de linea tem&aacute;tica del Programa Ondas </td>
+                                                    <td>APO</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>0.0</td>
+                                                    <td>&nbsp;</td>
+                                                    <td class="rellenoAzul">0.0</td>
+                                                    <td class="rellenoVerde"><strong>0</strong></td>
+                                                </tr>
+                                                <script>
+                                                    categoriasFormaRH.push('APO');
+                                                    dataFormaRH.push(0.0);
+                                                </script>
+                                            
+                                            
+                                            
+                                        
+                                    </table>
+                                
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div id="containerFormaRH" style="min-width: 310px; height: 480px; margin: 0 auto"></div>
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </td>
+            </tr>
+            
+        </table>
+
+        <script>
+            
+renderChart('containerIntegrantes','bar','Perfil de integrantes', dataIntegrantes, categoriasIntegrantes);
+
+
+    renderChart('containerColaboracion','bar','Perfil de colaboración', dataColaboracion, categoriasColaboracion);
+
+
+    renderChart('containerNuevoCono','bar','Perfil de productos de generación de nuevo conocimiento', dataNuevoCono, categoriasNuevoCono);
+
+
+    renderChart('containerDesaTecno','bar','Perfil de productos de actividades de Desarrollo Tecnológico e Innovación', dataDesaTecno, categoriasDesaTecno);
+
+
+    renderChart('containerAproSocial','bar','Perfil de productos de actividades de Apropiación Social del Conocimiento y Divulgación Pública de la Ciencia', dataAproSocial, categoriasAproSocial);
+
+
+    renderChart('containerFormaRH','bar','Perfil de productos de actividades relacionadas con la Formación del Recurso Humano en CTI', dataFormaRH, categoriasFormaRH);
+
+
+    renderChart('containerTrayectoria','bar','Perfil de Trayectoria, Permanencia y Estabilidad', dataTrayectoria, categoriasTrayectoria);
+
+            </script>
+
+
+
+
+
+
+
+<!-- MIRAR EL TOTAL DE GRUPOS EN EL AREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA   
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

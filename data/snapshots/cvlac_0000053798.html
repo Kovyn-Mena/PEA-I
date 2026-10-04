@@ -1,0 +1,1441 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=B6D40C6EC44D5951C5D3A9CDDEC410C5" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        Yenis Maria&nbsp;Castilla&nbsp;Sierra
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>CASTILLA SIERRA, YENIS MARIA</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Femenino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            UNIVERSIDAD AUTONOMA DEL CARIBE<br />
+                            MAESTRIA EN EDUCACION<br />
+                            Febrerode2015 - Juliode 2017<br />
+                            LA MUSICA VALLENATA NARRATIVA COMO ESTRATEGIA PARA MEJORAR LA COMPRENSION DE LECTURA </td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>GIMSABER</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>28&nbsp;horas Semanales
+                        Febrero de 2003            
+                         de <br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Instituto Murgas</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Febrero de 2008            
+                         de <br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Rector            
+                        <i> - Cargo:</i>&nbsp;Directora Acadèmeica          
+                        Febrero de 2008            
+                        Enero de <br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>18&nbsp;horas Semanales
+                        Febrero de 2018            
+                         de <br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Humanidades -- Otras Humanidades -- Otras Humanidades</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a></td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajo de grado de maestría o especialidad clínica</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            YENIS MARIA CASTILLA SIERRA,                    
+                            
+                            EL USO DE PODCASTS PARA MEJORAR EL APRENDIZAJE DEL INGLÉS EN ESTUDIANTES DE QUINTO GRADO DE LA INSTITUCIÓN EDUCATIVA ALFONSO LÓPEZ PUMAREJO SEDE ALFONSOCOTES QUERÚZ&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            LICENCIATURA EN ESPAÑOL E INGLÉS,
+                            &nbsp;2024.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): YENIS MARIA CASTILLA SIERRA,
+                               
+                            
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Jurado en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Maestría</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            YENIS MARIA CASTILLA SIERRA,                    
+                            
+                            <i>Titulo:&nbsp;</i>Cartilla didáctica desde el aprendizaje dialógico para la comprensión lectora                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Trabajo de grado/tesis
+                            <i>en:&nbsp;</i> Universidad Mariana - Unimar&nbsp;
+                            <i>programa acad&eacute;mico</i> MAESTRIA EN PEDAGOGIA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>YENIS MARIA CASTILLA SIERRA  &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a></td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a></td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                YENIS MARIA CASTILLA SIERRA,                    
+                
+                "Cartilla didáctica desde el aprendizaje dialógico para la comprensión lectora"
+                . En: Colombia&nbsp;<br>
+                Revista Unimar&nbsp;
+                <i>ISSN:</i>&nbsp;0100-9354&nbsp;
+                <i>ed:</i>&nbsp;<br>
+                <i>v.</i>41
+                <i>fasc.</i>
+                p.98
+                - 116
+                ,2023,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                YENIS MARIA CASTILLA SIERRA,                    
+                
+                "949 THEORETICAL AND METHODOLOGICAL REFLECTIONS ON URBAN SOCIAL IMAGINARIES"
+                . En: Rusia&nbsp;<br>
+                RUSSIAN LAW JOURNAL&nbsp;
+                <i>ISSN:</i>&nbsp;2312-3605&nbsp;
+                <i>ed:</i>&nbsp;Supporting Academic Initiatives Foundation<br>
+                <i>v.</i>11
+                <i>fasc.</i>N/A
+                p.949
+                - 953
+                ,2023,
+                <i>&nbsp;DOI:&nbsp;</i>10.52783/rlj.v11i6.3522
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                YENIS MARIA CASTILLA SIERRA,                    
+                
+                "Niveles de lectura como estrategia didáctica en la resolución de problemas matemáticos en estudiantes del grado sexto de la Institución Educativa La Mata, municipio Chimichagua, Cesar"
+                . En: Colombia&nbsp;<br>
+                Revista Criterios.&nbsp;
+                <i>ISSN:</i>&nbsp;2011-5733&nbsp;
+                <i>ed:</i>&nbsp;editorial  bonaventuriana<br>
+                <i>v.</i>28
+                <i>fasc.</i>N/A
+                p.150
+                - 173
+                ,2021,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                YENIS MARIA CASTILLA SIERRA,                    
+                                    
+                MARCELA MARTINEZ MURGAS,                    
+                
+                "El Canto Vallenato Tradicional Como Estrategia Didáctica Para La Comprensión Lectora: Instituto Murgas De Valledupar Cesar - Colombia"
+                . En: Colombia&nbsp;<br>
+                Escenarios, Empresas Y Territorios  &nbsp;
+                <i>ISSN:</i>&nbsp;2463-0799&nbsp;
+                <i>ed:</i>&nbsp;<br>
+                <i>v.</i>14
+                <i>fasc.</i>N/A
+                p.20
+                - 30
+                ,2016,
+                <i>&nbsp;DOI:&nbsp;</i>10.15665/esc.v14i2.929
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                comprensión lectora  ,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                HERMES EMILIO MARTINEZ BARRIOS,                    
+                                    
+                YENIS MARIA CASTILLA SIERRA,                    
+                
+                "CRITICAL THINKING AS KNOWLEDGE VALIDATION: AN INTERPRETIVE ANALYSIS OF ITS EPISTEMOLOGICAL PURPOSE, DIMENSIONAL STRUCTURE, AND EDUCATIONAL IMPLICATIONS"
+                . En: Bulgaria&nbsp;<br>
+                INTERNATIONAL JOURNAL OF APPLIED MATHEMATICS&nbsp;
+                <i>ISSN:</i>&nbsp;1311-1728&nbsp;
+                <i>ed:</i>&nbsp;Diogenes Co. Ltd.<br>
+                <i>v.</i>39
+                <i>fasc.</i>N/A
+                p.939
+                - 958
+                ,2026,
+                <i>&nbsp;DOI:&nbsp;</i>10.12732/ijam.v39i1s.1841
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                knowledge validation,                    
+                                    
+                interpretive paradigm,                    
+                                    
+                critical thinking,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a>
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Libros</h3></td>
+            </tr>
+                
+            <tr>
+                <td><li>
+                
+                <b>Producción bibliográfica - Libro - Otro libro publicado</b>
+            </li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            YENIS MARIA CASTILLA SIERRA,                    
+                                
+            MARCELA MARTINEZ MURGAS,                    
+            
+            "El Canto Vallenato Tradicional Como Estrategia Didáctica Para La Comprensión Lectora: Instituto Murgas De Valledupar Cesar - Colombia"
+            En: Colombia
+            2019.&nbsp;
+            ed:&nbsp;
+            <i>ISBN:</i>&nbsp;9786202235020&nbsp;
+            <i>v. </i>
+            <i>pags.</i>&nbsp;
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+             canto vallenato tradicional,                    
+                                
+            comprensión lectora  ,                    
+                                
+            vallenata,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Humanidades -- Otras Humanidades -- Otras Humanidades,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a></td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a></td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a>
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3>Dem&aacute;s trabajos</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+            <li><b>Demás trabajos - Demás trabajos</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            YENIS MARIA CASTILLA SIERRA,                    
+            
+            Cartilla didáctica desde el aprendizaje dialógico para la comprensión lectora
+            . En: Colombia,&nbsp;
+            ,2023,&nbsp;
+            <i>finalidad: </i>Pomover el aprendizaje , medante el uso de la cartilla dialógica &nbsp;
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Humanidades -- Otras Humanidades -- Otras Humanidades,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        ¿Los rincones literarios como recurso didáctico para el acercamiento a la literatura latinoamericana, colombiana, inglesa y aborigen en los estudiantes de básica secundaria de la Institución Educativa Técnica la Esperanza¿.<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2019                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2019
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Con el  proyecto  ¿Los rincones literarios
+como recurso didáctico para el acercamiento a la literatura latinoamericana,colombiana, inglesa y aborigen en los estudiantes de básica secundaria dela Institución Educativa Técnica la Esperanza¿. se pretende que los estudiantes desarrollen  habilidades  que les permitan conocer teorías literarias y apropiarse de los aspectos literarios  de nuestro entorno.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        la lectura en Voz alta como estrategia para mejorar la convivencia escolar  en los estudiantes del colegio Loperena Garupal jornada Tarde<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2019                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2019
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            teniendo en cuenta la dificultad que presentan los alumnos en lectura, entonación y signos de puntuación   , y la mala convivencia de los estudiantes en sus ratos de esparcimiento , crea la necesidad de intervenir esta problemática para mitigar los problemas presentas y surge la propuesta a lectura en Voz alta como estrategia para mejorar la convivencia escolar  en los estudiantes del colegio Loperena Garupal jornada Tarde.
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        Lectura de textos argumentativos como estrategia para promover el pensamiento critico en los estudiantes del institución educativa Valle Meza jornada tarde.<br>
+                        <i>Inicio:&nbsp;</i>Agosto&nbsp;
+                        2018                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2018
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            con el objetivo de mejorar el pensamiento critico y las notas estándar de las pruebas icfes en lectura critica, se requiere intervenir buscando una estrategia que sirva como mecanismos para poder mejorar esos niveles  y surge la propuesta de intervension" Lectura de textos argumentativos como estrategia para promover el pensamiento crítico en los estudiantes del institución educativa Valle Meza , logrando mitigar en parte la apatía a la lectura y a su vez mejorando el nivel critico en los estudiantes.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        "english day" as a pedagogical strategy for the teaching of english in institución educativa Rafael Valle Meza<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2019                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2019
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            teniendo en cuenta las falencias, la apatía  y los bajos resultados en las pruebas saber  que presentan los estudiantes en el área de ingles del Colegio Valle meza, se es necesario buscar alternativa para  mitigar la problemática presente, para esto se implementa la estrategia " "english day" as a pedagogical strategy for the teaching of english in institución educativa Rafael Valle Meza"<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        PRESTAMOS DE LIBRO COMO ALTERNATIVA  PARA INCREMMETAR EN HABITO LECTOR EN LOS ESTUDIANTES DE LA INSTITUCIÓN ALFONSO LOPEZ PUMAREJO<br>
+                        <i>Inicio:&nbsp;</i>Agosto&nbsp;
+                        2019                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2019
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Son preocupantes los resultados arrojados con relacióna las pruebas saber 3. °,5. ° y 9, °,
+aplicadas por el Instituto Colombiano para la Evaluación de la Educación (ICFES) ya que al
+tener como objetivo ser el país más educado para el año 2025 no estamos cumpliendo con
+las expectativas necesarias para alcanzarlo.
+El promedio nacional con relación a la lectura ha estado disminuyendo cuando se
+esperaba un aumento significativo y según las tablas de clasificación que maneja este ente
+que mide el nivel académico de los colombianos, los estudiantes no alcanzan a llegar al
+nivel satisfactorio. Esto significa que la mayoría de los estudiantes del país apenas son
+capaces de comprender y explicar los elementos de la estructura cohesiva, el nivel de
+oraciones y párrafos de textos cortos.
+Aunque la baja comprensión lectora a nivel nacional no es el único problema que agobia
+en la educación de nuestro país, debemos tomar conciencia de esta problemática y de la
+repercusión cognitiva que tiene en nuestra vida como ciudadanos ya que la criticidad se
+gana a través del proceso de lectura.
+En la institución educativa Alfonso López Pumarejo se observa que los estudiantes
+recorren los diversos grados con apatía por la lectura y que cada vez que deben iniciar este
+proceso establecido por el docente muestran su desmotivación, la cual se intensifica cuando
+
+ven los resultados de exámenes y de talleres de lectura que se realizan en el plantel
+educativo.
+
+Se puede afirmar que todo empieza y se posa en la desmotivación de los estudiantes, por
+lo que a pesar de que el plantel cuenta con una amplia biblioteca a su disposición, son muy
+pocos los que hacen uso del servicio de préstamo de libros o realizan las lecturas asignadas
+en el aula a conciencia, es por ello que este proyecto tiene como fin motivar a los
+estudiantes a reconocer la importancia de tener una alta compresión lectora y por
+consiguiente fomentar el amor por la lectura y la comprensión de textos.
+Con lo anterior no se suprimirá en su totalidad la apatía y la desmotivación que los
+estudiantes alfonsistas tienen por la lectura, pero sí en un porcentaje considerable, y a través
+de diversas actividades el estudiante se sentirá atraído para que no sea una carga el hecho
+de tener que leer, sino más bien un vehículo que lo introduzca en el maravilloso mundo de
+la lectura.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        El periódico mural como herramienta didáctica para promover la participación estudiantil a través del aprendizaje significativo en la institución Loperena Garupal¿<br>
+                        <i>Inicio:&nbsp;</i>Marzo&nbsp;
+                        2019                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2019
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                             A través de siguiente proyecto de intervensión se busca  la participación activa de la comunidad educativa  del Colegio Valle Meza en el  uso del periódico mural como estrategia didáctica  para promover el aprendizaje significativo  y que exista una mayor participación en todos los eventos programados por la I.E<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        La creación de infografías como estrategia para fortalecer la interpretación textual en los estudiantes de básica secundaria del colegio Alfonso López Pumarejo <br>
+                        <i>Inicio:&nbsp;</i>Agosto&nbsp;
+                        2018                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2018
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            La creación de infografías como estrategia para fortalecer la interpretación textual en los estudiantes de básica secundaria del colegio Alfonso López Pumarejo  fue el proyecto que se ejecuto en la institución como una forma de intervenir la problemática presentada por los estudiantes  en sus procesos de analizar, e interpretar textos con diferentes intenciones comunicativas.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        ¿La biografía como método para fortalecer la producción textual y las relaciones interpersonales de los estudiantes dela institución educativa Alfonso López Pumarejo <br>
+                        <i>Inicio:&nbsp;</i>Marzo&nbsp;
+                        2019                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2019
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            ¿La biografía como método para fortalecer la producción textual y las relaciones interpersonales de los estudiantes dela institución educativa Alfonso López Pumarejo, este proyecto de intervesíon busco mejorar en gran medida la producción textual, pero los padres de familia y toda la comunidad tuvo una gran participación  que marcó la sensibilidad de los padres y  de los alumnos, logrando ademas que los estudiantes pudieran hacer grandes producciones.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Extensi&oacute;n y responsabilidad social CTI&nbsp;<br>
+                        ¿culture around the world¿ como estrategia didáctica para la enseñanza del inglés en los estudiantes de la institución Educativa Técnica la Esperanza jornada de la tarde¿<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2019                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Junio&nbsp;
+                        2019
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            
+En Colombia la enseñanza del inglés ha tenido gran importancia en el ámbito educativo, teniendo
+como referencia que al dominarlo gran parte de la población es lo que conlleva a establecer lazos
+interpersonales, económicos, políticos y sociales desde distintas partes del mundo. Cabe resaltar que la
+comunicación es indispensable en el ser humano y que por medio de ella logramos transmitir la
+cultura, historia y experiencias de una sociedad. Es por ello que últimamente el inglés ha tomado gran
+fuerza en las instituciones educativas de Colombia debido a la implementación del programa nacional
+de bilingüismo del ministerio de educación llamado ¿Colombia Bilingüe¿ donde se pretende tomar el
+inglés como lengua extranjera y hacer uso de ella como una estrategia para la competitividad.
+Sin embargo, la falta de interés por parte de los estudiantes para adquirir el idioma inglés se ha
+convertido en un factor común en las instituciones tanto de la ciudad como en nuestro país,
+evidenciando el bajo nivel de bilingüismo que existe en la población vallenata, es por ello que el
+cuerpo docente presenta quejas al momento de enseñar dicha lengua extranjera debido a que los
+resultados que recogen no son los mejores por lo difícil que suele ser para cada uno de los estudiantes
+aprender una segunda lengua, la cual no está presente en su contexto.
+Comúnmente, lo que conlleva a desmotivar a los estudiantes en el aprendizaje de una segunda
+lengua es la insistencia en el uso de la gramática por parte del docente que no se centra en la
+comunicación, lo cual debe ser el propósito fundamental de adquirir un nuevo idioma según el
+enfoque natural, el cual propone que para que el estudiante posea un aprendizaje significativo debe
+desarrollarse en un entorno favorable y que vaya de la mano de lo que se está aprendiendo; sin
+embargo, debemos tener en cuenta que para aprender un idioma, debemos conocer de la cultura de
+este, adentrarse en ella para así aprender sobre la misma.
+
+En la actualidad, disponemos de una gran variedad de recursos, estos nos deben servir para
+transmitir la cultura del idioma que estamos enseñando, en este caso, el inglés. El uso de la música, la
+literatura, el cine, etc., va a causar en los alumnos una gran aceptación y un aumento en su motivación
+respecto al aprendizaje del inglés.
+Ahora bien, esta problemática no es ajena en la Institución Educativa Técnico la Esperanza, donde
+se identificaron deficiencias que inciden en el bajo desempeño académico de los estudiantes en la
+asignatura de inglés, lo que nos motiva a desarrollar un proyecto que permita fortalecer las habilidades
+comunicativas a través de la implementación de la cultura de los países de habla inglesa como
+elemento motivador para los estudiantes de esta institución en la jornada de la tarde, donde el docente
+de inglés debe intentar fomentar en sus estudiantes el conocimiento de la cultura de estos países.
+Podemos hablar de un proceso de interacción donde el estudiante sea capaz de desarrollar sus propias
+interpretaciones desde las relaciones que hay entre la cultura materna y la lengua que se desea
+aprender, puesto que para aprender un lengua, se debe tener un mínimo conocimiento acerca de los
+hablantes, las costumbre y tradiciones de la misma.
+Teniendo en cuenta nuestro planteamiento del problema, nos formulamos la siguiente pregunta:
+¿De qué manera la cultura de los países de habla inglesa servirá como elemento motivador para
+fortalecer las habilidades comunicativas del idioma inglés tales como speaking y listening?<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

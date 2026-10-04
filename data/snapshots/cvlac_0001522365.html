@@ -1,0 +1,3155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=90C138B9F543F0B2BA97B20D55EDE888" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                <tr>    
+                                    <td colspan="2" class="messageText"><b>Par evaluador reconocido por Minciencias.</b></td>                            
+                                </tr>                        
+                                
+                                
+                                    <tr>
+                                        <td>Categor&iacute;a</td>
+                                        <td>
+                                            Investigador Junior (IJ) con vigencia
+                                            
+                                                hasta la publicación de los resultados de la siguiente convocatoria
+                                                
+                                            
+                                        </td>
+                                    </tr>
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        Adalberto José&nbsp;Vides&nbsp;Redondo
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>VIDES REDONDO, ADALBERTO JOSÉ</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            Universidad Privada Dr. Rafael Belloso Chacín<br />
+                            Gerencia de Proyectos de Investigación y Desarrollo<br />
+                            Septiembrede2013 - Juliode 2015<br />
+                            APRENDIZAJE TECNOLÓGICO EN LOS CENTROS REGIONALES DE EDUCACIÓN SUPERIOR DEL DEPARTAMENTO DEL CESAR, COLOMBIA.</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD DEL MAGDALENA<br />
+                            INGENIERIA PESQUERA<br />
+                            Juliode1992 - Diciembrede 2000<br />
+                            ELABORACIÓN DE ANTIPASTO DE PESCADO COMO ALTERNATIVA DE CONSUMO CON BASE EN LA ESPECIE OJO GORDO 
+Selar crumenophthalmus, Bloch 1797
+</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Técnico - nivel medio</b>
+                            SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                            ESPECIALIZACIÓN TÉCNICA EN PEDAGOGÍA Y ORIENTACIÓN DE LA FORMACIÓN PROFESIONAL INTEGRAL<br />
+                            Febrerode2012 - Juniode 2012<br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Secundario</b>
+                            COLEGIO NACIONAL LOPERENA<br />
+                            <br />
+                            Febrerode1985 - Diciembrede 1991<br />
+                            </td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3>Formaci&oacute;n Complementaria</h3></td>
+                            </tr>   
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Servicio Nacional de Aprendizaje-SENA<br />
+                        ESTRATEGIA Y PROCESOS DE ADMINISTRACIÓN DE CONOCIMIENTO<br />
+                        Agostode2008 - Septiembrede 2008<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        FORTALECIMIENTO DE LA TECNOLOGÍA EN LA EDUCACIÓN<br />
+                        Juniode2010 - Juliode 2010<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA C.D.T.I. VALLE<br />
+                        MANEJO DE HERRAMIENTAS OFIMATICAS MICRO SOFT EXCEL.<br />
+                        Febrerode2007 - Marzode 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Servicio Nacional De Aprendizaje Atlantico<br />
+                        LA NUEVA ECONOMÍA Y ADMINISTRACIÓN DEL CONOCIMIENTO<br />
+                        Juliode2010 - Agostode 2010<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        NUEVAS TECNICAS DE LA INFORMACION Y LA COMUNICACIÓN APLICADAS A LA FORMACION<br />
+                        Diciembrede2005 - Enerode 2006<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Servicio Nacional De Aprendizaje Atlantico<br />
+                        CREATIVIDAD PARA LA SOLUCION DE CONFLICTOS LABORALES.<br />
+                        Enerode2007 - Marzode 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD POPULAR DEL CESAR<br />
+                        MANEJO DE LA PLATAFORMA MOODLE<br />
+                        Juniode2008 - Agostode 2008<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Servicio Nacional De Aprendizaje Sede Popayan<br />
+                        ASPECTOS PEDAGOGICOS, TECNOLOGICOS Y ADMINISTRATIVOS PARA LA GESTION DE LA FORMACION EN AMBIENTES VIRTUALES DE APRENDIZAJE<br />
+                        Febrerode2007 - Mayode 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        CENTRO BIOTECNOLOGICO DEL CARIBE - SENA - REGIONAL CESAR<br />
+                        PISCICULTURA<br />
+                        Abrilde2007 - Mayode 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Servicio Nacional De Aprendizaje Regional Antioquia<br />
+                        POLÍTICAS DE SEGURIDAD ALIMENTARIA Y NUTRICIONAL EN COLOMBIA<br />
+                        Juniode2010 - Agostode 2010<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Servicio Nacional De Aprendizaje Regional Bolivar - Sena<br />
+                        PROYECTOS DE ADMINISTRACIÓN DE CONOCIMIENTO<br />
+                        Juniode2010 - Agostode 2010<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Servicio Nacional de Aprendizaje-SENA<br />
+                        SISTEMA DE GESTIÓN AMBIENTAL SGA NORMA NTC ISO 14001 04<br />
+                        Agostode2007 - Septiembrede 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        ASOCIACIÓN NACIONAL DE ICTIOLOGOS<br />
+                        3 SIMPOSIO COLOMBIANO DE ICTIOLOGIA<br />
+                        Agostode1996 - Agostode 1996<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Corporacion Autonoma Regional Del Magdalena<br />
+                        TERCER SIMPOSIO NACIONAL SOBRE MEDIO AMBIENTE Y ECOTURISMO.<br />
+                        Septiembrede1997 - Septiembrede 1997<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        ESCUELA AMBIENTAL DEL CESAR Y OFICINA DE GESTION AMBIENTAL Y AGROPECUARIA D<br />
+                        SEMINARIO TALLER SOBRE FORMULACION DE PROYECTOS AMBIENTALES.<br />
+                        Octubrede2003 - Octubrede 2003<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Servicio Nacional de Aprendizaje-SENA<br />
+                        AGROECOLOGÍA Y DESARROLLO RURAL<br />
+                        Juniode2007 - Juliode 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Servicio Nacional de Aprendizaje-SENA<br />
+                        OPRERACION DE SISTEMAS DE POTABILIZACION DE AGUA<br />
+                        Juniode2007 - Juliode 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Servicio Nacional De Aprendizaje Sena Regional Cesar<br />
+                        SEMINARIO DE ACTUALIZACION DE BIOLOGIA Y TAXONOMIA DE LOS PECES CONTINENTALES<br />
+                        Mayode2007 - Juniode 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Servicio Nacional De Aprendizaje Sena Regional De Boyacá<br />
+                        PROTECCION Y CONSERVACION DE LOS ALIMENTOS<br />
+                        Agostode2007 - Septiembrede 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Servicio Nacional De Aprendizaje Sede Ibagué<br />
+                        CONTROL DE CALIDAD DE PRODUCTOS CÁRNICOS<br />
+                        Diciembrede2011 - Enerode 2012<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Servicio Nacional De Aprendizaje Sede Popayan<br />
+                        INDUCCION A PROCESOS PEDAGOGICOS<br />
+                        Septiembrede2007 - Octubrede 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Servicio Nacional De Aprendizaje Sena - Regional Quindío<br />
+                        ASESORÍA PARA LA APREHENSIÓN DE PROCESOS TECNOLÓGICOS<br />
+                        Septiembrede2007 - Octubrede 2007<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Servicio Nacional De Aprendizaje Sena Regional De Boyacá<br />
+                        ESTRATEGIAS Y MEDIOS PARA EL APRENDIZAJE DE TECNOLOGIAS<br />
+                        Marzode2006 - Abrilde 2006<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        SERVICIO NACIONAL DE APRENDIZAJE SENA<br />
+                        CREACION DE MODELOS DE ESTRATEGIAS DIDACTICAS INNOVADORAS<br />
+                        Agostode2008 - Septiembrede 2008<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Servicio Nacional De Aprendizaje Atlantico<br />
+                        DISEÑO DE INSTRUMENTOS DE EVALUACIÓN<br />
+                        Juniode2010 - Juliode 2010<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Servicio Nacional De Aprendizaje Atlantico<br />
+                        DISEÑO DE PROGRAMAS DE FORMACIÓN CON BASE EN COMPETENCIAS<br />
+                        Juniode2011 - Juliode 2011<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Otros</b>
+                        ICDL International Computer Driving Licence<br />
+                        CERTIFICACIÓN INTERNACIONAL EN LOS MÓDULOS: CONCEPTOS BÁSICOS DE LAS TIC, HOJA DE CALCULO, PRESENTACIONES, E INFORMACIÓN Y COMUNICACIONES.<br />
+                        Juniode2010 - Diciembrede 2010<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Otros</b>
+                        UNIVERSIDAD AUTONOMA DE BUCARAMANGA<br />
+                        DIPLOMADO EN: ESTRATEGIAS DIDACTICAS Y MEDIOS DIGITALES EN EDUCACION VIRTUAL<br />
+                        Juniode2010 - Diciembrede 2010<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Otros</b>
+                        MINISTERIO DE EDUCACIÓN NACIONAL, CENTRO COLOMBO AMERICANO MEDELLIN<br />
+                        CERTIFICACIÓN NIVEL A1. ENGLISH ENHANCEMENT PROGRAM 2008-2009, A LANGUAGE TRAINING INTERVENTION FOR TEACHERS OF INSTITUTIONS OF HIGHER EDUCATION IN COLOMBIA<br />
+                        Septiembrede2008 - Diciembrede 2008<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Otros</b>
+                        CENTRO BIOTECNOLOGICO DEL CARIBE - SENA - REGIONAL CESAR<br />
+                        ORGANIZACIÓN SOCIOEMPRESARIAL Y COPERATIVISMO BASICO.<br />
+                        Octubrede2003 - Diciembrede 2003<br />
+                        </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Febrero de 2016            
+                        Diciembre de 2024<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>&nbsp;horas Semanales
+                        Agosto de 2007            
+                        Diciembre de 2015<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>CENTRO BIOTECNOLOGICO DEL CARIBE - SENA - REGIONAL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Septiembre de 2003            
+                        Junio de 2006<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>COORPORACIÓN AUTONOMA REGIONAL DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>6&nbsp;horas Semanales
+                        Noviembre de 2002            
+                        Mayo de 2003<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD DEL MAGDALENA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Junio de 2002            
+                        Octubre de 2002<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Instituto Nacional De Pesca Y Acuicultura - Inpa</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Marzo de 2002            
+                        Mayo de 2002<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD DEL MAGDALENA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Mayo de 2000            
+                        Junio de 2001<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Ingeniería de Producción</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="5"><h3 >Idiomas</h3></td>
+                            </tr>    
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td><b>Habla</b></td>
+                                <td><b>Escribe</b></td>
+                                <td><b>Lee</b></td>
+                                <td><b>Entiende</b></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;Español</li></td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>                                                        
+                </tr>    
+                
+                            <tr>
+                                <td><li>&nbsp;Inglés</li></td>
+                    <td>Aceptable</td>
+                    <td>Aceptable</td>
+                    <td>Bueno</td>
+                    <td>Aceptable</td>                                                        
+                </tr>    
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;1.	INNOVACIÒN  Y DESARROLLO  DE PRODUCTOS ALIMENTARIOS, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;3.	PROCESOS BIOTECNOLOGICOS, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;2.	DESARROLLO EMPRESARIAL EN EL SECTOR AGROINDUSTRIAL, <i>Activa:</i>Si</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Cursos de corta duraci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Perfeccionamiento</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            ADALBERTO JOSE VIDES REDONDO,                    
+                                            
+                            DISEÑO CURRICULAR BAJO EL ENFOQUE DE COMPETENCIAS LABORALES Y CICLOS PROPEDÉUTICOS,
+                            <i>Finalidad: </i>
+                            . En: Colombia&nbsp;
+                            ,2010,&nbsp;
+                            ,.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;0 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            ADALBERTO JOSE VIDES REDONDO,                    
+                                            
+                            DIPLOMADO EN PEDAGOGÍA PARA PROFESIONALES NO LICENCIADOS Y LICENCIADOS,
+                            <i>Finalidad: </i>¿	Contribuir al mejoramiento del desempeño docente a través de la apropiación de fundamentos pedagógicos. ¿	Conocer y aplicar las estrategias didácticas para su práctica docente. ¿	Actualizar al profesional en la gestión y administración docente  ¿	Desarrollar competencias de planificación curricula
+                            . En: Colombia&nbsp;
+                            ,2016,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;4 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            ADALBERTO JOSE VIDES REDONDO,                    
+                            
+                            Diseño, implementación y evaluación de un sistema para la obtención de información biométrica de Tilapia Roja (Oreochromis sp), mediante el tratamiento de imágenes en ambientes de cultivo&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2019.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): ADALBERTO JOSE VIDES REDONDO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            ADALBERTO JOSE VIDES REDONDO,                    
+                            
+                            EVALUACION DE DIETAS EXPERIMENTALES PARA CACHAMA BLANCA (Piaractus brachypomus) EN FASE DE LEVANTE ADOPTANDO MULTIPLES NIVELES DE INCLUSION DE HARINA DE MORINGA (Moringa oleífera).&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA AGROINDUSTRIAL,
+                            &nbsp;2018.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): ADALBERTO JOSE VIDES REDONDO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            ADALBERTO JOSE VIDES REDONDO,                    
+                            
+                            OBTENCIÓN DE COLAGENO A PARTIR DE SUBPRODUCTOS PROVENIENTES DEL PROCESAMIENTO DE TILAPIA sp (Oreochromis Sp) EN LA CUENCA DEL MAGDALENA&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Ingeniería Agroindustrial,
+                            &nbsp;2019.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Carlos Antonio Fontalvo Pérez   Felipe Andrés guzmán Ditta  &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): ADALBERTO JOSE VIDES REDONDO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            ADALBERTO JOSE VIDES REDONDO,                    
+                            
+                            EVALUACIÓN DEL EFECTO DEL TRATAMIENTO TÉRMICO Y LA CONCENTRACIÓN DE ÁCIDO ACÉTICO Y SALSA DE TOMATE EN LA VIDA ÚTIL Y ACEPTABILIDAD DE UN ANTIPASTO ELABORADO CON LA ESPECIE CACHAMA BLANCA (Piaractus brachypomus)&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Ingeniería Agroindustrial,
+                            &nbsp;2016.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            LIZETH PABÓN OCAMPO&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): ADALBERTO JOSE VIDES REDONDO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            ADALBERTO JOSE VIDES REDONDO,                    
+                            
+                            ESTUDIO DE FACTIBILIDAD TÉCNICA, FINANCIERA Y AMBIENTAL PARA EL ESTABLECIMIENTO DE PROCESOS PRODUCTIVOS ACUÍCOLAS EN EL EMBALSE DEL RIO RANCHERÍA&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Ingeniería Agroindustrial,
+                            &nbsp;2017.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            YARLENIS DANITH POLO KING&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): ADALBERTO JOSE VIDES REDONDO,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Jurado en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            ADALBERTO JOSE VIDES REDONDO,                    
+                            
+                            <i>Titulo:&nbsp;</i>APROVECHAMIENTO DE LAS PERDIDAS POSTCOSECHAS DEL MANGO (Mangifera indica l) COMO SUSTITUTO DEL MAÍZ (Zea mays) EN LA ELABORACIÓN DE DIETAS PARA LA CACHAMA BLANCA (Piáractus brachypomus) EN EL SENA C.B.C.                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA AGROINDUSTRIAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>FRANCISCO JAVIER PEÑA SILVA WILLIAM DAVID GALINDO GOMEZ &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            ADALBERTO JOSE VIDES REDONDO,                    
+                            
+                            <i>Titulo:&nbsp;</i>APROVECHAMIENTO DE LOS RESIDUOS GENERADOS EN EL PROCESO DE PRODUCCION DE CARNE DE JAIBA (Callinectes sapidus) EN LA ELABORACION DE UN CALDO DESHIDRATADO PARA CONSUMO HUMANO                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> INGENIERIA AGROINDUSTRIAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>EMERSON DAVID RODRIGUEZ MAESTRE &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            ADALBERTO JOSE VIDES REDONDO,                    
+                            
+                            <i>Titulo:&nbsp;</i>EVALUACIÓN DEL EFECTO ANTIOXIDANTE Y BACTERICIDA DE ACEITES ESENCIALES DE LA PLANTA TOMILLO (Thymus vulgaris) Y LIMON (Citrus × limon) SOBRE LA CALIDAD DEL SALCHICHON CERVECERO                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> Ingeniería Agroindustrial&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>TATIANA CAROLINA DURAN COTES JORGE LEONARDO SANCHEZ MAESTRE &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            ADALBERTO JOSE VIDES REDONDO,                    
+                            
+                            <i>Titulo:&nbsp;</i>IMPLEMENTACION DE LAS BUENAS PRACTICAS DE MANUCFACTURA DE ACUERDO A LA RESOLUCION 2674 DE 2013 Y DECRETO 1500 DE 2007 EN LAS PLANTAS PILOTOS ADSCRITAS AL PROGRAMA DE INGENIERIA AGROINDUSTRIAL DE LA UNIVERSIDAD POPULAR DEL CESAR                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> Ingeniería Agroindustrial&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>SANDY YIRETH OÑATE ARENGA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            ADALBERTO JOSE VIDES REDONDO,                    
+                            
+                            <i>Titulo:&nbsp;</i>EVALUACION DE LA CAPACIDAD EMULSIONANTE Y RETENCION DE AGUA DE LA CARNE DE SAINO (Pecari Tajacu) PARA SER USADA COMO MATERIA PRIMA EN LA ELABORACION DE PRODUCTOS CARNICOS EMULSIONADOS TIPO SALCHICHA                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> Ingeniería Agroindustrial&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Yelitza Carolina Meriño Mejía   &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a></td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Congreso Internacional de Investigación Academia Journals Oaxaca 2020&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2020-06-17 00:00:00.0,&nbsp;
+                                                    2020-06-19 00:00:00.0 &nbsp;
+                                                    en Oaxaca de Juárez &nbsp; - Universidad Autónoma Benito Juárez de Oaxaca &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>ELABORACIÓN DE BOLSAS PLÁSTICAS BIODEGRADABLES A PARTIR DE LA MEZCLA DE ALMIDONES DE RESIDUOS ORGÁNICOS DE YUCA (Manihot Sculenta) Y PLÁTANO MACHO (Mussa Paradisiaca)
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>ELABORACIÓN DE BOLSAS PLÁSTICAS BIODEGRADABLES A PARTIR DE LA MEZCLA DE ALMIDONES DE RESIDUOS ORGÁNICOS DE YUCA (Manihot Sculenta) Y PLÁTANO MACHO (Mussa Paradisiaca)
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ADALBERTO JOSE VIDES REDONDO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>CONGRESO INTERNACIONAL DE INVESTIGACIÓN DE ACADEMIA JOURNALS CHETUMAL 2025&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2025-05-21 00:00:00.0,&nbsp;
+                                                    2025-05-23 00:00:00.0 &nbsp;
+                                                    en Chetumal &nbsp; - México - Quintana Roo - Chetumal &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Uso de Ordenadores Gráficos en el Análisis de Información en Talleres de Lectura Crítica
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ADALBERTO JOSE VIDES REDONDO
+                                                        <i>Rol en el evento: </i>Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>CONGRESO INTERNACIONAL DE INVESTIGACIÓN DE ACADEMIA JOURNALS CHETUMAL 2025&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2025-05-21 00:00:00.0,&nbsp;
+                                                    2025-05-23 00:00:00.0 &nbsp;
+                                                    en Chetumal &nbsp; - México - Quintana Roo - Chetumal &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Alternativas para el Aprovechamiento de Residuos de Alimentos Mediante la Producción de Biogás
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ADALBERTO JOSE VIDES REDONDO
+                                                        <i>Rol en el evento: </i>Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>IX JORNADA DE SOCIALIZACIÓN DE RESULTADOS DE INVESTIGACIÓN&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2025-11-05 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - UNIVERSIDAD POPULAR DEL CESAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>DISMINUCION DE PRODUCTOS NO CONFORMES EN LOS PROCESOS DE LOGÍSTICA Y DISTRIBUCIÓN, MEDIANTE LA METODOLOGIA SIX SIGMA EN LA EMPRESA AVSA S.A.
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>DISMINUCION DE PRODUCTOS NO CONFORMES EN LOS PROCESOS DE LOGÍSTICA Y DISTRIBUCIÓN, MEDIANTE LA METODOLOGIA SIX SIGMA EN LA EMPRESA AVSA S.A.
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ADALBERTO JOSE VIDES REDONDO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>5</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>IX JORNADA DE SOCIALIZACIÓN DE RESULTADOS DE INVESTIGACIÓN&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2025-11-05 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; - UNIVERSIDAD POPULAR DEL CESAR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>ROL DE LA UNIVERSIDAD EN EL PROCESO DE TRANSFERENCIA DEL CONOCIMIENTO PARA COMPAÑIAS DEL SECTOR AGROINDUSTRIAL
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>ROL DE LA UNIVERSIDAD EN EL PROCESO DE TRANSFERENCIA DEL CONOCIMIENTO PARA COMPAÑIAS DEL SECTOR AGROINDUSTRIAL
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ADALBERTO JOSE VIDES REDONDO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>6</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>1er Congreso Internacional Multidisciplinario de Investigación y Tecnología para el Conocimiento&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2022-06-06 00:00:00.0,&nbsp;
+                                                    2022-10-09 00:00:00.0 &nbsp;
+                                                    en Guayaquil &nbsp; - Universidad de Guayaquil &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>DISEÑO INSTRUCCIONAL PARA LA ESTRUCTURACIÓN DE OFERTA EDUCATIVA A NIVEL TÉCNICO Y TECNOLÓGICO, A DISTANCIA EN EL ÁREA ACUÍCOLA
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ADALBERTO JOSE VIDES REDONDO
+                                                        <i>Rol en el evento: </i>Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>7</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>CONGRESO INTERNACIONAL DE INVESTIGACIÓN DE ACADEMIA JOURNALS, MORELIA 2023&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2023-05-08 00:00:00.0,&nbsp;
+                                                    2023-05-09 00:00:00.0 &nbsp;
+                                                    en Morelia &nbsp; - a Universidad Nova Spania y con el Centro de Investigación PYSEIP (Productos y Servicios Estratégicos para Investigación y Posgrado) &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>La Gestión por Competencias como Factor Determinante para la Generación de Políticas Públicas Orientadas al Emprendimiento
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Conferencia
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>La Gestión por Competencias como Factor Determinante para la Generación de Políticas Públicas Orientadas al Emprendimiento
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>La Gestión por Competencias como Factor Determinante para la Generación de Políticas Públicas Orientadas al Emprendimiento
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ADALBERTO JOSE VIDES REDONDO
+                                                        <i>Rol en el evento: </i>Ponente magistral
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>8</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Congreso Internacional de Investigación Academia Journals Morelia 2020&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2020-05-13 00:00:00.0,&nbsp;
+                                                    2020-05-15 00:00:00.0 &nbsp;
+                                                    en Morelia &nbsp; - Universidad Nova Spania &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>RELACIÓN LONGITUD PESO Y FACTOR DE CONDICIÓN DE LA TILAPIA NILÓTICA (Oreochromis niloticus), EN CONDICIONES DE CULTIVO A ALTAS DENSIDADES EN MONTERÍA, COLOMBIA
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ADALBERTO JOSE VIDES REDONDO
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                ADALBERTO JOSE VIDES REDONDO,                    
+                                    
+                CARLOS RAMON VIDAL TOVAR,                    
+                                    
+                YIMMIS ARTURO PEREZ ROJAS,                    
+                                    
+                CLARIVEL PARRA DITTA,                    
+                                    
+                YIMY GORDON HERNANDEZ,                    
+                
+                "Biometrical Optimization System for Red Tilapia (Oreochromis sp.) through Image Processing in Growing Environments"
+                . En: Inglaterra&nbsp;<br>
+                MIGRATION LETTERS&nbsp;
+                <i>ISSN:</i>&nbsp;1741-8984&nbsp;
+                <i>ed:</i>&nbsp;Transnational Press London Ltd<br>
+                <i>v.</i>20
+                <i>fasc.</i>S7
+                p.105
+                - 117
+                ,2023,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                red Tilpia,                    
+                                    
+                UML Diagrams,                    
+                                    
+                Use Cases,                    
+                                    
+                biometrics,                    
+                                    
+                Entry Relationship,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                ADALBERTO JOSE VIDES REDONDO,                    
+                                    
+                CARLOS RAMON VIDAL TOVAR,                    
+                                    
+                YIMY GORDON HERNANDEZ,                    
+                
+                "EVALUATION OF A SILAGE PRODUCED BY MIXTURE OF RESIDUES OF CASSAVA (MANIHOT ESCULENTA), POTATO (SOLANUM TUBEROSUM), EGGPLANT (SOLANUM MELONGENA) AND WATERMELON (CITRULLUS LANATUS), GENERATED IN SUPERMARKETS"
+                . En: Colombia&nbsp;<br>
+                JOURNAL OF NAMIBIAN STUDIES&nbsp;
+                <i>ISSN:</i>&nbsp;2197-5523&nbsp;
+                <i>ed:</i>&nbsp;Otjivanda Presse.Bochum<br>
+                <i>v.</i>33
+                <i>fasc.</i>N/A
+                p.2625
+                - 2638
+                ,2023,
+                <i>&nbsp;DOI:&nbsp;</i>10.59670/jns.v33i.893
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Fermentation,                    
+                                    
+                silage,                    
+                                    
+                Vegetable Waste,                    
+                                    
+                Animal Feed,                    
+                                    
+                Supermarkets,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                ADALBERTO JOSE VIDES REDONDO,                    
+                                    
+                CARLOS RAMON VIDAL TOVAR,                    
+                                    
+                YIMY GORDON HERNANDEZ,                    
+                                    
+                YIMMIS ARTURO PEREZ ROJAS,                    
+                                    
+                CLARIVEL PARRA DITTA,                    
+                                    
+                INDIRA VIDES REDONDO,                    
+                
+                "RELATION OF LENGTH, WEIGHT AND CONDITION FACTOR OF NILOTIC TILAPIA IN HIGH DENSITY CROPS"
+                . En: Inglaterra&nbsp;<br>
+                REMITTANCES REVIEW&nbsp;
+                <i>ISSN:</i>&nbsp;2059-6596&nbsp;
+                <i>ed:</i>&nbsp;Transnational Press London Ltd<br>
+                <i>v.</i>8
+                <i>fasc.</i>4
+                p.2573
+                - 2583
+                ,2023,
+                <i>&nbsp;DOI:&nbsp;</i>10.33182/rr.v8i4.178
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Condition factor, biometrics, water quality, ,                    
+                                    
+                growth,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                ADALBERTO JOSE VIDES REDONDO,                    
+                                    
+                CARLOS RAMON VIDAL TOVAR,                    
+                                    
+                YIMY GORDON HERNANDEZ,                    
+                                    
+                CLARIVEL PARRA DITTA,                    
+                                    
+                YIMMIS ARTURO PEREZ ROJAS,                    
+                                    
+                ALEJANDRA SOFIA DAZA ARANDA,                    
+                
+                "Sensory Considerations Generated by Biochemical Changes during the Fermentation of the Cocoa Almond"
+                . En: Inglaterra&nbsp;<br>
+                MIGRATION LETTERS&nbsp;
+                <i>ISSN:</i>&nbsp;1741-8984&nbsp;
+                <i>ed:</i>&nbsp;Transnational Press London Ltd<br>
+                <i>v.</i>20
+                <i>fasc.</i>S7
+                p.88
+                - 104
+                ,2023,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Cocoa fermentetion,                    
+                                    
+                Cocoa bean,                    
+                                    
+                 physicochemical  characteristics,                    
+                                    
+                cocoa,                    
+                                    
+                biochemical characteristics,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                ADALBERTO JOSE VIDES REDONDO,                    
+                                    
+                CARLOS RAMON VIDAL TOVAR,                    
+                                    
+                ELIANA MARGARITA MOSCOTE VIDES,                    
+                
+                "Evaluation of the coughing power of the Opuntia ficus indica for removal of turbidity in waters of the Guatapuri River (Colombian Caribbean)"
+                . En: Colombia&nbsp;<br>
+                IOP CONFERENCE SERIES MATERIALS SCIENCE AND ENGINEERING&nbsp;
+                <i>ISSN:</i>&nbsp;1757-899X&nbsp;
+                <i>ed:</i>&nbsp;IOP Publishing Ltd<br>
+                <i>v.</i>1
+                <i>fasc.</i>N/A
+                p.1
+                - 9
+                ,2020,
+                <i>&nbsp;DOI:&nbsp;</i>10.1088/1757-899X/844/1/012003
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                turbidity, Guatapuri River,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                ADALBERTO JOSE VIDES REDONDO,                    
+                                    
+                MILTON DAVID JIMENEZ SALAS,                    
+                                    
+                CARLOS RAMON VIDAL TOVAR,                    
+                                    
+                YIMY GORDON HERNANDEZ,                    
+                
+                "RELATION OF LENGTH, WEIGHT AND CONDITION FACTOR OF NILOTIC TILAPIA (Oreochromis niloticus) IN HIGH DENSITY CROPS"
+                . En: Polonia&nbsp;<br>
+                SYLWAN&nbsp;
+                <i>ISSN:</i>&nbsp;0039-7660&nbsp;
+                <i>ed:</i>&nbsp;POLSKIE TOWARZYSTWO LESNE<br>
+                <i>v.</i>164
+                <i>fasc.</i>N/A
+                p.243
+                - 255
+                ,2020,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Condition factor, biometrics, water quality, ,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                ADALBERTO JOSE VIDES REDONDO,                    
+                                    
+                CARLOS RAMON VIDAL TOVAR,                    
+                                    
+                YIMMIS ARTURO PEREZ ROJAS,                    
+                                    
+                DELAYNE PAOLA MENDOZA OLIVELLA,                    
+                                    
+                ARMANDO COTES DE ARMAS,                    
+                                    
+                MARIANA CAROLINA GOMEZ URDIALES,                    
+                
+                "PAPEL DE LA UNIVERSIDAD EN LOS PROCESOS DETRANSFERENCIA DE CONOCIMIENTO PARA EMPRESAS EN ELAGRO-SECTOR INDUSTRIAL"
+                . En: Grecia&nbsp;<br>
+                SCIENTIFIC CULTURE&nbsp;
+                <i>ISSN:</i>&nbsp;2407-9529&nbsp;
+                <i>ed:</i>&nbsp;Henan University<br>
+                <i>v.</i>11
+                <i>fasc.</i>4
+                p.1267
+                - 1277
+                ,2025,
+                <i>&nbsp;DOI:&nbsp;</i>10.5281/zenodo.11042598
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Competitividad,                    
+                                    
+                Innovation,                    
+                                    
+                erencia de Conocimient,                    
+                                    
+                Value Chain,                    
+                                    
+                University,                    
+                                    
+                Agronegocio,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a></td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a>        
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td colspan="2"><h3 >Capitulos de libro</h3></td>
+            </tr>
+                
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    ADALBERTO JOSE VIDES REDONDO,                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    MILTON DAVID JIMENEZ SALAS,                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    CARLOS RAMON VIDAL TOVAR,                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    YIMY GORDON HERNANDEZ,                    
+                    
+
+                    "RELACIÓN LONGITUD PESO Y FACTOR DE CONDICIÓN DE LA TILAPIA NILÓTICA (Oreochromis niloticus), EN CONDICIONES DE CULTIVO A ALTAS DENSIDADES EN MONTERÍA, COLOMBIA"
+                    Investigación en la Educación Superior: Morelia 2020
+                    . En: Estados Unidos&nbsp;
+                    <i>ISBN:</i>&nbsp;978-1-939982-58-2&nbsp;
+                    <i>ed:</i>&nbsp;
+                    <i>, v.</i>
+                    , p.1870
+                    - 1875&nbsp;
+                    
+                    ,2020
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+                    
+                    
+                    
+                    <br><b>Sectores: </b><br>
+                                            
+                    Agricultura, pecuaria, silvicultura, explotación forestal - Producción animal, incluso servicios veterinarios,                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    ADALBERTO JOSE VIDES REDONDO,                    
+                    
+
+                    "ELEMENTOS VINCULADOS A LOS COSTOS DE LA CADENA LOGÍSTICA DE UNA EMPRESA PANELERA"
+                    Ingeniería, Innovación y la Cuarta Revolución Industrial
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-958-53358-1-3&nbsp;
+                    <i>ed:</i>&nbsp;
+                    <i>, v.</i>
+                    , p.28
+                    - 48&nbsp;
+                    
+                    ,2020
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    ADALBERTO JOSE VIDES REDONDO,                    
+                    
+
+                    "GESTIÓN DE LA SEGURIDAD ALIMENTARIA PARA EL DESARROLLO SUSTENTABLE DE LOS PRODUCTORES AGRÍCOLAS"
+                    Ingeniería, Innovación y la Cuarta Revolución Industrial
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-958-53358-1-3&nbsp;
+                    <i>ed:</i>&nbsp;
+                    <i>, v.</i>
+                    , p.116
+                    - 142&nbsp;
+                    
+                    ,2020
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+
+</table>
+</td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%">
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 id="textos">Textos en publicaciones no cient&iacute;ficas</h3></td>
+            </tr>        
+               
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Otro artículo publicado - Revista de divulgación</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            ADALBERTO JOSE VIDES REDONDO,                    
+                                
+            YIMY GORDON HERNANDEZ,                    
+                                
+            CARLOS RAMON VIDAL TOVAR,                    
+            
+            "La produccion de café especial y cacao, ventajas competitivas para el desarrollo sostenible de la empresa asociativa rural"
+            En: Brasil. 
+            2022.
+            STUDIES IN SOCIAL SCIENCES REVIEW.
+            <i>ISSN:</i>&nbsp;2764-085X 
+            <i>p.</i>147 
+            - 165
+            v.3
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            sistema agroforestal,                    
+                                
+            poscosecha,                    
+                                
+            Producción  primaria,                    
+                                
+            transformación,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+   
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Otro artículo publicado - Revista de divulgación</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            ADALBERTO JOSE VIDES REDONDO,                    
+                                
+            ALEJANDRA SOFIA DAZA ARANDA,                    
+            
+            "INCIDENCIA DE LA LECTURA CRÍTICA EN EL PROCESO DE APRENDIZAJE"
+            En: Colombia. 
+            2020.
+             REVISTA LASIRC.
+            <i>ISSN:</i>&nbsp;2711-1814 
+            <i>p.</i>180 
+            - 187
+            v.1
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            aprendizaje significativo,                    
+                                
+            cognitivo,                    
+                                
+            contexto,                    
+                                
+            lectura crítica,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Humanidades -- Otras Humanidades -- Otras Humanidades,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+   
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Otro artículo publicado - Revista de divulgación</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            ADALBERTO JOSE VIDES REDONDO,                    
+                                
+            MILTON DAVID JIMENEZ SALAS,                    
+                                
+            ALONSO AMARIS MORENO,                    
+                                
+            HERNIS MERCADO RAMOS,                    
+            
+            "DINÁMICA DEL CRECIMIENTO E ÍNDICE DE CONDICIÓN DE LA TILAPIA ROJA (Oreochromis sp), EN CONDICIONES DE CULTIVO A ALTAS DENSIDADES"
+            En: México. 
+            2020.
+            Congreso Internacional Investigación De Academia Journals.Com 2009.
+            <i>ISSN:</i>&nbsp;1946-5351 
+            <i>p.</i>2721 
+            - 2726
+            v.12
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            crecimiento,                    
+                                
+            alométrico,                    
+                                
+            biométrico,                    
+                                
+            geomembrana,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+   
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Otro artículo publicado - Revista de divulgación</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            ADALBERTO JOSE VIDES REDONDO,                    
+                                
+            MILTON DAVID JIMENEZ SALAS,                    
+                                
+            HERNIS MERCADO RAMOS,                    
+                                
+            ALONSO AMARIS MORENO,                    
+                                
+            JULIO ALFONSO RODRIGUEZ BUELVAS,                    
+                                
+            JESUS DAVID ORTIZ CHINCHILLA,                    
+                                
+            JAIME LUIS ROMERO GUTIERREZ,                    
+            
+            "DESARROLLO Y CALIBRACIÓN DE UN SOFTWARE PARA LA DETERMINACIÓN DE INFORMACIÓN BIOMÉTRICA EN LA TILAPIA ROJA, (Oreochromis sp) MEDIANTE TRATAMIENTO DE IMÁGENES"
+            En: México. 
+            2020.
+            Congreso Internacional Investigación De Academia Journals.Com 2009.
+            <i>ISSN:</i>&nbsp;1946-5351 
+            <i>p.</i>2277 
+            - 2282
+            v.12
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            Biometrías,                    
+                                
+            Factor de condición,                    
+                                
+            Factor de condición, biometrías, calidad de a,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+   
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Otro artículo publicado - Revista de divulgación</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            ADALBERTO JOSE VIDES REDONDO,                    
+            
+            "ELABORACIÓN DE BOLSAS PLÁSTICAS BIODEGRADABLES A PARTIR DE LA MEZCLA DE ALMIDONES DE RESIDUOS ORGÁNICOS DE YUCA (Manihot Sculenta) Y PLÁTANO MACHO (Mussa Paradisiaca)"
+            En: México. 
+            2020.
+            Congreso Internacional Investigación De Academia Journals.Com 2009.
+            <i>ISSN:</i>&nbsp;1946-5351 
+            <i>p.</i>408 
+            - 413
+            v.12
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            yuca, plátano, biodegradable, almidón,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Otras Ingenierías y Tecnologías,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+   
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Otro artículo publicado - Revista de divulgación</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            ADALBERTO JOSE VIDES REDONDO,                    
+            
+            "RELACIÓN LONGITUD PESO Y FACTOR DE CONDICIÓN DE LA TILAPIA NILÓTICA (Oreochromis niloticus), EN CONDICIONES DE CULTIVO A ALTAS DENSIDADES EN MONTERÍA, COLOMBIA"
+            En: México. 
+            2020.
+            Congreso Internacional Investigación De Academia Journals.Com 2009.
+            <i>ISSN:</i>&nbsp;1946-5351 
+            <i>p.</i>1 
+            - 6
+            v.12
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a>
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Documentos de trabajo</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Documento de trabajo (Working Paper)</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        ADALBERTO JOSE VIDES REDONDO,                    
+                        
+                        "MODULO DIGITAL RECURSO AGUA APLICADO A LA ACUICULTURA"
+                        En: Colombia. 
+                        2014.
+                        
+                        
+                        
+                        
+                        <i>p. </i>
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+                        
+                        
+                        
+                    </blockquote>
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Documento de trabajo (Working Paper)</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        ADALBERTO JOSE VIDES REDONDO,                    
+                        
+                        "MODULO DIGITAL INSTALACIONES Y EQUIPOS DE CULTIVOS ACUICOLAS"
+                        En: Colombia. 
+                        2015.
+                        
+                        
+                        
+                        
+                        <i>p. </i>
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+                        
+                        
+                        
+                    </blockquote>
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Documento de trabajo (Working Paper)</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        ADALBERTO JOSE VIDES REDONDO,                    
+                        
+                        "MÓDULO DIGITAL NUTRICIÓN Y ALIMENTACIÓN DE PECES CONTINENTALES"
+                        En: Colombia. 
+                        2015.
+                        
+                        
+                        
+                        
+                        <i>p. </i>
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+                        
+                        
+                        
+                    </blockquote>
+                </td>
+            </tr>
+            
+        </table>
+        </td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%">
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Otra producci&oacute;n blibliogr&aacute;fica</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+            <li>
+                <b>Producción bibliográfica - Otra producción bibliográfica - Otra</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            ADALBERTO JOSE VIDES REDONDO,                    
+                                
+            CARLOS RAMON VIDAL TOVAR,                    
+            
+            "Evaluation of the coughing power of the Opuntia ficus indica for removal of turbidity in waters of the Guatapuri River (Colombian Caribbean)"
+            En: Colombia. 
+            2020.
+            
+            
+            
+            
+            <i>p. </i>
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a>
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Productos tecnol&oacute;gicos</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+            <li><b>Producción técnica - Productos tecnológicos - Base de datos de referencia para investigacion</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            ADALBERTO JOSE VIDES REDONDO,                    
+            
+            Base de datos de estadísticas pesqueras artesanales del Caribe colombiano durante el período 1991-2002,
+            <i>Nombre comercial: </i>Contrato/registro,
+            <i>contrato/registro: </i>,
+            . En: Colombia,&nbsp;
+            ,2002,&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Naturales -- Ciencias Biológicas -- Biología Marina y del Agua,                    
+            
+            
+            
+            <br><b>Sectores: </b><br>
+                                    
+            Pesca acuicultura y maricultura,                    
+            
+
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td>
+                    
+            <li><b>Producción técnica - Productos tecnológicos - Otro </b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            ADALBERTO JOSE VIDES REDONDO,                    
+            
+            Modulo Digital de BIOLOGÍA APLICADA A LA ACUICULTURA,
+            <i>Nombre comercial: </i>,
+            <i>contrato/registro: </i>,
+            . En: Colombia,&nbsp;
+            ,2014,&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Otras Ingenierías y Tecnologías -- Alimentos y Bebidas,                    
+            
+            
+            
+
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Dinámica espacio-temporal del ecosistema de afloramiento del área Bocas de Ceniza- Punta Espada (Caribe colombiano)<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2002                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Abril&nbsp;
+                        2004
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                             objetivos: 1) Estimar los flujos de masa y energía en el ecosistema de surgencía tropical del área de estudio y caracterizar el impacto actual de las pesquerías mediante la modelación de las relaciones tróficas según la aproximación ECOPATH. como elemento para la protección y manejo de los recursos pesqueros del área. 2) Realizar un análisis comparativo de las caracterizaciones de las zonas tropicales de afloramiento. 3) Modelar el comportamiento de las variables ambientales y biológicas y las relaciones entre ellas. 4) Evaluar cambios temporales en los patrones espaciales de abundancia relativa y densidad de biomasa de los peces demersales y pelágicos, y relacionarlos de manera gráfica con la información disponible sobre los atributos ambientales. 5) Detectar las tendencias de uso de los recursos pesqueros demersales y pelágicos, en el mediano plazo y en el espacio. 6) Proponer estratégias fundamenteadas ecosistemáticamente para el uso responsable de los recursos pesqueros del área de afloramiento del norte del Caribe colombiano, con base en el análisis integrado de los resultados derivados de los anteriores objetivos. 7) Integrar la información existente sobre la biología, la distribución y las pesquerías de lso recursos demersales y pelágicos explotados en el ecosistema de afloramiento del área de estudio. 
+ <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n, desarrollo e Innovaci&oacute;n&nbsp;<br>
+                        DISEÑO Y DESARROLLO DE UN SISTEMA PARA LA DETERMINACIÓN DE LA INFORMACIÓN BIOMÉTRICA DE LA TILAPIA ROJA Orechromis sp, MEDIANTE EL TRATAMIENTO DE IMÁGENES EN AMBIENTES DE CULTIVO<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2019                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2019
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Diseño y desarrollo de un sistema para la determinación de información biométrica de la tilapia roja oreochromis sp, mediante el tratamiento de imágenes en ambientes de cultivo.<br>
+                        <i>Inicio:&nbsp;</i>Diciembre&nbsp;
+                        2018                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            La bioemtria de cultivos de peces, actualmente continua siendo practicada en muchos casos sometiendo a los peces al estres y muerte por las actividades que implica realizarlo, que incluyen el retiro de los pecesos del agua para su pesaje y medición; por lo que, entendiendo esa problemática, se hace necesario avanzar en el diseño e implementación de técnicas y/o mecanismos que posibiliten la obtención de información biométrica sin las desventajas que presenta la metodología tradicional (medición y pesaje de una muestra significativa de animales del cultivo), donde necesariamente y sin lugar a dudas se genera un impacto negativo producto a la extracción y manipulación (Acebo, 2018)
+Es por esto que la presente investigación pretende diseñar y desarrollar un sistema para la determinación de información biométrica en peces, mediante el tratamiento de imágenes en ambientes de cultivo.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

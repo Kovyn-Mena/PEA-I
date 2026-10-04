@@ -1,0 +1,3725 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=B2AC2E444E94FC09F0F1E46C98593CB1" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        Holmes Elias&nbsp;Pinto&nbsp;Avila
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>PINTO AVILA, HOLMES ELIAS</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Especialización</b>
+                            UNICESAR<br />
+                            Ingeneria<br />
+                            Febrerode2021 - Noviembrede 2022<br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD POPULAR DEL CESAR<br />
+                            INGENIERIA DE SISTEMAS<br />
+                            Juliode2005 - Juliode 2012<br />
+                            Sistema de información de gestión de procesos académicos apoyado con  redes neuronales artificiales</td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3>Formaci&oacute;n Complementaria</h3></td>
+                            </tr>   
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD EAFIT<br />
+                        CURSO DE OPTICA DIFRACTIVA<br />
+                        Enerode2005 - de 2005<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD EAFIT<br />
+                        CURSO DE OPTIMAL MARRIAGE OF WAVE AND RAY OPTICS P<br />
+                        Enerode2005 - de 2005<br />
+                        </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>50&nbsp;horas Semanales
+                        Septiembre de 2002            
+                        Septiembre de Actual<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Otro (Diseño electronico)          
+                        Septiembre de 2002            
+                         de <br>
+
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Otro (deseñador de la pagina web)          
+                        Septiembre de 2002            
+                         de <br>
+
+                                            
+                        - &nbsp;Miembro de consejo de centro            
+                        <i> - Cargo:</i>&nbsp;Otro (Mantenimiento de Computador)          
+                        Septiembre de 2002            
+                         de <br>
+
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Laboratorio de Optica E Informatica</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>0&nbsp;horas Semanales
+                        Septiembre de 2002            
+                         de <br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Otra actividad técnico-científica relevante            
+                        <i> - Cargo:</i>&nbsp;Diseño y Construccion de una Fusionadora de Fibra Optica          
+                        Septiembre de 2002            
+                         de <br>
+
+                                            
+                        - &nbsp;Servicio Técnico Especializado            
+                        <i> - Cargo:</i>&nbsp;Diseño y Construccion de la pagina web          
+                        Septiembre de 2002            
+                         de <br>
+
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; Diseño y Construccion de una Fusionadora de Fibra Optica                            
+                        Septiembre 2002            
+                         <br>            
+
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp;                              
+                        Septiembre 2002            
+                         <br>            
+
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía)</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="5"><h3 >Idiomas</h3></td>
+                            </tr>    
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td><b>Habla</b></td>
+                                <td><b>Escribe</b></td>
+                                <td><b>Lee</b></td>
+                                <td><b>Entiende</b></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;Inglés</li></td>
+                    <td>Deficiente</td>
+                    <td>Aceptable</td>
+                    <td>Aceptable</td>
+                    <td>Aceptable</td>                                                        
+                </tr>    
+                
+                            <tr>
+                                <td><li>&nbsp;Español</li></td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>                                                        
+                </tr>    
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;Informática Educativa, <i>Activa:</i>Si</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Reconocimientos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li>Mención Meritoria,UNIVERSIDAD POPULAR DEL CESAR - Juliode 2012</li></td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Cursos de corta duraci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Perfeccionamiento</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            HOLMES ELIAS PINTO AVILA,                    
+                                            
+                            Diseño de Animaciones Educativas de Aprendizaje en 2D,
+                            <i>Finalidad: </i>capacitar docentes de la universidad de ciencias medicas de la habana 
+                            . En: Cuba&nbsp;
+                            ,2013,&nbsp;
+                            ,UNIVERSIDAD POPULAR DEL CESAR.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;4 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            HOLMES ELIAS PINTO AVILA,                    
+                            
+                            Procedimientos Basicos de Enfermeria&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2007.
+                            <i>Dirigi&oacute; como: </i>,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Jennifer Arias&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): HOLMES ELIAS PINTO AVILA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Médicas y de la Salud -- Ciencias de la Salud -- Enfermería,
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Educación,                    
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            HOLMES ELIAS PINTO AVILA,                    
+                            
+                            Curso Interactivo de Ingles&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            INGENIERIA DE SISTEMAS,
+                            &nbsp;2007.
+                            <i>Dirigi&oacute; como: </i>,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Holmes Pinto Avila&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): HOLMES ELIAS PINTO AVILA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),
+                            
+                            
+                            <br><b>Sectores: </b><br>
+                                                    
+                            Educación,                    
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a></td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a></td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Experiencias latinoamericanas y del caribe. Venezuela 2012&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2013-03-12 00:00:00.0,&nbsp;
+                                                    2013-03-13 00:00:00.0 &nbsp;
+                                                    en Maracaibo &nbsp; - Universidad de zulia &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Herramienta didactica multimedia para la enseñanza de lectoescritura del idioma español
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Sistema de información de gestión de procesos académicos apoyado con redes neuronales artificiales
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>HOLMES ELIAS PINTO AVILA
+                                                        <i>Rol en el evento: </i>Asistente , Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Sistema de información de gestión de procesos académicos apoyados en redes neuronales&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2013-03-12 00:00:00.0,&nbsp;
+                                                    2013-03-13 00:00:00.0 &nbsp;
+                                                    en Maracaibo &nbsp; - Universidad de zulia &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Sistemaromació de información de gestión de procesos académicos apoyado en redes neuronales
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>HOLMES ELIAS PINTO AVILA
+                                                        <i>Rol en el evento: </i>Asistente , Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Congreso internacional de electrónica y de tecnologías de avanzada &nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2014-03-26 00:00:00.0,&nbsp;
+                                                    2014-03-28 00:00:00.0 &nbsp;
+                                                    en PAMPLONA &nbsp; - Universidad de pamplona &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Software para las publicaciones de repositorios de objetos virtuales de aprendizaje para la enseñanza de las ciencias de la salud
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>HOLMES ELIAS PINTO AVILA
+                                                        <i>Rol en el evento: </i>Asistente , Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XV Convención y feria internacional Informatica 2013&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2013-03-18 00:00:00.0,&nbsp;
+                                                    2013-03-22 00:00:00.0 &nbsp;
+                                                    en La Habana &nbsp; - Universidad de la Habana  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Sistemaromació de información de gestión de procesos académicos apoyado en redes neuronales
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Software para las guias de la investigación del programa ondas en la Universidad Popular del cesar
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>HOLMES ELIAS PINTO AVILA
+                                                        <i>Rol en el evento: </i>Asistente , Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>5</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>IX Encuentro nacional de óptica&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2005-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en MEDELLÍN &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>EMPALMADORA DE FIBRA OPTICA AUTOMATIZADA
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>DISEÑO Y CONSTRUCCIÓN DE UNA MAQUINA FUSIONADORA DE FIBRA ÓPTICA
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>HOLMES ELIAS PINTO AVILA
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>6</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XI Encuentro Nacional de Optica II conferencia Andina en Óptica y sus Aplicaciones&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2008-11-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en BOGOTÁ, D.C. &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Reconocimiento y Autenticacion de Voz Utilizando Transformada de Fourier
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>HOLMES ELIAS PINTO AVILA
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>7</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>5ta Conferencia Iberoamericana en Sistemas, Cibernética e Informática CISCI 2006&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2006-11-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en Orlando &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>EMPALMADORA DE FIBRA OPTICA AUTOMATIZADA
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>HOLMES ELIAS PINTO AVILA
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>8</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>III Congreso Internacional Electrónica y  Tecnologías de Avanzada&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:2003-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en PAMPLONA &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Diseño y construcción de una empalmadora por fusión de fibra óptica
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>HOLMES ELIAS PINTO AVILA
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>9</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Informatica2009&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2009-02-01 00:00:00.0,&nbsp;
+                                                    2009-02-06 00:00:00.0 &nbsp;
+                                                    en La Habana &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Elaboracion De Un Software Hipermedia Para El Aprendizaje De Procedimientos Ba-sicos De Enfermeria.
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>RECONOCIMIENTO Y AUTENTICACION DE VOZ UTILIZANDO TRANSFORMADA DE FOURIER
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>DESARROLLO DE UN SOFTWARE MULTIMEDIA PARA LA ENSEÑANZA DE LECTOESCRITURA DEL IDIOMA ESPAÑOL UTILIZANDO UN MODELO DE AMBIENTE DE APRENDIZAJE MEDIADO POR COMPUTADOR
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>HOLMES ELIAS PINTO AVILA
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>10</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>INFORMATICA2010&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:,&nbsp;
+                                                     &nbsp;
+                                                    en BARRANQUILLA &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Implementación de una Red Neuronal Artificial ¿Backpropagation¿ a un Sistema de Información para la Gestión de Proceso Académico.
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>HOLMES ELIAS PINTO AVILA
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>11</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>VI LANGUAGE FORUM ICT¨s in Teaching.&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>&nbsp;                
+                                                <i>Realizado el:,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>DESARROLLO DE UN SOFTWARE MULTIMEDIA PARA LA ENSEÑANZA DE LECTOESCRITURA DEL IDIOMA ESPAÑOL UTILIZANDO UN MODELO DE AMBIENTE DE APRENDIZAJE MEDIADO POR COMPUTADOR
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>HOLMES ELIAS PINTO AVILA
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>12</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>III CONGRESO INTERNACIONAL DE ELECTRONICA Y TECNOLOGIA DE AVANZADA&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2003-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en PAMPLONA &nbsp; - PAMPLONA &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DE PAMPLONA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>HOLMES ELIAS PINTO AVILA
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>13</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>IX CONGRESO DE INFORMATICA EDUCATIVA&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2008-06-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en  &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>HERRAMIENTA DIDACTICA MULTIMEDIA PARA PREPARACIÓN DE PRUEBAS DE ESTADO.
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>HOLMES ELIAS PINTO AVILA
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>14</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Congreso Nacional de Fisica&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2005-01-01 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en BARRANQUILLA &nbsp; - Barranquilla &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Comparador de voz utilizando transformada de Fourier
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Resumen
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD DEL ATLÁNTICO 
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>HOLMES ELIAS PINTO AVILA
+                                                        <i>Rol en el evento: </i>Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                HOLMES ELIAS PINTO AVILA,                    
+                                    
+                CESAR ORLANDO TORRES MORENO,                    
+                                    
+                LOENZO MATTOS VASQUEZ,                    
+                
+                "EMPALMADORA DE FIBRA OPTICA AUTOMATIZADA"
+                . En: Colombia&nbsp;<br>
+                REVISTA COLOMBIANA DE FISICA&nbsp;
+                <i>ISSN:</i>&nbsp;0120-2650&nbsp;
+                <i>ed:</i>&nbsp;Pontificia Universidad Javeriana <br>
+                <i>v.</i>38
+                <i>fasc.</i>2
+                p.937
+                - 940
+                ,2006,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Acoplamientos ópticos con fibra, empalme por fusió,                    
+                                    
+                DISEÑO Y CONSTRUCION DE UNA FUSIONADORA DE FIBRA O,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                HOLMES ELIAS PINTO AVILA,                    
+                
+                "EMPALMADORA DE FIBRA OPTICA AUTOMATIZADA"
+                . En: Colombia&nbsp;<br>
+                REVISTA COLOMBIANA DE FISICA&nbsp;
+                <i>ISSN:</i>&nbsp;0120-2650&nbsp;
+                <i>ed:</i>&nbsp;Pontificia Universidad Javeriana <br>
+                <i>v.</i>38
+                <i>fasc.</i>
+                p.
+                - 
+                ,2006,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Acoplamientos ópticos con fibra, empalme por fusió,                    
+                
+
+                
+                
+                <br><b>Sectores: </b><br>
+                                        
+                Desarrollo de programas (software) y prestación de servicios en informática - Desarrollo de programas (software),                    
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                HOLMES ELIAS PINTO AVILA,                    
+                
+                "Experiencia pedagógica en la impartición de un curso mediado por la Universidad Virtual de la Salud"
+                . En: Colombia&nbsp;<br>
+                REVISTA HABANERA DE CIENCIAS MEDICAS&nbsp;
+                <i>ISSN:</i>&nbsp;1729-519X&nbsp;
+                <i>ed:</i>&nbsp;Universidad de Ciencias Medicas de La Hab<br>
+                <i>v.</i>13
+                <i>fasc.</i>2
+                p.284
+                - 291
+                ,2014,
+                <i>&nbsp;DOI:&nbsp;</i>file:///C:/Users/Cefontev/Desktop/SoportesGruplav/SoportesHolmes/ArticuloRevistacienciasmedicas.pdf
+                
+                
+                <br><b>Palabras: </b><br>
+                                    
+                Objetos de aprendizaje,                    
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a>
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Libros</h3></td>
+            </tr>
+                
+            <tr>
+                <td><li>
+                
+                <b>Producción bibliográfica - Libro - Otro libro publicado</b>
+            </li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            HOLMES ELIAS PINTO AVILA,                    
+            
+            "Aprendiendo Lenguaje Undécimo Grado"
+            En: Colombia
+            2008.&nbsp;
+            ed:publicom pdc&nbsp;
+            <i>ISBN:</i>&nbsp;978-958-8283-42-5&nbsp;
+            <i>v. </i>1
+            <i>pags.</i>&nbsp;308
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Humanidades -- Idiomas y Literatura -- Lingüística,                    
+            
+            
+            
+            <br><b>Sectores: </b><br>
+                                    
+            Edición, impresión, reproducción y grabación industriales de diarios, revistas, libros, discos, ca-- setes, vídeos y películas,                    
+            
+        </blockquote>
+    </td>
+</tr>
+    
+            <tr>
+                <td><li>
+                
+                <b>Producción bibliográfica - Libro - Otro libro publicado</b>
+            </li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            HOLMES ELIAS PINTO AVILA,                    
+            
+            "Ecuador Miradas Binacionales"
+            En: Colombia
+            2008.&nbsp;
+            ed:Pretextos Ltda.&nbsp;
+            <i>ISBN:</i>&nbsp;9789588240&nbsp;
+            <i>v. </i>1
+            <i>pags.</i>&nbsp;380
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Humanidades -- Idiomas y Literatura -- Lingüística,                    
+            
+            
+            
+            <br><b>Sectores: </b><br>
+                                    
+            Desarrollo de programas (software) y prestación de servicios en informática - Desarrollo de programas (software),                    
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a></td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a></td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a>
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Softwares</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Plataforma educativa para el repoprte de Boletines y certificados estudiantil,
+                        <i>Nombre comercial: </i>SERBCE,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2009,&nbsp;
+                        .<i>plataforma: Entorno Web: PHP, Ajax, mysql,</i>&nbsp;
+                        .<i>ambiente: Web,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción técnica - Softwares - Multimedia</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Aprendiendo Lenguaje 10 Grado,
+                        <i>Nombre comercial: </i>Aprendiendo Lenguaje Décimo Grado,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2008,&nbsp;
+                        .<i>plataforma: AMS, PHP,</i>&nbsp;
+                        .<i>ambiente: windows,</i>                                
+                        
+                        
+                        <br><b>Palabras: </b><br>
+                                            
+                        Aplicación Informatica interactiva,                    
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                        
+                        
+                        
+                        <br><b>Sectores: </b><br>
+                                                
+                        Desarrollo de programas (software) y prestación de servicios en informática - Desarrollo de programas (software),                    
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción técnica - Softwares - Multimedia</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Aprendiendo Lenguaje 11 grado,
+                        <i>Nombre comercial: </i>Aprendiendo Lenguaje Undecimo Grado,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2008,&nbsp;
+                        .<i>plataforma: winxp,</i>&nbsp;
+                        .<i>ambiente: Windows,</i>                                
+                        
+                        
+                        <br><b>Palabras: </b><br>
+                                            
+                        Aplicación Informatica interactiva,                    
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                        
+                        
+                        
+                        <br><b>Sectores: </b><br>
+                                                
+                        Desarrollo de programas (software) y prestación de servicios en informática - Desarrollo de programas (software),                    
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción técnica - Softwares - Multimedia</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Desarrollo de un Aplicativo para la elaboración de tesis de grado para los estudiantes de la Maestría del SUE CARIBE,
+                        <i>Nombre comercial: </i> Aplicativo para la elaboración de tesis de grado para los estudiantes de la Maestría del SUE CARIBE,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2008,&nbsp;
+                        .<i>plataforma: PHP, MYSQL, AUTOPLAY,</i>&nbsp;
+                        .<i>ambiente: Windows,</i>                                
+                        
+                        
+                        <br><b>Palabras: </b><br>
+                                            
+                        Bases de Datos,                    
+                                            
+                        Aplicación Informatica interactiva,                    
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                        
+                        
+                        
+                        <br><b>Sectores: </b><br>
+                                                
+                        Desarrollo de programas (software) y prestación de servicios en informática,                    
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Multimedia</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Pagina web Iglesia Cristiana Ebenezer Valledupar,
+                        <i>Nombre comercial: </i>,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2006,&nbsp;
+                        .<i>plataforma: ,</i>&nbsp;
+                        .<i>ambiente: ,</i>                                
+                        
+                        
+                        <br><b>Palabras: </b><br>
+                                            
+                        web, Diseño en Internet,                    
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Humanidades -- Idiomas y Literatura -- Lingüística,                    
+                        
+                        
+                        
+                        <br><b>Sectores: </b><br>
+                                                
+                        Desarrollo de programas (software) y prestación de servicios en informática,                    
+                                                
+                        Desarrollo de programas (software) y prestación de servicios en informática - Actividades de base de datos,                    
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Multimedia</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        HERRAMIENTA DIDACTICA MULTIMEDIA PARA PREPARACIÓN DE PRUEBAS DE ESTADO.,
+                        <i>Nombre comercial: </i>HERRAMIENTA DIDACTICA MULTIMEDIA PARA PREPARACIÓN DE PRUEBAS DE ESTADO.,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2007,&nbsp;
+                        .<i>plataforma: PHP, MYSQL, AUTOPLAY,</i>&nbsp;
+                        .<i>ambiente: Windows,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Multimedia</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        SISTEMA INTEGRAL DE GESTIÓN DE PROYECTOS PARA EL SUE - CARIBE,
+                        <i>Nombre comercial: </i>,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2008,&nbsp;
+                        .<i>plataforma: winxp,</i>&nbsp;
+                        .<i>ambiente: winxp,</i>                                
+                        
+                        
+                        <br><b>Palabras: </b><br>
+                                            
+                        Bases de Datos,                    
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ciencias Sociales -- Periodismo y Comunicaciones -- Ciencias de la Información (Aspectos Sociales),                    
+                        
+                        
+                        
+                        <br><b>Sectores: </b><br>
+                                                
+                        Desarrollo de programas (software) y prestación de servicios en informática - Desarrollo de programas (software),                    
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+                    <b>Producción técnica - Softwares - Multimedia</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        CD interactivo para algunos Procedimientos Basicos de Enfermeria,
+                        <i>Nombre comercial: </i>Procedimientos Basicos de Enfermeria,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2007,&nbsp;
+                        .<i>plataforma: Autoplay, PHP, sqlite,,</i>&nbsp;
+                        .<i>ambiente: windows,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+                        <br><b>Sectores: </b><br>
+                                                
+                        Educación,                    
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Multimedia</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        CD Interactivo para la Enseñanza del Ingles,
+                        <i>Nombre comercial: </i>,
+                        <i>contrato/registro: </i>13-22-70,
+                        . En: Colombia,&nbsp;
+                        ,2007,&nbsp;
+                        .<i>plataforma: Autoplay, sqlite,,</i>&nbsp;
+                        .<i>ambiente: windows,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                        
+                        
+                        
+                        <br><b>Sectores: </b><br>
+                                                
+                        Educación,                    
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Multimedia</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Pagina web del Congreso de la IEEE unicesar,
+                        <i>Nombre comercial: </i>,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2006,&nbsp;
+                        .<i>plataforma: PHP,mySql,</i>&nbsp;
+                        .<i>ambiente: windows,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería Eléctrica y Electrónica,                    
+                        
+                        
+                        
+                        <br><b>Sectores: </b><br>
+                                                
+                        Otros sectores - Informática,                    
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Multimedia</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                                            
+                        CESAR ORLANDO TORRES MORENO,                    
+                                            
+                        LOENZO MATTOS VASQUEZ,                    
+                        
+                        CD Interactivo del Laboratorio de Optica e Informatica,
+                        <i>Nombre comercial: </i>,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2004,&nbsp;
+                        .<i>plataforma: Windows,</i>&nbsp;
+                        .<i>ambiente: Windows,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Multimedia</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                                            
+                        CESAR ORLANDO TORRES MORENO,                    
+                        
+                        Pagina Web del Sue Caribe,
+                        <i>Nombre comercial: </i>,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2004,&nbsp;
+                        .<i>plataforma: Windows,</i>&nbsp;
+                        .<i>ambiente: Windows,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Multimedia</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                                            
+                        CESAR ORLANDO TORRES MORENO,                    
+                        
+                        Pagina Web del Laboratorio de Optica e Informatica,
+                        <i>Nombre comercial: </i>,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2004,&nbsp;
+                        .<i>plataforma: Windows,</i>&nbsp;
+                        .<i>ambiente: Windows,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Multimedia</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                                            
+                        CESAR ORLANDO TORRES MORENO,                    
+                                            
+                        LOENZO MATTOS VASQUEZ,                    
+                        
+                        CD Interactivo de la Maestria en Ciencias Fisicas - SUE CARIBE-,
+                        <i>Nombre comercial: </i>,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2004,&nbsp;
+                        .<i>plataforma: Windows,</i>&nbsp;
+                        .<i>ambiente: Windows,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Multimedia</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                                            
+                        CESAR ORLANDO TORRES MORENO,                    
+                                            
+                        LOENZO MATTOS VASQUEZ,                    
+                        
+                        II encuentro Regional de Ciencias Fisicas,
+                        <i>Nombre comercial: </i>,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2004,&nbsp;
+                        .<i>plataforma: windows,</i>&nbsp;
+                        .<i>ambiente: windows,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Software para la gestión documental,
+                        <i>Nombre comercial: </i>Software para la gestión documental,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2018,&nbsp;
+                        .<i>plataforma: cc,</i>&nbsp;
+                        .<i>ambiente: cc,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Plataforma de Gestion de Informacion para el Programa Ondas,
+                        <i>Nombre comercial: </i>,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2012,&nbsp;
+                        .<i>plataforma: PHPy MYSQL,</i>&nbsp;
+                        .<i>ambiente: web,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Pagina Institucional de la Vicerrectoria de Investigacion de la Universidad Popular del Cesar,
+                        <i>Nombre comercial: </i>,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2012,&nbsp;
+                        .<i>plataforma: PHP, Mysql,</i>&nbsp;
+                        .<i>ambiente: web,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Pagina Institucional de la División de Extensión de la Universidad Popular del Cesar,
+                        <i>Nombre comercial: </i>DE,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2012,&nbsp;
+                        .<i>plataforma: ,</i>&nbsp;
+                        .<i>ambiente: web,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Pagina Institucional de la División de Estudios de Formación Avanzados de la Universidad Popular del Cesar,
+                        <i>Nombre comercial: </i>DEFA,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2012,&nbsp;
+                        .<i>plataforma: ,</i>&nbsp;
+                        .<i>ambiente: web,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Desarrollo Pagina web de la Vicerectoria de Investigacion de la UPC,
+                        <i>Nombre comercial: </i>Vicerrectoria de Investigación de la Universidad Popular del Cesar,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2012,&nbsp;
+                        .<i>plataforma: ,</i>&nbsp;
+                        .<i>ambiente: ,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Multimedia</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Software para el control de acceso a los computadores de la bibloteca Miguel Angel Vargas,
+                        <i>Nombre comercial: </i>SiverUPC,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2011,&nbsp;
+                        .<i>plataforma: Visual y web,</i>&nbsp;
+                        .<i>ambiente: web ,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Modulo Finaciero para el Registro de Matriculas Academicas del SUE-CARIBE,
+                        <i>Nombre comercial: </i>Finasue,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2010,&nbsp;
+                        .<i>plataforma: web,</i>&nbsp;
+                        .<i>ambiente: ,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Software para la Documentacion y Control de Calidad,
+                        <i>Nombre comercial: </i>SDCC,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2009,&nbsp;
+                        .<i>plataforma: AMS, PHP,</i>&nbsp;
+                        .<i>ambiente: windows,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Pagina web colegio Gimnasio Infantil "Aprendiendo a Escalar",
+                        <i>Nombre comercial: </i>SINTED,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2010,&nbsp;
+                        .<i>plataforma: PHP, AJAX,</i>&nbsp;
+                        .<i>ambiente: WEB,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Pagina web para el Desarrollo de la Hemeroteca de la UPC,
+                        <i>Nombre comercial: </i>,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2010,&nbsp;
+                        .<i>plataforma: PHP, AJAX, SPIP,</i>&nbsp;
+                        .<i>ambiente: WEB,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Pagina web colegio San Antonio de Valledupar,
+                        <i>Nombre comercial: </i>SINTED,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2010,&nbsp;
+                        .<i>plataforma: PHP, AJAX,</i>&nbsp;
+                        .<i>ambiente: WEB,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Pagina web colegio Mi Hogar,
+                        <i>Nombre comercial: </i>SINTED,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2010,&nbsp;
+                        .<i>plataforma: PHP, AJAX,</i>&nbsp;
+                        .<i>ambiente: WEB,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Pagina web colegio Juvenil,
+                        <i>Nombre comercial: </i>SINTED,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2010,&nbsp;
+                        .<i>plataforma: PHP, AJAX,</i>&nbsp;
+                        .<i>ambiente: WEB,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Pagina web colegio La Nevada Valledupar,
+                        <i>Nombre comercial: </i>SINTED,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2010,&nbsp;
+                        .<i>plataforma: PHP, AJAX,</i>&nbsp;
+                        .<i>ambiente: WEB,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Pagina web SINTED,
+                        <i>Nombre comercial: </i>SINTED,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2010,&nbsp;
+                        .<i>plataforma: PHP, AJAX,</i>&nbsp;
+                        .<i>ambiente: WEB,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        SISTEMA INTEGRADO EN INFORMATICA EDUCATIVA "SINTED",
+                        <i>Nombre comercial: </i>SINTED,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2011,&nbsp;
+                        .<i>plataforma: ,</i>&nbsp;
+                        .<i>ambiente: WEB,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Otra</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        CiberUPC,
+                        <i>Nombre comercial: </i>CiberUPC,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2011,&nbsp;
+                        .<i>plataforma: ,</i>&nbsp;
+                        .<i>ambiente: ,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Sinted,
+                        <i>Nombre comercial: </i>Sinted,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2011,&nbsp;
+                        .<i>plataforma: web,</i>&nbsp;
+                        .<i>ambiente: web,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Otra</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Pagina web Institucional LLanogrande,
+                        <i>Nombre comercial: </i>LLanogrande,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2011,&nbsp;
+                        .<i>plataforma: web,</i>&nbsp;
+                        .<i>ambiente: web,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Otra</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        Pagina web Institucional Bellavistasoft,
+                        <i>Nombre comercial: </i>Bellavistasoft,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2011,&nbsp;
+                        .<i>plataforma: web,</i>&nbsp;
+                        .<i>ambiente: web,</i>                                
+                        
+                        
+                        
+                                       
+                        <br><b>Areas: </b><br>
+                                                
+                        Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    
+                    <b>Producción técnica - Softwares - Computacional</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                                            
+                        HOLMES ELIAS PINTO AVILA,                    
+                        
+                        SOFTWARE INTEGRADO DE ATENCIÓN TEMPRANA,
+                        <i>Nombre comercial: </i>SIAT,
+                        <i>contrato/registro: </i>,
+                        . En: Colombia,&nbsp;
+                        ,2019,&nbsp;
+                        .<i>plataforma: ,</i>&nbsp;
+                        .<i>ambiente: ,</i>                                
+                        
+                        
+                        
+                        
+                        
+                        
+
+                    </blockquote>            
+                </td>
+            </tr>
+            
+        </table>
+        </td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a>
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3>Innovaci&oacute;n de proceso o procedimiento</h3></td>
+            </tr>
+                
+            <tr>
+                <td>
+            <li><b>Producción técnica - Innovación de proceso o procedimiento</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            HOLMES ELIAS PINTO AVILA,                    
+            
+            Software académico para la gestión de notas,
+            <i>Nombre comercial: </i>,
+            <i>contrato/registro: </i>,
+            . En: Colombia,&nbsp;
+            ,2014,&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+            
+            
+            
+
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%">
+
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Informes de investigaci&oacuten</h3></td>
+            </tr>    
+                
+            <tr>
+                <td>
+                    <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                    
+            <li><b>Producción técnica - Informes de investigación</b></li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            HOLMES ELIAS PINTO AVILA,                    
+            
+            Desarrollo de Repositorios de Objetos de Aprendizaje para la Enseñanza de las Ciencias de la Salud.                
+            . En: Colombia,&nbsp;
+            ,2015,&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ingeniería y Tecnología -- Ingenierías Eléctrica, Electrónica e Informática -- Ingeniería de Sistemas y Comunicaciones,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+    <table width="100%" style="border:#999 1px solid" id="obras_productos">
+        <tr>
+            <td> <h3>Obras o productos</h3> </td>
+        </tr>
+        
+            <tr>
+                <td>
+                    <blockquote>
+
+                        
+                        <i>Nombre del producto:</i>
+                        Ojos de Luna azul,
+
+                        <i>Disciplina:</i>
+                        Humanidades -- Arte -- Artes plásticas y visuales, 
+
+                        <i>Fecha de creación:</i>
+                        Enero de 2015
+
+                        
+                            <br/>
+                            <h5>INSTANCIAS DE VALORACIÓN DE LA OBRA</h5>
+                            <ul>
+                                
+                                    <li>
+                                    Nombre del espacio o evento:
+                                    ,
+
+                                    Fecha de presentación:
+                                    ,
+
+                                    Entidad convocante 1:
+                                    
+                                    </li>
+                                
+                            </ul>
+                        
+                    </blockquote>                    
+                </td>                         
+            </tr>
+        
+    </table>
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n, desarrollo e Innovaci&oacute;n&nbsp;<br>
+                        Diseño y Construccion de una Fusionadora de Fibra Optica<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2002                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>0<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Se desarrolló un sistema automático para el microposicionamiento y  fusión de fibras ópticas, por medio de motores Paso a Paso de 3.6º (1.8º a Medio paso) con un sistema de roscado para obtener  desplazamientos en el orden de los micrones, un  Microcontrolador PIC16F877A para el control del prototipo, se utilizo el modulo conversor análogo digital de  10 bit del PIC, como sus dos módulos PWM (modulación de achura de pulso), controlan un reductor de voltaje DC a DC (fuente del bobinado primario del transformador Flyback) como el circuito de descarga de alto voltaje (transformador FLYBACK) para el empalme definitivo de fibras ópticas, mediante el USART (Universal Synchronous Asynchronous Receiver Transmitter) del PIC16F877A se interfaza con el PC. La aplicación  se elaboró bajo la plataforma de Visual Basic 6.0, el cual permite manipular el prototipo. <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Laboratorio de Optica e Informatica<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2010                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n, desarrollo e Innovaci&oacute;n&nbsp;<br>
+                        DESARROLLO DE UN SOFTWARE MULTIMEDIA PARA LA ENSEÑANZA DE LECTOESCRITURA DEL IDIOMA ESPAÑOL UTILIZANDO UN MODELO DE AMBIENTE DE APRENDIZAJE MEDIADO POR COMPUTADOR<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2007                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Enero&nbsp;
+                        2009
+                        
+                        
+                        <i>Fin:&nbsp;</i>Enero&nbsp;
+                        2009
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>12<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Desarrollo de Repositorios de Objetos de Aprendizaje para la Enseñanza de las Ciencias de la Salud.<br>
+                        <i>Inicio:&nbsp;</i>Octubre&nbsp;
+                        2012                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Noviembre&nbsp;
+                        2014
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            <br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n, desarrollo e Innovaci&oacute;n&nbsp;<br>
+                        Desarrollo de Una API REST en SPIP<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2024                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Marzo&nbsp;
+                        2024
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            La API REST para SPIP es una interfaz desarrollada en PHP que aprovecha las librerías propias de SPIP para facilitar la integración con la base de datos de estudiantes de la Universidad Popular del Cesar. El objetivo principal de esta API es optimizar la gestión y el acceso a los datos estudiantiles, permitiendo así el desarrollo de diversas aplicaciones frontend que consuman esta información de manera eficiente y estructurada."<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        SOFTWARE DESARROLLADO EN ENTORNO WEB DE UN SISTEMA DE INFORMACIÓN PARA LA GESTIÓN DE PROCESOS DE LAS ENTIDADES EDUCATIVAS<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2009                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Enero&nbsp;
+                        2010
+                        
+                        
+                        <i>Fin:&nbsp;</i>Noviembre&nbsp;
+                        2010
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>12<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Se desarrollo una plataforma educativa que facilita los procesos  administrativos y la calidad de la gestión educativa en las instituciones, integrando en un solo sitio a padres de familia, docentes, estudiantes y directivos quienes pueden ingresar desde cualquier lugar del mundo y acceder a  información valiosa como: Reporte de notas, Tareas, Informes, Comunicados Disciplinarios, Reportes Estadísticos, Desempeño Académico, Estado  Financiero, entre otros. Esta valiosa herramienta fue creada con los lenguaje de programación PHP, AJAX y la Base de datos en Mysql, utilizando librería para graficar los datos estadísticos con Dojo toolkit.
+Debido a que es de vital importancia implementar una herramienta tecnológica  que permita identificar las características personales, intereses, ritmos de desarrollo y estilos de aprendizaje del Estudiante para valorar sus avances y que le facilite a las instituciones educativas la información necesaria para consolidar o reorientar los procesos educativos relacionados con el desarrollo integral del Estudiante, permitiendo de esta manera dar un aporte al plan de mejoramiento institucional, es este uno de los objetivos del presente software para aprovechar y utilizar las ventajas que nos brinda la tecnología representada por el Internet lográndose por medio de la presente plataforma educativa incrementar sustancialmente el nivel académico y la calidad de la gestión educativa en las instituciones.
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        SOFTWARE PARA LA DOCUMENTACIÓN Y CONTROL DE UN SISTEMA DE GESTIÓN DE CALIDAD<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2009                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Diciembre&nbsp;
+                        2010
+                        
+                        
+                        <i>Fin:&nbsp;</i>Abril&nbsp;
+                        2010
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>12<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            RESUMEN
+En la presente investigación se diseñó e implementó un software de un Sistema de Gestión de Calidad en cumplimientos de ciertos requisitos, uno de estos es el control de registros como lo establece la Norma Técnica de Calidad en la Gestión Pública NTCGP 1000:2004 e ISO-9001:2000 en su numeral 4.2.4 Control de registro y las disposiciones legales vigentes sobre la materia, específicamente la Ley 594 de 2000, por medio de la cual se dicta la ley general de archivos previendo el control de los registros generados en los diferentes procesos asociadas a las actividades del SCG que se desarrollan en una entidad Educativa. Teniendo en cuenta que los documentos de una institución es un patrimonio invaluable de la información que allí se maneja y que dictan evidencias de las actividades desempeñadas con la implementación de este software se ejercen los controles durante  el tiempo de retención definido para cada tipo de documento preservando y protegiéndolo de factores externos. Los documentos del SGC  son guardados en la Base de datos del servidor  y cada vez que se desee consultarlos son generados en formato PDF, el software realiza copias de respaldos para estos documentos cada vez que el Grupo de Planeación lo amerite. 
+El lenguaje de programación implementado fue desarrollado en la plataforma del entorno web, utilizando como lenguaje de programación PHP y una Base de Datos en Mysql. Los resultados obtenidos con la aplicación del software permiten un mejoramiento significativo en el acompañamiento de los procesos del SGC el cual se convierte en un instrumento indispensable, es cierto, la calidad no es un proceso mediato y requiere de grandes esfuerzos y recursos.
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        RECONOCIMIENTO Y AUTENTICACION DE VOZ UTILIZANDO TRANSFORMADA DE FOURIER<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2008                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Junio&nbsp;
+                        2010
+                        
+                        
+                        <i>Fin:&nbsp;</i>Octubre&nbsp;
+                        2010
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>24<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            En la presente investigación se diseñó e implementó un dispositivo de captura, procesado y reconocimiento de señales auditivas ; el sistema desarrollado permite la obtención de sonido directamente de un micrófono ; los cuales son capturados a través de una interfase sonora, la cual posibilita su conversión en formato digital, así como su grabación y posterior reproducción ; las señales auditivas digitalizadas son mejores utilizando filtros de procesamiento lo cual permite eliminar ruidos y señales indeseables. Para el procesamiento de reconocimiento y autenticación, la señal de prueba es correlacionada con las señales almacenadas previamente, dicho procesamiento es realizado en la represtación frecuencial, utilizando para ello la transformada de Fourier discreta. El reprocesamiento de la señal de voz tiene la particularidad de dividir un análisis tiempo-frecuencia estándar (transformada de Fourier de tiempo corto (STFT) con ventana de Hamming) en diferentes bandas de interés, modificando la resolución frecuencial de cada una (6 coeficientes entre 200Hz y 3 kHz y 13 entre 3 y 5kHz). Se podría decir que la cobertura del problema de ASR no supera el 10%, el lenguaje de programación implementado fue desarrollado en la plataforma matemática Matlab. Los resultados obtenidos con la aplicación del dispositivo permiten un reconocimiento de señales auditivas cercana al 95%.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n, desarrollo e Innovaci&oacute;n&nbsp;<br>
+                        HERRAMIENTA  DIDACTICA MULTIMEDIA PARA PREPARACIÓN DE PRUEBAS DE ESTADO<br>
+                        <i>Inicio:&nbsp;</i>Marzo&nbsp;
+                        2009                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Octubre&nbsp;
+                        2010
+                        
+                        
+                        <i>Fin:&nbsp;</i>Octubre&nbsp;
+                        2010
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>12<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Se desarrolló un software educativo, aplicando los métodos, procedimientos y herramientas de la ingeniería del software, los cuales ayudan a asegurar la calidad del mismo, en los temas  Lenguaje, Física, Ingles, Química, Sociales, Matemáticas, Biología, evaluaciones tipo ICFES, simulaciones animadas, cálculos matemáticos y físicos, con el fin de mejorar el desempeño a los estudiantes en las pruebas de estado,  facilita los aprendizajes significativos y transferibles, trascienden la simple memorización y presenta entornos heurísticos centrados en los estudiantes puesto que su fundamento tiene en cuenta las teorías constructivista y los principios del aprendizaje significativo donde además de comprender los contenidos puedan investigar y buscar nuevas relaciones. La base de Datos se hizo en SQLite. El programa utilizado es el Autoplay de Indigo Rose y las simulaciones se desarrollaron en Macromedia Flash.8.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n, desarrollo e Innovaci&oacute;n&nbsp;<br>
+                        Sistema de Información de Gestión de procesos Académicos apoyado con Redes Neuronales<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2011                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Enero&nbsp;
+                        2012
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2012
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>12<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Mediante este proyecto, se hará un seguimiento estratégico por parte de la Institución, el Docente, Los Padres de Familia a la  información completa  generada por los estudiantes para consolidar o reorientar los procesos educativos relacionados con el desarrollo integral. Esta experiencia de desarrollo es una alternativa positiva, pues, permitirá integrar tecnología y conocimiento, en inteligencia artificial utilizando las redes neuronales como apoyo a los modelos de conocimiento e inferencia lógica.
+El objetivo fundamental de esta proyecto de grado es el de aportar nueva luz en torno a la función de producción y la medición de la eficiencia escolar a partir del análisis no lineal de una realidad tan compleja como la educativa. Este análisis no lineal será llevado a cabo mediante un modelo basado en redes neuronales artificiales (RNAs).
+El propósito de este proyecto va encaminado a facilitar el aprendizaje y la captación total de la información con el fin de tener un mejor desempeño en la práctica profesional, contribuyendo al mejoramiento del aprendizaje en los procesos cognitivos  que se realizan en la educación Básica y Media. 
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                         Sistema de Información para la Presentación de Proyectos 2.0<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2012                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Noviembre&nbsp;
+                        2012
+                        
+                        
+                        <i>Fin:&nbsp;</i>Noviembre&nbsp;
+                        2012
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>12<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El espacio privado de esta Plataforma está abierto para los procesos de convocatorias internas para los grupos de investigación pertenecientes a la Universidad Popular del Cesar, se puede acceder al Sistema de Información para la Presentación de Proyectos 2.0<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Sistema de Información para la Gestion de Información del Programa Ondas Cesar<br>
+                        <i>Inicio:&nbsp;</i>Marzo&nbsp;
+                        2011                
+                        
+                        <i>Fin proyectado:&nbsp;</i>Septiembre&nbsp;
+                        2011
+                        
+                        
+                        <i>Fin:&nbsp;</i>Septiembre&nbsp;
+                        2011
+                        
+                        <i>Duraci&oacute;n&nbsp;</i>12<br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El Programa Ondas es su estrategia fundamental para fomentar una cultura ciudadana de ciencia, tecnología e innovación en la población infantil y juvenil de Colombia, por medio de la investigación. Este equipaje de navegación para niñas, niños y jóvenes investigadores es una guía para organizar sus grupos y desarrollar sus problemas de investigación a partir de la for mulación de sus preguntas; en él encontrarán sugerencias para construir una comunidad de saber y conocimiento, y para recorrer diferentes trayectorias de indagación.
+Mediante este software en entorno web se pretende sisntematizar las bitacoras y los recursos humanos que intervienen en este proyecto<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

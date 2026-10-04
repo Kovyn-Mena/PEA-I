@@ -1,0 +1,3008 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=48605B8FB46E396A0958E807FE2256BF" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        Sandra&nbsp;lago&nbsp;padilla
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>LAGO PADILLA, SANDRA</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Femenino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td><h3 >Redes sociales acad&eacute;micas</h3></td>
+                                </tr>
+                                    
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        
+                                        <a target="_blank" href="https://www.researchgate.net/profile/Sandra-Lago?ev=hdr_xprf" style="color: #007A81">ResearchGate</a>
+                                    </td>
+                                </tr>
+                                
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td><h3 >Identificadores de autor</h3></td>
+                                </tr>
+                                    
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        
+                                        <a target="_blank" href="https://orcid.org/0000-0002-7747-6096" style="color: #007A81">Open Researcher and Contributor ID (ORCID)</a>
+                                    </td>
+                                </tr>
+                                
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Doctorado</b>
+                            Universidad Dr. Rafael Belloso Chacín<br />
+                            DOCTORADO CIENCIA GERENCIALES<br />
+                            Marzode2023 - Septiembrede 2026<br />
+                            GERENCIA DISRUPTIVA COMO ESTRATEGIA TRASFORMADORA EN LAS ESTRUCTURAS ORGANIZACIONALES DE LAS EMISORAS RADIALES.</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            URBE RAFAEL BELLOSO CHAZÍN<br />
+                            MAESTRIA EN GERENCIA DE INVESTIGACIÓN Y DESARROLLO<br />
+                            Marzode2013 - Mayode 2015<br />
+                            GOBIERNO ELECTRÓNICO EN LA ALCALDÍA DEL MUNICIPIO DE AGUSTÍN CODAZZI, DEPARTAMENTO DEL CESAR- COLOMBIA</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD POPULAR DEL CESAR<br />
+                            ADMINISTRACION DE EMPRESAS<br />
+                            Enerode1998 - de 2003<br />
+                            </td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>SERVICIO NACIONAL DE APRENDIZAJE SENA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>160&nbsp;horas Mensuales
+                        Febrero de 2024            
+                         de <br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR-SECCIONAL AGUACHICA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>16&nbsp;horas Semanales
+                        Febrero de 2023            
+                         de Actual<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Otra actividad técnico-científica relevante            
+                        <i> - Cargo:</i>&nbsp;desarrollo de enseñanza, investigación, autoevaluación y actividades académicas contemplados en los ejes misionales de la Universidad Popular del Cesar,          
+                        Febrero de 2023            
+                        Enero de <br>
+
+                                    
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; Elaboración de productos innovadores a base de mago en estado de descomposición                            
+                        Agosto 2023            
+                        Enero <br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Servicio Nacional De Aprendizaje Sena Regional Cesar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>160&nbsp;horas Mensuales
+                        Febrero de 2022            
+                        Diciembre de 2022<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>SERVICIO NACIONAL DE APRENDIZAJE SENA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>10&nbsp;horas Semanales
+                        Marzo de 2021            
+                        Diciembre de 2021<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Centro Agroempresarial</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Febrero de 2020            
+                        Diciembre de 2020<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; EMPRENDIMIENTO,&nbsp;25 
+                        Febrero 2020            
+                        Diciembre 2020<br>
+
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; LIDER SEMILLERO DE INVESTIGACIÓN                            
+                        Febrero 2020            
+                        Diciembre 2020<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>SERVICIO NACIONAL DE APRENDIZAJE SENA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>20&nbsp;horas Semanales
+                        Febrero de 2020            
+                        Diciembre de 2020<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Centro Agroempresarial</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Febrero de 2019            
+                        Diciembre de 2019<br><br>   
+                        
+                        <span class="blueTitle">Actividades de administración</span><br>
+                                            
+                        - &nbsp;Otra actividad técnico-científica relevante            
+                        <i> - Cargo:</i>&nbsp;INSTRUCTOR INVESTIGADOR          
+                        Febrero de 2019            
+                        Diciembre de 2019<br>
+
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; SERVICIO AL CLIENTE,&nbsp;30 
+                        Febrero 2019            
+                        Febrero 2019<br>
+
+                        
+                        
+                        
+                        <span class="blueTitle">Actividades de investigación</span><br>
+                        
+                        - &nbsp;
+                        Investigación y Desarrollo
+                        <i> - Titulo:</i>&nbsp; LIDER DE PROYECTO DE INVESTIGACIÓN Y LIDER DE SEMILLERO DE INVESTIGACIÓN                            
+                        Febrero 2019            
+                        Diciembre 2019<br>            
+
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Servicio Nacional De Aprendizaje Sena Regional Cesar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Enero de 2018            
+                        Diciembre de 2018<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Servicio Nacional De Aprendizaje Sena Regional Cesar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>160&nbsp;horas Mensuales
+                        Julio de 2017            
+                        Noviembre de 2017<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Ciencias Sociales -- Economía y Negocios -- Negocios y Management</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >L&iacute;neas de investigaci&oacute;n</h3></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td><li>&nbsp;INNOVACION, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;GESTION, <i>Activa:</i>Si</li></td>
+                </tr>        
+                        
+                            <tr>
+                                <td><li>&nbsp;Desarrollo empresarial sostenible, <i>Activa:</i>Si</li></td>
+                </tr>        
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Cursos de corta duraci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            SANDRA LAGO PADILLA,                    
+                                            
+                            curso complementario de fundamentación para proyectos empresariales,
+                            <i>Finalidad: </i>orientar aprendices sobre conocimientos básicos de estructuración de proyectos
+                            . En: Colombia&nbsp;
+                            ,2019,&nbsp;
+                            ,.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;4 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Negocios y Management,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            SANDRA LAGO PADILLA,                    
+                                            
+                            TECNOLOGIAS DE LA INFORMACIÓN Y LA COMUNICACIÓN TICS (INTERNET),
+                            <i>Finalidad: </i>ENSEÑAR A L COMUNIDAD A MANEJAR LAS PlATAFORMAS DE GOBIERNOS EN LINEAS E INSTITUCIONES PUBLICAS
+                            . En: Colombia&nbsp;
+                            ,2019,&nbsp;
+                            ,Servicio Nacional De Aprendizaje Sena Regional Cesar.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;0 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Economía y Negocios -- Negocios y Management,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            SANDRA LAGO PADILLA,                    
+                            
+                            MODELO DE NEGOCIOS PARA LA ELABORACIÓN Y COMERCIALIZACIÓN DE ROPA DE MUJER EN AGUACHICA CESAR, BAJO LA MARCA (BARGUI),&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR-SECCIONAL AGUACHICA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Administración de Empresas,
+                            &nbsp;2023.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Yoenis Barbosa Guillen
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): SANDRA LAGO PADILLA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Otras Humanidades -- Otras Humanidades,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            SANDRA LAGO PADILLA,                    
+                            
+                            DISEÑO DE UN PLAN DE FORTALECIMIENTO ORGANIZACIONAL PARA EL POSICIONAMIENTO DE LA CONSTRUCTORA DUARCORP S.A.S EN AGUACHICA CESAR&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR-SECCIONAL AGUACHICA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Administración de Empresas,
+                            &nbsp;2023.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            GUSTAVO ANDRES BADILLO COBOS
+                            lina marcela quintero cardenas
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): SANDRA LAGO PADILLA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Otras Humanidades -- Otras Humanidades,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            SANDRA LAGO PADILLA,                    
+                            
+                            Análisis de aplicación de la RSE en los Centros Veterinarios en Aguachica - Cesar.&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR-SECCIONAL AGUACHICA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Administración de Empresas,
+                            &nbsp;2024.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Jhader Alberto Fajardo Uribe
+                            Johan Sebastian Peña  Martinez
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): SANDRA LAGO PADILLA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Otras Humanidades -- Otras Humanidades,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            SANDRA LAGO PADILLA,                    
+                            
+                            Creación de productos comerciales sostenibles a partir del mango en descomposición promoviendo la economía circular.&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR-SECCIONAL AGUACHICA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Administración de Empresas,
+                            &nbsp;2024.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Yelitza Sánchez Yaruro
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): SANDRA LAGO PADILLA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            SANDRA LAGO PADILLA,                    
+                            
+                            Análisis de los emprendimientos financiados por el Fondo Emprender en el Departamento del Cesarperiodo 2019- 2024&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR-SECCIONAL AGUACHICA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Administración de Empresas,
+                            &nbsp;2024.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Leidy Paola Rivas Navarro
+                            María Camila Angarita Galvis
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): SANDRA LAGO PADILLA,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Otras Humanidades -- Otras Humanidades,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Jurado en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            SANDRA LAGO PADILLA,                    
+                            
+                            <i>Titulo:&nbsp;</i>ANÁLISIS DE LA GESTIÓN DEL TALENTO HUMANO EN EL PROCESO DE RECLUTAMIENTO Y SELECCIÓN EN EL SECTOR HOTELERO DE AGUACHICA, CESAR,                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR-SECCIONAL AGUACHICA&nbsp;
+                            <i>programa acad&eacute;mico</i> Administración de Empresas&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i> &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Otras Humanidades -- Otras Humanidades,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            SANDRA LAGO PADILLA,                    
+                            
+                            <i>Titulo:&nbsp;</i>ANÁLISIS DEL RECLUTAMIENTO Y SELECCIÓN DEL PERSONAL DOCENTE DE LAS INSTITUCIONES DE EDUCACIÓN PRIVADAS DEL NIVEL MEDIO EN EL MUNICIPIO DE AGUACHICA, CESAR,                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR-SECCIONAL AGUACHICA&nbsp;
+                            <i>programa acad&eacute;mico</i> Administración de Empresas&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i> &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Otras Humanidades -- Otras Humanidades,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Par evaluador</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2020,&nbsp;
+                                        Noviembre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Internacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES,&nbsp;                
+                                        
+                                        2020,&nbsp;
+                                        Octubre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2020,&nbsp;
+                                        Noviembre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2020,&nbsp;
+                                        Noviembre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Internacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES,&nbsp;                
+                                        
+                                        2020,&nbsp;
+                                        Octubre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2020,&nbsp;
+                                        Noviembre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Internacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES,&nbsp;                
+                                        
+                                        2020,&nbsp;
+                                        Octubre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Internacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES,&nbsp;                
+                                        
+                                        2020,&nbsp;
+                                        Octubre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Internacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES,&nbsp;                
+                                        
+                                        2020,&nbsp;
+                                        Octubre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2019,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2019,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2019,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2019,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion RedCols - Nodo Cesar,&nbsp;                
+                                        
+                                        2019,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES,&nbsp;                
+                                        
+                                        2022,&nbsp;
+                                        Junio &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Internacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES,&nbsp;                
+                                        
+                                        2022,&nbsp;
+                                        Junio &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Internacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES,&nbsp;                
+                                        
+                                        2022,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Internacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES,&nbsp;                
+                                        
+                                        2022,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES,&nbsp;                
+                                        
+                                        2022,&nbsp;
+                                        Junio &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Internacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES,&nbsp;                
+                                        
+                                        2021,&nbsp;
+                                        Enero &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Internacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES,&nbsp;                
+                                        
+                                        2021,&nbsp;
+                                        Octubre &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES,&nbsp;                
+                                        
+                                        2022,&nbsp;
+                                        Junio &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>FUNDACIÓN RED LATINOAMERICANA DE JOVENES E INVESTIGADORES,&nbsp;                
+                                        
+                                        2022,&nbsp;
+                                        Junio &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion - RedColsi Nodo Barranquilla,&nbsp;                
+                                        
+                                        2018,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                
+                            <tr>
+                                <td>
+                                    <blockquote>
+                                        <i>&Aacute;mbito: </i>Nacional&nbsp;
+                                        <i>Par evaluador de: </i>Proyecto&nbsp;
+                                        
+                                        <i>Instituci&oacute;n: </i>Fundacion Red Colombiana de Semilleros de Investigacion - RedColsi Nodo Barranquilla,&nbsp;                
+                                        
+                                        2018,&nbsp;
+                                        Mayo &nbsp;
+                                    </blockquote>
+                                </td>                         
+                            </tr>            
+                                    
+                        </table>    
+                        </td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>Congreso Internacional de Tendencias en la Investigación Universitaria, Una Visión desde Latinoamérica&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2024-10-24 00:00:00.0,&nbsp;
+                                                    2024-10-25 00:00:00.0 &nbsp;
+                                                    en BELLO &nbsp; - UNIVERSIDAD UNIMINUTO &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>¿BARGUI Y EL MERCADO DE MODA FEMENINA EN AGUACHICA, CESAR: ESTUDIO DE CASO¿
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR-SECCIONAL AGUACHICA
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>SANDRA LAGO PADILLA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>VI CONGRESOS NACIONAL DE SEMILLEROS DE INVESTIGACIÒN E INNOVACIÒN 2022&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2022-06-10 00:00:00.0,&nbsp;
+                                                    2022-06-11 00:00:00.0 &nbsp;
+                                                    en AGUSTÍN CODAZZI &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>SENA - CENTRO AGROEMPRESARIAL - REGIONAL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>SANDRA LAGO PADILLA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>IX CONGRESO INTERNACIONAL DOSSIER 2023&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2023-06-01 00:00:00.0,&nbsp;
+                                                    2023-06-02 00:00:00.0 &nbsp;
+                                                    en OCAÑA &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>MEJORAMIENTO DE LA PRODUCCIÓN AGRÍCOLA A TRAVÉS DE LA IMPLEMENTACIÓN DE UN PLANTULADOR HORTOFRUTÍCOLA Y ESPECIES NATIVAS PARA LOS PEQUEÑOS PRODUCTORES DEL SUR DEL CESAR-COLOMBIA
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>SENA - CENTRO AGROEMPRESARIAL - REGIONAL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>SANDRA LAGO PADILLA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>I CONGRESO VIRTUAL INTERNACIONAL DE INVESTIGACIÒN INFANTIL Y JUEVENIL MIIC, DOCENTES EN AULA, SUPERVISORES Y DIRECTORES EDUCAIVIOS 2021&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2021-10-02 00:00:00.0,&nbsp;
+                                                     &nbsp;
+                                                    en VALLEDUPAR &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>APROVECHAMIENTO DE LOS DESECHOS GENERADOS EN LOS PRODUCTORES Y COMERCIALIZADORES DE FRUTAS Y HORTALIZAS DEL MERCADO PUBLICO DE AGUACHICA PARA SER INCORPORADOS A LA VIDA ÚTIL
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>SENA - CENTRO AGROEMPRESARIAL - REGIONAL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>SANDRA LAGO PADILLA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>5</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>4to encuentro latinoamericano de semilleros, jóvenes e investigadores&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2019-08-12 00:00:00.0,&nbsp;
+                                                    2019-08-15 00:00:00.0 &nbsp;
+                                                    en CARTAGENA DE INDIAS &nbsp; - Fundación universitaria Antonio de Arevalo Unitecnar &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Gobierno electrónico en las alcaldías del sur del departamento del cesar
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Servicio Nacional De Aprendizaje Sena Regional Cesar
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>SANDRA LAGO PADILLA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>6</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>segundo congreso internacional virtual de investigadores&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2020-10-24 00:00:00.0,&nbsp;
+                                                    2020-10-24 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Dignostico situacional de los gobierno en linea de las alcaldías del sur del cesar
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Centro Agroempresarial
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>SANDRA LAGO PADILLA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>7</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>I Encuentro de Investigación e Innovación Sena Regional Cesar&nbsp;
+                                                <i>Tipo de evento: </i>Encuentro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2018-05-09 00:00:00.0,&nbsp;
+                                                    2018-05-10 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - auditorio sena regional cesar &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Servicio Nacional De Aprendizaje Sena Regional Cesar
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>SANDRA LAGO PADILLA
+                                                        <i>Rol en el evento: </i>Asistente , Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>8</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>II CONGRESO DE BIOTECNOLOGÍA Y AGROINDUSTRIA DEL CENTRO BIOTECNOLOGICO DEL CARIBE - VALLEDUPAR - REGIONAL CESAR&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2018-11-28 00:00:00.0,&nbsp;
+                                                    2018-11-29 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - AUDITORIO BIBLIOTECA DEPARTAMENTAL RAFAEL CARRILLO LUQUEZ &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Servicio Nacional De Aprendizaje Sena Regional Cesar
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>SANDRA LAGO PADILLA
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>9</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>I CONGRESO INTERNACIONAL Y II CONGRESO NACIONAL DE CIENCIA, TECNOLOGÍA Y DESARROLLO SOCIAL, HACIA EL DESARROLLO SOSTENIBLE&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2018-11-08 00:00:00.0,&nbsp;
+                                                    2018-11-09 00:00:00.0 &nbsp;
+                                                    en BARRANQUILLA &nbsp; - auditorio hotel contry &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Servicio Nacional De Aprendizaje Atlantico
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>SANDRA LAGO PADILLA
+                                                        <i>Rol en el evento: </i>Asistente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>10</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>II simposio de innovación e  Investigación aplicada&nbsp;
+                                                <i>Tipo de evento: </i>Simposio&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2018-11-14 00:00:00.0,&nbsp;
+                                                    2018-11-16 00:00:00.0 &nbsp;
+                                                    en AGUACHICA &nbsp; - auditorio centro agroempresarial &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Servicio Nacional De Aprendizaje Sena Regional Cesar
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>SANDRA LAGO PADILLA
+                                                        <i>Rol en el evento: </i>Compilador de memorias , Organizador
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>11</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>III Simposio de Investigación, Innovacion y Desarrollo Tecnológico&nbsp;
+                                                <i>Tipo de evento: </i>Simposio&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2018-10-11 00:00:00.0,&nbsp;
+                                                    2018-10-12 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - CENTRO DE CONVECCIONES CRISPIN VILLAZON DE ARMAS &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>implementación de la herramienta gobierno en linea en la alcaldía del sur del cesar
+                                                        <i>Tipo de producto:</i>Demás trabajos - Demás trabajos - Póster
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>mplementación de la herramienta gobierno en linea en la alcaldía del sur del cesar
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>Servicio Nacional De Aprendizaje Sena Regional Cesar
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>SANDRA LAGO PADILLA
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a>         
+
+            <table width="100%" style="border:#999 1px solid">
+                <tr>
+                    <td><h3 >Art&iacute;culos</h3></td>
+                </tr>
+                
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                SANDRA LAGO PADILLA,                    
+                
+                "LA INNOVACION COMO EJE TRANSFORMADOR EN LA GERENCIA ORGANIZACIONAL"
+                . En: &nbsp;<br>
+                Revista de Gestao Social e Ambiental&nbsp;
+                <i>ISSN:</i>&nbsp;1981-982X&nbsp;
+                <i>ed:</i>&nbsp;ANPAD - Associacao Nacional de Pos-Graduacao e Pesquisa em Administracao<br>
+                <i>v.</i>N/A
+                <i>fasc.</i>
+                p.20
+                - 27
+                ,2026,
+                <i>&nbsp;DOI:&nbsp;</i>10.24857/rgsa.v20n2-013
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                SANDRA LAGO PADILLA,                    
+                
+                "NEGOCIOS AUTOSOSTENIBLES UNA OPORTUNIDAD DE LA CÁSCARA DE PLÁTANO VERDE"
+                . En: &nbsp;<br>
+                Nanotechnology Perceptions&nbsp;
+                <i>ISSN:</i>&nbsp;1660-6795&nbsp;
+                <i>ed:</i>&nbsp;Collegium Basilea<br>
+                <i>v.</i>22
+                <i>fasc.</i>N/A
+                p.8
+                - 16
+                ,2026,
+                <i>&nbsp;DOI:&nbsp;</i>10.62441/nano-ntp.vi.5952
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                SANDRA LAGO PADILLA,                    
+                
+                "DEVELOPMENT OF VEGETABLE ECO LEATHER FROM THE USE OF MANGO WASTE IN A STATE OF DECOMPOSITION"
+                . En: &nbsp;<br>
+                GENETICS AND MOLECULAR RESEARCH&nbsp;
+                <i>ISSN:</i>&nbsp;1676-5680&nbsp;
+                <i>ed:</i>&nbsp;Fundacao de Pesquisas Cientificas de Ribeirao Preto<br>
+                <i>v.</i>25
+                <i>fasc.</i>
+                p.1
+                - 8
+                ,2026,
+                <i>&nbsp;DOI:&nbsp;</i>
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+                <tr>
+                    <td>                            
+                <li>                                
+                    
+                    <b>Producción bibliográfica - Artículo - Publicado en revista especializada</b>
+                </li>
+        </td>
+    </tr>            
+    <tr>
+        <td>            
+            <blockquote>  
+                                    
+                SANDRA LAGO PADILLA,                    
+                
+                "¿Bargui Y El Mercado De Moda Femenina En Aguachica, Cesar¿"
+                . En: &nbsp;<br>
+                Mundo Fesc&nbsp;
+                <i>ISSN:</i>&nbsp;2216-0353&nbsp;
+                <i>ed:</i>&nbsp;<br>
+                <i>v.</i>14
+                <i>fasc.</i>
+                p.219
+                - 230
+                ,2024,
+                <i>&nbsp;DOI:&nbsp;</i>10.61799/2216-0388.1726
+                
+                
+
+                
+                            
+            </blockquote>
+        </td>
+    </tr>
+    
+</table>
+</td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a>
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Libros</h3></td>
+            </tr>
+                
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Libro - Libro resultado de investigación</b>
+            </li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            SANDRA LAGO PADILLA,                    
+            
+            "Gobierno electrónico y su implementación"
+            En: Colombia
+            2020.&nbsp;
+            ed:Editorial Académica
+Española&nbsp;
+            <i>ISBN:</i>&nbsp;978-620-2-81315-0&nbsp;
+            <i>v. </i>
+            <i>pags.</i>&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Sociales -- Economía y Negocios -- Negocios y Management,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a>        
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td colspan="2"><h3 >Capitulos de libro</h3></td>
+            </tr>
+                
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Otro capítulo de libro publicado<br>
+                    SANDRA LAGO PADILLA,                    
+                    
+
+                    "Diagnostico situacional de los gobiernos electrónicos de las alcaldías del sur del Departamento del Cesar"
+                    la investigación como eje de transformación del conocimiento
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-958-49-0749-3&nbsp;
+                    <i>ed:</i>&nbsp;
+                    <i>, v.</i>
+                    , p.34
+                    - 42&nbsp;
+                    
+                    ,2020
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ciencias Sociales -- Economía y Negocios -- Negocios y Management,                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Otro capítulo de libro publicado<br>
+                    SANDRA LAGO PADILLA,                    
+                    
+
+                    "ANALISIS SITUACIONAL DE LA IMPLEMENTACIÓN DE LA GESTIÓN DOCUMENTAL EN LAS EMPRESAS PUBLICAS DE AGUACHICA"
+                    ¿ACELERANDO  EL FUTURO. IMPORTANCIA DE LA CIENCIA Y LA TECNOLOGÍA
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-958-49-2797-2&nbsp;
+                    <i>ed:</i>&nbsp;
+                    <i>, v.</i>
+                    , p.7
+                    - 13&nbsp;
+                    
+                    ,2021
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Humanidades -- Otras Humanidades -- Otras Humanidades,                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Otro capítulo de libro publicado<br>
+                    SANDRA LAGO PADILLA,                    
+                    
+
+                    "GENERACIÓN DE PROCESOS AGROINDUSTRIALES INTEGRADOS A LA VIDA ÚTIL A PARTIR DE UNA RUTA DE APROVECHAMIENTO DE LOS DESECHOS GENERADOS EN LOS PRODUCTORES Y COMERCIALIZADORES DE FRUTAS Y HORTALIZAS DEL MUNICIPIO DE AGUACHICA"
+                    la ciencia como eje de desarrollo de las naciones
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-958-49-3597-7&nbsp;
+                    <i>ed:</i>&nbsp;
+                    <i>, v.</i>
+                    , p.75
+                    - 80&nbsp;
+                    
+                    ,2021
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ciencias Naturales -- Ciencias de la Tierra y Medioambientales -- Ciencias del Medio Ambiente,                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Otro capítulo de libro publicado<br>
+                    SANDRA LAGO PADILLA,                    
+                    
+
+                    "GESTION DOCUMENTAL EN LAS EMPRESAS PUBLICAS DE AGUACHICA COLOMBIA Y SUS AVANCES EN IMPLEMENTACIÒN Y TECNOLOGIA"
+                    Transformando el mundo: Reflexiones y hallazgos de la investigación juvenil
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-628-01-0497-3&nbsp;
+                    <i>ed:</i>&nbsp;
+                    <i>, v.</i>
+                    , p.247
+                    - 251&nbsp;
+                    
+                    ,2023
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ciencias Sociales -- Otras Ciencias Sociales -- Ciencias Sociales, Interdisciplinaria,                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    SANDRA LAGO PADILLA,                    
+                    
+
+                    "ASPECTOS TEÓRICOS Y FORMALES DE LA GERENCIA SOCIAL EN LAS EMISORAS RADIALES: AGUACHICA CESAR COLOMBIA."
+                    EXPLORADO NUEVAS FRONTERAS EN LA INVESTIGACION ACADEMICA
+                    . En: &nbsp;
+                    <i>ISBN:</i>&nbsp;978-628-01-8116-5&nbsp;
+                    <i>ed:</i>&nbsp;Editorial Fundación LASIRC
+                    <i>, v.</i>
+                    , p.568
+                    - 575&nbsp;
+                    
+                    ,2025
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ciencias Sociales -- Otras Ciencias Sociales -- Otras Ciencias Sociales,                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    SANDRA LAGO PADILLA,                    
+                    
+
+                    "LIDERAZGO Y EDUCACIÓN COMO EXPERIENCIAS DE FORMACIÓN JUVENIL EN LA SOCIEDA."
+                    PERSPECTIVAS CONTEPORANEAS EN EDUCACIÓN ¿DIALOGOS MULTIDISCIPLINARIOS¿
+                    . En: Colombia&nbsp;
+                    <i>ISBN:</i>&nbsp;978-628-02-0998-2&nbsp;
+                    <i>ed:</i>&nbsp;EDICIONES MAYA PABON
+                    <i>, v.</i>
+                    , p.41
+                    - 66&nbsp;
+                    
+                    ,2025
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+
+</table>
+</td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%">
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 id="textos">Textos en publicaciones no cient&iacute;ficas</h3></td>
+            </tr>        
+               
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Otro artículo publicado - Periódico de noticias</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            SANDRA LAGO PADILLA,                    
+            
+            "Análisis del gobierno electrónico en el municipio de Agustín Codazzi, del Departamento del Cesar ¿ Colombia"
+            En: Colombia. 
+            2020.
+             INNOCAE.
+            <i>ISSN:</i>&nbsp;2590-549X 
+            <i>p.</i>5 
+            - 14
+            v.2
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Sociales -- Economía y Negocios -- Negocios y Management,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+   
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Otro artículo publicado - Periódico de noticias</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            SANDRA LAGO PADILLA,                    
+            
+            "APROVECHAMIENTO DE LOS DESECHOS GENERADOS EN LOS PRODUCTORESY COMERCIALIZADORES DE FRUTAS Y HORTALIZAS DEL MERCADO PUBLICO DE AGUACHICA PARA SER INCORPORADOS A LA VIDA ÚTIL ("
+            En: Colombia. 
+            2022.
+             REVISTA LASIRC.
+            <i>ISSN:</i>&nbsp;2711-1814 
+            <i>p.</i>305 
+            - 435
+            v.4
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Sociales -- Economía y Negocios -- Negocios y Management,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+   
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Otro artículo publicado - Periódico de noticias</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            SANDRA LAGO PADILLA,                    
+            
+            "GOBIERNO ELECTRONICO EN LAS ALCALDIAS DEL SUR DEL DEPARTAMENTO DEL CESAR ."
+            En: Colombia. 
+            2020.
+             REVISTA LASIRC.
+            <i>ISSN:</i>&nbsp;2711-1814 
+            <i>p.</i>267 
+            - 270
+            v.1
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            Municipio,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Sociales -- Economía y Negocios -- Negocios y Management,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+   
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Otro artículo publicado - Periódico de noticias</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            SANDRA LAGO PADILLA,                    
+            
+            "Implementación de la Herramienta Gobierno en Linea en las Alcaldías del Sur del Departamento del Cesar."
+            En: Colombia. 
+            2018.
+            ISSN 2590-6151 - MEMORIA DEL SIMPOSIO DE INVESTIGACIÓN, INNOVACIÓN Y DESARROLLO TECNOLÓGICO COMM.
+            <i>ISSN:</i>&nbsp;2590-6151 
+            <i>p.</i>44 
+            - 46
+            v.1
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Sociales -- Economía y Negocios -- Negocios y Management,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+   
+            <tr>
+                <td><li>
+                
+                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                
+                <b>Producción bibliográfica - Otro artículo publicado - Periódico de noticias</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            SANDRA LAGO PADILLA,                    
+            
+            "Gobierno electrónico en las alcaldías del sur del Departamento del Cesar"
+            En: Colombia. 
+            2019.
+            LOGIN.
+            <i>ISSN:</i>&nbsp;2590-7441 
+            <i>p.</i>75 
+            - 77
+            v.3
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Ciencias Sociales -- Economía y Negocios -- Negocios y Management,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a></td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        EVALUAR LA IMPLEMENTACIÓN DE LOS GOBIERNOS EN LÍNEAS DE LAS ALCALDÍAS DEL SUR DEL CESAR<br>
+                        <i>Inicio:&nbsp;</i>Enero&nbsp;
+                        2019                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2019
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            La necesidad de tener un gobierno en línea eficiente que permita interactuar entre los ciudadanos y los gobiernos locales del sur del departamento del Cesar proporcionen a la ciudadanía no solo información verídica de lo que a diario acontece en el municipio sino que además, a través del sitio web se pueda acceder a servicios que no sea necesario la presencia del ciudadano con el objetivo de minimizar la tramitación tanto para el funcionario como para el usuario. La investigación busca aportar nuevos conocimientos y estrategias para la implementación de la herramienta gobierno en línea que le permitan a la administración pública integrar los diferentes servicios, racionalizar, optimizar, compartir recursos y contar con información de calidad y oportuna al interior de cada municipio, de igual forma fortalecer la transparencia gubernamental por medio de la participación ciudadana, facilitando el conocimiento de la gestión del gobierno, generando confianza en él  y habilitando nuevos canales para la participación ciudadana y el control social.
+
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Mejoramiento de producción de cultivos hortofrutícolas y especies nativas con la implementación de un plantulador en el Sur del Cesar<br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2023                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Mayo&nbsp;
+                        2023
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Actualmente el Departamento del Cesar viene enfrentando una disminución en la producción y rendimientos de los cultivos, debido a
+los altos costos de producción, mala calidad de los materiales a establecer y remplazo de sistemas agrícolas por actividad minera, este
+proyecto tiene como objetivo general mejorar la productividad agrícola mediante la implementación de un plantulador de hortofrutícola
+y especies nativas para los pequeños productores del sur del Departamento del Cesar; el tipo de investigación utilizada es mixta y
+desarrollará en 8 etapas fundamentadas en la implementación de un plantulador para la producción de plántulas hortofrutícolas y
+especies nativas de alta calidad; Como resultado final se busca proporcionaran a los pequeños productores material vegetal que
+ayudaran al aumento de la producción con esto aumentar crecimiento de sector agrícola. fortalecer la dinámica productiva del
+departamento, entre otras.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Análisis de la implementación de  la gestión documental en las empresas públicas de Aguachica Cesar <br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2021                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Este trabajo investigativo tiene como objetivo principal realizar un diagnóstico que permita analizar la implementación de la gestión documental de las empresas públicas del municipio de   Aguachica ¿ Cesar, teniendo como punto de referencia la ley 594 del 2000, Ley General de archivo y analizar la influencia del recurso en su implementación. Se busca identificar y conocer si estas instituciones actualmente están cumpliendo con lo estipulado en la presente ley, su estado de avance y como incide el talento humano para lograr el objetivo de la misma; El tipo de investigación es descriptiva, y cuantitativa teniendo en cuenta que se realizará un plan de acción que nos permita describir y analizar las etapas y características del modelo de gestión documental de las instituciones públicas, así mismo se hará un análisis cuantitativo de los resultados obtenidos que nos permita evaluar la implementación y proponer un plan de mejora basado en los requerimientos exigencias contempladas en la ley.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Elaboración  de papel artesanal a base de cascara de banano verde <br>
+                        <i>Inicio:&nbsp;</i>Febrero&nbsp;
+                        2022                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El incremento de forma acelerada del consumismo ha traído consigo aumento de  residuos sólidos en todo el mundo agudizando cada vez el problemática ambiental. Según el diario la república Actualmente, en Colombia se generan aproximadamente 11,6 millones de toneladas de residuos sólidos al año; mientras que los municipios del Cesar solo por mercado publico nos arroja una cifra considerable. Por lo anterior el objetivo general de esta investigación es generar procesos de reutilización de la cascara de guineo verde en la produción de papel como mecanismo de aprovechamiento de los desechos generados, integrados a la vida útil, toma como punto de referencia los lineamientos nacionales para generar alternativas de solución a esta problemática. El enfoque de la investigación es cualitativo y el diseño experimental teniendo en cuanta que hará un análisis de la información y luego estos se harán manipulados para crear una alternativa de aprovechamiento para obtener productos reincorporados ala vida útil<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        APROVECHAMIENTO DE LOS DESECHOS GENERADOS EN LOS PRODUCTORESY COMERCIALIZADORES DE FRUTAS Y HORTALIZAS DEL MERCADO PUBLICO DE AGUACHICA PARA SER INCORPORADOS A LA VIDA ÚTIL <br>
+                        <i>Inicio:&nbsp;</i>Julio&nbsp;
+                        2021                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2022
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Esta investigación fue fundamenta con el fin de aportar soluciones al rápido aumento de desechos que van al
+relleno sanitarios del municipio de Aguachica Cesar sin darle un manejo acorde con lo reglamentado, que permita
+crear procesos de separación de este material orgánico que puede ser reutilizado con otro fin específico. Por lo
+anterior el objetivo central de esta investigación es realizar un aprovechamiento de los desechos generados en los
+productores y comercializadores de frutas y hortalizas del mercado público del municipio de Aguachica.
+Soportado teóricamente por las leyes, decretos y normas nacionales creadas para reglamentar estos proceso en el país. El enfoque de la investigación es cuantitativo, diseño experimental y se estará aplicando un censo poblacional teniendo en cuenta que la población es bastante pequeña. Para finalizas como resultado es tendremos una ruta de aprovechamiento de los residuos orgánicos originados por las malas prácticas de manejo de residuos en el mercado público del Municipio de Aguachica Cesar.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        GOBIERNO ELECTRÓNICO EN LA ALCALDÍA DEL MUNICIPIO DE AGUSTÍN CODAZZI, DEPARTAMENTO DEL CESAR- COLOMBIA<br>
+                        <i>Inicio:&nbsp;</i>Marzo&nbsp;
+                        2014                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Marzo&nbsp;
+                        2015
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Hoy en día los gobiernos electrónicos son vistos como una nueva forma de hacer gobierno y  gestión;  que a través del uso de las tecnologías de información y comunicación (TIC) en las administraciones públicas, buscan simplificar procesos, mejorar la información, brindar un mejor servicio al ciudadano y pretenden lograr más eficiencia y transparencia para la sociedad. 
+En este contexto en  esta  investigación se analizó la implementación del gobierno electrónico en el municipio de Agustín Codazzi, con el fin de conocer hasta qué punto está herramienta está siendo efectivo y así mismo, si  cumple con los parámetros establecidos por los entes reguladores encargados  de velar el cumplimiento de sus ejecución,  por último, esta investigación busco concienciar la necesidad de tener un gobierno electrónico eficiente en harás de minimizar la tramitación tanto para el funcionario como para el usuario y que la página web proporcione a la sociedad no solo información verídica de lo que a diario acontece en el municipio, también se puedan acceder a servicios que anteriormente solo se podían hacer de manera presencial.
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        Desarrollo de una plataforma ecosistema digital ¿Walden MVP¿ para estudiantes emprendedores de la Universidad Popular del Cesar- Seccional Aguachica<br>
+                        <i>Inicio:&nbsp;</i>Octubre&nbsp;
+                        2025                
+                        
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            El emprendimiento se convierte en una alternativa más para dinamizar la economía en el mundo, convirtiéndose en un enfoque determinante en la construcción de un tejido empresarial y económico de las regiones, fortaleciendo la cultura de emprendimientos, la innovación y la generación de modelos de negocios. Sin embargo, para lograr materializar esto, se debe contar con ecosistemas empresariales que articulen los diferentes actores que hacen posible promover e impulsar el emprendimiento, minimizando la desmotivación y el abandono de ideas al inicio. En consecuencia, el objetivo principal de este proyecto es diseñar la plataforma ecosistema digital ¿Walden MVP¿ para estudiantes emprendedores de la Universidad Popular del Cesar - Seccional Aguachica. Este proyecto se justifica desde la necesidad del programa de administración de ser pioneros en el fortalecimiento de emprendimientos innovadores y sostenibles, brindando herramientas necesarias para hacer seguimiento, para retroalimentar los procesos, que exista un acompañamiento no solo presencial, sino también remoto, para lograr la formalización y cumplir con su papel de formar para la transformación social y económica del país. La metodología está enmarcada bajo un enfoque cuantitativo, de tipo descriptivo correlacional y un diseño de campo. Como principales referentes teóricos se encuentran Mack y Mayer (2016), Henry Etzkowitz & Leot desdorff (2000), con su Modelo del Triple Hélice, Isenberg (2011) con su modelo de los ecosistemas del emprendedor, entre otros. Para finalizar, los impactos, pertinencia y resultados esperados tendrán artículos como productos, resultados de actividades de generación de nuevo conocimiento, plataforma ecosistema emprendedor Walden MVP como productos, resultados de actividades de desarrollo tecnológico e innovación y capacitación, productos, resultados de actividades de apropiación social del conocimiento.<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

@@ -1,0 +1,2590 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+
+
+
+
+<html>
+
+    <head>
+        <title>CvLAC - RG</title>
+<script>
+	var texto="";
+	var NS4 = (document.layers); // Which browser?
+	var IE4 = (document.all);
+	var win = window; // window to search.
+	var n = 0;
+	
+	function resaltar(valor){
+	var encontro=0;
+	var donde=0;
+	//valor=document.getElementById('tt').value;
+	reemplazar=RegExp(valor,"i");
+	por="<span style=\u0022background-Color:yellow;\u0022>"+valor+"</span>";
+	if(texto==""){texto=document.body.innerHTML};
+	txt=texto.split(">");
+	for (x=0;x<txt.length;x++){
+	desde=(txt[x].indexOf("<")!=-1)?txt[x].indexOf("<"):0;
+	tempP=txt[x].slice(0,desde);
+	tempU=txt[x].slice(desde);
+	tempPx=tempP.split(" ");
+	for(y=0;y<tempPx.length;y++){
+	if(tempPx[y].search(reemplazar)!=-1){
+	tempPx[y]=tempPx[y].replace(reemplazar,por);
+	encontro+=1;
+	}
+	}
+	txt[x]=tempPx.join(" ")+tempU;
+	}
+	document.body.innerHTML=txt.join(">");
+	//alert((encontro==0)?"No se encontro ''"+valor+"''":"Se encontraron "+encontro+" coincidencias");
+	encontro=null;
+	donde=null;
+	}
+	
+	<!-- Original by http://javascript.internet.com More javascripts http://www.hypergurl.com -->
+	
+	function findInPage(str) {
+	//resaltar(str);
+	var txt, i, found; if (str == "") return false; // Find next occurance of the given string on the page, wrap around to the
+	// start of the page if necessary.
+	if (NS4) { // Look for match starting at the current point. If not found, rewind
+	// back to the first match.
+	if (!win.find(str)) while(win.find(str, false, true))
+	n++; else n++; // If not found in either direction, give message. if (n == 0)
+	alert("Not found."); } if (IE4) { txt = win.document.body.createTextRange();
+	// Find the nth match from the top of the page.
+	for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) { txt.moveStart("character", 1); txt.moveEnd("textedit"); } // If found, mark it and scroll it into view.
+	if (found) { txt.moveStart("character", -1); txt.findText(str);
+	txt.select(); txt.scrollIntoView(); n++; } // Otherwise, start over at the top of the page and find first match.
+	else { if (n > 0) { n = 0; findInPage(str);
+	} // Not found anywhere, give message.
+	else alert("Not found."); } }
+	return false; }
+</script>
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />                        
+    
+        <meta name="google-site-verification" content="i8iweOHAFYQV0nLnM5KwROxv6enyqJioSpdx0w_uZSI" />
+        <link href="/cvlac/css/visualizador.css;jsessionid=4239AB2505DFD809595C9C4B32D22E2F" type="text/css" rel="stylesheet">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+
+<body>
+
+<div class="wrapper">
+            <div class="header">
+                <div class="menubar">
+                    <ul class="mmenu" style="height:23px;padding:2px;">
+                        <li ><a class="menu" href="#" style="width:100px">Datos generales</a>
+
+                            <ul>
+                                <li><a class="menu" href="#datos_generales">Identificaci&oacute;n</a></li>
+                                <li><a class="menu" href="#redes_identificadores">Redes sociales acad&eacute;micas</a></li>
+                                <li><a class="menu" href="#red_identificadores">Identificadores de autor</a></li>
+                                <li><a class="menu" href="#formacion_acad">Formaci&oacute;n acad&eacute;mica</a></li>
+                                <li><a class="menu" href="#formacion_comp">Formaci&oacute;n complementaria</a></li>
+                                <li><a class="menu" href="#estancias_posdoctorales">Estancias posdoctorales</a></li>
+                                <li><a class="menu" href="#experiencia">Experiencia profesional</a></li>
+                                <li><a class="menu" href="#otra_info_personal">Otra informaci&oacute;n personal</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Actividades formaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#asesorias">Asesor&iacute;as</a></li>
+                                <li><a class="menu" href="#curso_corta_du">Cursos de corta duraci&oacute;n</a></li>
+                                <li><a class="menu" href="#trabajos_dirigi">Trabajos dirigidos/tutor&iacute;as</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:120px">Actividades evaluador</a>
+
+                            <ul>
+                                <li><a class="menu" href="#jurado">Jurado comisiones evaluadoras de trabajo de grado</a></li>
+                                <li><a class="menu" href="#par">Par evaluador</a></li>
+                                <li><a class="menu" href="#comite">Participaci&oacute;n en comit&eacute; de evaluaci&oacute;n</a></li>
+                            </ul>
+
+                        </li>
+                        <li ><a class="menu" href="#" style="width:130px">Apropiaci&oacute;n social</a>
+
+                            <ul>
+                                <li><a class="menu" href="#edicion">Edici&oacute;n</a></li>
+                                <li><a class="menu" href="#evento">Evento cient&iacute;fico</a></li>
+                                <li><a class="menu" href="#re_co">Redes de conocimiento especializado</a></li>                                
+                                <li><a class="menu" href="#asc_for">Fortalecimiento o soluci&oacute;n de asuntos de inter&eacute;s social</a></li>									
+                                <li><a class="menu" href="#asc_tra">Trabajo conjunto entre un Centro de Ciencia y un grupo de investigaci&oacute;n</a></li>									
+                                <li><a class="menu" href="#asc_gen">Generaci&oacute;n de insumos de pol&iacute;tica p&uacute;blica y normatividad</a></li>									
+                                <li><a class="menu" href="#asc_cad">Fortalecimiento de cadenas productivas</a></li>									
+                                <li><a class="menu" href="#div_ced">Publicaciones editoriales no especializadas</a></li>									
+                                <li><a class="menu" href="#div_cda">Producciones de contenido digital Audiovisual</a></li>									
+                                <li><a class="menu" href="#div_cds">Producciones de contenido digital Sonoro</a></li>									
+                                <li><a class="menu" href="#div_cdr">Producciones de contenido digital Recursos gr&aacute;ficos</a></li>									
+                                <li><a class="menu" href="#div_ctr">Producci&oacute;n de estrategias y contenidos transmedia</a></li>									
+                                <li><a class="menu" href="#div_des">Desarrollos web</a></li>	
+                            </ul>
+
+                        </li>
+
+                        <li ><a class="menu" href="#" style="width:140px">Producci&oacute;n bibliogr&aacute;fica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#articulos">Art&iacute;culos</a></li>
+                                <li><a class="menu" href="#libros">Libros</a></li>
+                                <li><a class="menu" href="#capitulos">Cap&iacute;tulos de libro</a></li>
+                                <li><a class="menu" href="#nota_cientifica">Nota cient&iacute;fica</a></li>
+                                <li><a class="menu" href="#textos">Textos en publicaciones no cient&iacute;ficas</a></li>
+                                <li><a class="menu" href="#otra_prod_biblio">Otra producci&oacute;n bibliog&aacute;fica</a></li>
+                                <li><a class="menu" href="#lib_tra">Traducciones Filol&oacute;gicas y Edición de Fuentes</a></li>
+                                <li><a class="menu" href="#lib_cre">Libro de creaci&oacute;n (Piloto)</a></li>
+                                <li><a class="menu" href="#lib_for">Libro de Formaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_div">Libros de divulgaci&oacute;n y/o Compilaci&oacute;n de divulgaci&oacute;n</a></li>
+                                <li><a class="menu" href="#lib_man">Manuales y Gu&iacute;as Especializadas</a></li>
+
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:120px">Producci&oacute;n T&eacute;cnica</a>
+
+                            <ul>
+                                <li><a class="menu" href="#patentes">Patentes</a></li>
+                                <li><a class="menu" href="#secretos">Secretos empresariales</a></li>
+                                <li><a class="menu" href="#software">Software</a></li>
+                                <li><a class="menu" href="#tecnologicos">Productos tenol&oacute;gicos</a></li>
+                                <li><a class="menu" href="#procesos">Procesos o t&eacute;cnicas</a></li>
+                                <li><a class="menu" href="#trabajos_tec">Trabajos t&eacute;cnicos</a></li>
+                                <li><a class="menu" href="#normas">Normas y Regulaciones</a></li>
+                                <li><a class="menu" href="#otra_prod_tecnica">Otra producci&oacute;n t&eacute;cnica</a></li>
+                                <li><a class="menu" href="#base_tecnologica">Empresas de base tecnologica</a></li>
+                            </ul>
+
+                        </li>	
+                        <li ><a class="menu" href="#" style="width:100px">M&aacute;s informaci&oacute;n</a>
+
+                            <ul>
+                                <li><a class="menu" href="#demas_trabajos">Dem&aacute;s Trabajos</a></li>
+                                <li><a class="menu" href="#proyectos">Proyectos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:110px">Producción en arte</a>
+
+                            <ul>
+                                <li><a class="menu" href="#obras_productos">Obras o productos</a></li>
+                                <li><a class="menu" href="#registros_acuerdo">Registros de acuerdo de licencia</a></li>
+                                <li><a class="menu" href="#crea_cul">Industrias Creativas y culturales</a></li>
+                                <li><a class="menu" href="#even_art">Evento artistico</a></li>
+                                <li><a class="menu" href="#talleres">Talleres creativos</a></li>
+                            </ul>
+
+                        </li>
+                        <li><a class="menu" href="#" style="width:60px;">Buscar</a><!--[if IE 7]><!--><!--<![endif]-->
+
+                            <ul>
+
+                                <li>
+                                    <form style="margin:0px;" name="search" onSubmit="return findInPage(this.string.value);" method="get">
+                                        <input name="string" type="text" onChange="n = 0;" /><br />
+                                        <input type="submit" value="Buscar" name="search" />
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li>				
+                    </ul>		
+                </div>
+            </div>
+
+            <div class="sep">&nbsp;</div>
+
+            <div class="container">
+                <table with="100%">   
+                    <tr><td><h3 align="center"><font size="3">Hoja de vida</font></h3></td></tr>
+                    <tr>        
+                        <td width="100%"><a name="datos_generales"></a>
+                            <table width="100%" style="border:#999 1px solid">                    
+                                
+                                                          
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>
+                                        Jerson Alexander&nbsp;Acero&nbsp;Morales
+                                    </td>            
+                                </tr>
+                                <tr>           
+                                    <td>Nombre en citaciones</td>
+                                    <td>ACERO MORALES, JERSON ALEXANDER</td>
+                                </tr>        
+                                <tr>            
+                                    <td>Nacionalidad</td>
+                                    <td>Colombiana</td>            
+                                </tr>                                 
+                                <tr>            
+                                    <td>Sexo</td>
+                                    <td>Masculino</td>            
+                                </tr>                     
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--INICIO REDES -->
+                    <tr>
+                        <td width="100%"><a name="redes_identificadores"></a></td>
+                    </tr>
+
+                    <!--                FIN REDES-->
+
+                    <!--INICIO IDENTIFICADORES -->
+                    <tr>
+                        <td width="100%"><a name="red_identificadores"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td><h3 >Identificadores de autor</h3></td>
+                                </tr>
+                                    
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        
+                                        <a target="_blank" href="https://orcid.org/0000-0002-5688-3258" style="color: #007A81">Open Researcher and Contributor ID (ORCID)</a>
+                                    </td>
+                                </tr>
+                                
+                            </table>
+                            </td>
+                    </tr>
+
+                    <!--                FIN IDENTIFICADORES-->
+
+                    <tr>        
+                        <td width="100%"><a name="formacion_acad"></a>
+                            <table width="100%" style="border:#999 1px solid">
+                                <tr>
+                                    <td colspan="2"><h3>Formaci&oacute;n Acad&eacute;mica</h3></td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Doctorado</b>
+                            UNIVERSIDAD PEDAGÓGICA Y TECNOLÓGICA DE COLOMBIA<br />
+                            Doctorado en Lenguaje y Cultura<br />
+                            Marzode2022 - de <br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Maestría/Magister</b>
+                            Universidad Pedagógica Y Tecnológica De Colombia - Uptc - Sede Tunja<br />
+                            Maestría en lingüística<br />
+                            Enerode2018 - Diciembrede 2019<br />
+                            CONCEPCIONES Y PRÁCTICAS DE ENSEÑANZA DE LECTURA Y ESCRITURA ACADÉMICA DE LOS FORMADORES DE FORMADORES EN LENGUAJE</td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Pregrado/Universitario</b>
+                            UNIVERSIDAD DE PAMPLONA<br />
+                            LICENCIATURA EN LENGUA CASTELLANA Y COMUNICACION<br />
+                            Agostode2009 - Juniode 2013<br />
+                            </td>
+                    </tr>
+                    
+                                <tr>
+                                    <td><li>&nbsp;</li></td>    
+                        <td><b>Perfeccionamiento</b>
+                            UNIVERSIDAD POPULAR DEL CESAR<br />
+                            DIPLOMADO EN DOCENCIA UNIVERSITARIA<br />
+                            Marzode2019 - Juniode 2019<br />
+                            </td>
+                    </tr>
+                    
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="formacion_comp"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3>Formaci&oacute;n Complementaria</h3></td>
+                            </tr>   
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        UNIVERSIDAD DE PAMPLONA<br />
+                        Introducción al Ambiente Virtual de Aprendizaje  - AVA <br />
+                        Noviembrede2015 - Noviembrede 2015<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        INSTITUTO TECNICO COMFACESAR<br />
+                        INGLÉS A1<br />
+                        Enerode2015 - Juliode 2015<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Cursos de corta duración</b>
+                        Instituto Colombiano para la Evaluación de la Educación<br />
+                        Taller: Uso de resultados en el mejoramiento continuo del proceso educativo<br />
+                        Septiembrede2015 - Septiembrede 2015<br />
+                        </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>    
+                    <td><b>Otros</b>
+                        Ministerio De Educación Nacional - Mineducación<br />
+                        Desarrollo y articulación de proyectos pedagógicos transversales<br />
+                        Marzode2013 - Noviembrede 2013<br />
+                        </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+
+                <tr>        
+                    <td width="100%"><a name="estancias_posdoctorales"></a>
+                </td>
+                </tr> 
+
+                <tr>
+                    <td width="100%"><a name="experiencia"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="2"><h3 >Experiencia profesional</h3></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>Secretaría de Educación Municipal de Valledupar</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Mayo de 2015            
+                         de Actual<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD POPULAR DEL CESAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>18&nbsp;horas Semanales
+                        Julio de 2016            
+                         de Actual<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD DEL MAGDALENA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>5&nbsp;horas Semanales
+                        Junio de 2018            
+                        Noviembre de 2018<br><br>   
+                                    
+                        
+                        <span class="blueTitle">Actividades de docencia</span><br>
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; PSICOLINGÜÍSTICA,&nbsp;16 
+                        Agosto 2018            
+                        Septiembre 2018<br>
+
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; TALLER DE TEXTO,&nbsp;16 
+                        Octubre 2018            
+                        Noviembre 2018<br>
+
+                                       
+                        - &nbsp;
+                        Pregrado            
+                        <i> - Nombre del curso:</i>&nbsp; Expresión oral y argumentación,&nbsp;16 
+                        Noviembre 2018            
+                        Noviembre 2018<br>
+
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>UNIVERSIDAD DE PAMPLONA</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>8&nbsp;horas Semanales
+                        Julio de 2015            
+                        Julio de 2018<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                            <tr>
+                                <td><li>&nbsp;</li></td>        
+                    <td>            
+                        <b>SECRETARÍA DE EDUCACIÓN VALLEDUPAR</b><br>                      
+                        <i>Dedicaci&oacute;n: </i>40&nbsp;horas Semanales
+                        Diciembre de 2008            
+                        Mayo de 2015<br><br>   
+                                    
+                        
+                        
+                        
+                    </td>
+                </tr>
+                
+                </table>
+                
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"><a name="otra_info_personal"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >&Aacute;reas de actuaci&oacute;n</h3></td>
+                            </tr>        
+                                   
+                            <tr>
+                                <td><li>&nbsp;Humanidades -- Idiomas y Literatura -- Lingüística</li></td>
+                </tr>            
+                       
+                            <tr>
+                                <td><li>&nbsp;Humanidades -- Idiomas y Literatura -- Estudios Generales del Lenguaje</li></td>
+                </tr>            
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%">
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td colspan="5"><h3 >Idiomas</h3></td>
+                            </tr>    
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td><b>Habla</b></td>
+                                <td><b>Escribe</b></td>
+                                <td><b>Lee</b></td>
+                                <td><b>Entiende</b></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><li>&nbsp;Inglés</li></td>
+                    <td>Aceptable</td>
+                    <td>Aceptable</td>
+                    <td>Bueno</td>
+                    <td>Aceptable</td>                                                        
+                </tr>    
+                
+                            <tr>
+                                <td><li>&nbsp;Español</li></td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>
+                    <td>Bueno</td>                                                        
+                </tr>    
+                
+                </table>
+                </td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>        
+                    <td width="100%"></td>
+                </tr>
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><blockquote class="fillText">Los ítems de producción con la marca  <img src='/cvlac/images/chulo.jpg' height="15px" width="15px"> corresponden a productos avalados y validados para la última <i>Convocatoria Nacional para el Reconocimiento y Medición de Grupos de Investigación, Desarrollo Tecnológico o de Innovación y para el Reconocimiento de Investigadores del SNCTeI</i></blockquote></td>
+                </tr>        
+                <!--Inicio asesorias-->
+                <tr>        
+                    <td width="100%"><a name="asesorias"></a></td>
+                </tr>
+                <!--Fin asesorias-->
+                <!--Inicio curso corta -->
+                <tr>        
+                    <td width="100%"><a name="curso_corta_du"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Cursos de corta duraci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Producción técnica - Cursos de corta duración dictados - Extensión extracurricular</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                                
+                            JERSON ALEXANDER ACERO MORALES,                    
+                                            
+                            Módulo No1 Lectura en los niveles iniciales del diplomado comprensión de texto en el aula.,
+                            <i>Finalidad: </i>
+                            . En: Colombia&nbsp;
+                            ,2018,&nbsp;
+                            ,UNIVERSIDAD DEL MAGDALENA.&nbsp;
+                            participaci&oacute;n: Docente
+                            ,&nbsp;4 semanas&nbsp;
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,                    
+                            
+                            
+                             
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin curso corta-->
+                <!--Inicio trabajos dirigidos-->
+                <tr>
+                    <td width="100%"><a name="trabajos_dirigi"></a>    <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Trabajos dirigidos/tutor&iacute;as</h3></td>
+                            </tr>
+                             
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            Lectura y Escritura Académica en los Programas de Formación Docente de la Universidad Popular del Cesar&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            LICENCIATURA EN ESPAÑOL E INGLÉS,
+                            &nbsp;2022.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            YULIANA SERRANO CASTILLO
+                            Marianella Barceló Robledo
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): JERSON ALEXANDER ACERO MORALES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            DESARROLLO DE LA ESCUCHA ACTIVA EN LA CLASE VIRTUAL DE LENGUA CASTELLANA&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            LICENCIATURA EN LENGUA CASTELLANA E INGLES,
+                            &nbsp;2020.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Karen Lorena López Maestre
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): JERSON ALEXANDER ACERO MORALES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            ELABORACIÓN DE UN PERIÓDICO DIGITAL MEDIANTE LA WEB BLOGS PARA MEJORAR LA PRODUCCIÓN TEXTUAL EN LOS ESTUDIANTES DEL GRADO SÉPTIMO DE LA INSTITUCIÓN EDUCATIVA NORMAL SUPERIOR MARÍA INMACULADA  DEL MUNICIPIO DE MANAURE CESAR&nbsp;
+                            UNIVERSIDAD DE PAMPLONA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ,
+                            &nbsp;2016.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            KELI JOHANA JIMENÈZ ANGARITA &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JERSON ALEXANDER ACERO MORALES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            LA LECTURA DIGITAL: UNA ESTRATEGIA PARA MEJORAR LAS MACROHABILIDADES COMUNICATIVAS LEER Y ESCRIBIR EN LOS ESTUDIANTES DEL GRADO 5º DE LA INSTITUCIÓN EDUCATIVA ELOY QUINTERO ARAÚJO SEDE CONCENTRACIÓN ESCOLAR MARÍA AUXILIADORA DE BOSCONIA CESAR&nbsp;
+                            UNIVERSIDAD DE PAMPLONA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ,
+                            &nbsp;2017.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            ANGELA MARCELA RODRIGUEZ ROMERO&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JERSON ALEXANDER ACERO MORALES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            MEJORAMIENTO DE LA PRODUCCIÓN DE TEXTOS INFORMATIVOS A TRAVÉS DE  LA CREACIÓN DEL PERIÓDICO ESCOLAR EN LOS ALUMNOS DEL GRADO SÉPTIMO DE LA INSTITUCIÓN EDUCATIVA TÉCNICA MAGOLA HERNÁNDEZ PARDO&nbsp;
+                            UNIVERSIDAD DE PAMPLONA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ,
+                            &nbsp;2016.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            ELIZABETH CASTRO PEÑALOZA&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JERSON ALEXANDER ACERO MORALES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            MEJORAR LA EXPRESIÓN ORAL A TRAVÉS DE  OBRAS DE TEATRO  EN LOS ALUMNOS DEL GRADO 3º 01 DE LA INSTITUCIÓN EDUCATIVA LEONIDAS ACUÑA SEDE HOGAR DEL NIÑO VALLEDUPAR -CESAR&nbsp;
+                            UNIVERSIDAD DE PAMPLONA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ,
+                            &nbsp;2017.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            YENIFER BELEÑO MARTINEZ&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JERSON ALEXANDER ACERO MORALES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            DESARROLLO DE LA COMPRENSIÓN TEXTUAL MEDIANTE LA TRADICIÓN ORAL EN LOS ESTUDIANTESDEL GRADO SEGUNDO DEL CENTRO EDUCATIVO LA ESMERALDA, SEDE GUADALUPE, VEREDA BOCA DE TIGRE, DEL MUNICIPIO DE BOSCONIA CESAR&nbsp;
+                            UNIVERSIDAD DE PAMPLONA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ,
+                            &nbsp;2016.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            ERMIS MANUEL LÓPEZ TORREZ&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JERSON ALEXANDER ACERO MORALES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            COMPOSICIÓN DE VERSOS VALLENATOS PARA PROMOVER LA PRODUCCIÓN TEXTUAL EN LOS GRADOS 5 DE LA INSTITUCIÓN EDUCATIVA RODOLFO CASTRO CASTRO DEL CORREGIMIENTO DE MARIANGOLA -  CESAR&nbsp;
+                            UNIVERSIDAD DE PAMPLONA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ,
+                            &nbsp;2016.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            ALIX YANETH  MONTAÑO OÑATE &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JERSON ALEXANDER ACERO MORALES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            LOS TEXTOS ICÓNICOS VERBALES (COMICS) COMO ESTRATEGIA PEDAGÓGICA PARA FORTALECER LA INTERPRETACIÓN Y LA COMPETENCIA COMUNICATIVA ESCRITORA EN LOS ESTUDIANTES DEL GRADO QUINTO DE LA INSTITUCIÓN EDUCATIVA NORMAL SUPERIOR MARÍA INMACULADA&nbsp;
+                            UNIVERSIDAD DE PAMPLONA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            LICENCIATURA EN LENGUA CASTELLANA Y COMUNICACION,
+                            &nbsp;2016.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            KATIANA SIMENA SÁNCHEZ RODRÍGUEZ&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JERSON ALEXANDER ACERO MORALES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            DESARROLLO DE LAS COMPETENCIAS DE COMPRENSIÓN PRODUCCIÓN TEXTUAL POR MEDIO DE LA LECTURA DE FABULAS EN LOS ESTUDIANTES DEL GRADO SEXTO DE LA INSTITUCIÓN EDUCATIVA RURAL LA LAGUNA DE LA HACIENDA EL CORAJE, ALGARROBO MAGALENA&nbsp;
+                            UNIVERSIDAD DE PAMPLONA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ,
+                            &nbsp;2017.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            ROSA MARÍA HERNÁNDEZ ROSADO&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JERSON ALEXANDER ACERO MORALES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            INCENTIVAR LA COMPETENCIA LECTURA MEDIANTE EL ANÁLISIS DE TEXTOS INSTRUCTIVOS A LOS ESTUDIANTES DEL GRADO TERCERO DE LA INSTITUCIÓN EDUCATIVA CARLOS RESTREPO ARAÚJO DEL MUNICIPIO DE BOSCONIA - CESAR&nbsp;
+                            UNIVERSIDAD DE PAMPLONA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ,
+                            &nbsp;2017.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            ANYELA KATERINE GONZÁLEZ ARIZA&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JERSON ALEXANDER ACERO MORALES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            FORTALECIMIENTO DE LA PRODUCCIÓN ESCRITA A TRAVÉS DE TALLERES LÚDICOS EN LOS GRADOS SEGUNDOS DE LA INSTITUCIÓN EDUCATIVA CASIMIRO RAÚL MAESTRE DE VALLEDUPAR - CESAR&nbsp;
+                            UNIVERSIDAD DE PAMPLONA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            ,
+                            &nbsp;2016.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            MARYURI MILDRETH MORALES LIÑAN&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JERSON ALEXANDER ACERO MORALES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                            
+                            MÁS ALLÁ DEL SILENCIO: USO DE LA MÚSICA COMO ESTRATEGIA DIDÁCTICA PARA FORTALECER LA EXPRESIÓN ORAL EN ESTUDIANTES DE EDUCACIÓN BÁSICA&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            Licenciatura en Español e Inglés,
+                            &nbsp;2024.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            Astrid Yurany Roldán Marín
+                            María Alejandra Amarís Puerta
+                                                        
+                            
+                            
+                            Tutor(es)/Cotutor(es): JERSON ALEXANDER ACERO MORALES,
+                               
+                            
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            La caricatura política como estrategia para el desarrollo de la competencia pragmática.&nbsp;
+                            UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            LICENCIATURA EN ESPAÑOL E INGLÉS,
+                            &nbsp;2023.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JERSON ALEXANDER ACERO MORALES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            MEJORAMIENTO DE LOS PROCESOS DE LECTURA (DECODIFICACIÓN Y COMPRESIÓN) MEDIANTE EL FORTALECIMIENTO DE LA CONCIENCIA FONOLÓGICA EN LOS ESTUDIANTES DE SEGUNDO GRADO DE LA INSTITUCIÓN EDUCATIVA SAGRADO CORAZÓN DE JESÚS DEL MUNICIPIO DE SAN DIEGO CESAR&nbsp;
+                            UNIVERSIDAD DE PAMPLONA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            LICENCIATURA EN LENGUA CASTELLANA Y COMUNICACION,
+                            &nbsp;2017.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            ANA MARÍA ARZUAGA QUINTERO &nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JERSON ALEXANDER ACERO MORALES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            USO DE LAS TECNOLOGÍAS DE LA INFORMACIÓN Y LA COMUNICACIÓN (TIC) COMO ESTRATEGIAS PARA EL FORTALECIMIENTO DE LA COMPRESIÓN LECTORA EN LOS ESTUDIANTES DEL GRADO SEGUNDO DE LA INSTITUCIÓN EDUCATIVA COLEGIO COLOMBO INGLÉS DE VALLEDUPAR&nbsp;
+                            UNIVERSIDAD DE PAMPLONA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            LICENCIATURA EN LENGUA CASTELLANA Y COMUNICACION,
+                            &nbsp;2016.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            ANA MILENA OÑATE ARDILA&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JERSON ALEXANDER ACERO MORALES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            EL DESARROLLO DE LOS NIVELES DE LECTURA (LITERAL, INFERENCIAL Y CRÍTICO-INTERTEXTUAL) A TRAVÉS DE POEMAS EN LOS ESTUDIANTES DEL GRADO TERCERO DEL COLEGIO LA SAGRADA FAMILIA DE VALLEDUPAR.&nbsp;
+                            UNIVERSIDAD DE PAMPLONA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            LICENCIATURA EN LENGUA CASTELLANA Y COMUNICACION,
+                            &nbsp;2016.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            KARINA LEONOR COTES CAMELO&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JERSON ALEXANDER ACERO MORALES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            DESARROLLO DE LA COMPETENCIA LECTORA MEDIANTE ACTIVIDADES LÚDICAS-RECREATIVAS APLICADAS A LOS ESTUDIANTES DEL GRADO 4° DEL COLEGIO SAN JUAN BOSCO DE BOSCONIA CESAR&nbsp;
+                            UNIVERSIDAD DE PAMPLONA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            LICENCIATURA EN LENGUA CASTELLANA Y COMUNICACION,
+                            &nbsp;2016.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            SANDRA MARGARITA MARTINEZ MUÑOZ&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JERSON ALEXANDER ACERO MORALES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                 
+                            <tr>
+                                <td><li>
+                                
+                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                
+                                <b>Trabajos dirigidos/Tutorías - Trabajos de grado de pregrado</b></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                                            
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            DESARROLLO DE LAS COMPETENCIAS DE COMPRENSIÓN TEXTUAL A PARTIR DE LOS ESTILOS DE APRENDIZAJE DE FELDER Y SILVERMAN EN SÉPTIMO GRADO DE LA INSTITUCIÓN EDUCATIVA JOSÉ AGUSTÍN SOLANO DE BARRANCA LA GUAJIRA&nbsp;
+                            UNIVERSIDAD DE PAMPLONA&nbsp;
+                            Estado: Tesis concluida&nbsp;
+                            LICENCIATURA EN LENGUA CASTELLANA Y COMUNICACION,
+                            &nbsp;2016.
+                            <i>Dirigi&oacute; como: </i>Tutor principal,&nbsp;
+                            &nbsp;<i>Persona(s) orientada(s):&nbsp;</i>                            
+                            
+                            YESIKA ARÉVALO AGUIRRE&nbsp;                            
+                            
+                            
+                            Tutor(es)/Cotutor(es): JERSON ALEXANDER ACERO MORALES,
+                               
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,
+                            
+                            
+                        </blockquote>                    
+                    </td>                         
+                </tr>            
+                        
+                </table>    
+                </td>
+                </tr> 
+                <!--Fin trabajos dirigidos-->
+                <tr>
+                    <td width="100%" align="right">&nbsp;</td>
+                </tr>
+                <!--Inicio jurados-->
+                <tr>
+                    <td width="100%"><a name="jurado"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3 >Jurado en comit&eacute;s de evaluaci&oacute;n</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Maestría</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            <i>Titulo:&nbsp;</i>ESTRATEGIA PEDAGÓGICA PARA EL FORTALECIMIENTO DE LA IDENTIDAD CULTURAL Y LOS VALORES SOCIALES A TRAVÉS DE LA TRADICIÓN ORAL DEL PACIFICO EN UNA INSTITUCIÓN EDUCATIVA RURAL DE BUENAVENTURA                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> MAESTRÍA EN EDUCACIÓN PARA EL DESARROLLO SOCIOCULTURAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>KEIVIS NIETO AYALA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Maestría</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            <i>Titulo:&nbsp;</i>FORTALECER LA IDENTIDAD CULTURAL Y LOS VALORES SOCIALES A TRAVÉS DEL DISEÑO DE UNA CARTILLA PEDAGÓGICA Y DIDÁCTICA SOPORTADA EN LA TRADICIÓN ORAL DEL PACIFICO COLOMBIANO EN UNA INSTITUCIÓN URBANA                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> MAESTRÍA EN EDUCACIÓN PARA EL DESARROLLO SOCIOCULTURAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>BERTILDA RENTERÍA GAMBOA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Maestría</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            <i>Titulo:&nbsp;</i>INFLUENCIA DE LOS DE LOS ESTILOS EDUCATIVOS FAMILIARES EN LA COMUNICACIÓN ORAL DE LOS ESTUDIANTES DE LOS GRADOS PRIMERO Y TERCERO DE LA INSTITUCIÓN EDUCATIVA SIMÓN BOLÍVAR SEDE DIVINO NIÑO                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> MAESTRÍA EN EDUCACIÓN PARA EL DESARROLLO SOCIOCULTURAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>LINA FERNANDA MONTENEGRO CARDENAS &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Maestría</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            <i>Titulo:&nbsp;</i>LA TRADICIÓN ORAL COMO ELEMENTO DINAMIZADOR DE LA CULTURA KANKUAMA, EN EL GRADO 9° DE LA INSTITUCIÓN AGRÍCOLA LA MINA                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> MAESTRÍA EN EDUCACIÓN PARA EL DESARROLLO SOCIOCULTURAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>SAMIR MONTERO ARIAS &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Maestría</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            <i>Titulo:&nbsp;</i>ESTRATEGIA PEDAGÓGICA LÚDICA EN EL ÁREA DE EDUCACIÓN FÍSICA A TRAVÉS DE LOS JUEGOS TRADICIONALES PARA LA APROPIACIÓN DE LA COMPETENCIA EXPRESIVA CORPORAL DE LOS ESTUDIANTES DEL GRADO SÉPTIMO DE LA INSTITUCIÓN EDUCATIVA SANTA CRUZ, LORICA, CÓRDOBA                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> MAESTRÍA EN EDUCACIÓN PARA EL DESARROLLO SOCIOCULTURAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>YIRA PAOLA CORREA LOPEZ &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Maestría</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            <i>Titulo:&nbsp;</i>LA TRADICIÓN ORAL DESDE LA PALABRA DE LOS MAYORES CON LOS ESTUDIANTES DEL GRADO NOVENO DE LA INSTITUCIÓN EDUCATIVA TÉCNICA AGROPECUARIA INDÍGENA PANAN, CUMBAL                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> MAESTRÍA EN EDUCACIÓN PARA EL DESARROLLO SOCIOCULTURAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>EDWIN ANÍBAL CUAICAL PIARPUEZAN &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Maestría</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            <i>Titulo:&nbsp;</i>APROPIACIÓN DE LAS TRADICIONES ORALES, MEDIADAS POR EL DESIGN THINKING, EL TEATRO Y LA MÚSICA EN LOS COLEGIOS AMIGOS DEL TURISMO DE LA CIUDAD DE BOGOTÁ                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> MAESTRÍA EN EDUCACIÓN PARA EL DESARROLLO SOCIOCULTURAL&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>CAROLINA MORA OSPINA &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            <i>Titulo:&nbsp;</i>PRODUCCIÓN DE TEXTOS INFORMATIVOS EMPLEADOS EN LA ORGANIZACIÓN DE LA EMISORA ESTUDIANTIL APLICADO POR LOS ALUMNOS DEL GRADO DÉCIMO DE LA INSTITUCIÓN EDUCATIVA ALFONSO LÓPEZ PUMAREJO                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD DE PAMPLONA&nbsp;
+                            <i>programa acad&eacute;mico</i> LICENCIATURA EN LENGUA CASTELLANA Y COMUNICACION&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>FLOR ELENA OLIVO PUMAREJO &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Humanidades -- Idiomas y Literatura -- Lingüística,                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            <i>Titulo:&nbsp;</i>Evolución y variación del cierre de vocales medias en Valledupar: un análisis sociolingüístico.                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> LICENCIATURA EN LITERATURA Y LENGUA CASTELLANA&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Daniel Pérez Peralta &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                    
+                            <tr>
+                                <td><li><b>Datos complementarios - Jurado/Comisiones evaluadoras de trabajo de grado - Pregrado</b></li></td>
+                </tr>
+                <tr>
+                    <td>
+                        <blockquote>
+                                                
+                            JERSON ALEXANDER ACERO MORALES,                    
+                            
+                            <i>Titulo:&nbsp;</i>La toma de apuntes: descripción de sus utilidades en estudiantes de undécimo grado                
+                            <i>Tipo de trabajo presentado:&nbsp;</i>Proyecto de grado/Tesis
+                            <i>en:&nbsp;</i> UNIVERSIDAD POPULAR DEL CESAR&nbsp;
+                            <i>programa acad&eacute;mico</i> LICENCIATURA EN ESPAÑOL E INGLÉS&nbsp;
+                            <i>Nombre del orientado:&nbsp;</i>Brayan Smith Martínez Malagón &nbsp;                
+                            
+                            
+                            
+                                           
+                            <br><b>Areas: </b><br>
+                                                    
+                            Ciencias Sociales -- Ciencias de la Educación -- Educación General (Incluye Capacitación, Pedagogía),                    
+                            
+                            
+                            
+
+                        </blockquote>
+                    </td>
+                </tr>
+                
+                </table>
+                </td>
+                </tr>
+                <!--Fin jurados-->
+                <!--Inicio Participacion comite-->
+                <tr>
+                    <td width="100%"><a name="comite"></a></td>
+                </tr>
+                <!--Fin particiacion comite-->
+                <!--Inicio par evaluador-->
+                <tr>
+                    <td><a name="par"></a></td>
+                </tr>
+                <!--Fin par evaluador-->
+                <!--Inicio Consultorias -->
+                <tr>       
+                    <td width="100%"></td>
+                </tr>
+                <!--Fin Consultorias-->
+                <!--Inicio edicion-->
+                <tr>        
+                    <td width="100%"><a name="edicion"></a></td>
+                </tr>
+                <!--Fin edicion-->
+                <!--Inicio eventos cientificos-->
+                <tr>        
+                    <td width="100%"><a name="evento"></a>
+                        <table width="100%" style="border:#999 1px solid">
+                            <tr>
+                                <td><h3>Eventos cient&iacute;ficos</h3></td>
+                            </tr>
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>1</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>III CONGRESO INTERNACIONAL DE LECTURA Y ESCRITURA EN LA SOCIEDAD GLOBAL&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2017-06-07 00:00:00.0,&nbsp;
+                                                    2017-06-09 00:00:00.0 &nbsp;
+                                                    en Ibarra &nbsp; - PONTIFICIA UNIVERSIDAD CATÓLICA DEL ECUADOR &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>LA LENGUA ESCRITA COMO OBJETO DE ENSEÑANZA: LA VOZ DE LOS MAESTROS DE NIVEL INICIAL
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>LA LECTURA Y LA ESCRITURA COMO OBJETO DE ENSEÑANZA: LA VOZ DE LOS MAESTROS DE BÁSICA PRIMARIA
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>ENITH JOHANA CIFUENTES ALVAREZ
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                                <ul><li><i>Nombre: </i>JERSON ALEXANDER ACERO MORALES
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>2</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>IV Congreso Internacional Ales 2023. Leer y escribir en contextos educativos y profesionales: desafíos en tiempos de incertidumbre&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2023-11-22 00:00:00.0,&nbsp;
+                                                    2023-11-24 00:00:00.0 &nbsp;
+                                                    en Comuna de Concepción &nbsp; - Universidad Católica de la Santísima Concepción &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JERSON ALEXANDER ACERO MORALES
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>3</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>XX FORO INTERNACIONAL SOBRE EVALUACIÓN DE LA CALIDAD DE LA INVESTIGACIÓN Y LA EDUCACIÓN SUPERIOR (FECIES)&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2023-05-24 00:00:00.0,&nbsp;
+                                                    2023-05-26 00:00:00.0 &nbsp;
+                                                    en Granada &nbsp; -  &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>CARACTERIZACIÓN DE GÉNEROS DISCURSIVOS EN LA FORMACIÓN DE DOCENTES EN LA UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de producto:</i>Producción bibliográfica - Trabajos en eventos (Capítulos de memoria) - Completo
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JERSON ALEXANDER ACERO MORALES
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>4</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>VIII COLOQUIO INTERNACIONAL EN LENGUAJE Y CULTURA&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2018-11-01 00:00:00.0,&nbsp;
+                                                    2018-11-02 00:00:00.0 &nbsp;
+                                                    en TUNJA &nbsp; - UNIVERSIDAD PEDAGÓGICA Y TECNOLÓGICA DE COLOMBIA &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>CONCEPCIONES Y PRÁCTICAS DE ENSEÑANZA DE LECTURA Y ESCRITURA ACADÉMICA DE LOS FORMADORES DE FORMADORES DE LENGUAJE
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD PEDAGÓGICA Y TECNOLÓGICA DE COLOMBIA UPTC
+                                                        <i>Tipo de vinculaci&oacute;n</i>Gestionadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JERSON ALEXANDER ACERO MORALES
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>5</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>VII COLOQUIO INTERNACIONAL EN LENGUAJE Y CULTURA&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2018-06-06 00:00:00.0,&nbsp;
+                                                    2018-06-08 00:00:00.0 &nbsp;
+                                                    en TUNJA &nbsp; - UNIVERSIDAD PEDAGÓGICA Y TECNOLÓGICA DE COLOMBIA &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD PEDAGÓGICA Y TECNOLÓGICA DE COLOMBIA UPTC
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JERSON ALEXANDER ACERO MORALES
+                                                        <i>Rol en el evento: </i>Compilador de memorias
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>6</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>COLOQUIO SOBRE PERSPECTIVAS TEÓRICAS Y METODOLÓGICAS EN LENGUAJE&nbsp;
+                                                <i>Tipo de evento: </i>Otro&nbsp;
+                                                <i>&Aacute;mbito: </i>Nacional&nbsp;                
+                                                <i>Realizado el:2018-03-17 00:00:00.0,&nbsp;
+                                                    2018-03-17 00:00:00.0 &nbsp;
+                                                    en VALLEDUPAR &nbsp; - UPTC &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>CONCEPCIONES Y PRÁCTICAS DE ENSEÑANZA DE LECTURA Y ESCRITURA ACADÉMICA DE LOS FORMADORES DE FORMADORES DE LENGUAJE
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD PEDAGÓGICA Y TECNOLÓGICA DE COLOMBIA UPTC
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JERSON ALEXANDER ACERO MORALES
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>7</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>IV Congreso Internacional de Lectura y Escritura en La Sociedad Global&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2019-06-12 00:00:00.0,&nbsp;
+                                                    2019-06-14 00:00:00.0 &nbsp;
+                                                    en Monterrey &nbsp; - Tecnológico de Monterrey &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Productos asociados</b><br>
+                                                
+                                                <ul>
+                                                    <li><i>Nombre del producto:</i>Concepciones y Prácticas de Enseñanza de Lectura y Escritura Académica de los Formadores de Formadores de Lenguaje
+                                                        <i>Tipo de producto:</i>Producción técnica - Presentación de trabajo - Ponencia
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JERSON ALEXANDER ACERO MORALES
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                                
+                            <tr>
+                                <td> 
+                                    <table>           
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src='/cvlac/images/chulo.jpg' height="15px" width="15px">
+                                                
+                                                <b>8</b>&nbsp;<i><b>Nombre del evento:&nbsp;</b></i>V Congreso Internacional de Investigación y Pedagogía&nbsp;
+                                                <i>Tipo de evento: </i>Congreso&nbsp;
+                                                <i>&Aacute;mbito: </i>Internacional&nbsp;                
+                                                <i>Realizado el:2019-10-07 00:00:00.0,&nbsp;
+                                                    2019-10-11 00:00:00.0 &nbsp;
+                                                    en TUNJA &nbsp; - UNIVERSIDAD PEDAGÓGICA Y TECNOLÓGICA DE COLOMBIA &nbsp;
+                                            </td>                         				
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Instituciones asociadas</b><br>					
+                                                
+                                                <ul><li><i>Nombre de la instituci&oacute;n:</i>UNIVERSIDAD POPULAR DEL CESAR
+                                                        <i>Tipo de vinculaci&oacute;n</i>Patrocinadora</li></ul>
+                                                        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                
+                                                <b>Participantes</b><br>
+                                                
+                                                <ul><li><i>Nombre: </i>JERSON ALEXANDER ACERO MORALES
+                                                        <i>Rol en el evento: </i>Ponente
+                                                    </li>
+                                                </ul>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </td>                         				
+                            </tr>          
+                             
+                        </table> 
+                        </td>
+                </tr>
+                <!--Fin eventos cientificos-->
+                <!--Inicio redes de conocimiento-->
+                <tr>        
+                    <td width="100%"><a name="re_co"></a></td>
+                </tr>
+                <!--Fin redes de conocimiento-->
+                
+                <!--Inicio ProyectosExtensionRespSoc-->
+                <tr>        
+                    <td width="100%"><a name="pr_ex_re"></a></td>
+                </tr>
+                <!--Fin ProyectosExtensionRespSoc-->
+                
+
+                <!--               //  //APROPIACION FORTALECIMIENTOS-->
+                <tr>
+                    <td width="100%"><a name="asc_for"></a></td>
+                </tr>
+
+                <!--                FIN FORTALECIMIENTOS-->
+
+                <!--               //  //APROPIACION TRABAJOS-->
+                <tr>
+                    <td width="100%"><a name="asc_tra"></a></td>
+                </tr>
+
+                <!--                FIN TRABAJOS-->
+
+                <!-- APROPIACION GENERACION-->
+                <tr>
+                    <td width="100%"><a name="asc_gen"></a></td>
+                </tr>
+
+                <!--                FIN GENERACION-->
+
+                <!-- APROPIACION CADENAS-->
+                <tr>
+                    <td width="100%"><a name="asc_cad"></a></td>
+                </tr>
+
+                <!--                FIN CADENAS-->
+
+                <!-- DIVULGACION CONTENIDO EDITORIAL-->
+                <tr>
+                    <td width="100%"><a name="div_ced"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO EDITORIAL-->
+
+                <!-- DIVULGACION CONTENIDO AUDIOVISUAL -->
+                <tr>
+                    <td width="100%"><a name="div_cda"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO AUDIOVISUAL-->
+
+                <!-- DIVULGACION CONTENIDO SONORO -->
+                <tr>
+                    <td width="100%"><a name="div_cds"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO SONORO-->
+
+                <!-- DIVULGACION CONTENIDO RECURSOS -->
+                <tr>
+                    <td width="100%"><a name="div_cdr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+                <!-- DIVULGACION TRANSMEDIA -->
+                <tr>
+                    <td width="100%"><a name="div_ctr"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO TRANSMEDIA-->
+
+                <!-- DIVULGACION DESARROLLO WEB  -->
+                <tr>
+                    <td width="100%"><a name="div_des"></a></td>
+                </tr>
+
+                <!--                FIN CONTENIDO RECURSOS-->
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
+        <!--Inicio Articulos-->				   	
+    <tr>        
+        <td width="100%"><a name="articulos"></a></td>
+</tr>
+<!--Fin Articulos-->
+<!--Inicio libros-->
+<tr>        
+    <td width="100%"><a name="libros"></a>
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 >Libros</h3></td>
+            </tr>
+                
+            <tr>
+                <td><li>
+                
+                <b>Producción bibliográfica - Libro - Otro libro publicado</b>
+            </li></td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            JERSON ALEXANDER ACERO MORALES,                    
+                                
+            ENITH JOHANA CIFUENTES ALVAREZ,                    
+                                
+            GABRIEL ANGEL GALIANO RANGEL,                    
+            
+            "Vamos ALasPalabras"
+            En: Colombia
+            2018.&nbsp;
+            ed:Alaspalabras S.A.S&nbsp;
+            <i>ISBN:</i>&nbsp;978-958-56664-0-5&nbsp;
+            <i>v. </i>
+            <i>pags.</i>&nbsp;
+            
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Humanidades -- Idiomas y Literatura -- Lingüística,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>       
+<!--Fin libros-->
+<!--Inicio capitulos libro-->
+<tr>        
+    <td width="100%"><a name="capitulos"></a>        
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td colspan="2"><h3 >Capitulos de libro</h3></td>
+            </tr>
+                
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    JERSON ALEXANDER ACERO MORALES,                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    GABRIEL ANGEL GALIANO RANGEL,                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    MARLON DE JESUS RONDON MEZA,                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    SIRCARLOS MOLINA RETAMOZO,                    
+                    
+
+                    "SITUACIONES DIDÁCTICAS INTERDISCIPLINARES A PARTIR DE LOS JUEGOS TRADICIONALES EN CONTEXTOS RURALES INTERCULTURALES"
+                    Tendencias en la investigación universitaria
+                    . En: Venezuela&nbsp;
+                    <i>ISBN:</i>&nbsp;978-980-7857-28-4&nbsp;
+                    <i>ed:</i>&nbsp;
+                    <i>, v.</i>
+                    , p.165
+                    - 179&nbsp;
+                    
+                    ,2020
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Humanidades -- Idiomas y Literatura -- Lingüística,                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+    
+            <tr>        
+                <td>                
+            <li>
+                <blockquote>
+                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    JERSON ALEXANDER ACERO MORALES,                    
+                    
+                    Tipo: Capítulo de libro<br>
+                    CARMEN BEATRIZ ARAUJO QUIROZ,                    
+                    
+
+                    "GÉNEROS ACADÉMICOS EN LA FORMACIÓN DOCENTE"
+                     TENDENCIAS EN LA INVESTIGACIÓN UNIVERSITARIA. UNA  VISIÓN DESDE LATINOAMÉRICA
+                    . En: Venezuela&nbsp;
+                    <i>ISBN:</i>&nbsp;978-980-7857-66-6&nbsp;
+                    <i>ed:</i>&nbsp;Fondo Editorial Universitario Servando Garcés
+                    <i>, v.</i>
+                    , p.225
+                    - 239&nbsp;
+                    
+                    ,2023
+                    
+                    
+                    
+                                   
+                    <br><b>Areas: </b><br>
+                                            
+                    Humanidades -- Idiomas y Literatura -- Estudios Generales del Lenguaje,                    
+                    
+                    
+                    
+                </blockquote>
+            </li>
+    </td>        
+</tr>
+
+</table>
+</td>
+</tr> 
+<!--Fin capitulos libro-->
+<!--Inicio nota cientifica-->			   	
+<tr>        
+    <td width="100%"><a name="nota_cientifica"></a></td>
+</tr>
+<!--Fin Nota cientificas-->
+<!--Inicio publicaciones no cienti-->
+<tr>        
+    <td width="100%">
+        <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td><h3 id="textos">Textos en publicaciones no cient&iacute;ficas</h3></td>
+            </tr>        
+               
+            <tr>
+                <td><li>
+                
+                <b>Producción bibliográfica - Otro artículo publicado - Revista de divulgación</b>
+            </li>
+    </td>
+</tr>
+<tr>
+    <td>
+        <blockquote>
+                                
+            JERSON ALEXANDER ACERO MORALES,                    
+            
+            "PRÁCTICAS DE ENSEÑANZA DE LECTURA Y ESCRITURA ACADÉMICA DE LOS FORMADORES DE FORMADORES EN LENGUAJE"
+            En: Colombia. 
+            2019.
+            V Congreso internacional de investigación y pedagogía.
+            <i>ISSN:</i>&nbsp;2556-1951 
+            <i>p.</i>2 
+            - 22
+            v.5
+            
+            
+            <br><b>Palabras: </b><br>
+                                
+            lectura y escritura académicas,                    
+                                
+            estudiantes,                    
+                                
+            docentes,                    
+                                
+            prácticas de enseñanza de lectura y escritura,                    
+            
+            
+                           
+            <br><b>Areas: </b><br>
+                                    
+            Humanidades -- Idiomas y Literatura -- Lingüística,                    
+            
+            
+            
+        </blockquote>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+<!--Fin publicaciones no cienti-->
+<!--Inicio documento trabajo-->
+<tr>        
+    <td width="100%"><a name="otra_prod_biblio"></a></td>
+</tr>	
+<!--Fin documentos trabajo-->
+
+ <!-- LIBROS TRADUCCIONES FILOLOGICAS  -->
+                <tr>
+                    <td width="100%"><a name="lib_tra"></a></td>
+                </tr>
+                
+<!--                FIN TRADUCCIONES FILOLOGICAS-->
+
+ 
+                    <!-- LIBROS DE CREACION -->
+                <tr>
+                    <td width="100%"><a name="lib_cre"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS CREACION-->
+
+  <!-- LIBROS DE FORMACION -->
+                <tr>
+                    <td width="100%"><a name="lib_for"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS FORMACION-->
+
+<!-- LIBROS DE DIVULGACION -->
+                <tr>
+                    <td width="100%"><a name="lib_div"></a></td>
+                </tr>
+                
+<!--                FIN LIBROS DIVULGACION-->
+
+<!--INICIO MANUALES -->
+                <tr>
+                    <td width="100%"><a name="lib_man"></a></td>
+                </tr>
+                
+<!--                FIN MANUALES-->
+<!--INICIO BOLETINES-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--FIN BOLETINES-->
+<!--Inicio traducciones-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin traducciones-->
+
+<!--Inicio otra prod biblio-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin otra prod biblio-->
+
+<!--Inicio patentes -->
+<tr>        
+    <td width="100%"><a name="patentes"></a></td>
+</tr>
+<!--Fin patentes -->
+
+
+<!--Inicio secretos -->
+<tr>        
+    <td width="100%"><a name="secretos"></a></td>
+</tr>
+<!--Fin secretos -->
+
+<!--Inicio software-->
+<tr>        
+    <td width="100%"><a name="software"></a></td>
+</tr>
+<!--Fin software-->
+<!--Inicio nutraceutico-->			   	
+<tr>        
+    <td width="100%"><a name="nutraceuticos"></a></td>
+</tr>
+<!--Fin nutraceutico-->
+<!--Inicio de protocolos de vigilancia epidemiológica-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de protocolos de vigilancia epidemiológica-->
+<!--Inicio de prototipos-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de prototipos-->
+<tr>        
+    <td width="100%"><a name="tecnologicos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Poblaciones mejoradas de razas pecuarias--> 
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Fin Poblaciones mejoradas de razas pecuarias-->
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+<!--Inicio Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="registro_cientifico"></a></td>
+</tr>
+<!--Fin Nuevo registro cientifico-->
+<tr>        
+    <td width="100%"><a name="procesos"></a></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="disnio"></a></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<!--Inicio de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin de concepto tecnico-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Inicio secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>
+<!--Fin secuencias genticas-->
+<tr>        
+    <td width="100%"></td>
+</tr>  
+<tr>        
+    <td width="100%"><a name="otra_prod_tecnica"></a></td>
+</tr>          
+<tr>        
+    <td width="100%"></td>
+</tr>
+<tr>        
+    <td width="100%"><a name="demas_trabajos"></a></td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>
+
+<tr>
+    <td width="100%">
+        
+
+</td>
+</tr>        
+
+<tr>
+    <td width="100%"></td>
+</tr>
+
+<tr>
+
+    <td width="100%"></td>
+</tr>
+
+<tr>
+    <td width="100%">        
+        
+</td>
+</tr>
+
+<tr>
+    <td>    <table width="100%" style="border:#999 1px solid">
+            <tr>
+                <td id="proyectos"><h3>Proyectos</h3></td>
+            </tr>
+                
+
+            <tr>
+                <td>                           
+                    <blockquote>
+                        
+                        <i>Tipo de proyecto:&nbsp;</i>Investigaci&oacute;n y desarrollo&nbsp;<br>
+                        LECTURA Y ESCRITURA ACADÉMICA EN LA FORMACIÓN DE DOCENTES DE LA UPC: ANÁLISIS DE PRÁCTICAS Y TENDENCIAS<br>
+                        <i>Inicio:&nbsp;</i>Abril&nbsp;
+                        2022                
+                        
+                        
+                        <i>Fin:&nbsp;</i>Diciembre&nbsp;
+                        2023
+                        
+                        <i>Duraci&oacute;n&nbsp;</i><br>
+                        <b>Resumen</b>
+                        <p class="test1">                                                                 
+                            Frente a las dificultades que los programas de licenciatura la Universidad Popular del Cesar han evidenciado en relación con las competencias de lectura y escritura durante y al finalizar la formación de futuros formadores, se desarrolló este proyecto que tuvo como objetivo analizar las prácticas de lectura y escritura académicas en las licenciaturas de la Universidad Popular del Cesar. 
+Para el logro del objetivo, se configuró un diseño metodológico cualitativo, desde el método etnográfico. El trabajo investigativo se realizó en dos momentos. En el primero, se aplicó un cuestionario masivo donde participaron 108 docentes y 375 estudiantes. En el segundo, se realizaron observaciones de clase de siete asignaturas, al tiempo que se determinó una muestra de 7 docentes y 22 estudiantes, que participaron en entrevistas y grupos focales, y que además permitieron hacer una recolección y análisis de los géneros de lectura y escritura trabajados durante un semestre. 
+Dentro de los resultados más relevantes se evidenció que los docentes tienen la concepción de que las debilidades en los procesos lectura y escritura de los estudiantes de licenciatura son responsabilidad de la educación media. También, que las prácticas de lectura y escritura se limitan, principalmente, hacia el desarrollo de actividades académicas evaluativas dentro de las asignaturas. Así mismo, se encontró que el papel que cada licenciatura otorga a estos procesos responde a motivaciones epistemológicas, pedagógicas y didácticas de cada una de las áreas que ellas representan. 
+Por otro lado, se lograron identificar 14 géneros de lectura y 13 géneros de escritura a partir de un corpus de 115 textos, destacándose que: a) el artículo científico como el género más leído, b) el organizador gráfico, los informes de lectura y el plan de clase como los géneros de escritura de mayor presencia, c) los géneros de lectura son en su mayoría monomodales y con el macropropósito pedagógico enfocado en instruir, en contraste con los de escritura, predominantemente multimodales y con el macropropósito pedagógico de constatar. Se encontró que muchas veces los estudiantes no logran capturar las intenciones que asignan los docentes a las prácticas y tareas de lectura o escritura; asunto que conviene revisar de cara al peso epistémico y pedagógico que tienen estas prácticas en la formación docente. Se espera, a partir de los resultados obtenidos, ofrecer a la Facultad las líneas base de un programa que permita el fortalecimiento de estas habilidades en docentes y estudiantes de cada licenciatura.
+<br>                                
+                        </p>                                                
+                    </blockquote>                                                
+                </td>                         
+            </tr>
+
+
+
+                    
+        </table>    
+        </td>
+</tr>
+
+</body>
+</html>

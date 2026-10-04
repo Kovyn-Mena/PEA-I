@@ -3,9 +3,9 @@
 | # | Requisito | Estado C++ |
 |---|-----------|:----------:|
 | 1 | Gestionar grupos e investigadores | ✅ menuGrupos/menuInvestigadores + N:M |
-| 2 | Productos por grupo y por investigador | ✅ doble enlace + detalles; 243 prod. (83 Art, 26 Cap, 27 Lib, 107 Soft); col. GRUPO + filtro por grupo (S29) |
+| 2 | Productos por grupo y por investigador | ✅ doble enlace + detalles; 1161 prod. en 14 tipos (ver [[034 - Producción por Tipo del Grupo]]); col. GRUPO + filtro por grupo (S29) + pie por tipo (S35) |
 | 3 | Integrantes, **plan** y productos por grupo | ✅ `verDetalleGrupo` |
-| 4 | Info personal + productos del investigador | ✅ `verDetalleInvestigador` |
+| 4 | Info personal + productos del investigador | ✅ `verDetalleInvestigador` + hoja de vida CvLAC S37 (`verPerfilInvestigador`: par evaluador, citaciones, nacionalidad, sexo, Scholar/ORCID, formación, experiencia, áreas, idiomas) |
 | 5 | Documento **Modelo** | ⚠️ No suministrado → ver `MODELO_FALTANTE_Punto5.md` |
 | 6 | Variables de entrada/salida | ✅ validadores + pendiente tabla consola |
 | 7 | Scraping URL o PDF/CSV | ✅ py `--scrape-grupo/--scrape-todos/--ingesta-archivo/--offline` idempotente + snapshot; PDF tabular E2E ✅ (S18) |

@@ -119,6 +119,16 @@ PERFILES_DDL = ("CREATE TABLE IF NOT EXISTS perfiles_grupo (codigo_grupo VARCHAR
                 " FOREIGN KEY (codigo_grupo) REFERENCES Grupos(codigo_grupo) ON DELETE CASCADE);")
 
 
+# S37: hoja de vida CvLAC por integrante (1:1 con Investigadores; FK en cascada).
+HV_DDL = ("CREATE TABLE IF NOT EXISTS perfil_investigador (cod_rh VARCHAR(50) PRIMARY KEY,"
+          " par_evaluador VARCHAR(10) DEFAULT '', nombre_citaciones VARCHAR(255) DEFAULT '',"
+          " nacionalidad VARCHAR(100) DEFAULT '', sexo VARCHAR(20) DEFAULT '',"
+          " scholar_url TEXT DEFAULT '', orcid VARCHAR(100) DEFAULT '',"
+          " formacion_academica TEXT DEFAULT '', formacion_complementaria TEXT DEFAULT '',"
+          " experiencia TEXT DEFAULT '', areas TEXT DEFAULT '', idiomas VARCHAR(600) DEFAULT '',"
+          " FOREIGN KEY (cod_rh) REFERENCES Investigadores(cod_rh) ON DELETE CASCADE);")
+
+
 def conectar(db):
     conn = sqlite3.connect(db)
     conn.execute("PRAGMA journal_mode=WAL;")
@@ -126,6 +136,7 @@ def conectar(db):
     conn.execute("PRAGMA foreign_keys=ON;")
     conn.execute(CACHE_DDL)
     conn.execute(PERFILES_DDL)
+    conn.execute(HV_DDL)
     return conn
 
 
@@ -187,8 +198,10 @@ def descargar_cache(url, nombre_local, db):
     return "nuevo", r.text
 
 
-def empaquetar_grupo(codigo, nro=""):
-    """Un zip por grupo con sus snapshots (S19: 66 zips, no 4.620 html)."""
+def empaquetar_grupo(codigo, nro="", reutilizar=True):
+    """Un zip por grupo con sus snapshots (S19: 66 zips, no 4.620 html).
+    S32: si el zip vigente ya existe y es mas nuevo que sus fuentes, se
+    reutiliza (no se reescribe ni se duplica)."""
     import zipfile
     import glob
     os.makedirs(os.path.join(SNAP_DIR, "zip"), exist_ok=True)
@@ -200,11 +213,105 @@ def empaquetar_grupo(codigo, nro=""):
     files = [f for f in glob.glob(os.path.join(SNAP_DIR, "*.html"))
              if any(k in os.path.basename(f).lower() for k in claves)]
     if not files:
+        # Sin fuentes propias: reutilizar el vigente si ya existe (idempotencia).
+        if reutilizar and os.path.exists(dest):
+            return dest
         return ""
+    if reutilizar and os.path.exists(dest):
+        try:
+            zt = os.path.getmtime(dest)
+            if all(os.path.getmtime(f) <= zt for f in files):
+                return dest
+        except OSError:
+            pass
     with zipfile.ZipFile(dest, "w", zipfile.ZIP_DEFLATED) as z:
         for f in files:
             z.write(f, os.path.basename(f))
     return dest
+
+
+# Mapa de códigos legacy (sigla/G+nro) -> CCRG/COL vigente (S28 + S32).
+# Evita zips huérfanos: el zip se nombra por código y el código cambió.
+CODIGOS_LEGACY = {"GISICO": "COL0018706", "G002668": "COL0043834", "G003639": "COL0001351",
+                  "G0002099": "COL0018706", "G002099": "COL0018706"}
+
+
+def limpiar_zips_huerfanos():
+    """Borra zips legacy cuyo COL vigente ya existe (S32: GISICO->COL0018706...).
+    Devuelve lista de eliminados."""
+    eliminados = []
+    zipdir = os.path.join(SNAP_DIR, "zip")
+    for viejo, nuevo in CODIGOS_LEGACY.items():
+        fv = os.path.join(zipdir, "grupo_%s.zip" % viejo)
+        fn = os.path.join(zipdir, "grupo_%s.zip" % nuevo)
+        if os.path.exists(fv) and os.path.exists(fn):
+            try:
+                os.remove(fv)
+                eliminados.append(os.path.basename(fv))
+            except OSError as e:
+                print("aviso zip %s: %s" % (fv, e))
+    if eliminados:
+        print("zips huerfanos eliminados: %s" % ", ".join(eliminados))
+    return eliminados
+
+
+def _snapshot_para_nro(nro):
+    """Snapshot GrupLAC local para un nro (sin red)."""
+    if not os.path.isdir(SNAP_DIR):
+        return ""
+    exacto = os.path.join(SNAP_DIR, "gruplac_%s.html" % nro)
+    if os.path.exists(exacto):
+        return exacto
+    cands = [f for f in os.listdir(SNAP_DIR) if nro in f and f.endswith(".html")]
+    if not cands:
+        cands = [f for f in os.listdir(SNAP_DIR)
+                 if f.endswith(".html") and nro[-4:] in f
+                 and os.path.basename(f).startswith("gruplac")]
+    if cands:
+        return os.path.join(SNAP_DIR, sorted(cands)[0])
+    return ""
+
+
+def existe_grupo_en_bd(nro, db):
+    """Chequeo offline (sin red): ¿el nro ya está cargado en la BD?
+    Devuelve (codigo_vigente, nombre) o (None, None).
+    Orden: 1) índice JSON nro->código, 2) ficha snapshot parseada vs Grupos."""
+    conn = conectar(db)
+    try:
+        # 1) índice de grupos (nro -> ccrg) si existe
+        idx = os.path.join(BASE, "data", "indice_grupos.json")
+        if os.path.exists(idx):
+            try:
+                d = json.load(open(idx, encoding="utf-8"))
+                grupos_idx = d if isinstance(d, list) else d.get("grupos", d)
+                items = grupos_idx if isinstance(grupos_idx, list) else []
+                for g in items:
+                    if not isinstance(g, dict):
+                        continue
+                    nro_g = str(g.get("nro", ""))
+                    if nro_g and (nro_g == nro or nro_g.endswith(nro[-6:])):
+                        cod = g.get("ccrg") or g.get("codigo") or ""
+                        if cod and conn.execute(
+                                "SELECT 1 FROM Grupos WHERE codigo_grupo=?;", (cod,)).fetchone():
+                            fila = conn.execute(
+                                "SELECT codigo_grupo, nombre FROM Grupos WHERE codigo_grupo=?;",
+                                (cod,)).fetchone()
+                            return fila[0], fila[1]
+            except Exception:
+                pass
+        # 2) snapshot local -> nombre -> Grupos (tolerante a �, S30)
+        snap = _snapshot_para_nro(nro)
+        if snap and os.path.exists(snap):
+            with open(snap, encoding="utf-8", errors="replace") as f:
+                ficha = parse_ficha(f.read())
+            if ficha.get("nombre"):
+                objetivo = sin_raros(_norm_txt(ficha["nombre"]))
+                for cg, nm in conn.execute("SELECT codigo_grupo, nombre FROM Grupos;"):
+                    if sin_raros(_norm_txt(nm)) == objetivo:
+                        return cg, nm
+    finally:
+        conn.close()
+    return None, None
 
 
 def guardar_grupo(conn, g):
@@ -252,19 +359,28 @@ def guardar_producto(conn, cod_grupo, rh, p):
     if not 1900 <= anio <= 2026:
         return "descartado"
     ya = conn.execute(
-        "SELECT 1 FROM Productos WHERE titulo=? AND anio_publicacion=? AND codigo_grupo_fk=? AND cod_rh_investigador_fk=?;",
+        "SELECT id_producto, estado_validacion FROM Productos WHERE titulo=? AND anio_publicacion=? AND codigo_grupo_fk=? AND cod_rh_investigador_fk=?;",
         (p["titulo"], anio, cod_grupo, rh)).fetchone()
     if ya:
+        # S36: el re-scrape actualiza el aval (Pendiente -> Validado por chulito).
+        if ya[1] == "Pendiente" and (p.get("estado_validacion") or "") == "Validado":
+            conn.execute("UPDATE Productos SET estado_validacion='Validado' WHERE id_producto=?;",
+                         (ya[0],))
+            return "actualizado"
         return "existente"
     # El PDF trunca titulos al ancho de columna: mismo articulo, distinto largo.
     # Se comparan anio + autor + 30 primeros caracteres normalizados.
     pref = re.sub(r"\s+", " ", p["titulo"][:30]).strip()
     if len(pref) >= 15:
         ya2 = conn.execute(
-            "SELECT 1 FROM Productos WHERE anio_publicacion=? AND cod_rh_investigador_fk=?"
+            "SELECT id_producto, estado_validacion FROM Productos WHERE anio_publicacion=? AND cod_rh_investigador_fk=?"
             " AND substr(titulo,1,30)=?;",
             (anio, rh, p["titulo"][:30])).fetchone()
         if ya2:
+            if ya2[1] == "Pendiente" and (p.get("estado_validacion") or "") == "Validado":
+                conn.execute("UPDATE Productos SET estado_validacion='Validado' WHERE id_producto=?;",
+                             (ya2[0],))
+                return "actualizado"
             return "existente"
     conn.execute(
         "INSERT INTO Productos (titulo, tipo_producto, categoria, estado_validacion, anio_publicacion,"
@@ -374,9 +490,11 @@ def parse_integrantes(html):
     return out
 
 
-def tipo_por_marcador(mk):
-    """Clasifica por prefijos robustos al � (tildes rotas de SCIENTI)."""
+def tipo_por_marcador(mk, seccion=""):
+    """Clasifica por prefijos robustos al � (tildes rotas de SCIENTI).
+    S35: 15 tipos propios; `seccion` resuelve ambiguos (Otro/Jurado/Maestria)."""
     m = mk.replace("_", " ")
+    # --- Núcleo bibliográfico (S28, intacto) ---
     if m.startswith("publicado en revista"):
         return "Articulo"
     if m.startswith("libro resultado"):
@@ -397,6 +515,39 @@ def tipo_por_marcador(mk):
         return "Articulo"
     if "patente" in m:
         return "Patente"
+    # --- Ampliación S35: resto de la ficha ---
+    if m.startswith("revision") or "survey" in m:
+        return "Articulo"
+    if m.startswith("libros de divulgaci") or "compilacion de divulgaci" in m:
+        return "Libro"
+    if m.startswith("informe tecnico") or m == "informe":
+        return "Informe"
+    if "consultor" in m:
+        return "Consultoria"
+    if (m.startswith("encuentro") or m.startswith("congreso") or m.startswith("simposio")
+            or m.startswith("seminario") or m.startswith("foro")
+            or m == "taller"):
+        # Taller/Seminario en Formación son cursos, no eventos.
+        if seccion == "formacion" and (m == "taller" or m.startswith("seminario")):
+            return "CursoCorto"
+        return "Evento"
+    if "trabajo de grado" in m or m.startswith("tesis"):
+        return "Tesis"
+    if "trabajo dirigido" in m or "tutoria" in m:
+        return "Tesis"
+    if (m.startswith("curso") or "perfeccionamiento" in m or "extension" in m
+            or m.startswith("diplomado")):
+        return "CursoCorto"
+    if "jurado" in m or "comision evaluadora" in m or "comite evaluador" in m:
+        return "Jurado"
+    if "contenido digital" in m or "produccion de contenido" in m or "audiovisual" in m:
+        return "Contenido"
+    if m.startswith("edicion") or (m.startswith("compilacion") and "divulgaci" not in m):
+        return "Compilacion"
+    if m.startswith("regulacion") or m.startswith("norma"):
+        return "Regulacion"
+    if seccion == "evaluador":
+        return "Jurado"  # todo acto en esa sección es evaluación
     return ""
 TIPOS_OMITIDOS = {"diseno industrial", "spin-off", "consultor", "informes de investigacion",
                   "congreso", "encuentro", "seminario", "taller", "simposio", "pagina web",
@@ -412,51 +563,166 @@ def _norm_txt(s):
     return re.sub(r"\s+", " ", s).strip()
 
 
+# Secciones de producción de la ficha GrupLAC (S35: el parser es consciente
+# de sección para resolver marcadores ambiguos como "Otro:" o "Taller:").
+# Patrones sobre texto crudo, tolerantes a tildes rotas (�) de SCIENTI.
+SECCIONES_FICHA = (
+    ("biblio", r"PRODUCCI.N\s+BIBLIOGR.FICA"),
+    ("tecnica", r"PRODUCCI.N\s+T.CNICA"),
+    ("apropiacion", r"APROPIACI.N\s+SOCIAL"),
+    ("formacion", r"ACTIVIDADES\s+DE\s+FORMACI.N|PRODUCCI.N\s+DE\s+FORMACI.N"),
+    ("evaluador", r"COMO\s+EVALUADOR"),
+)
+
+
+def _spans_secciones(texto):
+    spans = []
+    for key, pat in SECCIONES_FICHA:
+        for m in re.finditer(pat, texto, flags=re.IGNORECASE):
+            spans.append([key, m.start(), len(texto)])
+    spans.sort(key=lambda s: s[1])
+    for i in range(len(spans) - 1):
+        spans[i][2] = spans[i + 1][1]
+    return spans
+
+
+def seccion_de(pos, spans):
+    sec = ""
+    for key, ini, fin in spans:
+        if ini <= pos < fin:
+            sec = key
+    return sec
+
+
+def _titulo_bloque(bloque, mk):
+    """Título del bloque: entrecomillado o primera línea con contenido real
+    (nunca la línea del marcador `N. Marcador:`)."""
+    mt = re.search(r'"([^"]{8,480})"', bloque)
+    if not mt:
+        blines = [l.strip() for l in bloque.split("\n") if l.strip()]
+        for bl in blines:
+            if len(bl) < 8 or re.match(r"^\d+\.-?\s*$", bl):
+                continue
+            core = re.sub(r"^\d+\.\-?\s*", "", bl).strip().rstrip(":").strip()
+            if not core or _norm_txt(core) == mk:
+                continue  # línea del marcador, no título
+            mt = re.match(r"(.{8,480})", bl)
+            break
+    titulo = mt.group(1).strip() if mt else ""
+    return titulo.lstrip(":;,.—- ").strip()
+
+
+def _anio_bloque(bloque):
+    """Año del bloque: `, AAAA`, luego `desde AAAA`, luego año suelto
+    fuera de líneas ISSN/DOI/vol. 0 si no hay."""
+    ma = re.search(r",\s*((?:19|20)\d{2})\b", bloque)
+    anio = int(ma.group(1)) if ma and 1900 <= int(ma.group(1)) <= 2026 else 0
+    if not anio:
+        # Eventos/Tesis/Consultorías fechan con "desde ..." (sin ", AAAA").
+        md = re.search(r"[Dd]esde\D{0,14}((?:19|20)\d{2})\b", bloque)
+        if not md:
+            # Último recurso: primer año suelto fuera de líneas ISSN/DOI/vol.
+            for _bl in bloque.split("\n"):
+                if re.search(r"ISSN|DOI|vol|fasc|p.g", _bl, flags=re.IGNORECASE):
+                    continue
+                md = re.search(r"\b((?:19|20)\d{2})\b", _bl)
+                if md:
+                    break
+        if md and 1900 <= int(md.group(1)) <= 2026:
+            anio = int(md.group(1))
+    return anio
+
+
+def mapa_chulos(soup):
+    """S36: chulito GrupLAC (`chulo_1.jpg` = avalado/validado convocatoria,
+    `chulo_0.jpg` = no). La img va en el <td> previo al ítem, mismo <tr>.
+    Retorna {(marcador_norm, titulo_norm[:60], anio): validado_bool}."""
+    mapa = {}
+    for tr in soup.find_all("tr"):
+        imgs = tr.find_all("img")
+        ch = [i.get("src", "") for i in imgs if "chulo_" in (i.get("src", ""))]
+        if not ch:
+            continue
+        t = tr.get_text("\n")
+        mm = re.search(r"\d+\.\-?\s*([^\n:]{3,60})\s*:", t)
+        if not mm:
+            continue
+        mk = _norm_txt(mm.group(1).strip())
+        tit = _titulo_bloque(t, mk)
+        if not tit:
+            continue
+        key = (mk, _norm_txt(tit)[:60], _anio_bloque(t))
+        mapa[key] = mapa.get(key, False) or any("chulo_1" in c for c in ch)
+    return mapa
+
+
+# S37: títulos que son solo el marcador (basura histórica, ej. ids 31-50).
+# El _titulo_bloque ya los evita; esta red los rechaza si alguno se cuela.
+def _es_titulo_marcador(titulo, mk):
+    n = _norm_txt(titulo)
+    if not n or n == mk:
+        return True
+    return n in {"revision survey", "otra", "otro"}
+
+
 def parse_produccion_grupolac(html):
-    """Extrae productos de la ficha GrupLAC: [{titulo, anio, tipo, autores[]}].
-    Solo tipos del whitelist; el resto se cuenta como omitido (reporte, no se guarda)."""
+    """Extrae productos de la ficha GrupLAC: [{titulo, anio, tipo, autores[], validacion}].
+    S35: cubre las 6 secciones (biblio/tecnica/apropiacion/formacion/evaluador);
+    formatos `N.- X:` y `N. X:`; solo tipos del whitelist, el resto se cuenta
+    como omitido (reporte, no se guarda).
+    S36: `validacion` del chulito (`chulo_1.jpg` = Validado, si no Pendiente)."""
     soup = BeautifulSoup(html, "html.parser")
     texto = soup.get_text("\n")
+    chulos = mapa_chulos(soup)
+    spans = _spans_secciones(texto)
     marcas = [(m.start(), m.group(1).strip()) for m in
-              re.finditer(r"\d+\.-\s*([^\n:]{3,60})\s*:", texto)]
+              re.finditer(r"\d+\.\-?\s*([^\n:]{3,60})\s*:", texto)]
     marcas.append((len(texto), ""))
     prods, omitidos = [], 0
     for idx in range(len(marcas) - 1):
         inicio, marcador_raw = marcas[idx]
         bloque = texto[inicio:marcas[idx + 1][0]]
         mk = _norm_txt(marcador_raw)
-        tipo = tipo_por_marcador(mk)
+        sec = seccion_de(inicio, spans)
+        tipo = tipo_por_marcador(mk, sec)
         if not tipo:
             # ¿marcador ambiguo "Otra"/"Otro" con contenido de software?
             if mk in ("otra", "otro") and any(
                     k in _norm_txt(bloque[:400]) for k in
                     ("disponibilidad", "nombre comercial", "financiadora", "sitio web")):
                 tipo = "Software"
+            elif mk in ("otra", "otro") and sec == "apropiacion":
+                tipo = "Evento"
             else:
                 omitidos += 1
                 continue
-        mt = re.search(r'"([^"]{8,480})"', bloque)
-        if not mt:
-            # titulo = primera linea con contenido real (tras numero y marcador)
-            blines = [l.strip() for l in bloque.split("\n") if l.strip()]
-            for bl in blines:
-                if len(bl) >= 8 and not re.match(r"^\d+\.-?\s*$", bl) \
-                        and _norm_txt(bl) != mk:
-                    mt = re.match(r"(.{8,480})", bl)
-                    break
-        ma = re.search(r",\s*((?:19|20)\d{2})\b", bloque)
+        mt = _titulo_bloque(bloque, mk)
+        mt = _titulo_bloque(bloque, mk)
         maut = re.search(r"Autores:\s*([^\n]+(?:\n[^\n:]+)?)", bloque)
-        titulo = mt.group(1).strip() if mt else ""
-        titulo = titulo.lstrip(":;,.—- ").strip()
+        if not maut:
+            # Tesis/Eventos/Jurados no traen "Autores:": Estudiante/Director/etc.
+            # Misma regla (solo integrantes macheados, sin inventar).
+            maut = re.search(
+                r"(?:Tutor\(es\)/Cotutor\(es\)|Tutores?/Cotutores?|Estudiante|Director|"
+                r"Tutor|Asesor|Orientador|Organizador|Ponente|Responsable|Compilador|"
+                r"Consultor)[es]*\s*:\s*([^\n]+(?:\n[^\n:]+)?)",
+                bloque)
+        titulo = mt  # _titulo_bloque ya devuelve limpio
+        if _es_titulo_marcador(titulo, mk):
+            omitidos += 1  # marcador sin producto real (basura S37)
+            continue
         if re.match(r"^[A-Za-záéíóúñü]+\s*,\s*(?:19|20)\d{2}\s*,?$", titulo):
             omitidos += 1  # resto pais-anio sin titulo real (basura del parseo)
             continue
-        anio = int(ma.group(1)) if ma and 1900 <= int(ma.group(1)) <= 2026 else 0
+        anio = _anio_bloque(bloque)
         autores = []
         if maut:
             autores = [a.strip().rstrip(".") for a in re.split(r",", maut.group(1)) if a.strip()]
         if titulo and anio:
-            prods.append({"titulo": titulo, "anio": anio, "tipo": tipo, "autores": autores})
+            validado = chulos.get((mk, _norm_txt(titulo)[:60], anio), False)
+            prods.append({"titulo": titulo, "anio": anio, "tipo": tipo,
+                          "autores": autores,
+                          "validacion": "Validado" if validado else "Pendiente"})
         else:
             omitidos += 1
     return prods, omitidos
@@ -470,9 +736,24 @@ def mapa_autores(conn):
     return m
 
 
-def scrape_grupo(nro, db, usar_snapshot=True, universidad=""):
+def scrape_grupo(nro, db, usar_snapshot=True, universidad="", forzar=False, con_cvlac=True):
     """Verifica existencia (Grupo no existente) y filtra por universidad
-    (universidad no encontrada). Sin filtro, informa las avaladoras y sigue."""
+    (universidad no encontrada). Sin filtro, informa las avaladoras y sigue.
+    S32: si el nro ya está cargado (offline) y no se pasa forzar, informa
+    "grupo ya existente" y retorna sin red ni zip nuevo (idempotencia).
+    S37: con_cvlac descarga la hoja de vida CvLAC de cada integrante."""
+    # Pre-chequeo offline de duplicado (sin red): evita 2.º zip (S32).
+    if not forzar:
+        cod_ex, nom_ex = existe_grupo_en_bd(nro, db)
+        if cod_ex:
+            z_ex = os.path.join(SNAP_DIR, "zip", "grupo_%s.zip" % cod_ex)
+            if not os.path.exists(z_ex):
+                z_ex = empaquetar_grupo(cod_ex, nro)
+            print("[AVISO] grupo ya existente | CODIGO=%s | GRUPO=%s | ZIP=%s"
+                  % (cod_ex, (nom_ex or "")[:60], z_ex if z_ex else "n/a"))
+            print("No se descargo nada nuevo ni se duplico informacion."
+                  " Use --forzar para re-scrapear desde SCIENTI.")
+            return {"grupo": "existente", "integrantes": 0, "productos": 0}
     os.makedirs(SNAP_DIR, exist_ok=True)
     url = ("https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/"
            "visualizagr.jsp?nro=%s" % nro)
@@ -537,52 +818,133 @@ def scrape_grupo(nro, db, usar_snapshot=True, universidad=""):
          "lineas_estrategicas": ficha.get("lineas_estrategicas", "")}
     est, _ = guardar_grupo(conn, g)
     n_inv = n_hist = n_desc = 0
+    rhs_grupo = []
     for inv in integrantes:
         es_actual = "Actual" in inv.get("periodo", "")
         if not es_actual:
             n_hist += 1  # se informa pero IGUAL se importa (grupo completo)
         u, d = proyectar({"nombre": inv["nombre_completo"],
                           "cod_rh": inv.get("cod_rh", "")}, "investigador")
-        est_i, _, _ = guardar_investigador(conn, codigo, u)
+        est_i, _, rh = guardar_investigador(conn, codigo, u)
         if est_i in ("ok", "existente"):
             n_inv += 1
+            if rh and rh not in rhs_grupo:
+                rhs_grupo.append(rh)
         else:
             n_desc += 1
+    conn.commit()  # soltar escrituras antes de los CvLAC (otra conexión por rh)
     # Produccion del grupo: solo tipos whitelist, solo autores macheados (sin inventar autoria)
     prods, omit = parse_produccion_grupolac(html)
     mapa = mapa_autores(conn)
-    n_prod = n_sin_autor = 0
+    n_prod = n_sin_autor = n_val = 0
     for p in prods:
         rhs = [mapa[a] for a in (_norm_txt(x) for x in p["autores"]) if a in mapa]
         if not rhs:
             n_sin_autor += 1
             continue
         for rh in dict.fromkeys(rhs):
-            if guardar_producto(conn, codigo, rh, {"titulo": p["titulo"],
+            r_p = guardar_producto(conn, codigo, rh, {"titulo": p["titulo"],
                     "tipo_producto": p["tipo"], "categoria": "Por verificar",
-                    "estado_validacion": "Pendiente",
-                    "anio_publicacion": p["anio"]}) == "ok":
+                    "estado_validacion": p.get("validacion", "Pendiente"),
+                    "anio_publicacion": p["anio"]})
+            if r_p == "ok":
                 n_prod += 1
+                if p.get("validacion") == "Validado":
+                    n_val += 1
+            elif r_p == "actualizado":
+                n_val += 1
     # Perfiles verPerfiles del mismo grupo (basicos + indicadores)
     n_perf = 0
     if basicos_vp or perfiles_vp:
         _guardar_perfiles(conn, codigo, "22", basicos_vp, perfiles_vp)
         n_perf = len(perfiles_vp)
     conn.commit()
+    # S37: hoja de vida individual por integrante (CvLAC). Nunca tumba la carga.
+    n_hv = 0
+    if con_cvlac:
+        for rh in rhs_grupo:
+            try:
+                if scrape_cvlac(rh, db, codigo):
+                    n_hv += 1
+            except Exception as e:
+                print("aviso cvlac %s: %s" % (rh, e))
     conn.close()
     z = empaquetar_grupo(codigo, nro)
-    rep = ("OK scrape-grupo %s (%s): [%s] %s | lider=%s | avalan=%s | grupo=%s integrantes=%d historicos_omitidos=%d descartados=%d productos=%d sin_autor=%d omitidos_tipo=%d perfiles=%d zip=%s"
+    rep = ("OK scrape-grupo %s (%s): [%s] %s | lider=%s | avalan=%s | grupo=%s integrantes=%d historicos_omitidos=%d descartados=%d productos=%d validados=%d hv=%d sin_autor=%d omitidos_tipo=%d perfiles=%d zip=%s"
            % (nro, origen, codigo, (ficha["nombre"] or "")[:60], (ficha["lider"] or "")[:40],
               "; ".join(avaladoras) if avaladoras else "s/d",
-              est, n_inv, n_hist, n_desc, n_prod, n_sin_autor, omit, n_perf, z if z else "n/a"))
+               est, n_inv, n_hist, n_desc, n_prod, n_val, n_hv, n_sin_autor, omit, n_perf, z if z else "n/a"))
     print(rep.replace("�", "?"))
-    return {"grupo": est, "integrantes": n_inv, "productos": n_prod}
+    return {"grupo": est, "integrantes": n_inv, "productos": n_prod, "hv": n_hv}
 
 
 # ---------------- CvLAC (punto 4: info personal + productos) ----------------
+# S37: hoja de vida por integrante (Par evaluador, citaciones, nacionalidad,
+# sexo, Scholar/ORCID, formación, experiencia, áreas, idiomas).
+ETIQUETAS_HV = ("Nombre", "Nombre en citaciones", "Nacionalidad", "Sexo")
+SECCIONES_HV = ("Formación Académica", "Formacion Academica",
+                "Formación Complementaria", "Formacion Complementaria",
+                "Experiencia profesional", "Experiencia Profesional",
+                "Áreas de actuación", "Areas de actuacion", "Idiomas")
+FIN_HV = ("Cursos de corta duración", "Trabajos dirigidos", "Eventos científicos",
+          "Artículos", "Libros", "Capítulos", "Software", "Patentes", "Proyectos",
+          "Reconocimientos", "Producción", "Líneas de", "Jurado",
+          "Redes sociales", "Identificadores", "Hoja de vida", "Par evaluador")
+
+
 def _lineas(html):
     soup = BeautifulSoup(html, "html.parser")
     return [l.strip() for l in soup.get_text("\n").split("\n") if l.strip()]
+
+
+def _valor_etiqueta(lines, etiqueta):
+    for i, l in enumerate(lines):
+        if l == etiqueta and i + 1 < len(lines):
+            v = lines[i + 1]
+            if v not in ETIQUETAS_HV and not v.startswith("Categor"):
+                return v
+    return ""
+
+
+def _seccion_hv(lines, inicio_markers, tope=2000):
+    # El CvLAC repite encabezados en el menú de navegación: se toma la
+    # sección más larga (el contenido real, no el menú).
+    mejor = ""
+    for i, l in enumerate(lines):
+        if l in inicio_markers:
+            partes = []
+            for j in range(i + 1, len(lines)):
+                lj = lines[j]
+                if lj in SECCIONES_HV or any(lj.startswith(f) for f in FIN_HV):
+                    break
+                partes.append(lj)
+            txt = " ".join(" ".join(partes).split())
+            if len(txt) > len(mejor):
+                mejor = txt
+    return mejor[:tope]
+
+
+def parse_hoja_vida(html):
+    """S37: hoja de vida CvLAC (solo lo pedido: encabezado + formación +
+    experiencia + áreas + idiomas). Sin inventar: vacío si no aparece."""
+    lines = _lineas(html)
+    unido = "\n".join(lines)
+    par = "Si" if "Par evaluador reconocido" in unido else "No"
+    m_sch = re.search(r'href="(https://scholar\.google[^"]*)"', html)
+    m_orc = re.search(r'href="(https://orcid\.org/[^"]*)"', html)
+    return {
+        "par_evaluador": par,
+        "nombre_citaciones": _valor_etiqueta(lines, "Nombre en citaciones"),
+        "nacionalidad": _valor_etiqueta(lines, "Nacionalidad"),
+        "sexo": _valor_etiqueta(lines, "Sexo"),
+        "scholar_url": m_sch.group(1) if m_sch else "",
+        "orcid": m_orc.group(1) if m_orc else "",
+        "formacion_academica": _seccion_hv(lines, ("Formación Académica", "Formacion Academica")),
+        "formacion_complementaria": _seccion_hv(lines, ("Formación Complementaria", "Formacion Complementaria"), 1200),
+        "experiencia": _seccion_hv(lines, ("Experiencia profesional", "Experiencia Profesional")),
+        "areas": _seccion_hv(lines, ("Áreas de actuación", "Areas de actuacion"), 600),
+        "idiomas": _seccion_hv(lines, ("Idiomas",), 600),
+    }
 
 
 def parse_cvlac(html, cod_rh):
@@ -669,13 +1031,44 @@ def scrape_cvlac(cod_rh, db, cod_grupo=""):
         " VALUES (?,?,?,?,?,1);",
         (cod_rh, cv["nombre"], cv["correo"], cv["categoria"],
          "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=%s" % cod_rh))
+    # S37-blindaje S31: jamás pisar dato limpio con snapshot sucio (�).
+    viejo = conn.execute(
+        "SELECT nombre_completo, categoria_minciencias FROM Investigadores WHERE cod_rh=?;",
+        (cod_rh,)).fetchone() or ("", "")
+    nom_nuevo = cv["nombre"]
+    if "�" in (nom_nuevo or "") and "�" not in (viejo[0] or ""):
+        nom_nuevo = viejo[0]
+    cat_nueva = cv["categoria"]
+    if cat_nueva == "Por verificar" and (viejo[1] or "") not in ("", "Por verificar"):
+        cat_nueva = viejo[1]
     conn.execute(
         "UPDATE Investigadores SET nombre_completo=?, correo=COALESCE(NULLIF(?,''),correo),"
         " categoria_minciencias=?, cvlac_url=? WHERE cod_rh=?;",
-        (cv["nombre"], cv["correo"], cv["categoria"],
+        (nom_nuevo, cv["correo"], cat_nueva,
          "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=%s" % cod_rh,
          cod_rh))
     grupos = [cod_grupo] if cod_grupo else grupos_de(conn, cod_rh)
+    # S37: hoja de vida del integrante (REPLACE = idempotente).
+    hv = parse_hoja_vida(html)
+    viejo_hv = conn.execute(
+        "SELECT par_evaluador, nombre_citaciones, nacionalidad, sexo, scholar_url, orcid,"
+        " formacion_academica, formacion_complementaria, experiencia, areas, idiomas"
+        " FROM perfil_investigador WHERE cod_rh=?;", (cod_rh,)).fetchone()
+    if viejo_hv:
+        claves = ("par_evaluador", "nombre_citaciones", "nacionalidad", "sexo",
+                  "scholar_url", "orcid", "formacion_academica",
+                  "formacion_complementaria", "experiencia", "areas", "idiomas")
+        for i, k in enumerate(claves):
+            if "�" in (hv[k] or "") and "�" not in (viejo_hv[i] or ""):
+                hv[k] = viejo_hv[i]
+    conn.execute(
+        "REPLACE INTO perfil_investigador (cod_rh, par_evaluador, nombre_citaciones,"
+        " nacionalidad, sexo, scholar_url, orcid, formacion_academica,"
+        " formacion_complementaria, experiencia, areas, idiomas)"
+        " VALUES (?,?,?,?,?,?,?,?,?,?,?,?);",
+        (cod_rh, hv["par_evaluador"], hv["nombre_citaciones"], hv["nacionalidad"],
+         hv["sexo"], hv["scholar_url"], hv["orcid"], hv["formacion_academica"],
+         hv["formacion_complementaria"], hv["experiencia"], hv["areas"], hv["idiomas"]))
     n_p = n_e = 0
     for a in cv["articulos"]:
         if not a["anio"]:
@@ -694,9 +1087,10 @@ def scrape_cvlac(cod_rh, db, cod_grupo=""):
                 n_e += 1
     conn.commit()
     conn.close()
-    print("OK scrape-cvlac %s (%s): %s | cat=%s | formacion=%s | articulos_nuevos=%d existentes=%d grupos=%s"
-          % (cod_rh, origen, cv["nombre"][:50], cv["categoria"],
-             (cv["formacion"][:60] + "...") if cv["formacion"] else "n/a", n_p, n_e, grupos if grupos else "ninguno"))
+    print("OK scrape-cvlac %s (%s): %s | cat=%s | par=%s | hv=%s | articulos_nuevos=%d existentes=%d grupos=%s"
+          % (cod_rh, origen, cv["nombre"][:50], cv["categoria"], hv["par_evaluador"],
+             ("citas+formacion" if hv["nombre_citaciones"] or hv["formacion_academica"] else "basica"),
+             n_p, n_e, grupos if grupos else "ninguno"))
     return {"categoria": cv["categoria"], "articulos": n_p}
 
 
@@ -1232,7 +1626,27 @@ def main(argv=None):
     ap.add_argument("--indexar-instituciones", action="store_true")
     ap.add_argument("--perfiles", default="")
     ap.add_argument("--convocatoria", default="22")
+    ap.add_argument("--forzar", action="store_true",
+                    help="S32: re-scrapea aunque el grupo ya esté cargado")
+    ap.add_argument("--sin-cvlac", action="store_true",
+                    help="S37: omite la hoja de vida CvLAC por integrante (carga rápida)")
+    ap.add_argument("--existe-grupo", default="",
+                    help="S32: chequeo offline (sin red) ¿el nro ya está en BD?")
+    ap.add_argument("--limpiar-zips", action="store_true",
+                    help="S32: borra zips legacy huérfanos (GISICO->COL0018706...)")
     a = ap.parse_args(argv)
+
+    if a.limpiar_zips:
+        lim = limpiar_zips_huerfanos()
+        return 0
+    if a.existe_grupo:
+        cod, nom = existe_grupo_en_bd(a.existe_grupo, a.db)
+        if cod:
+            print("[AVISO] grupo ya existente | CODIGO=%s | GRUPO=%s" % (cod, (nom or "")[:60]))
+            print("No se descargo nada nuevo ni se duplico informacion.")
+            return 0
+        print("grupo no cargado (nro=%s)" % a.existe_grupo)
+        return 1
 
     if a.perfiles:
         return 0 if scrape_perfiles(a.perfiles, a.db, convocatoria=a.convocatoria) else 1
@@ -1261,19 +1675,27 @@ def main(argv=None):
                 if l.strip() and not l.startswith("#")]
         for nro in nros:
             try:
-                scrape_grupo(nro, a.db, universidad=a.universidad)
+                scrape_grupo(nro, a.db, universidad=a.universidad, forzar=a.forzar,
+                             con_cvlac=not a.sin_cvlac)
             except Exception as e:
                 print("ERROR scrape-grupo %s: %s" % (nro, e))
+        limpiar_zips_huerfanos()
         return 0
     if a.scrape_grupo:
-        return 0 if scrape_grupo(a.scrape_grupo, a.db, usar_snapshot=False,
-                                 universidad=a.universidad) else 1
+        r = scrape_grupo(a.scrape_grupo, a.db, usar_snapshot=False,
+                         universidad=a.universidad, forzar=a.forzar,
+                         con_cvlac=not a.sin_cvlac)
+        limpiar_zips_huerfanos()
+        return 0 if r else 1
     if a.scrape_url:
         m1 = re.search(r"nro=(\d+)", a.scrape_url)
         m2 = re.search(r"cod_rh=(\d+)", a.scrape_url)
         if m1:
-            return 0 if scrape_grupo(m1.group(1), a.db, usar_snapshot=False,
-                                     universidad=a.universidad) else 1
+            r = scrape_grupo(m1.group(1), a.db, usar_snapshot=False,
+                             universidad=a.universidad, forzar=a.forzar,
+                             con_cvlac=not a.sin_cvlac)
+            limpiar_zips_huerfanos()
+            return 0 if r else 1
         if m2:
             return 0 if scrape_cvlac(m2.group(1), a.db, a.grupo) else 1
         print("ERROR URL no reconocida (se espera nro= o cod_rh=)")
