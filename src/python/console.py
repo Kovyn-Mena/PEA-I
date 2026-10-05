@@ -224,7 +224,21 @@ class ConsolaApp:
     # INGESTA DE DATOS & WEB SCRAPING (TDA COLA FIFO)
     # -----------------------------------------------------------------
     def menu_ingesta(self):
-        from python.core.ingesta import MotorIngesta
+        try:
+            from python.core.ingesta import MotorIngesta
+        except ImportError as e:
+            self.limpiar_pantalla()
+            print("=================================================================")
+            print("  PEA-i UPC > Ingesta de Datos & Web Scraping (TDA Cola FIFO)    ")
+            print("=================================================================")
+            print("\n  [!] Módulo de scraping/PDF no disponible por falta de librerías.")
+            print(f"      Detalle: {e}")
+            print("\n  [i] Para habilitar esta función, instale los requisitos:")
+            print("      pip install -r requirements.txt")
+            print("-----------------------------------------------------------------")
+            self.pausar()
+            return
+
         op = -1
         while op != 0:
             self.limpiar_pantalla()

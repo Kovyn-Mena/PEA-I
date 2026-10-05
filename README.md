@@ -89,44 +89,125 @@ El sistema incorpora las **5 Macro-familias** oficiales y **15 tipologías** cie
 
 ---
 
-## 🛠️ Guía Rápida de Comandos (Makefile)
+## 🚀 Guía de Ejecución Rápida y Multiplataforma
 
-Todas las tareas están automatizadas mediante el archivo `Makefile`:
+> [!IMPORTANT]
+> **¿Por qué a tu compañero o amigo no le abría el programa?**
+> 1. **Si usa Windows:** El archivo `pea_cpp` es un ejecutable binario de **Linux (ELF 64-bit)**. En Windows, hacer doble clic en `pea_cpp` muestra el error *"Esta aplicación no se puede ejecutar en este equipo"* o no hace nada. Además, el comando `make` no viene instalado por defecto en la consola de Windows.
+> 2. **Solución Inmediata para Windows:** Usar la versión en **Python** (que no requiere compilar absolutamente nada) o hacer doble clic en el lanzador automático `ejecutar_windows.bat`.
+> 3. **Si usa Linux:** Si descargó el código comprimido en ZIP, el archivo ejecutable puede haber perdido los permisos de ejecución (`chmod +x pea_cpp`) o puede faltar la librería SQLite3 de desarrollo (`sudo apt install libsqlite3-dev`).
 
-### 1. Compilación y Ejecución
+---
+
+### 💻 1. Ejecución en Windows (Recomendada para compañeros sin Linux)
+
+En Windows existen **3 formas sencillas e inmediatas** para abrir y utilizar el sistema:
+
+#### ⚡ Opción A: Doble Clic Directo (El método más fácil)
+Simplemente haz doble clic sobre el archivo:
+```text
+ejecutar_windows.bat
+```
+*(El script detectará automáticamente tu instalación de Python en el sistema y abrirá la consola interactiva).*
+
+#### 🐍 Opción B: Por Consola / Terminal (CMD, PowerShell o VS Code)
+Abre una ventana de CMD o PowerShell en la carpeta del proyecto y ejecuta:
+```powershell
+python Taller2_AB_PO_XX.py
+# (O si utilizas el lanzador estándar de Python: py Taller2_AB_PO_XX.py)
+```
+*No requiere compilar nada ni instalar paquetes pesados. La consola interactiva, la navegación de la Multilista ortogonal 3D, el motor de Undo con Pila LIFO, la Cola FIFO y las consultas a los 3,351 productos en SQLite3 funcionan de forma 100% nativa con la librería estándar de Python.*
+
+#### 🌐 Opción C: Portal Web Ejecutivo (Visualizador Gráfico del Hipercubo)
+Para ver la interfaz gráfica moderna con tarjetas, estadísticas interactivas, filtrado por macro-familias y perfiles curriculares CvLAC enriquecidos con enlaces y fotos:
+* Haz doble clic directo sobre:
+  ```text
+  dist/visualizador_hipercubo.html
+  ```
+  *(Es 100% autocontenido y funciona offline en Google Chrome, Microsoft Edge o Mozilla Firefox sin necesidad de servidores web ni dependencias externas).*
+
+---
+
+### 🐧 2. Ejecución en Linux (Ubuntu, Debian, Linux Mint, Fedora, Arch)
+
+En Linux puedes utilizar tanto la solución nativa de alto rendimiento en **C++17** como la solución en **Python 3**.
+
+#### Requisitos Previos en Linux (Se instalan una única vez):
 ```bash
-# Compilar la aplicación C++:
+sudo apt update
+sudo apt install -y build-essential libsqlite3-dev python3 python3-pip
+```
+
+#### Modo C++17 (Nativo con TDAs Puros y Punteros):
+```bash
+# 1. Compilar todo el proyecto:
 make
 
-# Ejecutar la consola C++:
+# 2. Ejecutar la consola interactiva C++:
 make run
-
-# Ejecutar la consola interactiva Python:
-make run-py
-
-# Abrir el Portal Ejecutivo Web y Dashboard de Ciencia Abierta:
-make gui
 # O directamente:
+./pea_cpp
+```
+
+#### Modo Python 3:
+```bash
+# Ejecutar la consola interactiva en Python:
+make run-py
+# O directamente:
+python3 Taller2_AB_PO_XX.py
+```
+
+#### Abrir el Portal Web Ejecutivo desde la terminal de Linux:
+```bash
+make gui
+# O también:
 ./pea_cpp --gui
 ```
 
-### 2. Pruebas Unitarias Automatizadas
+---
+
+### 🍎 3. Ejecución en macOS
+
+En macOS, la forma más rápida y directa es a través de Python 3:
 ```bash
-# Ejecuta la suite de verificación completa (100% de TDAs en C++ y Python):
-make test
+python3 Taller2_AB_PO_XX.py
+```
+O para compilar la versión C++ utilizando Homebrew:
+```bash
+brew install sqlite3
+clang++ -std=c++17 -I$(brew --prefix sqlite3)/include -L$(brew --prefix sqlite3)/lib src/cpp/main.cpp -lsqlite3 -o pea_mac
+./pea_mac
 ```
 
-### 3. Generación de Documentación y Reportes
-```bash
-# Genera diagramas arquitectónicos y el documento Word oficial:
-make docs
-```
+---
 
-### 4. Empaquetado de Entrega Formal
+### 🔧 Solución de Problemas Frecuentes (FAQ / Troubleshooting)
+
+| Mensaje de Error o Situación | Causa | Solución Paso a Paso |
+| :--- | :--- | :--- |
+| **"Esta aplicación no se puede ejecutar en este equipo"** (Windows) | Se intentó hacer doble clic en `pea_cpp` (que es un binario compilado para Linux). | Ejecuta `ejecutar_windows.bat` o abre la terminal y escribe `python Taller2_AB_PO_XX.py`. |
+| **`'make' no se reconoce como un comando interno o externo`** (Windows) | Windows CMD/PowerShell no incluye la utilidad `make` de Linux por defecto. | En Windows no necesitas `make`. Ejecuta `python Taller2_AB_PO_XX.py` o abre `dist/visualizador_hipercubo.html`. |
+| **`bash: ./pea_cpp: Permiso denegado`** (`Permission denied` en Linux) | El archivo descargado o descomprimido perdió los permisos de ejecución en Linux. | Ejecuta en terminal: `chmod +x pea_cpp` y vuelve a correr `./pea_cpp`. |
+| **`fatal error: sqlite3.h: No such file or directory`** o `cannot find -lsqlite3` | Falta la cabecera de desarrollo de SQLite3 en el sistema Linux. | Instala la librería con: `sudo apt install libsqlite3-dev`. |
+| **`error: externally-managed-environment`** al usar `pip` en Linux moderno | Protección PEP 668 en Ubuntu 23+/Debian 12+ para proteger el sistema operativo. | Crea un entorno virtual:<br>`python3 -m venv .venv`<br>`source .venv/bin/activate`<br>`pip install -r requirements.txt` |
+| **`ModuleNotFoundError: No module named 'requests'` o `'bs4'`** | Faltan las librerías opcionales de scraping web en vivo. | Ejecuta `pip install -r requirements.txt`. *(Nota: La consola, la multilista, los 3,351 productos y las consultas funcionan aún sin estas librerías).* |
+| **¿Cómo ver los reportes PDF oficiales generados?** | Los documentos oficiales se encuentran en la carpeta `reportes/`. | Abre `reportes/Informe_GrupLAC_COL0002099.pdf` en cualquier visor de PDF del sistema. |
+
+---
+
+## 🛠️ Automatización con Makefile (Desarrollo y Evaluación en Linux)
+
+Para usuarios y docentes en entornos Linux/Unix, todas las tareas del ciclo de vida del software están completamente automatizadas:
+
 ```bash
-# Limpia temporales, compila, genera documentación y ensambla el ZIP final:
-make package
-# Genera: Taller2_EstructuraDatos_GrupoXX.zip (Listo para enviar a adithperez@unicesar.edu.co)
+make          # Compila el ejecutable nativo C++ (pea_cpp)
+make run      # Ejecuta la consola interactiva en C++
+make run-py   # Ejecuta la consola interactiva en Python
+make gui      # Abre el Portal Ejecutivo y Dashboard Web de Ciencia Abierta
+make test     # Ejecuta la suite de pruebas unitarias (100% C++ y Python)
+make docs     # Genera el documento técnico oficial en Word (.docx)
+make package  # Limpia, prueba, compila y empaqueta el ZIP de entrega final
+make clean    # Limpia archivos objeto y binarios temporales
 ```
 
 ---

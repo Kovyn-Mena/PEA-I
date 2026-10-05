@@ -10,7 +10,16 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(BASE_DIR, ".."))
 
 from python.console import ConsolaApp
-from python.core.ingesta import MotorIngesta
+
+def _crear_motor_ingesta(db_path):
+    try:
+        from python.core.ingesta import MotorIngesta
+        return MotorIngesta(db_path)
+    except ImportError as e:
+        print(f"\n[!] Dependencias faltantes para ingesta masiva: {e}")
+        print("    Para habilitar scraping y procesamiento de PDF ejecute:")
+        print("    pip install -r requirements.txt\n")
+        return None
 
 def main():
     db_path = os.path.join(BASE_DIR, "..", "..", "data", "pea_investigacion.db")
@@ -22,7 +31,9 @@ def main():
         idx = args.index("--scrape-url")
         if idx + 1 < len(args):
             url = args[idx + 1]
-            motor = MotorIngesta(db_path)
+            motor = _crear_motor_ingesta(db_path)
+            if not motor:
+                sys.exit(1)
             exito = motor.ejecutar_ingesta("URL", url)
             sys.exit(0 if exito else 1)
         else:
@@ -33,7 +44,9 @@ def main():
         idx = args.index("--scrape-csv")
         if idx + 1 < len(args):
             ruta_csv = args[idx + 1]
-            motor = MotorIngesta(db_path)
+            motor = _crear_motor_ingesta(db_path)
+            if not motor:
+                sys.exit(1)
             exito = motor.ejecutar_ingesta("CSV", ruta_csv)
             sys.exit(0 if exito else 1)
         else:
@@ -44,7 +57,9 @@ def main():
         idx = args.index("--scrape-pdf")
         if idx + 1 < len(args):
             ruta_pdf = args[idx + 1]
-            motor = MotorIngesta(db_path)
+            motor = _crear_motor_ingesta(db_path)
+            if not motor:
+                sys.exit(1)
             exito = motor.ejecutar_ingesta("PDF", ruta_pdf)
             sys.exit(0 if exito else 1)
         else:
@@ -56,7 +71,9 @@ def main():
         if idx + 1 < len(args):
             ruta = args[idx + 1]
             tipo = "PDF" if ruta.lower().endswith(".pdf") else "CSV"
-            motor = MotorIngesta(db_path)
+            motor = _crear_motor_ingesta(db_path)
+            if not motor:
+                sys.exit(1)
             exito = motor.ejecutar_ingesta(tipo, ruta)
             sys.exit(0 if exito else 1)
         else:

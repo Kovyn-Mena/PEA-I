@@ -19,9 +19,12 @@ FILES_TO_INCLUDE = [
     "Makefile",
     "README.md",
     "integrantes.txt",
+    "requirements.txt",
+    "ejecutar_windows.bat",
     "Documentacion_Tecnica_GrupoXX.docx",
     "Taller2_AB_PO_XX.cpp",
-    "Taller2_AB_PO_XX.py"
+    "Taller2_AB_PO_XX.py",
+    os.path.join("dist", "visualizador_hipercubo.html")
 ]
 
 DIRS_TO_INCLUDE = [
