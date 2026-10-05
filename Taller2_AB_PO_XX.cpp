@@ -13,7 +13,11 @@
 //       ./Taller2_AB_PO_XX
 // =====================================================================
 
-#include "src/cpp/include/ConsolaApp.h"
+#if __has_include("ConsolaApp.h")
+    #include "ConsolaApp.h"
+#else
+    #include "src/cpp/include/ConsolaApp.h"
+#endif
 
 int main(int argc, char* argv[]) {
     // Inicializa la aplicación con la base de datos de persistencia SQLite

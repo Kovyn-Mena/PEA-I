@@ -20,6 +20,8 @@ FILES_TO_INCLUDE = [
     "README.md",
     "integrantes.txt",
     "requirements.txt",
+    "INICIAR_WINDOWS.bat",
+    "compilar_cpp_windows.bat",
     "ejecutar_windows.bat",
     "Documentacion_Tecnica_GrupoXX.docx",
     "Taller2_AB_PO_XX.cpp",

@@ -99,26 +99,50 @@ El sistema incorpora las **5 Macro-familias** oficiales y **15 tipologías** cie
 
 ---
 
-### 💻 1. Ejecución en Windows (Recomendada para compañeros sin Linux)
+### 💻 1. Ejecución en Windows (Para Compañeros y Docente)
 
-En Windows existen **3 formas sencillas e inmediatas** para abrir y utilizar el sistema:
+En Windows tienes scripts automatizados de un solo clic que resuelven todo sin configuraciones complejas:
 
-#### ⚡ Opción A: Doble Clic Directo (El método más fácil)
-Simplemente haz doble clic sobre el archivo:
+#### 🌟 Opción 1: Lanzador Maestro con Menú Interactivo (¡El Más Recomendado!)
+Simplemente haz **doble clic** sobre:
 ```text
-ejecutar_windows.bat
+INICIAR_WINDOWS.bat
 ```
-*(El script detectará automáticamente tu instalación de Python en el sistema y abrirá la consola interactiva).*
+Se abrirá un menú interactivo en la consola de Windows donde puedes elegir con un número:
+* `[1]` Ejecutar Consola en Python (Abre al instante sin compilar nada).
+* `[2]` Compilar y Ejecutar en C++ (Detecta automáticamente tu compilador y genera `pea_cpp.exe`).
+* `[3]` Abrir Portal Web Ejecutivo (Visualizador del Hipercubo en Edge/Chrome).
+* `[4]` Ver Documentación Técnica Oficial Word (`.docx`).
+* `[5]` Ver Informe PDF Oficial de Investigación (GISICO).
+* `[6]` Ejecutar Pruebas Unitarias de Estructuras (TDAs).
 
-#### 🐍 Opción B: Por Consola / Terminal (CMD, PowerShell o VS Code)
-Abre una ventana de CMD o PowerShell en la carpeta del proyecto y ejecuta:
-```powershell
-python Taller2_AB_PO_XX.py
-# (O si utilizas el lanzador estándar de Python: py Taller2_AB_PO_XX.py)
-```
-*No requiere compilar nada ni instalar paquetes pesados. La consola interactiva, la navegación de la Multilista ortogonal 3D, el motor de Undo con Pila LIFO, la Cola FIFO y las consultas a los 3,351 productos en SQLite3 funcionan de forma 100% nativa con la librería estándar de Python.*
+#### ⚙️ Opción 2: Compilar y Ejecutar en C++ en Windows
+Si deseas ejecutar específicamente la versión en **C++** en Windows:
+1. Haz doble clic sobre:
+   ```text
+   compilar_cpp_windows.bat
+   ```
+2. El script buscará automáticamente si tienes instalado:
+   * **MSYS2 UCRT64** (`C:\msys64\ucrt64\bin\g++.exe` — configuración estándar de la UPC).
+   * **MSYS2 MINGW64** (`C:\msys64\mingw64\bin\g++.exe`).
+   * **Code::Blocks** (`C:\Program Files\CodeBlocks\MinGW\bin\g++.exe`).
+   * **Dev-C++** (`C:\Program Files (x86)\Dev-Cpp\MinGW64\bin\g++.exe`).
+   * O cualquier **g++** en el `PATH` del sistema.
+3. Compilará `pea_cpp.exe` y lo iniciará de inmediato.
+4. *Si no tienes ningún compilador C++ instalado*, el script te avisará cordialmente y te ofrecerá iniciar la versión de Python que tiene exactamente los mismos TDAs y la misma base de datos sin compilar nada.
 
-#### 🌐 Opción C: Portal Web Ejecutivo (Visualizador Gráfico del Hipercubo)
+#### ⚡ Opción 3: Ejecución Inmediata en Python (Doble Clic Directo)
+Si solo quieres abrir la consola interactiva sin compilar C++:
+* Haz doble clic sobre:
+  ```text
+  ejecutar_windows.bat
+  ```
+* O por terminal (CMD / PowerShell):
+  ```powershell
+  python Taller2_AB_PO_XX.py
+  ```
+
+#### 🌐 Opción 4: Portal Web Ejecutivo (Visualizador Gráfico del Hipercubo)
 Para ver la interfaz gráfica moderna con tarjetas, estadísticas interactivas, filtrado por macro-familias y perfiles curriculares CvLAC enriquecidos con enlaces y fotos:
 * Haz doble clic directo sobre:
   ```text
