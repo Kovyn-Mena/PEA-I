@@ -699,20 +699,33 @@ public:
             <button class="tab-btn" onclick="cambiarVistaPrincipal('tablas')">Vistas por Entidad</button>
             <button class="tab-btn" onclick="cambiarVistaPrincipal('crud')">Panel CRUD</button>
         </div>
-        <div class="header-actions">
-            <button class="action-btn-undo" id="btn-undo-header" onclick="deshacerUltimaAccion()" title="Deshacer última acción en Pila LIFO">
+        <div class="header-actions" style="position:relative;">
+            <button class="action-btn-undo" id="btn-undo-header" onclick="deshacerUltimaAccion()" title="Deshacer última acción en Pila LIFO (Ctrl+Z)">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"></path><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path></svg>
-                <span>Deshacer</span>
+                <span>Deshacer (Ctrl+Z)</span>
                 <span class="badge-counter" id="undo-count">0</span>
             </button>
-            <button class="action-btn-pila" onclick="abrirModalPilaUndo()" title="Ver elementos en la Pila LIFO">
+            <button class="action-btn-pila" id="btn-pila-popover" onclick="togglePopoverPilaUndo(event)" title="Inspeccionar Pila LIFO en tiempo real">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                <span>Pila LIFO</span>
+                <span>Pila LIFO &#9662;</span>
             </button>
             <button class="action-btn-export" onclick="abrirModalExportar()" title="Exportar cambios para SQLite / C++">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
                 <span>Sincronizar SQLite</span>
             </button>
+
+            <!-- POPOVER FLOTANTE DE PILA LIFO EN TIEMPO REAL -->
+            <div id="popover-historial-undo" style="display:none; position:absolute; top:calc(100% + 10px); right:0; width:360px; background:#0f172a; border:1px solid #334155; border-radius:10px; box-shadow:0 16px 36px rgba(0,0,0,0.85); z-index:1200; padding:0.85rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #1e293b; padding-bottom:0.55rem; margin-bottom:0.6rem;">
+                    <div style="font-size:0.8rem; font-weight:800; color:#fff;">Pila LIFO de Operaciones (Undo)</div>
+                    <span style="background:#1e293b; color:#38bdf8; border:1px solid #334155; padding:2px 6px; border-radius:4px; font-size:0.68rem; font-weight:700;">Atajo: Ctrl + Z</span>
+                </div>
+                <div id="popover-undo-list" style="max-height:240px; overflow-y:auto; display:flex; flex-direction:column; gap:0.4rem; margin-bottom:0.7rem;"></div>
+                <div style="display:flex; justify-content:space-between; gap:0.5rem; border-top:1px solid #1e293b; padding-top:0.6rem;">
+                    <button onclick="deshacerUltimaAccion()" class="btn-action-sm" style="flex:1; background:#f59e0b; color:#000; font-weight:800;">Deshacer Tope (POP)</button>
+                    <button onclick="cerrarPopoverUndo(); abrirModalPilaUndo();" class="btn-action-sm" style="background:#1e293b; color:#cbd5e1; border:1px solid #334155;">Tabla Completa</button>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -2056,16 +2069,80 @@ public:
             if (btnUndo) {
                 btnUndo.style.opacity = pilaUndoGUI.length === 0 ? "0.6" : "1";
             }
+            renderizarPopoverUndo();
         }
 
+        function togglePopoverPilaUndo(e) {
+            if (e) e.stopPropagation();
+            const pop = document.getElementById("popover-historial-undo");
+            if (!pop) return;
+            const abierto = pop.style.display === "block";
+            pop.style.display = abierto ? "none" : "block";
+            if (!abierto) renderizarPopoverUndo();
+        }
+
+        function cerrarPopoverUndo() {
+            const pop = document.getElementById("popover-historial-undo");
+            if (pop) pop.style.display = "none";
+        }
+
+        function renderizarPopoverUndo() {
+            const cont = document.getElementById("popover-undo-list");
+            if (!cont) return;
+            if (pilaUndoGUI.length === 0) {
+                cont.innerHTML = `<div style="text-align:center; color:#64748b; font-size:0.75rem; padding:1rem 0.5rem;">Pila LIFO vacía.<br>Cualquier alta, edición o cambio de estado se apilará aquí en tiempo real.</div>`;
+                return;
+            }
+            let html = "";
+            for (let i = pilaUndoGUI.length - 1; i >= 0; i--) {
+                const acc = pilaUndoGUI[i];
+                const esTope = (i === pilaUndoGUI.length - 1);
+                html += `
+                    <div style="background:${esTope ? 'rgba(16,185,129,0.12)' : '#090d16'}; border:1px solid ${esTope ? '#10b981' : '#1e293b'}; border-radius:7px; padding:0.45rem 0.6rem; display:flex; justify-content:space-between; align-items:center; gap:8px;">
+                        <div style="min-width:0; flex:1;">
+                            <div style="font-size:0.72rem; font-weight:800; color:${esTope ? '#10b981' : '#94a3b8'};">
+                                ${esTope ? '[TOPE DE PILA]' : `[#${i + 1}]`} &bull; ${acc.tipo} (${acc.entidad})
+                            </div>
+                            <div style="font-size:0.74rem; color:#e2e8f0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                                ${acc.desc}
+                            </div>
+                        </div>
+                        <code style="font-size:0.68rem; color:#38bdf8;">${acc.id}</code>
+                    </div>
+                `;
+            }
+            cont.innerHTML = html;
+        }
+
+        // Cerrar popover al hacer clic fuera y activar atajo global Ctrl+Z
+        window.addEventListener("click", e => {
+            const pop = document.getElementById("popover-historial-undo");
+            const btn = document.getElementById("btn-pila-popover");
+            if (pop && pop.style.display === "block") {
+                if (!pop.contains(e.target) && (!btn || !btn.contains(e.target))) {
+                    pop.style.display = "none";
+                }
+            }
+        });
+
+        window.addEventListener("keydown", e => {
+            const tag = (document.activeElement?.tagName || "").toUpperCase();
+            if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z") {
+                e.preventDefault();
+                deshacerUltimaAccion();
+            }
+        });
+
         function apilarAccion(accion) {
+            accion.hora = new Date().toLocaleTimeString();
             pilaUndoGUI.push(accion);
             operacionesAuditadas.push({
                 tipo: accion.tipo,
                 entidad: accion.entidad,
                 id: accion.id,
                 desc: accion.desc,
-                timestamp: new Date().toLocaleTimeString()
+                timestamp: accion.hora
             });
             actualizarContadorUndo();
             guardarEnLocalStorage();
@@ -2119,6 +2196,7 @@ public:
             const activa = document.querySelector(".view-panel.active");
             if (activa) {
                 if (activa.id === "view-dashboard") renderizarDashboard();
+                if (activa.id === "view-red") construirYRenderizarRed();
                 if (activa.id === "view-tablas") renderizarTablasEntidad();
                 if (activa.id === "view-crud") renderizarCRUDTab();
             }
