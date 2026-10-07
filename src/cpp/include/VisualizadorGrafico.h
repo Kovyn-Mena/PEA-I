@@ -1287,9 +1287,26 @@ public:
                     <label class="form-label">Formación Académica Principal:</label>
                     <input type="text" id="input-i-formacion" class="form-input" required placeholder="Ej: Maestría en Ciencias Computacionales">
                 </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div class="form-group">
+                        <label class="form-label">Par Evaluador MinCiencias:</label>
+                        <select id="input-i-par" class="form-select">
+                            <option value="No">No</option>
+                            <option value="Si">Sí (Par Reconocido)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Grupo de Investigación Asignado:</label>
+                        <select id="input-i-grupo" class="form-select" required></select>
+                    </div>
+                </div>
                 <div class="form-group">
-                    <label class="form-label">Grupo de Investigación Asignado:</label>
-                    <select id="input-i-grupo" class="form-select" required></select>
+                    <label class="form-label">Enlace Google Scholar (Opcional):</label>
+                    <input type="text" id="input-i-scholar" class="form-input" placeholder="https://scholar.google.com/citations?user=...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Enlace / Identificador ORCID (Opcional):</label>
+                    <input type="text" id="input-i-orcid" class="form-input" placeholder="https://orcid.org/0000-0002-...">
                 </div>
                 <div class="modal-footer">
                     <button type="button" onclick="cerrarModales()" class="btn-modal-cancel">Cancelar</button>
@@ -1662,12 +1679,17 @@ public:
                 const invActivo = inv.activo !== false;
                 let badgePar = inv.par_evaluador === "Si" ? " <span class='badge-cat' style='background:#047857; color:#fff; font-weight:700; margin-left:6px;'>Par Evaluador</span>" : "";
                 let links = "";
-                if (inv.scholar_url) links += `<a href="${inv.scholar_url}" target="_blank" style="background:#0284c7; color:#fff; padding:2px 6px; border-radius:4px; font-size:0.75rem; text-decoration:none; margin-right:4px;">Scholar</a>`;
-                if (inv.orcid) links += `<a href="${inv.orcid}" target="_blank" style="background:#10b981; color:#fff; padding:2px 6px; border-radius:4px; font-size:0.75rem; text-decoration:none;">ORCID</a>`;
+                if (inv.documento && /^\d{7,10}$/.test(String(inv.documento).trim())) {
+                    const codRh = String(inv.documento).trim().padStart(10, "0");
+                    links += `<a href="https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=${codRh}" target="_blank" style="background:#334155; color:#e2e8f0; border:1px solid #475569; padding:2px 6px; border-radius:4px; font-size:0.72rem; font-weight:600; text-decoration:none; margin-right:4px;" title="Abrir CvLAC oficial">CvLAC</a>`;
+                }
+                if (inv.scholar_url) links += `<a href="${inv.scholar_url}" target="_blank" style="background:#0284c7; color:#fff; padding:2px 6px; border-radius:4px; font-size:0.72rem; font-weight:600; text-decoration:none; margin-right:4px;" title="Abrir perfil de Google Scholar">Scholar</a>`;
+                if (inv.orcid) links += `<a href="${inv.orcid}" target="_blank" style="background:#10b981; color:#fff; padding:2px 6px; border-radius:4px; font-size:0.72rem; font-weight:600; text-decoration:none;" title="Abrir identificador ORCID">ORCID</a>`;
+                const linksRow = links ? `<div style="margin-top:5px; display:flex; gap:4px; flex-wrap:wrap;">${links}</div>` : "";
 
                 tr.innerHTML = `
                     <td><code style="color:#38bdf8;">${inv.documento}</code></td>
-                    <td><b>${inv.nombre}</b>${badgePar}</td>
+                    <td><div><b>${inv.nombre}</b>${badgePar}</div>${linksRow}</td>
                     <td><span class="badge-cat">${inv.categoria || "Junior"}</span></td>
                     <td>${inv.formacion || "Maestría / Doctorado CTeI"}</td>
                     <td><span class="badge-status ${invActivo ? 'badge-active' : 'badge-inactive'}">${invActivo ? '● Activo' : '○ Inactivo'}</span></td>
@@ -2152,6 +2174,9 @@ public:
             const inNom = document.getElementById("input-i-nombre");
             const inCat = document.getElementById("input-i-cat");
             const inForm = document.getElementById("input-i-formacion");
+            const inPar = document.getElementById("input-i-par");
+            const inScholar = document.getElementById("input-i-scholar");
+            const inOrcid = document.getElementById("input-i-orcid");
 
             if (invEnEdicion) {
                 titleEl.textContent = `Editar Investigador: ${invEnEdicion.documento}`;
@@ -2160,6 +2185,9 @@ public:
                 inNom.value = invEnEdicion.nombre;
                 inCat.value = invEnEdicion.categoria || "Junior";
                 inForm.value = invEnEdicion.formacion || "";
+                if (inPar) inPar.value = invEnEdicion.par_evaluador === "Si" ? "Si" : "No";
+                if (inScholar) inScholar.value = invEnEdicion.scholar_url || "";
+                if (inOrcid) inOrcid.value = invEnEdicion.orcid || "";
                 document.getElementById("input-i-grupo").value = grupoInvEdicion.codigo;
             } else {
                 titleEl.textContent = "Registrar Nuevo Investigador";
@@ -2168,6 +2196,9 @@ public:
                 inNom.value = "";
                 inCat.value = "Junior";
                 inForm.value = "Ingeniería de Sistemas y Computación";
+                if (inPar) inPar.value = "No";
+                if (inScholar) inScholar.value = "";
+                if (inOrcid) inOrcid.value = "";
             }
             document.getElementById("modal-investigador").style.display = "flex";
         }
@@ -2178,6 +2209,9 @@ public:
             const nom = document.getElementById("input-i-nombre").value.trim();
             const cat = document.getElementById("input-i-cat").value;
             const form = document.getElementById("input-i-formacion").value.trim();
+            const par = document.getElementById("input-i-par")?.value || "No";
+            const scholar = document.getElementById("input-i-scholar")?.value.trim() || "";
+            const orcid = document.getElementById("input-i-orcid")?.value.trim() || "";
             const codG = document.getElementById("input-i-grupo").value;
 
             const gTarget = gruposData.find(g => g.codigo === codG);
@@ -2188,6 +2222,9 @@ public:
                 invEnEdicion.nombre = nom;
                 invEnEdicion.categoria = cat;
                 invEnEdicion.formacion = form;
+                invEnEdicion.par_evaluador = par;
+                invEnEdicion.scholar_url = scholar;
+                invEnEdicion.orcid = orcid;
 
                 apilarAccion({
                     tipo: "UPDATE",
@@ -2205,9 +2242,9 @@ public:
                     nombre: nom,
                     categoria: cat,
                     formacion: form,
-                    par_evaluador: "No",
-                    scholar_url: "",
-                    orcid: "",
+                    par_evaluador: par,
+                    scholar_url: scholar,
+                    orcid: orcid,
                     activo: true
                 };
                 if (!gTarget.investigadores) gTarget.investigadores = [];
@@ -2577,9 +2614,18 @@ public:
                 const { inv, g, esActivo } = item;
                 const tr = document.createElement("tr");
                 if (!esActivo) tr.style.opacity = "0.6";
+                let badgePar = inv.par_evaluador === "Si" ? " <span class='badge-cat' style='background:#047857; color:#fff; font-weight:700; margin-left:6px;'>Par Evaluador</span>" : "";
+                let links = "";
+                if (inv.documento && /^\d{7,10}$/.test(String(inv.documento).trim())) {
+                    const codRh = String(inv.documento).trim().padStart(10, "0");
+                    links += `<a href="https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=${codRh}" target="_blank" style="background:#334155; color:#e2e8f0; border:1px solid #475569; padding:2px 6px; border-radius:4px; font-size:0.72rem; font-weight:600; text-decoration:none; margin-right:4px;" title="Abrir CvLAC oficial">CvLAC</a>`;
+                }
+                if (inv.scholar_url) links += `<a href="${inv.scholar_url}" target="_blank" style="background:#0284c7; color:#fff; padding:2px 6px; border-radius:4px; font-size:0.72rem; font-weight:600; text-decoration:none; margin-right:4px;" title="Abrir perfil de Google Scholar">Scholar</a>`;
+                if (inv.orcid) links += `<a href="${inv.orcid}" target="_blank" style="background:#10b981; color:#fff; padding:2px 6px; border-radius:4px; font-size:0.72rem; font-weight:600; text-decoration:none;" title="Abrir identificador ORCID">ORCID</a>`;
+                const linksRow = links ? `<div style="margin-top:5px; display:flex; gap:4px; flex-wrap:wrap;">${links}</div>` : "";
                 tr.innerHTML = `
                     <td><code style="color:#38bdf8;">${inv.documento}</code></td>
-                    <td><b>${inv.nombre}</b></td>
+                    <td><div><b>${inv.nombre}</b>${badgePar}</div>${linksRow}</td>
                     <td><span class="badge-cat">${inv.categoria || 'Junior'}</span></td>
                     <td>${inv.formacion || 'Ingeniería / Posgrado'}</td>
                     <td><code>${g.codigo}</code></td>
