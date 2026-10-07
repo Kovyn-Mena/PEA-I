@@ -3551,8 +3551,18 @@ public:
             }, { passive: false });
         }
 
+        const FIRMA_DATASET_BASE = (() => {
+            let ti = 0, tp = 0, tv = 0;
+            gruposData.forEach(g => {
+                ti += (g.investigadores ? g.investigadores.length : 0);
+                (g.productos || []).forEach(p => { tp++; if (p.validado) tv++; });
+            });
+            return `v2026_2_${gruposData.length}_${ti}_${tp}_${tv}`;
+        })();
+
         function guardarEnLocalStorage() {
             try {
+                localStorage.setItem("pea_upc_dataset_sig", FIRMA_DATASET_BASE);
                 localStorage.setItem("pea_upc_hipercubo_data", JSON.stringify(gruposData));
                 localStorage.setItem("pea_upc_undo_pila", JSON.stringify(operacionesAuditadas));
             } catch (err) {
@@ -3562,6 +3572,13 @@ public:
 
         function cargarDeLocalStorage() {
             try {
+                const sigGuardada = localStorage.getItem("pea_upc_dataset_sig");
+                if (sigGuardada !== FIRMA_DATASET_BASE) {
+                    localStorage.removeItem("pea_upc_hipercubo_data");
+                    localStorage.removeItem("pea_upc_undo_pila");
+                    localStorage.setItem("pea_upc_dataset_sig", FIRMA_DATASET_BASE);
+                    return;
+                }
                 const guardado = localStorage.getItem("pea_upc_hipercubo_data");
                 if (guardado) {
                     const parsed = JSON.parse(guardado);

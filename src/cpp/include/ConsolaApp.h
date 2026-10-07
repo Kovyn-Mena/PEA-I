@@ -455,9 +455,10 @@ public:
             std::cout << "  2. Web Scraping de Investigador MinCiencias (CvLAC)\n";
             std::cout << "  3. Procesar Archivo CSV de Investigacion (data/muestra_upc.csv)\n";
             std::cout << "  4. Procesar Archivo PDF de Produccion Cientifica\n";
+            std::cout << "  5. Ingesta Automatica Masiva de Web Scraping (Todos los Grupos GrupLAC + CvLAC)\n";
             std::cout << "  0. Anterior / Regresar al Menu Principal\n";
             std::cout << "-----------------------------------------------------------------\n";
-            op = leerOpcionMenu("01234", "Presione una opcion [0-4]: ");
+            op = leerOpcionMenu("012345", "Presione una opcion [0-5]: ");
 
             if (op == 1) {
                 limpiarPantalla();
@@ -475,6 +476,7 @@ public:
                 std::string salida;
                 if (GestorInterop::ejecutarScrapingURL(url, salida)) {
                     std::cout << "\n[+] Recargando datos en la Multilista en RAM desde SQLite...\n";
+                    multi.liberar();
                     GestorSQLite::cargarDesdeBD(multi, rutaBD);
                     std::cout << "[OK] Multilista actualizada en RAM: " 
                               << multi.contarGrupos(false) << " grupos, "
@@ -498,6 +500,7 @@ public:
                 std::string salida;
                 if (GestorInterop::ejecutarScrapingURL(url, salida)) {
                     std::cout << "\n[+] Recargando datos en la Multilista en RAM desde SQLite...\n";
+                    multi.liberar();
                     GestorSQLite::cargarDesdeBD(multi, rutaBD);
                     std::cout << "[OK] Multilista actualizada en RAM: " 
                               << multi.contarGrupos(false) << " grupos, "
@@ -520,6 +523,7 @@ public:
                 std::string salida;
                 if (GestorInterop::ejecutarIngestaCSV(ruta, salida)) {
                     std::cout << "\n[+] Recargando datos en la Multilista en RAM desde SQLite...\n";
+                    multi.liberar();
                     GestorSQLite::cargarDesdeBD(multi, rutaBD);
                     std::cout << "[OK] Multilista actualizada en RAM: " 
                               << multi.contarGrupos(false) << " grupos, "
@@ -539,8 +543,29 @@ public:
                 std::string salida;
                 if (GestorInterop::ejecutarIngestaPDF(ruta, salida)) {
                     std::cout << "\n[+] Recargando datos en la Multilista en RAM desde SQLite...\n";
+                    multi.liberar();
                     GestorSQLite::cargarDesdeBD(multi, rutaBD);
                     std::cout << "[OK] Multilista actualizada en RAM: " 
+                              << multi.contarGrupos(false) << " grupos, "
+                              << multi.contarInvestigadores(false) << " investigadores, "
+                              << multi.contarProductos(false) << " productos.\n";
+                }
+                pausar();
+            } else if (op == 5) {
+                limpiarPantalla();
+                std::cout << "=================================================================\n";
+                std::cout << "--- INGESTA AUTOMATICA MASIVA DE WEB SCRAPING (COLA FIFO) ---\n";
+                std::cout << "Procesa en lote todos los snapshots GrupLAC y 85 hojas CvLAC\n";
+                std::cout << "(GISICO, AITICE, FACEUPC, GIELEHLA + Scholar/ORCID/Par Evaluador)\n";
+                std::cout << "=================================================================\n";
+                GestorSQLite::guardarEnBD(multi, rutaBD);
+                std::string salida;
+                if (GestorInterop::ejecutarIngestaAutomatica(salida)) {
+                    std::cout << "\n[+] Recargando Multilista en RAM desde SQLite y regenerando Portal Web...\n";
+                    multi.liberar();
+                    GestorSQLite::cargarDesdeBD(multi, rutaBD);
+                    VisualizadorGrafico::generarHTML(multi, "dist/visualizador_hipercubo.html");
+                    std::cout << "[OK] Multilista y Portal Web actualizados: "
                               << multi.contarGrupos(false) << " grupos, "
                               << multi.contarInvestigadores(false) << " investigadores, "
                               << multi.contarProductos(false) << " productos.\n";

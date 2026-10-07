@@ -83,6 +83,12 @@ public:
         std::string args = "Taller2_AB_PO_XX.py --gui";
         return ejecutarComandoPython(args, salida);
     }
+
+    // Ejecuta la ingesta automática en lote de Web Scraping (GrupLAC + CvLAC)
+    static bool ejecutarIngestaAutomatica(std::string& salida) {
+        std::string args = "Taller2_AB_PO_XX.py --auto-ingest";
+        return ejecutarComandoPython(args, salida);
+    }
 };
 
 #endif // GESTOR_INTEROP_H

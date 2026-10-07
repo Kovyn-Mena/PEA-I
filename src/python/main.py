@@ -86,6 +86,13 @@ def main():
         app_gui.iniciar()
         sys.exit(0)
 
+    elif "--auto-ingest" in args:
+        motor = _crear_motor_ingesta(db_path)
+        if not motor:
+            sys.exit(1)
+        ok = motor.ejecutar_ingesta_automatica()
+        sys.exit(0 if ok else 1)
+
     app = ConsolaApp(db_path)
     app.iniciar()
 

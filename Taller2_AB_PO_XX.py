@@ -98,6 +98,13 @@ def main():
         ok = ejecutar_verificacion_cruzada(db_path)
         sys.exit(0 if ok else 1)
 
+    elif "--auto-ingest" in args:
+        motor = _crear_motor_ingesta(db_path)
+        if not motor:
+            sys.exit(1)
+        ok = motor.ejecutar_ingesta_automatica()
+        sys.exit(0 if ok else 1)
+
     app = ConsolaApp(db_path)
     app.iniciar()
 

@@ -354,9 +354,10 @@ class ConsolaApp:
             print("  3. Procesar Archivo CSV de Investigación (data/muestra_upc.csv)")
             print("  4. Procesar Archivo PDF de Producción Científica")
             print("  5. Auditoria Datos Abiertos Colombia (Socrata / Offline) y Catalogo 2024 (70 Subtipos)")
+            print("  6. Ingesta Automatica Masiva de Web Scraping (Todos los Grupos GrupLAC + CvLAC)")
             print("  0. Anterior / Regresar al Menú Principal")
             print("-----------------------------------------------------------------")
-            op = self.leer_opcion_menu("012345", "Presione una opción [0-5]: ")
+            op = self.leer_opcion_menu("0123456", "Presione una opción [0-6]: ")
 
             if op == 1:
                 self.limpiar_pantalla()
@@ -372,6 +373,7 @@ class ConsolaApp:
                 GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
                 motor = MotorIngesta(self.ruta_bd)
                 if motor.ejecutar_ingesta("URL_GRUPLAC", url):
+                    self.multi = Multilista()
                     GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
                 self.pausar()
 
@@ -389,6 +391,7 @@ class ConsolaApp:
                 GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
                 motor = MotorIngesta(self.ruta_bd)
                 if motor.ejecutar_ingesta("URL_CVLAC", url):
+                    self.multi = Multilista()
                     GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
                 self.pausar()
 
@@ -405,6 +408,7 @@ class ConsolaApp:
                 GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
                 motor = MotorIngesta(self.ruta_bd)
                 if motor.ejecutar_ingesta("ARCHIVO_CSV", ruta):
+                    self.multi = Multilista()
                     GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
                 self.pausar()
 
@@ -421,6 +425,7 @@ class ConsolaApp:
                 GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
                 motor = MotorIngesta(self.ruta_bd)
                 if motor.ejecutar_ingesta("ARCHIVO_PDF", ruta):
+                    self.multi = Multilista()
                     GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
                 self.pausar()
 
@@ -446,6 +451,15 @@ class ConsolaApp:
                 for c_k, c_v in aud["grupos_por_categoria"].items():
                     print(f"    - {c_k}: {c_v} grupo(s)")
                 print("=================================================================")
+                self.pausar()
+
+            elif op == 6:
+                self.limpiar_pantalla()
+                GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+                motor = MotorIngesta(self.ruta_bd)
+                if motor.ejecutar_ingesta_automatica():
+                    self.multi = Multilista()
+                    GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
                 self.pausar()
 
     # -----------------------------------------------------------------
