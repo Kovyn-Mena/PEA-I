@@ -431,12 +431,36 @@ public:
     }
 
     // -----------------------------------------------------------------
-    // 6. LIBERACIÓN COMPLETA DE MEMORIA
+    // 6. LIBERACIÓN COMPLETA DE MEMORIA (O(N) Lineal)
     // -----------------------------------------------------------------
     void liberar() {
-        while (cabezaGrupos != nullptr) {
-            eliminarGrupo(cabezaGrupos->codigo_grupo);
+        NodoGrupo* g = cabezaGrupos;
+        while (g != nullptr) {
+            NodoGrupo* sigG = g->sigGrupo;
+
+            // 1. Liberar productos del grupo directamente en O(N)
+            NodoProducto* p = g->primerProducto;
+            while (p != nullptr) {
+                NodoProducto* sigP = p->sigProductoGrupo;
+                delete p;
+                p = sigP;
+            }
+            g->primerProducto = nullptr;
+
+            // 2. Liberar investigadores del grupo en O(N)
+            NodoInvestigador* inv = g->primerInvestigador;
+            while (inv != nullptr) {
+                NodoInvestigador* sigInv = inv->sigInvestigador;
+                delete inv;
+                inv = sigInv;
+            }
+            g->primerInvestigador = nullptr;
+
+            // 3. Liberar el nodo del grupo
+            delete g;
+            g = sigG;
         }
+        cabezaGrupos = nullptr;
     }
 };
 

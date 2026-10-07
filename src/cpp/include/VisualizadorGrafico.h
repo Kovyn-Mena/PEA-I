@@ -533,12 +533,45 @@ public:
         .badge-inactive { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
         
         .btn-action-sm {
-            padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;
+            padding: 4px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: 700; cursor: pointer; border: 1px solid transparent; transition: all 0.2s; display: inline-flex; align-items: center; gap: 4px;
         }
         .btn-action-edit { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); }
-        .btn-action-edit:hover { background: #38bdf8; color: #000; }
+        .btn-action-edit:hover { background: #38bdf8; color: #000; box-shadow: 0 2px 8px rgba(56, 189, 248, 0.4); }
         .btn-action-toggle { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border-color: rgba(245, 158, 11, 0.3); }
-        .btn-action-toggle:hover { background: #f59e0b; color: #000; }
+        .btn-action-toggle:hover { background: #f59e0b; color: #000; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4); }
+
+        .btn-action-hero {
+            padding: 0.45rem 0.85rem; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none;
+        }
+        .btn-action-hero:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
+
+        .crud-tab-nav {
+            display: flex; gap: 0.6rem; margin-bottom: 1.2rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.8rem; flex-wrap: wrap;
+        }
+        .crud-tab-btn {
+            background: #1e293b; color: #cbd5e1; border: 1px solid #334155; padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 0.5rem;
+        }
+        .crud-tab-btn:hover { background: #334155; color: #fff; }
+        .crud-tab-btn.active { background: var(--upc-green); color: #fff; border-color: var(--upc-green-light); box-shadow: 0 4px 14px rgba(0, 104, 55, 0.4); }
+
+        .crud-toolbar {
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem; background: #0b1120; border: 1px solid #1e293b; border-radius: 10px; padding: 0.8rem 1rem; margin-bottom: 1rem;
+        }
+        .crud-toolbar-left { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; flex: 1; }
+        .crud-btn-create {
+            background: var(--upc-green); color: #fff; border: 1px solid var(--upc-green-light); padding: 0.55rem 1.2rem; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; box-shadow: 0 2px 10px rgba(0, 104, 55, 0.4); transition: all 0.2s; white-space: nowrap;
+        }
+        .crud-btn-create:hover { background: var(--upc-green-light); color: #000; transform: translateY(-1px); }
+
+        .crud-pagination {
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem; padding: 0.8rem 0.5rem 0.2rem 0.5rem; font-size: 0.8rem; color: var(--text-muted);
+        }
+        .crud-page-btn {
+            background: #1e293b; color: #e2e8f0; border: 1px solid #334155; padding: 5px 12px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.78rem; transition: all 0.2s;
+        }
+        .crud-page-btn:hover:not(:disabled) { background: #38bdf8; color: #000; }
+        .crud-page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
 
         /* MODALES */
         .modal-overlay {
@@ -642,7 +675,7 @@ public:
             <button class="tab-btn active" onclick="cambiarVistaPrincipal('portal')">Directorio Grupos</button>
             <button class="tab-btn" onclick="cambiarVistaPrincipal('dashboard')">Dashboard Analítico</button>
             <button class="tab-btn" onclick="cambiarVistaPrincipal('tablas')">Vistas por Entidad</button>
-            <button class="tab-btn" onclick="cambiarVistaPrincipal('crud')">Gestión y Control CRUD</button>
+            <button class="tab-btn" onclick="cambiarVistaPrincipal('crud')">Panel CRUD</button>
         </div>
         <div class="header-actions">
             <button class="action-btn-undo" id="btn-undo-header" onclick="deshacerUltimaAccion()" title="Deshacer última acción en Pila LIFO">
@@ -709,6 +742,12 @@ public:
                 <!-- COLUMNA IZQUIERDA: LISTA -->
                 <div class="groups-sidebar">
                     <div class="sidebar-header">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+                            <span style="font-weight:800; font-size:0.85rem; color:#cbd5e1; text-transform:uppercase; letter-spacing:0.5px;">Directorio</span>
+                            <button onclick="abrirModalGrupo()" style="background:var(--upc-green); color:#fff; border:none; padding:4px 10px; border-radius:6px; font-weight:700; font-size:0.75rem; cursor:pointer;" title="Registrar un nuevo grupo en la Multilista">
+                                + Nuevo Grupo
+                            </button>
+                        </div>
                         <input type="text" class="search-input" id="search-grupos" placeholder="Buscar por nombre o código (ej: GISICO)..." oninput="filtrarListaGrupos()">
                         <div class="filter-tags">
                             <button class="tag-btn active" onclick="filtrarCategoriaGrupo('')">Todos</button>
@@ -731,7 +770,10 @@ public:
                         <div class="hero-info">
                             <div class="hero-avatar" id="g-avatar">G</div>
                             <div class="hero-title">
-                                <h2 id="g-nombre">Seleccione un Grupo</h2>
+                                <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+                                    <h2 id="g-nombre" style="margin:0;">Seleccione un Grupo</h2>
+                                    <span id="g-badge-status-hero" class="badge-status badge-active">Activo</span>
+                                </div>
                                 <div class="hero-meta">
                                     <span class="badge-cat" id="g-badge-cat">Cat. C</span>
                                     <span>&bull;</span>
@@ -741,9 +783,23 @@ public:
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="btn-pdf-download" id="btn-descargar-pdf" target="_blank">
-                            <span>Descargar Informe PDF</span>
-                        </a>
+                        <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+                            <button onclick="editarGrupoActual()" class="btn-action-hero" style="background:#0284c7; color:#fff;" title="Modificar datos de este grupo">
+                                <span>Editar Grupo</span>
+                            </button>
+                            <button onclick="abrirModalInvestigador(grupoSeleccionado ? grupoSeleccionado.codigo : '')" class="btn-action-hero" style="background:var(--upc-green); color:#fff;" title="Vincular nuevo investigador a este grupo">
+                                <span>+ Nuevo Integrante</span>
+                            </button>
+                            <button onclick="abrirModalProducto(grupoSeleccionado ? grupoSeleccionado.codigo : '')" class="btn-action-hero" style="background:#059669; color:#fff;" title="Registrar producto para este grupo">
+                                <span>+ Nuevo Producto</span>
+                            </button>
+                            <button onclick="toggleEstadoGrupoActual()" id="btn-toggle-hero" class="btn-action-hero" style="background:#334155; color:#f87171;" title="Inactivar o activar este grupo">
+                                <span>Desactivar</span>
+                            </button>
+                            <a href="#" class="btn-pdf-download" id="btn-descargar-pdf" target="_blank">
+                                <span>Descargar PDF</span>
+                            </a>
+                        </div>
                     </div>
 
                     <!-- SUB-TABS DEL PERFIL -->
@@ -789,6 +845,12 @@ public:
 
                         <!-- SUB-TAB: INTEGRANTES -->
                         <div id="subtab-integrantes" class="profile-section">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem;">
+                                <span style="font-size:0.85rem; color:#94a3b8; font-weight:700;">Integrantes vinculados a este grupo</span>
+                                <button onclick="abrirModalInvestigador(grupoSeleccionado ? grupoSeleccionado.codigo : '')" class="btn-action-sm btn-action-edit" style="background:var(--upc-green); color:#fff; padding:4px 10px;">
+                                    + Vincular Nuevo Integrante
+                                </button>
+                            </div>
                             <div class="data-table-container">
                                 <table class="peai-table" id="tabla-perfil-inv">
                                     <thead>
@@ -798,6 +860,7 @@ public:
                                             <th>Escalafón MinCiencias</th>
                                             <th>Formación Académica</th>
                                             <th>Estado</th>
+                                            <th style="text-align:center;">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
@@ -807,6 +870,12 @@ public:
 
                         <!-- SUB-TAB: PRODUCTOS -->
                         <div id="subtab-productos" class="profile-section">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem;">
+                                <span style="font-size:0.85rem; color:#94a3b8; font-weight:700;">Producción científica asignada</span>
+                                <button onclick="abrirModalProducto(grupoSeleccionado ? grupoSeleccionado.codigo : '')" class="btn-action-sm btn-action-edit" style="background:#059669; color:#fff; padding:4px 10px;">
+                                    + Registrar Nuevo Producto
+                                </button>
+                            </div>
                             <div class="data-table-container">
                                 <table class="peai-table" id="tabla-perfil-prod">
                                     <thead>
@@ -818,6 +887,7 @@ public:
                                             <th>Tipo</th>
                                             <th>Aval</th>
                                             <th>Puntos IPP</th>
+                                            <th style="text-align:center;">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
@@ -974,106 +1044,162 @@ public:
 
         <!-- VISTA 4: CENTRO DE GESTIÓN Y CONTROL CRUD COMPLETO -->
         <section id="view-crud" class="view-panel">
-            <div class="chart-box" style="margin-bottom: 1.5rem;">
-                <div class="chart-box-title">
-                    <div style="display:flex; align-items:center; gap:0.8rem;">
-                        <span style="font-size:1.05rem; font-weight:800;">Centro de Operaciones CRUD & Control Integral</span>
-                        <span class="brand-badge">Persistencia en RAM y SQLite</span>
+            <!-- BANNER EXPLICATIVO Y PERSISTENCIA -->
+            <div style="background: linear-gradient(135deg, #0b1528 0%, #0f2219 100%); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 1.2rem 1.5rem; margin-bottom: 1.2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div style="max-width: 720px;">
+                    <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.3rem;">
+                        <h2 style="font-size:1.15rem; font-weight:800; margin:0; color:#fff;">Panel de Administración CRUD (Hipercubo en Memoria RAM & SQLite)</h2>
+                        <span class="brand-badge" style="background:#0284c7;">Tiempo Real</span>
                     </div>
-                    <div style="display:flex; gap:0.4rem;">
-                        <button class="p-tab-btn active" id="crud-tab-btn-g" onclick="cambiarSubTabCRUD('grupos')">Grupos (<span id="crud-badge-g">0</span>)</button>
-                        <button class="p-tab-btn" id="crud-tab-btn-i" onclick="cambiarSubTabCRUD('investigadores')">Investigadores (<span id="crud-badge-i">0</span>)</button>
-                        <button class="p-tab-btn" id="crud-tab-btn-p" onclick="cambiarSubTabCRUD('productos')">Productos (<span id="crud-badge-p">0</span>)</button>
+                    <p style="font-size:0.8rem; color:#cbd5e1; margin:0; line-height:1.4;">
+                        Gestiona el ciclo de vida de los datos de investigación de la UPC. Puedes <b>Crear (+ Nuevo)</b>, <b>Editar</b> o <b>Desactivar</b> registros. Cada mutación actualiza inmediatamente los KPIs, gráficos y puntajes IPP. Puedes usar <b>Deshacer</b> para revertir acciones o presionar <b>Sincronizar SQLite</b> para persistir en la base de datos.
+                    </p>
+                </div>
+                <div style="display:flex; gap:0.6rem; align-items:center;">
+                    <button onclick="deshacerUltimaAccion()" class="action-btn-undo" style="background:#1e293b; color:#fff; border:1px solid #334155; padding:0.5rem 1rem; border-radius:8px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:0.4rem;">
+                        <span>Deshacer Último</span>
+                    </button>
+                    <button onclick="abrirModalExportar()" class="action-btn-export" style="background:var(--upc-green); color:#fff; border:none; padding:0.5rem 1rem; border-radius:8px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:0.4rem;">
+                        <span>Sincronizar SQLite</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- SELECTOR DE ENTIDADES -->
+            <div class="crud-tab-nav">
+                <button class="crud-tab-btn active" id="crud-tab-btn-g" onclick="cambiarSubTabCRUD('grupos')">
+                    Grupos de Investigación (<span id="crud-badge-g">0</span>)
+                </button>
+                <button class="crud-tab-btn" id="crud-tab-btn-i" onclick="cambiarSubTabCRUD('investigadores')">
+                    Investigadores Adscritos (<span id="crud-badge-i">0</span>)
+                </button>
+                <button class="crud-tab-btn" id="crud-tab-btn-p" onclick="cambiarSubTabCRUD('productos')">
+                    Productos Científicos (<span id="crud-badge-p">0</span>)
+                </button>
+            </div>
+
+            <!-- SUBPANEL CRUD: GRUPOS -->
+            <div id="crud-panel-grupos" class="crud-subpanel">
+                <div class="crud-toolbar">
+                    <div class="crud-toolbar-left">
+                        <input type="text" class="search-input" id="search-crud-grupos" placeholder="Buscar grupos por código, nombre o líder..." oninput="renderizarCRUDGrupos()" style="min-width:320px;">
+                        <select id="filtro-crud-grupos-estado" class="search-input" style="width:160px;" onchange="renderizarCRUDGrupos()">
+                            <option value="todos">Todos los Estados</option>
+                            <option value="activos">Solo Activos</option>
+                            <option value="inactivos">Solo Inactivos</option>
+                        </select>
+                        <button onclick="limpiarFiltrosGrupos()" class="btn-action-sm" style="background:#334155; color:#cbd5e1; padding:0.5rem 0.8rem;">Limpiar</button>
+                    </div>
+                    <button onclick="abrirModalGrupo()" class="crud-btn-create">
+                        + Registrar Nuevo Grupo
+                    </button>
+                </div>
+                <div class="data-table-container">
+                    <table class="peai-table" id="tabla-crud-grupos">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Nombre Oficial del Grupo</th>
+                                <th>Clasificación</th>
+                                <th>Líder</th>
+                                <th>Año</th>
+                                <th>Estado</th>
+                                <th style="text-align:center;">Acciones (CRUD)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SUBPANEL CRUD: INVESTIGADORES -->
+            <div id="crud-panel-investigadores" class="crud-subpanel" style="display:none;">
+                <div class="crud-toolbar">
+                    <div class="crud-toolbar-left">
+                        <input type="text" class="search-input" id="search-crud-inv" placeholder="Buscar por documento o nombre..." oninput="irPaginaCRUDInv(1)" style="min-width:300px;">
+                        <select id="filtro-crud-inv-grupo" class="search-input" style="max-width:240px;" onchange="irPaginaCRUDInv(1)">
+                            <option value="">Todos los Grupos</option>
+                        </select>
+                        <select id="filtro-crud-inv-estado" class="search-input" style="width:160px;" onchange="irPaginaCRUDInv(1)">
+                            <option value="todos">Todos los Estados</option>
+                            <option value="activos">Solo Activos</option>
+                            <option value="inactivos">Solo Inactivos</option>
+                        </select>
+                        <button onclick="limpiarFiltrosInv()" class="btn-action-sm" style="background:#334155; color:#cbd5e1; padding:0.5rem 0.8rem;">Limpiar</button>
+                    </div>
+                    <button onclick="abrirModalInvestigador()" class="crud-btn-create">
+                        + Registrar Nuevo Investigador
+                    </button>
+                </div>
+                <div class="data-table-container">
+                    <table class="peai-table" id="tabla-crud-inv">
+                        <thead>
+                            <tr>
+                                <th>Documento ID</th>
+                                <th>Nombre Completo</th>
+                                <th>Categoría</th>
+                                <th>Formación Académica</th>
+                                <th>Grupo Asignado</th>
+                                <th>Estado</th>
+                                <th style="text-align:center;">Acciones (CRUD)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="crud-pagination" id="paginacion-crud-inv">
+                    <span id="info-pag-inv">Mostrando registros</span>
+                    <div style="display:flex; gap:0.4rem; align-items:center;">
+                        <button id="btn-pag-inv-prev" onclick="cambiarPaginaCRUDInv(-1)" class="crud-page-btn">Anterior</button>
+                        <span id="lbl-pag-inv-actual" style="font-weight:700; color:#fff;">Página 1</span>
+                        <button id="btn-pag-inv-next" onclick="cambiarPaginaCRUDInv(1)" class="crud-page-btn">Siguiente</button>
                     </div>
                 </div>
+            </div>
 
-                <!-- SUBPANEL CRUD: GRUPOS -->
-                <div id="crud-panel-grupos" class="crud-subpanel">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; gap:1rem;">
-                        <input type="text" class="search-input" id="search-crud-grupos" placeholder="Filtrar grupos por código o nombre..." oninput="renderizarCRUDGrupos()" style="max-width:380px;">
-                        <button onclick="abrirModalGrupo()" style="background:var(--upc-green); color:#fff; border:none; padding:0.55rem 1.1rem; border-radius:8px; font-weight:700; cursor:pointer; font-size:0.85rem; display:flex; align-items:center; gap:0.4rem;">
-                            + Nuevo Grupo
-                        </button>
+            <!-- SUBPANEL CRUD: PRODUCTOS -->
+            <div id="crud-panel-productos" class="crud-subpanel" style="display:none;">
+                <div class="crud-toolbar">
+                    <div class="crud-toolbar-left">
+                        <input type="text" class="search-input" id="search-crud-prod" placeholder="Buscar por título, ID o año..." oninput="irPaginaCRUDProd(1)" style="min-width:300px;">
+                        <select id="filtro-crud-prod-grupo" class="search-input" style="max-width:240px;" onchange="irPaginaCRUDProd(1)">
+                            <option value="">Todos los Grupos</option>
+                        </select>
+                        <select id="filtro-crud-prod-estado" class="search-input" style="width:160px;" onchange="irPaginaCRUDProd(1)">
+                            <option value="todos">Todos los Estados</option>
+                            <option value="activos">Solo Activos</option>
+                            <option value="inactivos">Solo Inactivos</option>
+                        </select>
+                        <button onclick="limpiarFiltrosProd()" class="btn-action-sm" style="background:#334155; color:#cbd5e1; padding:0.5rem 0.8rem;">Limpiar</button>
                     </div>
-                    <div class="data-table-container">
-                        <table class="peai-table" id="tabla-crud-grupos">
-                            <thead>
-                                <tr>
-                                    <th>Código</th>
-                                    <th>Nombre del Grupo</th>
-                                    <th>Clasificación</th>
-                                    <th>Líder</th>
-                                    <th>Año</th>
-                                    <th>Estado</th>
-                                    <th style="text-align:center;">Acciones (CRUD)</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
+                    <button onclick="abrirModalProducto()" class="crud-btn-create">
+                        + Registrar Nuevo Producto
+                    </button>
                 </div>
-
-                <!-- SUBPANEL CRUD: INVESTIGADORES -->
-                <div id="crud-panel-investigadores" class="crud-subpanel" style="display:none;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; gap:1rem;">
-                        <div style="display:flex; gap:0.5rem; flex:1;">
-                            <input type="text" class="search-input" id="search-crud-inv" placeholder="Filtrar investigadores por documento o nombre..." oninput="renderizarCRUDInvestigadores()" style="max-width:340px;">
-                            <select id="filtro-crud-inv-grupo" class="search-input" style="max-width:240px;" onchange="renderizarCRUDInvestigadores()">
-                                <option value="">Todos los Grupos</option>
-                            </select>
-                        </div>
-                        <button onclick="abrirModalInvestigador()" style="background:var(--upc-green); color:#fff; border:none; padding:0.55rem 1.1rem; border-radius:8px; font-weight:700; cursor:pointer; font-size:0.85rem; display:flex; align-items:center; gap:0.4rem;">
-                            + Nuevo Investigador
-                        </button>
-                    </div>
-                    <div class="data-table-container">
-                        <table class="peai-table" id="tabla-crud-inv">
-                            <thead>
-                                <tr>
-                                    <th>Documento ID</th>
-                                    <th>Nombre Completo</th>
-                                    <th>Categoría</th>
-                                    <th>Formación Académica</th>
-                                    <th>Grupo Asignado</th>
-                                    <th>Estado</th>
-                                    <th style="text-align:center;">Acciones (CRUD)</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
+                <div class="data-table-container">
+                    <table class="peai-table" id="tabla-crud-prod">
+                        <thead>
+                            <tr>
+                                <th>ID Producto</th>
+                                <th>Título de la Publicación</th>
+                                <th>Tipología CTeI</th>
+                                <th>Año</th>
+                                <th>Grupo</th>
+                                <th>Investigador Autor</th>
+                                <th>Aval MinCiencias</th>
+                                <th>Estado</th>
+                                <th style="text-align:center;">Acciones (CRUD)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
-
-                <!-- SUBPANEL CRUD: PRODUCTOS -->
-                <div id="crud-panel-productos" class="crud-subpanel" style="display:none;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; gap:1rem;">
-                        <div style="display:flex; gap:0.5rem; flex:1;">
-                            <input type="text" class="search-input" id="search-crud-prod" placeholder="Filtrar productos por título o ID..." oninput="renderizarCRUDProductos()" style="max-width:340px;">
-                            <select id="filtro-crud-prod-grupo" class="search-input" style="max-width:240px;" onchange="renderizarCRUDProductos()">
-                                <option value="">Todos los Grupos</option>
-                            </select>
-                        </div>
-                        <button onclick="abrirModalProducto()" style="background:var(--upc-green); color:#fff; border:none; padding:0.55rem 1.1rem; border-radius:8px; font-weight:700; cursor:pointer; font-size:0.85rem; display:flex; align-items:center; gap:0.4rem;">
-                            + Nuevo Producto
-                        </button>
-                    </div>
-                    <div class="data-table-container">
-                        <table class="peai-table" id="tabla-crud-prod">
-                            <thead>
-                                <tr>
-                                    <th>ID Producto</th>
-                                    <th>Título de la Publicación</th>
-                                    <th>Tipología CTeI</th>
-                                    <th>Año</th>
-                                    <th>Grupo</th>
-                                    <th>Investigador Autor</th>
-                                    <th>Validado</th>
-                                    <th>Estado</th>
-                                    <th style="text-align:center;">Acciones (CRUD)</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
+                <div class="crud-pagination" id="paginacion-crud-prod">
+                    <span id="info-pag-prod">Mostrando registros</span>
+                    <div style="display:flex; gap:0.4rem; align-items:center;">
+                        <button id="btn-pag-prod-prev" onclick="cambiarPaginaCRUDProd(-1)" class="crud-page-btn">Anterior</button>
+                        <span id="lbl-pag-prod-actual" style="font-weight:700; color:#fff;">Página 1</span>
+                        <button id="btn-pag-prod-next" onclick="cambiarPaginaCRUDProd(1)" class="crud-page-btn">Siguiente</button>
                     </div>
                 </div>
             </div>
@@ -1371,8 +1497,9 @@ public:
         }
 
         // CAMBIO DE SUB-TABS DEL PERFIL
+        // CAMBIO DE SUB-TABS DEL PERFIL
         function cambiarSubTab(subtab) {
-            document.querySelectorAll(".p-tab-btn").forEach(b => b.classList.remove("active"));
+            document.querySelectorAll(".profile-nav .p-tab-btn").forEach(b => b.classList.remove("active"));
             document.querySelectorAll(".profile-section").forEach(s => s.classList.remove("active"));
 
             const subMap = {
@@ -1382,7 +1509,7 @@ public:
                 "modelo2024": { btn: 3, sec: "subtab-modelo2024" }
             };
             const item = subMap[subtab] || subMap["general"];
-            document.querySelectorAll(".p-tab-btn")[item.btn].classList.add("active");
+            document.querySelectorAll(".profile-nav .p-tab-btn")[item.btn].classList.add("active");
             document.getElementById(item.sec).classList.add("active");
         }
 
@@ -1498,6 +1625,18 @@ public:
             badgeCat.textContent = `Cat. ${g.clasificacion || "Reconocido"}`;
             badgeCat.className = `badge-cat cat-${g.clasificacion || "C"}`;
 
+            const badgeStatHero = document.getElementById("g-badge-status-hero");
+            const btnToggleHero = document.getElementById("btn-toggle-hero");
+            const esActivo = g.activo !== false;
+            if (badgeStatHero) {
+                badgeStatHero.textContent = esActivo ? "Activo" : "Inactivo";
+                badgeStatHero.className = "badge-status " + (esActivo ? "badge-active" : "badge-inactive");
+            }
+            if (btnToggleHero) {
+                btnToggleHero.textContent = esActivo ? "Desactivar" : "Activar";
+                btnToggleHero.style.color = esActivo ? "#f87171" : "#10b981";
+            }
+
             const btnPdf = document.getElementById("btn-descargar-pdf");
             btnPdf.href = `../reportes/Informe_GrupLAC_${g.codigo}.pdf`;
 
@@ -1520,6 +1659,7 @@ public:
             tbodyInv.innerHTML = "";
             (g.investigadores || []).forEach(inv => {
                 const tr = document.createElement("tr");
+                const invActivo = inv.activo !== false;
                 let badgePar = inv.par_evaluador === "Si" ? " <span class='badge-cat' style='background:#047857; color:#fff; font-weight:700; margin-left:6px;'>Par Evaluador</span>" : "";
                 let links = "";
                 if (inv.scholar_url) links += `<a href="${inv.scholar_url}" target="_blank" style="background:#0284c7; color:#fff; padding:2px 6px; border-radius:4px; font-size:0.75rem; text-decoration:none; margin-right:4px;">Scholar</a>`;
@@ -1530,7 +1670,11 @@ public:
                     <td><b>${inv.nombre}</b>${badgePar}</td>
                     <td><span class="badge-cat">${inv.categoria || "Junior"}</span></td>
                     <td>${inv.formacion || "Maestría / Doctorado CTeI"}</td>
-                    <td>${links ? links : (inv.activo ? "<span style='color:#10b981;'>● Activo</span>" : "<span style='color:#94a3b8;'>Inactivo</span>")}</td>
+                    <td><span class="badge-status ${invActivo ? 'badge-active' : 'badge-inactive'}">${invActivo ? '● Activo' : '○ Inactivo'}</span></td>
+                    <td style="text-align:center; white-space:nowrap;">
+                        <button onclick="abrirModalInvestigador('${g.codigo}', '${inv.documento}')" class="btn-action-sm btn-action-edit">Editar</button>
+                        <button onclick="toggleEstadoInvestigador('${g.codigo}', '${inv.documento}')" class="btn-action-sm btn-action-toggle">${invActivo ? 'Desactivar' : 'Activar'}</button>
+                    </td>
                 `;
                 tbodyInv.appendChild(tr);
             });
@@ -1550,14 +1694,19 @@ public:
                 totalIPP += pts;
 
                 const tr = document.createElement("tr");
+                const prodActivo = p.activo !== false;
                 tr.innerHTML = `
                     <td><b>${p.anio}</b></td>
                     <td><span class="badge-cat" style="background:#0284c7; color:#fff;">${clas.fam}</span></td>
                     <td><code>${clas.cod}</code></td>
-                    <td style="max-width:380px;">${p.titulo}</td>
+                    <td style="max-width:320px;"><b>${p.titulo}</b></td>
                     <td>${p.tipo}</td>
                     <td>${p.validado ? "<span style='color:#10b981; font-weight:700;'>Avalado</span>" : "<span style='color:#f59e0b;'>En Revisión</span>"}</td>
                     <td style="color:var(--upc-green-light); font-weight:700;">${pts} pts</td>
+                    <td style="text-align:center; white-space:nowrap;">
+                        <button onclick="abrirModalProducto('${g.codigo}', '${p.id}')" class="btn-action-sm btn-action-edit">Editar</button>
+                        <button onclick="toggleEstadoProducto('${g.codigo}', '${p.id}')" class="btn-action-sm btn-action-toggle">${prodActivo ? 'Desactivar' : 'Activar'}</button>
+                    </td>
                 `;
                 tbodyProd.appendChild(tr);
             });
@@ -1838,6 +1987,8 @@ public:
                 if (activa.id === "view-tablas") renderizarTablasEntidad();
                 if (activa.id === "view-crud") renderizarCRUDTab();
             }
+            actualizarContadorUndo();
+            guardarEnLocalStorage();
         }
 
         // -------------------------------------------------------------
@@ -2249,8 +2400,61 @@ public:
         // -------------------------------------------------------------
         // VISTA CRUD: PANELES Y SUB-TABS
         // -------------------------------------------------------------
+        let pagActualCRUDInv = 1;
+        const pageSizeCRUDInv = 50;
+        let pagActualCRUDProd = 1;
+        const pageSizeCRUDProd = 50;
+
+        function irPaginaCRUDInv(p) {
+            pagActualCRUDInv = p;
+            renderizarCRUDInvestigadores();
+        }
+
+        function cambiarPaginaCRUDInv(delta) {
+            pagActualCRUDInv += delta;
+            renderizarCRUDInvestigadores();
+        }
+
+        function limpiarFiltrosInv() {
+            const inTxt = document.getElementById("search-crud-inv");
+            const selG = document.getElementById("filtro-crud-inv-grupo");
+            const selEst = document.getElementById("filtro-crud-inv-estado");
+            if (inTxt) inTxt.value = "";
+            if (selG) selG.value = "";
+            if (selEst) selEst.value = "todos";
+            irPaginaCRUDInv(1);
+        }
+
+        function irPaginaCRUDProd(p) {
+            pagActualCRUDProd = p;
+            renderizarCRUDProductos();
+        }
+
+        function cambiarPaginaCRUDProd(delta) {
+            pagActualCRUDProd += delta;
+            renderizarCRUDProductos();
+        }
+
+        function limpiarFiltrosProd() {
+            const inTxt = document.getElementById("search-crud-prod");
+            const selG = document.getElementById("filtro-crud-prod-grupo");
+            const selEst = document.getElementById("filtro-crud-prod-estado");
+            if (inTxt) inTxt.value = "";
+            if (selG) selG.value = "";
+            if (selEst) selEst.value = "todos";
+            irPaginaCRUDProd(1);
+        }
+
+        function limpiarFiltrosGrupos() {
+            const inTxt = document.getElementById("search-crud-grupos");
+            const selEst = document.getElementById("filtro-crud-grupos-estado");
+            if (inTxt) inTxt.value = "";
+            if (selEst) selEst.value = "todos";
+            renderizarCRUDGrupos();
+        }
+
         function cambiarSubTabCRUD(subtab) {
-            document.querySelectorAll("#view-crud .p-tab-btn").forEach(b => b.classList.remove("active"));
+            document.querySelectorAll(".crud-tab-nav .crud-tab-btn").forEach(b => b.classList.remove("active"));
             document.querySelectorAll(".crud-subpanel").forEach(p => p.style.display = "none");
 
             if (subtab === "grupos") {
@@ -2288,7 +2492,7 @@ public:
                     const opt = document.createElement("option");
                     opt.value = g.codigo; opt.textContent = `${g.codigo} - ${g.nombre.substring(0, 24)}`;
                     selInvG.appendChild(opt.cloneNode(true));
-                    selProdG.appendChild(opt);
+                    if (selProdG) selProdG.appendChild(opt);
                 });
             }
 
@@ -2300,11 +2504,21 @@ public:
         function renderizarCRUDGrupos() {
             const tbody = document.querySelector("#tabla-crud-grupos tbody");
             tbody.innerHTML = "";
-            const filtro = (document.getElementById("search-crud-grupos")?.value || "").toLowerCase();
+            const filtroTxt = (document.getElementById("search-crud-grupos")?.value || "").toLowerCase();
+            const filtroEst = document.getElementById("filtro-crud-grupos-estado")?.value || "todos";
 
-            gruposData.filter(g => !filtro || g.nombre.toLowerCase().includes(filtro) || g.codigo.toLowerCase().includes(filtro)).forEach(g => {
+            const filtrados = gruposData.filter(g => {
+                const esActivo = g.activo !== false;
+                if (filtroEst === "activos" && !esActivo) return false;
+                if (filtroEst === "inactivos" && esActivo) return false;
+                if (filtroTxt && !g.nombre.toLowerCase().includes(filtroTxt) && !g.codigo.toLowerCase().includes(filtroTxt) && !g.lider.toLowerCase().includes(filtroTxt)) return false;
+                return true;
+            });
+
+            filtrados.forEach(g => {
                 const tr = document.createElement("tr");
                 const esActivo = g.activo !== false;
+                if (!esActivo) tr.style.opacity = "0.6";
                 tr.innerHTML = `
                     <td><code style="color:#38bdf8; font-weight:700;">${g.codigo}</code></td>
                     <td><b>${g.nombre}</b></td>
@@ -2326,31 +2540,56 @@ public:
             tbody.innerHTML = "";
             const filtroTxt = (document.getElementById("search-crud-inv")?.value || "").toLowerCase();
             const filtroG = document.getElementById("filtro-crud-inv-grupo")?.value || "";
+            const filtroEst = document.getElementById("filtro-crud-inv-estado")?.value || "todos";
 
-            let count = 0;
+            let listaTotal = [];
             gruposData.forEach(g => {
                 if (filtroG && g.codigo !== filtroG) return;
                 (g.investigadores || []).forEach(inv => {
-                    if (filtroTxt && !inv.nombre.toLowerCase().includes(filtroTxt) && !inv.documento.includes(filtroTxt)) return;
-                    if (count >= 100) return; // Limitar a 100 para fluidez en renderizado
-                    count++;
-
-                    const tr = document.createElement("tr");
                     const esActivo = inv.activo !== false;
-                    tr.innerHTML = `
-                        <td><code style="color:#38bdf8;">${inv.documento}</code></td>
-                        <td><b>${inv.nombre}</b></td>
-                        <td><span class="badge-cat">${inv.categoria || 'Junior'}</span></td>
-                        <td>${inv.formacion || 'Ingeniería / Posgrado'}</td>
-                        <td><code>${g.codigo}</code></td>
-                        <td><span class="badge-status ${esActivo ? 'badge-active' : 'badge-inactive'}">${esActivo ? '● Activo' : '○ Inactivo'}</span></td>
-                        <td style="text-align:center; white-space:nowrap;">
-                            <button onclick="abrirModalInvestigador('${g.codigo}', '${inv.documento}')" class="btn-action-sm btn-action-edit">Editar</button>
-                            <button onclick="toggleEstadoInvestigador('${g.codigo}', '${inv.documento}')" class="btn-action-sm btn-action-toggle">${esActivo ? 'Desactivar' : 'Activar'}</button>
-                        </td>
-                    `;
-                    tbody.appendChild(tr);
+                    if (filtroEst === "activos" && !esActivo) return;
+                    if (filtroEst === "inactivos" && esActivo) return;
+                    if (filtroTxt && !inv.nombre.toLowerCase().includes(filtroTxt) && !inv.documento.includes(filtroTxt)) return;
+                    listaTotal.push({ inv, g, esActivo });
                 });
+            });
+
+            const total = listaTotal.length;
+            const totalPags = Math.max(1, Math.ceil(total / pageSizeCRUDInv));
+            if (pagActualCRUDInv > totalPags) pagActualCRUDInv = totalPags;
+            if (pagActualCRUDInv < 1) pagActualCRUDInv = 1;
+
+            const inicio = (pagActualCRUDInv - 1) * pageSizeCRUDInv;
+            const fin = Math.min(inicio + pageSizeCRUDInv, total);
+            const itemsPag = listaTotal.slice(inicio, fin);
+
+            // Actualizar controles paginación
+            const infoEl = document.getElementById("info-pag-inv");
+            if (infoEl) infoEl.textContent = `Mostrando ${total === 0 ? 0 : inicio + 1} - ${fin} de ${total.toLocaleString()} investigadores`;
+            const lblPag = document.getElementById("lbl-pag-inv-actual");
+            if (lblPag) lblPag.textContent = `Página ${pagActualCRUDInv} de ${totalPags}`;
+            const btnPrev = document.getElementById("btn-pag-inv-prev");
+            if (btnPrev) btnPrev.disabled = (pagActualCRUDInv <= 1);
+            const btnNext = document.getElementById("btn-pag-inv-next");
+            if (btnNext) btnNext.disabled = (pagActualCRUDInv >= totalPags);
+
+            itemsPag.forEach(item => {
+                const { inv, g, esActivo } = item;
+                const tr = document.createElement("tr");
+                if (!esActivo) tr.style.opacity = "0.6";
+                tr.innerHTML = `
+                    <td><code style="color:#38bdf8;">${inv.documento}</code></td>
+                    <td><b>${inv.nombre}</b></td>
+                    <td><span class="badge-cat">${inv.categoria || 'Junior'}</span></td>
+                    <td>${inv.formacion || 'Ingeniería / Posgrado'}</td>
+                    <td><code>${g.codigo}</code></td>
+                    <td><span class="badge-status ${esActivo ? 'badge-active' : 'badge-inactive'}">${esActivo ? '● Activo' : '○ Inactivo'}</span></td>
+                    <td style="text-align:center; white-space:nowrap;">
+                        <button onclick="abrirModalInvestigador('${g.codigo}', '${inv.documento}')" class="btn-action-sm btn-action-edit">Editar</button>
+                        <button onclick="toggleEstadoInvestigador('${g.codigo}', '${inv.documento}')" class="btn-action-sm btn-action-toggle">${esActivo ? 'Desactivar' : 'Activar'}</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
             });
         }
 
@@ -2359,33 +2598,58 @@ public:
             tbody.innerHTML = "";
             const filtroTxt = (document.getElementById("search-crud-prod")?.value || "").toLowerCase();
             const filtroG = document.getElementById("filtro-crud-prod-grupo")?.value || "";
+            const filtroEst = document.getElementById("filtro-crud-prod-estado")?.value || "todos";
 
-            let count = 0;
+            let listaTotal = [];
             gruposData.forEach(g => {
                 if (filtroG && g.codigo !== filtroG) return;
                 (g.productos || []).forEach(p => {
-                    if (filtroTxt && !p.titulo.toLowerCase().includes(filtroTxt) && !p.id.toLowerCase().includes(filtroTxt)) return;
-                    if (count >= 100) return;
-                    count++;
-
-                    const tr = document.createElement("tr");
                     const esActivo = p.activo !== false;
-                    tr.innerHTML = `
-                        <td><code>${p.id}</code></td>
-                        <td style="max-width:320px;"><b>${p.titulo}</b></td>
-                        <td><span class="badge-cat" style="background:#0284c7; color:#fff;">${p.tipo}</span></td>
-                        <td><b>${p.anio}</b></td>
-                        <td><code>${g.codigo}</code></td>
-                        <td><code>${p.id_investigador || '-'}</code></td>
-                        <td>${p.validado ? '<span style="color:#10b981;">Avalado</span>' : '<span style="color:#f59e0b;">Revisión</span>'}</td>
-                        <td><span class="badge-status ${esActivo ? 'badge-active' : 'badge-inactive'}">${esActivo ? '● Activo' : '○ Inactivo'}</span></td>
-                        <td style="text-align:center; white-space:nowrap;">
-                            <button onclick="abrirModalProducto('${g.codigo}', '${p.id}')" class="btn-action-sm btn-action-edit">Editar</button>
-                            <button onclick="toggleEstadoProducto('${g.codigo}', '${p.id}')" class="btn-action-sm btn-action-toggle">${esActivo ? 'Desactivar' : 'Activar'}</button>
-                        </td>
-                    `;
-                    tbody.appendChild(tr);
+                    if (filtroEst === "activos" && !esActivo) return;
+                    if (filtroEst === "inactivos" && esActivo) return;
+                    if (filtroTxt && !p.titulo.toLowerCase().includes(filtroTxt) && !p.id.toLowerCase().includes(filtroTxt) && !String(p.anio).includes(filtroTxt)) return;
+                    listaTotal.push({ p, g, esActivo });
                 });
+            });
+
+            const total = listaTotal.length;
+            const totalPags = Math.max(1, Math.ceil(total / pageSizeCRUDProd));
+            if (pagActualCRUDProd > totalPags) pagActualCRUDProd = totalPags;
+            if (pagActualCRUDProd < 1) pagActualCRUDProd = 1;
+
+            const inicio = (pagActualCRUDProd - 1) * pageSizeCRUDProd;
+            const fin = Math.min(inicio + pageSizeCRUDProd, total);
+            const itemsPag = listaTotal.slice(inicio, fin);
+
+            // Actualizar controles paginación
+            const infoEl = document.getElementById("info-pag-prod");
+            if (infoEl) infoEl.textContent = `Mostrando ${total === 0 ? 0 : inicio + 1} - ${fin} de ${total.toLocaleString()} productos`;
+            const lblPag = document.getElementById("lbl-pag-prod-actual");
+            if (lblPag) lblPag.textContent = `Página ${pagActualCRUDProd} de ${totalPags}`;
+            const btnPrev = document.getElementById("btn-pag-prod-prev");
+            if (btnPrev) btnPrev.disabled = (pagActualCRUDProd <= 1);
+            const btnNext = document.getElementById("btn-pag-prod-next");
+            if (btnNext) btnNext.disabled = (pagActualCRUDProd >= totalPags);
+
+            itemsPag.forEach(item => {
+                const { p, g, esActivo } = item;
+                const tr = document.createElement("tr");
+                if (!esActivo) tr.style.opacity = "0.6";
+                tr.innerHTML = `
+                    <td><code>${p.id}</code></td>
+                    <td style="max-width:320px;"><b>${p.titulo}</b></td>
+                    <td><span class="badge-cat" style="background:#0284c7; color:#fff;">${p.tipo}</span></td>
+                    <td><b>${p.anio}</b></td>
+                    <td><code>${g.codigo}</code></td>
+                    <td><code>${p.id_investigador || '-'}</code></td>
+                    <td>${p.validado ? '<span style="color:#10b981; font-weight:700;">Avalado</span>' : '<span style="color:#f59e0b;">En Revisión</span>'}</td>
+                    <td><span class="badge-status ${esActivo ? 'badge-active' : 'badge-inactive'}">${esActivo ? '● Activo' : '○ Inactivo'}</span></td>
+                    <td style="text-align:center; white-space:nowrap;">
+                        <button onclick="abrirModalProducto('${g.codigo}', '${p.id}')" class="btn-action-sm btn-action-edit">Editar</button>
+                        <button onclick="toggleEstadoProducto('${g.codigo}', '${p.id}')" class="btn-action-sm btn-action-toggle">${esActivo ? 'Desactivar' : 'Activar'}</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
             });
         }
 
