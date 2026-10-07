@@ -327,9 +327,10 @@ class ConsolaApp:
             print("  2. Web Scraping de Investigador MinCiencias (CvLAC)")
             print("  3. Procesar Archivo CSV de Investigación (data/muestra_upc.csv)")
             print("  4. Procesar Archivo PDF de Producción Científica")
+            print("  5. Auditoria Datos Abiertos Colombia (Socrata / Offline) y Catalogo 2024 (70 Subtipos)")
             print("  0. Anterior / Regresar al Menú Principal")
             print("-----------------------------------------------------------------")
-            op = self.leer_opcion_menu("01234", "Presione una opción [0-4]: ")
+            op = self.leer_opcion_menu("012345", "Presione una opción [0-5]: ")
 
             if op == 1:
                 self.limpiar_pantalla()
@@ -395,6 +396,30 @@ class ConsolaApp:
                 motor = MotorIngesta(self.ruta_bd)
                 if motor.ejecutar_ingesta("ARCHIVO_PDF", ruta):
                     GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
+                self.pausar()
+
+            elif op == 5:
+                self.limpiar_pantalla()
+                print("=================================================================")
+                print("--- DATOS ABIERTOS DE COLOMBIA (SOCRATA) & CATALOGO 2024 ---")
+                print("=================================================================")
+                from python.core.datos_abiertos import auditar_grupos_e_investigadores_locales
+                stats_cat = CatalogoMinCiencias2024.obtener_estadisticas_catalogo()
+                print(f"[Catalogo Oficial MinCiencias {stats_cat['version']} - Anexo 1]")
+                print(f"  * Familias Oficiales:   {stats_cat['total_familias']}")
+                print(f"  * Subtipos Oficiales:   {stats_cat['total_subtipos']}")
+                print(f"  * Categorias de Peso:   {stats_cat['total_categorias']}")
+                for f_code, f_info in stats_cat["por_familia"].items():
+                    print(f"    - [{f_code}] {f_info['nombre']}: {f_info['subtipos']} subtipos ({f_info['categorias']} categorias)")
+                aud = auditar_grupos_e_investigadores_locales(self.ruta_bd)
+                print("\n[Auditoria Local Datos Abiertos / Scienti (Modo Offline Seguro)]")
+                print(f"  * Grupos Activos Verificados:         {aud['total_grupos']}")
+                print(f"  * Investigadores Activos Verificados: {aud['total_investigadores']}")
+                print(f"  * Investigadores con CvLAC / ORCID:   {aud['investigadores_con_orcid_o_cvlac']}")
+                print("  * Distribucion de Grupos por Clasificacion MinCiencias:")
+                for c_k, c_v in aud["grupos_por_categoria"].items():
+                    print(f"    - {c_k}: {c_v} grupo(s)")
+                print("=================================================================")
                 self.pausar()
 
     # -----------------------------------------------------------------
@@ -1061,8 +1086,8 @@ class ConsolaApp:
         print(f"  • [DTI] Desarrollo Tecnológico e Innov.: {fam_dti} (Software, Diseños, Prototipos)")
         print(f"  • [ASC] Apropiación Social Conocimiento: {fam_asc} (Procesos CTeI e Innovación Social)")
         print(f"  • [DPC] Divulgación Pública Ciencia:    {fam_dpc} (Eventos, Talleres, Informes Técnicos)")
-        print(f"  • [FRH] Formación Recurso Humano CTeI:   {fam_frh} (Tesis doctorales, Trabajos de Grado, APO)")
-        print(f"  🏆 Índice de Producción Ponderada (IPP): {puntos_ponderados} pts MinCiencias")
+        print(f"  * [FRH] Formación Recurso Humano CTeI:   {fam_frh} (Tesis doctorales, Trabajos de Grado, APO)")
+        print(f"  [IPP] Índice de Producción Ponderada:    {puntos_ponderados} pts MinCiencias")
 
         print("\n--- Desglose por Tipo Específico de Producto ---")
         print(f"  - Artículos científicos: {articulos}")
