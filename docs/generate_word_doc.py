@@ -52,7 +52,7 @@ def add_callout(doc, title, text, border_color_hex="006837", bg_color_hex="F0FFF
     p = cell.paragraphs[0]
     p.paragraph_format.space_before = Pt(0)
     p.paragraph_format.space_after = Pt(4)
-    run_t = p.add_run(f"📌 {title}\n")
+    run_t = p.add_run(f"[ESPECIFICACION] {title}\n")
     run_t.font.name = "Segoe UI"
     run_t.font.size = Pt(10.5)
     run_t.font.bold = True
@@ -571,6 +571,59 @@ def build_document():
         border_color_hex=HEX_ROJO_UPC,
         bg_color_hex="FFF5F5"
     )
+
+    # --- SECCIÓN 9: CATÁLOGO OFICIAL MINCIENCIAS 2024 (70 SUBTIPOS) Y SUITE DE 11 DIAGRAMAS ---
+    doc.add_page_break()
+    h9 = doc.add_heading("9. Catálogo Oficial MinCiencias 2024 (70 Subtipos) y Suite de Diagramas UML", level=1)
+    h9.paragraph_format.space_before = Pt(14)
+    h9.paragraph_format.space_after = Pt(6)
+
+    doc.add_paragraph(
+        "El motor de clasificación de PEA-i incorpora el Anexo 1 completo de la Convocatoria Nacional 957 de MinCiencias "
+        "(Documento Oficial M601PR04G01 v02), abarcando las 5 grandes familias de producción científica, 70 subtipos oficiales "
+        "y 170 categorías de calidad con sus respectivos pesos relativos, pesos globales y clases de medición (TOP, A, B):"
+    )
+
+    tbl_cat = doc.add_table(rows=1, cols=4)
+    headers_cat = ["Código Familia", "Denominación Oficial MinCiencias 2024", "Subtipos", "Categorías Indexadas"]
+    widths_cat = [Inches(1.2), Inches(3.1), Inches(1.0), Inches(1.2)]
+    data_cat = [
+        ["GNC", "Generación de Nuevo Conocimiento", "10", "57"],
+        ["DTI", "Desarrollo Tecnológico e Innovación", "26", "34"],
+        ["ASC", "Apropiación Social del Conocimiento", "4", "11"],
+        ["DPC", "Divulgación Pública de la Ciencia", "21", "48"],
+        ["FRH", "Formación de Recurso Humano para la CTeI", "9", "20"],
+        ["TOTAL", "Cobertura Integral Anexo 1 (MinCiencias 2024)", "70", "170"]
+    ]
+    format_table(tbl_cat, widths_cat, headers_cat, data_cat)
+    doc.add_paragraph().paragraph_format.space_after = Pt(12)
+
+    doc.add_heading("9.1 Galería de Modelado Arquitectónico, Memoria RAM y Diagramas de Secuencia", level=2)
+    diagrams_suite = [
+        ("docs/diagrams/01_casos_de_uso.png", "Diagrama 01: Casos de Uso Generales del Sistema PEA-i."),
+        ("docs/diagrams/02_modelo_entidad_relacion.png", "Diagrama 02: Modelo Entidad-Relación y Persistencia Relacional."),
+        ("docs/diagrams/03_multilista_memoria_ram.png", "Diagrama 03: Topología de la Multilista Ortogonal 3D y Nodos en Memoria RAM."),
+        ("docs/diagrams/04_clases_cpp.png", "Diagrama 04: Diagrama de Clases y Estructuras TDA en C++17."),
+        ("docs/diagrams/05_hipercubo_informacion.png", "Diagrama 05: Hipercubo de Información Multidimensional (Cortes OLAP)."),
+        ("docs/diagrams/06_secuencia_creacion_escritura_dual.png", "Diagrama 06: Secuencia de Creación con Escritura Dual (RAM + SQLite3)."),
+        ("docs/diagrams/07_secuencia_ingesta_scienti.png", "Diagrama 07: Secuencia de Ingesta Scienti (GrupLAC / CvLAC / Datos Abiertos) y Deduplicación."),
+        ("docs/diagrams/08_secuencia_membresias_reglas.png", "Diagrama 08: Secuencia de Atribución de Membresías y Reglas de Integridad."),
+        ("docs/diagrams/09_secuencia_validacion_fifo.png", "Diagrama 09: Secuencia de Procesamiento FIFO en la Cola de Ingesta/Validación."),
+        ("docs/diagrams/10_secuencia_deshacer_lifo.png", "Diagrama 10: Secuencia de Reversión Transaccional LIFO en la Pila de Operaciones (Undo)."),
+        ("docs/diagrams/11_arquitectura_despliegue.png", "Diagrama 11: Arquitectura Física de Integración Políglota (C++17, Python y SQLite3).")
+    ]
+
+    for img_path, caption in diagrams_suite:
+        if os.path.exists(img_path):
+            p_d = doc.add_paragraph()
+            p_d.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            run_d = p_d.add_run()
+            run_d.add_picture(img_path, width=Inches(6.0))
+            p_c = doc.add_paragraph(caption)
+            p_c.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p_c.runs[0].font.size = Pt(8.5)
+            p_c.runs[0].font.italic = True
+            p_c.paragraph_format.space_after = Pt(10)
 
     doc.save(OUTPUT_FILE)
     print(f"[OK] Documento de Especificación Técnica generado exitosamente: {OUTPUT_FILE}")
