@@ -1120,9 +1120,14 @@ public:
                         </select>
                         <button onclick="limpiarFiltrosGrupos()" class="btn-action-sm" style="background:#334155; color:#cbd5e1; padding:0.5rem 0.8rem;">Limpiar</button>
                     </div>
-                    <button onclick="abrirModalGrupo()" class="crud-btn-create">
-                        + Registrar Nuevo Grupo
-                    </button>
+                    <div style="display:flex; gap:0.5rem; align-items:center;">
+                        <button onclick="exportarTablaCSV('grupos')" class="btn-action-sm" style="background:#1e293b; color:#38bdf8; border:1px solid #334155; padding:0.55rem 0.9rem;" title="Descargar tabla en formato CSV con BOM UTF-8 compatible con Microsoft Excel">
+                            Exportar CSV (Excel)
+                        </button>
+                        <button onclick="abrirModalGrupo()" class="crud-btn-create">
+                            + Registrar Nuevo Grupo
+                        </button>
+                    </div>
                 </div>
                 <div class="data-table-container">
                     <table class="peai-table" id="tabla-crud-grupos">
@@ -1157,9 +1162,14 @@ public:
                         </select>
                         <button onclick="limpiarFiltrosInv()" class="btn-action-sm" style="background:#334155; color:#cbd5e1; padding:0.5rem 0.8rem;">Limpiar</button>
                     </div>
-                    <button onclick="abrirModalInvestigador()" class="crud-btn-create">
-                        + Registrar Nuevo Investigador
-                    </button>
+                    <div style="display:flex; gap:0.5rem; align-items:center;">
+                        <button onclick="exportarTablaCSV('investigadores')" class="btn-action-sm" style="background:#1e293b; color:#38bdf8; border:1px solid #334155; padding:0.55rem 0.9rem;" title="Descargar investigadores filtrados en CSV con BOM UTF-8 para Excel">
+                            Exportar CSV (Excel)
+                        </button>
+                        <button onclick="abrirModalInvestigador()" class="crud-btn-create">
+                            + Registrar Nuevo Investigador
+                        </button>
+                    </div>
                 </div>
                 <div class="data-table-container">
                     <table class="peai-table" id="tabla-crud-inv">
@@ -1203,9 +1213,14 @@ public:
                         </select>
                         <button onclick="limpiarFiltrosProd()" class="btn-action-sm" style="background:#334155; color:#cbd5e1; padding:0.5rem 0.8rem;">Limpiar</button>
                     </div>
-                    <button onclick="abrirModalProducto()" class="crud-btn-create">
-                        + Registrar Nuevo Producto
-                    </button>
+                    <div style="display:flex; gap:0.5rem; align-items:center;">
+                        <button onclick="exportarTablaCSV('productos')" class="btn-action-sm" style="background:#1e293b; color:#38bdf8; border:1px solid #334155; padding:0.55rem 0.9rem;" title="Descargar productos filtrados en CSV con BOM UTF-8 para Excel">
+                            Exportar CSV (Excel)
+                        </button>
+                        <button onclick="abrirModalProducto()" class="crud-btn-create">
+                            + Registrar Nuevo Producto
+                        </button>
+                    </div>
                 </div>
                 <div class="data-table-container">
                     <table class="peai-table" id="tabla-crud-prod">
@@ -2964,6 +2979,85 @@ public:
             }).catch(() => {
                 alert("No se pudo copiar automáticamente. Por favor seleccione y copie el texto del área.");
             });
+        }
+
+        function escaparCeldaCSV(val) {
+            const s = String(val === null || val === undefined ? "" : val).replace(/"/g, '""');
+            return `"${s}"`;
+        }
+
+        function exportarTablaCSV(entidad) {
+            let filas = [];
+            let nombreArchivo = `peai_${entidad}_upc.csv`;
+
+            if (entidad === "grupos") {
+                filas.push(["Codigo_Grupo", "Nombre_Oficial", "Clasificacion_MinCiencias", "Area_Conocimiento", "Lider", "Anio_Creacion", "Investigadores", "Productos", "Estado"]);
+                const filtroTxt = (document.getElementById("search-crud-grupos")?.value || "").toLowerCase();
+                const filtroEst = document.getElementById("filtro-crud-grupos-estado")?.value || "todos";
+                gruposData.forEach(g => {
+                    const esActivo = g.activo !== false;
+                    if (filtroEst === "activos" && !esActivo) return;
+                    if (filtroEst === "inactivos" && esActivo) return;
+                    if (filtroTxt && !g.nombre.toLowerCase().includes(filtroTxt) && !g.codigo.toLowerCase().includes(filtroTxt) && !(g.lider || "").toLowerCase().includes(filtroTxt)) return;
+                    filas.push([
+                        g.codigo, g.nombre, g.clasificacion || "C", g.area || "Ingeniería y Tecnología",
+                        g.lider || "", g.anio_creacion || g.anio || 2024,
+                        (g.investigadores || []).length, (g.productos || []).length,
+                        esActivo ? "Activo" : "Inactivo"
+                    ]);
+                });
+            } else if (entidad === "investigadores") {
+                filas.push(["Documento_ID", "Nombre_Completo", "Categoria_MinCiencias", "Par_Evaluador", "Formacion_Academica", "Codigo_Grupo", "Google_Scholar", "ORCID", "Estado"]);
+                const filtroTxt = (document.getElementById("search-crud-inv")?.value || "").toLowerCase();
+                const filtroG = document.getElementById("filtro-crud-inv-grupo")?.value || "";
+                const filtroEst = document.getElementById("filtro-crud-inv-estado")?.value || "todos";
+                gruposData.forEach(g => {
+                    if (filtroG && g.codigo !== filtroG) return;
+                    (g.investigadores || []).forEach(inv => {
+                        const esActivo = inv.activo !== false;
+                        if (filtroEst === "activos" && !esActivo) return;
+                        if (filtroEst === "inactivos" && esActivo) return;
+                        if (filtroTxt && !inv.nombre.toLowerCase().includes(filtroTxt) && !String(inv.documento).includes(filtroTxt)) return;
+                        filas.push([
+                            inv.documento, inv.nombre, inv.categoria || "Junior", inv.par_evaluador || "No",
+                            inv.formacion || "Posgrado", g.codigo, inv.scholar_url || "", inv.orcid || "",
+                            esActivo ? "Activo" : "Inactivo"
+                        ]);
+                    });
+                });
+            } else if (entidad === "productos") {
+                filas.push(["ID_Producto", "Titulo_Publicacion", "Tipologia_CTeI", "Anio", "Categoria_MinCiencias", "Codigo_Grupo", "Documento_Autor", "Aval_MinCiencias", "Estado"]);
+                const filtroTxt = (document.getElementById("search-crud-prod")?.value || "").toLowerCase();
+                const filtroG = document.getElementById("filtro-crud-prod-grupo")?.value || "";
+                const filtroEst = document.getElementById("filtro-crud-prod-estado")?.value || "todos";
+                gruposData.forEach(g => {
+                    if (filtroG && g.codigo !== filtroG) return;
+                    (g.productos || []).forEach(p => {
+                        const esActivo = p.activo !== false;
+                        if (filtroEst === "activos" && !esActivo) return;
+                        if (filtroEst === "inactivos" && esActivo) return;
+                        if (filtroTxt && !p.titulo.toLowerCase().includes(filtroTxt) && !p.id.toLowerCase().includes(filtroTxt) && !String(p.anio).includes(filtroTxt)) return;
+                        filas.push([
+                            p.id, p.titulo, p.tipo, p.anio, p.categoria || "A1", g.codigo,
+                            p.id_investigador || "", p.validado ? "Avalado" : "En Revision",
+                            esActivo ? "Activo" : "Inactivo"
+                        ]);
+                    });
+                });
+            }
+
+            // Generar contenido CSV con BOM UTF-8 (\uFEFF) para que Excel en Windows reconozca tildes y ñ
+            const contenidoCSV = "\uFEFF" + filas.map(r => r.map(escaparCeldaCSV).join(",")).join("\r\n");
+            const blob = new Blob([contenidoCSV], { type: "text/csv;charset=utf-8;" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = nombreArchivo;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+            mostrarToast(`Exportado ${filas.length - 1} registros a ${nombreArchivo} (UTF-8 BOM Excel)`, "[CSV]");
         }
 
         // =============================================================

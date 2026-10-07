@@ -82,10 +82,14 @@ clean:
 	rm -f $(TARGET) pea_cpp pea_cpp.exe src/cpp/test_tda src/cpp/test_sqlite Taller2_EstructuraDatos_GrupoXX.zip
 	@echo "[OK] Archivos temporales eliminados."
 
+# Ejecutar verificación cruzada de equivalencia C++17 vs Python
+verify: $(TARGET)
+	$(PYTHON) Taller2_AB_PO_XX.py --verify
+
 # Empaquetar entrega final en archivo ZIP para envío al docente (adithperez@unicesar.edu.co)
 package: clean docs
 	@$(PYTHON) scripts/package_zip.py
 
-.PHONY: all run run-cpp run-py gui run-gui gui-py run-gui-py test docs audit-rust clean package
+.PHONY: all run run-cpp run-py gui run-gui gui-py run-gui-py test verify docs audit-rust clean package
 
 

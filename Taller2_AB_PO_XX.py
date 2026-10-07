@@ -93,6 +93,11 @@ def main():
         app_gui.iniciar()
         sys.exit(0)
 
+    elif "--verify" in args:
+        from python.core.verificacion_cruzada import ejecutar_verificacion_cruzada
+        ok = ejecutar_verificacion_cruzada(db_path)
+        sys.exit(0 if ok else 1)
+
     app = ConsolaApp(db_path)
     app.iniciar()
 
