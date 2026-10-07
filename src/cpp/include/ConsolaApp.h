@@ -200,6 +200,39 @@ public:
     }
 
     // -----------------------------------------------------------------
+    // VALIDACIÓN DE ACCESO PREVIA (LOGIN)
+    // -----------------------------------------------------------------
+    bool autenticarUsuario() {
+        for (int intento = 1; intento <= 3; ++intento) {
+            limpiarPantalla();
+            std::cout << "=================================================================\n";
+            std::cout << "     PEA-i UPC: VALIDACION DE ACCESO INSTITUCIONAL (LOGIN)       \n";
+            std::cout << "=================================================================\n";
+            std::cout << "  Credenciales por defecto -> Usuario: admin | Contraseña: 1234\n";
+            std::cout << "-----------------------------------------------------------------\n";
+            std::string user = leerLinea("  Usuario [admin]: ", true);
+            if (!std::cin) return true;
+            if (user.empty()) user = "admin";
+            std::string pass = leerLinea("  Contraseña [1234]: ", true);
+            if (!std::cin) return true;
+            if (pass.empty()) pass = "1234";
+
+            std::string uLower = user;
+            for (char& c : uLower) c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+
+            if ((uLower == "admin" || uLower == "upc" || uLower == "docente") &&
+                (pass == "1234" || pass == "admin" || pass == "upc2026")) {
+                std::cout << "\n  [OK] Acceso concedido. Bienvenido (" << user << ").\n";
+                return true;
+            }
+            std::cout << "\n  [!] Credenciales incorrectas (Intento " << intento << "/3).\n";
+            pausar("  [Presione ENTER para intentar nuevamente]... ");
+        }
+        std::cout << "\n  [X] Número máximo de intentos alcanzado. Saliendo...\n";
+        return false;
+    }
+
+    // -----------------------------------------------------------------
     // PUNTO DE ENTRADA INTERACTIVO (Punto 10 pág 3)
     // -----------------------------------------------------------------
     void iniciar() {
@@ -207,6 +240,7 @@ public:
     #if defined(_WIN32) || defined(_WIN64)
         std::system("chcp 65001 > nul");
     #endif
+        if (!autenticarUsuario()) return;
         limpiarPantalla();
         std::cout << "=================================================================\n";
         std::cout << "     PEA-i: PROGRAMA ESTADISTICO DE ANALISIS DE INVESTIGACION   \n";

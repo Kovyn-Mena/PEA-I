@@ -131,12 +131,38 @@ class ConsolaApp:
                 print("  [!] Entrada inválida. Ingrese un número.")
 
     # -----------------------------------------------------------------
+    # VALIDACIÓN DE ACCESO PREVIA (LOGIN)
+    # -----------------------------------------------------------------
+    def autenticar_usuario(self) -> bool:
+        for intento in range(1, 4):
+            self.limpiar_pantalla()
+            print("=================================================================")
+            print("     PEA-i UPC: VALIDACION DE ACCESO INSTITUCIONAL (LOGIN)       ")
+            print("=================================================================")
+            print("  Credenciales por defecto -> Usuario: admin | Contraseña: 1234")
+            print("-----------------------------------------------------------------")
+            try:
+                user = input("  Usuario [admin]: ").strip() or "admin"
+                pw = input("  Contraseña [1234]: ").strip() or "1234"
+            except (EOFError, KeyboardInterrupt):
+                return True
+            if user.lower() in ("admin", "upc", "docente") and pw in ("1234", "admin", "upc2026"):
+                print(f"\n  [OK] Acceso concedido. Bienvenido ({user}).")
+                return True
+            print(f"\n  [!] Credenciales incorrectas (Intento {intento}/3).")
+            self.pausar("  [Presione ENTER para intentar nuevamente]... ")
+        print("\n  [X] Número máximo de intentos alcanzado. Saliendo...")
+        return False
+
+    # -----------------------------------------------------------------
     # PUNTO DE ENTRADA INTERACTIVO (Punto 10 pág 3)
     # -----------------------------------------------------------------
     def iniciar(self):
         if os.name == 'nt':
             os.system("chcp 65001 > nul 2>&1")
         signal.signal(signal.SIGINT, manejador_sigint)
+        if not self.autenticar_usuario():
+            return
         self.limpiar_pantalla()
         print("=================================================================")
         print("     PEA-i: PROGRAMA ESTADISTICO DE ANALISIS DE INVESTIGACION   ")

@@ -444,6 +444,69 @@ class DashboardApp:
             style.configure("Treeview.Heading", background="#1e293b", foreground="#38bdf8", font=("Segoe UI", 9, "bold"))
             style.map("Treeview", background=[("selected", "#0284c7")])
 
+            # Ventana previa de validación de acceso (Login)
+            root.withdraw()
+            auth_state = {"ok": False}
+            login_win = tk.Toplevel(root)
+            login_win.title("Validación de Acceso — PEA-i UPC")
+            login_win.geometry("390x360")
+            login_win.resizable(False, False)
+            login_win.configure(bg="#0a0f1d")
+            if logo_img is not None:
+                login_win.iconphoto(True, logo_img)
+
+            card_login = tk.Frame(login_win, bg="#0f172a", bd=1, relief="solid", padx=22, pady=18)
+            card_login.pack(fill="both", expand=True, padx=16, pady=16)
+
+            if logo_img is not None:
+                tk.Label(card_login, image=logo_img, bg="#ffffff", bd=1, relief="solid", padx=4, pady=2).pack(pady=(0, 8))
+
+            tk.Label(card_login, text="PEA-i UPC • Validación de Acceso", fg="#10b981", bg="#0f172a", font=("Segoe UI", 11, "bold")).pack()
+            tk.Label(card_login, text="Credenciales por defecto: admin / 1234", fg="#94a3b8", bg="#0f172a", font=("Segoe UI", 8)).pack(pady=(2, 12))
+
+            tk.Label(card_login, text="Usuario Institucional:", fg="#e2e8f0", bg="#0f172a", font=("Segoe UI", 9, "bold"), anchor="w").pack(fill="x")
+            ent_user = tk.Entry(card_login, bg="#1e293b", fg="#ffffff", insertbackground="#ffffff", relief="flat", font=("Segoe UI", 10))
+            ent_user.insert(0, "admin")
+            ent_user.pack(fill="x", ipady=4, pady=(2, 10))
+
+            tk.Label(card_login, text="Contraseña:", fg="#e2e8f0", bg="#0f172a", font=("Segoe UI", 9, "bold"), anchor="w").pack(fill="x")
+            ent_pass = tk.Entry(card_login, show="*", bg="#1e293b", fg="#ffffff", insertbackground="#ffffff", relief="flat", font=("Segoe UI", 10))
+            ent_pass.insert(0, "1234")
+            ent_pass.pack(fill="x", ipady=4, pady=(2, 8))
+
+            lbl_err = tk.Label(card_login, text="", fg="#f87171", bg="#0f172a", font=("Segoe UI", 8, "bold"))
+            lbl_err.pack(pady=(0, 6))
+
+            def intentar_login(event=None):
+                u = ent_user.get().strip().lower()
+                p = ent_pass.get().strip()
+                if u in ("admin", "upc", "docente", "investigador") and p in ("1234", "admin", "upc2026"):
+                    auth_state["ok"] = True
+                    login_win.destroy()
+                else:
+                    lbl_err.config(text="Usuario o contraseña incorrectos (use admin / 1234)")
+
+            def cancelar_login():
+                auth_state["ok"] = False
+                login_win.destroy()
+
+            login_win.protocol("WM_DELETE_WINDOW", cancelar_login)
+            ent_pass.bind("<Return>", intentar_login)
+            ent_user.bind("<Return>", intentar_login)
+
+            btn_ingresar = tk.Button(
+                card_login, text="Ingresar al Sistema", command=intentar_login,
+                bg="#10b981", fg="#022c22", activebackground="#059669",
+                font=("Segoe UI", 9, "bold"), relief="flat", cursor="hand2", pady=6
+            )
+            btn_ingresar.pack(fill="x", pady=(4, 0))
+
+            root.wait_window(login_win)
+            if not auth_state["ok"]:
+                root.destroy()
+                return True
+            root.deiconify()
+
             notebook = ttk.Notebook(root)
             notebook.pack(fill="both", expand=True, padx=10, pady=10)
 

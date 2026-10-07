@@ -1,0 +1,210 @@
+{
+  "main": {
+    "id": "d8dcc17196f1cc07",
+    "type": "split",
+    "children": [
+      {
+        "id": "484ffeca98796b33",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "27834ad0ca9673e2",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Vista gráfica"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "8abf2f9a717fa805",
+    "type": "split",
+    "children": [
+      {
+        "id": "924ad9494ef52e96",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fdbc76fb01371865",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "byModifiedTime",
+                "autoReveal": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de archivos"
+            }
+          },
+          {
+            "id": "42e0216c414ba686",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Buscar"
+            }
+          },
+          {
+            "id": "0401c0089da9572a",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 296.4453125
+  },
+  "right": {
+    "id": "32ffe4e6f4019f81",
+    "type": "split",
+    "children": [
+      {
+        "id": "257ea1aa8ecd0c69",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b940946bbc4f634b",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "000 - PEA-i Hub Principal.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Enlaces entrantes"
+            }
+          },
+          {
+            "id": "47729bf8b947748e",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "000 - PEA-i Hub Principal.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Enlaces salientes"
+            }
+          },
+          {
+            "id": "c0464355fa665859",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiquetas"
+            }
+          },
+          {
+            "id": "123e6a42a6ff7825",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Todas las propiedades"
+            }
+          },
+          {
+            "id": "2d5e1c0c8d2b7d58",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "000 - PEA-i Hub Principal.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Esquema"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir selector rápido": false,
+      "graph:Abrir vista gráfica": false,
+      "canvas:Crear nuevo lienzo": false,
+      "daily-notes:Abrir la nota de hoy": false,
+      "templates:Insertar plantilla": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Crear nueva base": false
+    }
+  },
+  "active": "27834ad0ca9673e2",
+  "lastOpenFiles": [
+    "000 - PEA-i Hub Principal.md",
+    "051 - Guía de Configuración Windows y Git.md",
+    "Sin título.md",
+    "041 - Puntos Frágiles e Ingesta Masiva (Scraping).md",
+    "040 - Inconsistencias Detectadas (M-01 a M-10).md",
+    "042 - Matriz de Riesgos.md",
+    "020 - Hipercubo Ortogonal 3D (Multilista).md",
+    "034 - Producción por Tipo del Grupo.md",
+    "013 - Visión Sistema Final.md",
+    "033 - Escalabilidad a 1M de registros.md",
+    "021 - TDAs Auxiliares (Pila LIFO y Cola FIFO).md",
+    "060 - Bitácora de Cambios y Registro de Errores Lógicos.md",
+    "052 - Checklist de Entregables y Cierre.md",
+    "031 - Asignación de Roles.md",
+    "030 - Mapa de Fases (Fase 0 a Fase 6B).md",
+    "012 - Entregables, Fechas y Formato.md",
+    "010 - Requisitos del Taller (Matriz 1-14).md",
+    "022 - Principio Consola Primero y Desacoplamiento.md",
+    "032 - Roadmap Cronológico y Presupuesto Temporal.md",
+    "011 - Problema de Negocio y Entidades.md"
+  ]
+}
