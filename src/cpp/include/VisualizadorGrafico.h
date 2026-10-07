@@ -489,6 +489,74 @@ public:
         .bar-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; display: flex; align-items: center; justify-content: flex-end; padding-right: 6px; font-weight: 700; font-size: 0.7rem; color: #fff; }
         .bar-count { width: 45px; text-align: right; font-weight: 700; color: #e2e8f0; }
 
+        /* ESTILOS CRUD, MODALES, PILA UNDO Y TOAST */
+        .badge-status { display: inline-flex; align-items: center; gap: 0.3rem; padding: 2px 8px; border-radius: 12px; font-size: 0.72rem; font-weight: 700; }
+        .badge-active { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-inactive { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+        
+        .btn-action-sm {
+            padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;
+        }
+        .btn-action-edit { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); }
+        .btn-action-edit:hover { background: #38bdf8; color: #000; }
+        .btn-action-toggle { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border-color: rgba(245, 158, 11, 0.3); }
+        .btn-action-toggle:hover { background: #f59e0b; color: #000; }
+
+        /* MODALES */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(6px);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000;
+        }
+        .modal-box {
+            background: #0f172a; border: 1px solid #1e293b; border-radius: 12px;
+            width: 540px; max-width: 95vw; max-height: 90vh; overflow-y: auto;
+            padding: 1.5rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        }
+        .modal-box-lg { width: 720px; }
+        .modal-header {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid #1e293b; padding-bottom: 0.8rem; margin-bottom: 1rem;
+        }
+        .modal-header h3 { font-size: 1.1rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 0.5rem; }
+        .modal-close-btn { background: transparent; border: none; font-size: 1.4rem; color: #94a3b8; cursor: pointer; }
+        .modal-close-btn:hover { color: #fff; }
+        .form-group { margin-bottom: 0.9rem; display: flex; flex-direction: column; gap: 0.3rem; }
+        .form-label { font-size: 0.78rem; font-weight: 700; color: #94a3b8; }
+        .form-input, .form-select {
+            background: #090d16; border: 1px solid #1e293b; border-radius: 6px;
+            padding: 0.55rem 0.8rem; color: #fff; font-size: 0.85rem; outline: none;
+        }
+        .form-input:focus, .form-select:focus { border-color: var(--upc-green-light); }
+        .modal-footer {
+            display: flex; justify-content: flex-end; gap: 0.7rem; margin-top: 1.2rem;
+            border-top: 1px solid #1e293b; padding-top: 0.9rem;
+        }
+        .btn-modal-cancel {
+            background: #1e293b; color: #94a3b8; border: none; padding: 0.5rem 1rem;
+            border-radius: 6px; font-weight: 600; cursor: pointer;
+        }
+        .btn-modal-cancel:hover { background: #334155; color: #fff; }
+        .btn-modal-save {
+            background: var(--upc-green); color: #fff; border: none; padding: 0.5rem 1.2rem;
+            border-radius: 6px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 10px rgba(0, 104, 55, 0.4);
+        }
+        .btn-modal-save:hover { background: var(--upc-green-light); color: #000; }
+
+        /* TOAST NOTIFICACIÓN */
+        #toast-notification {
+            position: fixed; bottom: 25px; right: 25px; z-index: 2000;
+            background: #006837; border: 1px solid #10b981; color: #fff;
+            padding: 0.75rem 1.3rem; border-radius: 8px; font-weight: 700; font-size: 0.85rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6); display: none; align-items: center; gap: 0.6rem;
+            animation: slideInToast 0.3s ease;
+        }
+        @keyframes slideInToast {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
         footer {
             background: #05070e;
             border-top: 1px solid var(--card-border);
@@ -505,14 +573,26 @@ public:
         <div class="brand-box">
             <div class="brand-logo">UPC</div>
             <div class="brand-text">
-                <h1>PEA-i &bull; Portal de Ciencia Abierta <span class="brand-badge">v2.4 Oficial</span></h1>
+                <h1>PEA-i &bull; Portal de Ciencia Abierta <span class="brand-badge">v2.5 CRUD Interactivo</span></h1>
                 <p>Facultad de Ingeniería y Tecnológicas &bull; Sistema Estadístico de Investigación (MinCiencias SCIENTI)</p>
             </div>
         </div>
         <div class="nav-tabs">
-            <button class="tab-btn active" onclick="cambiarVistaPrincipal('portal')">🏛️ Directorio de Grupos</button>
+            <button class="tab-btn active" onclick="cambiarVistaPrincipal('portal')">🏛️ Directorio Grupos</button>
             <button class="tab-btn" onclick="cambiarVistaPrincipal('dashboard')">📊 Dashboard Analítico (12.b)</button>
             <button class="tab-btn" onclick="cambiarVistaPrincipal('tablas')">📑 Vistas por Entidad (12.c)</button>
+            <button class="tab-btn" onclick="cambiarVistaPrincipal('crud')">⚙️ Gestión y Control CRUD</button>
+        </div>
+        <div class="header-actions" style="display:flex; gap:0.4rem; align-items:center;">
+            <button class="action-btn-undo" id="btn-undo-header" onclick="deshacerUltimaAccion()" title="Deshacer última acción en Pila LIFO" style="background:#dc2626; color:#fff; border:none; padding:0.45rem 0.85rem; border-radius:6px; font-weight:700; font-size:0.8rem; cursor:pointer; display:flex; align-items:center; gap:0.35rem; transition:all 0.2s;">
+                <span>↩️</span> Deshacer (<span id="undo-count">0</span>)
+            </button>
+            <button class="action-btn-pila" onclick="abrirModalPilaUndo()" title="Ver elementos en la Pila LIFO" style="background:#1e293b; color:#cbd5e1; border:1px solid #334155; padding:0.45rem 0.75rem; border-radius:6px; font-weight:600; font-size:0.8rem; cursor:pointer;">
+                📜 Pila Undo
+            </button>
+            <button class="action-btn-export" onclick="abrirModalExportar()" title="Exportar cambios para SQLite / C++" style="background:var(--upc-green); color:#fff; border:none; padding:0.45rem 0.85rem; border-radius:6px; font-weight:700; font-size:0.8rem; cursor:pointer; display:flex; align-items:center; gap:0.35rem;">
+                💾 Sincronizar / SQLite
+            </button>
         </div>
     </header>
 
@@ -817,6 +897,111 @@ public:
                     </table>
                 </div>
             </div>
+        <!-- VISTA 4: CENTRO DE GESTIÓN Y CONTROL CRUD COMPLETO -->
+        <section id="view-crud" class="view-panel">
+            <div class="chart-box" style="margin-bottom: 1.5rem;">
+                <div class="chart-box-title">
+                    <div style="display:flex; align-items:center; gap:0.8rem;">
+                        <span style="font-size:1.05rem; font-weight:800;">⚙️ Centro de Operaciones CRUD & Control Integral</span>
+                        <span class="brand-badge">Persistencia en RAM y SQLite</span>
+                    </div>
+                    <div style="display:flex; gap:0.4rem;">
+                        <button class="p-tab-btn active" id="crud-tab-btn-g" onclick="cambiarSubTabCRUD('grupos')">🏢 Grupos (<span id="crud-badge-g">0</span>)</button>
+                        <button class="p-tab-btn" id="crud-tab-btn-i" onclick="cambiarSubTabCRUD('investigadores')">👨‍🔬 Investigadores (<span id="crud-badge-i">0</span>)</button>
+                        <button class="p-tab-btn" id="crud-tab-btn-p" onclick="cambiarSubTabCRUD('productos')">📚 Productos (<span id="crud-badge-p">0</span>)</button>
+                    </div>
+                </div>
+
+                <!-- SUBPANEL CRUD: GRUPOS -->
+                <div id="crud-panel-grupos" class="crud-subpanel">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; gap:1rem;">
+                        <input type="text" class="search-input" id="search-crud-grupos" placeholder="🔍 Filtrar grupos por código o nombre..." oninput="renderizarCRUDGrupos()" style="max-width:380px;">
+                        <button onclick="abrirModalGrupo()" style="background:var(--upc-green); color:#fff; border:none; padding:0.55rem 1.1rem; border-radius:8px; font-weight:700; cursor:pointer; font-size:0.85rem; display:flex; align-items:center; gap:0.4rem;">
+                            ➕ Registrar Nuevo Grupo
+                        </button>
+                    </div>
+                    <div class="data-table-container">
+                        <table class="peai-table" id="tabla-crud-grupos">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nombre del Grupo</th>
+                                    <th>Clasificación</th>
+                                    <th>Líder</th>
+                                    <th>Año</th>
+                                    <th>Estado</th>
+                                    <th style="text-align:center;">Acciones (CRUD)</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- SUBPANEL CRUD: INVESTIGADORES -->
+                <div id="crud-panel-investigadores" class="crud-subpanel" style="display:none;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; gap:1rem;">
+                        <div style="display:flex; gap:0.5rem; flex:1;">
+                            <input type="text" class="search-input" id="search-crud-inv" placeholder="🔍 Filtrar investigadores por documento o nombre..." oninput="renderizarCRUDInvestigadores()" style="max-width:340px;">
+                            <select id="filtro-crud-inv-grupo" class="search-input" style="max-width:240px;" onchange="renderizarCRUDInvestigadores()">
+                                <option value="">Todos los Grupos</option>
+                            </select>
+                        </div>
+                        <button onclick="abrirModalInvestigador()" style="background:var(--upc-green); color:#fff; border:none; padding:0.55rem 1.1rem; border-radius:8px; font-weight:700; cursor:pointer; font-size:0.85rem; display:flex; align-items:center; gap:0.4rem;">
+                            ➕ Registrar Investigador
+                        </button>
+                    </div>
+                    <div class="data-table-container">
+                        <table class="peai-table" id="tabla-crud-inv">
+                            <thead>
+                                <tr>
+                                    <th>Documento ID</th>
+                                    <th>Nombre Completo</th>
+                                    <th>Categoría</th>
+                                    <th>Formación Académica</th>
+                                    <th>Grupo Asignado</th>
+                                    <th>Estado</th>
+                                    <th style="text-align:center;">Acciones (CRUD)</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- SUBPANEL CRUD: PRODUCTOS -->
+                <div id="crud-panel-productos" class="crud-subpanel" style="display:none;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; gap:1rem;">
+                        <div style="display:flex; gap:0.5rem; flex:1;">
+                            <input type="text" class="search-input" id="search-crud-prod" placeholder="🔍 Filtrar productos por título o ID..." oninput="renderizarCRUDProductos()" style="max-width:340px;">
+                            <select id="filtro-crud-prod-grupo" class="search-input" style="max-width:240px;" onchange="renderizarCRUDProductos()">
+                                <option value="">Todos los Grupos</option>
+                            </select>
+                        </div>
+                        <button onclick="abrirModalProducto()" style="background:var(--upc-green); color:#fff; border:none; padding:0.55rem 1.1rem; border-radius:8px; font-weight:700; cursor:pointer; font-size:0.85rem; display:flex; align-items:center; gap:0.4rem;">
+                            ➕ Registrar Producto
+                        </button>
+                    </div>
+                    <div class="data-table-container">
+                        <table class="peai-table" id="tabla-crud-prod">
+                            <thead>
+                                <tr>
+                                    <th>ID Producto</th>
+                                    <th>Título de la Publicación</th>
+                                    <th>Tipología CTeI</th>
+                                    <th>Año</th>
+                                    <th>Grupo</th>
+                                    <th>Investigador Autor</th>
+                                    <th>Validado</th>
+                                    <th>Estado</th>
+                                    <th style="text-align:center;">Acciones (CRUD)</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -824,6 +1009,214 @@ public:
     <footer>
         PEA-i &bull; Programa Estadístico de Análisis de Investigación &bull; Universidad Popular del Cesar (UPC) &bull; C++17 Core Engine &bull; MinCiencias Convocatoria 957
     </footer>
+
+    <!-- MODALES CRUD Y PERSISTENCIA -->
+    <!-- 1. MODAL GRUPO -->
+    <div id="modal-grupo" class="modal-overlay" style="display:none;">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modal-g-title">➕ Registrar Nuevo Grupo</h3>
+                <button onclick="cerrarModales()" class="modal-close-btn">&times;</button>
+            </div>
+            <form onsubmit="guardarGrupoForm(event)">
+                <div class="form-group">
+                    <label class="form-label">Código del Grupo (Identificador Único):</label>
+                    <input type="text" id="input-g-codigo" class="form-input" required placeholder="Ej: COL0018706">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nombre Oficial del Grupo:</label>
+                    <input type="text" id="input-g-nombre" class="form-input" required placeholder="Ej: GRUPO DE INVESTIGACIÓN GISICO">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Clasificación MinCiencias:</label>
+                    <select id="input-g-clasif" class="form-select">
+                        <option value="A1">Categoría A1</option>
+                        <option value="A">Categoría A</option>
+                        <option value="B">Categoría B</option>
+                        <option value="C" selected>Categoría C</option>
+                        <option value="Reconocido">Reconocido</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Gran Área de Conocimiento:</label>
+                    <input type="text" id="input-g-area" class="form-input" required placeholder="Ej: Ingeniería y Tecnología">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Investigador Líder Oficial:</label>
+                    <input type="text" id="input-g-lider" class="form-input" required placeholder="Ej: Dr. John Jairo Patiño Vanegas">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Año de Creación / Reconocimiento:</label>
+                    <input type="number" id="input-g-anio" class="form-input" required min="1970" max="2026" value="2024">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="cerrarModales()" class="btn-modal-cancel">Cancelar</button>
+                    <button type="submit" class="btn-modal-save">💾 Guardar Grupo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2. MODAL INVESTIGADOR -->
+    <div id="modal-investigador" class="modal-overlay" style="display:none;">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modal-i-title">➕ Registrar Nuevo Investigador</h3>
+                <button onclick="cerrarModales()" class="modal-close-btn">&times;</button>
+            </div>
+            <form onsubmit="guardarInvestigadorForm(event)">
+                <div class="form-group">
+                    <label class="form-label">Documento ID / Cédula / CvLAC:</label>
+                    <input type="text" id="input-i-doc" class="form-input" required placeholder="Ej: 0000494917">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nombre Completo del Investigador:</label>
+                    <input type="text" id="input-i-nombre" class="form-input" required placeholder="Ej: Ing. Adith Bismarck Pérez Orozco">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Categoría MinCiencias:</label>
+                    <select id="input-i-cat" class="form-select">
+                        <option value="Senior" selected>Investigador Senior (IS)</option>
+                        <option value="Asociado">Investigador Asociado (I)</option>
+                        <option value="Junior">Investigador Junior (IJ)</option>
+                        <option value="Sin Categoria">Integrante Vinculado (Sin Categoría)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Formación Académica Principal:</label>
+                    <input type="text" id="input-i-formacion" class="form-input" required placeholder="Ej: Maestría en Ciencias Computacionales">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Grupo de Investigación Asignado:</label>
+                    <select id="input-i-grupo" class="form-select" required></select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="cerrarModales()" class="btn-modal-cancel">Cancelar</button>
+                    <button type="submit" class="btn-modal-save">💾 Guardar Investigador</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 3. MODAL PRODUCTO -->
+    <div id="modal-producto" class="modal-overlay" style="display:none;">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modal-p-title">➕ Registrar Producto de Investigación</h3>
+                <button onclick="cerrarModales()" class="modal-close-btn">&times;</button>
+            </div>
+            <form onsubmit="guardarProductoForm(event)">
+                <div class="form-group">
+                    <label class="form-label">ID Único del Producto:</label>
+                    <input type="text" id="input-p-id" class="form-input" required placeholder="Ej: PROD_GISICO_2024_01">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Título de la Publicación u Obra:</label>
+                    <input type="text" id="input-p-titulo" class="form-input" required placeholder="Ej: Algoritmos Avanzados en Multilistas 3D">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tipología Oficial Modelo MinCiencias:</label>
+                    <select id="input-p-tipo" class="form-select">
+                        <option value="Articulo" selected>Artículo en Revista Indexada (GNC)</option>
+                        <option value="Software">Desarrollo de Software / Sistema (DTI)</option>
+                        <option value="Libro">Libro Resultado de Investigación (GNC)</option>
+                        <option value="Capitulo">Capítulo de Libro Resultado de Inv. (GNC)</option>
+                        <option value="Patente">Patente de Invención o Modelo (DTI)</option>
+                        <option value="Tesis">Tesis Doctoral o de Posgrado (FRH)</option>
+                        <option value="Trabajo de Grado">Trabajo de Grado de Pregrado (FRH)</option>
+                        <option value="Evento">Ponencia en Evento Científico (DPC)</option>
+                        <option value="Contenido">Apropiación Social del Conocimiento (ASC)</option>
+                        <option value="Prototipo">Prototipo o Planta Piloto (DTI)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Año de Publicación:</label>
+                    <input type="number" id="input-p-anio" class="form-input" required min="1990" max="2026" value="2024">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Grupo Receptor (Eje X):</label>
+                    <select id="input-p-grupo" class="form-select" required onchange="actualizarSelectInvestigadoresModalProd()"></select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Investigador Autor (Eje Y):</label>
+                    <select id="input-p-investigador" class="form-select" required></select>
+                </div>
+                <div class="form-group" style="flex-direction:row; align-items:center; gap:0.6rem; margin-top:0.5rem;">
+                    <input type="checkbox" id="input-p-validado" checked style="width:18px; height:18px; accent-color:var(--upc-green-light);">
+                    <label for="input-p-validado" class="form-label" style="cursor:pointer; margin:0;">Validado por MinCiencias con Aval Institucional (chulo_1.jpg)</label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="cerrarModales()" class="btn-modal-cancel">Cancelar</button>
+                    <button type="submit" class="btn-modal-save">💾 Guardar Producto</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 4. MODAL HISTORIAL PILA UNDO (LIFO) -->
+    <div id="modal-pila-undo" class="modal-overlay" style="display:none;">
+        <div class="modal-box modal-box-lg">
+            <div class="modal-header">
+                <h3>📜 Pila de Deshacer (Historial LIFO en Memoria)</h3>
+                <button onclick="cerrarModales()" class="modal-close-btn">&times;</button>
+            </div>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem;">
+                Muestra las operaciones atómicas apiladas en orden <b>LIFO</b> (Last-In, First-Out).
+                Presione <b>Deshacer Tope</b> para revertir la acción más reciente en O(1).
+            </p>
+            <div class="data-table-container" style="max-height:360px;">
+                <table class="peai-table" id="tabla-pila-undo">
+                    <thead>
+                        <tr>
+                            <th>Posición</th>
+                            <th>Operación</th>
+                            <th>Entidad Afectada</th>
+                            <th>Identificador</th>
+                            <th>Descripción / Detalle</th>
+                            <th>Hora</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="deshacerUltimaAccion()" class="btn-action-sm btn-action-toggle" style="padding:0.5rem 1rem; font-weight:700;">↩️ Deshacer Tope de Pila</button>
+                <button type="button" onclick="cerrarModales()" class="btn-modal-cancel">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. MODAL EXPORTAR / SINCRONIZAR -->
+    <div id="modal-exportar" class="modal-overlay" style="display:none;">
+        <div class="modal-box modal-box-lg">
+            <div class="modal-header">
+                <h3>💾 Sincronización y Exportación a SQLite / C++</h3>
+                <button onclick="cerrarModales()" class="modal-close-btn">&times;</button>
+            </div>
+            <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:0.8rem;">
+                Todas las modificaciones realizadas en la interfaz gráfica pueden exportarse para sincronizar la Multilista en RAM de C++ y persistir en <code>data/pea_investigacion.db</code>:
+            </p>
+            <div class="form-group">
+                <label class="form-label">Script SQL Generado para SQLite:</label>
+                <textarea id="sql-export-area" readonly style="background:#090d16; border:1px solid #1e293b; color:#10b981; font-family:monospace; font-size:0.75rem; padding:0.6rem; border-radius:6px; height:120px; resize:none;"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Estructura JSON de Cambios (data/cambios_gui.json):</label>
+                <textarea id="json-export-area" readonly style="background:#090d16; border:1px solid #1e293b; color:#38bdf8; font-family:monospace; font-size:0.75rem; padding:0.6rem; border-radius:6px; height:120px; resize:none;"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="copiarSQLPortapapeles()" class="btn-action-sm btn-action-edit" style="padding:0.5rem 1rem; font-weight:700;">📋 Copiar SQL</button>
+                <button type="button" onclick="descargarCambiosJSON()" class="btn-modal-save">📥 Descargar data/cambios_gui.json</button>
+                <button type="button" onclick="cerrarModales()" class="btn-modal-cancel">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICACIÓN FLOTANTE -->
+    <div id="toast-notification">
+        <span id="toast-icon">✅</span>
+        <span id="toast-text">Operación completada</span>
+    </div>
 
     <!-- SERIALIZACIÓN DE DATOS DESDE C++ -->
     <script>
@@ -895,6 +1288,10 @@ public:
                 document.querySelectorAll(".tab-btn")[2].classList.add("active");
                 document.getElementById("view-tablas").classList.add("active");
                 renderizarTablasEntidad();
+            } else if (vista === "crud") {
+                document.querySelectorAll(".tab-btn")[3].classList.add("active");
+                document.getElementById("view-crud").classList.add("active");
+                renderizarCRUDTab();
             }
         }
 
@@ -1272,8 +1669,747 @@ public:
             });
         }
 
+        // =================================================================
+        // MOTOR DE GESTIÓN CRUD, PILA UNDO (LIFO) Y SINCRONIZACIÓN
+        // =================================================================
+        let pilaUndoGUI = [];
+        let operacionesAuditadas = [];
+
+        function mostrarToast(mensaje, icono = "✅") {
+            const toast = document.getElementById("toast-notification");
+            document.getElementById("toast-icon").textContent = icono;
+            document.getElementById("toast-text").textContent = mensaje;
+            toast.style.display = "flex";
+            if (window._toastTimeout) clearTimeout(window._toastTimeout);
+            window._toastTimeout = setTimeout(() => {
+                toast.style.display = "none";
+            }, 3500);
+        }
+
+        function cerrarModales() {
+            document.querySelectorAll(".modal-overlay").forEach(m => m.style.display = "none");
+        }
+
+        function actualizarContadorUndo() {
+            const countEl = document.getElementById("undo-count");
+            if (countEl) countEl.textContent = pilaUndoGUI.length;
+            const btnUndo = document.getElementById("btn-undo-header");
+            if (btnUndo) {
+                btnUndo.style.opacity = pilaUndoGUI.length === 0 ? "0.6" : "1";
+            }
+        }
+
+        function apilarAccion(accion) {
+            pilaUndoGUI.push(accion);
+            operacionesAuditadas.push({
+                tipo: accion.tipo,
+                entidad: accion.entidad,
+                id: accion.id,
+                desc: accion.desc,
+                timestamp: new Date().toLocaleTimeString()
+            });
+            actualizarContadorUndo();
+            guardarEnLocalStorage();
+        }
+
+        function deshacerUltimaAccion() {
+            if (pilaUndoGUI.length === 0) {
+                mostrarToast("La Pila Undo está vacía. No hay acciones para revertir.", "⚠️");
+                return;
+            }
+            const acc = pilaUndoGUI.pop();
+            if (acc && typeof acc.revertir === "function") {
+                acc.revertir();
+                actualizarContadorUndo();
+                refrescarTodo();
+                guardarEnLocalStorage();
+                mostrarToast(`Deshecho (LIFO): ${acc.desc}`, "↩️");
+            }
+        }
+
+        function abrirModalPilaUndo() {
+            const tbody = document.querySelector("#tabla-pila-undo tbody");
+            tbody.innerHTML = "";
+            if (pilaUndoGUI.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-muted); padding:1.5rem;">La pila LIFO no contiene operaciones pendientes.</td></tr>`;
+            } else {
+                for (let i = pilaUndoGUI.length - 1; i >= 0; i--) {
+                    const acc = pilaUndoGUI[i];
+                    const tr = document.createElement("tr");
+                    const esTope = (i === pilaUndoGUI.length - 1);
+                    tr.innerHTML = `
+                        <td><b>${esTope ? "🔝 [TOPE]" : `[#${i + 1}]`}</b></td>
+                        <td><span class="badge-status ${acc.tipo.includes('ELIM') || acc.tipo.includes('TOGGLE') ? 'badge-inactive' : 'badge-active'}">${acc.tipo}</span></td>
+                        <td>${acc.entidad}</td>
+                        <td><code>${acc.id}</code></td>
+                        <td>${acc.desc}</td>
+                        <td>${acc.hora || new Date().toLocaleTimeString()}</td>
+                    `;
+                    tbody.appendChild(tr);
+                }
+            }
+            document.getElementById("modal-pila-undo").style.display = "flex";
+        }
+
+        function refrescarTodo() {
+            calcularKPIsGlobales();
+            renderizarListaGrupos();
+            if (grupoSeleccionado) {
+                seleccionarGrupo(grupoSeleccionado.codigo);
+            }
+            const activa = document.querySelector(".view-panel.active");
+            if (activa) {
+                if (activa.id === "view-dashboard") renderizarDashboard();
+                if (activa.id === "view-tablas") renderizarTablasEntidad();
+                if (activa.id === "view-crud") renderizarCRUDTab();
+            }
+        }
+
+        // -------------------------------------------------------------
+        // CRUD: GRUPOS DE INVESTIGACIÓN
+        // -------------------------------------------------------------
+        let grupoEnEdicion = null;
+
+        function abrirModalGrupo(codigo = "") {
+            grupoEnEdicion = codigo ? gruposData.find(g => g.codigo === codigo) : null;
+            const titleEl = document.getElementById("modal-g-title");
+            const inCod = document.getElementById("input-g-codigo");
+            const inNom = document.getElementById("input-g-nombre");
+            const inClas = document.getElementById("input-g-clasif");
+            const inArea = document.getElementById("input-g-area");
+            const inLider = document.getElementById("input-g-lider");
+            const inAnio = document.getElementById("input-g-anio");
+
+            if (grupoEnEdicion) {
+                titleEl.textContent = `✏️ Editar Grupo: ${grupoEnEdicion.codigo}`;
+                inCod.value = grupoEnEdicion.codigo;
+                inCod.disabled = true;
+                inNom.value = grupoEnEdicion.nombre;
+                inClas.value = grupoEnEdicion.clasificacion || "C";
+                inArea.value = grupoEnEdicion.area || "Ingeniería y Tecnología";
+                inLider.value = grupoEnEdicion.lider || "";
+                inAnio.value = grupoEnEdicion.anio_creacion || grupoEnEdicion.anio || 2024;
+            } else {
+                titleEl.textContent = "➕ Registrar Nuevo Grupo de Investigación";
+                inCod.value = `COL${Math.floor(1000000 + Math.random() * 9000000)}`;
+                inCod.disabled = false;
+                inNom.value = "";
+                inClas.value = "C";
+                inArea.value = "Ingeniería y Tecnología";
+                inLider.value = "";
+                inAnio.value = 2024;
+            }
+            document.getElementById("modal-grupo").style.display = "flex";
+        }
+
+        function editarGrupoActual() {
+            if (grupoSeleccionado) abrirModalGrupo(grupoSeleccionado.codigo);
+        }
+
+        function guardarGrupoForm(e) {
+            e.preventDefault();
+            const cod = document.getElementById("input-g-codigo").value.trim().toUpperCase();
+            const nom = document.getElementById("input-g-nombre").value.trim();
+            const clas = document.getElementById("input-g-clasif").value;
+            const area = document.getElementById("input-g-area").value.trim();
+            const lider = document.getElementById("input-g-lider").value.trim();
+            const anio = parseInt(document.getElementById("input-g-anio").value) || 2024;
+
+            if (grupoEnEdicion) {
+                const copiaPrev = { ...grupoEnEdicion };
+                grupoEnEdicion.nombre = nom;
+                grupoEnEdicion.clasificacion = clas;
+                grupoEnEdicion.area = area;
+                grupoEnEdicion.lider = lider;
+                grupoEnEdicion.anio_creacion = anio;
+                grupoEnEdicion.anio = anio;
+
+                apilarAccion({
+                    tipo: "UPDATE",
+                    entidad: "GRUPO",
+                    id: cod,
+                    desc: `Modificación de grupo ${cod} (${nom})`,
+                    revertir: () => {
+                        Object.assign(grupoEnEdicion, copiaPrev);
+                    }
+                });
+                mostrarToast(`Grupo [${cod}] actualizado exitosamente.`);
+            } else {
+                if (gruposData.some(g => g.codigo === cod)) {
+                    alert(`El código de grupo ${cod} ya existe en el sistema.`);
+                    return;
+                }
+                const nuevo = {
+                    codigo: cod,
+                    nombre: nom,
+                    clasificacion: clas,
+                    area: area,
+                    lider: lider,
+                    anio_creacion: anio,
+                    anio: anio,
+                    activo: true,
+                    investigadores: [],
+                    productos: []
+                };
+                gruposData.unshift(nuevo);
+                apilarAccion({
+                    tipo: "INSERT",
+                    entidad: "GRUPO",
+                    id: cod,
+                    desc: `Creación de grupo ${cod} (${nom})`,
+                    revertir: () => {
+                        gruposData = gruposData.filter(g => g.codigo !== cod);
+                    }
+                });
+                grupoSeleccionado = nuevo;
+                mostrarToast(`Grupo [${cod}] registrado en el Hipercubo.`);
+            }
+            cerrarModales();
+            refrescarTodo();
+        }
+
+        function toggleEstadoGrupo(cod) {
+            const g = gruposData.find(item => item.codigo === cod);
+            if (!g) return;
+            g.activo = (g.activo === false ? true : false);
+            apilarAccion({
+                tipo: "TOGGLE_ESTADO",
+                entidad: "GRUPO",
+                id: cod,
+                desc: `Cambio de estado de grupo ${cod} a ${g.activo ? 'Activo' : 'Inactivo'}`,
+                revertir: () => {
+                    g.activo = !g.activo;
+                }
+            });
+            mostrarToast(`Grupo ${cod}: ahora está ${g.activo ? 'ACTIVO' : 'INACTIVO'}.`, g.activo ? "✅" : "⚠️");
+            refrescarTodo();
+        }
+
+        function toggleEstadoGrupoActual() {
+            if (grupoSeleccionado) toggleEstadoGrupo(grupoSeleccionado.codigo);
+        }
+
+        // -------------------------------------------------------------
+        // CRUD: INVESTIGADORES
+        // -------------------------------------------------------------
+        let invEnEdicion = null;
+        let grupoInvEdicion = null;
+
+        function actualizarSelectGrupos(selectId, codSel = "") {
+            const s = document.getElementById(selectId);
+            if (!s) return;
+            s.innerHTML = "";
+            gruposData.forEach(g => {
+                const opt = document.createElement("option");
+                opt.value = g.codigo;
+                opt.textContent = `${g.codigo} - ${g.nombre.substring(0, 35)}`;
+                if (g.codigo === codSel) opt.selected = true;
+                s.appendChild(opt);
+            });
+        }
+
+        function abrirModalInvestigador(codGrupoDef = "", doc = "") {
+            const targetCod = codGrupoDef || (grupoSeleccionado ? grupoSeleccionado.codigo : (gruposData[0] ? gruposData[0].codigo : ""));
+            actualizarSelectGrupos("input-i-grupo", targetCod);
+
+            invEnEdicion = null;
+            grupoInvEdicion = null;
+            if (doc) {
+                gruposData.forEach(g => {
+                    const found = (g.investigadores || []).find(i => i.documento === doc);
+                    if (found) { invEnEdicion = found; grupoInvEdicion = g; }
+                });
+            }
+
+            const titleEl = document.getElementById("modal-i-title");
+            const inDoc = document.getElementById("input-i-doc");
+            const inNom = document.getElementById("input-i-nombre");
+            const inCat = document.getElementById("input-i-cat");
+            const inForm = document.getElementById("input-i-formacion");
+
+            if (invEnEdicion) {
+                titleEl.textContent = `✏️ Editar Investigador: ${invEnEdicion.documento}`;
+                inDoc.value = invEnEdicion.documento;
+                inDoc.disabled = true;
+                inNom.value = invEnEdicion.nombre;
+                inCat.value = invEnEdicion.categoria || "Junior";
+                inForm.value = invEnEdicion.formacion || "";
+                document.getElementById("input-i-grupo").value = grupoInvEdicion.codigo;
+            } else {
+                titleEl.textContent = "➕ Registrar Nuevo Investigador";
+                inDoc.value = "";
+                inDoc.disabled = false;
+                inNom.value = "";
+                inCat.value = "Junior";
+                inForm.value = "Ingeniería de Sistemas y Computación";
+            }
+            document.getElementById("modal-investigador").style.display = "flex";
+        }
+
+        function guardarInvestigadorForm(e) {
+            e.preventDefault();
+            const doc = document.getElementById("input-i-doc").value.trim();
+            const nom = document.getElementById("input-i-nombre").value.trim();
+            const cat = document.getElementById("input-i-cat").value;
+            const form = document.getElementById("input-i-formacion").value.trim();
+            const codG = document.getElementById("input-i-grupo").value;
+
+            const gTarget = gruposData.find(g => g.codigo === codG);
+            if (!gTarget) return;
+
+            if (invEnEdicion) {
+                const copiaPrev = { ...invEnEdicion };
+                invEnEdicion.nombre = nom;
+                invEnEdicion.categoria = cat;
+                invEnEdicion.formacion = form;
+
+                apilarAccion({
+                    tipo: "UPDATE",
+                    entidad: "INVESTIGADOR",
+                    id: doc,
+                    desc: `Modificación de investigador ${doc} (${nom})`,
+                    revertir: () => {
+                        Object.assign(invEnEdicion, copiaPrev);
+                    }
+                });
+                mostrarToast(`Investigador [${doc}] actualizado exitosamente.`);
+            } else {
+                const nuevo = {
+                    documento: doc,
+                    nombre: nom,
+                    categoria: cat,
+                    formacion: form,
+                    par_evaluador: "No",
+                    scholar_url: "",
+                    orcid: "",
+                    activo: true
+                };
+                if (!gTarget.investigadores) gTarget.investigadores = [];
+                gTarget.investigadores.unshift(nuevo);
+
+                apilarAccion({
+                    tipo: "INSERT",
+                    entidad: "INVESTIGADOR",
+                    id: doc,
+                    desc: `Registro de investigador ${doc} en ${codG}`,
+                    revertir: () => {
+                        gTarget.investigadores = gTarget.investigadores.filter(i => i.documento !== doc);
+                    }
+                });
+                mostrarToast(`Investigador [${doc}] registrado en grupo ${codG}.`);
+            }
+            cerrarModales();
+            refrescarTodo();
+        }
+
+        function toggleEstadoInvestigador(codGrupo, doc) {
+            const g = gruposData.find(item => item.codigo === codGrupo);
+            if (!g) return;
+            const inv = (g.investigadores || []).find(i => i.documento === doc);
+            if (!inv) return;
+            inv.activo = (inv.activo === false ? true : false);
+            apilarAccion({
+                tipo: "TOGGLE_ESTADO",
+                entidad: "INVESTIGADOR",
+                id: doc,
+                desc: `Cambio de estado investigador ${doc} a ${inv.activo ? 'Activo' : 'Inactivo'}`,
+                revertir: () => {
+                    inv.activo = !inv.activo;
+                }
+            });
+            mostrarToast(`Investigador ${doc}: ahora está ${inv.activo ? 'ACTIVO' : 'INACTIVO'}.`, inv.activo ? "✅" : "⚠️");
+            refrescarTodo();
+        }
+
+        // -------------------------------------------------------------
+        // CRUD: PRODUCTOS DE INVESTIGACIÓN
+        // -------------------------------------------------------------
+        let prodEnEdicion = null;
+        let grupoProdEdicion = null;
+
+        function actualizarSelectInvestigadoresModalProd() {
+            const codG = document.getElementById("input-p-grupo").value;
+            const s = document.getElementById("input-p-investigador");
+            s.innerHTML = "";
+            const g = gruposData.find(item => item.codigo === codG);
+            if (g && g.investigadores) {
+                g.investigadores.forEach(inv => {
+                    const opt = document.createElement("option");
+                    opt.value = inv.documento;
+                    opt.textContent = `${inv.nombre} (${inv.documento})`;
+                    s.appendChild(opt);
+                });
+            }
+            if (s.options.length === 0) {
+                const opt = document.createElement("option");
+                opt.value = "0000494917";
+                opt.textContent = "Líder Asignado (0000494917)";
+                s.appendChild(opt);
+            }
+        }
+
+        function abrirModalProducto(codGrupoDef = "", idProd = "") {
+            const targetCod = codGrupoDef || (grupoSeleccionado ? grupoSeleccionado.codigo : (gruposData[0] ? gruposData[0].codigo : ""));
+            actualizarSelectGrupos("input-p-grupo", targetCod);
+            actualizarSelectInvestigadoresModalProd();
+
+            prodEnEdicion = null;
+            grupoProdEdicion = null;
+            if (idProd) {
+                gruposData.forEach(g => {
+                    const found = (g.productos || []).find(p => p.id === idProd);
+                    if (found) { prodEnEdicion = found; grupoProdEdicion = g; }
+                });
+            }
+
+            const titleEl = document.getElementById("modal-p-title");
+            const inId = document.getElementById("input-p-id");
+            const inTit = document.getElementById("input-p-titulo");
+            const inTipo = document.getElementById("input-p-tipo");
+            const inAnio = document.getElementById("input-p-anio");
+            const inVal = document.getElementById("input-p-validado");
+
+            if (prodEnEdicion) {
+                titleEl.textContent = `✏️ Editar Producto: ${prodEnEdicion.id}`;
+                inId.value = prodEnEdicion.id;
+                inId.disabled = true;
+                inTit.value = prodEnEdicion.titulo;
+                inTipo.value = prodEnEdicion.tipo || "Articulo";
+                inAnio.value = prodEnEdicion.anio || 2024;
+                inVal.checked = (prodEnEdicion.validado !== false);
+                document.getElementById("input-p-grupo").value = grupoProdEdicion.codigo;
+                actualizarSelectInvestigadoresModalProd();
+                document.getElementById("input-p-investigador").value = prodEnEdicion.id_investigador || "";
+            } else {
+                titleEl.textContent = "➕ Registrar Producto de Investigación";
+                inId.value = `PROD_${Math.floor(100000 + Math.random() * 900000)}`;
+                inId.disabled = false;
+                inTit.value = "";
+                inTipo.value = "Articulo";
+                inAnio.value = 2024;
+                inVal.checked = true;
+            }
+            document.getElementById("modal-producto").style.display = "flex";
+        }
+
+        function guardarProductoForm(e) {
+            e.preventDefault();
+            const idProd = document.getElementById("input-p-id").value.trim();
+            const tit = document.getElementById("input-p-titulo").value.trim();
+            const tipo = document.getElementById("input-p-tipo").value;
+            const anio = parseInt(document.getElementById("input-p-anio").value) || 2024;
+            const codG = document.getElementById("input-p-grupo").value;
+            const idInv = document.getElementById("input-p-investigador").value;
+            const valid = document.getElementById("input-p-validado").checked;
+
+            const gTarget = gruposData.find(g => g.codigo === codG);
+            if (!gTarget) return;
+
+            if (prodEnEdicion) {
+                const copiaPrev = { ...prodEnEdicion };
+                prodEnEdicion.titulo = tit;
+                prodEnEdicion.tipo = tipo;
+                prodEnEdicion.anio = anio;
+                prodEnEdicion.validado = valid;
+                prodEnEdicion.id_investigador = idInv;
+
+                apilarAccion({
+                    tipo: "UPDATE",
+                    entidad: "PRODUCTO",
+                    id: idProd,
+                    desc: `Modificación de producto ${idProd} (${tit.substring(0, 30)})`,
+                    revertir: () => {
+                        Object.assign(prodEnEdicion, copiaPrev);
+                    }
+                });
+                mostrarToast(`Producto [${idProd}] actualizado exitosamente.`);
+            } else {
+                const nuevo = {
+                    id: idProd,
+                    tipo: tipo,
+                    titulo: tit,
+                    anio: anio,
+                    categoria: "A1",
+                    validado: valid,
+                    activo: true,
+                    id_investigador: idInv
+                };
+                if (!gTarget.productos) gTarget.productos = [];
+                gTarget.productos.unshift(nuevo);
+
+                apilarAccion({
+                    tipo: "INSERT",
+                    entidad: "PRODUCTO",
+                    id: idProd,
+                    desc: `Registro de producto ${idProd} en ${codG}`,
+                    revertir: () => {
+                        gTarget.productos = gTarget.productos.filter(p => p.id !== idProd);
+                    }
+                });
+                mostrarToast(`Producto [${idProd}] indexado en el grupo ${codG}.`);
+            }
+            cerrarModales();
+            refrescarTodo();
+        }
+
+        function toggleEstadoProducto(codGrupo, idProd) {
+            const g = gruposData.find(item => item.codigo === codGrupo);
+            if (!g) return;
+            const prod = (g.productos || []).find(p => p.id === idProd);
+            if (!prod) return;
+            prod.activo = (prod.activo === false ? true : false);
+            apilarAccion({
+                tipo: "TOGGLE_ESTADO",
+                entidad: "PRODUCTO",
+                id: idProd,
+                desc: `Cambio de estado producto ${idProd} a ${prod.activo ? 'Activo' : 'Inactivo'}`,
+                revertir: () => {
+                    prod.activo = !prod.activo;
+                }
+            });
+            mostrarToast(`Producto ${idProd}: ahora está ${prod.activo ? 'ACTIVO' : 'INACTIVO'}.`, prod.activo ? "✅" : "⚠️");
+            refrescarTodo();
+        }
+
+        // -------------------------------------------------------------
+        // VISTA CRUD: PANELES Y SUB-TABS
+        // -------------------------------------------------------------
+        function cambiarSubTabCRUD(subtab) {
+            document.querySelectorAll("#view-crud .p-tab-btn").forEach(b => b.classList.remove("active"));
+            document.querySelectorAll(".crud-subpanel").forEach(p => p.style.display = "none");
+
+            if (subtab === "grupos") {
+                document.getElementById("crud-tab-btn-g").classList.add("active");
+                document.getElementById("crud-panel-grupos").style.display = "block";
+                renderizarCRUDGrupos();
+            } else if (subtab === "investigadores") {
+                document.getElementById("crud-tab-btn-i").classList.add("active");
+                document.getElementById("crud-panel-investigadores").style.display = "block";
+                renderizarCRUDInvestigadores();
+            } else if (subtab === "productos") {
+                document.getElementById("crud-tab-btn-p").classList.add("active");
+                document.getElementById("crud-panel-productos").style.display = "block";
+                renderizarCRUDProductos();
+            }
+        }
+
+        function renderizarCRUDTab() {
+            let totG = gruposData.length;
+            let totI = 0;
+            let totP = 0;
+            gruposData.forEach(g => {
+                totI += (g.investigadores || []).length;
+                totP += (g.productos || []).length;
+            });
+            document.getElementById("crud-badge-g").textContent = totG;
+            document.getElementById("crud-badge-i").textContent = totI;
+            document.getElementById("crud-badge-p").textContent = totP;
+
+            // Poblar selectores de filtro
+            const selInvG = document.getElementById("filtro-crud-inv-grupo");
+            const selProdG = document.getElementById("filtro-crud-prod-grupo");
+            if (selInvG && selInvG.options.length <= 1) {
+                gruposData.forEach(g => {
+                    const opt = document.createElement("option");
+                    opt.value = g.codigo; opt.textContent = `${g.codigo} - ${g.nombre.substring(0, 24)}`;
+                    selInvG.appendChild(opt.cloneNode(true));
+                    selProdG.appendChild(opt);
+                });
+            }
+
+            renderizarCRUDGrupos();
+            renderizarCRUDInvestigadores();
+            renderizarCRUDProductos();
+        }
+
+        function renderizarCRUDGrupos() {
+            const tbody = document.querySelector("#tabla-crud-grupos tbody");
+            tbody.innerHTML = "";
+            const filtro = (document.getElementById("search-crud-grupos")?.value || "").toLowerCase();
+
+            gruposData.filter(g => !filtro || g.nombre.toLowerCase().includes(filtro) || g.codigo.toLowerCase().includes(filtro)).forEach(g => {
+                const tr = document.createElement("tr");
+                const esActivo = g.activo !== false;
+                tr.innerHTML = `
+                    <td><code style="color:#38bdf8; font-weight:700;">${g.codigo}</code></td>
+                    <td><b>${g.nombre}</b></td>
+                    <td><span class="badge-cat cat-${g.clasificacion || 'C'}">Cat. ${g.clasificacion || 'Rec.'}</span></td>
+                    <td>${g.lider || "Investigador Líder"}</td>
+                    <td>${g.anio_creacion || g.anio || 2024}</td>
+                    <td><span class="badge-status ${esActivo ? 'badge-active' : 'badge-inactive'}">${esActivo ? '● Activo' : '○ Inactivo'}</span></td>
+                    <td style="text-align:center; white-space:nowrap;">
+                        <button onclick="abrirModalGrupo('${g.codigo}')" class="btn-action-sm btn-action-edit">✏️ Editar</button>
+                        <button onclick="toggleEstadoGrupo('${g.codigo}')" class="btn-action-sm btn-action-toggle">🔄 ${esActivo ? 'Desactivar' : 'Activar'}</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderizarCRUDInvestigadores() {
+            const tbody = document.querySelector("#tabla-crud-inv tbody");
+            tbody.innerHTML = "";
+            const filtroTxt = (document.getElementById("search-crud-inv")?.value || "").toLowerCase();
+            const filtroG = document.getElementById("filtro-crud-inv-grupo")?.value || "";
+
+            let count = 0;
+            gruposData.forEach(g => {
+                if (filtroG && g.codigo !== filtroG) return;
+                (g.investigadores || []).forEach(inv => {
+                    if (filtroTxt && !inv.nombre.toLowerCase().includes(filtroTxt) && !inv.documento.includes(filtroTxt)) return;
+                    if (count >= 100) return; // Limitar a 100 para fluidez en renderizado
+                    count++;
+
+                    const tr = document.createElement("tr");
+                    const esActivo = inv.activo !== false;
+                    tr.innerHTML = `
+                        <td><code style="color:#38bdf8;">${inv.documento}</code></td>
+                        <td><b>${inv.nombre}</b></td>
+                        <td><span class="badge-cat">${inv.categoria || 'Junior'}</span></td>
+                        <td>${inv.formacion || 'Ingeniería / Posgrado'}</td>
+                        <td><code>${g.codigo}</code></td>
+                        <td><span class="badge-status ${esActivo ? 'badge-active' : 'badge-inactive'}">${esActivo ? '● Activo' : '○ Inactivo'}</span></td>
+                        <td style="text-align:center; white-space:nowrap;">
+                            <button onclick="abrirModalInvestigador('${g.codigo}', '${inv.documento}')" class="btn-action-sm btn-action-edit">✏️ Editar</button>
+                            <button onclick="toggleEstadoInvestigador('${g.codigo}', '${inv.documento}')" class="btn-action-sm btn-action-toggle">🔄 ${esActivo ? 'Desactivar' : 'Activar'}</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            });
+        }
+
+        function renderizarCRUDProductos() {
+            const tbody = document.querySelector("#tabla-crud-prod tbody");
+            tbody.innerHTML = "";
+            const filtroTxt = (document.getElementById("search-crud-prod")?.value || "").toLowerCase();
+            const filtroG = document.getElementById("filtro-crud-prod-grupo")?.value || "";
+
+            let count = 0;
+            gruposData.forEach(g => {
+                if (filtroG && g.codigo !== filtroG) return;
+                (g.productos || []).forEach(p => {
+                    if (filtroTxt && !p.titulo.toLowerCase().includes(filtroTxt) && !p.id.toLowerCase().includes(filtroTxt)) return;
+                    if (count >= 100) return;
+                    count++;
+
+                    const tr = document.createElement("tr");
+                    const esActivo = p.activo !== false;
+                    tr.innerHTML = `
+                        <td><code>${p.id}</code></td>
+                        <td style="max-width:320px;"><b>${p.titulo}</b></td>
+                        <td><span class="badge-cat" style="background:#0284c7; color:#fff;">${p.tipo}</span></td>
+                        <td><b>${p.anio}</b></td>
+                        <td><code>${g.codigo}</code></td>
+                        <td><code>${p.id_investigador || '-'}</code></td>
+                        <td>${p.validado ? '<span style="color:#10b981;">Avalado</span>' : '<span style="color:#f59e0b;">Revisión</span>'}</td>
+                        <td><span class="badge-status ${esActivo ? 'badge-active' : 'badge-inactive'}">${esActivo ? '● Activo' : '○ Inactivo'}</span></td>
+                        <td style="text-align:center; white-space:nowrap;">
+                            <button onclick="abrirModalProducto('${g.codigo}', '${p.id}')" class="btn-action-sm btn-action-edit">✏️ Editar</button>
+                            <button onclick="toggleEstadoProducto('${g.codigo}', '${p.id}')" class="btn-action-sm btn-action-toggle">🔄 ${esActivo ? 'Desactivar' : 'Activar'}</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            });
+        }
+
+        // -------------------------------------------------------------
+        // EXPORTACIÓN Y SINCRONIZACIÓN PERSISTENTE (SQL / JSON)
+        // -------------------------------------------------------------
+        function generarSQLConsolidado() {
+            let sql = "-- ====================================================================\n";
+            sql += "-- PEA-i UPC: SCRIPT DE PERSISTENCIA Y SINCRONIZACIÓN SQLITE3\n";
+            sql += `-- Generado: ${new Date().toLocaleString()} desde Portal Web Interactivo\n`;
+            sql += "-- ====================================================================\n\n";
+
+            gruposData.forEach(g => {
+                const nomEsc = (g.nombre || "").replace(/'/g, "''");
+                const liderEsc = (g.lider || "").replace(/'/g, "''");
+                const areaEsc = (g.area || "").replace(/'/g, "''");
+                sql += `INSERT OR REPLACE INTO grupo (codigo_grupo, nombre, clasificacion, area_conocimiento, lider, anio_creacion, activo) `
+                     + `VALUES ('${g.codigo}', '${nomEsc}', '${g.clasificacion || "C"}', '${areaEsc}', '${liderEsc}', ${g.anio_creacion || g.anio || 2024}, ${g.activo !== false ? 1 : 0});\n`;
+
+                (g.investigadores || []).forEach(inv => {
+                    const nomIEsc = (inv.nombre || "").replace(/'/g, "''");
+                    const formEsc = (inv.formacion || "").replace(/'/g, "''");
+                    sql += `INSERT OR REPLACE INTO investigador (documento_id, nombre_completo, categoria, formacion_academica, codigo_grupo, activo) `
+                         + `VALUES ('${inv.documento}', '${nomIEsc}', '${inv.categoria || "Junior"}', '${formEsc}', '${g.codigo}', ${inv.activo !== false ? 1 : 0});\n`;
+                });
+
+                (g.productos || []).forEach(p => {
+                    const titEsc = (p.titulo || "").replace(/'/g, "''");
+                    const tipoEsc = (p.tipo || "Articulo").replace(/'/g, "''");
+                    sql += `INSERT OR REPLACE INTO producto (id_producto, tipo, titulo, anio, categoria_minciencias, validado, activo, codigo_grupo, documento_investigador) `
+                         + `VALUES ('${p.id}', '${tipoEsc}', '${titEsc}', ${p.anio || 2024}, '${p.categoria || "A1"}', ${p.validado ? 1 : 0}, ${p.activo !== false ? 1 : 0}, '${g.codigo}', '${p.id_investigador || ""}');\n`;
+                });
+            });
+            return sql;
+        }
+
+        function generarJSONConsolidado() {
+            return JSON.stringify({
+                version: "2.5",
+                timestamp: new Date().toISOString(),
+                total_grupos: gruposData.length,
+                operaciones_historial: operacionesAuditadas,
+                grupos: gruposData
+            }, null, 2);
+        }
+
+        function abrirModalExportar() {
+            document.getElementById("sql-export-area").value = generarSQLConsolidado();
+            document.getElementById("json-export-area").value = generarJSONConsolidado();
+            document.getElementById("modal-exportar").style.display = "flex";
+        }
+
+        function descargarCambiosJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(generarJSONConsolidado());
+            const a = document.createElement('a');
+            a.setAttribute("href", dataStr);
+            a.setAttribute("download", "cambios_gui.json");
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            mostrarToast("Archivo data/cambios_gui.json generado y descargado.", "📥");
+        }
+
+        function copiarSQLPortapapeles() {
+            const sql = document.getElementById("sql-export-area").value;
+            navigator.clipboard.writeText(sql).then(() => {
+                mostrarToast("Script SQL copiado al portapapeles con éxito.", "📋");
+            }).catch(() => {
+                alert("No se pudo copiar automáticamente. Por favor seleccione y copie el texto del área.");
+            });
+        }
+
+        function guardarEnLocalStorage() {
+            try {
+                localStorage.setItem("pea_upc_hipercubo_data", JSON.stringify(gruposData));
+                localStorage.setItem("pea_upc_undo_pila", JSON.stringify(operacionesAuditadas));
+            } catch (err) {
+                // Ignore storage limits
+            }
+        }
+
+        function cargarDeLocalStorage() {
+            try {
+                const guardado = localStorage.getItem("pea_upc_hipercubo_data");
+                if (guardado) {
+                    const parsed = JSON.parse(guardado);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        gruposData = parsed;
+                    }
+                }
+            } catch (e) {}
+        }
+
         // Ejecutar al cargar el DOM
-        window.addEventListener("DOMContentLoaded", inicializarPortal);
+        window.addEventListener("DOMContentLoaded", () => {
+            cargarDeLocalStorage();
+            inicializarPortal();
+            actualizarContadorUndo();
+        });
     </script>
 </body>
 </html>

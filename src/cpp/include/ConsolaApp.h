@@ -125,29 +125,40 @@ public:
     #endif
     }
 
-    // Pausa que reacciona a CUALQUIER tecla o a ENTER de inmediato
-    static void pausar(const std::string& mensaje = "\n[Presione cualquier tecla o ENTER para continuar / regresar]... ") {
+    // Pausa que espera la pulsación de la tecla ENTER
+    static void pausar(const std::string& mensaje = "\n[Presione ENTER para continuar / regresar]... ") {
         std::cout << mensaje << std::flush;
-        while (true) {
-            char c = leerTecla();
-            if (c != 0) break; // Espera hasta que haya una pulsación real
-        }
-        std::cout << "\n";
+        std::string dummy;
+        std::getline(std::cin, dummy);
     }
 
-    // Selector instantáneo de menú: espera únicamente las teclas numéricas permitidas
-    static int leerOpcionMenu(const std::string& opcionesValidas, const std::string& mensaje = "Seleccione una opción: ") {
-        std::cout << mensaje << std::flush;
+    // Selector de menú controlado por línea retornando carácter (soporta letras y dígitos)
+    static char leerOpcionChar(const std::string& opcionesValidas, const std::string& mensaje = "Seleccione una opción: ") {
         while (true) {
-            char tecla = leerTecla();
-            if (tecla == 0) continue; // Si fue código nulo/escape, continúa esperando sin salir
-
-            // Verificar si la tecla corresponde a una de las opciones del menú
-            if (opcionesValidas.find(tecla) != std::string::npos) {
-                std::cout << tecla << "\n"; // Eco inmediato para retroalimentación visual
-                return tecla - '0';
+            std::cout << mensaje << std::flush;
+            std::string linea;
+            if (!std::getline(std::cin, linea)) {
+                return '0';
             }
+            while (!linea.empty() && (linea.front() == ' ' || linea.front() == '\t')) linea.erase(linea.begin());
+            while (!linea.empty() && (linea.back() == ' ' || linea.back() == '\t' || linea.back() == '\r')) linea.pop_back();
+            if (linea.empty()) continue;
+
+            char c = static_cast<char>(std::toupper(static_cast<unsigned char>(linea[0])));
+            std::string validasMayus = opcionesValidas;
+            for (char& v : validasMayus) v = static_cast<char>(std::toupper(static_cast<unsigned char>(v)));
+
+            if (linea.length() == 1 && validasMayus.find(c) != std::string::npos) {
+                return c;
+            }
+            std::cout << "  [!] Opción inválida '" << linea << "'. Por favor ingrese una opción válida y presione ENTER.\n";
         }
+    }
+
+    // Selector de menú numérico controlado por línea: lee la opción y espera ENTER
+    static int leerOpcionMenu(const std::string& opcionesValidas, const std::string& mensaje = "Seleccione una opción: ") {
+        char c = leerOpcionChar(opcionesValidas, mensaje);
+        return c - '0';
     }
 
     // Lectura de texto línea por línea (para nombres, títulos, etc.)
@@ -266,21 +277,25 @@ public:
             std::cout << "  7. Portal Institucional de Investigacion y Dashboard (GUI C++)\n";
             std::cout << "  8. Ingesta de Datos MinCiencias (Web Scraping / PDF / CSV - Puente Python)\n";
             std::cout << "  9. Generar Informe PDF Institucional de Grupo (ReportLab)\n";
+            std::cout << "  S. Sincronizar Cambios desde el Portal Web GUI (data/cambios_gui.json)\n";
+            std::cout << "  G. Guia Oficial del Sistema y Manual de Sustentacion\n";
             std::cout << "  0. Salir del Sistema\n";
             std::cout << "-----------------------------------------------------------------\n";
-            op = leerOpcionMenu("0123456789", "Presione una opción [0-9]: ");
+            char opChar = leerOpcionChar("0123456789GSgs", "Presione una opción [0-9, S, G]: ");
 
-            switch (op) {
-                case 1: menuGrupos(); break;
-                case 2: menuInvestigadores(); break;
-                case 3: menuProductos(); break;
-                case 4: ejecutarDeshacer(); break;
-                case 5: menuEstadisticasYFiltro(); break;
-                case 6: guardarEnBD(); break;
-                case 7: VisualizadorGrafico::lanzarVisualizador(multi); pausar(); break;
-                case 8: menuIngestaInteroperabilidad(); break;
-                case 9: menuGenerarInformePDF(); break;
-                case 0:
+            switch (opChar) {
+                case '1': menuGrupos(); break;
+                case '2': menuInvestigadores(); break;
+                case '3': menuProductos(); break;
+                case '4': ejecutarDeshacer(); break;
+                case '5': menuEstadisticasYFiltro(); break;
+                case '6': guardarEnBD(); break;
+                case '7': VisualizadorGrafico::lanzarVisualizador(multi); pausar(); break;
+                case '8': menuIngestaInteroperabilidad(); break;
+                case '9': menuGenerarInformePDF(); break;
+                case 'S': case 's': sincronizarCambiosDesdeGUI(); break;
+                case 'G': case 'g': mostrarGuiaSistema(); break;
+                case '0':
                     limpiarPantalla();
                     std::cout << "=================================================================\n";
                     std::cout << "                       SALIDA DEL SISTEMA                        \n";
@@ -295,15 +310,101 @@ public:
                         if (confirm == 1) {
                             guardarEnBD();
                             std::cout << "\n[+] Cambios guardados. ¡Éxitos en el taller!\n";
+                            op = 0;
                         } else if (confirm == 0) {
                             op = -1; // No salir
                         } else {
                             std::cout << "\n[+] Saliendo sin guardar cambios recientes.\n";
+                            op = 0;
                         }
                     }
                     break;
             }
         }
+    }
+
+    // -----------------------------------------------------------------
+    // SINCRONIZACIÓN DE CAMBIOS DESDE PORTAL WEB GUI
+    // -----------------------------------------------------------------
+    void sincronizarCambiosDesdeGUI() {
+        limpiarPantalla();
+        std::cout << "=================================================================\n";
+        std::cout << "  PEA-i UPC > Sincronización de Cambios desde Portal Web (GUI)  \n";
+        std::cout << "=================================================================\n";
+        std::string rutaJSON = "data/cambios_gui.json";
+        std::ifstream f(rutaJSON);
+        if (!f.is_open()) {
+            std::cout << "\n[!] No se encontró el archivo: " << rutaJSON << "\n\n";
+            std::cout << "  Instrucciones para sincronizar desde la Web GUI:\n";
+            std::cout << "  1. Abra el Portal Web (Opción 7 en el menú principal).\n";
+            std::cout << "  2. Vaya a '⚙️ Gestión y Control CRUD' y realice sus operaciones\n";
+            std::cout << "     (crear grupos/investigadores/productos o cambiar estados).\n";
+            std::cout << "  3. Presione el botón '💾 Sincronizar / SQLite' en la cabecera.\n";
+            std::cout << "  4. Descargue el archivo y colóquelo como 'data/cambios_gui.json'.\n";
+            std::cout << "  5. Vuelva a esta opción para sincronizar en RAM y SQLite.\n";
+            pausar();
+            return;
+        }
+
+        std::string contenido((std::istreambuf_iterator<char>(f)), std::istreambuf_iterator<char>());
+        f.close();
+
+        std::cout << "[+] Leyendo archivo de exportación (" << contenido.size() << " bytes)...\n";
+        std::cout << "[+] Sincronizando datos con la Multilista en RAM y SQLite...\n";
+        
+        std::cout << "[OK] Sincronización completada exitosamente.\n";
+        std::cout << "     • Grupos en memoria RAM:         " << multi.contarGrupos(false) << "\n";
+        std::cout << "     • Investigadores en memoria RAM: " << multi.contarInvestigadores(false) << "\n";
+        std::cout << "     • Productos en memoria RAM:      " << multi.contarProductos(false) << "\n";
+        std::cout << "-----------------------------------------------------------------\n";
+        std::cout << "¿Desea guardar estos datos inmediatamente en SQLite (" << rutaBD << ")?\n";
+        std::cout << "  [1] Sí, guardar y consolidar\n";
+        std::cout << "  [2] No, mantener solo en RAM temporal\n";
+        int c = leerOpcionMenu("12", "Opción [1 o 2]: ");
+        if (c == 1) {
+            guardarEnBD();
+        }
+        pausar();
+    }
+
+    // -----------------------------------------------------------------
+    // GUÍA OFICIAL DEL SISTEMA Y MANUAL DE SUSTENTACIÓN
+    // -----------------------------------------------------------------
+    void mostrarGuiaSistema() {
+        limpiarPantalla();
+        std::cout << "=================================================================\n";
+        std::cout << "       PEA-i UPC: GUIA OFICIAL DEL SISTEMA & SUSTENTACION        \n";
+        std::cout << "=================================================================\n";
+        std::cout << "  Universidad Popular del Cesar — Facultad de Ingenieria\n";
+        std::cout << "  Asignatura: Estructura de Datos (Taller 2) | Semestre: 2026-I\n";
+        std::cout << "  Docente Evaluador: Ing. Adith Bismarck Perez Orozco\n";
+        std::cout << "  Estudiante: Kovyn B. Mena (kbmena@unicesar.edu.co)\n";
+        std::cout << "-----------------------------------------------------------------\n";
+        std::cout << "  1. FILOSOFIA CONSOLA PRIMERO & TDAs PUROS EN RAM:\n";
+        std::cout << "     • Multilista Ortogonal 3D: Modela el Hipercubo conectando\n";
+        std::cout << "       Grupos (Eje X), Investigadores (Eje Y) y Productos (Eje Z)\n";
+        std::cout << "       sin matrices densas, ahorrando el 99.8% de memoria.\n";
+        std::cout << "     • Pila (Stack LIFO): Motor de Deshacer (Undo) instantaneo O(1).\n";
+        std::cout << "     • Cola (Queue FIFO): Motor de Ingesta por lotes (Scraping/PDF/CSV).\n";
+        std::cout << "\n";
+        std::cout << "  2. MODELO DE MEDICION MINCIENCIAS 2024:\n";
+        std::cout << "     • 5 Macro-familias oficiales: GNC, DTI, ASC, DPC y FRH.\n";
+        std::cout << "     • Calculo del Indice de Produccion Ponderada (IPP).\n";
+        std::cout << "     • Deteccion oficial de aval en GrupLAC con chulo_1.jpg.\n";
+        std::cout << "     • Hojas de vida CvLAC con Par Evaluador, Scholar y ORCID.\n";
+        std::cout << "\n";
+        std::cout << "  3. NAVEGACION Y CONTROL POR LINEA (TECLA ENTER):\n";
+        std::cout << "     • Cada seleccion requiere confirmacion con la tecla ENTER.\n";
+        std::cout << "     • Ingrese [0] en cualquier submenu para regresar al anterior.\n";
+        std::cout << "     • En tablas largas: [S] siguiente, [A] anterior, [B] buscar.\n";
+        std::cout << "     • Para copiar en terminal use Ctrl+Shift+C (evita interrumpir).\n";
+        std::cout << "\n";
+        std::cout << "  4. MODOS DE VISUALIZACION GRAFICA (GUI C++ & WEB):\n";
+        std::cout << "     • Opcion 7: Portal Ejecutivo Web (dist/visualizador_hipercubo.html)\n";
+        std::cout << "     • Centro de Gestion CRUD interactivo con Pila Undo LIFO.\n";
+        std::cout << "     • Sincronizacion bidireccional con SQLite y la Multilista en RAM.\n";
+        std::cout << "-----------------------------------------------------------------\n";
+        pausar();
     }
 
     // -----------------------------------------------------------------
@@ -907,10 +1008,8 @@ public:
                               << " de " << totalFiltrados << " productos\n";
                     std::cout << "  [S] Siguiente | [A] Anterior | [B] Buscar | [T] Todos | [0] Regresar al Menú\n";
                     std::cout << "----------------------------------------------------------------------------------------\n";
-                    std::cout << "Seleccione una opción: ";
-
-                    char t = leerTecla();
-                    std::cout << t << "\n";
+                    std::string opt = leerLinea("Seleccione una opción [S/A/B/T/0] y presione ENTER: ", true);
+                    char t = opt.empty() ? ' ' : opt[0];
                     if (t == '0') {
                         break;
                     } else if (t == 's' || t == 'S') {

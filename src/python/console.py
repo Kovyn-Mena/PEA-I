@@ -13,6 +13,7 @@ import signal
 
 # Asegurar importación de estructuras y base de datos
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 sys.path.insert(0, BASE_DIR)
 
 from python.structures.multilista import Multilista
@@ -80,27 +81,26 @@ class ConsolaApp:
                 return c
 
     @staticmethod
-    def pausar(mensaje: str = "\n[Presione cualquier tecla o ENTER para continuar / regresar]... "):
-        sys.stdout.write(mensaje)
-        sys.stdout.flush()
-        while True:
-            c = ConsolaApp.leer_tecla()
-            if c:
-                break
-        sys.stdout.write("\n")
+    def pausar(mensaje: str = "\n[Presione ENTER para continuar / regresar]... "):
+        try:
+            input(mensaje)
+        except (EOFError, KeyboardInterrupt):
+            pass
 
     @staticmethod
-    def leer_opcion_menu(opciones_validas: str, mensaje: str = "Seleccione una opción: ") -> int:
-        sys.stdout.write(mensaje)
-        sys.stdout.flush()
+    def leer_opcion_menu(opciones_validas: str, mensaje: str = "Seleccione una opción: "):
         while True:
-            tecla = ConsolaApp.leer_tecla()
-            if not tecla:
+            try:
+                linea = input(mensaje).strip()
+            except (EOFError, KeyboardInterrupt):
+                return 0
+            if not linea:
                 continue
-            if tecla in opciones_validas:
-                sys.stdout.write(tecla + "\n")
-                sys.stdout.flush()
-                return int(tecla)
+            if linea in opciones_validas or linea.upper() in opciones_validas:
+                if linea.isdigit():
+                    return int(linea)
+                return linea.upper()
+            print(f"  [!] Opción inválida '{linea}'. Por favor ingrese una opción válida y presione ENTER.")
 
     @staticmethod
     def leer_linea(mensaje: str, permitir_vacio: bool = False) -> str:
@@ -179,11 +179,13 @@ class ConsolaApp:
             print(f"  4. Deshacer ultima accion (Pila Undo - LIFO) [{self.historial.tamano()} en pila]")
             print("  5. Resumen Estadistico y Filtro por Ventana de Años")
             print("  6. Guardar cambios en la Base de Datos (Persistencia)")
-            print("  7. Ingesta de Datos MinCiencias (Web Scraping / PDF / CSV - Cola FIFO)")
-            print("  8. Generar Informe PDF Institucional de Grupo (Estilo GrupLAC - ReportLab)")
+            print("  7. Portal Institucional de Investigacion y Dashboard (GUI Python / Web)")
+            print("  8. Ingesta de Datos MinCiencias (Web Scraping / PDF / CSV - Cola FIFO)")
+            print("  9. Generar Informe PDF Institucional de Grupo (Estilo GrupLAC - ReportLab)")
+            print("  G. Guia Oficial del Sistema y Manual de Sustentacion")
             print("  0. Salir del Sistema")
             print("-----------------------------------------------------------------")
-            op = self.leer_opcion_menu("012345678", "Presione una opción [0-8]: ")
+            op = self.leer_opcion_menu("0123456789Gg", "Presione una opción [0-9 o G]: ")
 
             if op == 1:
                 self.menu_grupos()
@@ -198,9 +200,13 @@ class ConsolaApp:
             elif op == 6:
                 self.guardar_en_bd()
             elif op == 7:
-                self.menu_ingesta()
+                self.menu_gui_portal()
             elif op == 8:
+                self.menu_ingesta()
+            elif op == 9:
                 self.menu_generar_informe_pdf()
+            elif op == 'G':
+                self.mostrar_guia_sistema()
             elif op == 0:
                 self.limpiar_pantalla()
                 print("=================================================================")
@@ -219,6 +225,78 @@ class ConsolaApp:
                     op = -1
                 else:
                     print("\n[+] Saliendo sin guardar cambios recientes.")
+
+    # -----------------------------------------------------------------
+    # PORTAL VISUALIZADOR & DASHBOARD (GUI PYTHON / WEB)
+    # -----------------------------------------------------------------
+    def menu_gui_portal(self):
+        """Lanza el Dashboard Gráfico & Portal Ejecutivo (GUI Python)"""
+        self.limpiar_pantalla()
+        print("=================================================================")
+        print("    PEA-i UPC > Portal Institucional y Dashboard (GUI Python)   ")
+        print("=================================================================")
+        print("  1. Abrir Portal Ejecutivo Web (Recomendado - Zero-Dependencies)")
+        print("  2. Abrir Dashboard de Escritorio Tkinter / Matplotlib (3 Vistas)")
+        print("  0. Regresar al Menú Principal")
+        print("-----------------------------------------------------------------")
+        op = self.leer_opcion_menu("012", "Seleccione una opción [0-2]: ")
+        if op == 1:
+            ruta_html = os.path.abspath(os.path.join(ROOT_DIR, "dist", "visualizador_hipercubo.html"))
+            print(f"\n[+] Abriendo Portal Web Ejecutivo en el navegador...")
+            try:
+                import webbrowser
+                webbrowser.open(f"file://{ruta_html}")
+                print(f"[OK] Portal abierto exitosamente desde: {ruta_html}")
+            except Exception as e:
+                print(f"[!] Error al abrir el navegador: {e}")
+            self.pausar()
+        elif op == 2:
+            print("\n[+] Inicializando Dashboard de Escritorio Tkinter / Matplotlib...")
+            try:
+                from python.gui import DashboardApp
+                app_gui = DashboardApp(self.ruta_bd)
+                app_gui.iniciar()
+            except Exception as e:
+                print(f"[!] Error al iniciar interfaz Tkinter: {e}")
+            self.pausar()
+
+    # -----------------------------------------------------------------
+    # GUÍA DEL SISTEMA & MANUAL DE SUSTENTACIÓN
+    # -----------------------------------------------------------------
+    def mostrar_guia_sistema(self):
+        """Muestra la Guía Oficial del Sistema y Manual de Sustentación"""
+        self.limpiar_pantalla()
+        print("=================================================================")
+        print("       PEA-i UPC: GUÍA OFICIAL DEL SISTEMA & SUSTENTACIÓN        ")
+        print("=================================================================")
+        print("  Universidad Popular del Cesar — Facultad de Ingeniería")
+        print("  Asignatura: Estructura de Datos (Taller 2) | Semestre: 2026-I")
+        print("  Docente Evaluador: Ing. Adith Bismarck Pérez Orozco")
+        print("  Estudiante: Kovyn B. Mena (kbmena@unicesar.edu.co)")
+        print("-----------------------------------------------------------------")
+        print("  1. FILOSOFÍA CONSOLA PRIMERO & TDAs PUROS EN RAM:")
+        print("     • Multilista Ortogonal 3D: Modela el Hipercubo conectando")
+        print("       Grupos (Eje X), Investigadores (Eje Y) y Productos (Eje Z)")
+        print("       sin matrices densas, ahorrando el 99.8% de memoria.")
+        print("     • Pila (Stack LIFO): Motor de Deshacer (Undo) instantáneo O(1).")
+        print("     • Cola (Queue FIFO): Motor de Ingesta por lotes (Scraping/PDF/CSV).")
+        print("")
+        print("  2. MODELO DE MEDICIÓN MINCIENCIAS 2024:")
+        print("     • 5 Macro-familias oficiales: GNC, DTI, ASC, DPC y FRH.")
+        print("     • Cálculo del Índice de Producción Ponderada (IPP).")
+        print("     • Detección oficial de aval en GrupLAC con chulo_1.jpg.")
+        print("     • Hojas de vida CvLAC con Par Evaluador, Scholar y ORCID.")
+        print("")
+        print("  3. NAVEGACIÓN Y ATAJOS DE TECLADO:")
+        print("     • Ingrese [0] en cualquier submenú para regresar al anterior.")
+        print("     • En tablas largas: [S] siguiente, [A] anterior, [B] buscar.")
+        print("     • Para copiar en terminal use Ctrl+Shift+C (evita interrumpir).")
+        print("")
+        print("  4. MODOS DE VISUALIZACIÓN GRÁFICA (GUI):")
+        print("     • Opción 7: Portal Ejecutivo Web (dist/visualizador_hipercubo.html)")
+        print("     • Opción 7 -> 2: Dashboard interactivo de 3 vistas (Matplotlib)")
+        print("-----------------------------------------------------------------")
+        self.pausar()
 
     # -----------------------------------------------------------------
     # INGESTA DE DATOS & WEB SCRAPING (TDA COLA FIFO)
@@ -754,11 +832,7 @@ class ConsolaApp:
                     print(f"  Página {pagina + 1} de {total_paginas} | Mostrando {0 if total_filtrados == 0 else inicio + 1}-{fin} de {total_filtrados} productos")
                     print("  [S] Siguiente | [A] Anterior | [B] Buscar | [T] Todos | [0] Regresar al Menú")
                     print("----------------------------------------------------------------------------------------")
-                    sys.stdout.write("Seleccione una opción: ")
-                    sys.stdout.flush()
-
-                    t = self.leer_tecla().lower()
-                    print(t)
+                    t = self.leer_linea("Seleccione una opción [S/A/B/T/0] y presione ENTER: ", permitir_vacio=True).lower()
                     if t == '0':
                         break
                     elif t == 's':
@@ -766,7 +840,7 @@ class ConsolaApp:
                     elif t == 'a':
                         if pagina > 0: pagina -= 1
                     elif t == 'b':
-                        filtro_busqueda = self.leer_linea("Texto a buscar (o ENTER para limpiar): ", permite_vacio=True)
+                        filtro_busqueda = self.leer_linea("Texto a buscar (o ENTER para limpiar): ", permitir_vacio=True)
                         pagina = 0
                     elif t == 't':
                         filtro_busqueda = ""

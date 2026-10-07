@@ -175,6 +175,107 @@ def guardar_perfil_bd(doc_id: str, perfil: dict, ruta_bd: str) -> bool:
         return False
 
 
+CODIGOS_LEGACY = {
+    "GISICO": "COL0018706",
+    "G002668": "COL0043834",
+    "G003639": "COL0001351",
+    "G0002099": "COL0018706",
+    "G002099": "COL0018706"
+}
+
+
+def empaquetar_grupo_zip(codigo: str, nro: str = "", reutilizar: bool = True) -> str:
+    """
+    Empaqueta los snapshots HTML de un grupo en un archivo .zip individual:
+    data/snapshots/zip/grupo_{codigo}.zip (Optimización de Damian para evitar miles de archivos sueltos).
+    """
+    import zipfile
+    snap_dir = os.path.join(PROJECT_ROOT, "data", "snapshots")
+    zip_dir = os.path.join(snap_dir, "zip")
+    os.makedirs(zip_dir, exist_ok=True)
+    dest = os.path.join(zip_dir, f"grupo_{codigo}.zip")
+
+    MAPA_ALIAS = {
+        "col0018706": ["2099", "gisico", "col0018706"],
+        "col0002099": ["2099", "gisico", "col0002099"],
+        "col0043834": ["2668", "col0043834"],
+        "col0001351": ["3639", "col0001351"],
+        "col0049121": ["3202", "col0049121"]
+    }
+    claves = [codigo.lower()]
+    for al in MAPA_ALIAS.get(codigo.lower(), []):
+        if al not in claves:
+            claves.append(al)
+    if nro:
+        claves.append(nro.lower())
+        if len(nro) >= 4:
+            claves.append(nro[-4:].lower())
+
+    files = []
+    if os.path.isdir(snap_dir):
+        for root, _, fs in os.walk(snap_dir):
+            if os.path.abspath(root).startswith(os.path.abspath(zip_dir)):
+                continue
+            for f in fs:
+                if f.endswith(".html") and any(k in f.lower() for k in claves):
+                    files.append(os.path.join(root, f))
+
+    if not files:
+        if reutilizar and os.path.exists(dest):
+            return dest
+        return ""
+
+    if reutilizar and os.path.exists(dest):
+        try:
+            zt = os.path.getmtime(dest)
+            if all(os.path.getmtime(f) <= zt for f in files):
+                return dest
+        except OSError:
+            pass
+
+    with zipfile.ZipFile(dest, "w", zipfile.ZIP_DEFLATED) as z:
+        for f in files:
+            z.write(f, os.path.basename(f))
+    return dest
+
+
+def limpiar_zips_huerfanos() -> list:
+    """
+    Borra zips legacy cuyo código vigente ya existe (evita zips duplicados / huérfanos).
+    """
+    eliminados = []
+    zip_dir = os.path.join(PROJECT_ROOT, "data", "snapshots", "zip")
+    if not os.path.isdir(zip_dir):
+        return eliminados
+
+    for viejo, nuevo in CODIGOS_LEGACY.items():
+        fv = os.path.join(zip_dir, f"grupo_{viejo}.zip")
+        fn = os.path.join(zip_dir, f"grupo_{nuevo}.zip")
+        if os.path.exists(fv) and os.path.exists(fn):
+            try:
+                os.remove(fv)
+                eliminados.append(os.path.basename(fv))
+            except OSError as e:
+                print(f"[!] Aviso al limpiar zip {fv}: {e}")
+    if eliminados:
+        print(f"[+] Zips huérfanos eliminados: {', '.join(eliminados)}")
+    return eliminados
+
+
+def empaquetar_todos_los_snapshots() -> dict:
+    """
+    Empaqueta todos los snapshots existentes en data/snapshots hacia sus respectivos zips.
+    """
+    codigos = ["COL0018706", "COL0002099", "COL0043834", "COL0001351", "COL0049121"]
+    resultados = {}
+    for cod in codigos:
+        z = empaquetar_grupo_zip(cod)
+        if z:
+            resultados[cod] = z
+    limpiar_zips_huerfanos()
+    return resultados
+
+
 def _buscar_snapshot_gruplac(nro_grupo: str) -> str:
     """Busca un snapshot de GrupLAC tanto en la raíz como recursivamente en subcarpetas."""
     snap_dir = os.path.join(PROJECT_ROOT, "data", "snapshots")
@@ -188,7 +289,10 @@ def _buscar_snapshot_gruplac(nro_grupo: str) -> str:
     for c in cands:
         if c and os.path.exists(c):
             return c
+    zip_dir = os.path.join(snap_dir, "zip")
     for root, _, files in os.walk(snap_dir):
+        if os.path.abspath(root).startswith(os.path.abspath(zip_dir)):
+            continue
         for f in files:
             if f.endswith(".html") and (nro_grupo in f or (len(nro_grupo) >= 4 and nro_grupo[-4:] in f)):
                 if f.startswith("gruplac"):
@@ -207,12 +311,50 @@ def _buscar_snapshot_cvlac(cod_rh: str) -> str:
         return os.path.join(snap_dir, nom)
     if nom_pad and os.path.exists(os.path.join(snap_dir, nom_pad)):
         return os.path.join(snap_dir, nom_pad)
+    zip_dir = os.path.join(snap_dir, "zip")
     for root, _, files in os.walk(snap_dir):
+        if os.path.abspath(root).startswith(os.path.abspath(zip_dir)):
+            continue
         if nom in files:
             return os.path.join(root, nom)
         if nom_pad and nom_pad in files:
             return os.path.join(root, nom_pad)
     return ""
+
+
+def leer_snapshot_cvlac_html(cod_rh: str) -> str:
+    """
+    Lee el contenido HTML de un snapshot de CvLAC, ya sea de un archivo suelto
+    o extrayéndolo directamente en memoria desde un archivo .zip empaquetado.
+    """
+    import zipfile
+    # 1. Intentar archivo suelto
+    ruta = _buscar_snapshot_cvlac(cod_rh)
+    if ruta and os.path.exists(ruta):
+        try:
+            with open(ruta, "r", encoding="utf-8", errors="ignore") as f:
+                return f.read()
+        except Exception:
+            pass
+
+    # 2. Intentar buscar en archivos .zip de data/snapshots/zip
+    zip_dir = os.path.join(PROJECT_ROOT, "data", "snapshots", "zip")
+    nom = f"cvlac_{cod_rh}.html"
+    nom_pad = f"cvlac_{int(cod_rh):010d}.html" if cod_rh.isdigit() else ""
+    if os.path.isdir(zip_dir):
+        for zf in os.listdir(zip_dir):
+            if zf.endswith(".zip"):
+                ruta_z = os.path.join(zip_dir, zf)
+                try:
+                    with zipfile.ZipFile(ruta_z, "r") as z:
+                        nombres = z.namelist()
+                        for target in [nom, nom_pad]:
+                            if target and target in nombres:
+                                return z.read(target).decode("utf-8", errors="ignore")
+                except Exception:
+                    pass
+    return ""
+
 
 
 class MotorIngesta:
@@ -352,12 +494,10 @@ class MotorIngesta:
                         cat = "Senior" if ("adith" in nom_raw.lower() or "patino" in _norm_txt(nom_raw)) else "Junior"
                         formacion = "Ingeniería de Sistemas y Computación"
 
-                        # Comprobar si existe snapshot de CvLAC para este investigador (búsqueda recursiva)
-                        cv_snap_path = _buscar_snapshot_cvlac(doc_inv)
-                        if cv_snap_path and os.path.exists(cv_snap_path):
+                        # Comprobar si existe snapshot de CvLAC para este investigador (archivo suelto o empaquetado en .zip)
+                        html_cv = leer_snapshot_cvlac_html(doc_inv)
+                        if html_cv:
                             try:
-                                with open(cv_snap_path, "r", encoding="utf-8", errors="ignore") as f_cv:
-                                    html_cv = f_cv.read()
                                 perfil_cv = parse_hoja_vida(html_cv)
                                 if perfil_cv.get("formacion_academica"):
                                     formacion = perfil_cv["formacion_academica"][:80]
@@ -519,13 +659,11 @@ class MotorIngesta:
             resumen["grupos"] += 1
 
         html_text = ""
-        # Buscar snapshot CvLAC en la raíz o en cualquier subcarpeta de grupo
-        snapshot_local = _buscar_snapshot_cvlac(cod_rh)
-
-        if snapshot_local:
-            print(f"[Scraping] Usando snapshot oficial local CvLAC: {os.path.basename(snapshot_local)}")
-            with open(snapshot_local, "r", encoding="utf-8", errors="ignore") as f_snap:
-                html_text = f_snap.read()
+        # Buscar snapshot CvLAC en disco o dentro de paquetes .zip
+        html_snap = leer_snapshot_cvlac_html(cod_rh)
+        if html_snap:
+            print(f"[Scraping] Usando snapshot oficial local CvLAC (disco o .zip): cod_rh={cod_rh}")
+            html_text = html_snap
             resumen["modo"] = "OFFLINE_SNAPSHOT"
         else:
             try:
@@ -728,6 +866,45 @@ class MotorIngesta:
             resumen["productos"] += 1
 
         return resumen
+
+    def scrapear_cvlacs_paralelo(self, lista_cod_rh: list, max_workers: int = 12) -> int:
+        """
+        Descarga o procesa hojas de vida CvLAC en paralelo usando ThreadPoolExecutor(max_workers=12).
+        Optimización basada en la solución de Damian para acelerar el procesamiento concurrente de perfiles.
+        """
+        from concurrent.futures import ThreadPoolExecutor, as_completed
+        import threading
+
+        exitos = 0
+        cerrojo = threading.Lock()
+
+        def _procesar_uno(rh):
+            try:
+                html = leer_snapshot_cvlac_html(rh)
+                if not html:
+                    url = f"https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh={rh}"
+                    r = requests.get(url, headers=self.HEADERS, timeout=12, verify=False)
+                    if r.status_code == 200 and len(r.text) > 1000:
+                        html = r.text
+                if html:
+                    p = parse_hoja_vida(html)
+                    guardar_perfil_bd(rh, p, self.ruta_bd)
+                    return rh, True
+                return rh, False
+            except Exception:
+                return rh, False
+
+        if not lista_cod_rh:
+            return 0
+
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            futuros = {executor.submit(_procesar_uno, rh): rh for rh in lista_cod_rh}
+            for fut in as_completed(futuros):
+                rh, ok = fut.result()
+                if ok:
+                    with cerrojo:
+                        exitos += 1
+        return exitos
 
     # -----------------------------------------------------------------
     # PROCESAMIENTO MEDIANTE TDA COLA (FIFO)
