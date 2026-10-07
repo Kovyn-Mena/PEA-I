@@ -430,6 +430,35 @@ public:
         return c;
     }
 
+    // Ventana de Observación Diferenciada según Modelo Oficial MinCiencias 2024:
+    // 10 años para Libro, Capitulo y Patente; 5 años para las demás tipologías
+    static bool cumpleVentanaModelo2024(const NodoProducto* p, int anioCorte = 2026) {
+        if (!p) return false;
+        bool es10Anios = contieneSubcadena(p->tipo, "libro") ||
+                         contieneSubcadena(p->tipo, "capitulo") ||
+                         contieneSubcadena(p->tipo, "capítulo") ||
+                         contieneSubcadena(p->tipo, "patente");
+        int inicio = es10Anios ? (anioCorte - 9) : (anioCorte - 4);
+        return (p->anio >= inicio && p->anio <= anioCorte);
+    }
+
+    int contarProductosModelo2024(int anioCorte = 2026, bool soloActivos = true) const {
+        int c = 0;
+        NodoGrupo* g = cabezaGrupos;
+        while (g != nullptr) {
+            NodoProducto* p = g->primerProducto;
+            while (p != nullptr) {
+                if ((!soloActivos || (p->activo && g->activo)) &&
+                    cumpleVentanaModelo2024(p, anioCorte)) {
+                    c++;
+                }
+                p = p->sigProductoGrupo;
+            }
+            g = g->sigGrupo;
+        }
+        return c;
+    }
+
     // -----------------------------------------------------------------
     // 6. LIBERACIÓN COMPLETA DE MEMORIA (O(N) Lineal)
     // -----------------------------------------------------------------

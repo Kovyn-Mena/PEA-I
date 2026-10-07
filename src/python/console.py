@@ -1109,10 +1109,13 @@ class ConsolaApp:
         print("  [1] Últimos 2 años (2024 - 2026)")
         print("  [2] Últimos 5 años (2021 - 2026)")
         print("  [3] Rango de años personalizado")
+        print("  [4] Corte Oficial Modelo 2024 (5 años general / 10 años Libros y Patentes)")
         print("  [0] Anterior / Regresar al Menú Principal")
         print("-----------------------------------------------------------------")
-        op_filtro = self.leer_opcion_menu("0123", "Presione opción [0-3]: ")
+        op_filtro = self.leer_opcion_menu("01234", "Presione opción [0-4]: ")
 
+        es_modelo_2024 = False
+        inicio, fin = 0, 9999
         if op_filtro == 1:
             inicio, fin = 2024, 2026
         elif op_filtro == 2:
@@ -1120,11 +1123,18 @@ class ConsolaApp:
         elif op_filtro == 3:
             inicio = self.leer_entero("Año inicial: ")
             fin = self.leer_entero("Año final: ")
+        elif op_filtro == 4:
+            es_modelo_2024 = True
+            inicio, fin = 2017, 2026
         else:
             return
 
-        prods_ventana = self.multi.contar_productos_por_ventana(inicio, fin, True)
-        print(f"\n[RESULTADO VENTANA {inicio} - {fin}]")
+        if es_modelo_2024:
+            prods_ventana = self.multi.contar_productos_modelo_2024(2026, True)
+            print("\n[RESULTADO CORTE OFICIAL MODELO MINCIENCIAS 2024 (5/10 AÑOS)]")
+        else:
+            prods_ventana = self.multi.contar_productos_por_ventana(inicio, fin, True)
+            print(f"\n[RESULTADO VENTANA {inicio} - {fin}]")
         print(f"Total de productos en la ventana: {prods_ventana}\n")
         print(f"{'ID':<12}{'AÑO':<6}{'TIPO':<12}{'TITULO':<35}{'GRUPO':<14}")
         print("-" * 79)
@@ -1133,7 +1143,8 @@ class ConsolaApp:
         while g:
             p = g.primer_producto
             while p:
-                if p.activo and g.activo and inicio <= p.anio <= fin:
+                cumple = self.multi.cumple_ventana_modelo_2024(p, 2026) if es_modelo_2024 else (inicio <= p.anio <= fin)
+                if p.activo and g.activo and cumple:
                     tit_corto = p.titulo[:30] + "..." if len(p.titulo) > 33 else p.titulo
                     print(f"{p.id_producto:<12}{p.anio:<6}{p.tipo:<12}{tit_corto:<35}{p.codigo_grupo:<14}")
                 p = p.sig_producto_grupo

@@ -1273,11 +1273,13 @@ public:
         std::cout << "  [1] Últimos 2 años (2024 - 2026)\n";
         std::cout << "  [2] Últimos 5 años (2021 - 2026)\n";
         std::cout << "  [3] Rango de años personalizado\n";
+        std::cout << "  [4] Corte Oficial Modelo 2024 (5 años general / 10 años Libros y Patentes)\n";
         std::cout << "  [0] Anterior / Regresar al Menú Principal\n";
         std::cout << "-----------------------------------------------------------------\n";
-        int opFiltro = leerOpcionMenu("0123", "Presione opción [0-3]: ");
+        int opFiltro = leerOpcionMenu("01234", "Presione opción [0-4]: ");
 
         int anioInicio = 0, anioFin = 9999;
+        bool esModelo2024 = false;
         if (opFiltro == 1) {
             anioInicio = 2024; anioFin = 2026;
         } else if (opFiltro == 2) {
@@ -1285,12 +1287,21 @@ public:
         } else if (opFiltro == 3) {
             anioInicio = leerEntero("Año inicial: ");
             anioFin = leerEntero("Año final: ");
+        } else if (opFiltro == 4) {
+            esModelo2024 = true;
+            anioInicio = 2017; anioFin = 2026;
         } else {
             return; // 0: Regresar
         }
 
-        int prodsVentana = multi.contarProductosPorVentana(anioInicio, anioFin, true);
-        std::cout << "\n[RESULTADO VENTANA " << anioInicio << " - " << anioFin << "]\n";
+        int prodsVentana = esModelo2024
+            ? multi.contarProductosModelo2024(2026, true)
+            : multi.contarProductosPorVentana(anioInicio, anioFin, true);
+        if (esModelo2024) {
+            std::cout << "\n[RESULTADO CORTE OFICIAL MODELO MINCIENCIAS 2024 (5/10 AÑOS)]\n";
+        } else {
+            std::cout << "\n[RESULTADO VENTANA " << anioInicio << " - " << anioFin << "]\n";
+        }
         std::cout << "Total de productos en la ventana: " << prodsVentana << "\n";
         std::cout << "\n" << std::left 
                   << std::setw(12) << "ID"
@@ -1304,7 +1315,10 @@ public:
         while (g) {
             NodoProducto* p = g->primerProducto;
             while (p) {
-                if (p->activo && g->activo && p->anio >= anioInicio && p->anio <= anioFin) {
+                bool cumple = esModelo2024
+                    ? Multilista::cumpleVentanaModelo2024(p, 2026)
+                    : (p->anio >= anioInicio && p->anio <= anioFin);
+                if (p->activo && g->activo && cumple) {
                     std::string titCorto = p->titulo.length() > 33 ? p->titulo.substr(0, 30) + "..." : p->titulo;
                     std::cout << std::left 
                               << std::setw(12) << p->id_producto

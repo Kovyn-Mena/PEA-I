@@ -348,8 +348,9 @@ public:
         .g-item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem; }
         .g-item-code { font-size: 0.75rem; font-weight: 800; color: #38bdf8; font-family: monospace; }
         .badge-cat {
-            font-size: 0.68rem; font-weight: 700; padding: 2px 6px; border-radius: 4px;
-            background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3);
+            font-size: 0.7rem; font-weight: 700; padding: 2px 7px; border-radius: 5px;
+            background: rgba(245, 158, 11, 0.14); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3);
+            white-space: nowrap; display: inline-block;
         }
         .badge-cat.cat-A1, .badge-cat.cat-A { background: rgba(16, 185, 129, 0.15); color: #10b981; border-color: rgba(16, 185, 129, 0.3); }
         .badge-cat.cat-B { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); }
@@ -368,39 +369,43 @@ public:
             overflow: hidden;
         }
         .group-hero {
-            background: linear-gradient(135deg, rgba(0, 104, 55, 0.3) 0%, rgba(15, 23, 42, 0.95) 70%);
+            background: linear-gradient(135deg, rgba(0, 104, 55, 0.24) 0%, rgba(15, 23, 42, 0.96) 65%);
             border-bottom: 1px solid var(--card-border);
-            padding: 1.4rem 1.6rem;
+            padding: 1.25rem 1.5rem;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
+            gap: 1.25rem;
         }
-        .hero-info { display: flex; gap: 1.2rem; align-items: center; }
+        .hero-info { display: flex; gap: 1rem; align-items: flex-start; flex: 1; min-width: 0; }
         .hero-avatar {
-            width: 58px; height: 58px; border-radius: 12px;
+            width: 52px; height: 52px; min-width: 52px; flex-shrink: 0; border-radius: 12px;
             background: linear-gradient(135deg, var(--upc-green) 0%, #064e3b 100%);
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.6rem; font-weight: 800; color: #fff;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.1);
+            font-size: 1.45rem; font-weight: 800; color: #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+            border: 1px solid rgba(255,255,255,0.12);
         }
-        .hero-title h2 { font-size: 1.25rem; font-weight: 800; line-height: 1.3; }
-        .hero-meta { display: flex; gap: 0.8rem; align-items: center; margin-top: 0.4rem; font-size: 0.78rem; color: var(--text-muted); }
+        .hero-title { flex: 1; min-width: 0; }
+        .hero-title h2 { font-size: 1.15rem; font-weight: 800; line-height: 1.35; color: #f8fafc; margin: 0; }
+        .hero-meta { display: flex; gap: 0.55rem; align-items: center; flex-wrap: wrap; margin-top: 0.5rem; font-size: 0.78rem; color: var(--text-muted); }
+        .hero-actions { display: flex; gap: 0.5rem; align-items: center; flex-shrink: 0; flex-wrap: nowrap; }
 
         .btn-pdf-download {
             background: var(--upc-green);
             color: #fff;
-            padding: 0.65rem 1.2rem;
-            border-radius: 8px;
+            padding: 0.45rem 0.9rem;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 0.82rem;
-            display: flex;
+            font-size: 0.78rem;
+            display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
+            white-space: nowrap;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(0, 104, 55, 0.4);
-            border: none;
+            box-shadow: 0 2px 8px rgba(0, 104, 55, 0.35);
+            border: 1px solid var(--upc-green-light);
             cursor: pointer;
         }
         .btn-pdf-download:hover { background: #007f43; transform: translateY(-1px); }
@@ -528,22 +533,38 @@ public:
         .bar-count { width: 45px; text-align: right; font-weight: 700; color: #e2e8f0; }
 
         /* ESTILOS CRUD, MODALES, PILA UNDO Y TOAST */
-        .badge-status { display: inline-flex; align-items: center; gap: 0.3rem; padding: 2px 8px; border-radius: 12px; font-size: 0.72rem; font-weight: 700; }
-        .badge-active { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
-        .badge-inactive { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+        .badge-status { display: inline-flex; align-items: center; gap: 0.35rem; padding: 3px 9px; border-radius: 12px; font-size: 0.72rem; font-weight: 700; white-space: nowrap; }
+        .badge-active { background: rgba(16, 185, 129, 0.14); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.32); }
+        .badge-inactive { background: rgba(239, 68, 68, 0.14); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.32); }
         
-        .btn-action-sm {
-            padding: 4px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: 700; cursor: pointer; border: 1px solid transparent; transition: all 0.2s; display: inline-flex; align-items: center; gap: 4px;
+        .table-actions-cell { display: inline-flex; align-items: center; justify-content: center; gap: 6px; white-space: nowrap; }
+        .link-pills-wrap { display: inline-flex; align-items: center; gap: 5px; flex-wrap: nowrap; white-space: nowrap; }
+        .link-pill {
+            display: inline-flex; align-items: center; padding: 2px 7px; border-radius: 4px;
+            font-size: 0.7rem; font-weight: 700; text-decoration: none; white-space: nowrap;
+            border: 1px solid rgba(148, 163, 184, 0.28); background: rgba(30, 41, 59, 0.7); color: #cbd5e1;
+            transition: all 0.15s ease;
         }
-        .btn-action-edit { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); }
-        .btn-action-edit:hover { background: #38bdf8; color: #000; box-shadow: 0 2px 8px rgba(56, 189, 248, 0.4); }
-        .btn-action-toggle { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border-color: rgba(245, 158, 11, 0.3); }
-        .btn-action-toggle:hover { background: #f59e0b; color: #000; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4); }
+        .link-pill:hover { background: #334155; color: #fff; border-color: #64748b; }
+        .link-pill-scholar { background: rgba(2, 132, 199, 0.16); color: #38bdf8; border-color: rgba(56, 189, 248, 0.35); }
+        .link-pill-scholar:hover { background: #0284c7; color: #fff; border-color: #38bdf8; }
+        .link-pill-orcid { background: rgba(16, 185, 129, 0.16); color: #34d399; border-color: rgba(16, 185, 129, 0.35); }
+        .link-pill-orcid:hover { background: #059669; color: #fff; border-color: #34d399; }
+
+        .btn-action-sm {
+            padding: 4px 10px; border-radius: 5px; font-size: 0.73rem; font-weight: 700; cursor: pointer; border: 1px solid transparent; transition: all 0.18s; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap;
+        }
+        .btn-action-edit { background: rgba(56, 189, 248, 0.12); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); }
+        .btn-action-edit:hover { background: #38bdf8; color: #090d16; }
+        .btn-action-toggle { background: rgba(245, 158, 11, 0.12); color: #fbbf24; border-color: rgba(245, 158, 11, 0.3); }
+        .btn-action-toggle:hover { background: #f59e0b; color: #090d16; }
 
         .btn-action-hero {
-            padding: 0.45rem 0.85rem; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none;
+            padding: 0.45rem 0.85rem; border-radius: 6px; font-size: 0.78rem; font-weight: 600; cursor: pointer;
+            border: 1px solid #334155; background: rgba(15, 23, 42, 0.85); color: #e2e8f0;
+            transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none; white-space: nowrap;
         }
-        .btn-action-hero:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
+        .btn-action-hero:hover { background: #1e293b; border-color: #475569; color: #fff; transform: translateY(-1px); }
 
         .crud-tab-nav {
             display: flex; gap: 0.6rem; margin-bottom: 1.2rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.8rem; flex-wrap: wrap;
@@ -770,34 +791,27 @@ public:
                         <div class="hero-info">
                             <div class="hero-avatar" id="g-avatar">G</div>
                             <div class="hero-title">
-                                <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
-                                    <h2 id="g-nombre" style="margin:0;">Seleccione un Grupo</h2>
-                                    <span id="g-badge-status-hero" class="badge-status badge-active">Activo</span>
-                                </div>
+                                <h2 id="g-nombre">Seleccione un Grupo</h2>
                                 <div class="hero-meta">
                                     <span class="badge-cat" id="g-badge-cat">Cat. C</span>
                                     <span>&bull;</span>
                                     <span id="g-codigo" style="font-family:monospace; font-weight:700; color:#38bdf8;">COL0000000</span>
                                     <span>&bull;</span>
+                                    <span id="g-badge-status-hero" class="badge-status badge-active">Activo</span>
+                                    <span>&bull;</span>
                                     <span>Universidad Popular del Cesar (UPC)</span>
                                 </div>
                             </div>
                         </div>
-                        <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
-                            <button onclick="editarGrupoActual()" class="btn-action-hero" style="background:#0284c7; color:#fff;" title="Modificar datos de este grupo">
+                        <div class="hero-actions">
+                            <button onclick="editarGrupoActual()" class="btn-action-hero" title="Modificar datos de este grupo">
                                 <span>Editar Grupo</span>
                             </button>
-                            <button onclick="abrirModalInvestigador(grupoSeleccionado ? grupoSeleccionado.codigo : '')" class="btn-action-hero" style="background:var(--upc-green); color:#fff;" title="Vincular nuevo investigador a este grupo">
-                                <span>+ Nuevo Integrante</span>
-                            </button>
-                            <button onclick="abrirModalProducto(grupoSeleccionado ? grupoSeleccionado.codigo : '')" class="btn-action-hero" style="background:#059669; color:#fff;" title="Registrar producto para este grupo">
-                                <span>+ Nuevo Producto</span>
-                            </button>
-                            <button onclick="toggleEstadoGrupoActual()" id="btn-toggle-hero" class="btn-action-hero" style="background:#334155; color:#f87171;" title="Inactivar o activar este grupo">
+                            <button onclick="toggleEstadoGrupoActual()" id="btn-toggle-hero" class="btn-action-hero" style="color:#fca5a5; border-color:rgba(248,113,113,0.35);" title="Inactivar o activar este grupo">
                                 <span>Desactivar</span>
                             </button>
                             <a href="#" class="btn-pdf-download" id="btn-descargar-pdf" target="_blank">
-                                <span>Descargar PDF</span>
+                                <span>Informe PDF</span>
                             </a>
                         </div>
                     </div>
@@ -847,7 +861,7 @@ public:
                         <div id="subtab-integrantes" class="profile-section">
                             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem;">
                                 <span style="font-size:0.85rem; color:#94a3b8; font-weight:700;">Integrantes vinculados a este grupo</span>
-                                <button onclick="abrirModalInvestigador(grupoSeleccionado ? grupoSeleccionado.codigo : '')" class="btn-action-sm btn-action-edit" style="background:var(--upc-green); color:#fff; padding:4px 10px;">
+                                <button onclick="abrirModalInvestigador(grupoSeleccionado ? grupoSeleccionado.codigo : '')" class="btn-action-sm btn-action-edit" style="background:var(--upc-green); color:#fff; border-color:var(--upc-green-light); padding:5px 12px;">
                                     + Vincular Nuevo Integrante
                                 </button>
                             </div>
@@ -855,9 +869,10 @@ public:
                                 <table class="peai-table" id="tabla-perfil-inv">
                                     <thead>
                                         <tr>
-                                            <th>Documento / CvLAC</th>
+                                            <th>Documento</th>
                                             <th>Nombre Completo</th>
-                                            <th>Escalafón MinCiencias</th>
+                                            <th>Perfiles Externos</th>
+                                            <th>Escalafón</th>
                                             <th>Formación Académica</th>
                                             <th>Estado</th>
                                             <th style="text-align:center;">Acciones</th>
@@ -872,7 +887,7 @@ public:
                         <div id="subtab-productos" class="profile-section">
                             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem;">
                                 <span style="font-size:0.85rem; color:#94a3b8; font-weight:700;">Producción científica asignada</span>
-                                <button onclick="abrirModalProducto(grupoSeleccionado ? grupoSeleccionado.codigo : '')" class="btn-action-sm btn-action-edit" style="background:#059669; color:#fff; padding:4px 10px;">
+                                <button onclick="abrirModalProducto(grupoSeleccionado ? grupoSeleccionado.codigo : '')" class="btn-action-sm btn-action-edit" style="background:#059669; color:#fff; border-color:#10b981; padding:5px 12px;">
                                     + Registrar Nuevo Producto
                                 </button>
                             </div>
@@ -895,7 +910,7 @@ public:
                             </div>
                         </div>
 
-                        <!-- SUB-TAB: MODELO 2024 -->
+                        <!-- SUB-TAB: MODELO 2024 & IPP -->
                         <div id="subtab-modelo2024" class="profile-section">
                             <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
                                 <div>
@@ -948,13 +963,14 @@ public:
 
         <!-- VISTA 2: DASHBOARD ANALÍTICO -->
         <section id="view-dashboard" class="view-panel">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; background:var(--bg-card); padding:0.8rem 1.2rem; border-radius:10px; border:1px solid var(--card-border);">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.8rem; margin-bottom:1rem; background:var(--bg-card); padding:0.9rem 1.2rem; border-radius:10px; border:1px solid var(--card-border);">
                 <div>
-                    <h3 style="font-size:1.05rem;">Filtro por Ventana de Observación (Requisito 10)</h3>
-                    <p style="font-size:0.75rem; color:var(--text-muted);">Calcule las métricas institucionales según el marco de años de la convocatoria</p>
+                    <h3 style="font-size:1.02rem; margin:0;">Filtro por Ventana de Observación (Requisito 10 y Modelo 2024)</h3>
+                    <p style="font-size:0.75rem; color:var(--text-muted); margin:0.2rem 0 0 0;" id="lbl-ventana-desc">Mostrando serie histórica completa (Todos los años)</p>
                 </div>
-                <div style="display:flex; gap:0.4rem;">
-                    <button class="tag-btn active" id="btn-win-0" onclick="cambiarVentanaObservacion(0)">Todos los Años</button>
+                <div style="display:flex; gap:0.45rem; flex-wrap:wrap;">
+                    <button class="tag-btn active" id="btn-win-0" onclick="cambiarVentanaObservacion(0)">Histórico Completo</button>
+                    <button class="tag-btn" id="btn-win-2024" onclick="cambiarVentanaObservacion(2024)" title="Aplica 10 años para Libros, Capítulos y Patentes, y 5 años para el resto de productos (Regla MinCiencias 2024)">Corte Modelo 2024 (5/10 Años)</button>
                     <button class="tag-btn" id="btn-win-5" onclick="cambiarVentanaObservacion(5)">Últimos 5 Años (2021-2026)</button>
                     <button class="tag-btn" id="btn-win-2" onclick="cambiarVentanaObservacion(2)">Últimos 2 Años (2024-2026)</button>
                 </div>
@@ -1137,9 +1153,10 @@ public:
                             <tr>
                                 <th>Documento ID</th>
                                 <th>Nombre Completo</th>
+                                <th>Perfiles Externos</th>
                                 <th>Categoría</th>
                                 <th>Formación Académica</th>
-                                <th>Grupo Asignado</th>
+                                <th>Grupo</th>
                                 <th>Estado</th>
                                 <th style="text-align:center;">Acciones (CRUD)</th>
                             </tr>
@@ -1677,25 +1694,28 @@ public:
             (g.investigadores || []).forEach(inv => {
                 const tr = document.createElement("tr");
                 const invActivo = inv.activo !== false;
-                let badgePar = inv.par_evaluador === "Si" ? " <span class='badge-cat' style='background:#047857; color:#fff; font-weight:700; margin-left:6px;'>Par Evaluador</span>" : "";
+                let badgePar = inv.par_evaluador === "Si" ? " <span class='badge-cat' style='background:rgba(16,185,129,0.16); color:#34d399; border-color:rgba(16,185,129,0.35); margin-left:6px;'>Par Evaluador</span>" : "";
                 let links = "";
                 if (inv.documento && /^\d{7,10}$/.test(String(inv.documento).trim())) {
                     const codRh = String(inv.documento).trim().padStart(10, "0");
-                    links += `<a href="https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=${codRh}" target="_blank" style="background:#334155; color:#e2e8f0; border:1px solid #475569; padding:2px 6px; border-radius:4px; font-size:0.72rem; font-weight:600; text-decoration:none; margin-right:4px;" title="Abrir CvLAC oficial">CvLAC</a>`;
+                    links += `<a href="https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=${codRh}" target="_blank" class="link-pill" title="Abrir CvLAC oficial">CvLAC</a>`;
                 }
-                if (inv.scholar_url) links += `<a href="${inv.scholar_url}" target="_blank" style="background:#0284c7; color:#fff; padding:2px 6px; border-radius:4px; font-size:0.72rem; font-weight:600; text-decoration:none; margin-right:4px;" title="Abrir perfil de Google Scholar">Scholar</a>`;
-                if (inv.orcid) links += `<a href="${inv.orcid}" target="_blank" style="background:#10b981; color:#fff; padding:2px 6px; border-radius:4px; font-size:0.72rem; font-weight:600; text-decoration:none;" title="Abrir identificador ORCID">ORCID</a>`;
-                const linksRow = links ? `<div style="margin-top:5px; display:flex; gap:4px; flex-wrap:wrap;">${links}</div>` : "";
+                if (inv.scholar_url) links += `<a href="${inv.scholar_url}" target="_blank" class="link-pill link-pill-scholar" title="Abrir perfil de Google Scholar">Scholar</a>`;
+                if (inv.orcid) links += `<a href="${inv.orcid}" target="_blank" class="link-pill link-pill-orcid" title="Abrir identificador ORCID">ORCID</a>`;
+                const linksCell = links ? `<div class="link-pills-wrap">${links}</div>` : `<span style="color:#475569; font-size:0.74rem;">—</span>`;
 
                 tr.innerHTML = `
                     <td><code style="color:#38bdf8;">${inv.documento}</code></td>
-                    <td><div><b>${inv.nombre}</b>${badgePar}</div>${linksRow}</td>
+                    <td><b>${inv.nombre}</b>${badgePar}</td>
+                    <td>${linksCell}</td>
                     <td><span class="badge-cat">${inv.categoria || "Junior"}</span></td>
                     <td>${inv.formacion || "Maestría / Doctorado CTeI"}</td>
                     <td><span class="badge-status ${invActivo ? 'badge-active' : 'badge-inactive'}">${invActivo ? '● Activo' : '○ Inactivo'}</span></td>
-                    <td style="text-align:center; white-space:nowrap;">
-                        <button onclick="abrirModalInvestigador('${g.codigo}', '${inv.documento}')" class="btn-action-sm btn-action-edit">Editar</button>
-                        <button onclick="toggleEstadoInvestigador('${g.codigo}', '${inv.documento}')" class="btn-action-sm btn-action-toggle">${invActivo ? 'Desactivar' : 'Activar'}</button>
+                    <td style="text-align:center;">
+                        <div class="table-actions-cell">
+                            <button onclick="abrirModalInvestigador('${g.codigo}', '${inv.documento}')" class="btn-action-sm btn-action-edit">Editar</button>
+                            <button onclick="toggleEstadoInvestigador('${g.codigo}', '${inv.documento}')" class="btn-action-sm btn-action-toggle">${invActivo ? 'Desactivar' : 'Activar'}</button>
+                        </div>
                     </td>
                 `;
                 tbodyInv.appendChild(tr);
@@ -1719,15 +1739,17 @@ public:
                 const prodActivo = p.activo !== false;
                 tr.innerHTML = `
                     <td><b>${p.anio}</b></td>
-                    <td><span class="badge-cat" style="background:#0284c7; color:#fff;">${clas.fam}</span></td>
+                    <td><span class="badge-cat" style="background:rgba(2,132,199,0.18); color:#38bdf8; border-color:rgba(56,189,248,0.35);">${clas.fam}</span></td>
                     <td><code>${clas.cod}</code></td>
-                    <td style="max-width:320px;"><b>${p.titulo}</b></td>
+                    <td style="max-width:340px;"><b>${p.titulo}</b></td>
                     <td>${p.tipo}</td>
-                    <td>${p.validado ? "<span style='color:#10b981; font-weight:700;'>Avalado</span>" : "<span style='color:#f59e0b;'>En Revisión</span>"}</td>
-                    <td style="color:var(--upc-green-light); font-weight:700;">${pts} pts</td>
-                    <td style="text-align:center; white-space:nowrap;">
-                        <button onclick="abrirModalProducto('${g.codigo}', '${p.id}')" class="btn-action-sm btn-action-edit">Editar</button>
-                        <button onclick="toggleEstadoProducto('${g.codigo}', '${p.id}')" class="btn-action-sm btn-action-toggle">${prodActivo ? 'Desactivar' : 'Activar'}</button>
+                    <td>${p.validado ? "<span style='color:#10b981; font-weight:700; white-space:nowrap;'>Avalado</span>" : "<span style='color:#f59e0b; white-space:nowrap;'>En Revisión</span>"}</td>
+                    <td style="color:var(--upc-green-light); font-weight:700; white-space:nowrap;">${pts} pts</td>
+                    <td style="text-align:center;">
+                        <div class="table-actions-cell">
+                            <button onclick="abrirModalProducto('${g.codigo}', '${p.id}')" class="btn-action-sm btn-action-edit">Editar</button>
+                            <button onclick="toggleEstadoProducto('${g.codigo}', '${p.id}')" class="btn-action-sm btn-action-toggle">${prodActivo ? 'Desactivar' : 'Activar'}</button>
+                        </div>
                     </td>
                 `;
                 tbodyProd.appendChild(tr);
@@ -1747,18 +1769,36 @@ public:
             document.getElementById("pts-frh").textContent = `${ptsFam["FRH"]} pts`;
         }
 
+        // REGLA DE VENTANA DIFERENCIADA MINCIENCIAS 2024 (5 AÑOS GENERAL / 10 AÑOS LIBROS, CAPÍTULOS Y PATENTES)
+        function cumpleVentanaProducto(p, win) {
+            if (!win || win === 0) return true;
+            if (win === 2024) {
+                const t = (p.tipo || "").toLowerCase();
+                const esVentana10 = t.includes("libro") || t.includes("capitulo") || t.includes("capítulo") || t.includes("patente") || t.includes("variedad");
+                const cota = esVentana10 ? (2026 - 10) : (2026 - 5);
+                return p.anio >= cota && p.anio <= 2026;
+            }
+            const anioLimite = 2026 - win;
+            return p.anio >= anioLimite;
+        }
+
         // RENDERIZAR DASHBOARD ANALÍTICO (12.B)
         function cambiarVentanaObservacion(win) {
             ventanaAnios = win;
-            document.getElementById("btn-win-0").classList.toggle("active", win === 0);
-            document.getElementById("btn-win-5").classList.toggle("active", win === 5);
-            document.getElementById("btn-win-2").classList.toggle("active", win === 2);
+            document.getElementById("btn-win-0")?.classList.toggle("active", win === 0);
+            document.getElementById("btn-win-2024")?.classList.toggle("active", win === 2024);
+            document.getElementById("btn-win-5")?.classList.toggle("active", win === 5);
+            document.getElementById("btn-win-2")?.classList.toggle("active", win === 2);
+            const descEl = document.getElementById("lbl-ventana-desc");
+            if (descEl) {
+                if (win === 0) descEl.textContent = "Mostrando serie histórica completa (Todos los años)";
+                else if (win === 2024) descEl.textContent = "Corte Oficial Modelo MinCiencias 2024: 10 años (2016-2026) para Libros, Capítulos y Patentes | 5 años (2021-2026) para las demás tipologías";
+                else descEl.textContent = `Filtro simétrico activo: últimos ${win} años (${2026 - win} - 2026)`;
+            }
             renderizarDashboard();
         }
 
         function renderizarDashboard() {
-            const anioLimite = ventanaAnios > 0 ? (2026 - ventanaAnios) : 0;
-
             // 1. Cronología por año
             let aniosCount = {};
             // 2. Familias 2024
@@ -1767,8 +1807,10 @@ public:
             let avalCount = { "Avalados": 0, "En Revisión": 0 };
 
             gruposData.forEach(g => {
+                if (g.activo === false) return;
                 (g.productos || []).forEach(p => {
-                    if (p.anio >= anioLimite) {
+                    if (p.activo === false) return;
+                    if (cumpleVentanaProducto(p, ventanaAnios)) {
                         aniosCount[p.anio] = (aniosCount[p.anio] || 0) + 1;
                         const c = clasificar2024(p.tipo, p.categoria, p.titulo);
                         famCount[c.fam] = (famCount[c.fam] || 0) + 1;
@@ -2564,8 +2606,10 @@ public:
                     <td>${g.anio_creacion || g.anio || 2024}</td>
                     <td><span class="badge-status ${esActivo ? 'badge-active' : 'badge-inactive'}">${esActivo ? '● Activo' : '○ Inactivo'}</span></td>
                     <td style="text-align:center; white-space:nowrap;">
-                        <button onclick="abrirModalGrupo('${g.codigo}')" class="btn-action-sm btn-action-edit">Editar</button>
-                        <button onclick="toggleEstadoGrupo('${g.codigo}')" class="btn-action-sm btn-action-toggle">${esActivo ? 'Desactivar' : 'Activar'}</button>
+                        <div class="table-actions-cell">
+                            <button onclick="abrirModalGrupo('${g.codigo}')" class="btn-action-sm btn-action-edit">Editar</button>
+                            <button onclick="toggleEstadoGrupo('${g.codigo}')" class="btn-action-sm btn-action-toggle">${esActivo ? 'Desactivar' : 'Activar'}</button>
+                        </div>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -2618,21 +2662,24 @@ public:
                 let links = "";
                 if (inv.documento && /^\d{7,10}$/.test(String(inv.documento).trim())) {
                     const codRh = String(inv.documento).trim().padStart(10, "0");
-                    links += `<a href="https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=${codRh}" target="_blank" style="background:#334155; color:#e2e8f0; border:1px solid #475569; padding:2px 6px; border-radius:4px; font-size:0.72rem; font-weight:600; text-decoration:none; margin-right:4px;" title="Abrir CvLAC oficial">CvLAC</a>`;
+                    links += `<a href="https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=${codRh}" target="_blank" class="link-pill link-pill-cvlac" title="Abrir CvLAC oficial">CvLAC</a>`;
                 }
-                if (inv.scholar_url) links += `<a href="${inv.scholar_url}" target="_blank" style="background:#0284c7; color:#fff; padding:2px 6px; border-radius:4px; font-size:0.72rem; font-weight:600; text-decoration:none; margin-right:4px;" title="Abrir perfil de Google Scholar">Scholar</a>`;
-                if (inv.orcid) links += `<a href="${inv.orcid}" target="_blank" style="background:#10b981; color:#fff; padding:2px 6px; border-radius:4px; font-size:0.72rem; font-weight:600; text-decoration:none;" title="Abrir identificador ORCID">ORCID</a>`;
-                const linksRow = links ? `<div style="margin-top:5px; display:flex; gap:4px; flex-wrap:wrap;">${links}</div>` : "";
+                if (inv.scholar_url) links += `<a href="${inv.scholar_url}" target="_blank" class="link-pill link-pill-scholar" title="Abrir perfil de Google Scholar">Scholar</a>`;
+                if (inv.orcid) links += `<a href="${inv.orcid}" target="_blank" class="link-pill link-pill-orcid" title="Abrir identificador ORCID">ORCID</a>`;
+                const linksCell = links ? `<div class="link-pills-wrap">${links}</div>` : `<span style="color:#64748b; font-size:0.75rem;">—</span>`;
                 tr.innerHTML = `
                     <td><code style="color:#38bdf8;">${inv.documento}</code></td>
-                    <td><div><b>${inv.nombre}</b>${badgePar}</div>${linksRow}</td>
+                    <td><b>${inv.nombre}</b>${badgePar}</td>
                     <td><span class="badge-cat">${inv.categoria || 'Junior'}</span></td>
                     <td>${inv.formacion || 'Ingeniería / Posgrado'}</td>
+                    <td>${linksCell}</td>
                     <td><code>${g.codigo}</code></td>
                     <td><span class="badge-status ${esActivo ? 'badge-active' : 'badge-inactive'}">${esActivo ? '● Activo' : '○ Inactivo'}</span></td>
                     <td style="text-align:center; white-space:nowrap;">
-                        <button onclick="abrirModalInvestigador('${g.codigo}', '${inv.documento}')" class="btn-action-sm btn-action-edit">Editar</button>
-                        <button onclick="toggleEstadoInvestigador('${g.codigo}', '${inv.documento}')" class="btn-action-sm btn-action-toggle">${esActivo ? 'Desactivar' : 'Activar'}</button>
+                        <div class="table-actions-cell">
+                            <button onclick="abrirModalInvestigador('${g.codigo}', '${inv.documento}')" class="btn-action-sm btn-action-edit">Editar</button>
+                            <button onclick="toggleEstadoInvestigador('${g.codigo}', '${inv.documento}')" class="btn-action-sm btn-action-toggle">${esActivo ? 'Desactivar' : 'Activar'}</button>
+                        </div>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -2691,8 +2738,10 @@ public:
                     <td>${p.validado ? '<span style="color:#10b981; font-weight:700;">Avalado</span>' : '<span style="color:#f59e0b;">En Revisión</span>'}</td>
                     <td><span class="badge-status ${esActivo ? 'badge-active' : 'badge-inactive'}">${esActivo ? '● Activo' : '○ Inactivo'}</span></td>
                     <td style="text-align:center; white-space:nowrap;">
-                        <button onclick="abrirModalProducto('${g.codigo}', '${p.id}')" class="btn-action-sm btn-action-edit">Editar</button>
-                        <button onclick="toggleEstadoProducto('${g.codigo}', '${p.id}')" class="btn-action-sm btn-action-toggle">${esActivo ? 'Desactivar' : 'Activar'}</button>
+                        <div class="table-actions-cell">
+                            <button onclick="abrirModalProducto('${g.codigo}', '${p.id}')" class="btn-action-sm btn-action-edit">Editar</button>
+                            <button onclick="toggleEstadoProducto('${g.codigo}', '${p.id}')" class="btn-action-sm btn-action-toggle">${esActivo ? 'Desactivar' : 'Activar'}</button>
+                        </div>
                     </td>
                 `;
                 tbody.appendChild(tr);

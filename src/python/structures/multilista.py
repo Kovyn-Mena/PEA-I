@@ -342,5 +342,31 @@ class Multilista:
             g = g.sig_grupo
         return c
 
+    @staticmethod
+    def cumple_ventana_modelo_2024(p, anio_corte: int = 2026) -> bool:
+        """
+        Ventana de Observación Diferenciada según Modelo Oficial MinCiencias 2024:
+        10 años para Libro, Capitulo y Patente; 5 años para el resto de tipologías.
+        """
+        if p is None:
+            return False
+        t = (p.tipo or "").lower()
+        es_10_anios = ("libro" in t) or ("capitulo" in t) or ("capítulo" in t) or ("patente" in t)
+        inicio = (anio_corte - 9) if es_10_anios else (anio_corte - 4)
+        return inicio <= p.anio <= anio_corte
+
+    def contar_productos_modelo_2024(self, anio_corte: int = 2026, solo_activos: bool = True) -> int:
+        c = 0
+        g = self.cabeza_grupos
+        while g is not None:
+            p = g.primer_producto
+            while p is not None:
+                if (not solo_activos or (p.activo and g.activo)) and self.cumple_ventana_modelo_2024(p, anio_corte):
+                    c += 1
+                p = p.sig_producto_grupo
+            g = g.sig_grupo
+        return c
+
     def liberar(self):
         self.cabeza_grupos = None
+
