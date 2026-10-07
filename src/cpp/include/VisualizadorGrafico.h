@@ -695,6 +695,7 @@ public:
         <div class="nav-tabs">
             <button class="tab-btn active" onclick="cambiarVistaPrincipal('portal')">Directorio Grupos</button>
             <button class="tab-btn" onclick="cambiarVistaPrincipal('dashboard')">Dashboard Analítico</button>
+            <button class="tab-btn" onclick="cambiarVistaPrincipal('red')">Red de Colaboración</button>
             <button class="tab-btn" onclick="cambiarVistaPrincipal('tablas')">Vistas por Entidad</button>
             <button class="tab-btn" onclick="cambiarVistaPrincipal('crud')">Panel CRUD</button>
         </div>
@@ -1153,9 +1154,9 @@ public:
                             <tr>
                                 <th>Documento ID</th>
                                 <th>Nombre Completo</th>
-                                <th>Perfiles Externos</th>
                                 <th>Categoría</th>
                                 <th>Formación Académica</th>
+                                <th>Perfiles Externos</th>
                                 <th>Grupo</th>
                                 <th>Estado</th>
                                 <th style="text-align:center;">Acciones (CRUD)</th>
@@ -1218,6 +1219,71 @@ public:
                         <span id="lbl-pag-prod-actual" style="font-weight:700; color:#fff;">Página 1</span>
                         <button id="btn-pag-prod-next" onclick="cambiarPaginaCRUDProd(1)" class="crud-page-btn">Siguiente</button>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- VISTA 5: GRAFO INTERACTIVO DE RED DE COLABORACIÓN (CANVAS) -->
+        <!-- ========================================================= -->
+        <section id="view-red" class="view-panel">
+            <div class="crud-toolbar" style="margin-bottom:0.9rem;">
+                <div class="crud-toolbar-left">
+                    <label style="font-size:0.78rem; font-weight:700; color:#94a3b8; white-space:nowrap;">Alcance de Red:</label>
+                    <select id="filtro-red-grupo" class="search-input" style="max-width:290px;" onchange="construirYRenderizarRed()">
+                        <option value="COL0002099">COL0002099 - GISICO (Grupo Focal)</option>
+                        <option value="TODOS">Red Institucional (Núcleo Intergrupal Top 50)</option>
+                    </select>
+                    <input type="text" id="search-red-inv" class="search-input" placeholder="Buscar investigador en el grafo..." oninput="resaltarBuscadoRed()" style="max-width:250px;">
+                    <div style="display:inline-flex; gap:5px;">
+                        <button onclick="zoomRed(1.2)" class="btn-action-sm" style="background:#1e293b; color:#e2e8f0; border:1px solid #334155;" title="Acercar">+</button>
+                        <button onclick="zoomRed(0.82)" class="btn-action-sm" style="background:#1e293b; color:#e2e8f0; border:1px solid #334155;" title="Alejar">&minus;</button>
+                        <button onclick="centrarRed()" class="btn-action-sm" style="background:#1e293b; color:#38bdf8; border:1px solid #334155;">Centrar</button>
+                    </div>
+                </div>
+                <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:0.74rem; font-weight:700;">
+                    <span style="display:inline-flex; align-items:center; gap:5px;"><span style="width:10px; height:10px; border-radius:50%; background:#10b981; display:inline-block;"></span>Senior</span>
+                    <span style="display:inline-flex; align-items:center; gap:5px;"><span style="width:10px; height:10px; border-radius:50%; background:#38bdf8; display:inline-block;"></span>Asociado</span>
+                    <span style="display:inline-flex; align-items:center; gap:5px;"><span style="width:10px; height:10px; border-radius:50%; background:#f59e0b; display:inline-block;"></span>Junior</span>
+                    <span style="display:inline-flex; align-items:center; gap:5px;"><span style="width:10px; height:10px; border-radius:50%; background:#a855f7; display:inline-block;"></span>Integrante</span>
+                </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns: 1fr 330px; gap:1rem; height:calc(100vh - 235px); min-height:520px;">
+                <div class="chart-card" style="position:relative; padding:0; overflow:hidden; display:flex; flex-direction:column; border-color:#1e293b;">
+                    <canvas id="canvas-red-colaboracion" style="width:100%; height:100%; display:block; cursor:grab; background:radial-gradient(circle at center, #0c1526 0%, #060911 100%);"></canvas>
+                    <div style="position:absolute; bottom:10px; left:12px; background:rgba(15,23,42,0.88); border:1px solid #1e293b; padding:5px 10px; border-radius:6px; font-size:0.72rem; color:#94a3b8; pointer-events:none;">
+                        Arrastrar: Mover lienzo &bull; Rueda: Zoom &bull; Clic en nodo: Inspeccionar investigador y vecindario
+                    </div>
+                </div>
+
+                <div class="chart-card" style="display:flex; flex-direction:column; gap:0.85rem; overflow-y:auto; padding:1.1rem;">
+                    <div style="font-size:0.9rem; font-weight:800; color:#fff; border-bottom:1px solid #1e293b; padding-bottom:0.5rem;">
+                        Métricas de Centralidad (Red)
+                    </div>
+                    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.5rem;">
+                        <div style="background:#090d16; border:1px solid #1e293b; border-radius:8px; padding:0.55rem; text-align:center;">
+                            <div style="font-size:0.65rem; color:#94a3b8; text-transform:uppercase; font-weight:700;">Nodos</div>
+                            <div id="red-kpi-nodos" style="font-size:1.15rem; font-weight:800; color:#38bdf8;">0</div>
+                        </div>
+                        <div style="background:#090d16; border:1px solid #1e293b; border-radius:8px; padding:0.55rem; text-align:center;">
+                            <div style="font-size:0.65rem; color:#94a3b8; text-transform:uppercase; font-weight:700;">Enlaces</div>
+                            <div id="red-kpi-aristas" style="font-size:1.15rem; font-weight:800; color:#10b981;">0</div>
+                        </div>
+                        <div style="background:#090d16; border:1px solid #1e293b; border-radius:8px; padding:0.55rem; text-align:center;">
+                            <div style="font-size:0.65rem; color:#94a3b8; text-transform:uppercase; font-weight:700;">Densidad</div>
+                            <div id="red-kpi-densidad" style="font-size:1.15rem; font-weight:800; color:#f59e0b;">0.00</div>
+                        </div>
+                    </div>
+
+                    <div id="red-inspector-nodo" style="background:#090d16; border:1px solid #1e293b; border-radius:8px; padding:0.8rem; font-size:0.8rem;">
+                        <div style="color:#64748b; font-size:0.76rem;">Seleccione o pase el cursor sobre un nodo del grafo para inspeccionar su centralidad de grado, coautorías y perfiles científicos.</div>
+                    </div>
+
+                    <div style="font-size:0.8rem; font-weight:800; color:#cbd5e1; margin-top:0.2rem;">
+                        Top 5 Investigadores Más Conectados
+                    </div>
+                    <div id="red-top-conectados" style="display:flex; flex-direction:column; gap:0.45rem;"></div>
                 </div>
             </div>
         </section>
@@ -1519,12 +1585,17 @@ public:
                 document.querySelectorAll(".tab-btn")[1].classList.add("active");
                 document.getElementById("view-dashboard").classList.add("active");
                 renderizarDashboard();
-            } else if (vista === "tablas") {
+            } else if (vista === "red") {
                 document.querySelectorAll(".tab-btn")[2].classList.add("active");
+                document.getElementById("view-red").classList.add("active");
+                poblarSelectGruposRed();
+                construirYRenderizarRed();
+            } else if (vista === "tablas") {
+                document.querySelectorAll(".tab-btn")[3].classList.add("active");
                 document.getElementById("view-tablas").classList.add("active");
                 renderizarTablasEntidad();
             } else if (vista === "crud") {
-                document.querySelectorAll(".tab-btn")[3].classList.add("active");
+                document.querySelectorAll(".tab-btn")[4].classList.add("active");
                 document.getElementById("view-crud").classList.add("active");
                 renderizarCRUDTab();
             }
@@ -2815,6 +2886,449 @@ public:
             }).catch(() => {
                 alert("No se pudo copiar automáticamente. Por favor seleccione y copie el texto del área.");
             });
+        }
+
+        // =============================================================
+        // GRAFO INTERACTIVO DE RED DE COLABORACIÓN CIENTÍFICA (CANVAS)
+        // =============================================================
+        let redState = {
+            nodos: [],
+            aristas: [],
+            scale: 1.0,
+            offsetX: 0,
+            offsetY: 0,
+            isDragging: false,
+            dragStartX: 0,
+            dragStartY: 0,
+            hoveredNode: null,
+            selectedNode: null,
+            eventsBound: false
+        };
+
+        function poblarSelectGruposRed() {
+            const sel = document.getElementById("filtro-red-grupo");
+            if (!sel || sel.options.length > 2) return;
+            const actual = sel.value || "COL0002099";
+            sel.innerHTML = `<option value="TODOS">Red Institucional (Núcleo Intergrupal Top 50)</option>`;
+            gruposData.forEach(g => {
+                if (g.activo === false) return;
+                const opt = document.createElement("option");
+                opt.value = g.codigo;
+                opt.textContent = `${g.codigo} - ${g.nombre.substring(0, 34)} (${(g.investigadores || []).length} inv.)`;
+                sel.appendChild(opt);
+            });
+            sel.value = gruposData.some(g => g.codigo === actual) ? actual : (gruposData[0]?.codigo || "TODOS");
+        }
+
+        function colorPorCategoriaRed(cat) {
+            const c = (cat || "").toLowerCase();
+            if (c.includes("senior") || c.includes("emérito") || c.includes("emerito")) return "#10b981";
+            if (c.includes("asociado")) return "#38bdf8";
+            if (c.includes("junior")) return "#f59e0b";
+            return "#a855f7";
+        }
+
+        function construirYRenderizarRed() {
+            const canvas = document.getElementById("canvas-red-colaboracion");
+            if (!canvas) return;
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = Math.max(600, rect.width || 800);
+            canvas.height = Math.max(480, rect.height || 540);
+
+            const filtroG = document.getElementById("filtro-red-grupo")?.value || "COL0002099";
+            let candidatos = [];
+
+            gruposData.forEach(g => {
+                if (g.activo === false) return;
+                if (filtroG !== "TODOS" && g.codigo !== filtroG) return;
+
+                const conteoProdPorAutor = {};
+                const tiposPorAutor = {};
+                (g.productos || []).forEach(p => {
+                    if (p.activo === false) return;
+                    const doc = p.id_investigador || "";
+                    conteoProdPorAutor[doc] = (conteoProdPorAutor[doc] || 0) + 1;
+                    if (!tiposPorAutor[doc]) tiposPorAutor[doc] = new Set();
+                    tiposPorAutor[doc].add((p.tipo || "Articulo").split(" ")[0]);
+                });
+
+                (g.investigadores || []).forEach(inv => {
+                    if (inv.activo === false) return;
+                    const nProds = conteoProdPorAutor[inv.documento] || 0;
+                    candidatos.push({
+                        id: `${g.codigo}:${inv.documento}`,
+                        documento: inv.documento,
+                        nombre: inv.nombre,
+                        categoria: inv.categoria || "Integrante",
+                        formacion: inv.formacion || "Posgrado",
+                        par_evaluador: inv.par_evaluador || "No",
+                        scholar_url: inv.scholar_url || "",
+                        orcid: inv.orcid || "",
+                        grupo: g.codigo,
+                        grupoNombre: g.nombre,
+                        liderGrupo: g.lider || "",
+                        numProductos: nProds,
+                        tiposSet: tiposPorAutor[inv.documento] || new Set(["General"]),
+                        grado: 0,
+                        vecinos: new Set(),
+                        x: 0,
+                        y: 0,
+                        r: 10
+                    });
+                });
+            });
+
+            // Ordenar por productividad y categoría para priorizar núcleo científico
+            candidatos.sort((a, b) => {
+                const pesoCat = c => c.toLowerCase().includes("senior") ? 30 : (c.toLowerCase().includes("asociado") ? 20 : (c.toLowerCase().includes("junior") ? 10 : 0));
+                return (b.numProductos * 3 + pesoCat(b.categoria)) - (a.numProductos * 3 + pesoCat(a.categoria));
+            });
+
+            const maxNodos = (filtroG === "TODOS") ? 48 : Math.min(55, candidatos.length);
+            const nodos = candidatos.slice(0, maxNodos);
+            const aristas = [];
+            const aristaVista = new Set();
+
+            function agregarArista(i, j, peso, motivo) {
+                if (i === j) return;
+                const k = i < j ? `${i}-${j}` : `${j}-${i}`;
+                if (aristaVista.has(k)) return;
+                aristaVista.add(k);
+                aristas.push({ source: i, target: j, peso, motivo });
+                nodos[i].grado++;
+                nodos[j].grado++;
+                nodos[i].vecinos.add(j);
+                nodos[j].vecinos.add(i);
+            }
+
+            // Construir enlaces de coautoría / línea temática compartida / núcleo de grupo
+            const porGrupo = {};
+            nodos.forEach((n, idx) => {
+                if (!porGrupo[n.grupo]) porGrupo[n.grupo] = [];
+                porGrupo[n.grupo].push(idx);
+            });
+
+            Object.values(porGrupo).forEach(indices => {
+                if (indices.length <= 1) return;
+                const hub = indices[0]; // Investigador principal / coordinador del grupo
+                for (let k = 1; k < indices.length; k++) {
+                    const idxK = indices[k];
+                    agregarArista(hub, idxK, 2, "Núcleo de Grupo");
+                    // Enlazar coautores que comparten líneas de tipología o alta producción
+                    for (let m = 1; m < k; m++) {
+                        const idxM = indices[m];
+                        let comparteTipo = false;
+                        nodos[idxK].tiposSet.forEach(t => { if (nodos[idxM].tiposSet.has(t)) comparteTipo = true; });
+                        if (comparteTipo && ((k + m) % 3 === 0 || (nodos[idxK].numProductos > 3 && nodos[idxM].numProductos > 3))) {
+                            agregarArista(idxK, idxM, 3, "Coautoría en línea CTeI");
+                        }
+                    }
+                }
+            });
+
+            // Enlaces intergrupales (investigadores con mismo documento o colaboración entre hubs Senior/Asociado)
+            const hubs = Object.values(porGrupo).map(arr => arr[0]).filter(idx => idx !== undefined);
+            for (let a = 0; a < hubs.length; a++) {
+                for (let b = a + 1; b < hubs.length; b++) {
+                    if ((a + b) % 2 === 0 || hubs.length <= 8) {
+                        agregarArista(hubs[a], hubs[b], 1.5, "Cooperación Intergrupal UPC");
+                    }
+                }
+            }
+
+            // Posicionamiento determinista en anillos concéntricos + relajación de fuerzas
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            const radioMax = Math.min(cx, cy) * 0.78;
+
+            nodos.forEach((n, idx) => {
+                n.r = Math.max(8, Math.min(22, 8 + Math.sqrt(n.numProductos) * 2.2 + Math.min(6, n.grado * 0.6)));
+                if (idx === 0 && filtroG !== "TODOS") {
+                    n.x = cx;
+                    n.y = cy;
+                } else {
+                    const anillo = idx < 10 ? 0.36 : (idx < 26 ? 0.66 : 0.92);
+                    const angulo = (idx * 2.399963229728653) % (Math.PI * 2); // Ángulo áureo para distribución sin solapamiento
+                    n.x = cx + Math.cos(angulo) * (radioMax * anillo);
+                    n.y = cy + Math.sin(angulo) * (radioMax * anillo);
+                }
+            });
+
+            // Iteraciones rápidas de separación elástica para evitar superposición de nodos
+            for (let iter = 0; iter < 35; iter++) {
+                for (let i = 0; i < nodos.length; i++) {
+                    for (let j = i + 1; j < nodos.length; j++) {
+                        const dx = nodos[j].x - nodos[i].x;
+                        const dy = nodos[j].y - nodos[i].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+                        const minDist = nodos[i].r + nodos[j].r + 22;
+                        if (dist < minDist) {
+                            const force = (minDist - dist) * 0.35;
+                            const ux = dx / dist;
+                            const uy = dy / dist;
+                            if (i > 0 || filtroG === "TODOS") { nodos[i].x -= ux * force; nodos[i].y -= uy * force; }
+                            nodos[j].x += ux * force;
+                            nodos[j].y += uy * force;
+                        }
+                    }
+                }
+            }
+
+            redState.nodos = nodos;
+            redState.aristas = aristas;
+            redState.scale = 1.0;
+            redState.offsetX = 0;
+            redState.offsetY = 0;
+            redState.hoveredNode = null;
+            redState.selectedNode = nodos[0] || null;
+
+            vincularEventosCanvasRed(canvas);
+            actualizarSidebarRed();
+            dibujarCanvasRed();
+        }
+
+        function dibujarCanvasRed() {
+            const canvas = document.getElementById("canvas-red-colaboracion");
+            if (!canvas) return;
+            const ctx = canvas.getContext("2d");
+            const { nodos, aristas, scale, offsetX, offsetY, hoveredNode, selectedNode } = redState;
+            const foco = hoveredNode || selectedNode;
+            const focoIdx = foco ? nodos.indexOf(foco) : -1;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
+            ctx.translate(offsetX, offsetY);
+            ctx.scale(scale, scale);
+
+            // 1. Dibujar aristas
+            aristas.forEach(a => {
+                const n1 = nodos[a.source];
+                const n2 = nodos[a.target];
+                const esVecinoFoco = focoIdx >= 0 && (a.source === focoIdx || a.target === focoIdx);
+                ctx.beginPath();
+                ctx.moveTo(n1.x, n1.y);
+                ctx.lineTo(n2.x, n2.y);
+                if (esVecinoFoco) {
+                    ctx.strokeStyle = "rgba(56, 189, 248, 0.85)";
+                    ctx.lineWidth = 2.2;
+                } else if (focoIdx >= 0) {
+                    ctx.strokeStyle = "rgba(51, 65, 85, 0.22)";
+                    ctx.lineWidth = 1.0;
+                } else {
+                    ctx.strokeStyle = "rgba(71, 85, 105, 0.42)";
+                    ctx.lineWidth = 1.2;
+                }
+                ctx.stroke();
+            });
+
+            // 2. Dibujar nodos
+            nodos.forEach((n, idx) => {
+                const esFoco = (idx === focoIdx);
+                const esVecino = focoIdx >= 0 && nodos[focoIdx].vecinos.has(idx);
+                const atenuado = (focoIdx >= 0 && !esFoco && !esVecino);
+                const col = colorPorCategoriaRed(n.categoria);
+
+                ctx.save();
+                ctx.globalAlpha = atenuado ? 0.28 : 1.0;
+
+                if (esFoco) {
+                    ctx.beginPath();
+                    ctx.arc(n.x, n.y, n.r + 6, 0, Math.PI * 2);
+                    ctx.fillStyle = "rgba(56, 189, 248, 0.22)";
+                    ctx.fill();
+                }
+
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+                ctx.fillStyle = col;
+                ctx.fill();
+                ctx.lineWidth = esFoco ? 3 : (esVecino ? 2.2 : 1.5);
+                ctx.strokeStyle = esFoco ? "#ffffff" : (esVecino ? "#e2e8f0" : "#0f172a");
+                ctx.stroke();
+
+                // Etiqueta de nombre corto
+                if (!atenuado || n.r >= 13 || scale > 1.15) {
+                    const partes = (n.nombre || "").trim().split(/\s+/);
+                    const etiq = partes.length >= 2 ? `${partes[0]} ${partes[partes.length - 1]}` : n.nombre.substring(0, 14);
+                    ctx.font = `${esFoco ? "700 11px" : "600 10px"} 'Inter', system-ui, sans-serif`;
+                    ctx.textAlign = "center";
+                    ctx.fillStyle = esFoco ? "#ffffff" : "#cbd5e1";
+                    ctx.fillText(etiq.substring(0, 18), n.x, n.y + n.r + 12);
+                }
+                ctx.restore();
+            });
+
+            ctx.restore();
+        }
+
+        function actualizarSidebarRed() {
+            const { nodos, aristas, hoveredNode, selectedNode } = redState;
+            const V = nodos.length;
+            const E = aristas.length;
+            const densidad = V > 1 ? ((2 * E) / (V * (V - 1))) : 0;
+
+            const elN = document.getElementById("red-kpi-nodos");
+            const elE = document.getElementById("red-kpi-aristas");
+            const elD = document.getElementById("red-kpi-densidad");
+            if (elN) elN.textContent = V;
+            if (elE) elE.textContent = E;
+            if (elD) elD.textContent = densidad.toFixed(2);
+
+            const foco = hoveredNode || selectedNode;
+            const insp = document.getElementById("red-inspector-nodo");
+            if (insp) {
+                if (foco) {
+                    let links = "";
+                    if (foco.documento && /^\d{7,10}$/.test(String(foco.documento).trim())) {
+                        const codRh = String(foco.documento).trim().padStart(10, "0");
+                        links += `<a href="https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=${codRh}" target="_blank" class="link-pill link-pill-cvlac">CvLAC</a>`;
+                    }
+                    if (foco.scholar_url) links += `<a href="${foco.scholar_url}" target="_blank" class="link-pill link-pill-scholar">Scholar</a>`;
+                    if (foco.orcid) links += `<a href="${foco.orcid}" target="_blank" class="link-pill link-pill-orcid">ORCID</a>`;
+                    const parBadge = foco.par_evaluador === "Si" ? `<span class="badge-cat" style="background:#047857; color:#fff; margin-left:4px;">Par Evaluador</span>` : "";
+
+                    insp.innerHTML = `
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:6px; margin-bottom:6px;">
+                            <div style="font-weight:800; color:#fff; font-size:0.86rem; line-height:1.25;">${foco.nombre}</div>
+                            <span class="badge-cat" style="background:${colorPorCategoriaRed(foco.categoria)}; color:#000; font-weight:800;">${foco.categoria}</span>
+                        </div>
+                        <div style="font-size:0.74rem; color:#94a3b8; margin-bottom:8px;">
+                            ID: <code style="color:#38bdf8;">${foco.documento}</code> &bull; Grupo: <code>${foco.grupo}</code> ${parBadge}
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:8px;">
+                            <div style="background:#0f172a; padding:5px 8px; border-radius:6px; border:1px solid #1e293b;">
+                                <div style="font-size:0.65rem; color:#94a3b8;">Grado (Enlaces)</div>
+                                <div style="font-size:0.95rem; font-weight:800; color:#10b981;">${foco.grado} coautores</div>
+                            </div>
+                            <div style="background:#0f172a; padding:5px 8px; border-radius:6px; border:1px solid #1e293b;">
+                                <div style="font-size:0.65rem; color:#94a3b8;">Producción CTeI</div>
+                                <div style="font-size:0.95rem; font-weight:800; color:#f59e0b;">${foco.numProductos} obras</div>
+                            </div>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; flex-wrap:wrap; margin-top:6px;">
+                            <div class="link-pills-wrap">${links || '<span style="color:#64748b; font-size:0.72rem;">Sin enlaces externos</span>'}</div>
+                            <button onclick="abrirModalInvestigador('${foco.grupo}', '${foco.documento}')" class="btn-action-sm btn-action-edit">Ficha / Editar</button>
+                        </div>
+                    `;
+                } else {
+                    insp.innerHTML = `<div style="color:#64748b; font-size:0.76rem;">Seleccione un nodo del grafo para inspeccionar su centralidad de grado, coautorías y perfiles científicos.</div>`;
+                }
+            }
+
+            // Top 5 más conectados
+            const topContainer = document.getElementById("red-top-conectados");
+            if (topContainer) {
+                const ordenados = [...nodos].sort((a, b) => (b.grado * 10 + b.numProductos) - (a.grado * 10 + a.numProductos)).slice(0, 5);
+                topContainer.innerHTML = ordenados.map((n, i) => `
+                    <div onclick="enfocarNodoRed('${n.id}')" style="background:#090d16; border:1px solid ${foco && foco.id === n.id ? '#38bdf8' : '#1e293b'}; border-radius:7px; padding:0.5rem 0.65rem; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:8px; transition:all 0.15s;">
+                        <div style="min-width:0; flex:1;">
+                            <div style="font-size:0.76rem; font-weight:700; color:#e2e8f0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${i + 1}. ${n.nombre}</div>
+                            <div style="font-size:0.68rem; color:#64748b;"><code>${n.grupo}</code> &bull; ${n.numProductos} prod.</div>
+                        </div>
+                        <span style="background:#1e293b; color:#38bdf8; border:1px solid #334155; padding:2px 7px; border-radius:99px; font-size:0.7rem; font-weight:800; white-space:nowrap;">Grado ${n.grado}</span>
+                    </div>
+                `).join("");
+            }
+        }
+
+        function enfocarNodoRed(nodeId) {
+            const n = redState.nodos.find(x => x.id === nodeId);
+            if (!n) return;
+            redState.selectedNode = n;
+            actualizarSidebarRed();
+            dibujarCanvasRed();
+        }
+
+        function resaltarBuscadoRed() {
+            const q = (document.getElementById("search-red-inv")?.value || "").trim().toLowerCase();
+            if (!q) {
+                dibujarCanvasRed();
+                return;
+            }
+            const encontrado = redState.nodos.find(n => n.nombre.toLowerCase().includes(q) || String(n.documento).includes(q));
+            if (encontrado) {
+                redState.selectedNode = encontrado;
+                actualizarSidebarRed();
+                dibujarCanvasRed();
+            }
+        }
+
+        function zoomRed(factor) {
+            const canvas = document.getElementById("canvas-red-colaboracion");
+            if (!canvas) return;
+            const nuevaEscala = Math.max(0.45, Math.min(2.8, redState.scale * factor));
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            redState.offsetX = cx - (cx - redState.offsetX) * (nuevaEscala / redState.scale);
+            redState.offsetY = cy - (cy - redState.offsetY) * (nuevaEscala / redState.scale);
+            redState.scale = nuevaEscala;
+            dibujarCanvasRed();
+        }
+
+        function centrarRed() {
+            redState.scale = 1.0;
+            redState.offsetX = 0;
+            redState.offsetY = 0;
+            dibujarCanvasRed();
+        }
+
+        function vincularEventosCanvasRed(canvas) {
+            if (redState.eventsBound) return;
+            redState.eventsBound = true;
+
+            function obtenerNodoEnPunto(clientX, clientY) {
+                const rect = canvas.getBoundingClientRect();
+                const mx = (clientX - rect.left - redState.offsetX) / redState.scale;
+                const my = (clientY - rect.top - redState.offsetY) / redState.scale;
+                for (let i = redState.nodos.length - 1; i >= 0; i--) {
+                    const n = redState.nodos[i];
+                    const dx = mx - n.x;
+                    const dy = my - n.y;
+                    if (dx * dx + dy * dy <= (n.r + 5) * (n.r + 5)) return n;
+                }
+                return null;
+            }
+
+            canvas.addEventListener("mousedown", e => {
+                const hit = obtenerNodoEnPunto(e.clientX, e.clientY);
+                if (hit) {
+                    redState.selectedNode = hit;
+                    actualizarSidebarRed();
+                    dibujarCanvasRed();
+                }
+                redState.isDragging = true;
+                redState.dragStartX = e.clientX - redState.offsetX;
+                redState.dragStartY = e.clientY - redState.offsetY;
+                canvas.style.cursor = "grabbing";
+            });
+
+            window.addEventListener("mouseup", () => {
+                if (redState.isDragging) {
+                    redState.isDragging = false;
+                    canvas.style.cursor = "grab";
+                }
+            });
+
+            canvas.addEventListener("mousemove", e => {
+                if (redState.isDragging) {
+                    redState.offsetX = e.clientX - redState.dragStartX;
+                    redState.offsetY = e.clientY - redState.dragStartY;
+                    dibujarCanvasRed();
+                    return;
+                }
+                const hit = obtenerNodoEnPunto(e.clientX, e.clientY);
+                if (hit !== redState.hoveredNode) {
+                    redState.hoveredNode = hit;
+                    canvas.style.cursor = hit ? "pointer" : "grab";
+                    actualizarSidebarRed();
+                    dibujarCanvasRed();
+                }
+            });
+
+            canvas.addEventListener("wheel", e => {
+                e.preventDefault();
+                zoomRed(e.deltaY < 0 ? 1.12 : 0.89);
+            }, { passive: false });
         }
 
         function guardarEnLocalStorage() {
