@@ -175,58 +175,96 @@ public:
 
         /* HEADER INSTITUCIONAL */
         header {
-            background: linear-gradient(135deg, #022c19 0%, #090d16 65%, #18090d 100%);
-            border-bottom: 2px solid var(--upc-green);
-            padding: 0.9rem 2rem;
+            background: linear-gradient(135deg, #022013 0%, #090d16 70%, #15080e 100%);
+            border-bottom: 1px solid var(--card-border);
+            padding: 0.7rem 1.6rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.75rem 1rem;
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
         }
-        .brand-box { display: flex; align-items: center; gap: 1rem; }
+        .brand-box { display: flex; align-items: center; gap: 0.85rem; flex-shrink: 0; }
         .brand-logo {
-            width: 44px; height: 44px;
+            width: 38px; height: 38px;
             background: linear-gradient(135deg, var(--upc-green) 50%, var(--upc-red) 50%);
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex; align-items: center; justify-content: center;
-            font-weight: 900; font-size: 1.1rem; color: #fff;
-            box-shadow: 0 4px 14px rgba(0, 104, 55, 0.4);
+            font-weight: 900; font-size: 0.95rem; color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 104, 55, 0.4);
+            letter-spacing: -0.5px;
         }
-        .brand-text h1 { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.3px; display: flex; align-items: center; gap: 0.5rem; }
-        .brand-badge { background: rgba(16, 185, 129, 0.2); color: var(--upc-green-light); font-size: 0.7rem; padding: 2px 7px; border-radius: 12px; font-weight: 700; }
-        .brand-text p { font-size: 0.78rem; color: var(--text-muted); }
+        .brand-text h1 { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.2px; display: flex; align-items: center; gap: 0.5rem; white-space: nowrap; }
+        .brand-badge { background: rgba(16, 185, 129, 0.15); color: var(--upc-green-light); border: 1px solid rgba(16, 185, 129, 0.3); font-size: 0.68rem; padding: 2px 7px; border-radius: 6px; font-weight: 700; letter-spacing: 0.3px; }
+        .brand-text p { font-size: 0.72rem; color: var(--text-muted); white-space: nowrap; }
 
-        .nav-tabs { display: flex; gap: 0.4rem; background: rgba(15, 23, 42, 0.85); padding: 0.3rem; border-radius: 8px; border: 1px solid var(--card-border); }
+        .nav-tabs { display: flex; gap: 0.3rem; background: #0c1222; padding: 0.25rem; border-radius: 8px; border: 1px solid var(--card-border); flex-wrap: wrap; }
         .tab-btn {
             background: transparent; border: none; color: var(--text-muted);
-            padding: 0.5rem 1.1rem; border-radius: 6px; cursor: pointer;
-            font-weight: 600; font-size: 0.84rem; transition: all 0.2s ease;
-            display: flex; align-items: center; gap: 0.4rem;
+            padding: 0.45rem 0.95rem; border-radius: 6px; cursor: pointer;
+            font-weight: 600; font-size: 0.8rem; transition: all 0.2s ease;
+            display: inline-flex; align-items: center; gap: 0.4rem; white-space: nowrap;
         }
-        .tab-btn:hover { color: #fff; background: rgba(255,255,255,0.06); }
-        .tab-btn.active { background: var(--upc-green); color: #fff; box-shadow: 0 2px 10px rgba(16, 185, 129, 0.4); }
+        .tab-btn:hover { color: #fff; background: rgba(255,255,255,0.05); }
+        .tab-btn.active { background: var(--upc-green); color: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+
+        .header-actions { display: flex; gap: 0.45rem; align-items: center; flex-shrink: 0; white-space: nowrap; }
+        .action-btn-undo {
+            background: #991b1b; color: #fff; border: 1px solid #dc2626;
+            padding: 0.42rem 0.85rem; border-radius: 6px; font-weight: 700; font-size: 0.78rem;
+            cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+            transition: all 0.2s; white-space: nowrap; flex-shrink: 0;
+        }
+        .action-btn-undo:hover { background: #b91c1c; }
+        .action-btn-pila {
+            background: #1e293b; color: #cbd5e1; border: 1px solid #334155;
+            padding: 0.42rem 0.85rem; border-radius: 6px; font-weight: 600; font-size: 0.78rem;
+            cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+            transition: all 0.2s; white-space: nowrap; flex-shrink: 0;
+        }
+        .action-btn-pila:hover { background: #334155; color: #fff; }
+        .action-btn-export {
+            background: var(--upc-green); color: #fff; border: 1px solid #10b981;
+            padding: 0.42rem 0.9rem; border-radius: 6px; font-weight: 700; font-size: 0.78rem;
+            cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+            transition: all 0.2s; white-space: nowrap; flex-shrink: 0;
+        }
+        .action-btn-export:hover { background: #047857; }
+        .badge-counter {
+            background: rgba(0, 0, 0, 0.4); color: #fecaca;
+            padding: 1px 6px; border-radius: 10px; font-size: 0.72rem; font-weight: 800;
+            min-width: 18px; text-align: center;
+        }
 
         /* KPI BAR */
         .kpi-bar {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            padding: 1.2rem 2rem 0.5rem 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 0.9rem;
+            padding: 1rem 1.6rem 0.4rem 1.6rem;
         }
         .kpi-card {
             background: var(--bg-card);
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 1rem 1.2rem;
+            border-radius: 10px;
+            padding: 0.9rem 1.1rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            min-width: 0;
+            gap: 0.6rem;
         }
-        .kpi-title { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 0.5px; }
-        .kpi-val { font-size: 1.6rem; font-weight: 800; margin-top: 0.2rem; }
+        .kpi-title { font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 0.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .kpi-val { font-size: 1.45rem; font-weight: 800; margin-top: 0.2rem; white-space: nowrap; letter-spacing: -0.5px; }
+        .kpi-icon-wrap {
+            width: 38px; height: 38px; border-radius: 8px;
+            background: #1e293b; display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
 
         /* MAIN CONTENT AREA */
         main { flex: 1; padding: 1rem 2rem 2rem 2rem; display: flex; flex-direction: column; }
@@ -557,6 +595,29 @@ public:
             to { transform: translateY(0); opacity: 1; }
         }
 
+        @media (max-width: 1200px) {
+            header { padding: 0.6rem 1rem; }
+            .brand-text p { display: none; }
+            main { padding: 0.8rem 1rem 1.5rem 1rem; }
+            .kpi-bar { padding: 0.8rem 1rem 0.4rem 1rem; }
+            .portal-layout { grid-template-columns: 320px 1fr; }
+        }
+        @media (max-width: 992px) {
+            header { justify-content: center; }
+            .brand-box { width: 100%; justify-content: space-between; }
+            .nav-tabs { width: 100%; justify-content: center; }
+            .header-actions { width: 100%; justify-content: flex-end; }
+            .portal-layout { grid-template-columns: 1fr; height: auto; min-height: 0; }
+            .groups-sidebar { max-height: 400px; }
+            .dashboard-container { grid-template-columns: 1fr; }
+            .metrics-2024-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+        }
+        @media (max-width: 640px) {
+            .kpi-bar { grid-template-columns: 1fr; }
+            .tab-btn { padding: 0.4rem 0.6rem; font-size: 0.75rem; }
+            .header-actions { flex-direction: column; align-items: stretch; }
+        }
+
         footer {
             background: #05070e;
             border-top: 1px solid var(--card-border);
@@ -573,25 +634,29 @@ public:
         <div class="brand-box">
             <div class="brand-logo">UPC</div>
             <div class="brand-text">
-                <h1>PEA-i &bull; Portal de Ciencia Abierta <span class="brand-badge">v2.5 CRUD Interactivo</span></h1>
+                <h1>PEA-i &bull; Portal de Ciencia Abierta <span class="brand-badge">CRUD Interactivo</span></h1>
                 <p>Facultad de Ingeniería y Tecnológicas &bull; Sistema Estadístico de Investigación (MinCiencias SCIENTI)</p>
             </div>
         </div>
         <div class="nav-tabs">
-            <button class="tab-btn active" onclick="cambiarVistaPrincipal('portal')">🏛️ Directorio Grupos</button>
-            <button class="tab-btn" onclick="cambiarVistaPrincipal('dashboard')">📊 Dashboard Analítico (12.b)</button>
-            <button class="tab-btn" onclick="cambiarVistaPrincipal('tablas')">📑 Vistas por Entidad (12.c)</button>
-            <button class="tab-btn" onclick="cambiarVistaPrincipal('crud')">⚙️ Gestión y Control CRUD</button>
+            <button class="tab-btn active" onclick="cambiarVistaPrincipal('portal')">Directorio Grupos</button>
+            <button class="tab-btn" onclick="cambiarVistaPrincipal('dashboard')">Dashboard Analítico</button>
+            <button class="tab-btn" onclick="cambiarVistaPrincipal('tablas')">Vistas por Entidad</button>
+            <button class="tab-btn" onclick="cambiarVistaPrincipal('crud')">Gestión y Control CRUD</button>
         </div>
-        <div class="header-actions" style="display:flex; gap:0.4rem; align-items:center;">
-            <button class="action-btn-undo" id="btn-undo-header" onclick="deshacerUltimaAccion()" title="Deshacer última acción en Pila LIFO" style="background:#dc2626; color:#fff; border:none; padding:0.45rem 0.85rem; border-radius:6px; font-weight:700; font-size:0.8rem; cursor:pointer; display:flex; align-items:center; gap:0.35rem; transition:all 0.2s;">
-                <span>↩️</span> Deshacer (<span id="undo-count">0</span>)
+        <div class="header-actions">
+            <button class="action-btn-undo" id="btn-undo-header" onclick="deshacerUltimaAccion()" title="Deshacer última acción en Pila LIFO">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"></path><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path></svg>
+                <span>Deshacer</span>
+                <span class="badge-counter" id="undo-count">0</span>
             </button>
-            <button class="action-btn-pila" onclick="abrirModalPilaUndo()" title="Ver elementos en la Pila LIFO" style="background:#1e293b; color:#cbd5e1; border:1px solid #334155; padding:0.45rem 0.75rem; border-radius:6px; font-weight:600; font-size:0.8rem; cursor:pointer;">
-                📜 Pila Undo
+            <button class="action-btn-pila" onclick="abrirModalPilaUndo()" title="Ver elementos en la Pila LIFO">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                <span>Pila LIFO</span>
             </button>
-            <button class="action-btn-export" onclick="abrirModalExportar()" title="Exportar cambios para SQLite / C++" style="background:var(--upc-green); color:#fff; border:none; padding:0.45rem 0.85rem; border-radius:6px; font-weight:700; font-size:0.8rem; cursor:pointer; display:flex; align-items:center; gap:0.35rem;">
-                💾 Sincronizar / SQLite
+            <button class="action-btn-export" onclick="abrirModalExportar()" title="Exportar cambios para SQLite / C++">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                <span>Sincronizar SQLite</span>
             </button>
         </div>
     </header>
@@ -603,28 +668,36 @@ public:
                 <div class="kpi-title">Grupos de Investigación</div>
                 <div class="kpi-val" id="kpi-grupos" style="color: #38bdf8;">0</div>
             </div>
-            <div style="font-size: 1.8rem; opacity: 0.6;">🏢</div>
+            <div class="kpi-icon-wrap">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+            </div>
         </div>
         <div class="kpi-card">
             <div>
                 <div class="kpi-title">Investigadores Registrados</div>
                 <div class="kpi-val" id="kpi-investigadores" style="color: #10b981;">0</div>
             </div>
-            <div style="font-size: 1.8rem; opacity: 0.6;">👨‍🔬</div>
+            <div class="kpi-icon-wrap">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
         </div>
         <div class="kpi-card">
             <div>
                 <div class="kpi-title">Productos Científicos</div>
                 <div class="kpi-val" id="kpi-productos" style="color: #f59e0b;">0</div>
             </div>
-            <div style="font-size: 1.8rem; opacity: 0.6;">📚</div>
+            <div class="kpi-icon-wrap">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            </div>
         </div>
         <div class="kpi-card">
             <div>
                 <div class="kpi-title">Puntos IPP (Modelo 2024)</div>
                 <div class="kpi-val" id="kpi-ipp" style="color: #c084fc;">0 pts</div>
             </div>
-            <div style="font-size: 1.8rem; opacity: 0.6;">🏆</div>
+            <div class="kpi-icon-wrap">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            </div>
         </div>
     </div>
 
@@ -636,7 +709,7 @@ public:
                 <!-- COLUMNA IZQUIERDA: LISTA -->
                 <div class="groups-sidebar">
                     <div class="sidebar-header">
-                        <input type="text" class="search-input" id="search-grupos" placeholder="🔍 Buscar por nombre o código (ej: GISICO)..." oninput="filtrarListaGrupos()">
+                        <input type="text" class="search-input" id="search-grupos" placeholder="Buscar por nombre o código (ej: GISICO)..." oninput="filtrarListaGrupos()">
                         <div class="filter-tags">
                             <button class="tag-btn active" onclick="filtrarCategoriaGrupo('')">Todos</button>
                             <button class="tag-btn" onclick="filtrarCategoriaGrupo('A1')">Cat. A1</button>
@@ -669,16 +742,16 @@ public:
                             </div>
                         </div>
                         <a href="#" class="btn-pdf-download" id="btn-descargar-pdf" target="_blank">
-                            <span>📄</span> Descargar Informe PDF
+                            <span>Descargar Informe PDF</span>
                         </a>
                     </div>
 
                     <!-- SUB-TABS DEL PERFIL -->
                     <div class="profile-nav">
-                        <button class="p-tab-btn active" onclick="cambiarSubTab('general')">📋 Información General</button>
-                        <button class="p-tab-btn" onclick="cambiarSubTab('integrantes')" id="tab-lbl-inv">👥 Integrantes (0)</button>
-                        <button class="p-tab-btn" onclick="cambiarSubTab('productos')" id="tab-lbl-prod">📚 Productos (0)</button>
-                        <button class="p-tab-btn" onclick="cambiarSubTab('modelo2024')">🎯 Balance MinCiencias 2024 & IPP</button>
+                        <button class="p-tab-btn active" onclick="cambiarSubTab('general')">Información General</button>
+                        <button class="p-tab-btn" onclick="cambiarSubTab('integrantes')" id="tab-lbl-inv">Integrantes (0)</button>
+                        <button class="p-tab-btn" onclick="cambiarSubTab('productos')" id="tab-lbl-prod">Productos (0)</button>
+                        <button class="p-tab-btn" onclick="cambiarSubTab('modelo2024')">Balance MinCiencias 2024 & IPP</button>
                     </div>
 
                     <!-- CONTENIDO DE LAS SUB-PESTAÑAS -->
@@ -820,7 +893,7 @@ public:
             <div class="dashboard-container">
                 <div class="chart-box">
                     <div class="chart-box-title">
-                        <span>📊 Distribución por Año de Publicación</span>
+                        <span>Distribución por Año de Publicación</span>
                         <span style="font-size:0.75rem; color:#38bdf8;">Cronología</span>
                     </div>
                     <div id="chart-anios-container" style="max-height: 280px; overflow-y:auto;"></div>
@@ -828,7 +901,7 @@ public:
 
                 <div class="chart-box">
                     <div class="chart-box-title">
-                        <span>🏛️ Grupos por Categoría MinCiencias</span>
+                        <span>Grupos por Categoría MinCiencias</span>
                         <span style="font-size:0.75rem; color:#10b981;">Escalafón Oficial</span>
                     </div>
                     <div id="chart-cat-container"></div>
@@ -836,7 +909,7 @@ public:
 
                 <div class="chart-box">
                     <div class="chart-box-title">
-                        <span>🎯 Modelo 2024: Las 5 Macro-Familias</span>
+                        <span>Modelo 2024: Las 5 Macro-Familias</span>
                         <span style="font-size:0.75rem; color:#f59e0b;">Tipología CTeI</span>
                     </div>
                     <div id="chart-familias-container"></div>
@@ -844,7 +917,7 @@ public:
 
                 <div class="chart-box">
                     <div class="chart-box-title">
-                        <span>✅ Aval Institucional / Validación MinCiencias</span>
+                        <span>Aval Institucional / Validación MinCiencias</span>
                         <span style="font-size:0.75rem; color:#c084fc;">Auditoría</span>
                     </div>
                     <div id="chart-aval-container"></div>
@@ -856,7 +929,7 @@ public:
         <section id="view-tablas" class="view-panel">
             <div class="chart-box" style="margin-bottom: 1.5rem;">
                 <div class="chart-box-title">
-                    <span>🏢 i. Resumen por Grupo de Investigación (12.c.i)</span>
+                    <span>i. Resumen por Grupo de Investigación (12.c.i)</span>
                     <span style="font-size:0.75rem; color:var(--text-muted);" id="lbl-total-grupos-tab"></span>
                 </div>
                 <div class="data-table-container">
@@ -879,7 +952,7 @@ public:
 
             <div class="chart-box">
                 <div class="chart-box-title">
-                    <span>👨‍🔬 ii. Escalafón de Investigadores (12.c.ii)</span>
+                    <span>ii. Escalafón de Investigadores (12.c.ii)</span>
                     <span style="font-size:0.75rem; color:var(--text-muted);">Ranking por Obras Registradas</span>
                 </div>
                 <div class="data-table-container">
@@ -897,27 +970,29 @@ public:
                     </table>
                 </div>
             </div>
+        </section>
+
         <!-- VISTA 4: CENTRO DE GESTIÓN Y CONTROL CRUD COMPLETO -->
         <section id="view-crud" class="view-panel">
             <div class="chart-box" style="margin-bottom: 1.5rem;">
                 <div class="chart-box-title">
                     <div style="display:flex; align-items:center; gap:0.8rem;">
-                        <span style="font-size:1.05rem; font-weight:800;">⚙️ Centro de Operaciones CRUD & Control Integral</span>
+                        <span style="font-size:1.05rem; font-weight:800;">Centro de Operaciones CRUD & Control Integral</span>
                         <span class="brand-badge">Persistencia en RAM y SQLite</span>
                     </div>
                     <div style="display:flex; gap:0.4rem;">
-                        <button class="p-tab-btn active" id="crud-tab-btn-g" onclick="cambiarSubTabCRUD('grupos')">🏢 Grupos (<span id="crud-badge-g">0</span>)</button>
-                        <button class="p-tab-btn" id="crud-tab-btn-i" onclick="cambiarSubTabCRUD('investigadores')">👨‍🔬 Investigadores (<span id="crud-badge-i">0</span>)</button>
-                        <button class="p-tab-btn" id="crud-tab-btn-p" onclick="cambiarSubTabCRUD('productos')">📚 Productos (<span id="crud-badge-p">0</span>)</button>
+                        <button class="p-tab-btn active" id="crud-tab-btn-g" onclick="cambiarSubTabCRUD('grupos')">Grupos (<span id="crud-badge-g">0</span>)</button>
+                        <button class="p-tab-btn" id="crud-tab-btn-i" onclick="cambiarSubTabCRUD('investigadores')">Investigadores (<span id="crud-badge-i">0</span>)</button>
+                        <button class="p-tab-btn" id="crud-tab-btn-p" onclick="cambiarSubTabCRUD('productos')">Productos (<span id="crud-badge-p">0</span>)</button>
                     </div>
                 </div>
 
                 <!-- SUBPANEL CRUD: GRUPOS -->
                 <div id="crud-panel-grupos" class="crud-subpanel">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; gap:1rem;">
-                        <input type="text" class="search-input" id="search-crud-grupos" placeholder="🔍 Filtrar grupos por código o nombre..." oninput="renderizarCRUDGrupos()" style="max-width:380px;">
+                        <input type="text" class="search-input" id="search-crud-grupos" placeholder="Filtrar grupos por código o nombre..." oninput="renderizarCRUDGrupos()" style="max-width:380px;">
                         <button onclick="abrirModalGrupo()" style="background:var(--upc-green); color:#fff; border:none; padding:0.55rem 1.1rem; border-radius:8px; font-weight:700; cursor:pointer; font-size:0.85rem; display:flex; align-items:center; gap:0.4rem;">
-                            ➕ Registrar Nuevo Grupo
+                            + Nuevo Grupo
                         </button>
                     </div>
                     <div class="data-table-container">
@@ -942,13 +1017,13 @@ public:
                 <div id="crud-panel-investigadores" class="crud-subpanel" style="display:none;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; gap:1rem;">
                         <div style="display:flex; gap:0.5rem; flex:1;">
-                            <input type="text" class="search-input" id="search-crud-inv" placeholder="🔍 Filtrar investigadores por documento o nombre..." oninput="renderizarCRUDInvestigadores()" style="max-width:340px;">
+                            <input type="text" class="search-input" id="search-crud-inv" placeholder="Filtrar investigadores por documento o nombre..." oninput="renderizarCRUDInvestigadores()" style="max-width:340px;">
                             <select id="filtro-crud-inv-grupo" class="search-input" style="max-width:240px;" onchange="renderizarCRUDInvestigadores()">
                                 <option value="">Todos los Grupos</option>
                             </select>
                         </div>
                         <button onclick="abrirModalInvestigador()" style="background:var(--upc-green); color:#fff; border:none; padding:0.55rem 1.1rem; border-radius:8px; font-weight:700; cursor:pointer; font-size:0.85rem; display:flex; align-items:center; gap:0.4rem;">
-                            ➕ Registrar Investigador
+                            + Nuevo Investigador
                         </button>
                     </div>
                     <div class="data-table-container">
@@ -973,13 +1048,13 @@ public:
                 <div id="crud-panel-productos" class="crud-subpanel" style="display:none;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; gap:1rem;">
                         <div style="display:flex; gap:0.5rem; flex:1;">
-                            <input type="text" class="search-input" id="search-crud-prod" placeholder="🔍 Filtrar productos por título o ID..." oninput="renderizarCRUDProductos()" style="max-width:340px;">
+                            <input type="text" class="search-input" id="search-crud-prod" placeholder="Filtrar productos por título o ID..." oninput="renderizarCRUDProductos()" style="max-width:340px;">
                             <select id="filtro-crud-prod-grupo" class="search-input" style="max-width:240px;" onchange="renderizarCRUDProductos()">
                                 <option value="">Todos los Grupos</option>
                             </select>
                         </div>
                         <button onclick="abrirModalProducto()" style="background:var(--upc-green); color:#fff; border:none; padding:0.55rem 1.1rem; border-radius:8px; font-weight:700; cursor:pointer; font-size:0.85rem; display:flex; align-items:center; gap:0.4rem;">
-                            ➕ Registrar Producto
+                            + Nuevo Producto
                         </button>
                     </div>
                     <div class="data-table-container">
@@ -1015,7 +1090,7 @@ public:
     <div id="modal-grupo" class="modal-overlay" style="display:none;">
         <div class="modal-box">
             <div class="modal-header">
-                <h3 id="modal-g-title">➕ Registrar Nuevo Grupo</h3>
+                <h3 id="modal-g-title">Registrar Nuevo Grupo</h3>
                 <button onclick="cerrarModales()" class="modal-close-btn">&times;</button>
             </div>
             <form onsubmit="guardarGrupoForm(event)">
@@ -1051,7 +1126,7 @@ public:
                 </div>
                 <div class="modal-footer">
                     <button type="button" onclick="cerrarModales()" class="btn-modal-cancel">Cancelar</button>
-                    <button type="submit" class="btn-modal-save">💾 Guardar Grupo</button>
+                    <button type="submit" class="btn-modal-save">Guardar Grupo</button>
                 </div>
             </form>
         </div>
@@ -1061,7 +1136,7 @@ public:
     <div id="modal-investigador" class="modal-overlay" style="display:none;">
         <div class="modal-box">
             <div class="modal-header">
-                <h3 id="modal-i-title">➕ Registrar Nuevo Investigador</h3>
+                <h3 id="modal-i-title">Registrar Nuevo Investigador</h3>
                 <button onclick="cerrarModales()" class="modal-close-btn">&times;</button>
             </div>
             <form onsubmit="guardarInvestigadorForm(event)">
@@ -1092,7 +1167,7 @@ public:
                 </div>
                 <div class="modal-footer">
                     <button type="button" onclick="cerrarModales()" class="btn-modal-cancel">Cancelar</button>
-                    <button type="submit" class="btn-modal-save">💾 Guardar Investigador</button>
+                    <button type="submit" class="btn-modal-save">Guardar Investigador</button>
                 </div>
             </form>
         </div>
@@ -1102,7 +1177,7 @@ public:
     <div id="modal-producto" class="modal-overlay" style="display:none;">
         <div class="modal-box">
             <div class="modal-header">
-                <h3 id="modal-p-title">➕ Registrar Producto de Investigación</h3>
+                <h3 id="modal-p-title">Registrar Producto de Investigación</h3>
                 <button onclick="cerrarModales()" class="modal-close-btn">&times;</button>
             </div>
             <form onsubmit="guardarProductoForm(event)">
@@ -1143,11 +1218,11 @@ public:
                 </div>
                 <div class="form-group" style="flex-direction:row; align-items:center; gap:0.6rem; margin-top:0.5rem;">
                     <input type="checkbox" id="input-p-validado" checked style="width:18px; height:18px; accent-color:var(--upc-green-light);">
-                    <label for="input-p-validado" class="form-label" style="cursor:pointer; margin:0;">Validado por MinCiencias con Aval Institucional (chulo_1.jpg)</label>
+                    <label for="input-p-validado" class="form-label" style="cursor:pointer; margin:0;">Validado por MinCiencias con Aval Institucional</label>
                 </div>
                 <div class="modal-footer">
                     <button type="button" onclick="cerrarModales()" class="btn-modal-cancel">Cancelar</button>
-                    <button type="submit" class="btn-modal-save">💾 Guardar Producto</button>
+                    <button type="submit" class="btn-modal-save">Guardar Producto</button>
                 </div>
             </form>
         </div>
@@ -1157,7 +1232,7 @@ public:
     <div id="modal-pila-undo" class="modal-overlay" style="display:none;">
         <div class="modal-box modal-box-lg">
             <div class="modal-header">
-                <h3>📜 Pila de Deshacer (Historial LIFO en Memoria)</h3>
+                <h3>Pila de Deshacer (Historial LIFO en Memoria)</h3>
                 <button onclick="cerrarModales()" class="modal-close-btn">&times;</button>
             </div>
             <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem;">
@@ -1180,7 +1255,7 @@ public:
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" onclick="deshacerUltimaAccion()" class="btn-action-sm btn-action-toggle" style="padding:0.5rem 1rem; font-weight:700;">↩️ Deshacer Tope de Pila</button>
+                <button type="button" onclick="deshacerUltimaAccion()" class="btn-action-sm btn-action-toggle" style="padding:0.5rem 1rem; font-weight:700;">Deshacer Tope de Pila</button>
                 <button type="button" onclick="cerrarModales()" class="btn-modal-cancel">Cerrar</button>
             </div>
         </div>
@@ -1190,7 +1265,7 @@ public:
     <div id="modal-exportar" class="modal-overlay" style="display:none;">
         <div class="modal-box modal-box-lg">
             <div class="modal-header">
-                <h3>💾 Sincronización y Exportación a SQLite / C++</h3>
+                <h3>Sincronización y Exportación a SQLite / C++</h3>
                 <button onclick="cerrarModales()" class="modal-close-btn">&times;</button>
             </div>
             <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:0.8rem;">
@@ -1205,8 +1280,8 @@ public:
                 <textarea id="json-export-area" readonly style="background:#090d16; border:1px solid #1e293b; color:#38bdf8; font-family:monospace; font-size:0.75rem; padding:0.6rem; border-radius:6px; height:120px; resize:none;"></textarea>
             </div>
             <div class="modal-footer">
-                <button type="button" onclick="copiarSQLPortapapeles()" class="btn-action-sm btn-action-edit" style="padding:0.5rem 1rem; font-weight:700;">📋 Copiar SQL</button>
-                <button type="button" onclick="descargarCambiosJSON()" class="btn-modal-save">📥 Descargar data/cambios_gui.json</button>
+                <button type="button" onclick="copiarSQLPortapapeles()" class="btn-action-sm btn-action-edit" style="padding:0.5rem 1rem; font-weight:700;">Copiar SQL</button>
+                <button type="button" onclick="descargarCambiosJSON()" class="btn-modal-save">Descargar data/cambios_gui.json</button>
                 <button type="button" onclick="cerrarModales()" class="btn-modal-cancel">Cerrar</button>
             </div>
         </div>
@@ -1214,7 +1289,7 @@ public:
 
     <!-- TOAST NOTIFICACIÓN FLOTANTE -->
     <div id="toast-notification">
-        <span id="toast-icon">✅</span>
+        <span id="toast-icon">•</span>
         <span id="toast-text">Operación completada</span>
     </div>
 
@@ -1383,8 +1458,8 @@ public:
                     </div>
                     <div class="g-item-name">${g.nombre}</div>
                     <div class="g-item-footer">
-                        <span>👤 ${(g.lider || "Investigador UPC").substring(0, 22)}</span>
-                        <span>👥 ${numInv} &bull; 📚 ${numProd}</span>
+                        <span>${(g.lider || "Investigador UPC").substring(0, 22)}</span>
+                        <span>${numInv} inv. &bull; ${numProd} prod.</span>
                     </div>
                 `;
                 cont.appendChild(card);
@@ -1437,18 +1512,18 @@ public:
             document.getElementById("g-resumen-conteo").textContent = `${nInv} integrantes | ${nProd} productos (${valProd} avalados)`;
 
             // LABELS TABS
-            document.getElementById("tab-lbl-inv").textContent = `👥 Integrantes (${nInv})`;
-            document.getElementById("tab-lbl-prod").textContent = `📚 Productos (${nProd})`;
+            document.getElementById("tab-lbl-inv").textContent = `Integrantes (${nInv})`;
+            document.getElementById("tab-lbl-prod").textContent = `Productos (${nProd})`;
 
             // TABLA INTEGRANTES
             const tbodyInv = document.querySelector("#tabla-perfil-inv tbody");
             tbodyInv.innerHTML = "";
             (g.investigadores || []).forEach(inv => {
                 const tr = document.createElement("tr");
-                let badgePar = inv.par_evaluador === "Si" ? " <span class='badge-cat' style='background:#eab308; color:#000; font-weight:700; margin-left:6px;'>⭐ Par Evaluador</span>" : "";
+                let badgePar = inv.par_evaluador === "Si" ? " <span class='badge-cat' style='background:#047857; color:#fff; font-weight:700; margin-left:6px;'>Par Evaluador</span>" : "";
                 let links = "";
-                if (inv.scholar_url) links += `<a href="${inv.scholar_url}" target="_blank" style="background:#0284c7; color:#fff; padding:2px 6px; border-radius:4px; font-size:0.75rem; text-decoration:none; margin-right:4px;">📘 Scholar</a>`;
-                if (inv.orcid) links += `<a href="${inv.orcid}" target="_blank" style="background:#10b981; color:#fff; padding:2px 6px; border-radius:4px; font-size:0.75rem; text-decoration:none;">🆔 ORCID</a>`;
+                if (inv.scholar_url) links += `<a href="${inv.scholar_url}" target="_blank" style="background:#0284c7; color:#fff; padding:2px 6px; border-radius:4px; font-size:0.75rem; text-decoration:none; margin-right:4px;">Scholar</a>`;
+                if (inv.orcid) links += `<a href="${inv.orcid}" target="_blank" style="background:#10b981; color:#fff; padding:2px 6px; border-radius:4px; font-size:0.75rem; text-decoration:none;">ORCID</a>`;
 
                 tr.innerHTML = `
                     <td><code style="color:#38bdf8;">${inv.documento}</code></td>
@@ -1632,7 +1707,7 @@ public:
                     <td>${g.lider}</td>
                     <td>${numInv}</td>
                     <td><b>${numProd}</b></td>
-                    <td><a href="../reportes/Informe_GrupLAC_${g.codigo}.pdf" target="_blank" style="background:#006837; color:#fff; padding:3px 7px; border-radius:4px; font-size:0.75rem; text-decoration:none; font-weight:700;">📄 Descargar PDF</a></td>
+                    <td><a href="../reportes/Informe_GrupLAC_${g.codigo}.pdf" target="_blank" style="background:#006837; color:#fff; padding:3px 7px; border-radius:4px; font-size:0.75rem; text-decoration:none; font-weight:700;">Descargar PDF</a></td>
                 `;
                 tbodyG.appendChild(tr);
             });
@@ -1675,7 +1750,7 @@ public:
         let pilaUndoGUI = [];
         let operacionesAuditadas = [];
 
-        function mostrarToast(mensaje, icono = "✅") {
+        function mostrarToast(mensaje, icono = "•") {
             const toast = document.getElementById("toast-notification");
             document.getElementById("toast-icon").textContent = icono;
             document.getElementById("toast-text").textContent = mensaje;
@@ -1714,7 +1789,7 @@ public:
 
         function deshacerUltimaAccion() {
             if (pilaUndoGUI.length === 0) {
-                mostrarToast("La Pila Undo está vacía. No hay acciones para revertir.", "⚠️");
+                mostrarToast("La Pila Undo está vacía. No hay acciones para revertir.", "!");
                 return;
             }
             const acc = pilaUndoGUI.pop();
@@ -1723,7 +1798,7 @@ public:
                 actualizarContadorUndo();
                 refrescarTodo();
                 guardarEnLocalStorage();
-                mostrarToast(`Deshecho (LIFO): ${acc.desc}`, "↩️");
+                mostrarToast(`Deshecho (LIFO): ${acc.desc}`, "⤺");
             }
         }
 
@@ -1738,7 +1813,7 @@ public:
                     const tr = document.createElement("tr");
                     const esTope = (i === pilaUndoGUI.length - 1);
                     tr.innerHTML = `
-                        <td><b>${esTope ? "🔝 [TOPE]" : `[#${i + 1}]`}</b></td>
+                        <td><b>${esTope ? "[TOPE]" : `[#${i + 1}]`}</b></td>
                         <td><span class="badge-status ${acc.tipo.includes('ELIM') || acc.tipo.includes('TOGGLE') ? 'badge-inactive' : 'badge-active'}">${acc.tipo}</span></td>
                         <td>${acc.entidad}</td>
                         <td><code>${acc.id}</code></td>
@@ -1781,7 +1856,7 @@ public:
             const inAnio = document.getElementById("input-g-anio");
 
             if (grupoEnEdicion) {
-                titleEl.textContent = `✏️ Editar Grupo: ${grupoEnEdicion.codigo}`;
+                titleEl.textContent = `Editar Grupo: ${grupoEnEdicion.codigo}`;
                 inCod.value = grupoEnEdicion.codigo;
                 inCod.disabled = true;
                 inNom.value = grupoEnEdicion.nombre;
@@ -1790,7 +1865,7 @@ public:
                 inLider.value = grupoEnEdicion.lider || "";
                 inAnio.value = grupoEnEdicion.anio_creacion || grupoEnEdicion.anio || 2024;
             } else {
-                titleEl.textContent = "➕ Registrar Nuevo Grupo de Investigación";
+                titleEl.textContent = "Registrar Nuevo Grupo de Investigación";
                 inCod.value = `COL${Math.floor(1000000 + Math.random() * 9000000)}`;
                 inCod.disabled = false;
                 inNom.value = "";
@@ -1881,7 +1956,7 @@ public:
                     g.activo = !g.activo;
                 }
             });
-            mostrarToast(`Grupo ${cod}: ahora está ${g.activo ? 'ACTIVO' : 'INACTIVO'}.`, g.activo ? "✅" : "⚠️");
+            mostrarToast(`Grupo ${cod}: ahora está ${g.activo ? 'ACTIVO' : 'INACTIVO'}.`, g.activo ? "[OK]" : "[INFO]");
             refrescarTodo();
         }
 
@@ -1928,7 +2003,7 @@ public:
             const inForm = document.getElementById("input-i-formacion");
 
             if (invEnEdicion) {
-                titleEl.textContent = `✏️ Editar Investigador: ${invEnEdicion.documento}`;
+                titleEl.textContent = `Editar Investigador: ${invEnEdicion.documento}`;
                 inDoc.value = invEnEdicion.documento;
                 inDoc.disabled = true;
                 inNom.value = invEnEdicion.nombre;
@@ -1936,7 +2011,7 @@ public:
                 inForm.value = invEnEdicion.formacion || "";
                 document.getElementById("input-i-grupo").value = grupoInvEdicion.codigo;
             } else {
-                titleEl.textContent = "➕ Registrar Nuevo Investigador";
+                titleEl.textContent = "Registrar Nuevo Investigador";
                 inDoc.value = "";
                 inDoc.disabled = false;
                 inNom.value = "";
@@ -2017,7 +2092,7 @@ public:
                     inv.activo = !inv.activo;
                 }
             });
-            mostrarToast(`Investigador ${doc}: ahora está ${inv.activo ? 'ACTIVO' : 'INACTIVO'}.`, inv.activo ? "✅" : "⚠️");
+            mostrarToast(`Investigador ${doc}: ahora está ${inv.activo ? 'ACTIVO' : 'INACTIVO'}.`, inv.activo ? "[OK]" : "[INFO]");
             refrescarTodo();
         }
 
@@ -2070,7 +2145,7 @@ public:
             const inVal = document.getElementById("input-p-validado");
 
             if (prodEnEdicion) {
-                titleEl.textContent = `✏️ Editar Producto: ${prodEnEdicion.id}`;
+                titleEl.textContent = `Editar Producto: ${prodEnEdicion.id}`;
                 inId.value = prodEnEdicion.id;
                 inId.disabled = true;
                 inTit.value = prodEnEdicion.titulo;
@@ -2081,7 +2156,7 @@ public:
                 actualizarSelectInvestigadoresModalProd();
                 document.getElementById("input-p-investigador").value = prodEnEdicion.id_investigador || "";
             } else {
-                titleEl.textContent = "➕ Registrar Producto de Investigación";
+                titleEl.textContent = "Registrar Producto de Investigación";
                 inId.value = `PROD_${Math.floor(100000 + Math.random() * 900000)}`;
                 inId.disabled = false;
                 inTit.value = "";
@@ -2167,7 +2242,7 @@ public:
                     prod.activo = !prod.activo;
                 }
             });
-            mostrarToast(`Producto ${idProd}: ahora está ${prod.activo ? 'ACTIVO' : 'INACTIVO'}.`, prod.activo ? "✅" : "⚠️");
+            mostrarToast(`Producto ${idProd}: ahora está ${prod.activo ? 'ACTIVO' : 'INACTIVO'}.`, prod.activo ? "[OK]" : "[INFO]");
             refrescarTodo();
         }
 
@@ -2238,8 +2313,8 @@ public:
                     <td>${g.anio_creacion || g.anio || 2024}</td>
                     <td><span class="badge-status ${esActivo ? 'badge-active' : 'badge-inactive'}">${esActivo ? '● Activo' : '○ Inactivo'}</span></td>
                     <td style="text-align:center; white-space:nowrap;">
-                        <button onclick="abrirModalGrupo('${g.codigo}')" class="btn-action-sm btn-action-edit">✏️ Editar</button>
-                        <button onclick="toggleEstadoGrupo('${g.codigo}')" class="btn-action-sm btn-action-toggle">🔄 ${esActivo ? 'Desactivar' : 'Activar'}</button>
+                        <button onclick="abrirModalGrupo('${g.codigo}')" class="btn-action-sm btn-action-edit">Editar</button>
+                        <button onclick="toggleEstadoGrupo('${g.codigo}')" class="btn-action-sm btn-action-toggle">${esActivo ? 'Desactivar' : 'Activar'}</button>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -2270,8 +2345,8 @@ public:
                         <td><code>${g.codigo}</code></td>
                         <td><span class="badge-status ${esActivo ? 'badge-active' : 'badge-inactive'}">${esActivo ? '● Activo' : '○ Inactivo'}</span></td>
                         <td style="text-align:center; white-space:nowrap;">
-                            <button onclick="abrirModalInvestigador('${g.codigo}', '${inv.documento}')" class="btn-action-sm btn-action-edit">✏️ Editar</button>
-                            <button onclick="toggleEstadoInvestigador('${g.codigo}', '${inv.documento}')" class="btn-action-sm btn-action-toggle">🔄 ${esActivo ? 'Desactivar' : 'Activar'}</button>
+                            <button onclick="abrirModalInvestigador('${g.codigo}', '${inv.documento}')" class="btn-action-sm btn-action-edit">Editar</button>
+                            <button onclick="toggleEstadoInvestigador('${g.codigo}', '${inv.documento}')" class="btn-action-sm btn-action-toggle">${esActivo ? 'Desactivar' : 'Activar'}</button>
                         </td>
                     `;
                     tbody.appendChild(tr);
@@ -2305,8 +2380,8 @@ public:
                         <td>${p.validado ? '<span style="color:#10b981;">Avalado</span>' : '<span style="color:#f59e0b;">Revisión</span>'}</td>
                         <td><span class="badge-status ${esActivo ? 'badge-active' : 'badge-inactive'}">${esActivo ? '● Activo' : '○ Inactivo'}</span></td>
                         <td style="text-align:center; white-space:nowrap;">
-                            <button onclick="abrirModalProducto('${g.codigo}', '${p.id}')" class="btn-action-sm btn-action-edit">✏️ Editar</button>
-                            <button onclick="toggleEstadoProducto('${g.codigo}', '${p.id}')" class="btn-action-sm btn-action-toggle">🔄 ${esActivo ? 'Desactivar' : 'Activar'}</button>
+                            <button onclick="abrirModalProducto('${g.codigo}', '${p.id}')" class="btn-action-sm btn-action-edit">Editar</button>
+                            <button onclick="toggleEstadoProducto('${g.codigo}', '${p.id}')" class="btn-action-sm btn-action-toggle">${esActivo ? 'Desactivar' : 'Activar'}</button>
                         </td>
                     `;
                     tbody.appendChild(tr);
@@ -2371,13 +2446,13 @@ public:
             document.body.appendChild(a);
             a.click();
             a.remove();
-            mostrarToast("Archivo data/cambios_gui.json generado y descargado.", "📥");
+            mostrarToast("Archivo data/cambios_gui.json generado y descargado.", "[JSON]");
         }
 
         function copiarSQLPortapapeles() {
             const sql = document.getElementById("sql-export-area").value;
             navigator.clipboard.writeText(sql).then(() => {
-                mostrarToast("Script SQL copiado al portapapeles con éxito.", "📋");
+                mostrarToast("Script SQL copiado al portapapeles con éxito.", "[SQL]");
             }).catch(() => {
                 alert("No se pudo copiar automáticamente. Por favor seleccione y copie el texto del área.");
             });

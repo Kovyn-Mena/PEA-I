@@ -356,25 +356,25 @@ class DashboardApp:
 
     <!-- GRÁFICOS MATPLOTLIB -->
     <div class="card">
-        <h2>📊 Histogramas y Diagramas de Barras (Requisito 12.b - Matplotlib Engine)</h2>
+        <h2>Histogramas y Diagramas de Barras (Requisito 12.b - Matplotlib Engine)</h2>
         <img class="img-chart" src="dashboard_metricas_python.png" alt="Dashboard Matplotlib UPC">
     </div>
 
     <!-- TRES APROXIMACIONES (12.c) -->
     <div class="card">
-        <h2>🏢 i. Vista por Grupo de Investigación (12.c.i)</h2>
+        <h2>i. Vista por Grupo de Investigación (12.c.i)</h2>
         <table>
             <thead>
                 <tr><th>Código</th><th>Nombre Oficial</th><th>Clasificación</th><th>Líder</th><th>Investigadores</th><th>Productos</th><th>Informe Oficial</th></tr>
             </thead>
             <tbody>
-                {''.join(f"<tr><td><b>{g['codigo']}</b></td><td>{g['nombre']}</td><td>{g['clasificacion']}</td><td>{g['lider']}</td><td>{g['investigadores']}</td><td><b>{g['productos']}</b></td><td><a href='../reportes/Informe_GrupLAC_{g['codigo']}.pdf' target='_blank' style='background:#006837; color:white; padding:3px 8px; border-radius:4px; text-decoration:none; font-size:0.75rem; font-weight:bold;'>📄 Descargar PDF</a></td></tr>" for g in filas_grupos)}
+                {''.join(f"<tr><td><b>{g['codigo']}</b></td><td>{g['nombre']}</td><td>{g['clasificacion']}</td><td>{g['lider']}</td><td>{g['investigadores']}</td><td><b>{g['productos']}</b></td><td><a href='../reportes/Informe_GrupLAC_{g['codigo']}.pdf' target='_blank' style='background:#006837; color:white; padding:3px 8px; border-radius:4px; text-decoration:none; font-size:0.75rem; font-weight:bold;'>Descargar PDF</a></td></tr>" for g in filas_grupos)}
             </tbody>
         </table>
     </div>
 
     <div class="card">
-        <h2>👨‍🔬 ii. Vista por Investigador Autor (12.c.ii)</h2>
+        <h2>ii. Vista por Investigador Autor (12.c.ii)</h2>
         <table>
             <thead>
                 <tr><th>Documento</th><th>Nombre Completo</th><th>Categoría MinCiencias</th><th>Grupo</th><th>Producción Autorada</th></tr>
@@ -386,7 +386,7 @@ class DashboardApp:
     </div>
 
     <div class="card">
-        <h2>📑 iii. Vista por Productos de Investigación (12.c.iii — Modelo MinCiencias 2024)</h2>
+        <h2>iii. Vista por Productos de Investigación (12.c.iii — Modelo MinCiencias 2024)</h2>
         <table>
             <thead>
                 <tr><th>ID</th><th>Familia 2024</th><th>Código</th><th>Peso IPP</th><th>Tipo</th><th>Título</th><th>Año</th><th>Categoría</th><th>Aval MinCiencias</th></tr>
@@ -409,32 +409,189 @@ class DashboardApp:
         try:
             import tkinter as tk
             from tkinter import ttk
-            from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
         except (ImportError, Exception):
             return False
 
         try:
             root = tk.Tk()
-            root.title("PEA-i UPC — Dashboard Gráfico Tkinter (Puntos 12.b y 12.c)")
+            root.title("PEA-i UPC — Dashboard de Investigación (Puntos 12.b y 12.c)")
             root.geometry("1100x750")
+            root.minsize(850, 550)
             root.configure(bg="#0a0f1d")
+
+            # Estilo ttk moderno y sobrio
+            style = ttk.Style()
+            style.theme_use("clam")
+            style.configure("TNotebook", background="#0a0f1d", borderwidth=0)
+            style.configure("TNotebook.Tab", background="#1e293b", foreground="#e2e8f0", padding=[12, 6], font=("Segoe UI", 9, "bold"))
+            style.map("TNotebook.Tab", background=[("selected", "#006837")], foreground=[("selected", "#ffffff")])
+            style.configure("Treeview", background="#0f172a", foreground="#f8fafc", fieldbackground="#0f172a", rowheight=24)
+            style.configure("Treeview.Heading", background="#1e293b", foreground="#38bdf8", font=("Segoe UI", 9, "bold"))
+            style.map("Treeview", background=[("selected", "#0284c7")])
 
             notebook = ttk.Notebook(root)
             notebook.pack(fill="both", expand=True, padx=10, pady=10)
 
-            # Tab 1: Gráficos Matplotlib
+            # TAB 1: Histogramas y Métricas (12.b)
             tab_graf = ttk.Frame(notebook)
-            notebook.add(tab_graf, text="📊 Histogramas y Gráficos (12.b)")
+            notebook.add(tab_graf, text="Histogramas y Métricas (12.b)")
 
             ruta_img = self.generar_graficos_matplotlib("dist")
-            lbl_info = tk.Label(tab_graf, text="PEA-i: Dashboard Visual Matplotlib (UPC MinCiencias)",
-                                font=("Segoe UI", 12, "bold"), bg="#0a0f1d", fg="#10b981")
-            lbl_info.pack(pady=5)
 
-            # Cargar imagen en Canvas o mostrar resumen
-            lbl_status = tk.Label(tab_graf, text=f"Gráficos generados exitosamente en: {ruta_img}",
-                                  bg="#0a0f1d", fg="#94a3b8")
-            lbl_status.pack(pady=5)
+            header_frame = tk.Frame(tab_graf, bg="#0a0f1d")
+            header_frame.pack(fill="x", padx=15, pady=8)
+
+            lbl_title = tk.Label(header_frame, text="PEA-i UPC • Dashboard Analítico (Matplotlib Engine)",
+                                 font=("Segoe UI", 12, "bold"), bg="#0a0f1d", fg="#10b981")
+            lbl_title.pack(anchor="w")
+
+            lbl_sub = tk.Label(header_frame, text=f"Archivo de alta resolución generado en: {ruta_img}",
+                               font=("Segoe UI", 9), bg="#0a0f1d", fg="#94a3b8")
+            lbl_sub.pack(anchor="w")
+
+            # Resumen de Métricas Clave en Tab 1
+            kpi_frame = tk.Frame(tab_graf, bg="#0f172a", relief="groove", bd=1)
+            kpi_frame.pack(fill="x", padx=15, pady=6)
+
+            total_g = self.multi.contar_grupos(False)
+            total_i = self.multi.contar_investigadores(False)
+            total_p = self.multi.contar_productos(False)
+
+            tk.Label(kpi_frame, text=f"Grupos Activos: {total_g}  |  Investigadores: {total_i}  |  Productos: {total_p}  |  Ventana: {'Histórica Total' if self.ventana_anios == 0 else f'Últimos {self.ventana_anios} años'}",
+                     font=("Segoe UI", 10, "bold"), bg="#0f172a", fg="#f8fafc", pady=8).pack()
+
+            btn_open_img = tk.Button(tab_graf, text="Abrir Gráfico Matplotlib en Navegador / Visor",
+                                     font=("Segoe UI", 9, "bold"), bg="#006837", fg="#ffffff", activebackground="#0284c7", activeforeground="#ffffff",
+                                     relief="flat", padx=12, pady=6, cursor="hand2",
+                                     command=lambda: webbrowser.open(os.path.abspath(ruta_img)))
+            btn_open_img.pack(pady=10)
+
+            # TAB 2: i. Vista por Grupos (12.c.i)
+            tab_grupos = ttk.Frame(notebook)
+            notebook.add(tab_grupos, text="i. Vista por Grupos (12.c.i)")
+
+            cols_g = ("codigo", "nombre", "clasificacion", "lider", "investigadores", "productos")
+            tree_g = ttk.Treeview(tab_grupos, columns=cols_g, show="headings")
+            tree_g.heading("codigo", text="Código")
+            tree_g.heading("nombre", text="Nombre Oficial")
+            tree_g.heading("clasificacion", text="Clasificación")
+            tree_g.heading("lider", text="Líder")
+            tree_g.heading("investigadores", text="Investigadores")
+            tree_g.heading("productos", text="Productos")
+
+            tree_g.column("codigo", width=120, anchor="center")
+            tree_g.column("nombre", width=320)
+            tree_g.column("clasificacion", width=100, anchor="center")
+            tree_g.column("lider", width=180)
+            tree_g.column("investigadores", width=100, anchor="center")
+            tree_g.column("productos", width=90, anchor="center")
+
+            scroll_g = ttk.Scrollbar(tab_grupos, orient="vertical", command=tree_g.yview)
+            tree_g.configure(yscrollcommand=scroll_g.set)
+            scroll_g.pack(side="right", fill="y")
+            tree_g.pack(fill="both", expand=True)
+
+            g_cur = self.multi.cabeza_grupos
+            while g_cur:
+                n_i = 0
+                i_cur = g_cur.primer_investigador
+                while i_cur:
+                    n_i += 1
+                    i_cur = i_cur.sig_investigador
+                n_p = 0
+                p_cur = g_cur.primer_producto
+                while p_cur:
+                    n_p += 1
+                    p_cur = p_cur.sig_producto_grupo
+
+                tree_g.insert("", "end", values=(g_cur.codigo_grupo, g_cur.nombre, g_cur.clasificacion, g_cur.lider, n_i, n_p))
+                g_cur = g_cur.sig_grupo
+
+            # TAB 3: ii. Vista por Investigadores (12.c.ii)
+            tab_inv = ttk.Frame(notebook)
+            notebook.add(tab_inv, text="ii. Vista por Investigadores (12.c.ii)")
+
+            cols_i = ("doc", "nombre", "categoria", "grupo", "obras")
+            tree_i = ttk.Treeview(tab_inv, columns=cols_i, show="headings")
+            tree_i.heading("doc", text="Documento")
+            tree_i.heading("nombre", text="Nombre Completo")
+            tree_i.heading("categoria", text="Categoría MinCiencias")
+            tree_i.heading("grupo", text="Código Grupo")
+            tree_i.heading("obras", text="Obras Autoradas")
+
+            tree_i.column("doc", width=110, anchor="center")
+            tree_i.column("nombre", width=280)
+            tree_i.column("categoria", width=140, anchor="center")
+            tree_i.column("grupo", width=110, anchor="center")
+            tree_i.column("obras", width=110, anchor="center")
+
+            scroll_i = ttk.Scrollbar(tab_inv, orient="vertical", command=tree_i.yview)
+            tree_i.configure(yscrollcommand=scroll_i.set)
+            scroll_i.pack(side="right", fill="y")
+            tree_i.pack(fill="both", expand=True)
+
+            g_cur = self.multi.cabeza_grupos
+            while g_cur:
+                i_cur = g_cur.primer_investigador
+                while i_cur:
+                    p_cnt = 0
+                    p_c = i_cur.primer_producto
+                    while p_c:
+                        p_cnt += 1
+                        p_c = p_c.sig_producto_investigador
+                    tree_i.insert("", "end", values=(i_cur.documento_id, i_cur.nombre_completo, i_cur.categoria, g_cur.codigo_grupo, p_cnt))
+                    i_cur = i_cur.sig_investigador
+                g_cur = g_cur.sig_grupo
+
+            # TAB 4: iii. Vista por Productos (12.c.iii)
+            tab_prod = ttk.Frame(notebook)
+            notebook.add(tab_prod, text="iii. Vista por Productos (12.c.iii)")
+
+            cols_p = ("id", "familia", "codigo_2024", "peso", "tipo", "titulo", "anio", "cat", "aval")
+            tree_p = ttk.Treeview(tab_prod, columns=cols_p, show="headings")
+            tree_p.heading("id", text="ID")
+            tree_p.heading("familia", text="Familia 2024")
+            tree_p.heading("codigo_2024", text="Código 2024")
+            tree_p.heading("peso", text="IPP Pts")
+            tree_p.heading("tipo", text="Tipo")
+            tree_p.heading("titulo", text="Título")
+            tree_p.heading("anio", text="Año")
+            tree_p.heading("cat", text="Categoría")
+            tree_p.heading("aval", text="Aval")
+
+            tree_p.column("id", width=80, anchor="center")
+            tree_p.column("familia", width=80, anchor="center")
+            tree_p.column("codigo_2024", width=90, anchor="center")
+            tree_p.column("peso", width=70, anchor="center")
+            tree_p.column("tipo", width=120)
+            tree_p.column("titulo", width=300)
+            tree_p.column("anio", width=60, anchor="center")
+            tree_p.column("cat", width=70, anchor="center")
+            tree_p.column("aval", width=90, anchor="center")
+
+            scroll_p = ttk.Scrollbar(tab_prod, orient="vertical", command=tree_p.yview)
+            tree_p.configure(yscrollcommand=scroll_p.set)
+            scroll_p.pack(side="right", fill="y")
+            tree_p.pack(fill="both", expand=True)
+
+            g_cur = self.multi.cabeza_grupos
+            while g_cur:
+                p_c = g_cur.primer_producto
+                while p_c:
+                    info_24 = CatalogoMinCiencias2024.clasificar_producto(p_c.tipo, p_c.categoria_minciencias, p_c.titulo)
+                    tree_p.insert("", "end", values=(
+                        p_c.id_producto,
+                        info_24["familia"],
+                        info_24["codigo_2024"],
+                        info_24["global_weight"],
+                        p_c.tipo,
+                        p_c.titulo,
+                        p_c.anio,
+                        p_c.categoria_minciencias,
+                        "Avalado" if p_c.validado else "En Revisión"
+                    ))
+                    p_c = p_c.sig_producto_grupo
+                g_cur = g_cur.sig_grupo
 
             root.mainloop()
             return True
