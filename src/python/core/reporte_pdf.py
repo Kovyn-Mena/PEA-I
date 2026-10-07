@@ -215,9 +215,30 @@ def generar_informe_grupo_pdf(codigo_grupo: str, ruta_bd: str = "data/pea_invest
 
     historia = []
 
-    # Encabezado
-    historia.append(_p("INFORME OFICIAL DE GRUPO DE INVESTIGACIÓN", STYLE_TITULO))
-    historia.append(_p(f"{nom_g} ({cod_g}) · Modelo MinCiencias Convocatoria 957 de 2024", STYLE_SUBTITULO))
+    # Encabezado con Logo Oficial UPC
+    logo_path = os.path.join(PROJECT_ROOT, "data", "logo_upc.png")
+    if os.path.exists(logo_path):
+        from reportlab.platypus import Image as RLImage
+        img_logo = RLImage(logo_path, width=1.6 * cm, height=1.4 * cm)
+        enc_data = [[
+            img_logo,
+            [
+                _p("INFORME OFICIAL DE GRUPO DE INVESTIGACIÓN", STYLE_TITULO),
+                _p(f"{nom_g} ({cod_g}) · Modelo MinCiencias Convocatoria 957 de 2024", STYLE_SUBTITULO)
+            ]
+        ]]
+        t_enc = Table(enc_data, colWidths=[2.0 * cm, 16.0 * cm])
+        t_enc.setStyle(TableStyle([
+            ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+            ("LEFTPADDING", (0, 0), (-1, -1), 0),
+            ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+            ("TOPPADDING", (0, 0), (-1, -1), 0),
+            ("BOTTOMPADDING", (0, 0), (-1, -1), 2),
+        ]))
+        historia.append(t_enc)
+    else:
+        historia.append(_p("INFORME OFICIAL DE GRUPO DE INVESTIGACIÓN", STYLE_TITULO))
+        historia.append(_p(f"{nom_g} ({cod_g}) · Modelo MinCiencias Convocatoria 957 de 2024", STYLE_SUBTITULO))
     historia.append(HRFlowable(width="100%", thickness=1, color=COLOR_UPC_VERDE, spaceBefore=0, spaceAfter=8))
 
     # Sección 1: Ficha Técnica

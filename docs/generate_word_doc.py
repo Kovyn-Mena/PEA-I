@@ -112,6 +112,13 @@ def build_document():
         section.right_margin = Inches(1.0)
         
     # --- PORTADA INSTITUCIONAL ---
+    logo_upc_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "logo_upc.png")
+    if os.path.exists(logo_upc_path):
+        p_logo = doc.add_paragraph()
+        p_logo.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p_logo.paragraph_format.space_after = Pt(10)
+        p_logo.add_run().add_picture(logo_upc_path, width=Inches(1.85))
+
     p_inst = doc.add_paragraph()
     p_inst.alignment = WD_ALIGN_PARAGRAPH.CENTER
     r_inst1 = p_inst.add_run("UNIVERSIDAD POPULAR DEL CESAR\n")

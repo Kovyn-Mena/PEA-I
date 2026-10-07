@@ -25,7 +25,8 @@ FILES_TO_INCLUDE = [
     "Documentacion_Tecnica_GrupoXX.docx",
     "Taller2_AB_PO_XX.cpp",
     "Taller2_AB_PO_XX.py",
-    os.path.join("dist", "visualizador_hipercubo.html")
+    os.path.join("dist", "visualizador_hipercubo.html"),
+    os.path.join("dist", "logo_upc.png")
 ]
 
 DIRS_TO_INCLUDE = [

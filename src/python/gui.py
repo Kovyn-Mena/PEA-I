@@ -347,9 +347,14 @@ class DashboardApp:
 </head>
 <body>
     <header>
-        <div>
-            <h1 style="margin:0; font-size:1.4rem;">PEA-i UPC &bull; Dashboard Analítico de Investigación</h1>
-            <p style="margin:0.2rem 0 0 0; font-size:0.8rem; color:#cbd5e1;">Fase 5 Python &bull; Histogramas, Diagramas de Barras y Macro-Tipologías MinCiencias (Puntos 12.b y 12.c)</p>
+        <div style="display:flex; align-items:center; gap:1rem;">
+            <div style="width:52px; height:46px; background:#ffffff; border-radius:9px; padding:4px; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 10px rgba(0,0,0,0.3);">
+                <img src="logo_upc.png" alt="Logo Oficial UPC" style="width:100%; height:100%; object-fit:contain;">
+            </div>
+            <div>
+                <h1 style="margin:0; font-size:1.4rem;">PEA-i UPC &bull; Dashboard Analítico de Investigación</h1>
+                <p style="margin:0.2rem 0 0 0; font-size:0.8rem; color:#cbd5e1;">Fase 5 Python &bull; Histogramas, Diagramas de Barras y Macro-Tipologías MinCiencias (Puntos 12.b y 12.c)</p>
+            </div>
         </div>
         <div class="badge-upc">UPC &bull; SCIENTI 2026</div>
     </header>
@@ -419,6 +424,16 @@ class DashboardApp:
             root.minsize(850, 550)
             root.configure(bg="#0a0f1d")
 
+            logo_path = os.path.join(PROJECT_ROOT, "data", "logo_upc_icon.png")
+            logo_img = None
+            if os.path.exists(logo_path):
+                try:
+                    logo_img = tk.PhotoImage(file=logo_path)
+                    root.iconphoto(True, logo_img)
+                    root._logo_img_ref = logo_img
+                except Exception:
+                    logo_img = None
+
             # Estilo ttk moderno y sobrio
             style = ttk.Style()
             style.theme_use("clam")
@@ -441,11 +456,18 @@ class DashboardApp:
             header_frame = tk.Frame(tab_graf, bg="#0a0f1d")
             header_frame.pack(fill="x", padx=15, pady=8)
 
-            lbl_title = tk.Label(header_frame, text="PEA-i UPC • Dashboard Analítico (Matplotlib Engine)",
+            if logo_img is not None:
+                lbl_logo = tk.Label(header_frame, image=logo_img, bg="#ffffff", bd=1, relief="solid", padx=4, pady=2)
+                lbl_logo.pack(side="left", padx=(0, 12))
+
+            title_box = tk.Frame(header_frame, bg="#0a0f1d")
+            title_box.pack(side="left", fill="x")
+
+            lbl_title = tk.Label(title_box, text="PEA-i UPC • Dashboard Analítico (Matplotlib Engine)",
                                  font=("Segoe UI", 12, "bold"), bg="#0a0f1d", fg="#10b981")
             lbl_title.pack(anchor="w")
 
-            lbl_sub = tk.Label(header_frame, text=f"Archivo de alta resolución generado en: {ruta_img}",
+            lbl_sub = tk.Label(title_box, text=f"Archivo de alta resolución generado en: {ruta_img}",
                                font=("Segoe UI", 9), bg="#0a0f1d", fg="#94a3b8")
             lbl_sub.pack(anchor="w")
 
