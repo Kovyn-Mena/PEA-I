@@ -89,6 +89,36 @@ public:
         std::string args = "Taller2_AB_PO_XX.py --auto-ingest";
         return ejecutarComandoPython(args, salida);
     }
+
+    // Busca universidades e instituciones en MinCiencias ScienTI
+    static bool buscarUniversidad(const std::string& texto, std::string& salida) {
+        std::string args = "Taller2_AB_PO_XX.py --buscar-universidad \"" + texto + "\"";
+        return ejecutarComandoPython(args, salida);
+    }
+
+    // Busca grupos por nombre o palabra clave en los índices institucionales
+    static bool buscarGrupo(const std::string& nombre, std::string& salida) {
+        std::string args = "Taller2_AB_PO_XX.py --buscar-grupo \"" + nombre + "\"";
+        return ejecutarComandoPython(args, salida);
+    }
+
+    // Lista los 66 grupos institucionales de la UPC
+    static bool listarGruposUPC(std::string& salida) {
+        std::string args = "Taller2_AB_PO_XX.py --listar-upc";
+        return ejecutarComandoPython(args, salida);
+    }
+
+    // Ejecuta Web Scraping de un grupo por su código NRO de MinCiencias
+    static bool scrapearGrupoNro(const std::string& nro, std::string& salida) {
+        std::string args = "Taller2_AB_PO_XX.py --scrape-grupo \"" + nro + "\"";
+        return ejecutarComandoPython(args, salida);
+    }
+
+    // Genera informe PDF formal con ReportLab de forma multiplataforma
+    static bool generarReportePDF(const std::string& codGrupo, std::string& salida) {
+        std::string args = "src/python/core/reporte_pdf.py \"" + codGrupo + "\"";
+        return ejecutarComandoPython(args, salida);
+    }
 };
 
 #endif // GESTOR_INTEROP_H

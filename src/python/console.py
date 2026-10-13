@@ -349,87 +349,106 @@ class ConsolaApp:
             print("=================================================================")
             print("  PEA-i UPC > Ingesta de Datos & Web Scraping (TDA Cola FIFO)    ")
             print("=================================================================")
-            print("  1. Web Scraping de Grupo MinCiencias (GrupLAC)")
-            print("  2. Web Scraping de Investigador MinCiencias (CvLAC)")
-            print("  3. Procesar Archivo CSV de Investigación (data/muestra_upc.csv)")
-            print("  4. Procesar Archivo PDF de Producción Científica")
-            print("  5. Auditoria Datos Abiertos Colombia (Socrata / Offline) y Catalogo 2024 (70 Subtipos)")
-            print("  6. Ingesta Automatica Masiva de Web Scraping (Todos los Grupos GrupLAC + CvLAC)")
+            print("  1. Buscar Universidad / Institución en MinCiencias (Directorio Nacional)")
+            print("  2. Explorar y Descargar Grupos de la UPC (66 Grupos Institucionales)")
+            print("  3. Buscar Grupo por Nombre o Sigla en MinCiencias (ScienTI)")
+            print("  4. Web Scraping de Grupo Directo (URL o Código nro MinCiencias)")
+            print("  5. Ingesta Automática Masiva de Todos los Grupos UPC (GrupLAC + CvLACs)")
+            print("  6. Web Scraping de Investigador Individual (CvLAC)")
+            print("  7. Procesar Archivo CSV de Investigación (data/muestra_upc.csv)")
+            print("  8. Procesar Archivo PDF de Producción Científica")
+            print("  9. Auditoría Datos Abiertos Colombia (Socrata) & Catálogo 2024")
             print("  0. Anterior / Regresar al Menú Principal")
             print("-----------------------------------------------------------------")
-            op = self.leer_opcion_menu("0123456", "Presione una opción [0-6]: ")
+            op = self.leer_opcion_menu("0123456789", "Presione una opción [0-9]: ")
+
+            motor = MotorIngesta(self.ruta_bd)
 
             if op == 1:
+                self._subopcion_buscar_universidad(motor)
+            elif op == 2:
+                self._subopcion_explorar_upc(motor)
+            elif op == 3:
+                self._subopcion_buscar_grupo(motor)
+            elif op == 4:
                 self.limpiar_pantalla()
                 print("=================================================================")
                 print("--- WEB SCRAPING: GRUPO MINCIENCIAS (GrupLAC) ---")
                 print("URL oficial del taller: Grupo GISICO (00000000002099)")
                 print("[Presione ENTER para usar la URL oficial, o 0 para cancelar]")
                 print("=================================================================")
-                url = self.leer_linea("URL GrupLAC: ", permite_vacio=True)
+                url = self.leer_linea("URL o NRO GrupLAC: ", permitir_vacio=True)
                 if url == "0": continue
                 if not url:
                     url = "https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002099"
+                elif url.isdigit():
+                    url = f"https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro={url}"
                 GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
-                motor = MotorIngesta(self.ruta_bd)
                 if motor.ejecutar_ingesta("URL_GRUPLAC", url):
                     self.multi = Multilista()
                     GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
                 self.pausar()
 
-            elif op == 2:
+            elif op == 5:
+                self.limpiar_pantalla()
+                GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+                if motor.ejecutar_ingesta_automatica():
+                    self.multi = Multilista()
+                    GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
+                self.pausar()
+
+            elif op == 6:
                 self.limpiar_pantalla()
                 print("=================================================================")
                 print("--- WEB SCRAPING: INVESTIGADOR MINCIENCIAS (CvLAC) ---")
                 print("URL oficial del taller: Ing. Adith Pérez (0000494917)")
                 print("[Presione ENTER para usar la URL oficial, o 0 para cancelar]")
                 print("=================================================================")
-                url = self.leer_linea("URL CvLAC: ", permite_vacio=True)
+                url = self.leer_linea("URL o COD_RH CvLAC: ", permitir_vacio=True)
                 if url == "0": continue
                 if not url:
                     url = "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000494917"
+                elif url.isdigit():
+                    url = f"https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh={url}"
                 GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
-                motor = MotorIngesta(self.ruta_bd)
                 if motor.ejecutar_ingesta("URL_CVLAC", url):
                     self.multi = Multilista()
                     GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
                 self.pausar()
 
-            elif op == 3:
+            elif op == 7:
                 self.limpiar_pantalla()
                 print("=================================================================")
                 print("--- PROCESAMIENTO DE ARCHIVO CSV ---")
                 print("[Presione ENTER para usar 'data/muestra_upc.csv', o 0 para cancelar]")
                 print("=================================================================")
-                ruta = self.leer_linea("Ruta del archivo CSV: ", permite_vacio=True)
+                ruta = self.leer_linea("Ruta del archivo CSV: ", permitir_vacio=True)
                 if ruta == "0": continue
                 if not ruta:
                     ruta = "data/muestra_upc.csv"
                 GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
-                motor = MotorIngesta(self.ruta_bd)
                 if motor.ejecutar_ingesta("ARCHIVO_CSV", ruta):
                     self.multi = Multilista()
                     GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
                 self.pausar()
 
-            elif op == 4:
+            elif op == 8:
                 self.limpiar_pantalla()
                 print("=================================================================")
                 print("--- PROCESAMIENTO DE ARCHIVO PDF ---")
                 print("[Presione ENTER para usar 'data/muestra_articulo.pdf', o 0 para cancelar]")
                 print("=================================================================")
-                ruta = self.leer_linea("Ruta del archivo PDF: ", permite_vacio=True)
+                ruta = self.leer_linea("Ruta del archivo PDF: ", permitir_vacio=True)
                 if ruta == "0": continue
                 if not ruta:
                     ruta = "data/muestra_articulo.pdf"
                 GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
-                motor = MotorIngesta(self.ruta_bd)
                 if motor.ejecutar_ingesta("ARCHIVO_PDF", ruta):
                     self.multi = Multilista()
                     GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
                 self.pausar()
 
-            elif op == 5:
+            elif op == 9:
                 self.limpiar_pantalla()
                 print("=================================================================")
                 print("--- DATOS ABIERTOS DE COLOMBIA (SOCRATA) & CATALOGO 2024 ---")
@@ -453,14 +472,136 @@ class ConsolaApp:
                 print("=================================================================")
                 self.pausar()
 
-            elif op == 6:
-                self.limpiar_pantalla()
+    def _subopcion_buscar_universidad(self, motor):
+        self.limpiar_pantalla()
+        print("=================================================================")
+        print("   BÚSQUEDA DE UNIVERSIDADES / INSTITUCIONES EN MINCIENCIAS     ")
+        print("=================================================================")
+        texto = self.leer_linea("Nombre o sigla a buscar (ej: Cesar, Andes, Valle, 947): ")
+        if not texto or texto == "0":
+            return
+        from python.core.busqueda_scienti import buscar_universidad, obtener_grupos_institucion
+        resultados = buscar_universidad(texto)
+        if not resultados:
+            print(f"\n[!] No se encontraron instituciones con el término '{texto}'.")
+            self.pausar()
+            return
+
+        print(f"\nSe encontraron {len(resultados)} instituciones:")
+        print(f"{'#':<4}{'CÓDIGO':<10}{'INSTITUCIÓN':<48}{'GRUPOS':<10}")
+        print("-" * 74)
+        for i, inst in enumerate(resultados[:25], 1):
+            nom_c = inst.get("nombre", "")[:45]
+            print(f"{i:<4}{inst.get('codinst',''):<10}{nom_c:<48}{inst.get('n_grupos',0):<10}")
+
+        sel = self.leer_linea("\nSeleccione [#] para ver sus grupos (o ENTER para regresar): ", permitir_vacio=True)
+        if sel.isdigit() and 1 <= int(sel) <= min(len(resultados), 25):
+            inst_sel = resultados[int(sel) - 1]
+            codinst = inst_sel.get("codinst", "")
+            grupos = obtener_grupos_institucion(codinst, inst_sel.get("nombre", ""))
+            print(f"\n--- GRUPOS DE: {inst_sel.get('nombre','')} ({len(grupos)} grupos) ---")
+            for j, g in enumerate(grupos[:30], 1):
+                print(f"  {j:02d}. [{g.get('nro','')}] {g.get('col','')} - {g.get('nombre','')[:48]} ({g.get('categoria','')})")
+
+            sel_g = self.leer_linea("\nIngrese [#] de grupo para ingestar automáticamente (o 0 para omitir): ", permitir_vacio=True)
+            if sel_g.isdigit() and 1 <= int(sel_g) <= min(len(grupos), 30):
+                g_target = grupos[int(sel_g) - 1]
+                nro = g_target.get("nro", "")
+                if nro:
+                    url = f"https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro={nro}"
+                    print(f"\n[+] Ingestando grupo {g_target.get('nombre','')} (nro={nro})...")
+                    GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+                    if motor.ejecutar_ingesta("URL_GRUPLAC", url):
+                        self.multi = Multilista()
+                        GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
+        self.pausar()
+
+    def _subopcion_explorar_upc(self, motor):
+        from python.core.busqueda_scienti import listar_grupos_upc
+        grupos = listar_grupos_upc()
+        if not grupos:
+            print("\n[!] No se encontraron grupos de la UPC en el índice local.")
+            self.pausar()
+            return
+
+        tam_pag = 15
+        total_pags = (len(grupos) + tam_pag - 1) // tam_pag
+        pag = 0
+
+        while True:
+            self.limpiar_pantalla()
+            print("=========================================================================================")
+            print(f"   GRUPOS INSTITUCIONALES UNIVERSIDAD POPULAR DEL CESAR (Página {pag + 1}/{total_pags})")
+            print("=========================================================================================")
+            print(f"{'#':<4}{'CÓDIGO':<12}{'NOMBRE DEL GRUPO':<45}{'LÍDER':<25}{'CATEGORÍA':<10}")
+            print("-" * 98)
+
+            inicio = pag * tam_pag
+            fin = min(inicio + tam_pag, len(grupos))
+            for i in range(inicio, fin):
+                g = grupos[i]
+                nom = g.get("nombre", "")[:42]
+                lid = g.get("lider", "")[:23]
+                print(f"{i + 1:<4}{g.get('col',''):<12}{nom:<45}{lid:<25}{g.get('estado',''):<10}")
+
+            print("-----------------------------------------------------------------------------------------")
+            print("Controles: [S]iguiente página | [A]nterior página | [1-66] Ingestar Grupo | [0] Regresar")
+            cmd = self.leer_linea("Selección: ", permitir_vacio=True).upper()
+
+            if cmd in ("0", ""):
+                break
+            elif cmd == "S" and pag + 1 < total_pags:
+                pag += 1
+            elif cmd == "A" and pag > 0:
+                pag -= 1
+            elif cmd.isdigit() and 1 <= int(cmd) <= len(grupos):
+                idx = int(cmd) - 1
+                g_sel = grupos[idx]
+                nro = g_sel.get("nro", "")
+                url = f"https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro={nro}"
+                print(f"\n[+] Ingestando automáticamente grupo UPC: {g_sel.get('nombre','')} (nro={nro})...")
                 GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
-                motor = MotorIngesta(self.ruta_bd)
-                if motor.ejecutar_ingesta_automatica():
+                if motor.ejecutar_ingesta("URL_GRUPLAC", url):
                     self.multi = Multilista()
                     GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
                 self.pausar()
+                break
+
+    def _subopcion_buscar_grupo(self, motor):
+        self.limpiar_pantalla()
+        print("=================================================================")
+        print("       BÚSQUEDA DE GRUPOS EN MINCIENCIAS (ScienTI)               ")
+        print("=================================================================")
+        termino = self.leer_linea("Palabra clave a buscar (ej: GISICO, Biotecnología, Software, Patino): ")
+        if not termino or termino == "0":
+            return
+        from python.core.busqueda_scienti import buscar_grupo_en_indices
+        cands = buscar_grupo_en_indices(termino)
+        if not cands:
+            print(f"\n[!] No se encontraron grupos con el término '{termino}'.")
+            self.pausar()
+            return
+
+        print(f"\nSe encontraron {len(cands)} grupos:")
+        print(f"{'#':<4}{'CÓDIGO':<12}{'NOMBRE DEL GRUPO':<45}{'LÍDER':<25}")
+        print("-" * 88)
+        for i, g in enumerate(cands[:25], 1):
+            nom = g.get("nombre", "")[:42]
+            lid = g.get("lider", "")[:23]
+            print(f"{i:<4}{g.get('col',''):<12}{nom:<45}{lid:<25}")
+
+        sel = self.leer_linea("\nIngrese [#] para ingestar automáticamente el grupo (o ENTER para cancelar): ", permitir_vacio=True)
+        if sel.isdigit() and 1 <= int(sel) <= min(len(cands), 25):
+            g_sel = cands[int(sel) - 1]
+            nro = g_sel.get("nro", "")
+            if nro:
+                url = f"https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro={nro}"
+                print(f"\n[+] Ingestando grupo {g_sel.get('nombre','')} (nro={nro})...")
+                GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+                if motor.ejecutar_ingesta("URL_GRUPLAC", url):
+                    self.multi = Multilista()
+                    GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
+        self.pausar()
 
     # -----------------------------------------------------------------
     # CRUD: GRUPOS

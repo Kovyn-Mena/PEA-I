@@ -98,6 +98,48 @@ def main():
         ok = ejecutar_verificacion_cruzada(db_path)
         sys.exit(0 if ok else 1)
 
+    elif "--buscar-universidad" in args:
+        idx = args.index("--buscar-universidad")
+        q = args[idx + 1] if idx + 1 < len(args) else ""
+        from python.core.busqueda_scienti import buscar_universidad
+        res = buscar_universidad(q)
+        print(f"=== RESULTADOS BÚSQUEDA UNIVERSIDAD: '{q}' ({len(res)} encontradas) ===")
+        for i, c in enumerate(res[:30], 1):
+            print(f"UNIV|{i}|{c.get('codinst','')}|{c.get('nombre','')[:70]}|{c.get('n_grupos',0)} grupos")
+        sys.exit(0)
+
+    elif "--buscar-grupo" in args:
+        idx = args.index("--buscar-grupo")
+        q = args[idx + 1] if idx + 1 < len(args) else ""
+        from python.core.busqueda_scienti import buscar_grupo_en_indices
+        res = buscar_grupo_en_indices(q)
+        print(f"=== RESULTADOS BÚSQUEDA GRUPO: '{q}' ({len(res)} encontrados) ===")
+        for i, g in enumerate(res[:40], 1):
+            print(f"GRUPO|{i}|{g.get('nro','')}|{g.get('col','')}|{g.get('nombre','')[:60]}|Líder: {g.get('lider','')[:30]}|Cat: {g.get('estado','')}")
+        sys.exit(0)
+
+    elif "--listar-upc" in args:
+        from python.core.busqueda_scienti import listar_grupos_upc
+        res = listar_grupos_upc()
+        print(f"=== GRUPOS INSTITUCIONALES UNIVERSIDAD POPULAR DEL CESAR ({len(res)} grupos) ===")
+        for i, g in enumerate(res, 1):
+            print(f"UPC|{i:02d}|{g.get('nro','')}|{g.get('col','')}|{g.get('nombre','')[:55]}|{g.get('lider','')[:25]}|{g.get('estado','')}")
+        sys.exit(0)
+
+    elif "--scrape-grupo" in args:
+        idx = args.index("--scrape-grupo")
+        if idx + 1 < len(args):
+            nro = args[idx + 1]
+            url = f"https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro={nro}"
+            motor = _crear_motor_ingesta(db_path)
+            if not motor:
+                sys.exit(1)
+            exito = motor.ejecutar_ingesta("URL_GRUPLAC", url)
+            sys.exit(0 if exito else 1)
+        else:
+            print("[!] Falta especificar el NRO para --scrape-grupo")
+            sys.exit(1)
+
     elif "--auto-ingest" in args:
         motor = _crear_motor_ingesta(db_path)
         if not motor:

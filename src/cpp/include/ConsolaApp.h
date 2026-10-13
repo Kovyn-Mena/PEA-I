@@ -451,50 +451,61 @@ public:
             std::cout << "=================================================================\n";
             std::cout << "  PEA-i UPC > Ingesta de Datos & Web Scraping (Interoperabilidad)\n";
             std::cout << "=================================================================\n";
-            std::cout << "  1. Web Scraping de Grupo MinCiencias (GrupLAC)\n";
-            std::cout << "  2. Web Scraping de Investigador MinCiencias (CvLAC)\n";
-            std::cout << "  3. Procesar Archivo CSV de Investigacion (data/muestra_upc.csv)\n";
-            std::cout << "  4. Procesar Archivo PDF de Produccion Cientifica\n";
-            std::cout << "  5. Ingesta Automatica Masiva de Web Scraping (Todos los Grupos GrupLAC + CvLAC)\n";
-            std::cout << "  0. Anterior / Regresar al Menu Principal\n";
+            std::cout << "  1. Buscar Universidad / Institución en MinCiencias (Directorio)\n";
+            std::cout << "  2. Explorar y Descargar Grupos de la UPC (66 Grupos)\n";
+            std::cout << "  3. Buscar Grupo por Nombre o Sigla en MinCiencias (ScienTI)\n";
+            std::cout << "  4. Web Scraping de Grupo Directo (URL o Código nro MinCiencias)\n";
+            std::cout << "  5. Ingesta Automática Masiva de Web Scraping (Grupos UPC + CvLAC)\n";
+            std::cout << "  6. Web Scraping de Investigador Individual (CvLAC)\n";
+            std::cout << "  7. Procesar Archivo CSV de Investigación (data/muestra_upc.csv)\n";
+            std::cout << "  8. Procesar Archivo PDF de Producción Científica\n";
+            std::cout << "  0. Anterior / Regresar al Menú Principal\n";
             std::cout << "-----------------------------------------------------------------\n";
-            op = leerOpcionMenu("012345", "Presione una opcion [0-5]: ");
+            op = leerOpcionMenu("012345678", "Presione una opción [0-8]: ");
 
             if (op == 1) {
                 limpiarPantalla();
                 std::cout << "=================================================================\n";
-                std::cout << "--- WEB SCRAPING: GRUPO MINCIENCIAS (GrupLAC) ---\n";
-                std::cout << "URL oficial del taller: Grupo GISICO (00000000002099)\n";
-                std::cout << "[Presione ENTER para usar la URL oficial, o 0 para cancelar]\n";
+                std::cout << "--- BÚSQUEDA DE UNIVERSIDADES / INSTITUCIONES EN MINCIENCIAS ---\n";
                 std::cout << "=================================================================\n";
-                std::string url = leerLinea("URL GrupLAC: ", true);
-                if (url == "0") continue;
-                if (url.empty()) {
-                    url = "https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002099";
-                }
-                GestorSQLite::guardarEnBD(multi, rutaBD);
+                std::string txt = leerLinea("Nombre o sigla a buscar (ej: Cesar, Andes, Valle, 947): ");
+                if (txt.empty() || txt == "0") continue;
                 std::string salida;
-                if (GestorInterop::ejecutarScrapingURL(url, salida)) {
-                    std::cout << "\n[+] Recargando datos en la Multilista en RAM desde SQLite...\n";
-                    multi.liberar();
-                    GestorSQLite::cargarDesdeBD(multi, rutaBD);
-                    std::cout << "[OK] Multilista actualizada en RAM: " 
-                              << multi.contarGrupos(false) << " grupos, "
-                              << multi.contarInvestigadores(false) << " investigadores, "
-                              << multi.contarProductos(false) << " productos.\n";
-                }
+                GestorInterop::buscarUniversidad(txt, salida);
                 pausar();
             } else if (op == 2) {
                 limpiarPantalla();
                 std::cout << "=================================================================\n";
-                std::cout << "--- WEB SCRAPING: INVESTIGADOR MINCIENCIAS (CvLAC) ---\n";
-                std::cout << "URL oficial del taller: Ing. Adith Perez (0000494917)\n";
+                std::cout << "--- GRUPOS INSTITUCIONALES DE LA UNIVERSIDAD POPULAR DEL CESAR ---\n";
+                std::cout << "=================================================================\n";
+                std::string salida;
+                GestorInterop::listarGruposUPC(salida);
+                std::cout << "\n[i] Para ingestar un grupo específico use la Opción 4 con su número NRO.\n";
+                pausar();
+            } else if (op == 3) {
+                limpiarPantalla();
+                std::cout << "=================================================================\n";
+                std::cout << "--- BÚSQUEDA DE GRUPOS EN MINCIENCIAS (ScienTI) ---\n";
+                std::cout << "=================================================================\n";
+                std::string nom = leerLinea("Palabra clave del grupo (ej: GISICO, Software, Biotecnología): ");
+                if (nom.empty() || nom == "0") continue;
+                std::string salida;
+                GestorInterop::buscarGrupo(nom, salida);
+                std::cout << "\n[i] Para ingestar un grupo específico use la Opción 4 con su número NRO.\n";
+                pausar();
+            } else if (op == 4) {
+                limpiarPantalla();
+                std::cout << "=================================================================\n";
+                std::cout << "--- WEB SCRAPING: GRUPO MINCIENCIAS (GrupLAC) ---\n";
+                std::cout << "URL o NRO oficial del taller: Grupo GISICO (00000000002099)\n";
                 std::cout << "[Presione ENTER para usar la URL oficial, o 0 para cancelar]\n";
                 std::cout << "=================================================================\n";
-                std::string url = leerLinea("URL CvLAC: ", true);
+                std::string url = leerLinea("URL o NRO GrupLAC: ", true);
                 if (url == "0") continue;
                 if (url.empty()) {
-                    url = "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000494917";
+                    url = "https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002099";
+                } else if (url.find("http") == std::string::npos) {
+                    url = "https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=" + url;
                 }
                 GestorSQLite::guardarEnBD(multi, rutaBD);
                 std::string salida;
@@ -508,7 +519,53 @@ public:
                               << multi.contarProductos(false) << " productos.\n";
                 }
                 pausar();
-            } else if (op == 3) {
+            } else if (op == 5) {
+                limpiarPantalla();
+                std::cout << "=================================================================\n";
+                std::cout << "--- INGESTA AUTOMATICA MASIVA DE WEB SCRAPING (COLA FIFO) ---\n";
+                std::cout << "Procesa en lote todos los snapshots GrupLAC y hojas CvLAC\n";
+                std::cout << "(GISICO, AITICE, FACEUPC, GIELEHLA + Scholar/ORCID/Par Evaluador)\n";
+                std::cout << "=================================================================\n";
+                GestorSQLite::guardarEnBD(multi, rutaBD);
+                std::string salida;
+                if (GestorInterop::ejecutarIngestaAutomatica(salida)) {
+                    std::cout << "\n[+] Recargando Multilista en RAM desde SQLite y regenerando Portal Web...\n";
+                    multi.liberar();
+                    GestorSQLite::cargarDesdeBD(multi, rutaBD);
+                    VisualizadorGrafico::generarHTML(multi, "dist/visualizador_hipercubo.html");
+                    std::cout << "[OK] Multilista y Portal Web actualizados: "
+                              << multi.contarGrupos(false) << " grupos, "
+                              << multi.contarInvestigadores(false) << " investigadores, "
+                              << multi.contarProductos(false) << " productos.\n";
+                }
+                pausar();
+            } else if (op == 6) {
+                limpiarPantalla();
+                std::cout << "=================================================================\n";
+                std::cout << "--- WEB SCRAPING: INVESTIGADOR MINCIENCIAS (CvLAC) ---\n";
+                std::cout << "URL o COD_RH oficial del taller: Ing. Adith Perez (0000494917)\n";
+                std::cout << "[Presione ENTER para usar la URL oficial, o 0 para cancelar]\n";
+                std::cout << "=================================================================\n";
+                std::string url = leerLinea("URL o COD_RH CvLAC: ", true);
+                if (url == "0") continue;
+                if (url.empty()) {
+                    url = "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000494917";
+                } else if (url.find("http") == std::string::npos) {
+                    url = "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=" + url;
+                }
+                GestorSQLite::guardarEnBD(multi, rutaBD);
+                std::string salida;
+                if (GestorInterop::ejecutarScrapingURL(url, salida)) {
+                    std::cout << "\n[+] Recargando datos en la Multilista en RAM desde SQLite...\n";
+                    multi.liberar();
+                    GestorSQLite::cargarDesdeBD(multi, rutaBD);
+                    std::cout << "[OK] Multilista actualizada en RAM: " 
+                              << multi.contarGrupos(false) << " grupos, "
+                              << multi.contarInvestigadores(false) << " investigadores, "
+                              << multi.contarProductos(false) << " productos.\n";
+                }
+                pausar();
+            } else if (op == 7) {
                 limpiarPantalla();
                 std::cout << "=================================================================\n";
                 std::cout << "--- PROCESAMIENTO DE ARCHIVO CSV ---\n";
@@ -531,7 +588,7 @@ public:
                               << multi.contarProductos(false) << " productos.\n";
                 }
                 pausar();
-            } else if (op == 4) {
+            } else if (op == 8) {
                 limpiarPantalla();
                 std::cout << "=================================================================\n";
                 std::cout << "--- PROCESAMIENTO DE ARCHIVO PDF ---\n";
@@ -546,26 +603,6 @@ public:
                     multi.liberar();
                     GestorSQLite::cargarDesdeBD(multi, rutaBD);
                     std::cout << "[OK] Multilista actualizada en RAM: " 
-                              << multi.contarGrupos(false) << " grupos, "
-                              << multi.contarInvestigadores(false) << " investigadores, "
-                              << multi.contarProductos(false) << " productos.\n";
-                }
-                pausar();
-            } else if (op == 5) {
-                limpiarPantalla();
-                std::cout << "=================================================================\n";
-                std::cout << "--- INGESTA AUTOMATICA MASIVA DE WEB SCRAPING (COLA FIFO) ---\n";
-                std::cout << "Procesa en lote todos los snapshots GrupLAC y 85 hojas CvLAC\n";
-                std::cout << "(GISICO, AITICE, FACEUPC, GIELEHLA + Scholar/ORCID/Par Evaluador)\n";
-                std::cout << "=================================================================\n";
-                GestorSQLite::guardarEnBD(multi, rutaBD);
-                std::string salida;
-                if (GestorInterop::ejecutarIngestaAutomatica(salida)) {
-                    std::cout << "\n[+] Recargando Multilista en RAM desde SQLite y regenerando Portal Web...\n";
-                    multi.liberar();
-                    GestorSQLite::cargarDesdeBD(multi, rutaBD);
-                    VisualizadorGrafico::generarHTML(multi, "dist/visualizador_hipercubo.html");
-                    std::cout << "[OK] Multilista y Portal Web actualizados: "
                               << multi.contarGrupos(false) << " grupos, "
                               << multi.contarInvestigadores(false) << " investigadores, "
                               << multi.contarProductos(false) << " productos.\n";
@@ -773,13 +810,12 @@ public:
         if (cod.empty() || cod == "0") return;
 
         std::cout << "\n[+] Generando informe formal en PDF para " << cod << " (ReportLab)...\n";
-        std::string cmd = "python3 src/python/core/reporte_pdf.py " + cod;
-        int res = std::system(cmd.c_str());
-        if (res == 0) {
+        std::string salida;
+        if (GestorInterop::generarReportePDF(cod, salida)) {
             std::cout << "\n[OK] ¡Informe PDF institucional generado con éxito!\n";
             std::cout << "     Directorio: reportes/Informe_GrupLAC_" << cod << ".pdf\n";
         } else {
-            std::cout << "\n[!] Error generando el informe PDF (código: " << res << ").\n";
+            std::cout << "\n[!] Error generando el informe PDF.\n";
         }
         pausar();
     }
