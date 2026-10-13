@@ -398,13 +398,24 @@ class MotorIngesta:
         nro_grupo = match_cod.group(1) if match_cod else "00000000002099"
         sufijo_nro = nro_grupo[-4:] if len(nro_grupo) >= 4 else nro_grupo
 
-        MAPA_NRO_A_COL = {
-            "2099": "COL0002099",
-            "2668": "COL0043834",
-            "3202": "COL0049121",
-            "3639": "COL0001351",
-        }
-        cod_grupo = MAPA_NRO_A_COL.get(sufijo_nro, f"COL{nro_grupo[-7:]}" if len(nro_grupo) >= 7 else f"COL{nro_grupo}")
+        # Resolver código COL oficial desde los índices institucionales
+        cod_grupo = ""
+        try:
+            from python.core.busqueda_scienti import buscar_grupo_en_indices
+            cands = buscar_grupo_en_indices(nro_grupo)
+            if cands and cands[0].get("col"):
+                cod_grupo = cands[0]["col"]
+        except Exception:
+            pass
+
+        if not cod_grupo:
+            MAPA_NRO_A_COL = {
+                "2099": "COL0002099",
+                "2668": "COL0043834",
+                "3202": "COL0049121",
+                "3639": "COL0001351",
+            }
+            cod_grupo = MAPA_NRO_A_COL.get(sufijo_nro, f"COL{nro_grupo[-7:]}" if len(nro_grupo) >= 7 else f"COL{nro_grupo}")
 
         html_text = ""
         # Verificar primero si url ya es ruta de archivo o si existe snapshot oficial local en data/snapshots/
@@ -424,10 +435,9 @@ class MotorIngesta:
                 else:
                     raise Exception(f"HTTP Status {resp.status_code}")
             except Exception as e:
-                print(f"[!] Aviso: No se pudo conectar a MinCiencias en vivo ({e}).")
-                print("[+] Activando Plan B: Usando dataset offline de respaldo para GrupLAC...")
-                resumen["modo"] = "OFFLINE_BACKUP"
-                return self._fallback_gruplac(cod_grupo, multi, resumen)
+                print(f"[!] Error: No se pudo conectar a MinCiencias ({e}) y no existe snapshot local para el grupo {nro_grupo}.")
+                resumen["modo"] = "ERROR_SIN_CONEXION"
+                return resumen
 
         soup = BeautifulSoup(html_text, "html.parser")
 
@@ -497,6 +507,7 @@ class MotorIngesta:
         # 6. Integrantes del Grupo (con cod_rh de CvLAC y vinculación a PerfilInvestigador)
         mapa_integrantes = {}
         id_lider_doc = ""
+        rhs_grupo = []
 
         for t in soup.find_all("table"):
             th = " ".join(t.get_text(" ").split())
@@ -516,6 +527,7 @@ class MotorIngesta:
                             m_rh = re.search(r"cod_rh=(\d+)", a_cv.get("href", ""))
                             if m_rh:
                                 cod_rh = m_rh.group(1)
+                                rhs_grupo.append(cod_rh)
 
                         doc_inv = cod_rh if cod_rh else f"INV{sufijo_nro}{len(mapa_integrantes)+1:03d}"
                         if "adith" in nom_raw.lower():
@@ -567,6 +579,23 @@ class MotorIngesta:
                 multi.insertar_investigador(cod_grupo, id_lider_doc, lider, "Senior", area, True)
                 resumen["investigadores"] += 1
             mapa_integrantes[_norm_txt(lider)] = id_lider_doc
+
+        # Pipeline Unificado: procesar en paralelo las hojas de vida CvLAC de los integrantes descubiertos (12 hilos)
+        rhs_unicos = sorted(set(rhs_grupo))
+        if rhs_unicos:
+            print(f"[GrupLAC + CvLAC] Procesando {len(rhs_unicos)} hojas de vida CvLAC en paralelo (12 hilos)...")
+            cv_ok = self.scrapear_cvlacs_paralelo(rhs_unicos, max_workers=12)
+            print(f"[GrupLAC + CvLAC] Perfiles CvLAC procesados: {cv_ok}/{len(rhs_unicos)}")
+            for rh in rhs_unicos:
+                h_cv = leer_snapshot_cvlac_html(rh)
+                if h_cv:
+                    p_cv = parse_hoja_vida(h_cv)
+                    nodo_inv = multi.buscar_investigador(rh)
+                    if nodo_inv:
+                        if p_cv.get("formacion_academica"):
+                            nodo_inv.formacion_academica = p_cv["formacion_academica"][:90]
+                        if p_cv.get("categoria"):
+                            nodo_inv.categoria = p_cv["categoria"]
 
         lista_docs_grupo = list(mapa_integrantes.values()) or [id_lider_doc]
 
@@ -641,7 +670,7 @@ class MotorIngesta:
                         id_inv_asociado = doc_k
 
             if not id_inv_asociado:
-                id_inv_asociado = lista_docs_grupo[prod_count % len(lista_docs_grupo)]
+                id_inv_asociado = id_lider_doc
 
             prod_count += 1
             cat_prod = "A1" if is_validado and prod_count % 2 == 0 else cats_ciclo[prod_count % len(cats_ciclo)]
@@ -652,56 +681,11 @@ class MotorIngesta:
                 if is_validado:
                     resumen["validados"] += 1
 
-        return resumen
-
-    def _fallback_gruplac(self, cod_grupo: str, multi: Multilista, resumen: dict) -> dict:
-        """Plan B: Ingesta con datos representativos reales de GISICO si MinCiencias está caído"""
-        if not multi.buscar_grupo(cod_grupo):
-            multi.insertar_grupo(
-                cod_grupo,
-                "GRUPO DE INVESTIGACION EN SISTEMAS Y COMPUTACIÓN -GISICO-",
-                "C",
-                "Ingeniería y Tecnología",
-                "John Jairo Patiño Vanegas",
-                2001,
-                True
-            )
-            resumen["grupos"] += 1
-
-        invs = [
-            ("INV2099001", "John Jairo Patiño Vanegas", "Asociado", "Maestría en Computación"),
-            ("0000494917", "Adith Bismarck Pérez Orozco", "Senior", "Doctorado en Ingeniería de Sistemas"),
-            ("0000666106", "Eydy Del Carmen Suarez Brieva", "Asociado", "Maestría en Sistemas"),
-            ("INV2099004", "Alfonso Enrique García Payares", "Junior", "Ingeniería de Sistemas"),
-            ("0000441708", "Gloria Marina Rosado Galindo", "Asociado", "Ingeniería de Sistemas"),
-            ("0001404785", "Heyner Alexander Aroca Araujo", "Junior", "Ingeniería de Sistemas")
-        ]
-        for doc, nom, cat, form in invs:
-            if not multi.buscar_investigador(doc):
-                multi.insertar_investigador(cod_grupo, doc, nom, cat, form, True)
-                resumen["investigadores"] += 1
-
-        # Poblar PerfilInvestigador para el docente Adith Pérez
-        guardar_perfil_bd("0000494917", {
-            "par_evaluador": "Si",
-            "scholar_url": "https://scholar.google.com/citations?user=7DUEVWAAAAAJ&hl=es",
-            "orcid": "https://orcid.org/0000-0002-2149-1625",
-            "formacion_academica": "Doctorado en Ingeniería de Sistemas | Maestría en Sistemas"
-        }, self.ruta_bd)
-
-        prods = [
-            ("FALLBACK-001", "0000494917", "Articulo", "Modelo de hipercubo para análisis multidimensional en MinCiencias", 2024, "A1", True),
-            ("FALLBACK-002", "0000666106", "Software", "Sistema de analítica institucional de investigación universitaria", 2025, "A1", True),
-            ("FALLBACK-003", "INV2099001", "Articulo", "Epistemological Foundations of Quantitative Software Research", 2023, "A", True),
-            ("FALLBACK-004", "0000494917", "Libro", "Fundamentos de Estructuras de Datos aplicadas a grafos y multilistas", 2022, "A1", True),
-            ("FALLBACK-005", "0000441708", "Articulo", "Scientific Methods of Quantitative Research in Engineering", 2026, "A1", True),
-            ("FALLBACK-006", "0001404785", "Evento", "Pensamiento sistémico y simulación microcontrolada", 2025, "A", True)
-        ]
-        for id_p, doc_inv, tip, tit, an, cat, val in prods:
-            if not multi.buscar_producto(id_p):
-                multi.insertar_producto(cod_grupo, doc_inv, id_p, tip, tit, an, cat, val, True)
-                resumen["productos"] += 1
-                if val: resumen["validados"] += 1
+        # Empaquetar snapshots del grupo en su archivo ZIP correspondiente
+        try:
+            empaquetar_grupo_zip(cod_grupo)
+        except Exception:
+            pass
 
         return resumen
 
@@ -737,10 +721,9 @@ class MotorIngesta:
                 else:
                     raise Exception(f"HTTP Status {resp.status_code}")
             except Exception as e:
-                print(f"[!] Aviso: No se pudo conectar a CvLAC en vivo ({e}).")
-                print("[+] Activando Plan B: Usando dataset offline de respaldo para CvLAC...")
-                resumen["modo"] = "OFFLINE_BACKUP"
-                return self._fallback_cvlac(cod_rh, cod_grupo_def, multi, resumen)
+                print(f"[!] Error: No se pudo conectar a CvLAC en vivo ({e}) y no existe snapshot para cod_rh={cod_rh}.")
+                resumen["modo"] = "ERROR_SIN_CONEXION"
+                return resumen
 
         # Parsear Hoja de Vida CvLAC enriquecida
         perfil_cv = parse_hoja_vida(html_text)
@@ -801,37 +784,6 @@ class MotorIngesta:
                 if prod_count >= 20:
                     break
 
-        return resumen
-
-    def _fallback_cvlac(self, cod_rh: str, cod_grupo: str, multi: Multilista, resumen: dict) -> dict:
-        """Plan B: Ingesta offline del perfil del docente Adith Pérez"""
-        if not multi.buscar_investigador(cod_rh):
-            multi.insertar_investigador(
-                cod_grupo,
-                cod_rh,
-                "Adith Bismarck Pérez Orozco",
-                "Senior",
-                "Doctorado en Ingeniería de Sistemas",
-                True
-            )
-            resumen["investigadores"] += 1
-
-        guardar_perfil_bd(cod_rh, {
-            "par_evaluador": "Si",
-            "scholar_url": "https://scholar.google.com/citations?user=7DUEVWAAAAAJ&hl=es",
-            "orcid": "https://orcid.org/0000-0002-2149-1625",
-            "formacion_academica": "Doctorado en Ingeniería de Sistemas"
-        }, self.ruta_bd)
-
-        prods = [
-            (f"CVLAC-{cod_rh[-4:]}-001", "Articulo", "Algoritmos genéticos aplicados a la clasificación de grupos MinCiencias", 2024, "A1", True),
-            (f"CVLAC-{cod_rh[-4:]}-002", "Libro", "Estructuras de Datos Avanzadas e Hipercubos Multidimensionales", 2023, "A1", True),
-            (f"CVLAC-{cod_rh[-4:]}-003", "Capitulo", "Minería de datos sobre el Scienti de MinCiencias", 2022, "A", True)
-        ]
-        for id_p, tip, tit, an, cat, val in prods:
-            if not multi.buscar_producto(id_p):
-                multi.insertar_producto(cod_grupo, cod_rh, id_p, tip, tit, an, cat, val, True)
-                resumen["productos"] += 1
         return resumen
 
     # -----------------------------------------------------------------
@@ -923,7 +875,9 @@ class MotorIngesta:
             resumen["investigadores"] += 1
 
         nombre_archivo = os.path.basename(ruta_pdf)
-        id_prod = f"PDF-{abs(hash(nombre_archivo)) % 100000:05d}"
+        import hashlib
+        h_pdf = hashlib.sha256((nombre_archivo + titulo).encode("utf-8", errors="ignore")).hexdigest()[:8].upper()
+        id_prod = f"PDF-{h_pdf}"
         if not multi.buscar_producto(id_prod):
             multi.insertar_producto(cod_grupo, doc_inv, id_prod, "Articulo", titulo[:110], anio, "A1", True, True)
             resumen["productos"] += 1
