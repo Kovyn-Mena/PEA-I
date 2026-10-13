@@ -276,13 +276,22 @@ Archivos raíz perdidos al copiar el repo (papelera y disco revisados: sin copia
   3. **Fase 3 (Deshacer LIFO Real en C++ y Python):**
      - En `src/python/console.py` y `src/cpp/include/ConsolaApp.h`, captura exhaustiva de atributos en `detalle_previo` (`clave=valor;...`) antes de modificar o eliminar grupos, investigadores o productos.
      - En `ejecutar_deshacer` / `ejecutarDeshacer`, parseo atómico del estado previo, restauración de campos en RAM (`MODIFICAR`), re-inserción ortogonal de nodos (`ELIMINAR`) y sincronización inmediata con SQLite.
-  4. **Lanzador y Distribución:**
+  4. **Fase 4 (Blindaje de Persistencia, Verificación Cruzada y Rendimiento):**
+     - En `src/cpp/include/GestorSQLite.h` y `src/cpp/test_sqlite.cpp`, implementada la función `columnaTextoSegura()` para evitar lecturas de punteros nulos ante campos vacíos en SQLite.
+     - Protegido `guardarEnBD()` con `BEGIN IMMEDIATE TRANSACTION` y `ROLLBACK` ante errores de preparación.
+     - En `src/python/core/verificacion_cruzada.py`, eliminado el falso positivo `v_cpp = v_py if not cpp_stats else -2`. Si el binario C++ no existe, se compila en caliente con `make`, y si no se encuentra disponible, se reporta falla estricta sin declarar equivalencias ficticias.
+     - En `src/python/gui.py`, eliminada la pre-generación síncrona bloqueante de 62 PDFs en el arranque del dashboard.
+  5. **Fase 5 (Unificación de Catálogo 2024 e IPP):**
+     - En `src/python/core/reporte_pdf.py`, filtrado estricto `activo = 1` en integrantes y productos para que el informe no contabilice registros eliminados lógicamente.
+     - Estandarizada la ponderación del IPP al 100% para productos validados y 50% (`global_weight // 2`) para pendientes en C++, Python, GUI y PDF.
+  6. **Fase 6 (Paridad de Entrypoints, Empaquetado y Verificación Final):**
+     - Sincronizados los flags de línea de comandos (`--stats-json`, `--gen`, `--gui`) en `Taller2_AB_PO_XX.cpp` para paridad completa con `src/cpp/main.cpp`.
      - Añadida la opción `[7]` a `iniciar.bat` para empaquetar la entrega final en ZIP con un solo clic.
      - Regenerado el archivo formal `Taller2_EstructuraDatos_GrupoXX.zip` mediante `scripts/package_zip.py`.
 - **Verificación:**
   - `make clean && make` compiló en C++17 con `-Wall -Wextra` y cero advertencias.
   - `make test` ejecutó exitosamente el 100% de las pruebas unitarias de TDAs en C++ y Python.
-  - Pruebas de Deshacer en RAM y SQLite superadas con éxito.
+  - `make verify` ejecutó la verificación cruzada real con 100% de paridad en todas las métricas de las Multilistas C++ y Python.
 
 ## 🐛 Bugs
 | ID | Bug | Estado |
@@ -306,3 +315,7 @@ Archivos raíz perdidos al copiar el repo (papelera y disco revisados: sin copia
 | BUG-17 (nuevo, auditoría) | GrupLAC y CvLAC desarticulados con presencia de funciones de datos sintéticos `_fallback_gruplac` y `_fallback_cvlac` | **corregido S42**: unificación con `ThreadPoolExecutor(12)`, eliminación total de sintéticos y atribución institucional estricta |
 | BUG-18 (nuevo, auditoría) | Deshacer (TDA Pila - LIFO) ignoraba valores previos de `MODIFICAR` y no reinsertaba registros en `ELIMINAR` | **corregido S42**: serialización en `detalle_previo`, restauración completa en memoria RAM y sincronización atómica con SQLite |
 | BUG-19 (nuevo, auditoría) | IDs de productos en PDFs generados con `hash()` no-determinista | **corregido S42**: cálculo criptográfico determinista con SHA-256 de 8 caracteres hexadecimales |
+| BUG-20 (nuevo, auditoría) | Punteros inseguros `reinterpret_cast<const char*>(sqlite3_column_text)` sin validación NULL en C++ | **corregido S42**: función `columnaTextoSegura()` y transacciones con `BEGIN IMMEDIATE` + `ROLLBACK` |
+| BUG-21 (nuevo, auditoría) | Verificación cruzada declaraba falsamente "100% equivalencia" ante binario C++ inexistente | **corregido S42**: compilación en caliente con `make` y reporte estricto de discrepancias |
+| BUG-22 (nuevo, auditoría) | Pre-generación bloqueante de 62 PDFs al abrir el dashboard GUI | **corregido S42**: optimización a generación bajo demanda/muestra rápida |
+| BUG-23 (nuevo, auditoría) | Inconsistencia en fórmula del IPP y falta de filtro de borrado lógico en reportes PDF | **corregido S42**: filtrado estricto `activo = 1` y fórmula estándar unificada |
