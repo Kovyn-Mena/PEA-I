@@ -11,6 +11,11 @@
 // Conecta el contrato de base de datos con la Multilista en memoria RAM
 // =====================================================================
 
+inline std::string columnaTextoSegura(sqlite3_stmt* stmt, int col) {
+    const unsigned char* txt = sqlite3_column_text(stmt, col);
+    return txt ? reinterpret_cast<const char*>(txt) : "";
+}
+
 class GestorSQLite {
 public:
     // Carga todos los Grupos, Investigadores y Productos desde SQLite a la Multilista
@@ -30,11 +35,11 @@ public:
         sqlite3_stmt* stmtG = nullptr;
         if (sqlite3_prepare_v2(db, sqlGrupos, -1, &stmtG, nullptr) == SQLITE_OK) {
             while (sqlite3_step(stmtG) == SQLITE_ROW) {
-                std::string cod = reinterpret_cast<const char*>(sqlite3_column_text(stmtG, 0));
-                std::string nom = reinterpret_cast<const char*>(sqlite3_column_text(stmtG, 1));
-                std::string clas = reinterpret_cast<const char*>(sqlite3_column_text(stmtG, 2));
-                std::string area = reinterpret_cast<const char*>(sqlite3_column_text(stmtG, 3));
-                std::string lid = reinterpret_cast<const char*>(sqlite3_column_text(stmtG, 4));
+                std::string cod = columnaTextoSegura(stmtG, 0);
+                std::string nom = columnaTextoSegura(stmtG, 1);
+                std::string clas = columnaTextoSegura(stmtG, 2);
+                std::string area = columnaTextoSegura(stmtG, 3);
+                std::string lid = columnaTextoSegura(stmtG, 4);
                 int anio = sqlite3_column_int(stmtG, 5);
                 bool act = sqlite3_column_int(stmtG, 6) != 0;
 
@@ -48,11 +53,11 @@ public:
         sqlite3_stmt* stmtI = nullptr;
         if (sqlite3_prepare_v2(db, sqlInv, -1, &stmtI, nullptr) == SQLITE_OK) {
             while (sqlite3_step(stmtI) == SQLITE_ROW) {
-                std::string doc = reinterpret_cast<const char*>(sqlite3_column_text(stmtI, 0));
-                std::string nom = reinterpret_cast<const char*>(sqlite3_column_text(stmtI, 1));
-                std::string cat = reinterpret_cast<const char*>(sqlite3_column_text(stmtI, 2));
-                std::string form = reinterpret_cast<const char*>(sqlite3_column_text(stmtI, 3));
-                std::string cod_g = reinterpret_cast<const char*>(sqlite3_column_text(stmtI, 4));
+                std::string doc = columnaTextoSegura(stmtI, 0);
+                std::string nom = columnaTextoSegura(stmtI, 1);
+                std::string cat = columnaTextoSegura(stmtI, 2);
+                std::string form = columnaTextoSegura(stmtI, 3);
+                std::string cod_g = columnaTextoSegura(stmtI, 4);
                 bool act = sqlite3_column_int(stmtI, 5) != 0;
 
                 multi.insertarInvestigador(cod_g, doc, nom, cat, form, act);
@@ -65,14 +70,14 @@ public:
         sqlite3_stmt* stmtP = nullptr;
         if (sqlite3_prepare_v2(db, sqlProd, -1, &stmtP, nullptr) == SQLITE_OK) {
             while (sqlite3_step(stmtP) == SQLITE_ROW) {
-                std::string id_p = reinterpret_cast<const char*>(sqlite3_column_text(stmtP, 0));
-                std::string tipo = reinterpret_cast<const char*>(sqlite3_column_text(stmtP, 1));
-                std::string tit = reinterpret_cast<const char*>(sqlite3_column_text(stmtP, 2));
+                std::string id_p = columnaTextoSegura(stmtP, 0);
+                std::string tipo = columnaTextoSegura(stmtP, 1);
+                std::string tit = columnaTextoSegura(stmtP, 2);
                 int anio = sqlite3_column_int(stmtP, 3);
-                std::string cat_m = reinterpret_cast<const char*>(sqlite3_column_text(stmtP, 4));
+                std::string cat_m = columnaTextoSegura(stmtP, 4);
                 bool val = sqlite3_column_int(stmtP, 5) != 0;
-                std::string cod_g = reinterpret_cast<const char*>(sqlite3_column_text(stmtP, 6));
-                std::string id_inv = reinterpret_cast<const char*>(sqlite3_column_text(stmtP, 7));
+                std::string cod_g = columnaTextoSegura(stmtP, 6);
+                std::string id_inv = columnaTextoSegura(stmtP, 7);
                 bool act = sqlite3_column_int(stmtP, 8) != 0;
 
                 multi.insertarProducto(cod_g, id_inv, id_p, tipo, tit, anio, cat_m, val, act);
@@ -97,7 +102,12 @@ public:
 
         char* errMsg = nullptr;
         sqlite3_exec(db, "PRAGMA foreign_keys = OFF;", nullptr, nullptr, nullptr);
-        sqlite3_exec(db, "BEGIN TRANSACTION;", nullptr, nullptr, nullptr);
+        if (sqlite3_exec(db, "BEGIN IMMEDIATE TRANSACTION;", nullptr, nullptr, &errMsg) != SQLITE_OK) {
+            std::cerr << "[ERROR Persistencia] No se pudo iniciar transacción: " << (errMsg ? errMsg : "") << "\n";
+            sqlite3_free(errMsg);
+            sqlite3_close(db);
+            return false;
+        }
 
         // Limpiar tablas para sincronización completa
         sqlite3_exec(db, "DELETE FROM Productos;", nullptr, nullptr, nullptr);
@@ -107,17 +117,32 @@ public:
         // 1. Insertar Grupos
         const char* sqlInsG = "INSERT INTO Grupos (codigo_grupo, nombre, clasificacion, area_conocimiento, lider, anio_creacion, activo) VALUES (?, ?, ?, ?, ?, ?, ?);";
         sqlite3_stmt* stmtG = nullptr;
-        sqlite3_prepare_v2(db, sqlInsG, -1, &stmtG, nullptr);
+        if (sqlite3_prepare_v2(db, sqlInsG, -1, &stmtG, nullptr) != SQLITE_OK) {
+            sqlite3_exec(db, "ROLLBACK;", nullptr, nullptr, nullptr);
+            sqlite3_close(db);
+            return false;
+        }
 
         // 2. Insertar Investigadores
         const char* sqlInsI = "INSERT INTO Investigadores (documento_id, nombre_completo, categoria, formacion_academica, codigo_grupo, activo) VALUES (?, ?, ?, ?, ?, ?);";
         sqlite3_stmt* stmtI = nullptr;
-        sqlite3_prepare_v2(db, sqlInsI, -1, &stmtI, nullptr);
+        if (sqlite3_prepare_v2(db, sqlInsI, -1, &stmtI, nullptr) != SQLITE_OK) {
+            sqlite3_finalize(stmtG);
+            sqlite3_exec(db, "ROLLBACK;", nullptr, nullptr, nullptr);
+            sqlite3_close(db);
+            return false;
+        }
 
         // 3. Insertar Productos
         const char* sqlInsP = "INSERT INTO Productos (id_producto, tipo, titulo, anio, categoria_minciencias, validado, codigo_grupo, id_investigador, activo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         sqlite3_stmt* stmtP = nullptr;
-        sqlite3_prepare_v2(db, sqlInsP, -1, &stmtP, nullptr);
+        if (sqlite3_prepare_v2(db, sqlInsP, -1, &stmtP, nullptr) != SQLITE_OK) {
+            sqlite3_finalize(stmtG);
+            sqlite3_finalize(stmtI);
+            sqlite3_exec(db, "ROLLBACK;", nullptr, nullptr, nullptr);
+            sqlite3_close(db);
+            return false;
+        }
 
         NodoGrupo* g = multi.getCabezaGrupos();
         while (g != nullptr) {
@@ -193,14 +218,14 @@ public:
         if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) == SQLITE_OK) {
             sqlite3_bind_text(stmt, 1, doc.c_str(), -1, SQLITE_STATIC);
             if (sqlite3_step(stmt) == SQLITE_ROW) {
-                const char* p = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0));
-                const char* s = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1));
-                const char* o = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 2));
-                const char* f = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 3));
-                parEval = p ? p : "No";
-                scholar = s ? s : "";
-                orcid = o ? o : "";
-                formacion = f ? f : "";
+                std::string p = columnaTextoSegura(stmt, 0);
+                std::string s = columnaTextoSegura(stmt, 1);
+                std::string o = columnaTextoSegura(stmt, 2);
+                std::string f = columnaTextoSegura(stmt, 3);
+                parEval = !p.empty() ? p : "No";
+                scholar = s;
+                orcid = o;
+                formacion = f;
                 hallado = true;
             }
             sqlite3_finalize(stmt);

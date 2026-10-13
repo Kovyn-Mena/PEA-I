@@ -31,9 +31,12 @@ int main() {
 
     std::cout << "--- Grupos Registrados (Activos) ---\n";
     while (sqlite3_step(stmt) == SQLITE_ROW) {
-        std::string codigo = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0));
-        std::string nombre = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1));
-        std::string clasif = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 2));
+        const unsigned char* c0 = sqlite3_column_text(stmt, 0);
+        const unsigned char* c1 = sqlite3_column_text(stmt, 1);
+        const unsigned char* c2 = sqlite3_column_text(stmt, 2);
+        std::string codigo = c0 ? reinterpret_cast<const char*>(c0) : "";
+        std::string nombre = c1 ? reinterpret_cast<const char*>(c1) : "";
+        std::string clasif = c2 ? reinterpret_cast<const char*>(c2) : "";
         int anio = sqlite3_column_int(stmt, 3);
 
         std::cout << "• [" << codigo << "] " << nombre << " | Clasif: " << clasif << " | Creación: " << anio << "\n";

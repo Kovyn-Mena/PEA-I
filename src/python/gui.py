@@ -245,12 +245,16 @@ class DashboardApp:
             g = g.sig_grupo
         filas_prods.sort(key=lambda x: x["anio"], reverse=True)
 
-        # Pre-generar informes PDF oficiales con ReportLab para los grupos listados
-        for grp in filas_grupos:
-            try:
-                generar_informe_grupo_pdf(grp["codigo"], self.ruta_bd)
-            except Exception:
-                pass
+        # Asegurar directorio de reportes y generar de muestra para los primeros grupos si no existen
+        rep_dir = os.path.abspath(os.path.join(os.path.dirname(self.ruta_bd), "..", "reportes"))
+        os.makedirs(rep_dir, exist_ok=True)
+        for grp in filas_grupos[:3]:
+            pdf_path = os.path.join(rep_dir, f"Informe_GrupLAC_{grp['codigo']}.pdf")
+            if not os.path.exists(pdf_path):
+                try:
+                    generar_informe_grupo_pdf(grp["codigo"], self.ruta_bd)
+                except Exception:
+                    pass
 
         html = f"""<!DOCTYPE html>
 <html lang="es">

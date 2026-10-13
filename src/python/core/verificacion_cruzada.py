@@ -41,7 +41,18 @@ def obtener_metricas_cpp(base_dir: str) -> dict:
     ]
     bin_path = next((b for b in bin_candidates if os.path.exists(b)), None)
     if not bin_path:
+        # Intentar compilar en caliente con make si g++ está disponible
+        print("[i] Binario C++ no encontrado. Intentando compilar en caliente con 'make'...")
+        try:
+            comp = subprocess.run(["make"], cwd=base_dir, capture_output=True, text=True, timeout=30)
+            if comp.returncode == 0:
+                bin_path = next((b for b in bin_candidates if os.path.exists(b)), None)
+        except Exception:
+            pass
+
+    if not bin_path:
         return {}
+
     try:
         res = subprocess.run(
             [bin_path, "--stats-json"],
@@ -52,7 +63,8 @@ def obtener_metricas_cpp(base_dir: str) -> dict:
             check=True,
         )
         return json.loads(res.stdout.strip())
-    except Exception:
+    except Exception as e:
+        print(f"[!] Error ejecutando binario C++ ({bin_path}): {e}")
         return {}
 
 
@@ -64,6 +76,13 @@ def ejecutar_verificacion_cruzada(db_path: str) -> bool:
     print("=========================================================================")
     print("  AUDITORÍA DE VERIFICACIÓN CRUZADA DE EQUIVALENCIA: MOTOR C++17 vs PYTHON")
     print("=========================================================================")
+
+    if not cpp_stats:
+        print("  [ERROR CRÍTICO] No se pudo obtener métricas del binario C++.")
+        print("                  Verifique que g++ esté instalado y ejecute 'make'.")
+        print("=========================================================================")
+        return False
+
     print(f"  {'MÉTRICA / INVARIANTE ESTRUCTURAL':<40} | {'PYTHON':>8} | {'C++17':>8} | {'ESTADO':<8}")
     print("-" * 73)
 
@@ -82,13 +101,12 @@ def ejecutar_verificacion_cruzada(db_path: str) -> bool:
     todo_ok = True
     for key, label in etiquetas:
         v_py = py_stats.get(key, -1)
-        v_cpp = cpp_stats.get(key, v_py if not cpp_stats else -2)
+        v_cpp = cpp_stats.get(key, -2)
         iguales = (v_py == v_cpp)
         if not iguales:
             todo_ok = False
         estado = "[OK]" if iguales else "[DIF]"
-        cpp_str = str(v_cpp) if cpp_stats else f"{v_py}*"
-        print(f"  {label:<40} | {v_py:>8} | {cpp_str:>8} | {estado:<8}")
+        print(f"  {label:<40} | {v_py:>8} | {v_cpp:>8} | {estado:<8}")
 
     print("=========================================================================")
     if todo_ok:
