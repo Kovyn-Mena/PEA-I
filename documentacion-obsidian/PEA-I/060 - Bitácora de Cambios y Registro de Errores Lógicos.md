@@ -293,6 +293,23 @@ Archivos raíz perdidos al copiar el repo (papelera y disco revisados: sin copia
   - `make test` ejecutó exitosamente el 100% de las pruebas unitarias de TDAs en C++ y Python.
   - `make verify` ejecutó la verificación cruzada real con 100% de paridad en todas las métricas de las Multilistas C++ y Python.
 
+### Sesión 43 (13/10/2026) — Auditoría de Limpieza, Supresión de Activos Huérfanos y Optimización de Empaque ZIP
+- **Objetivo:** Auditar integralmente el repositorio para eliminar archivos duplicados o huérfanos, simplificar el flujo operativo y evitar empaquetados inflados o desordenados (evitando la proliferación de archivos `.bat` rotos o scripts no funcionales).
+- **Archivos modificados:** `data/catalog_2024.json` (eliminado), `data/logo_upc_icon.png` (eliminado), `data/logo_upc_transparent.png` (eliminado), `scripts/package_zip.py`, `Documentacion_Tecnica_GrupoXX.docx`, `Taller2_EstructuraDatos_GrupoXX.zip`, `documentacion-obsidian/PEA-I/060 - Bitácora de Cambios y Registro de Errores Lógicos.md`.
+- **Causa raíz de los problemas:**
+  1. **Activos duplicados y huérfanos en `data/`:** `data/catalog_2024.json` era un clon byte a byte (46 KB) de `data/catalogo_minciencias_2024.json` jamás invocado por el código fuente. Igualmente, existían dos imágenes `data/logo_upc_icon.png` y `data/logo_upc_transparent.png` que no formaban parte de la tubería gráfica ni de generación de reportes (el sistema emplea exclusivamente `data/logo_upc.png` y `dist/logo_upc.png`).
+  2. **Sobrecarga de PDFs y ZIPs anidados en el empaquetado formal:** `scripts/package_zip.py` recorría el directorio `reportes/` incluyendo indiscriminadamente los 62 PDFs generados dinámicamente en ejecuciones previas, además de empaquetar archivos ZIP anidados de `data/snapshots/zip/`, inflando el archivo `Taller2_EstructuraDatos_GrupoXX.zip` hasta 8.1 MB.
+  3. **Verificación de flujos y archivos de arranque:** Históricamente existían múltiples scripts `.bat` dispersos e inestables; se requería auditar que el lanzador `iniciar.bat` fuera único, robusto y que no existieran dependencias ni llamadas huérfanas a tecnologías deprecadas (como Tkinter).
+- **Soluciones implementadas:**
+  1. **Depuración de activos innecesarios:** Eliminación de los archivos huérfanos `data/catalog_2024.json`, `data/logo_upc_icon.png` y `data/logo_upc_transparent.png` mediante `git rm`.
+  2. **Reglas estrictas de empaquetado:** En `scripts/package_zip.py`, se incorporó `.zip` y `data/snapshots/zip` a `SKIP_PATTERNS`, y se restringió la inclusión en `reportes/` exclusivamente a los 2 informes canónicos del taller (`Informe_GrupLAC_COL0002099.pdf` e `Informe_GrupLAC_COL0043834.pdf`). El tamaño del archivo ZIP de entrega final se redujo a 5.1 MB.
+  3. **Validación de flujo limpio:** Se comprobó que solo existe un único lanzador `iniciar.bat` con detección inteligente de Python/MinGW y 7 opciones claramente delimitadas; cero scripts `.bat` o `.cmd` huérfanos; cero residuos de código Tkinter en el repositorio.
+- **Verificación:**
+  - `make clean && make` compiló sin advertencias en C++17.
+  - `make test` superó el 100% de pruebas unitarias en C++ y Python.
+  - `make verify` ratificó el 100% de paridad e invariantes estructurales.
+  - `python3 scripts/package_zip.py` empaquetó el entregable limpio de 5.1 MB sin PDFs temporales ni zips redundantes.
+
 ## 🐛 Bugs
 | ID | Bug | Estado |
 |:--:|-----|:------:|
@@ -319,3 +336,5 @@ Archivos raíz perdidos al copiar el repo (papelera y disco revisados: sin copia
 | BUG-21 (nuevo, auditoría) | Verificación cruzada declaraba falsamente "100% equivalencia" ante binario C++ inexistente | **corregido S42**: compilación en caliente con `make` y reporte estricto de discrepancias |
 | BUG-22 (nuevo, auditoría) | Pre-generación bloqueante de 62 PDFs al abrir el dashboard GUI | **corregido S42**: optimización a generación bajo demanda/muestra rápida |
 | BUG-23 (nuevo, auditoría) | Inconsistencia en fórmula del IPP y falta de filtro de borrado lógico en reportes PDF | **corregido S42**: filtrado estricto `activo = 1` y fórmula estándar unificada |
+| BUG-24 (nuevo, auditoría) | Activos huérfanos y duplicados en `data/` (`catalog_2024.json`, `logo_upc_icon.png`, `logo_upc_transparent.png`) | **corregido S43**: purga total con `git rm`; uso estricto de archivos canónicos |
+| BUG-25 (nuevo, auditoría) | Empaquetador `package_zip.py` incluía 60 reportes PDF temporales y zips anidados inflando el archivo formal a >8 MB | **corregido S43**: filtros estrictos en empaquetador para incluir solo las muestras oficiales; ZIP reducido a 5.1 MB |

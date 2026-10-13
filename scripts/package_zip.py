@@ -51,8 +51,15 @@ SKIP_PATTERNS = [
     ".obj",
     ".exe",
     ".pyc",
-    ".DS_Store"
+    ".zip",
+    ".DS_Store",
+    os.path.join("snapshots", "zip"),
 ]
+
+OFFICIAL_SAMPLE_REPORTS = {
+    "Informe_GrupLAC_COL0002099.pdf",
+    "Informe_GrupLAC_COL0043834.pdf",
+}
 
 def empaquetar():
     if os.path.exists(ZIP_NAME):
@@ -73,10 +80,19 @@ def empaquetar():
                 if any(skip in root for skip in SKIP_PATTERNS):
                     continue
                 for file in filenames:
-                    if any(file.endswith(ext) for ext in [".o", ".obj", ".exe", ".pyc", ".gitkeep"]) or file in SKIP_PATTERNS:
+                    if (
+                        any(file.endswith(ext) for ext in [".o", ".obj", ".exe", ".pyc", ".gitkeep", ".zip"])
+                        or file in SKIP_PATTERNS
+                    ):
                         continue
                     full_p = os.path.join(root, file)
                     rel_p = os.path.relpath(full_p, BASE_DIR)
+                    if (
+                        rel_p.startswith("reportes")
+                        and file.endswith(".pdf")
+                        and file not in OFFICIAL_SAMPLE_REPORTS
+                    ):
+                        continue
                     zf.write(full_p, arcname=rel_p)
 
     size_kb = round(os.path.getsize(ZIP_NAME) / 1024, 1)
