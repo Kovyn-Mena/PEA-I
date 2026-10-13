@@ -4,6 +4,8 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <sstream>
+#include <map>
 #include <cstdlib>
 #include <csignal>
 #include <cerrno>
@@ -770,9 +772,15 @@ public:
                 std::cout << "\n  [ADVERTENCIA] Se eliminará el grupo, sus investigadores y productos asociados.\n";
                 int conf = leerOpcionMenu("01", "¿Confirmar eliminación física definitiva? (1: Sí / 0: Cancelar): ");
                 if (conf == 1) {
-                    if (multi.eliminarGrupo(cod)) {
-                        historial.push("ELIMINAR", "GRUPO", cod, "");
-                        std::cout << "\n[OK] Grupo y dependencias eliminados físicamente de memoria.\n";
+                    NodoGrupo* g = multi.buscarGrupo(cod);
+                    if (g) {
+                        std::string prev = "nom=" + g->nombre + ";clas=" + g->clasificacion + ";area=" + g->area_conocimiento + ";lid=" + g->lider + ";anio=" + std::to_string(g->anio_creacion) + ";act=" + (g->activo ? "1" : "0");
+                        if (multi.eliminarGrupo(cod)) {
+                            historial.push("ELIMINAR", "GRUPO", cod, prev);
+                            std::cout << "\n[OK] Grupo y dependencias eliminados físicamente de memoria.\n";
+                        } else {
+                            std::cout << "\n[!] Error al eliminar grupo.\n";
+                        }
                     } else {
                         std::cout << "\n[!] Grupo no encontrado.\n";
                     }
@@ -955,7 +963,7 @@ public:
                 if (!inv) {
                     std::cout << "\n[!] Investigador no encontrado.\n";
                 } else {
-                    std::string prev = "nom=" + inv->nombre_completo + ";cat=" + inv->categoria;
+                    std::string prev = "nom=" + inv->nombre_completo + ";cat=" + inv->categoria + ";form=" + inv->formacion_academica;
                     inv->nombre_completo = leerLinea("Nuevo Nombre (" + inv->nombre_completo + "): ");
                     inv->categoria = leerLinea("Nueva Categoría (" + inv->categoria + "): ");
                     inv->formacion_academica = leerLinea("Nueva Formación (" + inv->formacion_academica + "): ");
@@ -987,9 +995,15 @@ public:
 
                 int conf = leerOpcionMenu("01", "¿Confirmar eliminación física definitiva? (1: Sí / 0: Cancelar): ");
                 if (conf == 1) {
-                    if (multi.eliminarInvestigador(doc)) {
-                        historial.push("ELIMINAR", "INVESTIGADOR", doc, "");
-                        std::cout << "\n[OK] Investigador y sus productos eliminados de la memoria.\n";
+                    NodoInvestigador* inv = multi.buscarInvestigador(doc);
+                    if (inv) {
+                        std::string prev = "cod_g=" + inv->codigo_grupo + ";nom=" + inv->nombre_completo + ";cat=" + inv->categoria + ";form=" + inv->formacion_academica + ";act=" + (inv->activo ? "1" : "0");
+                        if (multi.eliminarInvestigador(doc)) {
+                            historial.push("ELIMINAR", "INVESTIGADOR", doc, prev);
+                            std::cout << "\n[OK] Investigador y sus productos eliminados de la memoria.\n";
+                        } else {
+                            std::cout << "\n[!] Error al eliminar investigador.\n";
+                        }
                     } else {
                         std::cout << "\n[!] Investigador no encontrado.\n";
                     }
@@ -1189,7 +1203,7 @@ public:
                 if (!p) {
                     std::cout << "\n[!] Producto no encontrado.\n";
                 } else {
-                    std::string prev = "tit=" + p->titulo + ";cat=" + p->categoria_minciencias;
+                    std::string prev = "tit=" + p->titulo + ";anio=" + std::to_string(p->anio) + ";cat=" + p->categoria_minciencias + ";val=" + (p->validado ? "1" : "0");
                     p->titulo = leerLinea("Nuevo Título (" + p->titulo + "): ");
                     p->anio = leerEntero("Nuevo Año: ");
                     p->categoria_minciencias = leerLinea("Nueva Categoría (" + p->categoria_minciencias + "): ");
@@ -1223,9 +1237,15 @@ public:
 
                 int conf = leerOpcionMenu("01", "¿Confirmar eliminación física? (1: Sí / 0: Cancelar): ");
                 if (conf == 1) {
-                    if (multi.eliminarProducto(idP)) {
-                        historial.push("ELIMINAR", "PRODUCTO", idP, "");
-                        std::cout << "\n[OK] Producto desenlazado ortogonalmente y liberado de memoria.\n";
+                    NodoProducto* p = multi.buscarProducto(idP);
+                    if (p) {
+                        std::string prev = "cod_g=" + p->codigo_grupo + ";id_inv=" + p->id_investigador + ";tipo=" + p->tipo + ";tit=" + p->titulo + ";anio=" + std::to_string(p->anio) + ";cat=" + p->categoria_minciencias + ";val=" + (p->validado ? "1" : "0") + ";act=" + (p->activo ? "1" : "0");
+                        if (multi.eliminarProducto(idP)) {
+                            historial.push("ELIMINAR", "PRODUCTO", idP, prev);
+                            std::cout << "\n[OK] Producto desenlazado ortogonalmente y liberado de memoria.\n";
+                        } else {
+                            std::cout << "\n[!] Error al eliminar producto.\n";
+                        }
                     } else {
                         std::cout << "\n[!] Producto no encontrado.\n";
                     }
@@ -1256,6 +1276,16 @@ public:
         std::cout << "\n[<-- Deshacer] Revertiendo última acción: " 
                   << acc.tipo_operacion << " en " << acc.tipo_entidad << " (" << acc.id_registro << ")...\n";
 
+        std::map<std::string, std::string> campos;
+        std::stringstream ss(acc.detalle_previo);
+        std::string item;
+        while (std::getline(ss, item, ';')) {
+            size_t eqPos = item.find('=');
+            if (eqPos != std::string::npos) {
+                campos[item.substr(0, eqPos)] = item.substr(eqPos + 1);
+            }
+        }
+
         if (acc.tipo_operacion == "DESACTIVAR") {
             if (acc.tipo_entidad == "GRUPO") {
                 NodoGrupo* g = multi.buscarGrupo(acc.id_registro);
@@ -1268,11 +1298,87 @@ public:
                 if (p) p->activo = !p->activo;
             }
             std::cout << "[OK] Estado lógico restaurado con éxito mediante pop() de la Pila.\n";
+            GestorSQLite::guardarEnBD(multi, rutaBD);
         } else if (acc.tipo_operacion == "CREAR") {
             if (acc.tipo_entidad == "GRUPO") multi.eliminarGrupo(acc.id_registro);
             else if (acc.tipo_entidad == "INVESTIGADOR") multi.eliminarInvestigador(acc.id_registro);
             else if (acc.tipo_entidad == "PRODUCTO") multi.eliminarProducto(acc.id_registro);
             std::cout << "[OK] Inserción revertida (registro retirado de memoria).\n";
+            GestorSQLite::guardarEnBD(multi, rutaBD);
+        } else if (acc.tipo_operacion == "MODIFICAR") {
+            if (acc.tipo_entidad == "GRUPO") {
+                NodoGrupo* g = multi.buscarGrupo(acc.id_registro);
+                if (g) {
+                    if (campos.count("nom")) g->nombre = campos["nom"];
+                    if (campos.count("clas")) g->clasificacion = campos["clas"];
+                    if (campos.count("lid")) g->lider = campos["lid"];
+                    std::cout << "[OK] Grupo " << acc.id_registro << " restaurado a valores previos.\n";
+                } else {
+                    std::cout << "[!] Grupo " << acc.id_registro << " no encontrado en memoria.\n";
+                }
+            } else if (acc.tipo_entidad == "INVESTIGADOR") {
+                NodoInvestigador* inv = multi.buscarInvestigador(acc.id_registro);
+                if (inv) {
+                    if (campos.count("nom")) inv->nombre_completo = campos["nom"];
+                    if (campos.count("cat")) inv->categoria = campos["cat"];
+                    if (campos.count("form")) inv->formacion_academica = campos["form"];
+                    std::cout << "[OK] Investigador " << acc.id_registro << " restaurado a valores previos.\n";
+                } else {
+                    std::cout << "[!] Investigador " << acc.id_registro << " no encontrado en memoria.\n";
+                }
+            } else if (acc.tipo_entidad == "PRODUCTO") {
+                NodoProducto* p = multi.buscarProducto(acc.id_registro);
+                if (p) {
+                    if (campos.count("tit")) p->titulo = campos["tit"];
+                    if (campos.count("anio")) p->anio = std::stoi(campos["anio"]);
+                    if (campos.count("cat")) p->categoria_minciencias = campos["cat"];
+                    if (campos.count("val")) p->validado = (campos["val"] == "1");
+                    std::cout << "[OK] Producto " << acc.id_registro << " restaurado a valores previos.\n";
+                } else {
+                    std::cout << "[!] Producto " << acc.id_registro << " no encontrado en memoria.\n";
+                }
+            }
+            GestorSQLite::guardarEnBD(multi, rutaBD);
+        } else if (acc.tipo_operacion == "ELIMINAR") {
+            if (acc.tipo_entidad == "GRUPO") {
+                std::string nom = campos.count("nom") ? campos["nom"] : "Grupo";
+                std::string clas = campos.count("clas") ? campos["clas"] : "Reconocido";
+                std::string area = campos.count("area") ? campos["area"] : "General";
+                std::string lid = campos.count("lid") ? campos["lid"] : "Líder";
+                int anio = campos.count("anio") ? std::stoi(campos["anio"]) : 2000;
+                bool act = campos.count("act") ? (campos["act"] == "1") : true;
+                if (multi.insertarGrupo(acc.id_registro, nom, clas, area, lid, anio, act)) {
+                    std::cout << "[OK] Grupo " << acc.id_registro << " reinsertado en la Multilista.\n";
+                } else {
+                    std::cout << "[!] Error al reinsertar grupo " << acc.id_registro << ".\n";
+                }
+            } else if (acc.tipo_entidad == "INVESTIGADOR") {
+                std::string codG = campos.count("cod_g") ? campos["cod_g"] : "";
+                std::string nom = campos.count("nom") ? campos["nom"] : "Investigador";
+                std::string cat = campos.count("cat") ? campos["cat"] : "Junior";
+                std::string form = campos.count("form") ? campos["form"] : "Pregrado";
+                bool act = campos.count("act") ? (campos["act"] == "1") : true;
+                if (multi.insertarInvestigador(codG, acc.id_registro, nom, cat, form, act)) {
+                    std::cout << "[OK] Investigador " << acc.id_registro << " reinsertado en la Multilista.\n";
+                } else {
+                    std::cout << "[!] Error al reinsertar investigador " << acc.id_registro << " (verifique grupo " << codG << ").\n";
+                }
+            } else if (acc.tipo_entidad == "PRODUCTO") {
+                std::string codG = campos.count("cod_g") ? campos["cod_g"] : "";
+                std::string idInv = campos.count("id_inv") ? campos["id_inv"] : "";
+                std::string tipo = campos.count("tipo") ? campos["tipo"] : "Articulo";
+                std::string tit = campos.count("tit") ? campos["tit"] : "Sin Titulo";
+                int anio = campos.count("anio") ? std::stoi(campos["anio"]) : 2024;
+                std::string cat = campos.count("cat") ? campos["cat"] : "B";
+                bool val = campos.count("val") ? (campos["val"] == "1") : true;
+                bool act = campos.count("act") ? (campos["act"] == "1") : true;
+                if (multi.insertarProducto(codG, idInv, acc.id_registro, tipo, tit, anio, cat, val, act)) {
+                    std::cout << "[OK] Producto " << acc.id_registro << " reinsertado ortogonalmente en la Multilista.\n";
+                } else {
+                    std::cout << "[!] Error al reinsertar producto " << acc.id_registro << " (verifique grupo e investigador).\n";
+                }
+            }
+            GestorSQLite::guardarEnBD(multi, rutaBD);
         } else {
             std::cout << "[OK] Acción procesada desde la cima de la Pila.\n";
         }

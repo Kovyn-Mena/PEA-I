@@ -748,9 +748,14 @@ class ConsolaApp:
                 print("\n  [ADVERTENCIA] Se eliminará el grupo, sus investigadores y productos asociados.")
                 conf = self.leer_opcion_menu("01", "¿Confirmar eliminación física definitiva? (1: Sí / 0: Cancelar): ")
                 if conf == 1:
-                    if self.multi.eliminar_grupo(cod):
-                        self.historial.push("ELIMINAR", "GRUPO", cod, "")
-                        print("\n[OK] Grupo y dependencias eliminados físicamente de memoria.")
+                    g = self.multi.buscar_grupo(cod)
+                    if g:
+                        prev = f"nom={g.nombre};clas={g.clasificacion};area={g.area_conocimiento};lid={g.lider};anio={g.anio_creacion};act={int(g.activo)}"
+                        if self.multi.eliminar_grupo(cod):
+                            self.historial.push("ELIMINAR", "GRUPO", cod, prev)
+                            print("\n[OK] Grupo y dependencias eliminados físicamente de memoria.")
+                        else:
+                            print("\n[!] Error al eliminar grupo.")
                     else:
                         print("\n[!] Grupo no encontrado.")
                 else:
@@ -917,7 +922,7 @@ class ConsolaApp:
                 if not inv:
                     print("\n[!] Investigador no encontrado.")
                 else:
-                    prev = f"nom={inv.nombre_completo};cat={inv.categoria}"
+                    prev = f"nom={inv.nombre_completo};cat={inv.categoria};form={inv.formacion_academica}"
                     inv.nombre_completo = self.leer_linea(f"Nuevo Nombre ({inv.nombre_completo}): ")
                     inv.categoria = self.leer_linea(f"Nueva Categoría ({inv.categoria}): ")
                     inv.formacion_academica = self.leer_linea(f"Nueva Formación ({inv.formacion_academica}): ")
@@ -948,9 +953,14 @@ class ConsolaApp:
                     continue
                 conf = self.leer_opcion_menu("01", "¿Confirmar eliminación física definitiva? (1: Sí / 0: Cancelar): ")
                 if conf == 1:
-                    if self.multi.eliminar_investigador(doc):
-                        self.historial.push("ELIMINAR", "INVESTIGADOR", doc, "")
-                        print("\n[OK] Investigador y sus productos eliminados de la memoria.")
+                    inv = self.multi.buscar_investigador(doc)
+                    if inv:
+                        prev = f"cod_g={inv.codigo_grupo};nom={inv.nombre_completo};cat={inv.categoria};form={inv.formacion_academica};act={int(inv.activo)}"
+                        if self.multi.eliminar_investigador(doc):
+                            self.historial.push("ELIMINAR", "INVESTIGADOR", doc, prev)
+                            print("\n[OK] Investigador y sus productos eliminados de la memoria.")
+                        else:
+                            print("\n[!] Error al eliminar investigador.")
                     else:
                         print("\n[!] Investigador no encontrado.")
                 else:
@@ -1119,7 +1129,7 @@ class ConsolaApp:
                 if not p:
                     print("\n[!] Producto no encontrado.")
                 else:
-                    prev = f"tit={p.titulo};cat={p.categoria_minciencias}"
+                    prev = f"tit={p.titulo};anio={p.anio};cat={p.categoria_minciencias};val={int(p.validado)}"
                     p.titulo = self.leer_linea(f"Nuevo Título ({p.titulo}): ")
                     p.anio = self.leer_entero("Nuevo Año: ")
                     p.categoria_minciencias = self.leer_linea(f"Nueva Categoría ({p.categoria_minciencias}): ")
@@ -1152,9 +1162,14 @@ class ConsolaApp:
                     continue
                 conf = self.leer_opcion_menu("01", "¿Confirmar eliminación física? (1: Sí / 0: Cancelar): ")
                 if conf == 1:
-                    if self.multi.eliminar_producto(id_p):
-                        self.historial.push("ELIMINAR", "PRODUCTO", id_p, "")
-                        print("\n[OK] Producto desenlazado ortogonalmente y liberado de memoria.")
+                    p = self.multi.buscar_producto(id_p)
+                    if p:
+                        prev = f"cod_g={p.codigo_grupo};id_inv={p.id_investigador};tipo={p.tipo};tit={p.titulo};anio={p.anio};cat={p.categoria_minciencias};val={int(p.validado)};act={int(p.activo)}"
+                        if self.multi.eliminar_producto(id_p):
+                            self.historial.push("ELIMINAR", "PRODUCTO", id_p, prev)
+                            print("\n[OK] Producto desenlazado ortogonalmente y liberado de memoria.")
+                        else:
+                            print("\n[!] Error al eliminar producto.")
                     else:
                         print("\n[!] Producto no encontrado.")
                 else:
@@ -1192,6 +1207,8 @@ class ConsolaApp:
                 if p:
                     p.activo = not p.activo
             print("[OK] Estado lógico restaurado con éxito mediante pop() de la Pila.")
+            GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+
         elif acc.tipo_operacion == "CREAR":
             if acc.tipo_entidad == "GRUPO":
                 self.multi.eliminar_grupo(acc.id_registro)
@@ -1200,6 +1217,88 @@ class ConsolaApp:
             elif acc.tipo_entidad == "PRODUCTO":
                 self.multi.eliminar_producto(acc.id_registro)
             print("[OK] Inserción revertida (registro retirado de memoria).")
+            GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+
+        elif acc.tipo_operacion == "MODIFICAR":
+            campos = {}
+            for part in acc.detalle_previo.split(";"):
+                if "=" in part:
+                    k, v = part.split("=", 1)
+                    campos[k.strip()] = v.strip()
+
+            if acc.tipo_entidad == "GRUPO":
+                g = self.multi.buscar_grupo(acc.id_registro)
+                if g:
+                    if "nom" in campos: g.nombre = campos["nom"]
+                    if "clas" in campos: g.clasificacion = campos["clas"]
+                    if "lid" in campos: g.lider = campos["lid"]
+                    print(f"[OK] Grupo {acc.id_registro} restaurado a valores previos.")
+                else:
+                    print(f"[!] Grupo {acc.id_registro} no encontrado en memoria.")
+            elif acc.tipo_entidad == "INVESTIGADOR":
+                inv = self.multi.buscar_investigador(acc.id_registro)
+                if inv:
+                    if "nom" in campos: inv.nombre_completo = campos["nom"]
+                    if "cat" in campos: inv.categoria = campos["cat"]
+                    if "form" in campos: inv.formacion_academica = campos["form"]
+                    print(f"[OK] Investigador {acc.id_registro} restaurado a valores previos.")
+                else:
+                    print(f"[!] Investigador {acc.id_registro} no encontrado en memoria.")
+            elif acc.tipo_entidad == "PRODUCTO":
+                p = self.multi.buscar_producto(acc.id_registro)
+                if p:
+                    if "tit" in campos: p.titulo = campos["tit"]
+                    if "anio" in campos: p.anio = int(campos["anio"])
+                    if "cat" in campos: p.categoria_minciencias = campos["cat"]
+                    if "val" in campos: p.validado = (campos["val"] == "1" or campos["val"].lower() == "true")
+                    print(f"[OK] Producto {acc.id_registro} restaurado a valores previos.")
+                else:
+                    print(f"[!] Producto {acc.id_registro} no encontrado en memoria.")
+            GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+
+        elif acc.tipo_operacion == "ELIMINAR":
+            campos = {}
+            for part in acc.detalle_previo.split(";"):
+                if "=" in part:
+                    k, v = part.split("=", 1)
+                    campos[k.strip()] = v.strip()
+
+            if acc.tipo_entidad == "GRUPO":
+                nom = campos.get("nom", "Grupo Restaurado")
+                clas = campos.get("clas", "Reconocido")
+                area = campos.get("area", "General")
+                lid = campos.get("lid", "Líder")
+                anio = int(campos.get("anio", 2000))
+                act = (campos.get("act", "1") == "1")
+                if self.multi.insertar_grupo(acc.id_registro, nom, clas, area, lid, anio, act):
+                    print(f"[OK] Grupo {acc.id_registro} reinsertado en la Multilista.")
+                else:
+                    print(f"[!] Error: no se pudo reinsertar grupo {acc.id_registro}.")
+            elif acc.tipo_entidad == "INVESTIGADOR":
+                cod_g = campos.get("cod_g", "")
+                nom = campos.get("nom", "Investigador")
+                cat = campos.get("cat", "Junior")
+                form = campos.get("form", "Pregrado")
+                act = (campos.get("act", "1") == "1")
+                if self.multi.insertar_investigador(cod_g, acc.id_registro, nom, cat, form, act):
+                    print(f"[OK] Investigador {acc.id_registro} reinsertado en la Multilista.")
+                else:
+                    print(f"[!] Error: no se pudo reinsertar investigador {acc.id_registro} (verifique grupo {cod_g}).")
+            elif acc.tipo_entidad == "PRODUCTO":
+                cod_g = campos.get("cod_g", "")
+                id_inv = campos.get("id_inv", "")
+                tipo = campos.get("tipo", "Articulo")
+                tit = campos.get("tit", "Sin Titulo")
+                anio = int(campos.get("anio", 2024))
+                cat = campos.get("cat", "B")
+                val = (campos.get("val", "1") == "1")
+                act = (campos.get("act", "1") == "1")
+                if self.multi.insertar_producto(cod_g, id_inv, acc.id_registro, tipo, tit, anio, cat, val, act):
+                    print(f"[OK] Producto {acc.id_registro} reinsertado ortogonalmente en la Multilista.")
+                else:
+                    print(f"[!] Error: no se pudo reinsertar producto {acc.id_registro} (verifique grupo e investigador).")
+            GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+
         else:
             print("[OK] Acción procesada desde la cima de la Pila.")
 
