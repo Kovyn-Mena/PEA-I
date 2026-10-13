@@ -40,7 +40,7 @@ flowchart TD
 
         subgraph TRACK_B ["Línea Persona B (Compañero - Windows)"]
             F3["Fase 3: Ingesta Masiva Multifuente<br><i>(Web Scraping GrupLAC/CvLAC + PDF + CSV + Cola)</i>"]:::parallelB
-            F5["Fase 5: Dashboard Gráfico Interactivo<br><i>(Tkinter + Gráficos Matplotlib + 3 Vistas - Compl. 14.c)</i>"]:::parallelB
+            F5["Fase 5: Dashboard Gráfico Interactivo<br><i>(Matplotlib + Portal Web + 3 Vistas - Compl. 14.c)</i>"]:::parallelB
         end
     end
 
@@ -68,7 +68,7 @@ flowchart TD
 | **3** | **Ingesta Masiva (Scraping/PDF/CSV)** | **Persona B** | **EN CURSO** | Fases 0 y 1 | **Fases 4 y 4.B (Persona A)** | **Punto 7 del Taller:** Descarga automática desde GrupLAC y CvLAC, lectura de informes PDF y archivos CSV usando la Cola TDA. |
 | **4** | **Interoperabilidad C++ $\leftrightarrow$ Python** | **Persona A** | **EN CURSO** | Fase 2 | **Fases 3 y 5 (Persona B)** | **Punto 14.d (Complemento 5.0):** Permite que C++ invoque el scraping o el dashboard en Python mediante `popen()`. |
 | **4.B**| **GUI Creativa en C++** | **Persona A** | **EN CURSO** | Fase 2 | **Fases 3 y 5 (Persona B)** | **Punto 14.c (Complemento 5.0):** Interfaz gráfica creativa en C++ (ImGui / Raylib o canvas gráfico) para visualización visual del Hipercubo. |
-| **5** | **Dashboard Gráfico (Tkinter + Matplotlib)** | **Persona B** | **PENDIENTE** | Fases 0 y 3 | **Fases 4.B y 6.B (Persona A)**| **Punto 12.b (Obligatorio 4.0):** Dashboard con las 3 vistas obligatorias (Grupo, Investigador, Producto), histogramas por año y barras por categoría. |
+| **5** | **Dashboard Gráfico (Matplotlib + Portal Web)** | **Persona B** | **COMPLETADO** | Fases 0 y 3 | **Fases 4.B y 6.B (Persona A)**| **Punto 12.b (Obligatorio 4.0):** Dashboard con las 3 vistas obligatorias (Grupo, Investigador, Producto), histogramas por año y barras por categoría. |
 | **6.A**| **Documentación Técnica & Entrega Formal** | **Ambos** | **PENDIENTE** | Fases 3, 4, 4.B, 5 | — | **Notas 1 a 8 del Taller:** Word formal (SPEC, HU, Casos de Uso), entrega antes del lunes 19 de octubre 11:59 am con iniciales en los fuentes. |
 | **6.B**| **Módulo Opcional Rust (CLI/Bridge)** | **Persona A** | **OPCIONAL** | Fase 2 | Fase 5 (Persona B) | **Punto 14.f (Complemento 5.0):** Analizador complementario en Rust para blindar el 5.0 rotundo frente a cualquier rúbrica. |
 
@@ -164,10 +164,10 @@ flowchart TD
 
 ---
 
-### 🔹 Fase 5: Dashboard Gráfico Interactivo (Tkinter + Matplotlib) — [PENDIENTE: PERSONA B]
+### 🔹 Fase 5: Dashboard Gráfico Interactivo (Matplotlib + Portal Web) — [COMPLETADO: PERSONA B]
 * **Rama asignada:** `feature/python-gui`
 * **Archivo a crear:** `src/python/gui.py`
-* **Librerías a usar:** `tkinter` (nativo) y `matplotlib`.
+* **Librerías a usar:** `matplotlib` (renderizado estático de alta resolución) y Portal HTML5 autónomo.
 * **¿Por qué existe y qué hace?:**
   El Punto 12.b y 12.c exigen:
   > *"En Python el programa mostrará un DASHBOARD con la información estadística, histogramas y diagramas de barras. Ejemplo: https://sistemainvestigacion.uniminuto.edu/PGrupos/Ver/141"*
@@ -217,7 +217,7 @@ El script principal de Python (`Taller2_AB_PO_XX.py` o `src/python/main.py`) ace
 # Modo 1: Consola interactiva normal (predeterminada)
 python Taller2_AB_PO_XX.py
 
-# Modo 2: Lanzar el Dashboard Gráfico Tkinter (Fase 5)
+# Modo 2: Lanzar el Dashboard Gráfico Python / Matplotlib (Fase 5)
 python Taller2_AB_PO_XX.py --gui
 
 # Modo 3: Ejecutar Ingesta Masiva desde URL MinCiencias (Fase 3)
@@ -318,7 +318,7 @@ Todas están especificadas en `requirements.txt`:
 * `beautifulsoup4`: Para parsear el HTML y extraer tablas y textos del scraping.
 * `pypdf`: Para leer y procesar texto de archivos PDF de investigación.
 * `matplotlib`: Para generar gráficos de barras, histogramas y visualizaciones estadísticas.
-* Librerías nativas estándar utilizadas: `sqlite3`, `tkinter`, `csv`, `os`, `sys`, `json`.
+* Librerías nativas estándar utilizadas: `sqlite3`, `csv`, `os`, `sys`, `json`.
 
 ### 🎨 Identidad Institucional de la UPC (Para el Dashboard y Documentos)
 * **Color Verde Institucional:** `#006837`

@@ -17,7 +17,7 @@ echo.
 echo   Seleccione una opcion de ejecucion:
 echo.
 echo   [1] Consola Interactiva Python (Recomendado - Abre al instante sin compilar)
-echo   [2] Interfaz Grafica de Escritorio Tkinter (Python GUI --gui)
+echo   [2] Dashboard Grafico Interactivo Python (Matplotlib + 3 Vistas --gui)
 echo   [3] Portal Web Interactivo del Hipercubo y CRUD (HTML5 Offline)
 echo   [4] Compilar y Ejecutar en C++17 (Autodetecta MSYS2, MinGW, Code::Blocks)
 echo   [5] Ejecutar Pruebas Unitarias de Estructuras de Datos (TDAs)
@@ -113,7 +113,7 @@ if !ERRORLEVEL! neq 0 (
     goto MENU
 )
 echo [OK] Python detectado: !PYCMD!
-echo [+] Iniciando Interfaz Grafica Nativa Tkinter (--gui)...
+echo [+] Iniciando Dashboard Grafico Interactivo Python (--gui)...
 echo.
 if "!PYCMD!"=="py -3" (
     py -3 Taller2_AB_PO_XX.py --gui

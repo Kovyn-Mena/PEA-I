@@ -246,6 +246,15 @@ Archivos raíz perdidos al copiar el repo (papelera y disco revisados: sin copia
   - **Solución:** `header` cambiado a flujo normal (`position: relative`), grilla ajustada a `290px minmax(0, 1fr)` con `overflow-x: auto` en contenedores de tabla y celdas compactas.
   - **Login previo:** Añadida ventana previa de validación de usuario y contraseña (`admin` / `1234`) en el Portal Web (`#login-overlay` + botón `Salir`), en la GUI nativa Tkinter (`Toplevel` modal previo) y en las consolas C++ y Python.
 
+## Sesión 41 — Eliminación Total de Tkinter y Consolidación del Flujo Gráfico (Auditoría Técnica)
+
+- **Archivos modificados:** `src/python/gui.py`, `src/python/console.py`, `iniciar.bat`, `README_WINDOWS.txt`, `docs/guia-desarrollo-equipo.md`, `documentacion-obsidian/PEA-I/030 - Mapa de Fases (Fase 0 a Fase 6B).md`, `documentacion-obsidian/PEA-I/060 - Bitácora de Cambios y Registro de Errores Lógicos.md`.
+- **Causa raíz del problema:** La implementación de Tkinter requería dependencias nativas del sistema operativo (`libtk`, servidor X11/Wayland o drivers de ventana de escritorio), lo que provocaba bloqueos silenciosos o excepciones al ejecutar en terminales de desarrollo, entornos headless y diversas plataformas. Además, duplicaba innecesariamente la lógica visual que ya resuelve con mayor sofisticación el Portal Web interactivo y los gráficos de alta resolución con Matplotlib (backend `Agg`).
+- **Solución implementada:**
+  1. **Purga completa de Tkinter en `src/python/gui.py`:** Eliminado el método `lanzar_tkinter_desktop()` (~275 líneas de widgets de escritorio frágiles) y la bifurcación condicional en `iniciar()`. Ahora `DashboardApp.iniciar()` compila directamente los gráficos estadísticos institucionales con Matplotlib y genera el Portal HTML5 autónomo (`dist/dashboard_python.html`) con las 3 vistas obligatorias (Grupos, Investigadores, Productos) y enlaces a reportes PDF.
+  2. **Actualización de menús y lanzadores:** En `src/python/console.py`, `iniciar.bat` y `README_WINDOWS.txt`, se renombró la opción 2 a *Dashboard Gráfico Interactivo Python (Matplotlib + 3 Vistas --gui)*, garantizando que el usuario y el docente experimenten una apertura instantánea y sin errores en su navegador predeterminado.
+  3. **Verificación de calidad:** Ejecutados exitosamente `make test` (pruebas de TDAs C++ y Python sin regresiones) y `python3 Taller2_AB_PO_XX.py --gui`.
+
 ## 🐛 Bugs
 | ID | Bug | Estado |
 |:--:|-----|:------:|
@@ -263,3 +272,4 @@ Archivos raíz perdidos al copiar el repo (papelera y disco revisados: sin copia
 | BUG-12 (nuevo, detectado por el usuario, grave) | Arranque con sí + grupo ya existente (o búsqueda cancelada/fallida) entraba al menú sin datos en automático: `iniciar()` sin guardián + S33 sin recarga | **corregido S34**: `menuBuscarGrupo()` retorna bool + `iniciar()` en bucle con submenú 1-buscar otro (repite si/no) / 2-precargar SQLite / 3-sin datos explícito |
 | BUG-13 (nuevo, detectado por el usuario, grave) | Salir con No no borraba (EIDGA quedó guardado): el restore backup nunca corrió en esa sesión | **corregido S39**: sesión sobre BD temporal (`pea_sesion.db`, Python con `--db` automático); Sí promueve, No elimina; X-close seguro por construcción |
 | BUG-14 (nuevo, detectado por el usuario) | Recorte superior e izquierdo/derecho en tablas del Portal Web (`Desacti...` cortado y `header` sticky tapando buscador al hacer scroll) | **corregido S40**: `header` en flujo relativo, `.portal-layout` con `290px minmax(0, 1fr)` y `.data-table-container` con `overflow-x: auto` |
+| BUG-15 (nuevo, auditoría) | Interfaz nativa Tkinter generaba cuelgues, fallos por dependencias (`_tkinter`) y problemas en entornos sin display | **corregido S41**: purga completa de Tkinter; adopción exclusiva del flujo Matplotlib (Agg) + Dashboard HTML5 interactivo multiplataforma |

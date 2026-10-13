@@ -19,7 +19,7 @@ si la ruta contiene espacios) y verifica instalaciones reales de Python 3 y C++1
 (evitando el alias vacio de Microsoft Store):
 
   [1] Consola Interactiva Python (Recomendado - Abre al instante sin compilar)
-  [2] Interfaz Grafica de Escritorio Tkinter (Python GUI --gui)
+  [2] Dashboard Grafico Interactivo Python (Matplotlib + 3 Vistas --gui)
   [3] Portal Web Interactivo del Hipercubo y CRUD (HTML5 Offline)
   [4] Compilar y Ejecutar en C++17 (Autodetecta MSYS2, MinGW, Code::Blocks)
   [5] Ejecutar Pruebas Unitarias de Estructuras de Datos (TDAs)

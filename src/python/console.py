@@ -261,8 +261,8 @@ class ConsolaApp:
         print("=================================================================")
         print("    PEA-i UPC > Portal Institucional y Dashboard (GUI Python)   ")
         print("=================================================================")
-        print("  1. Abrir Portal Ejecutivo Web (Recomendado - Zero-Dependencies)")
-        print("  2. Abrir Dashboard de Escritorio Tkinter / Matplotlib (3 Vistas)")
+        print("  1. Abrir Portal Institucional C++ (HTML5 / Zero-Dependencies)")
+        print("  2. Abrir Dashboard Analítico Python (Matplotlib + 3 Vistas HTML5 + PDFs)")
         print("  0. Regresar al Menú Principal")
         print("-----------------------------------------------------------------")
         op = self.leer_opcion_menu("012", "Seleccione una opción [0-2]: ")
@@ -277,13 +277,13 @@ class ConsolaApp:
                 print(f"[!] Error al abrir el navegador: {e}")
             self.pausar()
         elif op == 2:
-            print("\n[+] Inicializando Dashboard de Escritorio Tkinter / Matplotlib...")
+            print("\n[+] Inicializando Dashboard Analítico Python (Matplotlib + 3 Vistas)...")
             try:
                 from python.gui import DashboardApp
                 app_gui = DashboardApp(self.ruta_bd)
                 app_gui.iniciar()
             except Exception as e:
-                print(f"[!] Error al iniciar interfaz Tkinter: {e}")
+                print(f"[!] Error al iniciar Dashboard Python: {e}")
             self.pausar()
 
     # -----------------------------------------------------------------

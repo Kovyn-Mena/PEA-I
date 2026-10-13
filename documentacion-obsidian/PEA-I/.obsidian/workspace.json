@@ -4,17 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "484ffeca98796b33",
+        "id": "738ec6a5c56f01af",
         "type": "tabs",
         "children": [
           {
-            "id": "27834ad0ca9673e2",
+            "id": "db42c93554888f99",
             "type": "leaf",
             "state": {
-              "type": "graph",
+              "type": "empty",
               "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Vista gráfica"
+              "icon": "lucide-file",
+              "title": "Nueva pestaña"
             }
           }
         ]
@@ -184,7 +184,7 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "27834ad0ca9673e2",
+  "active": "fdbc76fb01371865",
   "lastOpenFiles": [
     "000 - PEA-i Hub Principal.md",
     "051 - Guía de Configuración Windows y Git.md",
