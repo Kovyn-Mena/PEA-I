@@ -168,12 +168,12 @@ def generar_informe_grupo_pdf(codigo_grupo: str, ruta_bd: str = "data/pea_invest
 
     cod_g, nom_g, clas_g, area_g, lid_g, anio_g, act_g = g_row
 
-    # 2. Obtener Integrantes
-    cur.execute("SELECT documento_id, nombre_completo, categoria, formacion_academica, activo FROM Investigadores WHERE codigo_grupo = ? ORDER BY nombre_completo", (cod_g,))
+    # 2. Obtener Integrantes (Activos)
+    cur.execute("SELECT documento_id, nombre_completo, categoria, formacion_academica, activo FROM Investigadores WHERE codigo_grupo = ? AND activo = 1 ORDER BY nombre_completo", (cod_g,))
     investigadores = cur.fetchall()
 
-    # 3. Obtener Productos
-    cur.execute("SELECT id_producto, tipo, titulo, anio, categoria_minciencias, validado, id_investigador, activo FROM Productos WHERE codigo_grupo = ? ORDER BY anio DESC, titulo ASC", (cod_g,))
+    # 3. Obtener Productos (Activos)
+    cur.execute("SELECT id_producto, tipo, titulo, anio, categoria_minciencias, validado, id_investigador, activo FROM Productos WHERE codigo_grupo = ? AND activo = 1 ORDER BY anio DESC, titulo ASC", (cod_g,))
     productos = cur.fetchall()
     conn.close()
 
@@ -188,7 +188,7 @@ def generar_informe_grupo_pdf(codigo_grupo: str, ruta_bd: str = "data/pea_invest
         pid, tipo, tit, anio, cat_m, val, id_inv, act = p
         clas_info = CatalogoMinCiencias2024.clasificar_producto(tipo, cat_m, tit)
         fam = clas_info["familia"]
-        pts = clas_info["global_weight"] if val else 0
+        pts = clas_info["global_weight"] if val else (clas_info["global_weight"] // 2)
         conteos_2024[fam] = conteos_2024.get(fam, 0) + 1
         puntos_2024[fam] = puntos_2024.get(fam, 0) + pts
         total_ipp += pts
