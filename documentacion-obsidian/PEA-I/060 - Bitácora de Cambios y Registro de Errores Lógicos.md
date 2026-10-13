@@ -255,6 +255,35 @@ Archivos raíz perdidos al copiar el repo (papelera y disco revisados: sin copia
   2. **Actualización de menús y lanzadores:** En `src/python/console.py`, `iniciar.bat` y `README_WINDOWS.txt`, se renombró la opción 2 a *Dashboard Gráfico Interactivo Python (Matplotlib + 3 Vistas --gui)*, garantizando que el usuario y el docente experimenten una apertura instantánea y sin errores en su navegador predeterminado.
   3. **Verificación de calidad:** Ejecutados exitosamente `make test` (pruebas de TDAs C++ y Python sin regresiones) y `python3 Taller2_AB_PO_XX.py --gui`.
 
+## Sesión 42 — Corrección Integral de Auditorías Técnicas y Unificación ScienTI (Fases 1, 2 y 3)
+
+- **Archivos modificados:** `src/python/core/busqueda_scienti.py`, `src/python/core/ingesta.py`, `src/python/console.py`, `src/cpp/include/ConsolaApp.h`, `src/cpp/include/GestorInterop.h`, `Taller2_AB_PO_XX.py`, `src/python/main.py`, `iniciar.bat`, `scripts/package_zip.py`, `documentacion-obsidian/PEA-I/060 - Bitácora de Cambios y Registro de Errores Lógicos.md`.
+- **Causa raíz de los problemas:**
+  1. **Falla tipográfica y ausencia de búsquedas institucionales:** El Menú de Ingesta (opción 8) en Python arrojaba `TypeError: leer_linea() got an unexpected keyword argument 'permite_vacio'` debido al parámetro incorrecto, y no exponía las búsquedas de universidades/grupos ni el catálogo UPC de 66 grupos (`data/indice_instituciones.json`, `data/indice_grupos.json`, `data/grupos_upc.txt`).
+  2. **Desarticulación GrupLAC y CvLAC con datos sintéticos:** El scraper procesaba grupos de manera aislada sin concurrencia para los CvLAC de sus miembros, y recurría a métodos ficticios (`_fallback_gruplac`, `_fallback_cvlac`) que contaminaban la base de datos con registros falsos (`FALLBACK-001`, `Paper Hipercubo ficticio`).
+  3. **Deshacer LIFO incompleto:** La función de Deshacer solo manejaba `DESACTIVAR` y `CREAR`. Ante `MODIFICAR` no restauraba los valores previos de los campos, y ante `ELIMINAR` no reinsertaba el nodo ortogonalmente en la Multilista ni sincronizaba la base de datos SQLite.
+  4. **IDs no deterministas en PDFs:** La función nativa `hash()` de Python dependía de la semilla del proceso, generando identificadores variables e inestables entre ejecuciones.
+- **Soluciones implementadas:**
+  1. **Fase 1 (Búsquedas ScienTI y Reestructuración Menú 8):**
+     - Módulo `src/python/core/busqueda_scienti.py` con resolución offline y online de universidades y grupos UPC.
+     - Menú 8 reestructurado en 9 subopciones claras tanto en Python (`console.py`) como en C++ (`ConsolaApp.h` vía `GestorInterop`).
+     - CLI enriquecido en `Taller2_AB_PO_XX.py` con `--buscar-universidad`, `--buscar-grupo`, `--listar-upc`, `--scrape-grupo`.
+  2. **Fase 2 (Pipeline Unificado GrupLAC + CvLAC y Supresión de Datos Sintéticos):**
+     - En `src/python/core/ingesta.py`, la extracción de GrupLAC dispara inmediatamente `ThreadPoolExecutor(12)` para capturar las hojas de vida CvLAC de todos los integrantes y poblar `perfil_investigador`.
+     - Eliminados definitivamente `_fallback_gruplac` y `_fallback_cvlac`. La base de datos `data/pea_investigacion.db` contiene cero registros sintéticos.
+     - Atribución estricta de autoría con fallback al líder institucional para productos huérfanos.
+     - Generación determinista de IDs de productos en PDFs con SHA-256 truncado a 8 caracteres hexadecimales.
+  3. **Fase 3 (Deshacer LIFO Real en C++ y Python):**
+     - En `src/python/console.py` y `src/cpp/include/ConsolaApp.h`, captura exhaustiva de atributos en `detalle_previo` (`clave=valor;...`) antes de modificar o eliminar grupos, investigadores o productos.
+     - En `ejecutar_deshacer` / `ejecutarDeshacer`, parseo atómico del estado previo, restauración de campos en RAM (`MODIFICAR`), re-inserción ortogonal de nodos (`ELIMINAR`) y sincronización inmediata con SQLite.
+  4. **Lanzador y Distribución:**
+     - Añadida la opción `[7]` a `iniciar.bat` para empaquetar la entrega final en ZIP con un solo clic.
+     - Regenerado el archivo formal `Taller2_EstructuraDatos_GrupoXX.zip` mediante `scripts/package_zip.py`.
+- **Verificación:**
+  - `make clean && make` compiló en C++17 con `-Wall -Wextra` y cero advertencias.
+  - `make test` ejecutó exitosamente el 100% de las pruebas unitarias de TDAs en C++ y Python.
+  - Pruebas de Deshacer en RAM y SQLite superadas con éxito.
+
 ## 🐛 Bugs
 | ID | Bug | Estado |
 |:--:|-----|:------:|
@@ -273,3 +302,7 @@ Archivos raíz perdidos al copiar el repo (papelera y disco revisados: sin copia
 | BUG-13 (nuevo, detectado por el usuario, grave) | Salir con No no borraba (EIDGA quedó guardado): el restore backup nunca corrió en esa sesión | **corregido S39**: sesión sobre BD temporal (`pea_sesion.db`, Python con `--db` automático); Sí promueve, No elimina; X-close seguro por construcción |
 | BUG-14 (nuevo, detectado por el usuario) | Recorte superior e izquierdo/derecho en tablas del Portal Web (`Desacti...` cortado y `header` sticky tapando buscador al hacer scroll) | **corregido S40**: `header` en flujo relativo, `.portal-layout` con `290px minmax(0, 1fr)` y `.data-table-container` con `overflow-x: auto` |
 | BUG-15 (nuevo, auditoría) | Interfaz nativa Tkinter generaba cuelgues, fallos por dependencias (`_tkinter`) y problemas en entornos sin display | **corregido S41**: purga completa de Tkinter; adopción exclusiva del flujo Matplotlib (Agg) + Dashboard HTML5 interactivo multiplataforma |
+| BUG-16 (nuevo, auditoría) | Ingesta Menú 8 arrojaba `TypeError: leer_linea() got an unexpected keyword argument 'permite_vacio'` y carecía de búsqueda ScienTI | **corregido S42**: corregido tipográfico `permitir_vacio` e integrado módulo `busqueda_scienti.py` con 9 opciones en Python y C++ |
+| BUG-17 (nuevo, auditoría) | GrupLAC y CvLAC desarticulados con presencia de funciones de datos sintéticos `_fallback_gruplac` y `_fallback_cvlac` | **corregido S42**: unificación con `ThreadPoolExecutor(12)`, eliminación total de sintéticos y atribución institucional estricta |
+| BUG-18 (nuevo, auditoría) | Deshacer (TDA Pila - LIFO) ignoraba valores previos de `MODIFICAR` y no reinsertaba registros en `ELIMINAR` | **corregido S42**: serialización en `detalle_previo`, restauración completa en memoria RAM y sincronización atómica con SQLite |
+| BUG-19 (nuevo, auditoría) | IDs de productos en PDFs generados con `hash()` no-determinista | **corregido S42**: cálculo criptográfico determinista con SHA-256 de 8 caracteres hexadecimales |
