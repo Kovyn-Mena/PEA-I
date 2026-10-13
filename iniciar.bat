@@ -22,11 +22,12 @@ echo   [3] Portal Web Interactivo del Hipercubo y CRUD (HTML5 Offline)
 echo   [4] Compilar y Ejecutar en C++17 (Autodetecta MSYS2, MinGW, Code::Blocks)
 echo   [5] Ejecutar Pruebas Unitarias de Estructuras de Datos (TDAs)
 echo   [6] Abrir Documentacion Tecnica Oficial Word (.docx)
+echo   [7] Empaquetar Entrega Formal en ZIP (Limpio para envio al docente)
 echo   [0] Salir
 echo.
 echo ===============================================================================
 set "OPC="
-set /p OPC="Ingrese el numero de la opcion [0-6]: "
+set /p OPC="Ingrese el numero de la opcion [0-7]: "
 
 if "%OPC%"=="1" goto RUN_PY_CONSOLE
 if "%OPC%"=="2" goto RUN_PY_GUI
@@ -34,6 +35,7 @@ if "%OPC%"=="3" goto RUN_WEB
 if "%OPC%"=="4" goto RUN_CPP
 if "%OPC%"=="5" goto RUN_TESTS
 if "%OPC%"=="6" goto OPEN_DOCX
+if "%OPC%"=="7" goto RUN_PACKAGE
 if "%OPC%"=="0" exit /b 0
 
 echo [!] Opcion no valida. Intente nuevamente.
@@ -225,6 +227,20 @@ if exist "Documentacion_Tecnica_GrupoXX.docx" (
     start "" "Documentacion_Tecnica_GrupoXX.docx"
 ) else (
     echo [!] No se encontro Documentacion_Tecnica_GrupoXX.docx
+)
+pause
+goto MENU
+
+:RUN_PACKAGE
+cls
+call :DETECT_PYTHON
+if !ERRORLEVEL! equ 0 (
+    echo [+] Creando archivo de entrega ZIP limpio...
+    if "!PYCMD!"=="py -3" (
+        py -3 scripts\package_zip.py
+    ) else (
+        "!PYCMD!" scripts\package_zip.py
+    )
 )
 pause
 goto MENU
