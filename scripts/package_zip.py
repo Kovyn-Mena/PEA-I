@@ -109,6 +109,40 @@ def _debe_excluir(root: str, filename: str) -> bool:
         return True
     return False
 
+def verificar_frescura() -> bool:
+    """Gate anti-stale (incidente oct-2026: ZIP entregado sin los últimos fixes).
+    Advierte si alguna fuente versionada es más nueva que el ZIP existente.
+    No bloquea (el empaquetado actualiza el ZIP de todos modos)."""
+    if not os.path.exists(ZIP_NAME):
+        print("    [gate] Sin ZIP previo: se creará desde cero.")
+        return True
+    t_zip = os.path.getmtime(ZIP_NAME)
+    rancios = []
+    for d in ("src", "data", "docs", "scripts"):
+        dd = os.path.join(BASE_DIR, d)
+        for root, dirs, fs in os.walk(dd):
+            dirs[:] = [x for x in dirs if x not in ("__pycache__",)]
+            if "pylib" in root.split(os.sep):
+                continue
+            for f in fs:
+                if not f.endswith((".py", ".h", ".cpp", ".json", ".sql")):
+                    continue
+                p = os.path.join(root, f)
+                if os.path.getmtime(p) > t_zip:
+                    rancios.append(os.path.relpath(p, BASE_DIR))
+    for f in ("iniciar.bat", "Makefile", "requirements.txt", "Taller2_AB_PO_XX.py",
+              "Taller2_AB_PO_XX.cpp", "README_WINDOWS.txt", "LEEME-PRIMERO.txt"):
+        p = os.path.join(BASE_DIR, f)
+        if os.path.exists(p) and os.path.getmtime(p) > t_zip:
+            rancios.append(f)
+    if rancios:
+        print(f"    [gate] ZIP desactualizado: {len(rancios)} fuentes más nuevas "
+              f"(ej. {', '.join(rancios[:4])}). Se regenerará ahora.")
+        return False
+    print("    [gate] ZIP al día con las fuentes.")
+    return True
+
+
 def verificar_formato_windows() -> bool:
     """Gate anti-repetición (fallo 'el .bat ni abre' oct-2026):
     los archivos cara-Windows deben ir en CRLF; los .py/.cpp/Makefile en LF.
@@ -140,6 +174,8 @@ def verificar_formato_windows() -> bool:
     return ok
 
 def empaquetar():
+    print("[*] Gate F: frescura del ZIP previo (antes de reemplazarlo)...")
+    verificar_frescura()
     if os.path.exists(ZIP_NAME):
         os.remove(ZIP_NAME)
 
