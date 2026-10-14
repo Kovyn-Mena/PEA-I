@@ -498,6 +498,26 @@ class MotorIngesta:
         self.ruta_bd = ruta_bd
         self.cola = Cola()
 
+    def _get_con_reintento(self, url: str, timeout: int = 25, intentos: int = 2):
+        """GET a MinCiencias con reintento. El JSP responde en 10-30 s;
+        timeouts cortos abortaban descargas legítimas (ERROR_SIN_CONEXION)."""
+        ultimo_error = None
+        for intento in range(1, intentos + 1):
+            try:
+                resp = requests.get(url, headers=self.HEADERS, timeout=timeout, verify=False)
+                if resp.status_code == 200 and len(resp.text) > 1000:
+                    return resp
+                ultimo_error = f"HTTP Status {resp.status_code}"
+            except requests.exceptions.Timeout:
+                ultimo_error = f"timeout agotado ({timeout}s, intento {intento}/{intentos})"
+            except requests.exceptions.ConnectionError as e:
+                ultimo_error = f"sin conexión/DNS ({e})"
+            except Exception as e:
+                ultimo_error = str(e)
+            if intento < intentos:
+                print(f"    [reintento {intento}/{intentos}] {ultimo_error}")
+        raise Exception(ultimo_error or "error desconocido de red")
+
     # -----------------------------------------------------------------
     # WEB SCRAPING: GRUPLAC (MinCiencias)
     # -----------------------------------------------------------------
@@ -540,11 +560,8 @@ class MotorIngesta:
         else:
             try:
                 print(f"[Scraping] Conectando a MinCiencias GrupLAC ({url})...")
-                resp = requests.get(url, headers=self.HEADERS, timeout=8, verify=False)
-                if resp.status_code == 200 and len(resp.text) > 1000:
-                    html_text = resp.text
-                else:
-                    raise Exception(f"HTTP Status {resp.status_code}")
+                resp = self._get_con_reintento(url, timeout=25, intentos=2)
+                html_text = resp.text
             except Exception as e:
                 print(f"[!] Error: No se pudo conectar a MinCiencias ({e}) y no existe snapshot local para el grupo {nro_grupo}.")
                 resumen["modo"] = "ERROR_SIN_CONEXION"
@@ -851,11 +868,8 @@ class MotorIngesta:
         else:
             try:
                 print(f"[Scraping] Conectando a MinCiencias CvLAC ({url})...")
-                resp = requests.get(url, headers=self.HEADERS, timeout=12, verify=False)
-                if resp.status_code == 200 and len(resp.text) > 1000:
-                    html_text = resp.text
-                else:
-                    raise Exception(f"HTTP Status {resp.status_code}")
+                resp = self._get_con_reintento(url, timeout=30, intentos=2)
+                html_text = resp.text
             except Exception as e:
                 print(f"[!] Error: No se pudo conectar a CvLAC en vivo ({e}) y no existe snapshot para cod_rh={cod_rh}.")
                 resumen["modo"] = "ERROR_SIN_CONEXION"
@@ -1036,9 +1050,11 @@ class MotorIngesta:
                 html = leer_snapshot_cvlac_html(rh)
                 if not html:
                     url = f"https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh={rh}"
-                    r = requests.get(url, headers=self.HEADERS, timeout=12, verify=False)
-                    if r.status_code == 200 and len(r.text) > 1000:
+                    try:
+                        r = self._get_con_reintento(url, timeout=30, intentos=2)
                         html = r.text
+                    except Exception:
+                        html = html or ""
                 if html:
                     p = parse_hoja_vida(html)
                     guardar_perfil_bd(rh, p, self.ruta_bd)
@@ -1104,7 +1120,14 @@ class MotorIngesta:
                 print(f"[!] Tipo de fuente no reconocido: {tarea.tipo_fuente}")
                 return False
 
-            # 5. Persistir el nuevo estado a SQLite
+            # 5. Persistir el nuevo estado a SQLite (solo si hubo datos nuevos;
+            # con resumen vacío se preserva la BD intacta y se reporta fallo)
+            if (resumen.get("grupos", 0) == 0 and resumen.get("investigadores", 0) == 0
+                    and resumen.get("productos", 0) == 0):
+                print(f"[!] Ingesta sin datos nuevos (modo: {resumen.get('modo', 'ESTÁNDAR')}).")
+                print("    La BD se deja intacta. Revise snapshot local o conexión a MinCiencias.")
+                print("=================================================================\n")
+                return False
             print("\n[+] Sincronizando datos extraídos con la Base de Datos SQLite...")
             if not GestorPersistencia.guardar_en_bd(multi, self.ruta_bd):
                 print("[ERROR] No se pudo persistir en SQLite (revisa CHECK constraints / esquema).")

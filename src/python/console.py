@@ -203,10 +203,15 @@ class ConsolaApp:
         nombre = elegido.get("nombre", "")
 
         print(f"\n[+] Conectando a ScienTI y descargando grupo: {nombre} ({cod} / nro={nro})...")
-        from python.core.ingesta import MotorIngesta
+        from python.core.ingesta import MotorIngesta, _buscar_snapshot_gruplac
         motor = MotorIngesta(self.ruta_bd)
         url = f"https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro={nro}" if nro else f"COL:{cod}"
-        GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+        if nro and _buscar_snapshot_gruplac(nro):
+            print(f"[i] Snapshot local disponible: scrape offline instantáneo.")
+        else:
+            print(f"[i] Sin snapshot local: intentará descarga en vivo "
+                  f"(MinCiencias responde en 10-30 s, sea paciente).")
+        self.guardar_ram_si_hay_datos("respaldo pre-ingesta")
         if motor.ejecutar_ingesta("URL_GRUPLAC", url):
             self.multi = Multilista()
             GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
@@ -376,7 +381,7 @@ class ConsolaApp:
             try:
                 from python.core.ingesta import MotorIngesta
                 from python.gui import DashboardApp
-                GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+                self.guardar_ram_si_hay_datos("respaldo pre-ingesta")
                 motor = MotorIngesta(self.ruta_bd)
                 if motor.ejecutar_ingesta_automatica():
                     self.multi = Multilista()
@@ -483,7 +488,15 @@ class ConsolaApp:
                     url = "https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002099"
                 elif url.isdigit():
                     url = f"https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro={url}"
-                GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+                import re as _re
+                from python.core.ingesta import _buscar_snapshot_gruplac as _snap_g
+                _m = _re.search(r"nro=(\d+)", url)
+                if _m and _snap_g(_m.group(1)):
+                    print(f"[i] Snapshot local disponible: scrape offline instantáneo.")
+                else:
+                    print(f"[i] Sin snapshot local: intentará descarga en vivo "
+                          f"(MinCiencias responde en 10-30 s, sea paciente).")
+                self.guardar_ram_si_hay_datos("respaldo pre-ingesta")
                 if motor.ejecutar_ingesta("URL_GRUPLAC", url):
                     self.multi = Multilista()
                     GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
@@ -491,7 +504,7 @@ class ConsolaApp:
 
             elif op == 5:
                 self.limpiar_pantalla()
-                GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+                self.guardar_ram_si_hay_datos("respaldo pre-ingesta")
                 if motor.ejecutar_ingesta_automatica():
                     self.multi = Multilista()
                     GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
@@ -510,7 +523,7 @@ class ConsolaApp:
                     url = "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000494917"
                 elif url.isdigit():
                     url = f"https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh={url}"
-                GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+                self.guardar_ram_si_hay_datos("respaldo pre-ingesta")
                 if motor.ejecutar_ingesta("URL_CVLAC", url):
                     self.multi = Multilista()
                     GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
@@ -526,7 +539,7 @@ class ConsolaApp:
                 if ruta == "0": continue
                 if not ruta:
                     ruta = "data/muestra_upc.csv"
-                GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+                self.guardar_ram_si_hay_datos("respaldo pre-ingesta")
                 if motor.ejecutar_ingesta("ARCHIVO_CSV", ruta):
                     self.multi = Multilista()
                     GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
@@ -542,7 +555,7 @@ class ConsolaApp:
                 if ruta == "0": continue
                 if not ruta:
                     ruta = "data/muestra_articulo.pdf"
-                GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+                self.guardar_ram_si_hay_datos("respaldo pre-ingesta")
                 if motor.ejecutar_ingesta("ARCHIVO_PDF", ruta):
                     self.multi = Multilista()
                     GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
@@ -610,7 +623,7 @@ class ConsolaApp:
                 if nro:
                     url = f"https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro={nro}"
                     print(f"\n[+] Ingestando grupo {g_target.get('nombre','')} (nro={nro})...")
-                    GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+                    self.guardar_ram_si_hay_datos("respaldo pre-ingesta")
                     if motor.ejecutar_ingesta("URL_GRUPLAC", url):
                         self.multi = Multilista()
                         GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
@@ -660,7 +673,7 @@ class ConsolaApp:
                 nro = g_sel.get("nro", "")
                 url = f"https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro={nro}"
                 print(f"\n[+] Ingestando automáticamente grupo UPC: {g_sel.get('nombre','')} (nro={nro})...")
-                GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+                self.guardar_ram_si_hay_datos("respaldo pre-ingesta")
                 if motor.ejecutar_ingesta("URL_GRUPLAC", url):
                     self.multi = Multilista()
                     GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
@@ -697,7 +710,7 @@ class ConsolaApp:
             if nro:
                 url = f"https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro={nro}"
                 print(f"\n[+] Ingestando grupo {g_sel.get('nombre','')} (nro={nro})...")
-                GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+                self.guardar_ram_si_hay_datos("respaldo pre-ingesta")
                 if motor.ejecutar_ingesta("URL_GRUPLAC", url):
                     self.multi = Multilista()
                     GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
@@ -1307,7 +1320,7 @@ class ConsolaApp:
                 if p:
                     p.activo = not p.activo
             print("[OK] Estado lógico restaurado con éxito mediante pop() de la Pila.")
-            GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+            self.guardar_ram_si_hay_datos("respaldo deshacer", forzar=True)
 
         elif acc.tipo_operacion == "CREAR":
             if acc.tipo_entidad == "GRUPO":
@@ -1317,7 +1330,7 @@ class ConsolaApp:
             elif acc.tipo_entidad == "PRODUCTO":
                 self.multi.eliminar_producto(acc.id_registro)
             print("[OK] Inserción revertida (registro retirado de memoria).")
-            GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+            self.guardar_ram_si_hay_datos("respaldo deshacer", forzar=True)
 
         elif acc.tipo_operacion == "MODIFICAR":
             campos = {}
@@ -1354,7 +1367,7 @@ class ConsolaApp:
                     print(f"[OK] Producto {acc.id_registro} restaurado a valores previos.")
                 else:
                     print(f"[!] Producto {acc.id_registro} no encontrado en memoria.")
-            GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+            self.guardar_ram_si_hay_datos("respaldo deshacer", forzar=True)
 
         elif acc.tipo_operacion == "ELIMINAR":
             campos = {}
@@ -1397,7 +1410,7 @@ class ConsolaApp:
                     print(f"[OK] Producto {acc.id_registro} reinsertado ortogonalmente en la Multilista.")
                 else:
                     print(f"[!] Error: no se pudo reinsertar producto {acc.id_registro} (verifique grupo e investigador).")
-            GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+            self.guardar_ram_si_hay_datos("respaldo deshacer", forzar=True)
 
         else:
             print("[OK] Acción procesada desde la cima de la Pila.")
@@ -1533,11 +1546,29 @@ class ConsolaApp:
         print("=================================================================")
         self.pausar()
 
+    def guardar_ram_si_hay_datos(self, motivo: str = "respaldo", forzar: bool = False) -> bool:
+        """Guarda la RAM en SQLite salvo que esté vacía (anti-wipe).
+
+        `guardar_en_bd` hace DELETE+INSERT total: con RAM vacía borraría la BD.
+        Los respaldos pre-ingesta se omiten si no hay datos; las mutaciones
+        deliberadas (deshacer) usan forzar=True para persistir el vaciado real.
+        """
+        if not forzar and (self.multi.contar_grupos(False) == 0
+                           and self.multi.contar_investigadores(False) == 0
+                           and self.multi.contar_productos(False) == 0):
+            print(f"[i] RAM vacía: se omite {motivo} para no borrar la BD.")
+            return False
+        return GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+
     def guardar_en_bd(self):
         self.limpiar_pantalla()
         print("=================================================================")
         print("       PERSISTENCIA: GUARDAR DATOS EN SQLITE (data.db)           ")
         print("=================================================================")
+        if (self.multi.contar_grupos(False) == 0
+                and self.multi.contar_investigadores(False) == 0
+                and self.multi.contar_productos(False) == 0):
+            print("[AVISO] La memoria RAM está vacía: guardar ahora dejaría la BD vacía.")
         print("[+] Sincronizando Multilista en memoria con SQLite...")
         if GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd):
             print(f"[OK] Todos los registros fueron persistidos exitosamente en {self.ruta_bd}")
