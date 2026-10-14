@@ -80,9 +80,11 @@ test:
 	$(PYTHON) src/python/test_tda.py
 
 # Generar diagramas y documento Word formal de especificación técnica
+# (requiere python-docx/matplotlib: solo declarados como opcionales en
+# requirements.txt; si faltan, se avisa y NO se aborta el empaquetado)
 docs:
-	$(PYTHON) docs/generate_diagrams.py
-	$(PYTHON) docs/generate_word_doc.py
+	-$(PYTHON) docs/generate_diagrams.py
+	-$(PYTHON) docs/generate_word_doc.py
 	@echo "[OK] Documentación y diagramas generados exitosamente."
 
 # Ejecutar auditoría complementaria en Rust (Punto 14.f)

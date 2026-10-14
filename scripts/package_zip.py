@@ -107,9 +107,42 @@ def _debe_excluir(root: str, filename: str) -> bool:
         return True
     return False
 
+def verificar_formato_windows() -> bool:
+    """Gate anti-repetición (fallo 'el .bat ni abre' oct-2026):
+    los archivos cara-Windows deben ir en CRLF; los .py/.cpp/Makefile en LF.
+    Normaliza automáticamente a CRLF y avisa. Retorna False si algo falla."""
+    windows_crlf = [
+        "iniciar.bat",
+        "README_WINDOWS.txt",
+        "integrantes.txt",
+        "requirements.txt",
+    ]
+    ok = True
+    for rel in windows_crlf:
+        p = os.path.join(BASE_DIR, rel)
+        if not os.path.exists(p):
+            print(f"    [!] Gate formato: no encontrado — {rel}")
+            ok = False
+            continue
+        with open(p, "rb") as f:
+            data = f.read()
+        lineas = data.split(b"\n")
+        sin_cr = sum(1 for ln in lineas if ln and not ln.endswith(b"\r"))
+        if sin_cr:
+            with open(p, "wb") as f:
+                f.write(b"\n".join(
+                    ln if not ln or ln.endswith(b"\r") else ln + b"\r"
+                    for ln in data.split(b"\n")
+                ))
+            print(f"    [gate] {rel}: {sin_cr} líneas LF→CRLF normalizadas")
+    return ok
+
 def empaquetar():
     if os.path.exists(ZIP_NAME):
         os.remove(ZIP_NAME)
+
+    print("[*] Gate 1/3: formato Windows (CRLF en .bat/.txt)...")
+    verificar_formato_windows()
 
     print(f"[+] Creando archivo de entrega ZIP: {os.path.basename(ZIP_NAME)}...")
     archivos_incluidos = 0
@@ -169,6 +202,26 @@ def empaquetar():
     print(f"     • Tamaño:   {size_kb} KB")
     print(f"     • Incluidos: {archivos_incluidos} archivos")
     print(f"     • Omitidos:  {archivos_omitidos} archivos (binarios/cache/temporales)")
+
+    print("[*] Gate 2/3: contenido del ZIP (basura/duplicados/obligatorios)...")
+    with zipfile.ZipFile(ZIP_NAME, "r") as zf:
+        names = zf.namelist()
+        mal = [n for n in names
+               if n.endswith((".pyc", ".exe", ".bak", "-shm", "-wal"))
+               or n.split("/")[-1] in ("pea_cpp", "test_tda", "test_sqlite", "sqlite3_amalg.o")
+               or "/snapshots/zip/" in n or "__pycache__" in n]
+        dups = len(names) - len(set(names))
+        obligatorios = ["iniciar.bat", "Taller2_AB_PO_XX.py", "Taller2_AB_PO_XX.cpp",
+                        "src/cpp/sqlite3.c", "dist/dashboard_python.html"]
+        faltan = [o for o in obligatorios if o not in names]
+        if mal:
+            print(f"    [!] Gate 2/3 FALLA: basura en ZIP: {mal[:5]}")
+        if dups:
+            print(f"    [!] Gate 2/3 FALLA: {dups} duplicados")
+        if faltan:
+            print(f"    [!] Gate 2/3 FALLA: faltan obligatorios: {faltan}")
+        if not mal and not dups and not faltan:
+            print(f"    [gate] ZIP limpio: {len(names)} entradas, 0 basura, 0 duplicados")
     print(f"     • Listo para adjuntar y enviar a adithperez@unicesar.edu.co")
 
 if __name__ == "__main__":

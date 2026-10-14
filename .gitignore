@@ -6,7 +6,10 @@
 *.app
 build/
 bin/
-dist/
+dist/*
+!dist/visualizador_hipercubo.html
+!dist/dashboard_python.html
+!dist/logo_upc.png
 src/cpp/test_sqlite
 src/cpp/test_tda
 src/cpp/pea_cpp
@@ -24,7 +27,10 @@ venv/
 # Bases de datos generadas en ejecución y temporales
 *.db
 *.sqlite3
+*.db-shm
+*.db-wal
 !data/empty_placeholder.db
+!data/pea_investigacion.db
 
 # IDEs y editores
 .vscode/
