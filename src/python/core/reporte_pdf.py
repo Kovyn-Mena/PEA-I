@@ -152,6 +152,14 @@ def generar_informe_grupo_pdf(codigo_grupo: str, ruta_bd: str = "data/pea_invest
     if not os.path.isabs(ruta_bd):
         ruta_bd = os.path.join(PROJECT_ROOT, ruta_bd)
 
+    MAPA_ALIAS = {
+        "COL0002099": "COL0018706",
+        "2099": "COL0018706",
+        "00000000002099": "COL0018706",
+        "GISICO": "COL0018706",
+    }
+    codigo_grupo = MAPA_ALIAS.get(str(codigo_grupo).strip(), str(codigo_grupo).strip())
+
     conn = sqlite3.connect(ruta_bd)
     cur = conn.cursor()
 
@@ -360,7 +368,7 @@ def generar_informe_grupo_pdf(codigo_grupo: str, ruta_bd: str = "data/pea_invest
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="Generador de Informes PDF GrupLAC UPC")
-    parser.add_argument("codigo", nargs="?", default="COL0002099", help="Código GrupLAC o nombre del grupo")
+    parser.add_argument("codigo", nargs="?", default="COL0018706", help="Código GrupLAC o nombre del grupo")
     parser.add_argument("-o", "--output", default=None, help="Ruta de salida del PDF")
     args = parser.parse_args()
 

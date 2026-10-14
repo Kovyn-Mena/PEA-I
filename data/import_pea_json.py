@@ -9,7 +9,7 @@ Importa y normaliza el dataset masivo de investigación de la UPC
 desde pea_data_upc.json (61 grupos, 355 investigadores, 3335 productos)
 integrando las reglas del Modelo MinCiencias 2024 y garantizando la
 verdad empírica institucional:
-  - GISICO (COL0002099): Líder John Jairo Patiño Vanegas, integrante Adith Pérez.
+  - GISICO (COL0018706): Líder John Jairo Patiño Vanegas, integrante Adith Pérez.
   - AITICE (COL0043834): Líder Armando Javier López Sierra.
   - GISI (COL0005544): Líder Carlos Mendoza.
   - BIOTEC (COL0012981): Líder Martha Rangel.
@@ -39,7 +39,7 @@ from src.python.core.catalogo_2024 import CatalogoMinCiencias2024
 
 def normalizar_clasificacion_grupo(raw: str, codigo: str) -> str:
     r = raw.strip().upper()
-    if codigo == "COL0002099": return "C"
+    if codigo == "COL0018706": return "C"
     if codigo == "COL0043834": return "B"
     if codigo == "COL0005544": return "A"
     if codigo == "COL0012981": return "B"
@@ -102,7 +102,7 @@ def importar_dataset_completo(limite_grupos: int = None):
 
     # 2. Semillas Críticas Verificadas (GISICO, AITICE, GISI, BIOTEC)
     grupos_base = {
-        "COL0002099": ("COL0002099", "GRUPO DE INVESTIGACION EN SISTEMAS Y COMPUTACIÓN -GISICO-", "C", "Ingeniería y Tecnología", "John Jairo Patiño Vanegas", 2001, 1),
+        "COL0018706": ("COL0018706", "GRUPO DE INVESTIGACION EN SISTEMAS Y COMPUTACIÓN -GISICO-", "C", "Ingeniería y Tecnología", "John Jairo Patiño Vanegas", 2001, 1),
         "COL0043834": ("COL0043834", "GRUPO DE INVESTIGACIÓN AITICE (UPC)", "B", "Ciencias de la Educación y TIC", "Armando Javier López Sierra", 2011, 1),
         "COL0005544": ("COL0005544", "GRUPO DE INVESTIGACIÓN EN SISTEMAS INTELIGENTES (GISI)", "A", "Ciencias de la Computación", "Carlos Mendoza", 2008, 1),
         "COL0012981": ("COL0012981", "BIOTECNOLOGÍA Y AGROINDUSTRIA CESAR (BIOTEC)", "B", "Ciencias Agrícolas", "Martha Rangel", 2012, 1)
@@ -124,7 +124,7 @@ def importar_dataset_completo(limite_grupos: int = None):
         
         # Unificar GISICO si aparece con otro código
         if "GISICO" in g.get("name", "").upper():
-            code = "COL0002099"
+            code = "COL0018706"
         elif "AITICE" in g.get("name", "").upper():
             code = "COL0043834"
 
@@ -147,8 +147,8 @@ def importar_dataset_completo(limite_grupos: int = None):
     # 3. Investigadores
     # Investigadores semilla garantizados
     investigadores_base = [
-        ("INV2099001", "John Jairo Patiño Vanegas", "Asociado", "Maestría en Computación", "COL0002099", 1),
-        ("0000494917", "Adith Bismarck Pérez Orozco", "Asociado", "Doctorado en Ingeniería de Sistemas", "COL0002099", 1),
+        ("INV2099001", "John Jairo Patiño Vanegas", "Asociado", "Maestría en Computación", "COL0018706", 1),
+        ("0000494917", "Adith Bismarck Pérez Orozco", "Asociado", "Doctorado en Ingeniería de Sistemas", "COL0018706", 1),
         ("INV4383000", "Armando Javier López Sierra", "Asociado", "Master in Arts in Education (UNAD)", "COL0043834", 1),
         ("INV4383001", "Vanessa Paola Pertuz Peralta", "Asociado", "Doctorado en Administración", "COL0043834", 1),
         ("INV4383002", "Neida Coromoto Boscán Romero", "Asociado", "Maestría en Computación", "COL0043834", 1),
@@ -178,9 +178,9 @@ def importar_dataset_completo(limite_grupos: int = None):
 
         # Asignar grupo
         gid = res_to_gid.get(rid, 1)
-        cod_grupo = gid_to_code.get(gid, "COL0002099")
+        cod_grupo = gid_to_code.get(gid, "COL0018706")
         if cod_grupo not in grupos_db:
-            cod_grupo = "COL0002099"
+            cod_grupo = "COL0018706"
 
         if doc_id not in investigadores_db:
             cat = "Asociado" if (rid % 3 == 0) else ("Junior" if (rid % 2 == 0) else "Senior")
@@ -245,9 +245,9 @@ def importar_dataset_completo(limite_grupos: int = None):
 
         # Determinar grupo asignado
         gid = prod_to_gid.get(pid_raw, 1)
-        cod_grupo = gid_to_code.get(gid, "COL0002099")
+        cod_grupo = gid_to_code.get(gid, "COL0018706")
         if cod_grupo not in grupos_db:
-            cod_grupo = "COL0002099"
+            cod_grupo = "COL0018706"
 
         # Asignar investigador dentro del grupo
         pool_inv = inv_by_group.get(cod_grupo, ["INV2099001"])

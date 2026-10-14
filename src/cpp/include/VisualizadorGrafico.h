@@ -1307,7 +1307,7 @@ public:
                 <div class="crud-toolbar-left">
                     <label style="font-size:0.78rem; font-weight:700; color:#94a3b8; white-space:nowrap;">Alcance de Red:</label>
                     <select id="filtro-red-grupo" class="search-input" style="max-width:290px;" onchange="construirYRenderizarRed()">
-                        <option value="COL0002099">COL0002099 - GISICO (Grupo Focal)</option>
+                        <option value="COL0018706">COL0018706 - GISICO (Grupo Focal)</option>
                         <option value="TODOS">Red Institucional (Núcleo Intergrupal Top 50)</option>
                     </select>
                     <input type="text" id="search-red-inv" class="search-input" placeholder="Buscar investigador en el grafo..." oninput="resaltarBuscadoRed()" style="max-width:250px;">
@@ -1700,7 +1700,7 @@ public:
             renderizarListaGrupos();
 
             // Seleccionar GISICO o el primer grupo disponible
-            let inicial = gruposData.find(g => g.codigo === "COL0002099") || gruposData[0];
+            let inicial = gruposData.find(g => g.codigo === "COL0018706" || g.codigo === "COL0002099") || gruposData[0];
             if (inicial) {
                 seleccionarGrupo(inicial.codigo);
             }
@@ -3128,7 +3128,7 @@ public:
         function poblarSelectGruposRed() {
             const sel = document.getElementById("filtro-red-grupo");
             if (!sel || sel.options.length > 2) return;
-            const actual = sel.value || "COL0002099";
+            const actual = sel.value || "COL0018706";
             sel.innerHTML = `<option value="TODOS">Red Institucional (Núcleo Intergrupal Top 50)</option>`;
             gruposData.forEach(g => {
                 if (g.activo === false) return;
@@ -3155,7 +3155,7 @@ public:
             canvas.width = Math.max(600, rect.width || 800);
             canvas.height = Math.max(480, rect.height || 540);
 
-            const filtroG = document.getElementById("filtro-red-grupo")?.value || "COL0002099";
+            const filtroG = document.getElementById("filtro-red-grupo")?.value || (gruposData[0]?.codigo || "COL0018706");
             let candidatos = [];
 
             gruposData.forEach(g => {

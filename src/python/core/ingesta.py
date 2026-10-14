@@ -19,18 +19,21 @@ import os
 import sys
 import re
 import csv
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, "..", "..", ".."))
+pylib_dir = os.path.join(PROJECT_ROOT, "pylib")
+if os.path.exists(pylib_dir) and pylib_dir not in sys.path:
+    sys.path.insert(0, pylib_dir)
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 import urllib3
 import requests
 from bs4 import BeautifulSoup
 
 # Desactivar advertencias de certificados auto-firmados en MinCiencias
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
-# Asegurar importaciones relativas al paquete principal
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, "..", "..", ".."))
-if PROJECT_ROOT not in sys.path:
-    sys.path.insert(0, PROJECT_ROOT)
 
 from src.python.structures.cola import Cola
 from src.python.structures.multilista import Multilista
@@ -190,6 +193,7 @@ def guardar_perfil_bd(doc_id: str, perfil: dict, ruta_bd: str) -> bool:
 
 CODIGOS_LEGACY = {
     "GISICO": "COL0018706",
+    "COL0002099": "COL0018706",
     "G002668": "COL0043834",
     "G003639": "COL0001351",
     "G0002099": "COL0018706",
@@ -410,7 +414,7 @@ class MotorIngesta:
 
         if not cod_grupo:
             MAPA_NRO_A_COL = {
-                "2099": "COL0002099",
+                "2099": "COL0018706",
                 "2668": "COL0043834",
                 "3202": "COL0049121",
                 "3639": "COL0001351",
@@ -558,7 +562,7 @@ class MotorIngesta:
                             inv_prev.nombre_completo = nom_tit
                             inv_prev.categoria = cat
                             inv_prev.formacion_academica = formacion
-                        elif cod_grupo == "COL0002099" or inv_prev.primer_producto is None:
+                        elif cod_grupo in ("COL0018706", "COL0002099") or inv_prev.primer_producto is None:
                             # Priorizar membresía real en GISICO o mover si no tenía productos atados en otro grupo
                             while inv_prev.primer_producto:
                                 multi.eliminar_producto(inv_prev.primer_producto.id_producto)
@@ -700,7 +704,7 @@ class MotorIngesta:
         cod_rh = match_cod.group(1) if match_cod else "0000494917"
 
         # Asegurar que exista un grupo receptor por defecto
-        cod_grupo_def = "COL0002099"
+        cod_grupo_def = "COL0018706"
         if not multi.buscar_grupo(cod_grupo_def):
             multi.insertar_grupo(cod_grupo_def, "GRUPO DE INVESTIGACIÓN GISICO (UPC)", "C", "Ingeniería y Tecnología", "John Jairo Patiño Vanegas", 2005, True)
             resumen["grupos"] += 1
@@ -864,7 +868,7 @@ class MotorIngesta:
         anio = int(m_anio.group(1)) if m_anio else 2024
 
         # Grupo e Investigador por defecto si no existen
-        cod_grupo = "COL0002099"
+        cod_grupo = "COL0018706"
         if not multi.buscar_grupo(cod_grupo):
             multi.insertar_grupo(cod_grupo, "GRUPO DE INVESTIGACIÓN GISICO (UPC)", "C", "Ingeniería y Tecnología", "John Jairo Patiño Vanegas", 2005, True)
             resumen["grupos"] += 1

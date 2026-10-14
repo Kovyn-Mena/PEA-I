@@ -2,7 +2,7 @@
 """
 Script de inicialización de la base de datos SQLite y generación de datos semilla oficiales
 Refleja la realidad 100% oficial de MinCiencias (GrupLAC y CvLAC) para la Universidad Popular del Cesar:
-  1. GISICO (COL0002099): Líder John Jairo Patiño Vanegas (Cat. C) — Adith Pérez es integrante/investigador.
+  1. GISICO (COL0018706): Líder John Jairo Patiño Vanegas (Cat. C) — Adith Pérez es integrante/investigador.
   2. AITICE (COL0043834): Líder Armando Javier López Sierra (Cat. B) — Grupo de Innovación TIC en Educación.
   3. GISI (COL0005544): Líder Carlos Mendoza (Cat. A)
   4. BIOTEC (COL0012981): Líder Martha Rangel (Cat. B)
@@ -53,7 +53,7 @@ def init_database(forzar_muestra_reducida: bool = False):
 
     # 1. Grupos oficiales MinCiencias de la Universidad Popular del Cesar (UPC)
     grupos = [
-        ("COL0002099", "GRUPO DE INVESTIGACION EN SISTEMAS Y COMPUTACIÓN -GISICO-", "C", "Ingeniería y Tecnología", "John Jairo Patiño Vanegas", 2001, 1),
+        ("COL0018706", "GRUPO DE INVESTIGACION EN SISTEMAS Y COMPUTACIÓN -GISICO-", "C", "Ingeniería y Tecnología", "John Jairo Patiño Vanegas", 2001, 1),
         ("COL0043834", "GRUPO DE INVESTIGACIÓN AITICE (UPC)", "B", "Ciencias de la Educación y TIC", "Armando Javier López Sierra", 2011, 1),
         ("COL0005544", "GRUPO DE INVESTIGACIÓN EN SISTEMAS INTELIGENTES (GISI)", "A", "Ciencias de la Computación", "Carlos Mendoza", 2008, 1),
         ("COL0012981", "BIOTECNOLOGÍA Y AGROINDUSTRIA CESAR (BIOTEC)", "B", "Ciencias Agrícolas", "Martha Rangel", 2012, 1)
@@ -62,23 +62,23 @@ def init_database(forzar_muestra_reducida: bool = False):
 
     # 2. Investigadores oficiales registrados ante MinCiencias
     investigadores = [
-        ("INV2099001", "John Jairo Patiño Vanegas", "Asociado", "Maestría en Computación", "COL0002099", 1),
-        ("0000494917", "Adith Bismarck Pérez Orozco", "Asociado", "Doctorado en Ingeniería de Sistemas", "COL0002099", 1),
+        ("INV2099001", "John Jairo Patiño Vanegas", "Asociado", "Maestría en Computación", "COL0018706", 1),
+        ("0000494917", "Adith Bismarck Pérez Orozco", "Asociado", "Doctorado en Ingeniería de Sistemas", "COL0018706", 1),
         ("INV4383000", "Armando Javier López Sierra", "Asociado", "Master in Arts in Education (UNAD)", "COL0043834", 1),
         ("INV4383001", "Vanessa Paola Pertuz Peralta", "Asociado", "Doctorado en Administración", "COL0043834", 1),
         ("INV4383002", "Neida Coromoto Boscán Romero", "Asociado", "Maestría en Computación", "COL0043834", 1),
-        ("INV2099004", "Alfonso Enrique García Payares", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
-        ("INV2099005", "Alfredo David Bautista Romero", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
-        ("INV2099006", "Alvaro Oñate Bowen", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
-        ("INV2099007", "Amilkar José Hernández Oñate", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
-        ("INV2099008", "Amilkar Sierra Romano", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
-        ("INV2099009", "Andrés Alberto Herrera García", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
-        ("INV2099010", "Anya Miyeth Bolaño Arias", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
-        ("INV2099011", "Boris Arturo González Rivera", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
-        ("INV2099012", "Braulio Barrios Zúñiga", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
-        ("INV2099013", "Brinulfo Manuel Álvarez Milián", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
-        ("INV2099014", "Camilo Andrés Colón Cañizares", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
-        ("INV2099015", "Carlos Mario Baquero Torres", "Junior", "Ingeniería de Sistemas", "COL0002099", 1),
+        ("INV2099004", "Alfonso Enrique García Payares", "Junior", "Ingeniería de Sistemas", "COL0018706", 1),
+        ("INV2099005", "Alfredo David Bautista Romero", "Junior", "Ingeniería de Sistemas", "COL0018706", 1),
+        ("INV2099006", "Alvaro Oñate Bowen", "Junior", "Ingeniería de Sistemas", "COL0018706", 1),
+        ("INV2099007", "Amilkar José Hernández Oñate", "Junior", "Ingeniería de Sistemas", "COL0018706", 1),
+        ("INV2099008", "Amilkar Sierra Romano", "Junior", "Ingeniería de Sistemas", "COL0018706", 1),
+        ("INV2099009", "Andrés Alberto Herrera García", "Junior", "Ingeniería de Sistemas", "COL0018706", 1),
+        ("INV2099010", "Anya Miyeth Bolaño Arias", "Junior", "Ingeniería de Sistemas", "COL0018706", 1),
+        ("INV2099011", "Boris Arturo González Rivera", "Junior", "Ingeniería de Sistemas", "COL0018706", 1),
+        ("INV2099012", "Braulio Barrios Zúñiga", "Junior", "Ingeniería de Sistemas", "COL0018706", 1),
+        ("INV2099013", "Brinulfo Manuel Álvarez Milián", "Junior", "Ingeniería de Sistemas", "COL0018706", 1),
+        ("INV2099014", "Camilo Andrés Colón Cañizares", "Junior", "Ingeniería de Sistemas", "COL0018706", 1),
+        ("INV2099015", "Carlos Mario Baquero Torres", "Junior", "Ingeniería de Sistemas", "COL0018706", 1),
         ("0000331456", "Laura Quintero", "Asociado", "Maestría en Computación", "COL0005544", 1),
         ("0000771234", "Jorge Gómez", "Junior", "Ingeniería Agroindustrial", "COL0012981", 1)
     ]
