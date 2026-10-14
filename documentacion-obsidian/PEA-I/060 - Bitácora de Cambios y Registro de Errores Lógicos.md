@@ -346,6 +346,20 @@ Archivos raíz perdidos al copiar el repo (papelera y disco revisados: sin copia
   - `python3 -c "from src.python.gui import DashboardApp"` importó de forma instantánea y limpia sin requerir `matplotlib`.
   - `make test` superó el 100% de las suites de pruebas unitarias en C++ y Python.
 
+### Sesión 47 — 2026-10-13 (Corrección de Bypass de Login por Entrada Vacía en Consola)
+- **Archivos modificados:** `src/cpp/include/ConsolaApp.h`, `src/python/console.py`.
+- **Causa raíz y Diagnóstico (BUG-27):**
+  - Al solicitar credenciales de acceso institucional, el código en Python usaba `input(...).strip() or "admin"` y en C++ evaluaba `if (user.empty()) user = "admin"`.
+  - Al pulsar ENTER repetidas veces sin digitar credenciales, las variables tomaban los valores por defecto automáticos y la validación `user == "admin" && pass == "1234"` se cumplía, permitiendo entrar sin autenticarse.
+- **Acciones Realizadas:**
+  - Eliminados los fallbacks automáticos en blanco en `ConsolaApp.h` y `console.py`.
+  - Añadida validación explícita: si `user` o `pass` están vacíos, se muestra mensaje de advertencia `[!] El usuario y la contraseña son obligatorios`, se descuenta el intento y no se concede acceso.
+  - En caso de interrupción/EOF, se retorna `false` en lugar de conceder acceso.
+- **Verificación:**
+  - Test unitario simulado con mocks en Python verificando que 3 intentos vacíos retornan `False` y credenciales correctas retornan `True`.
+  - Compilación limpia de C++ con `make clean && make` (`-Wall -Wextra`).
+  - Prueba de tubería en C++ `printf "\n\n\n\n\n\n" | ./pea_cpp` confirmando que rechaza los intentos vacíos y bloquea el acceso.
+
 ## 🐛 Bugs
 | ID | Bug | Estado |
 |:--:|-----|:------:|
@@ -377,4 +391,5 @@ Archivos raíz perdidos al copiar el repo (papelera y disco revisados: sin copia
 | BUG-26 (nuevo, detectado por Damián en Windows) | `ModuleNotFoundError: No module named 'urllib3'` o caída por falta de `matplotlib` al ejecutar en Windows | **corregido S45**: bundle autónomo `pylib/` inyectado a `sys.path`, `matplotlib` opcional protegido en `gui.py`, e inclusión en ZIP formal |
 | BUG-27 (nuevo, detectado por el usuario) | 51 grupos vacíos en SQLite y código artificial de GISICO (`COL0002099` vs `COL0018706`) provocaban fallos al cargar datos internos y filas duplicadas | **corregido S45**: purga de 51 grupos vacíos (11 grupos consolidados reales), migración relacional `COL0002099` $\rightarrow$ `COL0018706` con FK limpia y aliasing en todos los módulos |
 | BUG-28 (nuevo, detectado por Damián) | C++ carecía del flujo interactivo de arranque y la opción 3 de búsqueda solo imprimía texto sin permitir seleccionar ni descargar el grupo | **corregido S45**: `menuBuscarGrupo()` interactivo con tabla de candidatos, selección por índice, pre-chequeo `--existe-grupo` y enlace directo al menú de inicio y opción 3 de ingesta |
+| BUG-29 (nuevo, detectado por el usuario) | Login en consola permitía entrar con ENTER en blanco por fallback automático a credenciales por defecto (`admin`/`1234`) | **corregido S47**: eliminación de fallbacks automáticos en blanco en `ConsolaApp.h` y `console.py`; rechazo estricto de campos vacíos con aviso |
 

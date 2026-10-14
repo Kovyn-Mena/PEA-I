@@ -212,12 +212,16 @@ public:
             std::cout << "=================================================================\n";
             std::cout << "  Credenciales por defecto -> Usuario: admin | Contraseña: 1234\n";
             std::cout << "-----------------------------------------------------------------\n";
-            std::string user = leerLinea("  Usuario [admin]: ", true);
-            if (!std::cin) return true;
-            if (user.empty()) user = "admin";
-            std::string pass = leerLinea("  Contraseña [1234]: ", true);
-            if (!std::cin) return true;
-            if (pass.empty()) pass = "1234";
+            std::string user = leerLinea("  Usuario: ", true);
+            if (!std::cin) return false;
+            std::string pass = leerLinea("  Contraseña: ", true);
+            if (!std::cin) return false;
+
+            if (user.empty() || pass.empty()) {
+                std::cout << "\n  [!] El usuario y la contraseña son obligatorios (Intento " << intento << "/3).\n";
+                pausar("  [Presione ENTER para intentar nuevamente]... ");
+                continue;
+            }
 
             std::string uLower = user;
             for (char& c : uLower) c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));

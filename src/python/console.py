@@ -145,10 +145,16 @@ class ConsolaApp:
             print("  Credenciales por defecto -> Usuario: admin | Contraseña: 1234")
             print("-----------------------------------------------------------------")
             try:
-                user = input("  Usuario [admin]: ").strip() or "admin"
-                pw = input("  Contraseña [1234]: ").strip() or "1234"
+                user = input("  Usuario: ").strip()
+                pw = input("  Contraseña: ").strip()
             except (EOFError, KeyboardInterrupt):
-                return True
+                return False
+
+            if not user or not pw:
+                print(f"\n  [!] El usuario y la contraseña son obligatorios (Intento {intento}/3).")
+                self.pausar("  [Presione ENTER para intentar nuevamente]... ")
+                continue
+
             if user.lower() in ("admin", "upc", "docente") and pw in ("1234", "admin", "upc2026"):
                 print(f"\n  [OK] Acceso concedido. Bienvenido ({user}).")
                 return True
