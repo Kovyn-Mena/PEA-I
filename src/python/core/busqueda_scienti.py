@@ -237,6 +237,81 @@ def buscar_grupo_en_indices(termino: str) -> list:
     return candidatos
 
 
+def _mapa_nro_a_col_dinamico() -> dict:
+    """Construye nro->COL desde indice_grupos.json (66 grupos UPC).
+    Se combina con el mapa hardcodeado de 4 grupos base."""
+    base = {
+        "00000000002099": "COL0018706",
+        "2099": "COL0018706",
+        "COL0002099": "COL0018706",
+        "00000000002668": "COL0043834",
+        "2668": "COL0043834",
+        "00000000003202": "COL0049121",
+        "3202": "COL0049121",
+        "00000000003639": "COL0001351",
+        "3639": "COL0001351",
+    }
+    try:
+        if os.path.exists(IDX_GRUPOS):
+            with open(IDX_GRUPOS, "r", encoding="utf-8") as f:
+                idx = json.load(f)
+            items = []
+            if isinstance(idx, dict):
+                for v in idx.values():
+                    if isinstance(v, list):
+                        items.extend(v)
+            elif isinstance(idx, list):
+                items = idx
+            for g in items:
+                if not isinstance(g, dict):
+                    continue
+                nro = str(g.get("nro", "")).strip()
+                col = str(g.get("col", "")).strip()
+                if nro and col:
+                    base.setdefault(nro, col)
+                    base.setdefault(nro.lstrip("0"), col)
+                    if len(nro) >= 4:
+                        base.setdefault(nro[-4:], col)
+    except Exception:
+        pass
+    return base
+
+
+def resolver_codigo_nro(nro: str) -> str:
+    """Resuelve nro GrupLAC -> código COL oficial usando el índice.
+    Retorna "" si no hay coincidencia (nunca inventa COL...)."""
+    nro_limpio = str(nro or "").strip()
+    if not nro_limpio:
+        return ""
+    mapa = _mapa_nro_a_col_dinamico()
+    if nro_limpio in mapa:
+        return mapa[nro_limpio]
+    # Búsqueda por nro en índice (comparación exacta de sufijos)
+    try:
+        if os.path.exists(IDX_GRUPOS):
+            with open(IDX_GRUPOS, "r", encoding="utf-8") as f:
+                idx = json.load(f)
+            items = []
+            if isinstance(idx, dict):
+                for v in idx.values():
+                    if isinstance(v, list):
+                        items.extend(v)
+            elif isinstance(idx, list):
+                items = idx
+            for g in items:
+                if not isinstance(g, dict):
+                    continue
+                gnro = str(g.get("nro", "")).strip()
+                if gnro and (gnro == nro_limpio or (
+                        len(nro_limpio) >= 4 and gnro.endswith(nro_limpio[-4:]))):
+                    col = str(g.get("col", "")).strip()
+                    if col:
+                        return col
+    except Exception:
+        pass
+    return ""
+
+
 def existe_grupo_en_bd(nro: str, db_path: str = None) -> tuple:
     """
     Chequeo offline (sin red): ¿el nro o código ya está cargado en la BD?
@@ -253,18 +328,8 @@ def existe_grupo_en_bd(nro: str, db_path: str = None) -> tuple:
     if not nro_limpio:
         return None, None
 
-    # Mapeo canónico de NRO MinCiencias a código COL oficial
-    MAPA_NRO_CANONICO = {
-        "00000000002099": "COL0018706",
-        "2099": "COL0018706",
-        "COL0002099": "COL0018706",
-        "00000000002668": "COL0043834",
-        "2668": "COL0043834",
-        "00000000003202": "COL0049121",
-        "3202": "COL0049121",
-        "00000000003639": "COL0001351",
-        "3639": "COL0001351",
-    }
+    # Mapeo canónico de NRO MinCiencias a código COL oficial (66 grupos UPC)
+    MAPA_NRO_CANONICO = _mapa_nro_a_col_dinamico()
     cod_objetivo = MAPA_NRO_CANONICO.get(nro_limpio, "")
 
     try:

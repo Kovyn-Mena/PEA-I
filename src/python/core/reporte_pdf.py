@@ -16,26 +16,53 @@ Incluye:
 =====================================================================
 """
 
+from __future__ import annotations  # anotaciones perezosas (reportlab opcional)
+
 import os
 import sys
 import sqlite3
 from datetime import datetime
 from typing import Dict, List, Any, Optional
 
-from reportlab.lib import colors
-from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import ParagraphStyle
-from reportlab.lib.units import cm
-from reportlab.platypus import (
-    SimpleDocTemplate,
-    Paragraph,
-    Spacer,
-    Table,
-    TableStyle,
-    KeepTogether,
-    PageBreak,
-    HRFlowable
-)
+try:
+    # reportlab 5.x exige Pillow al importar (binario por plataforma,
+    # no vendorizado en pylib/). Importación perezosa: sin ellas la
+    # consola/GUI muestran aviso limpio en vez de traceback (Windows sin pip).
+    from reportlab.lib import colors
+    from reportlab.lib.pagesizes import A4
+    from reportlab.lib.styles import ParagraphStyle
+    from reportlab.lib.units import cm
+    from reportlab.platypus import (
+        SimpleDocTemplate,
+        Paragraph,
+        Spacer,
+        Table,
+        TableStyle,
+        KeepTogether,
+        PageBreak,
+        HRFlowable
+    )
+    try:
+        from PIL import Image as _PILImage  # noqa: F401
+        _PIL_DISPONIBLE = True
+    except ImportError:
+        _PIL_DISPONIBLE = False
+    _REPORTLAB_DISPONIBLE = True
+except ImportError:
+    _REPORTLAB_DISPONIBLE = False
+    _PIL_DISPONIBLE = False
+
+if not _REPORTLAB_DISPONIBLE:
+    # Stubs mínimos para import seguro sin reportlab/pillow
+    # (generar_informe_grupo_pdf lanza RuntimeError amable en ese caso).
+    import types
+    colors = types.SimpleNamespace(HexColor=lambda *a, **k: None, white=None)
+    A4 = (0, 0)
+    cm = 1
+
+    class ParagraphStyle:  # noqa: F811
+        def __init__(self, *a, **k):
+            pass
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, "..", "..", ".."))
@@ -149,6 +176,10 @@ def generar_informe_grupo_pdf(codigo_grupo: str, ruta_bd: str = "data/pea_invest
     Construye y emite el archivo PDF institucional para un grupo de investigación.
     Retorna la ruta absoluta del archivo PDF generado.
     """
+    if not _REPORTLAB_DISPONIBLE:
+        raise RuntimeError(
+            "Informes PDF no disponibles: falta 'reportlab'/'pillow'. "
+            "Instale con: pip install -r requirements.txt")
     if not os.path.isabs(ruta_bd):
         ruta_bd = os.path.join(PROJECT_ROOT, ruta_bd)
 
@@ -223,9 +254,9 @@ def generar_informe_grupo_pdf(codigo_grupo: str, ruta_bd: str = "data/pea_invest
 
     historia = []
 
-    # Encabezado con Logo Oficial UPC
+    # Encabezado con Logo Oficial UPC (se omite sin Pillow)
     logo_path = os.path.join(PROJECT_ROOT, "data", "logo_upc.png")
-    if os.path.exists(logo_path):
+    if os.path.exists(logo_path) and _PIL_DISPONIBLE:
         from reportlab.platypus import Image as RLImage
         img_logo = RLImage(logo_path, width=1.6 * cm, height=1.4 * cm)
         enc_data = [[

@@ -348,9 +348,10 @@ class ConsolaApp:
         print("=================================================================")
         print("  1. Abrir Portal Institucional C++ (HTML5 / Zero-Dependencies)")
         print("  2. Abrir Dashboard Analítico Python (HTML5 + 3 Vistas + PDFs)")
+        print("  3. Ejecutar ingesta masiva UPC (66) y regenerar Dashboard")
         print("  0. Regresar al Menú Principal")
         print("-----------------------------------------------------------------")
-        op = self.leer_opcion_menu("012", "Seleccione una opción [0-2]: ")
+        op = self.leer_opcion_menu("0123", "Seleccione una opción [0-3]: ")
         if op == 1:
             ruta_html = os.path.abspath(os.path.join(ROOT_DIR, "dist", "visualizador_hipercubo.html"))
             print(f"\n[+] Abriendo Portal Web Ejecutivo en el navegador...")
@@ -369,6 +370,20 @@ class ConsolaApp:
                 app_gui.iniciar()
             except Exception as e:
                 print(f"[!] Error al iniciar Dashboard Python: {e}")
+            self.pausar()
+        elif op == 3:
+            print("\n[+] Ejecutando ingesta masiva UPC (66 grupos, GISICO al final)...")
+            try:
+                from python.core.ingesta import MotorIngesta
+                from python.gui import DashboardApp
+                GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+                motor = MotorIngesta(self.ruta_bd)
+                if motor.ejecutar_ingesta_automatica():
+                    self.multi = Multilista()
+                    GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
+                    DashboardApp(self.ruta_bd).iniciar()
+            except Exception as e:
+                print(f"[!] Error en ingesta masiva desde GUI: {e}")
             self.pausar()
 
     # -----------------------------------------------------------------

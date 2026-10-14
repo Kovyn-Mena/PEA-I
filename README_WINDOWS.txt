@@ -22,12 +22,32 @@ si la ruta contiene espacios) y verifica instalaciones reales de Python 3 y C++1
   [2] Dashboard Grafico Interactivo Python (HTML5 + 3 Vistas --gui)
   [3] Portal Web Interactivo del Hipercubo y CRUD (HTML5 Offline)
   [4] Compilar y Ejecutar en C++17 (Autodetecta MSYS2, MinGW, Code::Blocks)
-  [5] Ejecutar Pruebas Unitarias de Estructuras de Datos (TDAs)
+  [5] Ejecutar Pruebas Unitarias de Estructuras de Datos (TDAs Python + C++)
   [6] Abrir Documentacion Tecnica Oficial Word (.docx)
+  [7] Empaquetar Entrega Formal en ZIP (Limpio para envio al docente)
+  [8] Ingesta Masiva UPC - 66 grupos con hojas de vida CvLAC
+      [8-1] Rapida offline (snapshots locales, sin CvLAC)
+      [8-2] Completa en vivo (red MinCiencias + CvLAC, 1-2 horas)
+      [8-3] Completa forzada (reprocesa todo)
 
 2. EJECUCION DIRECTA DEL PORTAL WEB (SIN CONSOLA):
 -------------------------------------------------------------------------------
 Tambien puede abrir directamente el archivo:
   * dist\visualizador_hipercubo.html
 en cualquier navegador (Edge, Chrome, Brave, Firefox) sin conexion a internet.
+===============================================================================
+
+3. DEPENDENCIAS PYTHON (requests, bs4, pypdf, reportlab):
+-------------------------------------------------------------------------------
+El proyecto incluye el bundle local pylib\ que cubre lo esencial sin instalar
+nada (portable). Si alguna funcion falla con ModuleNotFoundError, instale con:
+
+  pip install -r requirements.txt
+
+4. INGESTA MASIVA POR TERMINAL (alternativa a la opcion [8]):
+-------------------------------------------------------------------------------
+  python Taller2_AB_PO_XX.py --auto-ingest --sin-cvlac   (rapida offline)
+  python Taller2_AB_PO_XX.py --auto-ingest --con-red      (completa en vivo)
+  python Taller2_AB_PO_XX.py --auto-ingest --con-red --forzar  (reprocesa)
+  python Taller2_AB_PO_XX.py --listar-upc                 (ver los 66 grupos)
 ===============================================================================

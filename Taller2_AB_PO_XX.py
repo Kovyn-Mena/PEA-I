@@ -173,7 +173,17 @@ def main():
         motor = _crear_motor_ingesta(db_path)
         if not motor:
             sys.exit(1)
-        ok = motor.ejecutar_ingesta_automatica()
+        forzar = "--forzar" in args
+        con_cvlac = "--sin-cvlac" not in args
+        solo_snaps = "--con-red" not in args
+        # --nro NRO (repetible) para ingesta selectiva; si ausente, los 66 UPC
+        nros_sel = []
+        for i, a in enumerate(args):
+            if a == "--nro" and i + 1 < len(args):
+                nros_sel.append(args[i + 1])
+        ok = motor.ejecutar_ingesta_automatica(
+            nros=nros_sel if nros_sel else None,
+            forzar=forzar, con_cvlac=con_cvlac, solo_snapshots=solo_snaps)
         sys.exit(0 if ok else 1)
 
     app = ConsolaApp(db_path)

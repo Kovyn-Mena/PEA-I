@@ -54,42 +54,150 @@ def _norm_txt(s: str) -> str:
     return re.sub(r"\s+", " ", s).strip()
 
 
-def clasificar_marcador_gruplac(marcador: str) -> str:
-    """Clasifica los marcadores de producción de GrupLAC en las 15 tipologías oficiales."""
-    m = _norm_txt(marcador)
-    if any(k in m for k in ["revista especializada", "revista", "divulgacion", "divulgación", "noticias", "working paper", "corto (resumen)", "articulo", "artículo"]):
+def clasificar_marcador_gruplac(marcador: str, seccion: str = "") -> str:
+    """Clasifica marcadores GrupLAC con whitelist estricta (port compañero).
+    Retorna "" si no hay tipo válido (se cuenta como omitido, no se inventa)."""
+    m = _norm_txt(marcador).replace("_", " ")
+    if m.startswith("publicado en revista"):
         return "Articulo"
-    elif any(k in m for k in ["capitulo", "capítulo"]):
-        return "Capitulo"
-    elif any(k in m for k in ["libro resultado", "libros de formacion", "libros de formación", "otro libro", "libro"]):
+    if m.startswith("libro resultado"):
         return "Libro"
-    elif any(k in m for k in ["computacional", "software"]):
+    if m.startswith("libros de formaci"):
+        return "Libro"
+    if m.startswith("otro libro publicado"):
+        return "Libro"
+    if "capitulo" in m or ("cap" in m and "tulo" in m):
+        return "Capitulo"
+    if m.startswith("computacional"):
         return "Software"
-    elif any(k in m for k in ["patente"]):
+    if m.startswith("revista de divulgaci"):
+        return "Articulo"
+    if "de noticias" in m:
+        return "Articulo"
+    if m.startswith("documento de trabajo"):
+        return "Articulo"
+    if "patente" in m:
         return "Patente"
-    elif any(k in m for k in ["pregrado", "trabajos de grado", "trabajo de grado"]):
-        return "Trabajo de Grado"
-    elif any(k in m for k in ["maestria", "maestría", "doctorado", "tesis"]):
-        return "Tesis"
-    elif any(k in m for k in ["jurado", "evaluador"]):
-        return "Jurado"
-    elif any(k in m for k in ["taller", "curso", "diplomado", "perfeccionamiento"]):
-        return "CursoCorto"
-    elif any(k in m for k in ["congreso", "encuentro", "seminario", "simposio", "evento", "ponencia", "foro"]):
-        return "Evento"
-    elif any(k in m for k in ["consultor"]):
-        return "Consultoria"
-    elif any(k in m for k in ["informe"]):
+    if m.startswith("revision") or "survey" in m:
+        return "Articulo"
+    if m.startswith("libros de divulgaci") or "compilacion de divulgaci" in m:
+        return "Libro"
+    if m.startswith("informe tecnico") or m == "informe":
         return "Informe"
-    elif any(k in m for k in ["contenido", "audiovisual", "red", "extension", "extensión", "responsabilidad social"]):
+    if "consultor" in m:
+        return "Consultoria"
+    if (m.startswith("encuentro") or m.startswith("congreso") or m.startswith("simposio")
+            or m.startswith("seminario") or m.startswith("foro") or m == "taller"):
+        if seccion == "formacion" and (m == "taller" or m.startswith("seminario")):
+            return "CursoCorto"
+        return "Evento"
+    if "trabajo de grado" in m or m.startswith("tesis"):
+        return "Tesis"
+    if "trabajo dirigido" in m or "tutoria" in m:
+        return "Tesis"
+    if (m.startswith("curso") or "perfeccionamiento" in m or "extension" in m
+            or m.startswith("diplomado")):
+        return "CursoCorto"
+    if "jurado" in m or "comision evaluadora" in m or "comite evaluador" in m:
+        return "Jurado"
+    if "contenido digital" in m or "produccion de contenido" in m or "audiovisual" in m:
         return "Contenido"
-    elif any(k in m for k in ["norma", "regulacion", "regulación"]):
+    if m.startswith("edicion") or (m.startswith("compilacion") and "divulgaci" not in m):
+        return "Libro"  # Compilación ~ Libro (contrato CHECK SQLite de 15 tipos)
+    if m.startswith("regulacion") or m.startswith("norma"):
         return "Regulacion"
-    elif any(k in m for k in ["prototipo", "planta", "investigacion y desarrollo", "investigación y desarrollo", "spin-off", "innovacion", "innovación"]):
-        return "Prototipo"
-    elif any(k in m for k in ["diseno", "diseño"]):
-        return "Diseno"
-    return "Articulo"
+    if seccion == "evaluador":
+        return "Jurado"
+    return ""
+
+
+SECCIONES_FICHA = (
+    ("biblio", r"PRODUCCI.N\s+BIBLIOGR.FICA"),
+    ("tecnica", r"PRODUCCI.N\s+T.CNICA"),
+    ("apropiacion", r"APROPIACI.N\s+SOCIAL"),
+    ("formacion", r"ACTIVIDADES\s+DE\s+FORMACI.N|PRODUCCI.N\s+DE\s+FORMACI.N"),
+    ("evaluador", r"COMO\s+EVALUADOR"),
+)
+
+
+def _spans_secciones(texto: str):
+    spans = []
+    for key, pat in SECCIONES_FICHA:
+        for mm in re.finditer(pat, texto, flags=re.IGNORECASE):
+            spans.append([key, mm.start(), len(texto)])
+    spans.sort(key=lambda s: s[1])
+    for i in range(len(spans) - 1):
+        spans[i][2] = spans[i + 1][1]
+    return spans
+
+
+def _seccion_de(pos: int, spans) -> str:
+    sec = ""
+    for key, ini, fin in spans:
+        if ini <= pos < fin:
+            sec = key
+    return sec
+
+
+def _titulo_bloque(bloque: str, mk: str) -> str:
+    mt = re.search(r'"([^"]{8,480})"', bloque)
+    if not mt:
+        blines = [l.strip() for l in bloque.split("\n") if l.strip()]
+        for bl in blines:
+            if len(bl) < 8 or re.match(r"^\d+\.-?\s*$", bl):
+                continue
+            core = re.sub(r"^\d+\.\-?\s*", "", bl).strip().rstrip(":").strip()
+            if not core or _norm_txt(core) == mk:
+                continue
+            mt = re.match(r"(.{8,480})", bl)
+            break
+    titulo = mt.group(1).strip() if mt else ""
+    return titulo.lstrip(":;,.—- ").strip()
+
+
+def _anio_bloque(bloque: str) -> int:
+    ma = re.search(r",\s*((?:19|20)\d{2})\b", bloque)
+    anio = int(ma.group(1)) if ma and 1900 <= int(ma.group(1)) <= 2026 else 0
+    if not anio:
+        md = re.search(r"[Dd]esde\D{0,14}((?:19|20)\d{2})\b", bloque)
+        if not md:
+            for _bl in bloque.split("\n"):
+                if re.search(r"ISSN|DOI|vol|fasc|p.g", _bl, flags=re.IGNORECASE):
+                    continue
+                md = re.search(r"\b((?:19|20)\d{2})\b", _bl)
+                if md:
+                    break
+        if md and 1900 <= int(md.group(1)) <= 2026:
+            anio = int(md.group(1))
+    return anio
+
+
+def _es_titulo_marcador(titulo: str, mk: str) -> bool:
+    n = _norm_txt(titulo)
+    if not n or n == mk:
+        return True
+    return n in {"revision survey", "otra", "otro"}
+
+
+def mapa_chulos_triple(soup) -> dict:
+    """{(marcador_norm, titulo_norm[:60], anio): validado_bool}."""
+    mapa = {}
+    for tr in soup.find_all("tr"):
+        imgs = tr.find_all("img")
+        ch = [i.get("src", "") for i in imgs if "chulo_" in (i.get("src", ""))]
+        if not ch:
+            continue
+        t = tr.get_text("\n")
+        mm = re.search(r"\d+\.\-?\s*([^\n:]{3,60})\s*:", t)
+        if not mm:
+            continue
+        mk = _norm_txt(mm.group(1).strip())
+        tit = _titulo_bloque(t, mk)
+        if not tit:
+            continue
+        key = (mk, _norm_txt(tit)[:60], _anio_bloque(t))
+        mapa[key] = mapa.get(key, False) or any("chulo_1" in c for c in ch)
+    return mapa
 
 
 def parse_hoja_vida(html: str) -> dict:
@@ -393,33 +501,32 @@ class MotorIngesta:
     # -----------------------------------------------------------------
     # WEB SCRAPING: GRUPLAC (MinCiencias)
     # -----------------------------------------------------------------
-    def parsear_gruplac(self, url: str, multi: Multilista) -> dict:
+    def parsear_gruplac(self, url: str, multi: Multilista, procesar_cvlac: bool = True) -> dict:
         """Descarga y extrae los datos de un grupo de investigación desde GrupLAC."""
-        resumen = {"grupos": 0, "investigadores": 0, "productos": 0, "validados": 0, "modo": "ONLINE"}
+        resumen = {"grupos": 0, "investigadores": 0, "productos": 0, "validados": 0,
+                   "omitidos": 0, "sin_autor": 0, "modo": "ONLINE"}
 
         # Extraer código de grupo de la URL o nombre de archivo snapshot (parámetro nro o gruplac_XXXX)
         match_cod = re.search(r'(?:nro=|gruplac_)(\d+)', url)
         nro_grupo = match_cod.group(1) if match_cod else "00000000002099"
         sufijo_nro = nro_grupo[-4:] if len(nro_grupo) >= 4 else nro_grupo
 
-        # Resolver código COL oficial desde los índices institucionales
+        # Resolver código COL oficial desde el índice (66 grupos UPC). Nunca inventa.
         cod_grupo = ""
         try:
-            from python.core.busqueda_scienti import buscar_grupo_en_indices
-            cands = buscar_grupo_en_indices(nro_grupo)
-            if cands and cands[0].get("col"):
-                cod_grupo = cands[0]["col"]
+            from python.core.busqueda_scienti import resolver_codigo_nro, buscar_grupo_en_indices
+            cod_grupo = resolver_codigo_nro(nro_grupo)
+            if not cod_grupo:
+                cands = buscar_grupo_en_indices(nro_grupo)
+                if cands and cands[0].get("col"):
+                    cod_grupo = cands[0]["col"]
         except Exception:
             pass
 
         if not cod_grupo:
-            MAPA_NRO_A_COL = {
-                "2099": "COL0018706",
-                "2668": "COL0043834",
-                "3202": "COL0049121",
-                "3639": "COL0001351",
-            }
-            cod_grupo = MAPA_NRO_A_COL.get(sufijo_nro, f"COL{nro_grupo[-7:]}" if len(nro_grupo) >= 7 else f"COL{nro_grupo}")
+            print(f"[!] NRO {nro_grupo} sin código COL en el índice; se omite (no se inventa código).")
+            resumen["modo"] = "SIN_CODIGO"
+            return resumen
 
         html_text = ""
         # Verificar primero si url ya es ruta de archivo o si existe snapshot oficial local en data/snapshots/
@@ -444,15 +551,32 @@ class MotorIngesta:
                 return resumen
 
         soup = BeautifulSoup(html_text, "html.parser")
+        texto_plano = soup.get_text("\n")
+        lineas_plano = [l.strip() for l in texto_plano.split("\n") if l.strip()]
+        existe_ficha = any(l.startswith("Datos b") for l in lineas_plano)
+        tiene_encabezado = soup.find("span", class_="celdaEncabezado") is not None
+        if not existe_ficha and not tiene_encabezado:
+            print(f"[!] Grupo no existente (nro={nro_grupo}): GrupLAC no devuelve ficha.")
+            resumen["modo"] = "GRUPO_NO_EXISTENTE"
+            return resumen
 
         # 1. Nombre del Grupo
-        nombre_grupo = "GRUPO DE INVESTIGACIÓN GISICO (UPC)"
+        nombre_grupo = ""
         span_encabezado = soup.find("span", class_="celdaEncabezado")
         if span_encabezado and span_encabezado.get_text(strip=True):
             nombre_grupo = span_encabezado.get_text(strip=True)
+        if not nombre_grupo:
+            for i, l in enumerate(lineas_plano):
+                if l.startswith("GrupLAC -") and i + 1 < len(lineas_plano):
+                    nombre_grupo = lineas_plano[i + 1]
+                    break
+        if not nombre_grupo:
+            print(f"[!] Ficha sin nombre de grupo (nro={nro_grupo}); se omite.")
+            resumen["modo"] = "SIN_NOMBRE"
+            return resumen
 
         # 2. Líder
-        lider = "John Jairo Patiño Vanegas"
+        lider = "Por verificar"
         td_lider = soup.find("td", string=re.compile(r"Líder|Lider", re.I))
         if td_lider and td_lider.find_next_sibling("td"):
             lider = td_lider.find_next_sibling("td").get_text(strip=True).title()
@@ -486,7 +610,10 @@ class MotorIngesta:
                 break
 
         # Insertar o actualizar Grupo en la Multilista
+        # (los productos viejos solo se reemplazan si el scrape trae productos nuevos;
+        # ver bloque 7 para no vaciar grupos existentes)
         g_existente = multi.buscar_grupo(cod_grupo)
+        grupo_es_nuevo = g_existente is None
         if not g_existente:
             multi.insertar_grupo(cod_grupo, nombre_grupo, clasificacion, area, lider, anio_creacion, True)
             g_existente = multi.buscar_grupo(cod_grupo)
@@ -498,24 +625,14 @@ class MotorIngesta:
             g_existente.area_conocimiento = area
             g_existente.anio_creacion = anio_creacion
 
-        # Limpiar productos sintéticos previos del grupo para reemplazarlos con los de GrupLAC
-        if g_existente and g_existente.primer_producto:
-            prods_viejos = []
-            p_cur = g_existente.primer_producto
-            while p_cur:
-                prods_viejos.append(p_cur.id_producto)
-                p_cur = p_cur.sig_producto_grupo
-            for pid_v in prods_viejos:
-                multi.eliminar_producto(pid_v)
-
         # 6. Integrantes del Grupo (con cod_rh de CvLAC y vinculación a PerfilInvestigador)
         mapa_integrantes = {}
-        id_lider_doc = ""
         rhs_grupo = []
+        vistos_nombres = set()
 
         for t in soup.find_all("table"):
             th = " ".join(t.get_text(" ").split())
-            if "Vinculaci" in th and "Nombre" in th:
+            if "Vinculaci" in th and "Nombre" in th and "Horas" in th:
                 for tr in t.find_all("tr")[1:]:
                     tds = [c.get_text(" ").strip() for c in tr.find_all(["td", "th"])]
                     tds = [d for d in tds if d]
@@ -523,6 +640,9 @@ class MotorIngesta:
                         nom_raw = re.sub(r"^\d+\.-\s*", "", tds[0]).strip()
                         if not nom_raw or len(nom_raw) < 3:
                             continue
+                        if nom_raw in vistos_nombres:
+                            continue
+                        vistos_nombres.add(nom_raw)
                         nom_tit = nom_raw.title()
 
                         cod_rh = ""
@@ -533,15 +653,14 @@ class MotorIngesta:
                                 cod_rh = m_rh.group(1)
                                 rhs_grupo.append(cod_rh)
 
-                        doc_inv = cod_rh if cod_rh else f"INV{sufijo_nro}{len(mapa_integrantes)+1:03d}"
-                        if "adith" in nom_raw.lower():
-                            doc_inv = "0000494917"
+                        # Placeholder documentado si GrupLAC no publica cod_rh (como compañero)
+                        doc_inv = cod_rh if cod_rh else f"{cod_grupo}-RH-{len(mapa_integrantes)+1:03d}"
 
-                        cat = "Asociado" if ("adith" in nom_raw.lower() or "patino" in _norm_txt(nom_raw) or "lopez sierra" in _norm_txt(nom_raw)) else "Junior"
+                        cat = "Por verificar"
                         formacion = area
 
                         # Comprobar si existe snapshot de CvLAC para este investigador (archivo suelto o empaquetado en .zip)
-                        html_cv = leer_snapshot_cvlac_html(doc_inv)
+                        html_cv = leer_snapshot_cvlac_html(doc_inv) if cod_rh else ""
                         if html_cv:
                             try:
                                 perfil_cv = parse_hoja_vida(html_cv)
@@ -560,32 +679,27 @@ class MotorIngesta:
                             inv_prev = multi.buscar_investigador(doc_inv)
                         elif inv_prev.codigo_grupo == cod_grupo:
                             inv_prev.nombre_completo = nom_tit
-                            inv_prev.categoria = cat
-                            inv_prev.formacion_academica = formacion
-                        elif cod_grupo in ("COL0018706", "COL0002099") or inv_prev.primer_producto is None:
-                            # Priorizar membresía real en GISICO o mover si no tenía productos atados en otro grupo
-                            while inv_prev.primer_producto:
-                                multi.eliminar_producto(inv_prev.primer_producto.id_producto)
-                            multi.eliminar_investigador(doc_inv)
-                            multi.insertar_investigador(cod_grupo, doc_inv, nom_tit, cat, formacion, True)
-                            resumen["investigadores"] += 1
-                            inv_prev = multi.buscar_investigador(doc_inv)
+                            if cat != "Por verificar":
+                                inv_prev.categoria = cat
+                            if formacion != area:
+                                inv_prev.formacion_academica = formacion
 
                         if inv_prev and inv_prev.codigo_grupo == cod_grupo:
                             mapa_integrantes[_norm_txt(nom_raw)] = doc_inv
-                            if not id_lider_doc or "patino" in _norm_txt(nom_raw) or "adith" in nom_raw.lower() or _norm_txt(lider) in _norm_txt(nom_raw):
-                                id_lider_doc = doc_inv
 
-        # Si no se encontraron integrantes en el grupo actual, asegurar al líder
-        if not id_lider_doc:
-            id_lider_doc = f"LIDER_{sufijo_nro}"
-            if not multi.buscar_investigador(id_lider_doc):
-                multi.insertar_investigador(cod_grupo, id_lider_doc, lider, "Senior", area, True)
-                resumen["investigadores"] += 1
-            mapa_integrantes[_norm_txt(lider)] = id_lider_doc
+        # Sin integrantes reales no se persiste grupo vacío (evita grupos vacíos)
+        if not mapa_integrantes:
+            print(f"[!] {cod_grupo}: sin integrantes parseables; se omite grupo vacío.")
+            if grupo_es_nuevo:
+                try:
+                    multi.eliminar_grupo(cod_grupo)
+                except Exception:
+                    pass
+            resumen["modo"] = "SIN_INTEGRANTES"
+            return resumen
 
         # Pipeline Unificado: procesar en paralelo las hojas de vida CvLAC de los integrantes descubiertos (12 hilos)
-        rhs_unicos = sorted(set(rhs_grupo))
+        rhs_unicos = sorted(set(rhs_grupo)) if procesar_cvlac else []
         if rhs_unicos:
             print(f"[GrupLAC + CvLAC] Procesando {len(rhs_unicos)} hojas de vida CvLAC en paralelo (12 hilos)...")
             cv_ok = self.scrapear_cvlacs_paralelo(rhs_unicos, max_workers=12)
@@ -601,89 +715,107 @@ class MotorIngesta:
                         if p_cv.get("categoria"):
                             nodo_inv.categoria = p_cv["categoria"]
 
-        lista_docs_grupo = list(mapa_integrantes.values()) or [id_lider_doc]
-
-        # 7. Productos del Grupo (con aval oficial chulo_1.jpg y 15 tipologías)
-        prod_count = 0
-        cats_ciclo = ["A1", "A2", "B", "C"]
-        for tr in soup.find_all("tr"):
-            imgs = tr.find_all("img")
-            ch = [i.get("src", "") for i in imgs if "chulo_" in (i.get("src", ""))]
-            if not ch:
+        # 7. Productos del Grupo (whitelist estricta, chulo triple, sin inventar autoría)
+        chulos = mapa_chulos_triple(soup)
+        spans = _spans_secciones(texto_plano)
+        marcas = [(m.start(), m.group(1).strip()) for m in
+                  re.finditer(r"\d+\.\-?\s*([^\n:]{3,60})\s*:", texto_plano)]
+        marcas.append((len(texto_plano), ""))
+        prods_parsed = []
+        omitidos = 0
+        for idx in range(len(marcas) - 1):
+            inicio, marcador_raw = marcas[idx]
+            bloque = texto_plano[inicio:marcas[idx + 1][0]]
+            mk = _norm_txt(marcador_raw)
+            sec = _seccion_de(inicio, spans)
+            tipo = clasificar_marcador_gruplac(marcador_raw, sec)
+            if not tipo:
+                if mk in ("otra", "otro") and any(
+                        k in _norm_txt(bloque[:400]) for k in
+                        ("disponibilidad", "nombre comercial", "financiadora", "sitio web")):
+                    tipo = "Software"
+                elif mk in ("otra", "otro") and sec == "apropiacion":
+                    tipo = "Evento"
+                else:
+                    omitidos += 1
+                    continue
+            titulo = _titulo_bloque(bloque, mk)
+            if _es_titulo_marcador(titulo, mk):
+                omitidos += 1
                 continue
-
-            tds = tr.find_all("td")
-            if len(tds) < 2:
+            if re.match(r"^[A-Za-záéíóúñü]+\s*,\s*(?:19|20)\d{2}\s*,?$", titulo):
+                omitidos += 1
                 continue
-
-            is_validado = any("chulo_1" in c for c in ch)
-            raw = tds[1].get_text("\n")
-            raw_flat = " ".join(raw.split())
-
-            # Clasificar tipología por marcador (soportando saltos de línea entre número, marcador y ':')
-            m_m = re.search(r"^\d+\.-?\s*([^:]{2,70}?)\s*:", raw_flat)
-            marcador_str = m_m.group(1).strip() if m_m else ""
-            tipo = clasificar_marcador_gruplac(marcador_str) if marcador_str else "Articulo"
-
-            # Extraer título limpio
-            m_tit = re.search(r'\"([^\"]{8,250})\"', raw)
-            if m_tit:
-                titulo = m_tit.group(1).strip()
+            anio = _anio_bloque(bloque)
+            maut = re.search(r"Autores:\s*([^\n]+(?:\n[^\n:]+)?)", bloque)
+            if not maut:
+                maut = re.search(
+                    r"(?:Tutor\(es\)/Cotutor\(es\)|Tutores?/Cotutores?|Estudiante|Director|"
+                    r"Tutor|Asesor|Orientador|Organizador|Ponente|Responsable|Compilador|"
+                    r"Consultor)[es]*\s*:\s*([^\n]+(?:\n[^\n:]+)?)",
+                    bloque)
+            autores = []
+            if maut:
+                autores = [a.strip().rstrip(".") for a in re.split(r",", maut.group(1)) if a.strip()]
+            if titulo and anio:
+                validado = chulos.get((mk, _norm_txt(titulo)[:60], anio), False)
+                prods_parsed.append({"titulo": titulo[:110], "anio": anio, "tipo": tipo,
+                                     "autores": autores,
+                                     "validado": validado})
             else:
-                lines = [l.strip().lstrip(":").strip() for l in raw.split("\n") if len(l.strip().lstrip(":").strip()) > 3]
-                titulo = ""
-                for idx_l, l in enumerate(lines):
-                    if re.match(r"^\d+\.-?$", l):
-                        continue
-                    if idx_l <= 1 and marcador_str and l.lower() == marcador_str.lower():
-                        continue
-                    if re.match(r"^\d+\.-?\s*[^:]+:", l):
-                        subl = re.sub(r"^\d+\.-?\s*[^:]+:\s*", "", l).strip()
-                        if len(subl) > 8:
-                            titulo = subl
+                omitidos += 1
+        resumen["omitidos"] = omitidos
+
+        # Solo reemplazar productos viejos si hay productos nuevos (no vaciar)
+        if prods_parsed and g_existente and g_existente.primer_producto:
+            prods_viejos = []
+            p_cur = g_existente.primer_producto
+            while p_cur:
+                prods_viejos.append(p_cur.id_producto)
+                p_cur = p_cur.sig_producto_grupo
+            for pid_v in prods_viejos:
+                multi.eliminar_producto(pid_v)
+
+        # Atribuir autoría solo a integrantes macheados (sin inventar)
+        prod_count = 0
+        sin_autor = 0
+        normas_vistas = set()
+        for p in prods_parsed:
+            rhs = []
+            for a in p["autores"]:
+                na = _norm_txt(a)
+                if na in mapa_integrantes and mapa_integrantes[na] not in rhs:
+                    rhs.append(mapa_integrantes[na])
+            if not rhs:
+                # Fallback por apellidos (como antes) antes de descartar
+                for a in p["autores"]:
+                    na = _norm_txt(a)
+                    for nom_k, doc_k in mapa_integrantes.items():
+                        apellidos = [w for w in nom_k.split() if len(w) > 3]
+                        if (na in nom_k or nom_k in na or
+                                (len(apellidos) >= 2 and apellidos[-1] in na and apellidos[-2] in na)):
+                            if doc_k not in rhs:
+                                rhs.append(doc_k)
                             break
-                        continue
-                    if l.endswith(":"):
-                        continue
-                    if any(k in l for k in ["Autores:", "Colombia,", "ISSN:", "DOI:", "Disponibilidad:", "Sitio web:", "Nombre comercial:"]):
-                        continue
-                    titulo = l
-                    break
-            if not titulo:
-                titulo = "Producto Científico MinCiencias"
-            titulo = titulo.lstrip(":").strip()[:110]
-
-            # Extraer año
-            m_anio = re.search(r'\b(20[0-2]\d|19[89]\d)\b', raw)
-            anio = int(m_anio.group(1)) if m_anio else 2024
-
-            # Extraer autor y emparejar con integrantes del grupo
-            m_aut = re.search(r"Autores:\s*([^\n\r]+)", raw)
-            autor_raw = m_aut.group(1).strip() if m_aut else ""
-            autor_raw = re.sub(r"[\xa0\s]+", " ", autor_raw).strip()
-            norm_a = _norm_txt(autor_raw)
-
-            id_inv_asociado = ""
-            if norm_a:
-                for nom_k, doc_k in mapa_integrantes.items():
-                    apellidos = [w for w in nom_k.split() if len(w) > 3]
-                    if norm_a in nom_k or nom_k in norm_a or (len(apellidos) >= 2 and apellidos[-1] in norm_a and apellidos[-2] in norm_a):
-                        id_inv_asociado = doc_k
+                    if rhs:
                         break
-                    elif any(len(w) > 5 and w in norm_a for w in apellidos):
-                        id_inv_asociado = doc_k
-
-            if not id_inv_asociado:
-                id_inv_asociado = id_lider_doc
-
-            prod_count += 1
-            cat_prod = "A1" if is_validado and prod_count % 2 == 0 else cats_ciclo[prod_count % len(cats_ciclo)]
-            id_prod = f"PROD-{sufijo_nro}-{prod_count:04d}"
-            if not multi.buscar_producto(id_prod):
-                multi.insertar_producto(cod_grupo, id_inv_asociado, id_prod, tipo, titulo, anio, cat_prod, is_validado, True)
-                resumen["productos"] += 1
-                if is_validado:
-                    resumen["validados"] += 1
+            if not rhs:
+                sin_autor += 1
+                continue
+            norma = re.sub(r"[^a-z0-9]+", "", _norm_txt(p["titulo"])) + f"|{p['anio']}"
+            if norma in normas_vistas:
+                continue
+            normas_vistas.add(norma)
+            for rh in dict.fromkeys(rhs):
+                prod_count += 1
+                id_prod = f"PROD-{sufijo_nro}-{prod_count:04d}"
+                if not multi.buscar_producto(id_prod):
+                    multi.insertar_producto(cod_grupo, rh, id_prod, p["tipo"], p["titulo"],
+                                            p["anio"], "Por verificar", p["validado"], True)
+                    resumen["productos"] += 1
+                    if p["validado"]:
+                        resumen["validados"] += 1
+        resumen["sin_autor"] = sin_autor
 
         # Empaquetar snapshots del grupo en su archivo ZIP correspondiente
         try:
@@ -974,7 +1106,10 @@ class MotorIngesta:
 
             # 5. Persistir el nuevo estado a SQLite
             print("\n[+] Sincronizando datos extraídos con la Base de Datos SQLite...")
-            GestorPersistencia.guardar_en_bd(multi, self.ruta_bd)
+            if not GestorPersistencia.guardar_en_bd(multi, self.ruta_bd):
+                print("[ERROR] No se pudo persistir en SQLite (revisa CHECK constraints / esquema).")
+                print("        Los cambios quedan solo en RAM y NO se guardaron en disco.")
+                return False
 
             # 6. Reporte de resultados
             print(f"[OK] Ingesta completada con éxito en modo: {resumen.get('modo', 'ESTÁNDAR')}")
@@ -982,6 +1117,8 @@ class MotorIngesta:
             print(f"  • Nuevos Grupos registrados:         {resumen.get('grupos', 0)}")
             print(f"  • Nuevos Investigadores registrados: {resumen.get('investigadores', 0)}")
             print(f"  • Nuevos Productos indexados:        {resumen.get('productos', 0)}")
+            print(f"  • Omitidos por whitelist:            {resumen.get('omitidos', 0)}")
+            print(f"  • Sin autor macheado (descartados):  {resumen.get('sin_autor', 0)}")
             print(f"  • Estado total en la Multilista:     {multi.contar_grupos(False)} grupos, "
                   f"{multi.contar_investigadores(False)} investigadores, "
                   f"{multi.contar_productos(False)} productos.")
@@ -997,73 +1134,124 @@ class MotorIngesta:
     # -----------------------------------------------------------------
     # INGESTA AUTOMÁTICA EN LOTE DE WEB SCRAPING (GRUPLAC + CVLAC)
     # -----------------------------------------------------------------
-    def ejecutar_ingesta_automatica(self) -> bool:
+    def ejecutar_ingesta_automatica(self, nros: list = None, forzar: bool = False,
+                                        con_cvlac: bool = True, lote_checkpoint: int = 5,
+                                        solo_snapshots: bool = True) -> bool:
         """
-        Escanea y encola automáticamente todas las fuentes de Web Scraping
-        (GrupLAC de grupos UPC y hojas de vida CvLAC con Scholar/ORCID/Par Evaluador)
-        usando el TDA Cola (FIFO) y sincroniza toda la Multilista con SQLite.
+        Ingesta masiva de grupos UPC usando Cola FIFO con checkpoint por grupo.
+        - Si nros es None, lee los 66 grupos de indice_grupos.json[947].
+        - GISICO (02099) se procesa al final para no robar integrantes.
+        - Cada `lote_checkpoint` grupos se persiste a SQLite (no se pierde avance).
+        - Nunca persiste grupos vacíos (parsear_gruplac los descarta antes).
+        - Con solo_snapshots=True (defecto) se omiten grupos sin snapshot local
+          para no colgar la demo con 60 descargas en vivo; usar --con-red para vivo.
         """
         print("=================================================================")
         print("   PEA-i: INGESTA AUTOMATICA MASIVA DE WEB SCRAPING (COLA FIFO)  ")
         print("=================================================================")
 
         snap_dir = os.path.join(PROJECT_ROOT, "data", "snapshots")
-        # Orden de procesamiento: primero GIELEHLA, FACEUPC, AITICE y al final GISICO
-        # para garantizar que los 85 integrantes con CvLAC de GISICO queden en GISICO
-        nros_objetivo = ["00000000003639", "00000000003202", "00000000002668", "00000000002099"]
-
-        for nro in nros_objetivo:
-            url_g = f"https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro={nro}"
-            self.cola.encolar("URL_GRUPLAC", url_g, f"Scraping automático GrupLAC nro={nro}")
-
-        # También detectar cualquier otro gruplac_*.html nuevo en data/snapshots
-        if os.path.isdir(snap_dir):
+        if nros is None:
+            try:
+                from python.core.busqueda_scienti import listar_grupos_upc
+                grupos_upc = listar_grupos_upc()
+                nros = [str(g.get("nro", "")).strip() for g in grupos_upc
+                        if str(g.get("nro", "")).strip()]
+            except Exception as e:
+                print(f"[!] No se pudo leer el índice UPC ({e}); usando 4 base.")
+                nros = []
+            if not nros:
+                nros = ["00000000003639", "00000000003202", "00000000002668", "00000000002099"]
+        # GISICO al final
+        nros_orden = [n for n in nros if not n.endswith("02099")]
+        nros_orden += [n for n in nros if n.endswith("02099")]
+        # Extras sueltos en snapshots raíz solo en modo completo (compatibilidad)
+        if nros is None and os.path.isdir(snap_dir):
             for fname in sorted(os.listdir(snap_dir)):
                 if fname.startswith("gruplac_") and fname.endswith(".html"):
                     m = re.search(r"gruplac_(\d{4,14})\.html", fname)
-                    if m and m.group(1) not in nros_objetivo:
-                        nro_extra = m.group(1)
-                        url_extra = f"https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro={nro_extra}"
-                        self.cola.encolar("URL_GRUPLAC", url_extra, f"Scraping automático GrupLAC nro={nro_extra}")
+                    if m and m.group(1) not in nros_orden:
+                        nros_orden.append(m.group(1))
+
+        # Idempotencia S32: omitir ya cargados salvo forzar; omitir sin snapshot salvo --con-red
+        from python.core.busqueda_scienti import existe_grupo_en_bd
+        nros_pend = []
+        nros_omit = 0
+        nros_sin_snap = 0
+        for nro in nros_orden:
+            if not forzar:
+                cod_ex, _ = existe_grupo_en_bd(nro, self.ruta_bd)
+                if cod_ex:
+                    nros_omit += 1
+                    continue
+            if solo_snapshots and not _buscar_snapshot_gruplac(nro):
+                nros_sin_snap += 1
+                continue
+            nros_pend.append(nro)
+        print(f"[+] Grupos en índice: {len(nros_orden)} | ya cargados (omitidos): {nros_omit} "
+              f"| sin snapshot (omitidos): {nros_sin_snap} | a procesar: {len(nros_pend)}")
+        for nro in nros_pend:
+            url_g = f"https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro={nro}"
+            self.cola.encolar("URL_GRUPLAC", url_g, f"Scraping automático GrupLAC nro={nro}")
 
         print(f"[+] Se encolaron {self.cola.tamano()} fuentes GrupLAC en la Cola FIFO.")
 
         multi = Multilista()
         GestorPersistencia.cargar_desde_bd(multi, self.ruta_bd)
 
-        tot_g, tot_i, tot_p, tot_val = 0, 0, 0, 0
+        tot_g, tot_i, tot_p, tot_val, tot_omit, tot_sinautor = 0, 0, 0, 0, 0, 0
+        procesados = 0
         while not self.cola.esta_vacia():
             tarea = self.cola.desencolar()
             print(f"  -> Desencolando (FIFO): {tarea.descripcion}")
-            res = self.parsear_gruplac(tarea.ruta_o_url, multi)
+            try:
+                res = self.parsear_gruplac(tarea.ruta_o_url, multi, procesar_cvlac=con_cvlac)
+            except Exception as e:
+                print(f"     [!] Fallo grupo ({e}); se continúa con el siguiente.")
+                continue
             tot_g += res.get("grupos", 0)
             tot_i += res.get("investigadores", 0)
             tot_p += res.get("productos", 0)
             tot_val += res.get("validados", 0)
+            tot_omit += res.get("omitidos", 0)
+            tot_sinautor += res.get("sin_autor", 0)
+            procesados += 1
+            if procesados % lote_checkpoint == 0:
+                print(f"     [checkpoint] {procesados} grupos -> guardando en SQLite...")
+                if not GestorPersistencia.guardar_en_bd(multi, self.ruta_bd):
+                    print("     [ERROR checkpoint] Falló el guardado; se aborta la masiva.")
+                    return False
 
-        # Procesar en paralelo todas las hojas de vida CvLAC disponibles en snapshots
-        cods_cvlac = []
-        if os.path.isdir(snap_dir):
-            for root, _, fs in os.walk(snap_dir):
-                for f in fs:
-                    m_cv = re.match(r"cvlac_(\d+)\.html", f)
-                    if m_cv:
-                        cods_cvlac.append(m_cv.group(1))
-        cods_cvlac = sorted(set(cods_cvlac))
-        perfiles_ok = self.scrapear_cvlacs_paralelo(cods_cvlac, max_workers=12)
+        # CvLAC en paralelo solo si hay integrantes nuevos y con_cvlac
+        perfiles_ok = 0
+        if con_cvlac:
+            cods_cvlac = []
+            if os.path.isdir(snap_dir):
+                for root, _, fs in os.walk(snap_dir):
+                    for f in fs:
+                        m_cv = re.match(r"cvlac_(\d+)\.html", f)
+                        if m_cv:
+                            cods_cvlac.append(m_cv.group(1))
+            cods_cvlac = sorted(set(cods_cvlac))
+            if cods_cvlac:
+                perfiles_ok = self.scrapear_cvlacs_paralelo(cods_cvlac, max_workers=12)
 
         # Empaquetar snapshots en .zip por grupo sin duplicados
         empaquetar_todos_los_snapshots()
 
         # Guardar Multilista actualizada en SQLite
         print("\n[+] Persistiendo Multilista enriquecida en SQLite...")
-        GestorPersistencia.guardar_en_bd(multi, self.ruta_bd)
+        if not GestorPersistencia.guardar_en_bd(multi, self.ruta_bd):
+            print("[ERROR] Falló el guardado en SQLite; la BD conserva el estado previo.")
+            return False
 
         print("[OK] Ingesta Automática de Web Scraping finalizada exitosamente:")
-        print(f"     • Grupos totales en BD:             {multi.contar_grupos(False)}")
-        print(f"     • Investigadores totales en BD:     {multi.contar_investigadores(False)}")
+        print(f"     • Grupos nuevos en esta corrida:    {tot_g}")
+        print(f"     • Investigadores nuevos:            {tot_i}")
         print(f"     • Perfiles CvLAC (Scholar/ORCID):   {perfiles_ok} actualizados en paralelo")
-        print(f"     • Productos totales en BD:          {multi.contar_productos(False)} ({tot_p} de GrupLAC, {tot_val} con chulo_1)")
+        print(f"     • Productos nuevos:                 {tot_p} ({tot_val} con chulo_1, "
+              f"{tot_omit} omitidos por whitelist, {tot_sinautor} sin autor)")
+        print(f"     • Grupos totales en BD:             {multi.contar_grupos(False)}")
         print("=================================================================\n")
         return True
 

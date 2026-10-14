@@ -66,9 +66,34 @@ class DashboardApp:
         self.ventana_anios = 0 # 0: Todos, 2: Últimos 2, 5: Últimos 5
         self.anio_actual = 2026
 
+    def obtener_estado_ingesta(self) -> dict:
+        """Compara índice UPC (66) vs grupos cargados en BD para el panel GUI."""
+        try:
+            from src.python.core.busqueda_scienti import listar_grupos_upc
+            grupos_upc = listar_grupos_upc()
+        except Exception:
+            grupos_upc = []
+        cargados = set()
+        g = self.multi.cabeza_grupos
+        while g:
+            cargados.add(g.codigo_grupo)
+            g = g.sig_grupo
+        faltantes = [x for x in grupos_upc if x.get("col") not in cargados]
+        return {"total_indice": len(grupos_upc), "cargados": len(cargados),
+                "faltantes": faltantes[:25], "n_faltantes": len(faltantes)}
+
     def generar_html_dashboard(self, ruta_salida: str = "dist/dashboard_python.html"):
         """Genera un archivo HTML enriquecido con las 3 vistas exigidas (12.c) y métricas"""
         os.makedirs(os.path.dirname(ruta_salida), exist_ok=True)
+        try:
+            estado_ing = self.obtener_estado_ingesta()
+        except Exception:
+            estado_ing = {"total_indice": 0, "cargados": 0, "faltantes": [], "n_faltantes": 0}
+        filas_falt = "".join(
+            f'<tr><td><code>{(x.get("nro") or "")}</code></td><td><b>{(x.get("col") or "")}</b></td>'
+            f'<td>{(x.get("nombre") or "")[:60]}</td>'
+            f'<td><code>python3 Taller2_AB_PO_XX.py --scrape-grupo {(x.get("nro") or "")}</code></td></tr>'
+            for x in estado_ing["faltantes"])
 
         # 12.c.i: Vista por Grupo
         filas_grupos = []
@@ -279,43 +304,132 @@ class DashboardApp:
         <p><a href="visualizador_hipercubo.html" target="_blank" style="display:inline-block; background:#006837; color:#fff; padding:8px 16px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.9rem;">&rarr; Abrir Portal Interactivo Completo con Gráficos Canvas 2D y Red 3D</a></p>
     </div>
 
+    <!-- INGESTA MASIVA UPC (panel funcional GUI) -->
+    <div class="card">
+        <h2>Ingesta Masiva UPC — Estado y Acciones</h2>
+        <p style="color:#94a3b8;">Índice institucional: <b>{estado_ing["total_indice"]}</b> grupos UPC &bull;
+        Cargados en BD: <b>{len(filas_grupos)}</b> &bull; Faltantes: <b>{estado_ing["n_faltantes"]}</b></p>
+        <p style="color:#94a3b8; font-size:0.85rem;">Desde la consola ejecute:
+        <code>python3 Taller2_AB_PO_XX.py --auto-ingest</code> (66 grupos, GISICO al final) &bull;
+        <code>--forzar</code> reprocesa &bull; <code>--sin-cvlac</code> carga rápida &bull;
+        <code>--nro NRO</code> selectivo. Tras ingerir, regenere este dashboard (opción 7→2).</p>
+        <table>
+            <thead><tr><th>NRO</th><th>COL</th><th>Grupo faltante</th><th>Comando</th></tr></thead>
+            <tbody>{filas_falt or '<tr><td colspan="4">Sin faltantes: ingesta completa.</td></tr>'}</tbody>
+        </table>
+    </div>
+
     <!-- TRES APROXIMACIONES (12.c) -->
     <div class="card">
-        <h2>i. Vista por Grupo de Investigación (12.c.i)</h2>
-        <table>
+        <h2>i. Vista por Grupo de Investigación (12.c.i) — <span style="color:#94a3b8; font-size:0.9rem;">{len(filas_grupos)} grupos</span></h2>
+        <div style="display:flex; gap:0.5rem; align-items:center; margin-bottom:0.75rem; flex-wrap:wrap;">
+            <input id="buscar-grup" type="text" placeholder="Buscar por código, nombre, líder o clasificación..." oninput="filtrarTabla('tabla-grup','buscar-grup')" style="padding:6px 10px; border-radius:6px; border:1px solid #334155; background:#0f172a; color:#f8fafc; font-size:0.85rem; flex:1; min-width:220px;">
+            <button onclick="cambiarPagina('grup',-1)" style="background:#1e293b; color:#f8fafc; border:1px solid #334155; border-radius:6px; padding:6px 14px; cursor:pointer;">◀ Ant</button>
+            <span id="pag-grup-label" style="color:#94a3b8; font-size:0.85rem;"></span>
+            <button onclick="cambiarPagina('grup',1)" style="background:#1e293b; color:#f8fafc; border:1px solid #334155; border-radius:6px; padding:6px 14px; cursor:pointer;">Sig ▶</button>
+        </div>
+        <table id="tabla-grup">
             <thead>
                 <tr><th>Código</th><th>Nombre Oficial</th><th>Clasificación</th><th>Líder</th><th>Investigadores</th><th>Productos</th><th>Informe Oficial</th></tr>
             </thead>
             <tbody>
-                {''.join(f"<tr><td><b>{g['codigo']}</b></td><td>{g['nombre']}</td><td>{g['clasificacion']}</td><td>{g['lider']}</td><td>{g['investigadores']}</td><td><b>{g['productos']}</b></td><td><a href='../reportes/Informe_GrupLAC_{g['codigo']}.pdf' target='_blank' style='background:#006837; color:white; padding:3px 8px; border-radius:4px; text-decoration:none; font-size:0.75rem; font-weight:bold;'>Descargar PDF</a></td></tr>" for g in filas_grupos)}
+                {''.join(f'<tr><td><b>{g["codigo"]}</b></td><td>{g["nombre"]}</td><td>{g["clasificacion"]}</td><td>{g["lider"]}</td><td>{g["investigadores"]}</td><td><b>{g["productos"]}</b></td><td><a href="../reportes/Informe_GrupLAC_{g["codigo"]}.pdf" target="_blank" style="background:#006837; color:white; padding:3px 8px; border-radius:4px; text-decoration:none; font-size:0.75rem; font-weight:bold;">Descargar PDF</a></td></tr>' for g in filas_grupos)}
             </tbody>
         </table>
     </div>
 
     <div class="card">
-        <h2>ii. Vista por Investigador Autor (12.c.ii)</h2>
-        <table>
+        <h2>ii. Vista por Investigador Autor (12.c.ii) — <span style="color:#94a3b8; font-size:0.9rem;">{len(filas_invs)} investigadores</span></h2>
+        <div style="display:flex; gap:0.5rem; align-items:center; margin-bottom:0.75rem; flex-wrap:wrap;">
+            <input id="buscar-inv" type="text" placeholder="Buscar por nombre, documento o grupo..." oninput="filtrarTabla('tabla-invs','buscar-inv')" style="padding:6px 10px; border-radius:6px; border:1px solid #334155; background:#0f172a; color:#f8fafc; font-size:0.85rem; flex:1; min-width:220px;">
+            <button onclick="cambiarPagina('invs',-1)" style="background:#1e293b; color:#f8fafc; border:1px solid #334155; border-radius:6px; padding:6px 14px; cursor:pointer;">◀ Ant</button>
+            <span id="pag-invs-label" style="color:#94a3b8; font-size:0.85rem;"></span>
+            <button onclick="cambiarPagina('invs',1)" style="background:#1e293b; color:#f8fafc; border:1px solid #334155; border-radius:6px; padding:6px 14px; cursor:pointer;">Sig ▶</button>
+        </div>
+        <table id="tabla-invs">
             <thead>
                 <tr><th>Documento</th><th>Nombre Completo</th><th>Categoría MinCiencias</th><th>Grupo</th><th>Producción Autorada</th></tr>
             </thead>
             <tbody>
-                {''.join(f"<tr><td><code>{i['doc']}</code></td><td><b>{i['nombre']}</b></td><td>{i['categoria']}</td><td>{i['grupo']}</td><td><b>{i['obras']} obras</b></td></tr>" for i in filas_invs[:25])}
+                {''.join(f'<tr><td><code>{i["doc"]}</code></td><td><b>{i["nombre"]}</b></td><td>{i["categoria"]}</td><td>{i["grupo"]}</td><td><b>{i["obras"]} obras</b></td></tr>' for i in filas_invs)}
             </tbody>
         </table>
     </div>
 
     <div class="card">
-        <h2>iii. Vista por Productos de Investigación (12.c.iii — Modelo MinCiencias 2024)</h2>
-        <table>
+        <h2>iii. Vista por Productos de Investigación (12.c.iii — Modelo MinCiencias 2024) — <span style="color:#94a3b8; font-size:0.9rem;">{len(filas_prods)} productos</span></h2>
+        <div style="display:flex; gap:0.5rem; align-items:center; margin-bottom:0.75rem; flex-wrap:wrap;">
+            <input id="buscar-prod" type="text" placeholder="Buscar por título, tipo, familia o año..." oninput="filtrarTabla('tabla-prods','buscar-prod')" style="padding:6px 10px; border-radius:6px; border:1px solid #334155; background:#0f172a; color:#f8fafc; font-size:0.85rem; flex:1; min-width:220px;">
+            <button onclick="cambiarPagina('prods',-1)" style="background:#1e293b; color:#f8fafc; border:1px solid #334155; border-radius:6px; padding:6px 14px; cursor:pointer;">◀ Ant</button>
+            <span id="pag-prods-label" style="color:#94a3b8; font-size:0.85rem;"></span>
+            <button onclick="cambiarPagina('prods',1)" style="background:#1e293b; color:#f8fafc; border:1px solid #334155; border-radius:6px; padding:6px 14px; cursor:pointer;">Sig ▶</button>
+        </div>
+        <table id="tabla-prods">
             <thead>
                 <tr><th>ID</th><th>Familia 2024</th><th>Código</th><th>Peso IPP</th><th>Tipo</th><th>Título</th><th>Año</th><th>Categoría</th><th>Aval MinCiencias</th></tr>
             </thead>
             <tbody>
-                {''.join(f"<tr><td><code>{p['id']}</code></td><td><span class='tag-macro'>{p['familia']}</span></td><td><b>{p['codigo_2024']}</b></td><td>{p['peso']} pts</td><td>{p['tipo']}</td><td>{p['titulo']}</td><td>{p['anio']}</td><td>{p['categoria']}</td><td>{p['validado']}</td></tr>" for p in filas_prods[:40])}
+                {''.join(f'<tr><td><code>{p["id"]}</code></td><td><span class="tag-macro">{p["familia"]}</span></td><td><b>{p["codigo_2024"]}</b></td><td>{p["peso"]} pts</td><td>{p["tipo"]}</td><td>{p["titulo"]}</td><td>{p["anio"]}</td><td>{p["categoria"]}</td><td>{p["validado"]}</td></tr>' for p in filas_prods)}
             </tbody>
         </table>
-        <p style="font-size:0.75rem; color:#94a3b8; margin-top:0.8rem;">Mostrando las primeras 40 obras científicas de un total de {len(filas_prods)} en memoria RAM clasificadas bajo el Modelo MinCiencias 2024.</p>
+        <p style="font-size:0.75rem; color:#94a3b8; margin-top:0.8rem;">Total: {len(filas_prods)} obras científicas clasificadas bajo el Modelo MinCiencias 2024.</p>
     </div>
+
+<script>
+// ─── PAGINACIÓN Y BÚSQUEDA ────────────────────────────────────────────────────
+const FILAS_POR_PAG = 50;
+const estado = {{
+    grup:  {{ pag: 0, filas: null, filtradas: null }},
+    invs:  {{ pag: 0, filas: null, filtradas: null }},
+    prods: {{ pag: 0, filas: null, filtradas: null }},
+}};
+
+function inicializarPaginacion(clave) {{
+    const tabla = document.getElementById('tabla-' + clave);
+    estado[clave].filas = Array.from(tabla.querySelectorAll('tbody tr'));
+    estado[clave].filtradas = estado[clave].filas;
+    renderPagina(clave);
+}}
+
+function renderPagina(clave) {{
+    const e = estado[clave];
+    const total = e.filtradas.length;
+    const totalPags = Math.max(1, Math.ceil(total / FILAS_POR_PAG));
+    e.pag = Math.min(e.pag, totalPags - 1);
+    const inicio = e.pag * FILAS_POR_PAG;
+    const fin = Math.min(inicio + FILAS_POR_PAG, total);
+    e.filas.forEach(tr => tr.style.display = 'none');
+    e.filtradas.forEach((tr, idx) => {{
+        tr.style.display = (idx >= inicio && idx < fin) ? '' : 'none';
+    }});
+    const label = document.getElementById('pag-' + clave + '-label');
+    if (label) label.textContent = total === 0
+        ? 'Sin resultados'
+        : `Página ${{e.pag + 1}} / ${{totalPags}}  (${{inicio + 1}}–${{fin}} de ${{total}})`;
+}}
+
+function cambiarPagina(clave, delta) {{
+    const e = estado[clave];
+    const totalPags = Math.max(1, Math.ceil(e.filtradas.length / FILAS_POR_PAG));
+    e.pag = Math.max(0, Math.min(e.pag + delta, totalPags - 1));
+    renderPagina(clave);
+}}
+
+function filtrarTabla(tablaId, inputId) {{
+    const termino = document.getElementById(inputId).value.toLowerCase();
+    const clave = tablaId.replace('tabla-', '');
+    const e = estado[clave];
+    e.filtradas = e.filas.filter(tr => tr.textContent.toLowerCase().includes(termino));
+    e.pag = 0;
+    renderPagina(clave);
+}}
+
+document.addEventListener('DOMContentLoaded', function() {{
+    inicializarPaginacion('grup');
+    inicializarPaginacion('invs');
+    inicializarPaginacion('prods');
+}});
+</script>
 </body>
 </html>
 """
@@ -331,19 +445,23 @@ class DashboardApp:
         print("[+] Analizando datos de la Multilista ortogonal en RAM...")
         print(f"[OK] {self.multi.contar_grupos(False)} grupos, {self.multi.contar_investigadores(False)} investigadores, {self.multi.contar_productos(False)} productos.")
 
-        # Generar vista tabular enriquecida
-        ruta_html = self.generar_html_dashboard("dist/dashboard_python.html")
+        # Generar dashboard Python siempre actualizado con los datos actuales de la BD
+        ruta_html = os.path.abspath(os.path.join(PROJECT_ROOT, "dist", "dashboard_python.html"))
+        self.generar_html_dashboard(ruta_html)
+        print(f"[+] Dashboard generado: {ruta_html}")
 
-        # Priorizar el portal interactivo del Hipercubo HTML5 si existe, o el dashboard python
-        portal_html = os.path.join(PROJECT_ROOT, "dist", "visualizador_hipercubo.html")
-        destino = portal_html if os.path.exists(portal_html) else os.path.abspath(ruta_html)
-
-        print(f"[+] Abriendo Portal Gráfico Interactivo HTML5...")
+        print(f"[+] Abriendo Dashboard Analítico en el navegador...")
         try:
-            webbrowser.open(f"file://{os.path.abspath(destino)}")
-            print(f"[OK] Portal abierto exitosamente en el navegador: {destino}")
+            webbrowser.open(f"file://{ruta_html}")
+            print(f"[OK] Dashboard abierto exitosamente.")
+            # Informar también sobre el portal C++ si existe
+            portal_html = os.path.join(PROJECT_ROOT, "dist", "visualizador_hipercubo.html")
+            if os.path.exists(portal_html):
+                print(f"[i]  Portal Hipercubo C++ disponible en: {portal_html}")
+                print(f"[i]  Para regenerarlo con datos actuales ejecute: ./pea_cpp --gen")
         except Exception as e:
             print(f"[!] No se pudo abrir automáticamente el navegador: {e}")
+            print(f"    Abra manualmente: {ruta_html}")
 
         print("\n[OK] Dashboard interactivo ejecutado exitosamente.")
         print("=" * 65 + "\n")
