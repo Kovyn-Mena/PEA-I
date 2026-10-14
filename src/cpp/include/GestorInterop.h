@@ -24,6 +24,10 @@
     #define PYTHON_CMD "python3"
 #endif
 
+#if !defined(_WIN32) && !defined(_WIN64)
+#include <sys/wait.h>
+#endif
+
 // Representación de grupo candidato devuelto por la búsqueda en ScienTI
 struct CandidatoGrupo {
     std::string nro;
@@ -36,9 +40,59 @@ struct CandidatoGrupo {
 
 class GestorInterop {
 public:
+    // Resuelve el intérprete Python real una sola vez (cacheado).
+    // Orden: PEAI_PYTHON (exportado por iniciar.bat con el Python detectado)
+    // -> "py -3" (Windows) -> PYTHON_CMD. Verifica ejecución real con -c,
+    // no solo --version (evita el alias fantasma de Microsoft Store).
+    // Retorna "" si no hay intérprete funcional.
+    static std::string comandoPython() {
+        static std::string cache;
+        static bool resuelto = false;
+        if (resuelto) return cache;
+        resuelto = true;
+        std::vector<std::string> candidatos;
+        if (const char* env = std::getenv("PEAI_PYTHON")) {
+            if (std::string(env).size() > 0) candidatos.push_back(env);
+        }
+#if defined(_WIN32) || defined(_WIN64)
+        candidatos.push_back("py -3");
+#endif
+        candidatos.push_back(PYTHON_CMD);
+        for (size_t i = 0; i < candidatos.size(); i++) {
+            const std::string& c = candidatos[i];
+            // Entrecomillar solo rutas con espacios (no comandos como "py -3")
+            bool esRuta = (c.find('\\') != std::string::npos) ||
+                          (c.find('/') != std::string::npos) ||
+                          (c.find(':') != std::string::npos);
+            std::string inv = esRuta ? ("\"" + c + "\"") : c;
+            std::string prueba = inv + " -c \"import sys;sys.exit(0)\"";
+#if defined(_WIN32) || defined(_WIN64)
+            prueba += " >nul 2>&1";
+#else
+            prueba += " >/dev/null 2>&1";
+#endif
+            int rc = std::system(prueba.c_str());
+#if !defined(_WIN32) && !defined(_WIN64)
+            if (WIFEXITED(rc)) rc = WEXITSTATUS(rc);
+#endif
+            if (rc == 0) { cache = c; return cache; }
+        }
+        cache.clear();
+        return cache;
+    }
+
+    static bool hayPython() { return !comandoPython().empty(); }
+
     // Ejecuta el script de Python y captura la salida silenciosamente (para parsers)
+    // Retorna "[PEAI_SIN_PYTHON]" si no hay intérprete (distinguible de "sin resultados")
     static std::string salidaPython(const std::string& argumentos) {
-        std::string comando = std::string(PYTHON_CMD) + " Taller2_AB_PO_XX.py " + argumentos + " 2>&1";
+        const std::string py = comandoPython();
+        if (py.empty()) return "[PEAI_SIN_PYTHON]";
+        bool esRuta = (py.find('\\') != std::string::npos) ||
+                      (py.find('/') != std::string::npos) ||
+                      (py.find(':') != std::string::npos);
+        std::string inv = esRuta ? ("\"" + py + "\"") : py;
+        std::string comando = inv + " Taller2_AB_PO_XX.py " + argumentos + " 2>&1";
         std::string out;
         FILE* pipe = POPEN(comando.c_str(), "r");
         if (!pipe) return out;
@@ -70,8 +124,20 @@ public:
     static bool ejecutarComandoPython(const std::string& scriptArg, std::string& salidaCompleta) {
         salidaCompleta.clear();
 
+        const std::string py = comandoPython();
+        if (py.empty()) {
+            salidaCompleta = "Error: no hay intérprete Python funcional (ni PEAI_PYTHON, ni py -3, ni "
+                + std::string(PYTHON_CMD) + "). Instale Python o use datos locales.";
+            std::cout << "[!] " << salidaCompleta << "\n";
+            return false;
+        }
+        bool esRuta = (py.find('\\') != std::string::npos) ||
+                      (py.find('/') != std::string::npos) ||
+                      (py.find(':') != std::string::npos);
+        std::string inv = esRuta ? ("\"" + py + "\"") : py;
+
         // Construir la línea de comando multiplataforma
-        std::string comando = std::string(PYTHON_CMD) + " " + scriptArg + " 2>&1";
+        std::string comando = inv + " " + scriptArg + " 2>&1";
 
         std::cout << "\n[C++ -> Python Bridge] Ejecutando: " << comando << "\n";
         std::cout << std::string(65, '-') << "\n";

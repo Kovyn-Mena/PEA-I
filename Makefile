@@ -8,7 +8,7 @@ ifeq ($(OS),Windows_NT)
     PYTHON = python
     CXX = g++
     CC = gcc
-    CXXFLAGS = -std=c++17 -Wall -Wextra -Isrc/cpp/include
+    CXXFLAGS = -std=c++17 -Wall -Wextra -Isrc/cpp/include -Isrc/cpp
     # Usa sqlite3 amalgamado si existe (compilado como C puro, luego linkeado)
     ifneq ($(wildcard src/cpp/sqlite3.c),)
         SQLITE_OBJ = src/cpp/sqlite3_amalg.o
@@ -28,7 +28,7 @@ else
     PYTHON = python3
     CXX = g++
     CC = gcc
-    CXXFLAGS = -std=c++17 -Wall -Wextra -Isrc/cpp/include
+    CXXFLAGS = -std=c++17 -Wall -Wextra -Isrc/cpp/include -Isrc/cpp
     # En Linux usar sqlite3 del sistema (más simple y ya instalado)
     SQLITE_OBJ =
     LDFLAGS = -lsqlite3

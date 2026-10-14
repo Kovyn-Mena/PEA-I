@@ -380,13 +380,13 @@ if exist "src\cpp\sqlite3.c" (
     if not "!BUILD_STATUS!"=="0" goto CPP_BUILD_FAILED
 
     echo [+] Compilando y enlazando C++17...
-    "!CXX_BIN!" -std=c++17 -Wall -Wextra -Isrc/cpp/include !CXX_INC! ^
+    "!CXX_BIN!" -std=c++17 -Wall -Wextra -Isrc/cpp/include -Isrc/cpp !CXX_INC! ^
         "src/cpp/main.cpp" "!SQLITE_OBJ!" -o "!CPP_BUILD!" !CXX_LIB! ^
         -static-libgcc -static-libstdc++
     set "BUILD_STATUS=!ERRORLEVEL!"
 ) else (
     echo [+] Compilando con SQLite del sistema...
-    "!CXX_BIN!" -std=c++17 -Wall -Wextra -Isrc/cpp/include !CXX_INC! ^
+    "!CXX_BIN!" -std=c++17 -Wall -Wextra -Isrc/cpp/include -Isrc/cpp !CXX_INC! ^
         "src/cpp/main.cpp" -o "!CPP_BUILD!" !CXX_LIB! ^
         -lsqlite3 -static-libgcc -static-libstdc++
     set "BUILD_STATUS=!ERRORLEVEL!"
@@ -429,6 +429,11 @@ goto MENU
 echo.
 echo [+] Ejecutando pea_cpp.exe...
 echo.
+call :DETECT_PYTHON_SILENCIOSO
+if defined PYCMD (
+    :: El C++ prefiere PEAI_PYTHON (GestorInterop) antes que "python"/"py -3"
+    if "!PYCMD!"=="py -3" ( set "PEAI_PYTHON=py -3" ) else ( set "PEAI_PYTHON=!PYCMD!" )
+)
 "%~dp0pea_cpp.exe"
 echo.
 echo Presione cualquier tecla para volver al menu...
@@ -464,7 +469,7 @@ call :DETECT_CPP
 if !ERRORLEVEL! equ 0 (
     echo [+] Compilando y ejecutando tests C++...
     set "TEST_BIN=%TEMP%\pea_i_test_tda_%RANDOM%_%RANDOM%.exe"
-    "!CXX_BIN!" -std=c++17 -Wall -Wextra -Isrc\cpp\include ^
+    "!CXX_BIN!" -std=c++17 -Wall -Wextra -Isrc\cpp\include -Isrc\cpp ^
         "src\cpp\test_tda.cpp" -o "!TEST_BIN!" -static-libgcc -static-libstdc++
     set "TEST_STATUS=!ERRORLEVEL!"
     if "!TEST_STATUS!"=="0" (

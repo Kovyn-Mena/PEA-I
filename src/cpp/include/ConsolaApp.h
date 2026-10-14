@@ -350,6 +350,13 @@ public:
         std::cout << "     PEA-i: PROGRAMA ESTADISTICO DE ANALISIS DE INVESTIGACION   \n";
         std::cout << "    Universidad Popular del Cesar (UPC) - Estructura de Datos   \n";
         std::cout << "=================================================================\n";
+        if (!GestorInterop::hayPython()) {
+            std::cout << "[AVISO] Sin intérprete Python funcional: scraping, dashboard e\n";
+            std::cout << "        informes vía Python deshabilitados. Solo datos locales.\n";
+            std::cout << "        Instale Python 3 (python.org, casilla Add to PATH) o ejecute\n";
+            std::cout << "        con PEAI_PYTHON=<intérprete> en el entorno.\n";
+            std::cout << "=================================================================\n";
+        }
 
         while (true) {
             std::string resp = leerLinea("¿Desea cargar algún grupo de investigación de la Universidad Popular del Cesar? (si/no): ");
