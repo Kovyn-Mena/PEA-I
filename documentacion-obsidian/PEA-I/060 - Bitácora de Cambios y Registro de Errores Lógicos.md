@@ -310,6 +310,29 @@ Archivos raíz perdidos al copiar el repo (papelera y disco revisados: sin copia
   - `make verify` ratificó el 100% de paridad e invariantes estructurales.
   - `python3 scripts/package_zip.py` empaquetó el entregable limpio de 5.1 MB sin PDFs temporales ni zips redundantes.
 
+## Sesión 45 — Adopción del Flujo de Arranque Dinámico de Damián, Corrección de Códigos COL/GISICO y Blindaje Multiplataforma (Windows/pylib)
+
+- **Archivos modificados:** `src/cpp/include/ConsolaApp.h`, `src/cpp/include/GestorInterop.h`, `src/cpp/include/VisualizadorGrafico.h`, `src/python/console.py`, `src/python/core/busqueda_scienti.py`, `src/python/core/ingesta.py`, `src/python/core/reporte_pdf.py`, `src/python/gui.py`, `Taller2_AB_PO_XX.py`, `scripts/package_zip.py`, `data/pea_investigacion.db`, `data/muestra_upc.csv`, `data/init_db.py`, `data/import_pea_json.py`, `pylib/`.
+- **1. Blindaje Multiplataforma sin Dependencias Externas (`pylib` en Windows):**
+  - **Problema:** En Windows, usuarios y compañeros de equipo obtenían errores `ModuleNotFoundError: No module named 'urllib3'` o caídas por falta de `matplotlib` al ejecutar el sistema o el dashboard.
+  - **Solución:** Se integró el paquete autónomo `pylib/` (con `requests`, `urllib3`, `bs4`, `certifi`, `idna`, `charset_normalizer`, `soupsieve`, `fpdf2`, `pypdf`) auto-inyectado en `sys.path`. En `gui.py`, se protegió la importación de `matplotlib` de modo que si no está instalada, el sistema emite un aviso informativo y abre de inmediato el Portal HTML5 autónomo sin colapsar. Se incluyó `pylib` en `scripts/package_zip.py` para asegurar que el ZIP de entrega final sea 100% plug & play en Windows.
+- **2. Purga de Grupos Vacíos y Resolución Canónica de Códigos MinCiencias (GISICO):**
+  - **Causa raíz:** `data/pea_investigacion.db` contenía 51 grupos fantasma sin investigadores ni productos, originados por el volcado `pea_data_upc.json`. Además, el grupo GISICO estaba registrado bajo el código artificial `COL0002099` (derivado de su NRO `00000000002099`), mientras que MinCiencias ScienTI reporta su código oficial `COL0018706`. Cada intento de buscar e importar GISICO creaba una fila duplicada y vacía con `COL0018706`, desvinculada de los 86 investigadores y 330 productos reales.
+  - **Solución:** Se eliminaron quirúrgicamente los 51 grupos vacíos dejando exactamente los 11 grupos reales con datos consolidados (622 investigadores y 4,515 productos). Se ejecutó la migración relacional `COL0002099` $\rightarrow$ `COL0018706` en `Grupos`, `Investigadores` y `Productos` con `PRAGMA foreign_key_check` 100% limpio. Se añadieron alias canónicos transparentes en Python y C++ para que consultas por `00000000002099`, `GISICO` o `COL0002099` resuelvan invariablemente a `COL0018706`.
+- **3. Flujo Interactivo de Búsqueda y Carga de Grupos (Diseño de Damián):**
+  - **Problema:** La aplicación no incluía el flujo de arranque interactivo diseñado por Damián, y en el menú C++ la búsqueda de grupos solo mostraba texto sin permitir seleccionarlos ni descargarlos interactivamente.
+  - **Solución:**
+    - Se implementó `menuBuscarGrupo()` en C++ (`ConsolaApp.h`) y `menu_buscar_y_cargar_grupo_inicio()` en Python (`console.py`).
+    - Al iniciar, el sistema consulta: `¿Desea cargar algún grupo de investigación de la Universidad Popular del Cesar? (si/no): `.
+    - Si se responde "si", el usuario busca por término clave, visualiza una tabla formateada de candidatos, selecciona por número, y el sistema verifica con `--existe-grupo` si ya estaba cargado para evitar duplicados o re-descargas innecesarias.
+    - Si no estaba cargado, descarga y parsea el grupo desde ScienTI, actualiza SQLite e ingesta automáticamente a la Multilista en RAM.
+    - En el submenú de Ingesta, la opción 3 fue reconectada a este mismo flujo interactivo directo.
+- **Verificación:**
+  - `make clean && make` compiló sin warnings en C++17.
+  - `make test` superó el 100% de pruebas unitarias de TDAs en C++ y Python.
+  - `make verify` ratificó el 100% de paridad e invariantes estructurales (11 grupos, 622 investigadores, 4,515 productos).
+  - Empaquetado de entrega en ZIP probado y verificado con `pylib/` autónomo.
+
 ## 🐛 Bugs
 | ID | Bug | Estado |
 |:--:|-----|:------:|
@@ -338,3 +361,7 @@ Archivos raíz perdidos al copiar el repo (papelera y disco revisados: sin copia
 | BUG-23 (nuevo, auditoría) | Inconsistencia en fórmula del IPP y falta de filtro de borrado lógico en reportes PDF | **corregido S42**: filtrado estricto `activo = 1` y fórmula estándar unificada |
 | BUG-24 (nuevo, auditoría) | Activos huérfanos y duplicados en `data/` (`catalog_2024.json`, `logo_upc_icon.png`, `logo_upc_transparent.png`) | **corregido S43**: purga total con `git rm`; uso estricto de archivos canónicos |
 | BUG-25 (nuevo, auditoría) | Empaquetador `package_zip.py` incluía 60 reportes PDF temporales y zips anidados inflando el archivo formal a >8 MB | **corregido S43**: filtros estrictos en empaquetador para incluir solo las muestras oficiales; ZIP reducido a 5.1 MB |
+| BUG-26 (nuevo, detectado por Damián en Windows) | `ModuleNotFoundError: No module named 'urllib3'` o caída por falta de `matplotlib` al ejecutar en Windows | **corregido S45**: bundle autónomo `pylib/` inyectado a `sys.path`, `matplotlib` opcional protegido en `gui.py`, e inclusión en ZIP formal |
+| BUG-27 (nuevo, detectado por el usuario) | 51 grupos vacíos en SQLite y código artificial de GISICO (`COL0002099` vs `COL0018706`) provocaban fallos al cargar datos internos y filas duplicadas | **corregido S45**: purga de 51 grupos vacíos (11 grupos consolidados reales), migración relacional `COL0002099` $\rightarrow$ `COL0018706` con FK limpia y aliasing en todos los módulos |
+| BUG-28 (nuevo, detectado por Damián) | C++ carecía del flujo interactivo de arranque y la opción 3 de búsqueda solo imprimía texto sin permitir seleccionar ni descargar el grupo | **corregido S45**: `menuBuscarGrupo()` interactivo con tabla de candidatos, selección por índice, pre-chequeo `--existe-grupo` y enlace directo al menú de inicio y opción 3 de ingesta |
+
