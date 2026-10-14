@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 #include <array>
 #include <cstdlib>
 
@@ -23,8 +24,48 @@
     #define PYTHON_CMD "python3"
 #endif
 
+// Representación de grupo candidato devuelto por la búsqueda en ScienTI
+struct CandidatoGrupo {
+    std::string nro;
+    std::string nombre;
+    std::string col;
+    std::string lider;
+    std::string inst;
+    std::string cat;
+};
+
 class GestorInterop {
 public:
+    // Ejecuta el script de Python y captura la salida silenciosamente (para parsers)
+    static std::string salidaPython(const std::string& argumentos) {
+        std::string comando = std::string(PYTHON_CMD) + " Taller2_AB_PO_XX.py " + argumentos + " 2>&1";
+        std::string out;
+        FILE* pipe = POPEN(comando.c_str(), "r");
+        if (!pipe) return out;
+        std::array<char, 512> buffer;
+        while (fgets(buffer.data(), buffer.size(), pipe) != nullptr) {
+            out += buffer.data();
+        }
+        PCLOSE(pipe);
+        return out;
+    }
+
+    // Parte una cadena por delimitador (helper para parsear CAND|...)
+    static std::vector<std::string> partir(const std::string& s, char sep) {
+        std::vector<std::string> v;
+        std::string cur;
+        for (size_t i = 0; i < s.size(); i++) {
+            if (s[i] == sep) {
+                v.push_back(cur);
+                cur.clear();
+            } else if (s[i] != '\r' && s[i] != '\n') {
+                cur += s[i];
+            }
+        }
+        v.push_back(cur);
+        return v;
+    }
+
     // Ejecuta un comando en Python a través de una tubería y muestra la salida en vivo
     static bool ejecutarComandoPython(const std::string& scriptArg, std::string& salidaCompleta) {
         salidaCompleta.clear();

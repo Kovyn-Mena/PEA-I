@@ -12,11 +12,15 @@ Opera con fallback 100% offline sobre la caché local en JSON.
 
 import json
 import os
+import sys
 import re
 import unicodedata
 from urllib.parse import urlencode
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+pylib_dir = os.path.join(PROJECT_ROOT, "pylib")
+if os.path.exists(pylib_dir) and pylib_dir not in sys.path:
+    sys.path.insert(0, pylib_dir)
 DATA_DIR = os.path.join(PROJECT_ROOT, "data")
 IDX_INSTITUCIONES = os.path.join(DATA_DIR, "indice_instituciones.json")
 IDX_GRUPOS = os.path.join(DATA_DIR, "indice_grupos.json")
@@ -231,3 +235,84 @@ def buscar_grupo_en_indices(termino: str) -> list:
                 copia["institucion"] = copia.get("institucion", "") or inst_nom.get(str(codinst), "")
                 candidatos.append(copia)
     return candidatos
+
+
+def existe_grupo_en_bd(nro: str, db_path: str = None) -> tuple:
+    """
+    Chequeo offline (sin red): ¿el nro o código ya está cargado en la BD?
+    Devuelve (codigo_vigente, nombre) o (None, None).
+    S32 / BUG-11: Detecta grupos existentes y resuelve alias canónicos (ej. GISICO -> COL0018706).
+    """
+    import sqlite3
+    if not db_path:
+        db_path = os.path.join(DATA_DIR, "pea_investigacion.db")
+    if not os.path.exists(db_path):
+        return None, None
+
+    nro_limpio = str(nro).strip()
+    if not nro_limpio:
+        return None, None
+
+    # Mapeo canónico de NRO MinCiencias a código COL oficial
+    MAPA_NRO_CANONICO = {
+        "00000000002099": "COL0018706",
+        "2099": "COL0018706",
+        "COL0002099": "COL0018706",
+        "00000000002668": "COL0043834",
+        "2668": "COL0043834",
+        "00000000003202": "COL0049121",
+        "3202": "COL0049121",
+        "00000000003639": "COL0001351",
+        "3639": "COL0001351",
+    }
+    cod_objetivo = MAPA_NRO_CANONICO.get(nro_limpio, "")
+
+    try:
+        conn = sqlite3.connect(db_path)
+        cur = conn.cursor()
+
+        # 1. Búsqueda por código canónico mapeado
+        if cod_objetivo:
+            row = cur.execute("SELECT codigo_grupo, nombre FROM Grupos WHERE codigo_grupo = ?;", (cod_objetivo,)).fetchone()
+            if row:
+                conn.close()
+                return row[0], row[1]
+
+        # 2. Búsqueda directa por código de grupo o nombre
+        row = cur.execute("SELECT codigo_grupo, nombre FROM Grupos WHERE codigo_grupo = ? OR codigo_grupo = ? OR UPPER(nombre) LIKE ?;", (nro_limpio, f"COL{nro_limpio}", f"%{nro_limpio.upper()}%")).fetchone()
+        if row:
+            conn.close()
+            return row[0], row[1]
+
+        # 3. Búsqueda por sufijo o nro en indice_grupos.json
+        idx = {}
+        if os.path.exists(IDX_GRUPOS):
+            try:
+                with open(IDX_GRUPOS, "r", encoding="utf-8") as f:
+                    idx = json.load(f)
+            except Exception:
+                idx = {}
+            items = []
+            if isinstance(idx, dict):
+                for v in idx.values():
+                    if isinstance(v, list):
+                        items.extend(v)
+            elif isinstance(idx, list):
+                items = idx
+            for g in items:
+                gnro = str(g.get("nro", "")).strip()
+                if gnro and (gnro == nro_limpio or gnro.endswith(nro_limpio[-4:])):
+                    col = g.get("col", "")
+                    col_canonico = MAPA_NRO_CANONICO.get(col, col)
+                    if col_canonico:
+                        r = cur.execute("SELECT codigo_grupo, nombre FROM Grupos WHERE codigo_grupo = ?;", (col_canonico,)).fetchone()
+                        if r:
+                            conn.close()
+                            return r[0], r[1]
+
+        conn.close()
+    except Exception:
+        pass
+
+    return None, None
+

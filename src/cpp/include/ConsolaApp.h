@@ -235,7 +235,105 @@ public:
     }
 
     // -----------------------------------------------------------------
-    // PUNTO DE ENTRADA INTERACTIVO (Punto 10 pág 3)
+    // BUSCADOR Y DESCARGA DINÁMICA DE GRUPOS (Flujo Damián)
+    // -----------------------------------------------------------------
+    bool menuBuscarGrupo() {
+        limpiarPantalla();
+        std::cout << "=================================================================\n";
+        std::cout << "  --- BUSCAR Y CARGAR GRUPO POR NOMBRE EN SCIENTI / MINCIENCIAS ---\n";
+        std::cout << "=================================================================\n";
+        std::string q = leerLinea(" Nombre o sigla a buscar (ej. GISICO, Biotecnologia): ");
+        if (q.empty() || q == "0") return false;
+
+        std::cout << "\n[Buscando en ScienTI / Catálogo Institucional UPC...]\n";
+        std::string out = GestorInterop::salidaPython("--buscar-grupo \"" + q + "\"");
+
+        std::vector<CandidatoGrupo> cands;
+        std::string cur;
+        for (size_t i = 0; i <= out.size(); i++) {
+            if (i == out.size() || out[i] == '\n') {
+                if (cur.size() > 5 && cur.substr(0, 5) == "CAND|") {
+                    std::vector<std::string> f = GestorInterop::partir(cur, '|');
+                    if (f.size() >= 8) {
+                        CandidatoGrupo c;
+                        c.nro = f[2];
+                        c.nombre = f[3];
+                        c.col = f[4];
+                        c.lider = f[5];
+                        c.inst = f[6];
+                        c.cat = f[7];
+                        cands.push_back(c);
+                    }
+                }
+                cur.clear();
+            } else if (out[i] != '\r') {
+                cur += out[i];
+            }
+        }
+
+        if (cands.empty()) {
+            std::cout << "[AVISO] Grupo no existente (sin coincidencias para \"" << q << "\").\n";
+            pausar();
+            return false;
+        }
+
+        std::cout << "\nCoincidencias encontradas (" << cands.size() << " grupos):\n";
+        std::cout << std::left << std::setw(5) << "No."
+                  << std::setw(14) << "CODIGO"
+                  << std::setw(42) << "GRUPO"
+                  << std::setw(28) << "LIDER" << "\n";
+        std::cout << std::string(88, '-') << "\n";
+
+        size_t limite = cands.size() < 20 ? cands.size() : 20;
+        for (size_t i = 0; i < limite; i++) {
+            std::string nom = cands[i].nombre.substr(0, 40);
+            std::string lid = cands[i].lider.substr(0, 26);
+            std::cout << std::left << std::setw(5) << (i + 1)
+                      << std::setw(14) << cands[i].col
+                      << std::setw(42) << nom
+                      << std::setw(28) << lid << "\n";
+        }
+        std::cout << std::string(88, '-') << "\n";
+
+        int pick = leerEntero("Seleccione opción [1-" + std::to_string(limite) + "] para descargar y cargar (0 cancela): ", 0);
+        if (pick <= 0 || (size_t)pick > limite) {
+            std::cout << "[CANCELADO].\n";
+            pausar();
+            return false;
+        }
+
+        CandidatoGrupo elegido = cands[(size_t)pick - 1];
+        std::cout << "\n[+] Verificando grupo: " << elegido.nombre << " (" << elegido.col << " / nro=" << elegido.nro << ")...\n";
+
+        std::string chk = GestorInterop::salidaPython("--existe-grupo \"" + elegido.nro + "\"");
+        if (chk.find("ya existente") != std::string::npos) {
+            std::cout << "\n[AVISO] Este grupo ya estaba cargado en el sistema.\n";
+            std::cout << "        " << chk << "\n";
+            std::cout << "        No se descargo nada nuevo ni se duplico informacion.\n";
+            std::cout << "        Sincronizando Multilista con los datos existentes...\n";
+            GestorSQLite::cargarDesdeBD(multi, rutaBD);
+            pausar("\nPresione ENTER para continuar...");
+            return true;
+        }
+
+        std::cout << "\n[+] Conectando a ScienTI y descargando grupo...\n";
+        std::string salidaScrape;
+        bool ok = GestorInterop::scrapearGrupoNro(elegido.nro, salidaScrape);
+        if (ok || salidaScrape.find("exito") != std::string::npos || salidaScrape.find("completada") != std::string::npos) {
+            std::cout << "\n[RECARGA] Sincronizando Hipercubo 3D en RAM desde SQLite...\n";
+            GestorSQLite::cargarDesdeBD(multi, rutaBD);
+            std::cout << "[OK] ¡Datos del grupo " << elegido.nombre << " cargados exitosamente!\n";
+            pausar();
+            return true;
+        } else {
+            std::cout << "\n[!] Ocurrió un error al scrapear el grupo.\n";
+            pausar();
+            return false;
+        }
+    }
+
+    // -----------------------------------------------------------------
+    // PUNTO DE ENTRADA INTERACTIVO (Flujo de Arranque Dinámico)
     // -----------------------------------------------------------------
     void iniciar() {
         std::signal(SIGINT, manejadorSenal);
@@ -248,28 +346,71 @@ public:
         std::cout << "     PEA-i: PROGRAMA ESTADISTICO DE ANALISIS DE INVESTIGACION   \n";
         std::cout << "    Universidad Popular del Cesar (UPC) - Estructura de Datos   \n";
         std::cout << "=================================================================\n";
-        std::cout << "Seleccione el modo de inicio del sistema:\n";
-        std::cout << "  [1] Cargar datos persistidos desde la BD SQLite (" << rutaBD << ")\n";
-        std::cout << "  [2] Iniciar con estructuras en memoria vacias\n";
-        std::cout << "-----------------------------------------------------------------\n";
-        
-        int opcion = leerOpcionMenu("12", "Opción [1 o 2]: ");
-        if (opcion == 1) {
-            std::cout << "\n[+] Cargando datos desde SQLite hacia la Multilista...\n";
-            if (GestorSQLite::cargarDesdeBD(multi, rutaBD)) {
-                std::cout << "[OK] Datos cargados exitosamente:\n";
-                std::cout << "     • Grupos:         " << multi.contarGrupos(false) << "\n";
-                std::cout << "     • Investigadores: " << multi.contarInvestigadores(false) << "\n";
-                std::cout << "     • Productos:      " << multi.contarProductos(false) << "\n";
-            } else {
-                std::cout << "[!] No se pudo cargar la BD. Se iniciará en memoria vacía.\n";
-            }
-        } else {
-            std::cout << "\n[+] Iniciando con estructuras en memoria vacías.\n";
-        }
 
-        pausar("\n[Presione cualquier tecla o ENTER para ingresar al Menú Principal]... ");
-        menuPrincipal();
+        while (true) {
+            std::string resp = leerLinea("¿Desea cargar algún grupo de investigación de la Universidad Popular del Cesar? (si/no): ");
+            std::string t = "";
+            for (char c : resp) {
+                if (c >= 'A' && c <= 'Z') t += (char)(c + ('a' - 'A'));
+                else if (c != ' ' && c != '\t') t += c;
+            }
+
+            if (t == "si" || t == "s" || t == "sí") {
+                bool ok = menuBuscarGrupo();
+                if (ok) {
+                    pausar("\n[Presione cualquier tecla o ENTER para ingresar al Menú Principal]... ");
+                    menuPrincipal();
+                    return;
+                }
+                // Sin carga nueva (cancelado/fallo): submenú espejo
+                std::cout << "\n-----------------------------------------------------------------\n";
+                std::cout << " [SIN CARGA NUEVA] Elija la modalidad de arranque inicial:\n";
+                std::cout << "  [1] Volver a buscar otro grupo\n";
+                std::cout << "  [2] Precargar datos de la Universidad desde SQLite (" << rutaBD << ")\n";
+                std::cout << "  [3] Iniciar con estructuras vacías en memoria RAM (Ejecutar sin datos)\n";
+                std::cout << "-----------------------------------------------------------------\n";
+                int sub = leerOpcionMenu("123", "Seleccione una opción [1-3]: ");
+                if (sub == 1) continue;
+                if (sub == 2) {
+                    std::cout << "\n[+] Cargando datos desde SQLite hacia la Multilista...\n";
+                    if (GestorSQLite::cargarDesdeBD(multi, rutaBD)) {
+                        std::cout << "[OK] " << multi.contarGrupos(false) << " grupos, "
+                                  << multi.contarInvestigadores(false) << " investigadores, "
+                                  << multi.contarProductos(false) << " productos cargados.\n";
+                    }
+                } else {
+                    std::cout << "\n[+] Iniciando con estructuras en memoria vacías.\n";
+                }
+                pausar("\n[Presione cualquier tecla o ENTER para ingresar al Menú Principal]... ");
+                menuPrincipal();
+                return;
+            } else if (t == "no" || t == "n") {
+                std::cout << "\n-----------------------------------------------------------------\n";
+                std::cout << " [NOTA 10] Elija la modalidad de arranque inicial:\n";
+                std::cout << "  [1] Cargar datos persistidos desde la BD SQLite (" << rutaBD << ")\n";
+                std::cout << "  [2] Iniciar con estructuras vacías en memoria RAM (Ejecutar sin datos)\n";
+                std::cout << "-----------------------------------------------------------------\n";
+                int opcion = leerOpcionMenu("12", "Opción [1 o 2]: ");
+                if (opcion == 1) {
+                    std::cout << "\n[+] Cargando datos desde SQLite hacia la Multilista...\n";
+                    if (GestorSQLite::cargarDesdeBD(multi, rutaBD)) {
+                        std::cout << "[OK] Datos cargados exitosamente:\n";
+                        std::cout << "     • Grupos:         " << multi.contarGrupos(false) << "\n";
+                        std::cout << "     • Investigadores: " << multi.contarInvestigadores(false) << "\n";
+                        std::cout << "     • Productos:      " << multi.contarProductos(false) << "\n";
+                    } else {
+                        std::cout << "[!] No se pudo cargar la BD. Se iniciará en memoria vacía.\n";
+                    }
+                } else {
+                    std::cout << "\n[+] Iniciando con estructuras en memoria vacías.\n";
+                }
+                pausar("\n[Presione cualquier tecla o ENTER para ingresar al Menú Principal]... ");
+                menuPrincipal();
+                return;
+            } else {
+                std::cout << "[AVISO] Por favor responda 'si' o 'no'.\n";
+            }
+        }
     }
 
     // -----------------------------------------------------------------
@@ -455,7 +596,7 @@ public:
             std::cout << "=================================================================\n";
             std::cout << "  1. Buscar Universidad / Institución en MinCiencias (Directorio)\n";
             std::cout << "  2. Explorar y Descargar Grupos de la UPC (66 Grupos)\n";
-            std::cout << "  3. Buscar Grupo por Nombre o Sigla en MinCiencias (ScienTI)\n";
+            std::cout << "  3. Buscar y Cargar Grupo Interactivamente en MinCiencias (ScienTI)\n";
             std::cout << "  4. Web Scraping de Grupo Directo (URL o Código nro MinCiencias)\n";
             std::cout << "  5. Ingesta Automática Masiva de Web Scraping (Grupos UPC + CvLAC)\n";
             std::cout << "  6. Web Scraping de Investigador Individual (CvLAC)\n";
@@ -485,16 +626,7 @@ public:
                 std::cout << "\n[i] Para ingestar un grupo específico use la Opción 4 con su número NRO.\n";
                 pausar();
             } else if (op == 3) {
-                limpiarPantalla();
-                std::cout << "=================================================================\n";
-                std::cout << "--- BÚSQUEDA DE GRUPOS EN MINCIENCIAS (ScienTI) ---\n";
-                std::cout << "=================================================================\n";
-                std::string nom = leerLinea("Palabra clave del grupo (ej: GISICO, Software, Biotecnología): ");
-                if (nom.empty() || nom == "0") continue;
-                std::string salida;
-                GestorInterop::buscarGrupo(nom, salida);
-                std::cout << "\n[i] Para ingestar un grupo específico use la Opción 4 con su número NRO.\n";
-                pausar();
+                menuBuscarGrupo();
             } else if (op == 4) {
                 limpiarPantalla();
                 std::cout << "=================================================================\n";
@@ -684,7 +816,7 @@ public:
                 limpiarPantalla();
                 std::cout << "=================================================================\n";
                 std::cout << "--- CONSULTAR DETALLE DE GRUPO ---\n";
-                std::cout << "Búsqueda por Código o Nombre (ej: COL0002099 o GISICO)\n";
+                std::cout << "Búsqueda por Código o Nombre (ej: COL0018706 o GISICO)\n";
                 std::cout << "[Sugerencia: Presione ENTER para ver un ejemplo aleatorio, o 0 para regresar]\n";
                 std::cout << "=================================================================\n";
                 std::string busqueda = leerLinea("Término de búsqueda: ", true);
@@ -813,7 +945,7 @@ public:
                 std::cout << "  (Consultando directamente la base de datos institucional)\n";
             }
             std::cout << "-----------------------------------------------------------------\n";
-            cod = leerLinea("Ingrese el código del grupo [ej. COL0002099 o COL0043834]: ");
+            cod = leerLinea("Ingrese el código del grupo [ej. COL0018706 o COL0043834]: ");
         }
         if (cod.empty() || cod == "0") return;
 

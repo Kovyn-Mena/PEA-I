@@ -15,6 +15,9 @@ import signal
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 sys.path.insert(0, BASE_DIR)
+pylib_dir = os.path.join(ROOT_DIR, "pylib")
+if os.path.exists(pylib_dir) and pylib_dir not in sys.path:
+    sys.path.insert(0, pylib_dir)
 
 from python.structures.multilista import Multilista
 from python.structures.pila import Pila
@@ -155,8 +158,56 @@ class ConsolaApp:
         return False
 
     # -----------------------------------------------------------------
-    # PUNTO DE ENTRADA INTERACTIVO (Punto 10 pág 3)
+    # PUNTO DE ENTRADA INTERACTIVO (Flujo de Arranque Dinámico)
     # -----------------------------------------------------------------
+    def menu_buscar_y_cargar_grupo_inicio(self):
+        print("\n=================================================================")
+        print("  --- BUSCAR Y CARGAR GRUPO POR NOMBRE EN SCIENTI / MINCIENCIAS ---")
+        print("=================================================================")
+        q = self.leer_linea("Nombre o sigla a buscar (ej. GISICO, Biotecnología): ").strip()
+        if not q or q == "0":
+            return False
+
+        print("\n[Buscando en ScienTI / Catálogo Institucional UPC...]")
+        from python.core.busqueda_scienti import buscar_grupo_en_indices
+        cands = buscar_grupo_en_indices(q)
+        if not cands:
+            print(f"[AVISO] Grupo no existente (sin coincidencias para '{q}').")
+            self.pausar()
+            return False
+
+        print(f"\nCoincidencias encontradas ({len(cands)} grupos):")
+        print(f"{'No.':<4}{'CÓDIGO':<12}{'GRUPO':<45}{'LÍDER':<25}")
+        print("-" * 88)
+        for i, g in enumerate(cands[:20], 1):
+            nom = g.get("nombre", "")[:42]
+            lid = g.get("lider", "")[:23]
+            print(f"{i:<4}{g.get('col',''):<12}{nom:<45}{lid:<25}")
+        print("-" * 88)
+
+        sel = self.leer_linea(f"Seleccione opción [1-{min(len(cands),20)}] para descargar y cargar (0 cancela): ", permitir_vacio=True)
+        if not sel or sel == "0" or not sel.isdigit() or not (1 <= int(sel) <= min(len(cands), 20)):
+            print("[CANCELADO].")
+            self.pausar()
+            return False
+
+        elegido = cands[int(sel) - 1]
+        nro = elegido.get("nro", "")
+        cod = elegido.get("col", "")
+        nombre = elegido.get("nombre", "")
+
+        print(f"\n[+] Conectando a ScienTI y descargando grupo: {nombre} ({cod} / nro={nro})...")
+        from python.core.ingesta import MotorIngesta
+        motor = MotorIngesta(self.ruta_bd)
+        url = f"https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro={nro}" if nro else f"COL:{cod}"
+        GestorPersistencia.guardar_en_bd(self.multi, self.ruta_bd)
+        if motor.ejecutar_ingesta("URL_GRUPLAC", url):
+            self.multi = Multilista()
+            GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd)
+            print(f"\n[OK] ¡Grupo {nombre} ({cod}) descargado e ingestados sus datos a la Multilista!")
+            return True
+        return False
+
     def iniciar(self):
         if os.name == 'nt':
             os.system("chcp 65001 > nul 2>&1")
@@ -168,26 +219,54 @@ class ConsolaApp:
         print("     PEA-i: PROGRAMA ESTADISTICO DE ANALISIS DE INVESTIGACION   ")
         print("    Universidad Popular del Cesar (UPC) - Estructura de Datos   ")
         print("=================================================================")
-        print("Seleccione el modo de inicio del sistema:")
-        print(f"  [1] Cargar datos persistidos desde la BD SQLite ({self.ruta_bd})")
-        print("  [2] Iniciar con estructuras en memoria vacias")
-        print("-----------------------------------------------------------------")
 
-        opcion = self.leer_opcion_menu("12", "Opción [1 o 2]: ")
-        if opcion == 1:
-            print("\n[+] Cargando datos desde SQLite hacia la Multilista...")
-            if GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd):
-                print("[OK] Datos cargados exitosamente:")
-                print(f"     • Grupos:         {self.multi.contar_grupos(False)}")
-                print(f"     • Investigadores: {self.multi.contar_investigadores(False)}")
-                print(f"     • Productos:      {self.multi.contar_productos(False)}")
+        while True:
+            resp = self.leer_linea("¿Desea cargar algún grupo de investigación de la Universidad Popular del Cesar? (si/no): ").strip().lower()
+            if resp in ("si", "s", "sí"):
+                ok = self.menu_buscar_y_cargar_grupo_inicio()
+                if ok:
+                    self.pausar("\n[Presione cualquier tecla o ENTER para ingresar al Menú Principal]... ")
+                    self.menu_principal()
+                    return
+                # Sin carga nueva (cancelado/fallo): submenú espejo
+                print("\n-----------------------------------------------------------------")
+                print(" [SIN CARGA NUEVA] Elija la modalidad de arranque inicial:")
+                print("  [1] Volver a buscar otro grupo")
+                print(f"  [2] Precargar datos de la Universidad desde SQLite ({self.ruta_bd})")
+                print("  [3] Iniciar con estructuras vacías en memoria RAM (Ejecutar sin datos)")
+                print("-----------------------------------------------------------------")
+                sub = self.leer_opcion_menu("123", "Seleccione una opción [1-3]: ")
+                if sub == 1:
+                    continue
+                elif sub == 2:
+                    print("\n[+] Cargando datos desde SQLite hacia la Multilista...")
+                    if GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd):
+                        print(f"[OK] {self.multi.contar_grupos(False)} grupos, {self.multi.contar_investigadores(False)} investigadores, {self.multi.contar_productos(False)} productos cargados.")
+                else:
+                    print("\n[+] Iniciando con estructuras en memoria vacías.")
+                self.pausar("\n[Presione cualquier tecla o ENTER para ingresar al Menú Principal]... ")
+                self.menu_principal()
+                return
+            elif resp in ("no", "n"):
+                print("\n-----------------------------------------------------------------")
+                print(" [NOTA 10] Elija la modalidad de arranque inicial:")
+                print(f"  [1] Cargar datos persistidos desde la BD SQLite ({self.ruta_bd})")
+                print("  [2] Iniciar con estructuras vacías en memoria RAM (Ejecutar sin datos)")
+                print("-----------------------------------------------------------------")
+                opcion = self.leer_opcion_menu("12", "Opción [1 o 2]: ")
+                if opcion == 1:
+                    print("\n[+] Cargando datos desde SQLite hacia la Multilista...")
+                    if GestorPersistencia.cargar_desde_bd(self.multi, self.ruta_bd):
+                        print(f"[OK] {self.multi.contar_grupos(False)} grupos, {self.multi.contar_investigadores(False)} investigadores, {self.multi.contar_productos(False)} productos cargados.")
+                    else:
+                        print("[!] No se pudo cargar la BD. Se iniciará en memoria vacía.")
+                else:
+                    print("\n[+] Iniciando con estructuras en memoria vacías.")
+                self.pausar("\n[Presione cualquier tecla o ENTER para ingresar al Menú Principal]... ")
+                self.menu_principal()
+                return
             else:
-                print("[!] No se pudo cargar la BD. Se iniciará en memoria vacía.")
-        else:
-            print("\n[+] Iniciando con estructuras en memoria vacías.")
-
-        self.pausar("\n[Presione cualquier tecla o ENTER para ingresar al Menú Principal]... ")
-        self.menu_principal()
+                print("[AVISO] Por favor responda 'si' o 'no'.")
 
     # -----------------------------------------------------------------
     # MENÚ PRINCIPAL
@@ -663,7 +742,7 @@ class ConsolaApp:
                 self.limpiar_pantalla()
                 print("=================================================================")
                 print("--- CONSULTAR DETALLE DE GRUPO ---")
-                print("Búsqueda por Código o Nombre (ej: COL0002099 o GISICO)")
+                print("Búsqueda por Código o Nombre (ej: COL0018706 o GISICO)")
                 print("[Sugerencia: Presione ENTER para ver un ejemplo aleatorio, o 0 para regresar]")
                 print("=================================================================")
                 busqueda = self.leer_linea("Término de búsqueda: ", True)
@@ -781,7 +860,7 @@ class ConsolaApp:
             if count == 0:
                 print("  (Consultando directamente la base de datos institucional)")
             print("-----------------------------------------------------------------")
-            cod = self.leer_linea("Ingrese el código del grupo [ej. COL0002099 o COL0043834]: ", permitir_vacio=False)
+            cod = self.leer_linea("Ingrese el código del grupo [ej. COL0018706 o COL0043834]: ", permitir_vacio=False)
         else:
             cod = codigo_defecto
 

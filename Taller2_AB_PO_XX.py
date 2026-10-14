@@ -17,6 +17,9 @@ import sys
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(BASE_DIR, "src"))
+pylib_dir = os.path.join(BASE_DIR, "pylib")
+if os.path.exists(pylib_dir):
+    sys.path.insert(0, pylib_dir)
 
 from python.console import ConsolaApp
 
@@ -115,8 +118,28 @@ def main():
         res = buscar_grupo_en_indices(q)
         print(f"=== RESULTADOS BÚSQUEDA GRUPO: '{q}' ({len(res)} encontrados) ===")
         for i, g in enumerate(res[:40], 1):
-            print(f"GRUPO|{i}|{g.get('nro','')}|{g.get('col','')}|{g.get('nombre','')[:60]}|Líder: {g.get('lider','')[:30]}|Cat: {g.get('estado','')}")
+            nro = g.get('nro', '')
+            col = g.get('col', '')
+            nom = g.get('nombre', '')[:60]
+            lid = g.get('lider', '')[:40]
+            inst = g.get('institucion', '')[:50]
+            cat = g.get('categoria', '') or g.get('estado', '')
+            print(f"CAND|{i}|{nro}|{nom}|{col}|{lid}|{inst}|{cat}")
+            print(f"GRUPO|{i}|{nro}|{col}|{nom}|Líder: {lid[:30]}|Cat: {cat}")
         sys.exit(0)
+
+    elif "--existe-grupo" in args:
+        idx = args.index("--existe-grupo")
+        nro = args[idx + 1] if idx + 1 < len(args) else ""
+        from python.core.busqueda_scienti import existe_grupo_en_bd
+        cod, nom = existe_grupo_en_bd(nro, db_path)
+        if cod:
+            print(f"[AVISO] grupo ya existente | CODIGO={cod} | GRUPO={nom[:60]}")
+            print("No se descargo nada nuevo ni se duplico informacion.")
+            sys.exit(0)
+        else:
+            print(f"grupo no cargado (nro={nro})")
+            sys.exit(1)
 
     elif "--listar-upc" in args:
         from python.core.busqueda_scienti import listar_grupos_upc
@@ -130,6 +153,12 @@ def main():
         idx = args.index("--scrape-grupo")
         if idx + 1 < len(args):
             nro = args[idx + 1]
+            from python.core.busqueda_scienti import existe_grupo_en_bd
+            cod, nom = existe_grupo_en_bd(nro, db_path)
+            if cod and "--forzar" not in args:
+                print(f"[AVISO] grupo ya existente | CODIGO={cod} | GRUPO={nom[:60]}")
+                print("No se descargo nada nuevo ni se duplico informacion.")
+                sys.exit(0)
             url = f"https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro={nro}"
             motor = _crear_motor_ingesta(db_path)
             if not motor:
