@@ -34,7 +34,8 @@ DIRS_TO_INCLUDE = [
     "data",
     "docs",
     "reportes",
-    "scripts"
+    "scripts",
+    "pylib"
 ]
 
 SKIP_PATTERNS = [
@@ -57,6 +58,7 @@ SKIP_PATTERNS = [
 ]
 
 OFFICIAL_SAMPLE_REPORTS = {
+    "Informe_GrupLAC_COL0018706.pdf",
     "Informe_GrupLAC_COL0002099.pdf",
     "Informe_GrupLAC_COL0043834.pdf",
 }

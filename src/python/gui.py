@@ -31,12 +31,20 @@ import webbrowser
 import sqlite3
 
 # Backend seguro para Matplotlib
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
+HAS_MATPLOTLIB = False
+try:
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    HAS_MATPLOTLIB = True
+except ImportError:
+    HAS_MATPLOTLIB = False
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, "..", ".."))
+pylib_dir = os.path.join(PROJECT_ROOT, "pylib")
+if os.path.exists(pylib_dir) and pylib_dir not in sys.path:
+    sys.path.insert(0, pylib_dir)
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
@@ -69,6 +77,8 @@ class DashboardApp:
 
     def generar_graficos_matplotlib(self, dir_salida: str = "dist"):
         """Genera los gráficos estáticos exigidos en el Punto 12.b usando Matplotlib"""
+        if not HAS_MATPLOTLIB:
+            return ""
         os.makedirs(dir_salida, exist_ok=True)
 
         cat_counts = {"A1": 0, "A": 0, "B": 0, "C": 0}
@@ -420,6 +430,21 @@ class DashboardApp:
         print("=" * 65)
         print("[+] Analizando datos de la Multilista ortogonal en RAM...")
         print(f"[OK] {self.multi.contar_grupos(False)} grupos, {self.multi.contar_investigadores(False)} investigadores, {self.multi.contar_productos(False)} productos.")
+
+        if not HAS_MATPLOTLIB:
+            print("\n[INFO] 'matplotlib' no detectado en el entorno.")
+            print("[+] Abriendo Portal Gráfico Interactivo del Hipercubo (HTML5 autónomo)...")
+            portal_html = os.path.join(PROJECT_ROOT, "dist", "visualizador_hipercubo.html")
+            if os.path.exists(portal_html):
+                try:
+                    webbrowser.open(f"file://{os.path.abspath(portal_html)}")
+                    print(f"[OK] Portal interactivo abierto exitosamente: {portal_html}")
+                except Exception as e:
+                    print(f"[!] No se pudo abrir automáticamente el navegador: {e}")
+            print("\n[OK] Portal gráfico ejecutado exitosamente.")
+            print("=" * 65 + "\n")
+            return True
+
         print("\n[+] Generando histogramas, diagramas de barras y Macro-Tipologías MinCiencias (Punto 12.b)...")
 
         ruta_html = self.generar_html_dashboard("dist/dashboard_python.html")
