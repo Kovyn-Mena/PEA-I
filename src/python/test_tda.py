@@ -116,6 +116,47 @@ def test_cola_ingesta():
     assert cola.esta_vacia()
     print("  -> OK: Cola FIFO verificada.")
 
+def test_antiwipe_persistencia():
+    print("[TEST Python] 4. Anti-wipe de persistencia (regresión oct-2026)...")
+    import shutil
+    import sqlite3
+    import tempfile
+    from python.core.db import GestorPersistencia
+    from python.console import ConsolaApp
+    from python.core.ingesta import MotorIngesta
+
+    base_bd = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..",
+                                           "data", "pea_investigacion.db"))
+    assert os.path.exists(base_bd), "se requiere data/pea_investigacion.db para el test"
+    tmp = tempfile.mkdtemp(prefix="pea_test_")
+    db = os.path.join(tmp, "t.db")
+    try:
+        shutil.copy(base_bd, db)
+        n0 = sqlite3.connect(db).execute("SELECT COUNT(*) FROM Grupos").fetchone()[0]
+        assert n0 > 0
+
+        # 1. RAM vacía -> respaldo omitido, BD intacta (antes: wipe total)
+        app = ConsolaApp(db)
+        assert app.guardar_ram_si_hay_datos("test") is False
+        assert sqlite3.connect(db).execute("SELECT COUNT(*) FROM Grupos").fetchone()[0] == n0
+
+        # 2. Ingesta fallida (NRO sin COL en índice, sin red) -> False y BD intacta
+        motor = MotorIngesta(db)
+        ok = motor.ejecutar_ingesta(
+            "URL_GRUPLAC",
+            "https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=99999999999999")
+        assert ok is False
+        assert sqlite3.connect(db).execute("SELECT COUNT(*) FROM Grupos").fetchone()[0] == n0
+
+        # 3. Mutación real sí persiste (deshacer/CRUD no quedan bloqueados)
+        app.multi.insertar_grupo("COLTEST99", "Grupo Test", "C", "Area", "Lider", 2020, True)
+        assert app.guardar_ram_si_hay_datos("test") is True
+        assert sqlite3.connect(db).execute(
+            "SELECT COUNT(*) FROM Grupos WHERE codigo_grupo='COLTEST99'").fetchone()[0] == 1
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+    print("  -> OK: vacío no borra, fallo no guarda, dato real persiste.")
+
 if __name__ == "__main__":
     print("========================================")
     print("TEST SUITE TDA PYTHON (Estructuras Puras)")
@@ -123,4 +164,5 @@ if __name__ == "__main__":
     test_multilista_y_hipercubo()
     test_pila_deshacer()
     test_cola_ingesta()
+    test_antiwipe_persistencia()
     print("\n[EXITO TOTAL Python] Todos los TDA pasaron las pruebas rigurosamente.")

@@ -1,0 +1,29 @@
+===============================================================================
+PEA-i UPC — LEEME PRIMERO (Windows, 2 minutos)
+===============================================================================
+
+1. EXTRAER TODO EL ZIP antes de usarlo (clic derecho > Extraer todo).
+   No ejecute nada desde dentro del visor del ZIP: faltarían carpetas.
+   Recomendado extraer en una ruta corta sin tildes, ej: C:\PEA-i\
+
+2. Si Windows bloquea archivos descargados: clic derecho en iniciar.bat >
+   Propiedades > Desbloquear (o en PowerShell: Unblock-File .\iniciar.bat).
+
+3. DOBLE CLIC en iniciar.bat y elija opción del menú 1-9.
+
+4. Python: las opciones 1/2/5/7/8/9 lo necesitan. Si no lo tiene,
+   instálelo desde https://www.python.org/downloads/ marcando
+   "Add python.exe to PATH". Sin Python igual funciona la opción [3]
+   (portal web offline). NO use el alias de Microsoft Store.
+
+5. Si algo falla: ejecute la opción [9] Diagnóstico y copie el reporte
+   al pedir soporte. Incluye Python, dependencias, BD, snapshots y red.
+
+6. La ingesta en vivo ([8-2]/[8-3]) descarga de MinCiencias y tarda
+   1-2 horas (el portal JSP responde en 10-30 s por página). Lo offline
+   ([8-1], snapshots incluidos) es instantáneo. No cierre la ventana
+   a mitad: cada 5 grupos se guarda avance y al repetir retoma solo.
+
+7. Si el .html se abre en Bloc de Notas: cambie la app predeterminada
+   de .html a su navegador (Edge/Chrome/Firefox).
+===============================================================================

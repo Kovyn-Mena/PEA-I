@@ -29,6 +29,7 @@ si la ruta contiene espacios) y verifica instalaciones reales de Python 3 y C++1
       [8-1] Rapida offline (snapshots locales, sin CvLAC)
       [8-2] Completa en vivo (red MinCiencias + CvLAC, 1-2 horas)
       [8-3] Completa forzada (reprocesa todo)
+  [9] Diagnostico del sistema (reporte para soporte)
 
 2. EJECUCION DIRECTA DEL PORTAL WEB (SIN CONSOLA):
 -------------------------------------------------------------------------------

@@ -141,6 +141,11 @@ def main():
             print(f"grupo no cargado (nro={nro})")
             sys.exit(1)
 
+    elif "--diagnostico" in args:
+        from python.core.diagnostico import ejecutar_diagnostico
+        ok = ejecutar_diagnostico(db_path)
+        sys.exit(0 if ok else 1)
+
     elif "--listar-upc" in args:
         from python.core.busqueda_scienti import listar_grupos_upc
         res = listar_grupos_upc()

@@ -181,11 +181,12 @@ echo   [5] Ejecutar Pruebas Unitarias de Estructuras de Datos (TDAs)
 echo   [6] Abrir Documentacion Tecnica Oficial Word (.docx)
 echo   [7] Empaquetar Entrega Formal en ZIP (Limpio para envio al docente)
 echo   [8] Ingesta Masiva UPC - Todos los grupos (66) con CvLAC
+echo   [9] Diagnostico del sistema (reporte para soporte)
 echo   [0] Salir
 echo.
 echo ===============================================================================
 set "OPC="
-set /p OPC="Ingrese el numero de la opcion [0-8]: "
+set /p OPC="Ingrese el numero de la opcion [0-9]: "
 if errorlevel 1 goto FIN
 
 if "%OPC%"=="1" goto RUN_PY_CONSOLE
@@ -196,6 +197,7 @@ if "%OPC%"=="5" goto RUN_TESTS
 if "%OPC%"=="6" goto OPEN_DOCX
 if "%OPC%"=="7" goto RUN_PACKAGE
 if "%OPC%"=="8" goto RUN_INGESTA
+if "%OPC%"=="9" goto RUN_DIAGNOSTICO
 if "%OPC%"=="0" goto FIN
 
 echo [!] Opcion no valida. Intente nuevamente.
@@ -582,6 +584,29 @@ if "!PYCMD!"=="py -3" (
     py -3 Taller2_AB_PO_XX.py --auto-ingest --con-red --forzar
 ) else (
     "!PYCMD!" Taller2_AB_PO_XX.py --auto-ingest --con-red --forzar
+)
+echo.
+echo Presione cualquier tecla para volver al menu...
+pause >nul
+goto MENU
+
+:: ==============================================================================
+:: [9] DIAGNOSTICO DEL SISTEMA (reporte copiable para soporte)
+:: ==============================================================================
+:RUN_DIAGNOSTICO
+cls
+call :DETECT_PYTHON
+if !ERRORLEVEL! neq 0 (
+    pause
+    goto MENU
+)
+echo [+] Ejecutando diagnostico del sistema...
+echo     (copie el reporte si necesita soporte)
+echo.
+if "!PYCMD!"=="py -3" (
+    py -3 Taller2_AB_PO_XX.py --diagnostico
+) else (
+    "!PYCMD!" Taller2_AB_PO_XX.py --diagnostico
 )
 echo.
 echo Presione cualquier tecla para volver al menu...

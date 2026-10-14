@@ -10,6 +10,7 @@ Empaqueta la solución integral limpia para el envío al docente
 """
 
 import os
+import sys
 import zipfile
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -22,6 +23,7 @@ FILES_TO_INCLUDE = [
     "requirements.txt",
     "iniciar.bat",
     "README_WINDOWS.txt",
+    "LEEME-PRIMERO.txt",
     "Documentacion_Tecnica_GrupoXX.docx",
     "Taller2_AB_PO_XX.cpp",
     "Taller2_AB_PO_XX.py",
@@ -140,6 +142,13 @@ def verificar_formato_windows() -> bool:
 def empaquetar():
     if os.path.exists(ZIP_NAME):
         os.remove(ZIP_NAME)
+
+    print("[*] Gate 0/3: matriz de dependencias...")
+    import subprocess
+    ver = subprocess.run([sys.executable, os.path.join(BASE_DIR, "scripts", "verificar_dependencias.py")])
+    if ver.returncode != 0:
+        print("[!] Gate 0/3 FALLA: corrija dependencias antes de empaquetar.")
+        raise SystemExit(1)
 
     print("[*] Gate 1/3: formato Windows (CRLF en .bat/.txt)...")
     verificar_formato_windows()
