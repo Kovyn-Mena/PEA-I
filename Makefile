@@ -48,7 +48,7 @@ gui: $(TARGET)
 
 run-gui: gui
 
-# Ejecutar el dashboard gráfico (Python GUI - Matplotlib & 3 Vistas)
+# Ejecutar el dashboard gráfico (Python GUI - HTML5 & 3 Vistas)
 gui-py:
 	$(PYTHON) Taller2_AB_PO_XX.py --gui
 

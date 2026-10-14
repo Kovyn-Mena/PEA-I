@@ -5,7 +5,7 @@ Universidad Popular del Cesar — Estructura de Datos
 Docente: Ing. Adith Pérez
 =====================================================================
 Cumple estrictamente los requisitos 12.b y 12.c del Taller 2:
-  • 12.b: Dashboard con histogramas y diagramas de barras (Matplotlib).
+  • 12.b: Dashboard con histogramas y diagramas de barras (HTML5 Interactivo).
   • 12.c: Tres aproximaciones / vistas:
       i. Por Grupo
       ii. Por Investigador
@@ -19,7 +19,6 @@ Cumple estrictamente los requisitos 12.b y 12.c del Taller 2:
   • Paleta Institucional UPC: Verde #006837, Rojo #ED1C24.
 
 Arquitectura Zero-Dependencies / Portal Gráfico Interactivo:
-  - Genera visualizaciones estadísticas de alta resolución con Matplotlib (Agg).
   - Produce un Dashboard interactivo HTML5 autónomo con las 3 vistas institucionales (Grupo, Investigador, Productos) y generación de reportes en PDF.
   - Abre fluidamente en el navegador predeterminado del sistema (100% multiplataforma, sin dependencias ni conflictos con entornos gráficos de escritorio).
 =====================================================================
@@ -30,15 +29,7 @@ import sys
 import webbrowser
 import sqlite3
 
-# Backend seguro para Matplotlib
-HAS_MATPLOTLIB = False
-try:
-    import matplotlib
-    matplotlib.use('Agg')
-    import matplotlib.pyplot as plt
-    HAS_MATPLOTLIB = True
-except ImportError:
-    HAS_MATPLOTLIB = False
+
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, "..", ".."))
@@ -75,115 +66,9 @@ class DashboardApp:
         self.ventana_anios = 0 # 0: Todos, 2: Últimos 2, 5: Últimos 5
         self.anio_actual = 2026
 
-    def generar_graficos_matplotlib(self, dir_salida: str = "dist"):
-        """Genera los gráficos estáticos exigidos en el Punto 12.b usando Matplotlib"""
-        if not HAS_MATPLOTLIB:
-            return ""
-        os.makedirs(dir_salida, exist_ok=True)
-
-        cat_counts = {"A1": 0, "A": 0, "B": 0, "C": 0}
-        anio_counts = {}
-        val_counts = {"Avalados (MinCiencias)": 0, "Sin Aval": 0}
-        tipos_counts = {}
-        macro_counts = {
-            "GNC (Nuevo Conocimiento)": 0,
-            "DTI (Tecnología/Innov.)": 0,
-            "ASC (Apropiación Social)": 0,
-            "DPC (Divulgación Ciencia)": 0,
-            "FRH (Formación Talento)": 0
-        }
-        total_puntos_ipp = 0
-
-        g = self.multi.cabeza_grupos
-        while g:
-            p = g.primer_producto
-            while p:
-                pasa = True
-                if self.ventana_anios > 0:
-                    pasa = (p.anio >= (self.anio_actual - self.ventana_anios + 1)) and (p.anio <= self.anio_actual)
-                if pasa:
-                    cat = p.categoria_minciencias
-                    if cat in cat_counts: cat_counts[cat] += 1
-                    else: cat_counts[cat] = 1
-
-                    anio_counts[p.anio] = anio_counts.get(p.anio, 0) + 1
-                    if p.validado: val_counts["Avalados (MinCiencias)"] += 1
-                    else: val_counts["Sin Aval"] += 1
-
-                    tipos_counts[p.tipo] = tipos_counts.get(p.tipo, 0) + 1
-                    
-                    info = CatalogoMinCiencias2024.clasificar_producto(p.tipo, p.categoria_minciencias, p.titulo)
-                    fam = info["familia"]
-                    if fam == "GNC": macro_counts["GNC (Nuevo Conocimiento)"] += 1
-                    elif fam == "DTI": macro_counts["DTI (Tecnología/Innov.)"] += 1
-                    elif fam == "ASC": macro_counts["ASC (Apropiación Social)"] += 1
-                    elif fam == "DPC": macro_counts["DPC (Divulgación Ciencia)"] += 1
-                    elif fam == "FRH": macro_counts["FRH (Formación Talento)"] += 1
-
-                    total_puntos_ipp += info["global_weight"] if p.validado else (info["global_weight"] // 2)
-                p = p.sig_producto_grupo
-            g = g.sig_grupo
-
-        # Estilo visual de Matplotlib con identidad UPC
-        plt.style.use('dark_background')
-        fig, axes = plt.subplots(2, 2, figsize=(13, 9.5), facecolor='#080c16')
-
-        # 1. Diagrama de Barras: Categorías MinCiencias / Publindex (12.b)
-        ax1 = axes[0, 0]
-        cats = list(cat_counts.keys())
-        cant_cats = [cat_counts[c] for c in cats]
-        barras1 = ax1.bar(cats, cant_cats, color=['#10b981', '#38bdf8', '#f59e0b', '#a855f7'], edgecolor='#1e293b')
-        ax1.set_title("Calidad Editorial / Publindex (12.b)", color='#10b981', fontsize=11, fontweight='bold')
-        ax1.set_facecolor('#0f172a')
-        ax1.grid(axis='y', linestyle='--', alpha=0.3)
-        for b in barras1:
-            h = b.get_height()
-            ax1.annotate(f'{h}', xy=(b.get_x() + b.get_width() / 2, h), xytext=(0, 3),
-                         textcoords="offset points", ha='center', va='bottom', fontsize=9, color='#fff')
-
-        # 2. Histograma: Producción Científica por Año (12.b)
-        ax2 = axes[0, 1]
-        anios_ordenados = sorted(anio_counts.keys())
-        cant_anios = [anio_counts[a] for a in anios_ordenados]
-        colores_anios = ['#10b981' if (self.ventana_anios == 0 or a >= self.anio_actual - self.ventana_anios + 1) else '#475569' for a in anios_ordenados]
-        ax2.bar([str(a) for a in anios_ordenados], cant_anios, color=colores_anios, edgecolor='#1e293b')
-        ax2.set_title("Histograma Temporal de Producción (1996-2026)", color='#f59e0b', fontsize=11, fontweight='bold')
-        ax2.set_facecolor('#0f172a')
-        ax2.tick_params(axis='x', rotation=45, labelsize=8)
-        ax2.grid(axis='y', linestyle='--', alpha=0.3)
-
-        # 3. 5 Familias Oficiales MinCiencias 2024 (GNC, DTI, ASC, DPC, FRH)
-        ax3 = axes[1, 0]
-        etiquetas_macro = list(macro_counts.keys())
-        cant_macro = [macro_counts[k] for k in etiquetas_macro]
-        ax3.barh(etiquetas_macro, cant_macro, color=['#006837', '#38bdf8', '#f59e0b', '#818cf8', '#ec4899'], edgecolor='#1e293b')
-        ax3.set_title(f"5 Familias MinCiencias 2024 (IPP: {total_puntos_ipp} pts)", color='#38bdf8', fontsize=11, fontweight='bold')
-        ax3.set_facecolor('#0f172a')
-        ax3.grid(axis='x', linestyle='--', alpha=0.3)
-        for b in ax3.patches:
-            w = b.get_width()
-            ax3.annotate(f'{int(w)}', xy=(w, b.get_y() + b.get_height() / 2), xytext=(4, 0),
-                         textcoords="offset points", ha='left', va='center', fontsize=9, color='#fff')
-
-        # 4. Estado de Aval Institucional UPC
-        ax4 = axes[1, 1]
-        etiquetas_val = list(val_counts.keys())
-        cant_val = [val_counts[k] for k in etiquetas_val]
-        ax4.pie(cant_val, labels=etiquetas_val, autopct='%1.1f%%', startangle=140,
-                colors=['#006837', '#ED1C24'], textprops={'color': '#fff', 'fontsize': 9.5},
-                wedgeprops={'edgecolor': '#080c16', 'linewidth': 2})
-        ax4.set_title("Auditoría de Aval MinCiencias UPC", color='#ED1C24', fontsize=11, fontweight='bold')
-
-        plt.tight_layout()
-        ruta_img = os.path.join(dir_salida, "dashboard_metricas_python.png")
-        fig.savefig(ruta_img, dpi=180, facecolor='#080c16')
-        plt.close(fig)
-        return ruta_img
-
     def generar_html_dashboard(self, ruta_salida: str = "dist/dashboard_python.html"):
-        """Genera un archivo HTML enriquecido con las 3 vistas exigidas (12.c) y gráficos"""
+        """Genera un archivo HTML enriquecido con las 3 vistas exigidas (12.c) y métricas"""
         os.makedirs(os.path.dirname(ruta_salida), exist_ok=True)
-        self.generar_graficos_matplotlib(os.path.dirname(ruta_salida))
 
         # 12.c.i: Vista por Grupo
         filas_grupos = []
@@ -373,10 +258,25 @@ class DashboardApp:
         <div class="badge-upc">UPC &bull; SCIENTI 2026</div>
     </header>
 
-    <!-- GRÁFICOS MATPLOTLIB -->
+    <!-- MÉTRICAS Y RESUMEN EJECUTIVO (12.b) -->
     <div class="card">
-        <h2>Histogramas y Diagramas de Barras (Requisito 12.b - Matplotlib Engine)</h2>
-        <img class="img-chart" src="dashboard_metricas_python.png" alt="Dashboard Matplotlib UPC">
+        <h2>Resumen Analítico y Métricas Institucionales (Requisito 12.b - HTML5 Engine)</h2>
+        <p style="color:#94a3b8; margin-bottom:1rem;">Visualización analítica institucional generada directamente desde la Multilista en memoria RAM (Zero-Dependencies).</p>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1rem;">
+            <div style="background:#0f172a; border:1px solid #1e293b; border-radius:8px; padding:1rem; flex:1; min-width:180px; text-align:center;">
+                <div style="font-size:2rem; font-weight:bold; color:#10b981;">{len(filas_grupos)}</div>
+                <div style="color:#94a3b8; font-size:0.85rem;">Grupos Registrados</div>
+            </div>
+            <div style="background:#0f172a; border:1px solid #1e293b; border-radius:8px; padding:1rem; flex:1; min-width:180px; text-align:center;">
+                <div style="font-size:2rem; font-weight:bold; color:#38bdf8;">{len(filas_invs)}</div>
+                <div style="color:#94a3b8; font-size:0.85rem;">Investigadores Activos</div>
+            </div>
+            <div style="background:#0f172a; border:1px solid #1e293b; border-radius:8px; padding:1rem; flex:1; min-width:180px; text-align:center;">
+                <div style="font-size:2rem; font-weight:bold; color:#f59e0b;">{len(filas_prods)}</div>
+                <div style="color:#94a3b8; font-size:0.85rem;">Productos de Investigación</div>
+            </div>
+        </div>
+        <p><a href="visualizador_hipercubo.html" target="_blank" style="display:inline-block; background:#006837; color:#fff; padding:8px 16px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.9rem;">&rarr; Abrir Portal Interactivo Completo con Gráficos Canvas 2D y Red 3D</a></p>
     </div>
 
     <!-- TRES APROXIMACIONES (12.c) -->
@@ -424,36 +324,24 @@ class DashboardApp:
         return ruta_salida
 
     def iniciar(self):
-        """Punto de entrada maestro para lanzar el Dashboard Analítico"""
+        """Punto de entrada maestro para lanzar el Dashboard Analítico (HTML5 Autónomo)"""
         print("\n" + "=" * 65)
         print("     PEA-i UPC: DASHBOARD ANALÍTICO DE INVESTIGACIÓN (PYTHON)    ")
         print("=" * 65)
         print("[+] Analizando datos de la Multilista ortogonal en RAM...")
         print(f"[OK] {self.multi.contar_grupos(False)} grupos, {self.multi.contar_investigadores(False)} investigadores, {self.multi.contar_productos(False)} productos.")
 
-        if not HAS_MATPLOTLIB:
-            print("\n[INFO] 'matplotlib' no detectado en el entorno.")
-            print("[+] Abriendo Portal Gráfico Interactivo del Hipercubo (HTML5 autónomo)...")
-            portal_html = os.path.join(PROJECT_ROOT, "dist", "visualizador_hipercubo.html")
-            if os.path.exists(portal_html):
-                try:
-                    webbrowser.open(f"file://{os.path.abspath(portal_html)}")
-                    print(f"[OK] Portal interactivo abierto exitosamente: {portal_html}")
-                except Exception as e:
-                    print(f"[!] No se pudo abrir automáticamente el navegador: {e}")
-            print("\n[OK] Portal gráfico ejecutado exitosamente.")
-            print("=" * 65 + "\n")
-            return True
-
-        print("\n[+] Generando histogramas, diagramas de barras y Macro-Tipologías MinCiencias (Punto 12.b)...")
-
+        # Generar vista tabular enriquecida
         ruta_html = self.generar_html_dashboard("dist/dashboard_python.html")
-        print(f"[OK] Dashboard gráfico generado con éxito en: {ruta_html}")
-        print("[+] Abriendo interfaz visual en el navegador del sistema...")
 
+        # Priorizar el portal interactivo del Hipercubo HTML5 si existe, o el dashboard python
+        portal_html = os.path.join(PROJECT_ROOT, "dist", "visualizador_hipercubo.html")
+        destino = portal_html if os.path.exists(portal_html) else os.path.abspath(ruta_html)
+
+        print(f"[+] Abriendo Portal Gráfico Interactivo HTML5...")
         try:
-            ruta_abs = os.path.abspath(ruta_html)
-            webbrowser.open(f"file://{ruta_abs}")
+            webbrowser.open(f"file://{os.path.abspath(destino)}")
+            print(f"[OK] Portal abierto exitosamente en el navegador: {destino}")
         except Exception as e:
             print(f"[!] No se pudo abrir automáticamente el navegador: {e}")
 

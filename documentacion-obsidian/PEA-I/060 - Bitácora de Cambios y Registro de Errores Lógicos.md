@@ -333,6 +333,19 @@ Archivos raíz perdidos al copiar el repo (papelera y disco revisados: sin copia
   - `make verify` ratificó el 100% de paridad e invariantes estructurales (11 grupos, 622 investigadores, 4,515 productos).
   - Empaquetado de entrega en ZIP probado y verificado con `pylib/` autónomo.
 
+### Sesión 46 — 2026-10-13 (Eliminación Completa de Matplotlib & Arquitectura Zero-Dependencies Pura)
+- **Archivos modificados:** `requirements.txt`, `src/python/gui.py`, `src/python/console.py`, `Makefile`, `iniciar.bat`, `README_WINDOWS.txt`.
+- **Causa raíz y Diagnóstico:**
+  - `matplotlib` era una dependencia pesada (>40 MB con C-extensions) que generaba bloqueos y fallos de instalación en entornos Windows (`ModuleNotFoundError: No module named 'matplotlib'`).
+  - El proyecto ya dispone del portal interactivo moderno HTML5 (`dist/visualizador_hipercubo.html`) con gráficos 2D en Canvas y red 3D que corre sin dependencias de escritorio ni bibliotecas gráficas pesadas.
+- **Acciones Realizadas:**
+  - Eliminado `matplotlib>=3.6.0` de `requirements.txt`.
+  - En `src/python/gui.py`, se removió la función generadora de PNGs estáticos `generar_graficos_matplotlib`, se eliminaron los imports de `matplotlib`, y se actualizó `DashboardApp.iniciar()` y `generar_html_dashboard` para presentar un resumen KPI analítico en HTML5 nativo y enlazar directamente con el visualizador hipercubo HTML5 interactivo.
+  - Se actualizaron las referencias de menús y documentación en `src/python/console.py`, `Makefile`, `iniciar.bat` y `README_WINDOWS.txt` reflejando la arquitectura HTML5 autónoma.
+- **Verificación:**
+  - `python3 -c "from src.python.gui import DashboardApp"` importó de forma instantánea y limpia sin requerir `matplotlib`.
+  - `make test` superó el 100% de las suites de pruebas unitarias en C++ y Python.
+
 ## 🐛 Bugs
 | ID | Bug | Estado |
 |:--:|-----|:------:|

@@ -341,7 +341,7 @@ class ConsolaApp:
         print("    PEA-i UPC > Portal Institucional y Dashboard (GUI Python)   ")
         print("=================================================================")
         print("  1. Abrir Portal Institucional C++ (HTML5 / Zero-Dependencies)")
-        print("  2. Abrir Dashboard Analítico Python (Matplotlib + 3 Vistas HTML5 + PDFs)")
+        print("  2. Abrir Dashboard Analítico Python (HTML5 + 3 Vistas + PDFs)")
         print("  0. Regresar al Menú Principal")
         print("-----------------------------------------------------------------")
         op = self.leer_opcion_menu("012", "Seleccione una opción [0-2]: ")
@@ -356,7 +356,7 @@ class ConsolaApp:
                 print(f"[!] Error al abrir el navegador: {e}")
             self.pausar()
         elif op == 2:
-            print("\n[+] Inicializando Dashboard Analítico Python (Matplotlib + 3 Vistas)...")
+            print("\n[+] Inicializando Dashboard Analítico Python (HTML5 + 3 Vistas)...")
             try:
                 from python.gui import DashboardApp
                 app_gui = DashboardApp(self.ruta_bd)
@@ -399,7 +399,7 @@ class ConsolaApp:
         print("")
         print("  4. MODOS DE VISUALIZACIÓN GRÁFICA (GUI):")
         print("     • Opción 7: Portal Ejecutivo Web (dist/visualizador_hipercubo.html)")
-        print("     • Opción 7 -> 2: Dashboard interactivo de 3 vistas (Matplotlib)")
+        print("     • Opción 7 -> 2: Dashboard interactivo de 3 vistas (HTML5)")
         print("-----------------------------------------------------------------")
         self.pausar()
 
