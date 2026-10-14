@@ -451,16 +451,28 @@ document.addEventListener('DOMContentLoaded', function() {{
         print(f"[+] Dashboard generado: {ruta_html}")
 
         print(f"[+] Abriendo Dashboard Analítico en el navegador...")
+        print(f"    (si no abre solo, abra manualmente: {ruta_html})")
+        abierto = False
         try:
-            webbrowser.open(f"file://{ruta_html}")
+            import pathlib
+            abierto = bool(webbrowser.open(pathlib.Path(ruta_html).as_uri()))
+        except Exception as e:
+            print(f"[!] webbrowser falló ({e}), intentando apertura directa del SO...")
+        if not abierto and os.name == "nt":
+            try:
+                os.startfile(ruta_html)  # noqa: S606 -- apertura local de archivo propio
+                abierto = True
+            except Exception as e:
+                print(f"[!] Apertura directa falló ({e}).")
+        if abierto:
             print(f"[OK] Dashboard abierto exitosamente.")
             # Informar también sobre el portal C++ si existe
             portal_html = os.path.join(PROJECT_ROOT, "dist", "visualizador_hipercubo.html")
             if os.path.exists(portal_html):
                 print(f"[i]  Portal Hipercubo C++ disponible en: {portal_html}")
                 print(f"[i]  Para regenerarlo con datos actuales ejecute: ./pea_cpp --gen")
-        except Exception as e:
-            print(f"[!] No se pudo abrir automáticamente el navegador: {e}")
+        else:
+            print(f"[!] No se pudo abrir automáticamente el navegador.")
             print(f"    Abra manualmente: {ruta_html}")
 
         print("\n[OK] Dashboard interactivo ejecutado exitosamente.")

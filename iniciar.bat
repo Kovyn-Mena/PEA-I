@@ -1,7 +1,11 @@
 @echo off
-setlocal EnableDelayedExpansion
+setlocal EnableExtensions EnableDelayedExpansion
 chcp 65001 >nul
 cd /d "%~dp0"
+set "PEAI_PYLIB=%~dp0pylib"
+set "PYTHONDONTWRITEBYTECODE=1"
+if exist "src\cpp\sqlite3_amalg.o" del /q "src\cpp\sqlite3_amalg.o" >nul 2>&1
+if exist "src\cpp\test_tda.exe" del /q "src\cpp\test_tda.exe" >nul 2>&1
 title PEA-i - Sistema de Analisis de Investigacion UPC (Windows)
 goto MENU
 
@@ -84,20 +88,72 @@ for /d %%D in ("C:\Program Files\Python3*") do (
 exit /b 1
 
 :: ==============================================================================
-:: CHEQUEO DE DEPENDENCIAS (no fatal: pylib/ vendored cubre requests, bs4,
-:: pypdf y reportlab; solo avisa y ofrece pip install -r requirements.txt)
+:: DETECCION DE COMPILADOR C++ (prioriza instalaciones conocidas y completas)
+:: ==============================================================================
+:DETECT_CPP
+set "CXX_BIN="
+set "CC_BIN="
+set "CXX_INC="
+set "CXX_LIB="
+
+if exist "C:\msys64\ucrt64\bin\g++.exe" (
+    set "CXX_BIN=C:\msys64\ucrt64\bin\g++.exe"
+    set "CC_BIN=C:\msys64\ucrt64\bin\gcc.exe"
+    set "CXX_INC=-IC:/msys64/ucrt64/include"
+    set "CXX_LIB=-LC:/msys64/ucrt64/lib"
+    set "PATH=C:\msys64\ucrt64\bin;%PATH%"
+    exit /b 0
+)
+if exist "C:\msys64\mingw64\bin\g++.exe" (
+    set "CXX_BIN=C:\msys64\mingw64\bin\g++.exe"
+    set "CC_BIN=C:\msys64\mingw64\bin\gcc.exe"
+    set "CXX_INC=-IC:/msys64/mingw64/include"
+    set "CXX_LIB=-LC:/msys64/mingw64/lib"
+    set "PATH=C:\msys64\mingw64\bin;%PATH%"
+    exit /b 0
+)
+if exist "C:\Program Files\CodeBlocks\MinGW\bin\g++.exe" (
+    set "CXX_BIN=C:\Program Files\CodeBlocks\MinGW\bin\g++.exe"
+    set "CC_BIN=C:\Program Files\CodeBlocks\MinGW\bin\gcc.exe"
+    exit /b 0
+)
+if exist "C:\Program Files (x86)\Dev-Cpp\MinGW64\bin\g++.exe" (
+    set "CXX_BIN=C:\Program Files (x86)\Dev-Cpp\MinGW64\bin\g++.exe"
+    set "CC_BIN=C:\Program Files (x86)\Dev-Cpp\MinGW64\bin\gcc.exe"
+    exit /b 0
+)
+if exist "C:\MinGW\bin\g++.exe" (
+    set "CXX_BIN=C:\MinGW\bin\g++.exe"
+    set "CC_BIN=C:\MinGW\bin\gcc.exe"
+    exit /b 0
+)
+g++ --version >nul 2>&1
+if !ERRORLEVEL! equ 0 (
+    set "CXX_BIN=g++"
+    set "CC_BIN=gcc"
+    exit /b 0
+)
+exit /b 1
+
+:: ==============================================================================
+:: CHEQUEO DE DEPENDENCIAS (no fatal; avisa si las funciones avanzadas no
+:: encuentran sus dependencias completas en el Python elegido o en pylib/)
 :: ==============================================================================
 :CHECK_DEPS
 if "!PYCMD!"=="py -3" (
-    py -3 -c "import requests, bs4, pypdf, reportlab" >nul 2>&1
+    py -3 -c "import os,sys; sys.path.insert(0, os.environ['PEAI_PYLIB']); import requests, bs4, pypdf, reportlab" >nul 2>&1
 ) else (
-    "!PYCMD!" -c "import requests, bs4, pypdf, reportlab" >nul 2>&1
+    "!PYCMD!" -c "import os,sys; sys.path.insert(0, os.environ['PEAI_PYLIB']); import requests, bs4, pypdf, reportlab" >nul 2>&1
 )
 if !ERRORLEVEL! neq 0 (
     echo.
-    echo [i] Faltan librerias Python (requests/bs4/pypdf/reportlab).
-    echo     El proyecto incluye bundle local pylib/ que cubre lo esencial.
-    echo     Si algo falla, instale con: pip install -r requirements.txt
+    echo [i] Dependencias Python ausentes o incompletas (requests/bs4/pypdf/reportlab).
+    echo     Para habilitar scraping e informes PDF, ejecute:
+    if "!PYCMD!"=="py -3" (
+        echo     py -3 -m pip install -r requirements.txt
+    ) else (
+        echo     "!PYCMD!" -m pip install -r requirements.txt
+    )
     echo.
 )
 exit /b 0
@@ -120,7 +176,7 @@ echo.
 echo   [1] Consola Interactiva Python (Recomendado - Abre al instante sin compilar)
 echo   [2] Dashboard Grafico Interactivo Python (HTML5 + 3 Vistas --gui)
 echo   [3] Portal Web Interactivo del Hipercubo y CRUD (HTML5 Offline)
-echo   [4] Compilar y Ejecutar en C++17 (Autodetecta MSYS2, MinGW, Code::Blocks)
+echo   [4] Compilar y Ejecutar en C++17 (Autodetecta MSYS2, MinGW, Code::Blocks, Dev-C++)
 echo   [5] Ejecutar Pruebas Unitarias de Estructuras de Datos (TDAs)
 echo   [6] Abrir Documentacion Tecnica Oficial Word (.docx)
 echo   [7] Empaquetar Entrega Formal en ZIP (Limpio para envio al docente)
@@ -130,6 +186,7 @@ echo.
 echo ===============================================================================
 set "OPC="
 set /p OPC="Ingrese el numero de la opcion [0-8]: "
+if errorlevel 1 goto FIN
 
 if "%OPC%"=="1" goto RUN_PY_CONSOLE
 if "%OPC%"=="2" goto RUN_PY_GUI
@@ -223,7 +280,11 @@ set "HTML_PATH=%~dp0dist\visualizador_hipercubo.html"
 :: Intento 1: Python webbrowser (mas confiable y multiplataforma)
 call :DETECT_PYTHON_SILENCIOSO
 if defined PYCMD (
-    "!PYCMD!" -c "import webbrowser, sys; webbrowser.open('file:///' + sys.argv[1].replace(chr(92), '/').replace(' ', '%%20'))" "!HTML_PATH!" >nul 2>&1
+    if "!PYCMD!"=="py -3" (
+        py -3 -c "import pathlib,sys,webbrowser; sys.exit(0 if webbrowser.open(pathlib.Path(sys.argv[1]).as_uri()) else 1)" "!HTML_PATH!" >nul 2>&1
+    ) else (
+        "!PYCMD!" -c "import pathlib,sys,webbrowser; sys.exit(0 if webbrowser.open(pathlib.Path(sys.argv[1]).as_uri()) else 1)" "!HTML_PATH!" >nul 2>&1
+    )
     if !ERRORLEVEL! equ 0 (
         echo [OK] Portal abierto en el navegador via Python webbrowser.
         echo.
@@ -256,7 +317,7 @@ for %%B in (
 ) do (
     if !ABIERTO! equ 0 (
         if exist %%B (
-            start "" %%B "file:///!HTML_PATH!"
+            start "" %%B "!HTML_PATH!"
             set "ABIERTO=1"
             echo [OK] Portal abierto con %%~B
         )
@@ -271,8 +332,8 @@ if !ABIERTO! equ 1 (
 
 :: Fallback final: start clasico con instrucciones manuales
 echo [!] No se encontro un navegador conocido. Intentando apertura directa...
-echo     Si se abre en Bloc de Notas, copia esta ruta en tu navegador:
-echo     file:///!HTML_PATH!
+echo     Si no se abre, copia esta ruta en tu navegador:
+echo     !HTML_PATH!
 echo.
 start "" "!HTML_PATH!"
 echo Presione cualquier tecla para volver al menu...
@@ -297,41 +358,46 @@ if exist "pea_cpp.exe" (
     echo.
     set "RECOMP=1"
     set /p RECOMP="Seleccione [1-2, Enter=1]: "
+    if errorlevel 1 goto FIN
     if "!RECOMP!"=="1" goto EXEC_CPP_BIN
 )
 
-set "CXX_BIN="
-set "CXX_INC="
-set "CXX_LIB="
+call :DETECT_CPP
+if !ERRORLEVEL! neq 0 goto CPP_COMPILER_MISSING
 
-if exist "C:\msys64\ucrt64\bin\g++.exe" (
-    set "CXX_BIN=C:\msys64\ucrt64\bin\g++.exe"
-    set "CXX_INC=-IC:/msys64/ucrt64/include"
-    set "CXX_LIB=-LC:/msys64/ucrt64/lib"
-    set "PATH=C:\msys64\ucrt64\bin;!PATH!"
-    goto COMPILE_CPP
-)
-if exist "C:\msys64\mingw64\bin\g++.exe" (
-    set "CXX_BIN=C:\msys64\mingw64\bin\g++.exe"
-    set "CXX_INC=-IC:/msys64/mingw64/include"
-    set "CXX_LIB=-LC:/msys64/mingw64/lib"
-    set "PATH=C:\msys64\mingw64\bin;!PATH!"
-    goto COMPILE_CPP
-)
-g++ --version >nul 2>&1
-if !ERRORLEVEL! equ 0 (
-    set "CXX_BIN=g++"
-    goto COMPILE_CPP
-)
-if exist "C:\Program Files\CodeBlocks\MinGW\bin\g++.exe" (
-    set "CXX_BIN=C:\Program Files\CodeBlocks\MinGW\bin\g++.exe"
-    goto COMPILE_CPP
-)
-if exist "C:\MinGW\bin\g++.exe" (
-    set "CXX_BIN=C:\MinGW\bin\g++.exe"
-    goto COMPILE_CPP
+echo [+] Compilador detectado: "!CXX_BIN!"
+echo.
+set "CPP_BUILD=%TEMP%\pea_i_cpp_%RANDOM%_%RANDOM%.exe"
+set "SQLITE_OBJ=%TEMP%\pea_i_sqlite_%RANDOM%_%RANDOM%.o"
+
+if exist "src\cpp\sqlite3.c" (
+    echo [+] Usando SQLite3 amalgamado incluido.
+    echo [+] Compilando SQLite3 como C...
+    "!CC_BIN!" -O2 !CXX_INC! -c "src\cpp\sqlite3.c" -o "!SQLITE_OBJ!"
+    set "BUILD_STATUS=!ERRORLEVEL!"
+    if not "!BUILD_STATUS!"=="0" goto CPP_BUILD_FAILED
+
+    echo [+] Compilando y enlazando C++17...
+    "!CXX_BIN!" -std=c++17 -Wall -Wextra -Isrc/cpp/include !CXX_INC! ^
+        "src/cpp/main.cpp" "!SQLITE_OBJ!" -o "!CPP_BUILD!" !CXX_LIB! ^
+        -static-libgcc -static-libstdc++
+    set "BUILD_STATUS=!ERRORLEVEL!"
+) else (
+    echo [+] Compilando con SQLite del sistema...
+    "!CXX_BIN!" -std=c++17 -Wall -Wextra -Isrc/cpp/include !CXX_INC! ^
+        "src/cpp/main.cpp" -o "!CPP_BUILD!" !CXX_LIB! ^
+        -lsqlite3 -static-libgcc -static-libstdc++
+    set "BUILD_STATUS=!ERRORLEVEL!"
 )
 
+if exist "!SQLITE_OBJ!" del /q "!SQLITE_OBJ!" >nul 2>&1
+if not "!BUILD_STATUS!"=="0" goto CPP_BUILD_FAILED
+move /y "!CPP_BUILD!" "%~dp0pea_cpp.exe" >nul
+if !ERRORLEVEL! neq 0 goto CPP_BUILD_FAILED
+echo [OK] Compilacion exitosa: pea_cpp.exe
+goto EXEC_CPP_BIN
+
+:CPP_COMPILER_MISSING
 echo [!] No se detecto compilador g++ en este equipo.
 echo     Opciones sin compilar: [1] Consola Python  [3] Portal Web
 echo     Para compilar C++: instale MSYS2 desde https://www.msys2.org/
@@ -342,65 +408,26 @@ echo Presione cualquier tecla para volver al menu...
 pause >nul
 goto MENU
 
-:COMPILE_CPP
-echo [+] Compilador detectado: "!CXX_BIN!"
+:CPP_BUILD_FAILED
+if exist "!SQLITE_OBJ!" del /q "!SQLITE_OBJ!" >nul 2>&1
+if exist "!CPP_BUILD!" del /q "!CPP_BUILD!" >nul 2>&1
 echo.
-
-:: Verificar si existe el amalgamado sqlite3.c (compilacion portable sin -lsqlite3)
-if exist "src\cpp\sqlite3.c" (
-    echo [+] Usando SQLite3 amalgamado incluido (portable, sin dependencias externas)
-    echo [+] Compilando sqlite3.c como C...
-    :: sqlite3.c DEBE compilarse como C puro (no C++), luego linkearse con el binario C++
-    set "CC_BIN=!CXX_BIN:.exe=!"
-    set "CC_BIN=!CC_BIN:g++=gcc!"
-    if not exist "!CC_BIN!.exe" set "CC_BIN=gcc"
-    "!CC_BIN!" -O2 !CXX_INC! -c src/cpp/sqlite3.c -o src/cpp/sqlite3_amalg.o
-    if !ERRORLEVEL! neq 0 (
-        echo [!] No se pudo compilar sqlite3.c con gcc. Intentando con -lsqlite3...
-        goto COMPILE_CPP_NOSQLITE
-    )
-    echo [+] Compilando y linkeando C++17...
-    "!CXX_BIN!" -std=c++17 -Wall -Wextra -Isrc/cpp/include !CXX_INC! ^
-        src/cpp/main.cpp src/cpp/sqlite3_amalg.o ^
-        -o pea_cpp.exe !CXX_LIB! ^
-        -static-libgcc -static-libstdc++
-    del /q src\cpp\sqlite3_amalg.o >nul 2>&1
-    goto COMPILE_CPP_DONE
-)
-
-:COMPILE_CPP_NOSQLITE
-    echo [i] src\cpp\sqlite3.c no encontrado — intentando con -lsqlite3 del sistema
-    echo [+] Compilando...
-    "!CXX_BIN!" -std=c++17 -Wall -Wextra -Isrc/cpp/include !CXX_INC! ^
-        src/cpp/main.cpp ^
-        -o pea_cpp.exe !CXX_LIB! ^
-        -lsqlite3 -static-libgcc -static-libstdc++
-
-:COMPILE_CPP_DONE
-
-if !ERRORLEVEL! neq 0 (
-    echo.
-    echo [!] Error de compilacion C++. Posibles causas:
-    echo     1. Falta src\cpp\sqlite3.c (amalgamado SQLite3)
-    echo        Descargue de: https://www.sqlite.org/download.html
-    echo        (archivo "sqlite-amalgamation-XXXXXXX.zip", copie sqlite3.c y sqlite3.h
-    echo        a la carpeta src\cpp\)
-    echo     2. El compilador no soporta C++17 (actualice MinGW/MSYS2)
-    echo     3. Rutas con espacios o permisos insuficientes
-    echo.
-    echo     Alternativas sin compilar: [1] Consola Python  [3] Portal Web
-    echo.
-    echo Presione cualquier tecla para volver al menu...
-    pause >nul
-    goto MENU
-)
-echo [OK] Compilacion exitosa: pea_cpp.exe
+echo [!] Error de compilacion C++. Posibles causas:
+echo     1. Error del compilador o falta de permisos para escribir temporales.
+echo     2. El compilador no soporta C++17 (actualice MinGW/MSYS2).
+echo     3. Si falta sqlite3.c, instale SQLite3 de desarrollo para enlazar -lsqlite3.
+echo.
+echo     Alternativas sin compilar: [1] Consola Python  [3] Portal Web
+echo.
+echo Presione cualquier tecla para volver al menu...
+pause >nul
+goto MENU
 
 :EXEC_CPP_BIN
 echo.
 echo [+] Ejecutando pea_cpp.exe...
 echo.
-pea_cpp.exe
+"%~dp0pea_cpp.exe"
 echo.
 echo Presione cualquier tecla para volver al menu...
 pause >nul
@@ -415,8 +442,8 @@ echo ===========================================================================
 echo   PEA-i: Pruebas Unitarias de Estructuras de Datos
 echo ===============================================================================
 echo.
-call :DETECT_PYTHON
-if !ERRORLEVEL! equ 0 (
+call :DETECT_PYTHON_SILENCIOSO
+if defined PYCMD (
     echo [+] Ejecutando suite de pruebas unitarias Python...
     echo.
     if "!PYCMD!"=="py -3" (
@@ -424,27 +451,28 @@ if !ERRORLEVEL! equ 0 (
     ) else (
         "!PYCMD!" src\python\test_tda.py
     )
+    set "TEST_STATUS=!ERRORLEVEL!"
+    if not "!TEST_STATUS!"=="0" echo [!] Las pruebas Python terminaron con errores.
 ) else (
     echo [i] Python no detectado: se omiten tests Python.
 )
 echo.
 echo [+] Buscando compilador C++ para pruebas de TDAs en C++...
-g++ --version >nul 2>&1
+call :DETECT_CPP
 if !ERRORLEVEL! equ 0 (
     echo [+] Compilando y ejecutando tests C++...
-    if exist "src\cpp\sqlite3.c" (
-        g++ -std=c++17 -Wall -Wextra -Isrc\cpp\include src\cpp\test_tda.cpp src\cpp\sqlite3.c -o src\cpp\test_tda.exe -static-libgcc -static-libstdc++
-    ) else (
-        g++ -std=c++17 -Wall -Wextra -Isrc\cpp\include src\cpp\test_tda.cpp -o src\cpp\test_tda.exe -lsqlite3
-    )
-    if !ERRORLEVEL! equ 0 (
-        src\cpp\test_tda.exe
-        del /q src\cpp\test_tda.exe >nul 2>&1
+    set "TEST_BIN=%TEMP%\pea_i_test_tda_%RANDOM%_%RANDOM%.exe"
+    "!CXX_BIN!" -std=c++17 -Wall -Wextra -Isrc\cpp\include ^
+        "src\cpp\test_tda.cpp" -o "!TEST_BIN!" -static-libgcc -static-libstdc++
+    set "TEST_STATUS=!ERRORLEVEL!"
+    if "!TEST_STATUS!"=="0" (
+        "!TEST_BIN!"
+        set "TEST_STATUS=!ERRORLEVEL!"
     ) else (
         echo [!] No se pudo compilar tests C++.
-        echo     Si falta sqlite3: descargue el amalgamado de sqlite.org y
-        echo     coloque sqlite3.c y sqlite3.h en src\cpp\
     )
+    if exist "!TEST_BIN!" del /q "!TEST_BIN!" >nul 2>&1
+    if not "!TEST_STATUS!"=="0" echo [!] Las pruebas C++ terminaron con errores.
 ) else (
     echo [i] g++ no detectado: se omiten tests C++.
 )
@@ -518,6 +546,7 @@ echo   [0] Volver al menu
 echo.
 set "ING="
 set /p ING="Seleccione [0-3]: "
+if errorlevel 1 goto FIN
 if "%ING%"=="1" goto INGESTA_RAPIDA
 if "%ING%"=="2" goto INGESTA_FULL
 if "%ING%"=="3" goto INGESTA_FORZADA
