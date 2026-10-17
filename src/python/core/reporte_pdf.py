@@ -212,8 +212,14 @@ def generar_informe_grupo_pdf(codigo_grupo: str, ruta_bd: str = "data/pea_invest
     investigadores = cur.fetchall()
 
     # 3. Obtener Productos (Activos)
-    cur.execute("SELECT id_producto, tipo, titulo, anio, categoria_minciencias, validado, id_investigador, activo FROM Productos WHERE codigo_grupo = ? AND activo = 1 ORDER BY anio DESC, titulo ASC", (cod_g,))
-    productos = cur.fetchall()
+    try:
+        cur.execute("SELECT id_producto, tipo, titulo, anio, categoria_minciencias, validado, id_investigador, activo, subtipo_codigo, familia, clase_medicion, peso_calculado FROM Productos WHERE codigo_grupo = ? AND activo = 1 ORDER BY anio DESC, titulo ASC", (cod_g,))
+        productos = cur.fetchall()
+        tiene_cols_2024 = True
+    except Exception:
+        cur.execute("SELECT id_producto, tipo, titulo, anio, categoria_minciencias, validado, id_investigador, activo FROM Productos WHERE codigo_grupo = ? AND activo = 1 ORDER BY anio DESC, titulo ASC", (cod_g,))
+        productos = cur.fetchall()
+        tiene_cols_2024 = False
     conn.close()
 
     # 4. Calcular Métricas Modelo 2024
@@ -224,16 +230,25 @@ def generar_informe_grupo_pdf(codigo_grupo: str, ruta_bd: str = "data/pea_invest
 
     productos_enriquecidos = []
     for p in productos:
-        pid, tipo, tit, anio, cat_m, val, id_inv, act = p
-        clas_info = CatalogoMinCiencias2024.clasificar_producto(tipo, cat_m, tit)
-        fam = clas_info["familia"]
-        pts = clas_info["global_weight"] if val else (clas_info["global_weight"] // 2)
+        if tiene_cols_2024:
+            pid, tipo, tit, anio, cat_m, val, id_inv, act, sub_c, fam_db, cls_m, peso = p
+        else:
+            pid, tipo, tit, anio, cat_m, val, id_inv, act = p
+            sub_c, fam_db, cls_m, peso = "", "", "", 0.0
+
+        clas_info = CatalogoMinCiencias2024.clasificar_producto(sub_c or tipo, cat_m, tit)
+        fam = fam_db or clas_info["familia"]
+        if peso > 0.0:
+            pts = int(peso if val else (peso / 2.0))
+        else:
+            pts = clas_info["global_weight"] if val else (clas_info["global_weight"] // 2)
+
         conteos_2024[fam] = conteos_2024.get(fam, 0) + 1
         puntos_2024[fam] = puntos_2024.get(fam, 0) + pts
         total_ipp += pts
         if val:
             total_validados += 1
-        productos_enriquecidos.append((pid, tipo, tit, anio, cat_m, val, id_inv, fam, pts, clas_info["codigo_2024"]))
+        productos_enriquecidos.append((pid, tipo, tit, anio, cat_m, val, id_inv, fam, pts, sub_c or clas_info["codigo_2024"]))
 
     # Ruta de salida
     if not ruta_salida:

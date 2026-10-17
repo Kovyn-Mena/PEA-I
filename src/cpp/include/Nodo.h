@@ -27,7 +27,7 @@
 // ---------------------------------------------------------------------
 struct NodoProducto {
     std::string id_producto;
-    std::string tipo;                 // Articulo, Libro, Capitulo, Software, Patente
+    std::string tipo;                 // Articulo, Libro, Capitulo, Software, Patente...
     std::string titulo;
     int anio;
     std::string categoria_minciencias;// A1, A, B, C
@@ -36,6 +36,12 @@ struct NodoProducto {
     std::string id_investigador;
     bool activo;                      // true: activo, false: desactivado (borrado lógico)
 
+    // Taxonomía MinCiencias 2024 oficial (Convocatoria 957 / Anexo 1)
+    std::string subtipo_codigo;       // ART, ART_OPEN, SF, TD, TM, TP, WP, LIB_DIV...
+    std::string familia;              // GNC, DTI, ASC, DPC, FRH
+    std::string clase_medicion;       // TOP, GNC-A, DTI-B, FRH-A, FRH-B, DPC...
+    double peso_calculado;            // Peso final = Peso Global x (Peso Relativo / 10.0)
+
     // Punteros ortogonales (Hipercubo multidimensional)
     NodoProducto* sigProductoGrupo;        // Siguiente producto en el mismo Grupo
     NodoProducto* sigProductoInvestigador; // Siguiente producto del mismo Investigador
@@ -43,9 +49,12 @@ struct NodoProducto {
     // Constructor para inicialización limpia
     NodoProducto(const std::string& id, const std::string& tp, const std::string& tit,
                  int a, const std::string& cat, bool val,
-                 const std::string& cod_g, const std::string& id_inv, bool act = true)
+                 const std::string& cod_g, const std::string& id_inv, bool act = true,
+                 const std::string& sub_cod = "ART", const std::string& fam = "GNC",
+                 const std::string& cls_med = "GNC-A", double peso = 0.0)
         : id_producto(id), tipo(tp), titulo(tit), anio(a), categoria_minciencias(cat),
           validado(val), codigo_grupo(cod_g), id_investigador(id_inv), activo(act),
+          subtipo_codigo(sub_cod), familia(fam), clase_medicion(cls_med), peso_calculado(peso),
           sigProductoGrupo(nullptr), sigProductoInvestigador(nullptr) {}
 };
 

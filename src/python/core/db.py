@@ -38,10 +38,27 @@ class GestorPersistencia:
                 multi.insertar_investigador(cod_g, doc, nom, cat, form, bool(act))
 
             # 3. Cargar Productos (Ortogonal)
-            cursor.execute("SELECT id_producto, tipo, titulo, anio, categoria_minciencias, validado, codigo_grupo, id_investigador, activo FROM Productos;")
-            for row in cursor.fetchall():
-                id_p, tipo, tit, anio, cat_m, val, cod_g, id_inv, act = row
-                multi.insertar_producto(cod_g, id_inv, id_p, tipo, tit, anio, cat_m, bool(val), bool(act))
+            cursor.execute("PRAGMA table_info(Productos);")
+            col_names = [c[1] for c in cursor.fetchall()]
+            tiene_cols_2024 = "subtipo_codigo" in col_names
+
+            if tiene_cols_2024:
+                cursor.execute("""
+                    SELECT id_producto, tipo, titulo, anio, categoria_minciencias,
+                           validado, codigo_grupo, id_investigador, activo,
+                           subtipo_codigo, familia, clase_medicion, peso_calculado
+                    FROM Productos;
+                """)
+                for row in cursor.fetchall():
+                    id_p, tipo, tit, anio, cat_m, val, cod_g, id_inv, act, sub_c, fam, cls_m, peso = row
+                    multi.insertar_producto(cod_g, id_inv, id_p, tipo, tit, anio, cat_m,
+                                            bool(val), bool(act), sub_c or "ART",
+                                            fam or "GNC", cls_m or "GNC-A", float(peso or 0.0))
+            else:
+                cursor.execute("SELECT id_producto, tipo, titulo, anio, categoria_minciencias, validado, codigo_grupo, id_investigador, activo FROM Productos;")
+                for row in cursor.fetchall():
+                    id_p, tipo, tit, anio, cat_m, val, cod_g, id_inv, act = row
+                    multi.insertar_producto(cod_g, id_inv, id_p, tipo, tit, anio, cat_m, bool(val), bool(act))
 
             conn.close()
             return True
@@ -68,7 +85,13 @@ class GestorPersistencia:
 
             sql_grupo = "INSERT INTO Grupos VALUES (?, ?, ?, ?, ?, ?, ?);"
             sql_inv = "INSERT INTO Investigadores VALUES (?, ?, ?, ?, ?, ?);"
-            sql_prod = "INSERT INTO Productos VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"
+            sql_prod = """
+                INSERT INTO Productos (
+                    id_producto, tipo, titulo, anio, categoria_minciencias, validado,
+                    codigo_grupo, id_investigador, activo, subtipo_codigo, familia,
+                    clase_medicion, peso_calculado
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+            """
 
             g = multi.cabeza_grupos
             while g is not None:
@@ -91,11 +114,17 @@ class GestorPersistencia:
                 # Productos del grupo
                 p = g.primer_producto
                 while p is not None:
+                    sub_cod = getattr(p, "subtipo_codigo", "ART") or "ART"
+                    fam = getattr(p, "familia", "GNC") or "GNC"
+                    cls_med = getattr(p, "clase_medicion", "GNC-A") or "GNC-A"
+                    peso = getattr(p, "peso_calculado", 0.0) or 0.0
+
                     cursor.execute(sql_prod, (
                         p.id_producto, p.tipo, p.titulo, p.anio,
                         p.categoria_minciencias, 1 if p.validado else 0,
                         p.codigo_grupo, p.id_investigador,
-                        1 if p.activo else 0
+                        1 if p.activo else 0,
+                        sub_cod, fam, cls_med, peso
                     ))
                     p = p.sig_producto_grupo
 

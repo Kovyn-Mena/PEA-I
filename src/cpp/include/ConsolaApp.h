@@ -863,8 +863,10 @@ public:
                     NodoProducto* p = g->primerProducto;
                     if (!p) std::cout << "     (Sin productos registrados)\n";
                     while (p) {
-                        std::cout << "     • [" << p->tipo << " " << p->anio << "] " << p->titulo 
-                                  << " (Cat: " << p->categoria_minciencias << ", " 
+                        std::cout << "     • [" << p->tipo;
+                        if (!p->subtipo_codigo.empty()) std::cout << "/" << p->subtipo_codigo;
+                        std::cout << " " << p->anio << "] " << p->titulo 
+                                  << " (Fam: " << p->familia << ", Cat: " << p->categoria_minciencias << ", " 
                                   << (p->validado ? "Validado" : "No validado") << ") ["
                                   << (p->activo ? "Activo" : "Inactivo") << "]\n";
                         p = p->sigProductoGrupo;
@@ -1087,8 +1089,10 @@ public:
                     NodoProducto* p = inv->primerProducto;
                     if (!p) std::cout << "     (Sin productos asociados)\n";
                     while (p) {
-                        std::cout << "     • [" << p->tipo << " " << p->anio << "] " << p->titulo 
-                                  << " (Cat: " << p->categoria_minciencias << ", " 
+                        std::cout << "     • [" << p->tipo;
+                        if (!p->subtipo_codigo.empty()) std::cout << "/" << p->subtipo_codigo;
+                        std::cout << " " << p->anio << "] " << p->titulo 
+                                  << " (Fam: " << p->familia << ", Cat: " << p->categoria_minciencias << ", " 
                                   << (p->validado ? "Validado" : "No validado") << ") ["
                                   << (p->activo ? "Activo" : "Inactivo") << "]\n";
                         p = p->sigProductoInvestigador;
@@ -1298,7 +1302,9 @@ public:
                 std::string cat = leerLinea("Categoría MinCiencias (A1, A, B, C): ");
                 int val = leerOpcionMenu("01", "¿Validado/Avalado por MinCiencias? (1: Sí / 0: No): ");
 
-                if (multi.insertarProducto(codG, idInv, idP, tipo, tit, anio, cat, val == 1, true)) {
+                InfoTipologia2024 info = Catalogo2024::clasificar(tipo, cat, tit);
+                if (multi.insertarProducto(codG, idInv, idP, tipo, tit, anio, cat, val == 1, true,
+                                           info.codigo_2024, info.familia, info.measurement_class, info.peso_final())) {
                     historial.push("CREAR", "PRODUCTO", idP, codG);
                     std::cout << "\n[OK] Producto registrado y enlazado ortogonalmente en el Hipercubo.\n";
                 } else {
@@ -1328,7 +1334,8 @@ public:
                 } else {
                     std::cout << "\n=================================================================\n";
                     std::cout << "PRODUCTO: [" << p->id_producto << "] " << p->titulo << "\n";
-                    std::cout << "Tipo: " << p->tipo << " | Año: " << p->anio << "\n";
+                    std::cout << "Tipo: " << p->tipo << " | Subtipo: " << p->subtipo_codigo << " | Familia: " << p->familia << "\n";
+                    std::cout << "Año: " << p->anio << " | Clase Medición: " << p->clase_medicion << " | Peso Calculado: " << p->peso_calculado << " pts\n";
                     std::cout << "Categoría MinCiencias: " << p->categoria_minciencias 
                               << " | Aval MinCiencias: " << (p->validado ? "VALIDADO" : "NO VALIDADO") << "\n";
                     std::cout << "Grupo: " << p->codigo_grupo << " | Investigador Autor: " << p->id_investigador << "\n";
@@ -1558,12 +1565,13 @@ public:
             NodoProducto* p = g->primerProducto;
             while (p) {
                 if (p->activo && g->activo) {
-                    InfoTipologia2024 info = Catalogo2024::clasificar(p->tipo, p->categoria_minciencias, p->titulo);
-                    if (info.familia == "GNC") famGNC++;
-                    else if (info.familia == "DTI") famDTI++;
-                    else if (info.familia == "ASC") famASC++;
-                    else if (info.familia == "DPC") famDPC++;
-                    else if (info.familia == "FRH") famFRH++;
+                    InfoTipologia2024 info = Catalogo2024::clasificar(p->tipo, p->categoria_minciencias, p->titulo, p->subtipo_codigo);
+                    std::string famEfectiva = !p->familia.empty() ? p->familia : info.familia;
+                    if (famEfectiva == "GNC") famGNC++;
+                    else if (famEfectiva == "DTI") famDTI++;
+                    else if (famEfectiva == "ASC") famASC++;
+                    else if (famEfectiva == "DPC") famDPC++;
+                    else if (famEfectiva == "FRH") famFRH++;
 
                     if (p->tipo == "Articulo") articulos++;
                     else if (p->tipo == "Libro") libros++;
@@ -1577,11 +1585,12 @@ public:
                     else if (p->categoria_minciencias == "B") catB++;
                     else if (p->categoria_minciencias == "C") catC++;
 
+                    double basePts = (p->peso_calculado > 0.0) ? p->peso_calculado : (double)info.global_weight;
                     if (p->validado) {
                         validados++;
-                        puntosPonderadosTotal += info.global_weight;
+                        puntosPonderadosTotal += (int)basePts;
                     } else {
-                        puntosPonderadosTotal += (info.global_weight / 2);
+                        puntosPonderadosTotal += (int)(basePts / 2.0);
                     }
                 }
                 p = p->sigProductoGrupo;

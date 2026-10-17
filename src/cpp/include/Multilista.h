@@ -72,7 +72,9 @@ public:
     bool insertarProducto(const std::string& cod_grupo, const std::string& id_inv,
                           const std::string& id_prod, const std::string& tipo,
                           const std::string& titulo, int anio,
-                          const std::string& cat_min, bool val, bool act = true) {
+                          const std::string& cat_min, bool val, bool act = true,
+                          const std::string& sub_cod = "ART", const std::string& fam = "GNC",
+                          const std::string& cls_med = "GNC-A", double peso = 0.0) {
         NodoGrupo* grupo = buscarGrupo(cod_grupo);
         NodoInvestigador* inv = buscarInvestigador(id_inv);
 
@@ -81,7 +83,8 @@ public:
 
         // Se crea una única instancia física en memoria
         NodoProducto* nuevo = new NodoProducto(id_prod, tipo, titulo, anio, cat_min, val,
-                                               cod_grupo, id_inv, act);
+                                               cod_grupo, id_inv, act,
+                                               sub_cod, fam, cls_med, peso);
 
         // 1. Enlace ortogonal en la dimensión Grupo
         nuevo->sigProductoGrupo = grupo->primerProducto;

@@ -54,9 +54,283 @@ def _norm_txt(s: str) -> str:
     return re.sub(r"\s+", " ", s).strip()
 
 
+# Helper dedupe (A1) - alineado con Khemia
+def _normalized_name_key(value: str) -> str:
+    if not value:
+        return ""
+    import unicodedata, re
+    nfkd = unicodedata.normalize("NFD", value)
+    no_accents = "".join(c for c in nfkd if unicodedata.category(c) != "Mn")
+    val = no_accents.encode("ascii", "ignore").decode("ascii").upper()
+    val = re.sub(r"[^A-Z0-9 ]", " ", val)
+    return " ".join(val.split())
+
+
+def _dedupe_products(productos):
+    """Fusiona productos duplicados (mismo título normalizado + año). Prioriza DOI."""
+    if not productos:
+        return productos, 0
+    merged = {}
+    order = []
+    merged_count = 0
+    for p in productos:
+        t = getattr(p, 'titulo', '') or getattr(p, 'title', '') or ''
+        y = getattr(p, 'ano', None) or getattr(p, 'year', None) or ''
+        key = f"{_normalized_name_key(t)}|{y}"
+        if key not in merged:
+            merged[key] = p
+            order.append(key)
+            continue
+        merged_count += 1
+        base = merged[key]
+        ex = p
+        base_doi = getattr(base, 'doi', '') or ''
+        ex_doi = getattr(ex, 'doi', '') or ''
+        if ex_doi and not base_doi:
+            base, ex = ex, base
+            merged[key] = base
+        try:
+            base_aut = list(getattr(base, 'autores', []) or [])
+            ex_aut = list(getattr(ex, 'autores', []) or [])
+            seen = {_normalized_name_key(a) for a in base_aut}
+            for a in ex_aut:
+                k = _normalized_name_key(a)
+                if k and k not in seen:
+                    base_aut.append(a)
+                    seen.add(k)
+            base.autores = base_aut
+        except Exception:
+            pass
+        for attr in ('doi','issn','isbn','revista','editorial','volumen','paginas','tipo_fuente','url'):
+            bv = getattr(base, attr, None)
+            if not bv:
+                ev = getattr(ex, attr, None)
+                if ev:
+                    try:
+                        setattr(base, attr, ev)
+                    except Exception:
+                        pass
+        if (not getattr(base,'ano',None)) and getattr(ex,'ano',None):
+            base.ano = ex.ano
+        if (not getattr(base,'year',None)) and getattr(ex,'year',None):
+            base.year = ex.year
+    return [merged[k] for k in order], merged_count
+
+
+try:
+    from src.python.core.catalogo_2024 import CatalogoMinCiencias2024
+except ModuleNotFoundError:
+    from python.core.catalogo_2024 import CatalogoMinCiencias2024
+
+# Matriz exhaustiva de Mapeo GrupLAC -> Tipologías MinCiencias 2024 (Convocatoria 957 / Anexo 1)
+# Adaptado del motor de sys-pea-integration para resolver falsos positivos GNC y jerarquía FRH
+SECTION_MAP_2024 = [
+    # --- FRH: Formación de recurso humano ---
+    ("trabajos dirigidos", "TD"),    # Refinado por fila (TD: Doctorado, TM: Maestría, TP: Pregrado)
+    ("tesis", "TD"),                 # Refinado por fila (TD: Doctorado, TM: Maestría, TP: Pregrado)
+    ("asesorias al programa ondas", "APO"),
+    # --- DPC: Divulgación pública de la ciencia ---
+    ("contenido virtual", "PCD"),
+    ("audiovisual", "PCD"),
+    ("recursos graficos", "PCD"),
+    ("contenido de audio", "PCD"),
+    ("contenido multimedia", "PCD"),
+    ("contenido digital", "PCD"),
+    ("contenido impreso", "PEE"),
+    ("publicaciones editoriales no especializadas", "PEE"),
+    ("generacion de contenido", "GC"),
+    ("libros de divulgacion", "LIB_DIV"),
+    ("libros de formacion", "LIB_FOR"),
+    ("manuales y guias", "MAN_GUI"),
+    ("desarrollo web", "DW"),
+    ("estrategias de comunicacion", "TRM"),
+    ("produccion de estrategias", "TRM"),
+    ("estrategias y contenidos", "TRM"),
+    ("ediciones", "ERL"),
+    ("informe final", "IFI"),
+    ("informes de investigacion", "IFI"),
+    ("informes tecnicos", "INF"),
+    ("consultorias", "CON_CT"),
+    ("secuencias geneticas", "NSG"),
+    ("boletines", "BOL"),
+    ("redes de conocimiento", "RC"),
+    ("talleres de creacion", "TC"),
+    ("documentos de trabajo", "WP"),         # DPC en 2024 (Sección 2.2.4.2)
+    ("eventos artisticos", "ECA"),
+    ("eventos", "EC"),
+    # --- GNC: Generación de nuevo conocimiento ---
+    ("otros articulos", "ART"),
+    ("articulos", "ART"),
+    ("publicado en revista", "ART"),
+    ("notas cientificas", "N"),
+    ("otros libros", "LIB"),
+    ("libros publicados", "LIB"),
+    ("libro resultado", "LIB"),
+    ("capitulos", "CAP_LIB"),
+    ("nuevas variedades", "VV"),
+    ("nuevas razas", "NRA"),
+    ("poblaciones mejoradas", "PMR"),
+    ("patente", "PAT_INV"),                  # Refinado por fila (MOD_UTIL vs PAT_INV)
+    ("obras o productos", "AAD"),
+    ("produccion en arte", "AAD"),
+    # --- DTI: Desarrollo tecnológico e innovación ---
+    ("software", "SF"),
+    ("computacional", "SF"),
+    ("prototipo", "PI"),
+    ("planta piloto", "PP"),
+    ("plantas piloto", "PP"),
+    ("disenos industriales", "DI"),
+    ("esquemas de trazados", "ECI"),
+    ("productos nutraceuticos", "PN"),
+    ("signos distintivos", "SD"),
+    ("colecciones cientificas", "CC"),
+    ("nuevos registros", "NRC"),
+    ("secreto empresarial", "SE"),
+    ("empresas de base tecnologica", "EBT"),
+    ("empresas creativas", "ICC"),
+    ("innovaciones en procesos", "IPP"),
+    ("innovaciones generadas", "IG"),
+    # --- Formación complementaria y evaluadores ---
+    ("jurado", "JUR_EVAL"),
+    ("comision evaluadora", "JUR_EVAL"),
+    ("comite evaluador", "JUR_EVAL"),
+    ("curso", "CUR_COR"),
+    ("perfeccionamiento", "CUR_COR"),
+    ("diplomado", "CUR_COR"),
+    ("regulacion", "REG_NORM"),
+    ("norma", "REG_NORM"),
+    # Patrones extra alineados con Khemia (M1 selectivo)
+    ("protocolos de vigilancia epidemiologica", "PVE"),
+    ("guias de practica clinica", "RNPC"),
+    ("proyectos de ley", "RNPL"),
+    ("conceptos tecnicos", "CT"),
+    ("comitas", None),  # mojibake Scienti
+]
+
+
+def clasificar_marcador_gruplac_2024(marcador: str, seccion: str = "", bloque: str = "", titulo: str = "") -> dict:
+    """Clasifica un ítem de GrupLAC conforme a los 70 subtipos del Modelo MinCiencias 2024 (Convocatoria 957).
+    Resuelve falsos positivos en GNC (Working Papers y Libros de divulgación van a DPC)
+    y separa tesis de doctorado (FRH-A) de maestrías y pregrados (FRH-B)."""
+    m = _norm_txt(marcador).replace("_", " ")
+    b = _norm_txt(bloque)
+    tit = _norm_txt(titulo)
+    full = f"{m} {b} {tit}"
+
+    # 1. Búsqueda por SECTION_MAP
+    sub_code = None
+    for pattern, code in SECTION_MAP_2024:
+        if pattern in m:
+            sub_code = code
+            break
+
+    # 2. Refinamiento por fila para Formación de Recurso Humano (FRH)
+    if sub_code in ("TD", None) and any(k in m for k in ["trabajo", "tesis", "tutoria", "grado"]):
+        if "doctorado" in full or "doctor" in full:
+            return {
+                "tipo": "Tesis Doctoral", "subtipo_codigo": "TD", "familia": "FRH",
+                "clase_medicion": "FRH-A", "global_weight": 160, "weight": 10.0, "peso_calculado": 160.0
+            }
+        elif "maestr" in full or "master" in full or "magister" in full:
+            return {
+                "tipo": "Tesis Maestría", "subtipo_codigo": "TM", "familia": "FRH",
+                "clase_medicion": "FRH-B", "global_weight": 70, "weight": 10.0, "peso_calculado": 70.0
+            }
+        elif "ondas" in full or "apo" in full or "semillero" in full:
+            return {
+                "tipo": "Asesoría Ondas", "subtipo_codigo": "APO", "familia": "FRH",
+                "clase_medicion": "FRH-B", "global_weight": 30, "weight": 5.0, "peso_calculado": 15.0
+            }
+        else:
+            return {
+                "tipo": "Trabajo de Grado", "subtipo_codigo": "TP", "familia": "FRH",
+                "clase_medicion": "FRH-B", "global_weight": 20, "weight": 10.0, "peso_calculado": 20.0
+            }
+
+    # 3. Refinamiento por fila para Patentes (GNC)
+    if sub_code == "PAT_INV" or "patente" in m:
+        if "utilidad" in full or "modelo de utilidad" in full:
+            return {
+                "tipo": "Patente", "subtipo_codigo": "MOD_UTIL", "familia": "GNC",
+                "clase_medicion": "GNC-TOP", "global_weight": 100, "weight": 10.0, "peso_calculado": 100.0
+            }
+        return {
+            "tipo": "Patente", "subtipo_codigo": "PAT_INV", "familia": "GNC",
+            "clase_medicion": "GNC-TOP", "global_weight": 300, "weight": 10.0, "peso_calculado": 300.0
+        }
+
+    # 4. Refinamiento para Working Papers (DPC, Sección 2.2.4.2)
+    if "documento de trabajo" in m or "working paper" in full or sub_code == "WP":
+        return {
+            "tipo": "Articulo", "subtipo_codigo": "WP", "familia": "DPC",
+            "clase_medicion": "DPC", "global_weight": 100, "weight": 10.0, "peso_calculado": 100.0
+        }
+
+    # 5. Refinamiento para Libros de divulgación / formación (DPC, Sección 2.2.4)
+    if "libros de divulgaci" in m or "compilacion de divulgaci" in m or sub_code == "LIB_DIV":
+        return {
+            "tipo": "Libro", "subtipo_codigo": "LIB_DIV", "familia": "DPC",
+            "clase_medicion": "DPC", "global_weight": 100, "weight": 10.0, "peso_calculado": 100.0
+        }
+    if "libros de formaci" in m or sub_code == "LIB_FOR":
+        return {
+            "tipo": "Libro", "subtipo_codigo": "LIB_FOR", "familia": "DPC",
+            "clase_medicion": "DPC", "global_weight": 100, "weight": 10.0, "peso_calculado": 100.0
+        }
+
+    # 6. Refinamiento para Software (DTI-B, peso relativo 8, global 35)
+    if sub_code == "SF" or any(k in m for k in ["computacional", "software"]):
+        return {
+            "tipo": "Software", "subtipo_codigo": "SF", "familia": "DTI",
+            "clase_medicion": "DTI-B", "global_weight": 35, "weight": 8.0, "peso_calculado": 28.0
+        }
+
+    # 7. Artículos (GNC) con discriminación Open Access
+    if sub_code == "ART" or any(k in m for k in ["publicado en revista", "articulo", "revista"]):
+        es_open = "open" in full or "abierto" in full
+        sub_c = "ART_OPEN_A1" if es_open else "ART_A1"
+        rw = 10.0 if es_open else 9.5
+        return {
+            "tipo": "Articulo", "subtipo_codigo": sub_c, "familia": "GNC",
+            "clase_medicion": "GNC-TOP", "global_weight": 100, "weight": rw, "peso_calculado": rw * 10.0
+        }
+
+    # 8. Mapeo por defecto según sub_code o catálogo
+    if sub_code:
+        res = CatalogoMinCiencias2024.clasificar_producto(sub_code, "A1", tit)
+        gw = float(res.get("global_weight", 50) or 50)
+        rw = float(res.get("weight", 5) or 5)
+        return {
+            "tipo": clasificar_marcador_gruplac(marcador, seccion) or "Articulo",
+            "subtipo_codigo": sub_code,
+            "familia": res.get("familia", "GNC"),
+            "clase_medicion": res.get("measurement_class", "GNC-A"),
+            "global_weight": gw,
+            "weight": rw,
+            "peso_calculado": gw * (rw / 10.0)
+        }
+
+    # Fallback con clasificador general
+    tipo_legible = clasificar_marcador_gruplac(marcador, seccion)
+    if tipo_legible:
+        res = CatalogoMinCiencias2024.clasificar_producto(tipo_legible, "A1", tit)
+        gw = float(res.get("global_weight", 50) or 50)
+        rw = float(res.get("weight", 5) or 5)
+        return {
+            "tipo": tipo_legible,
+            "subtipo_codigo": res.get("codigo_2024", "ART"),
+            "familia": res.get("familia", "GNC"),
+            "clase_medicion": res.get("measurement_class", "GNC-A"),
+            "global_weight": gw,
+            "weight": rw,
+            "peso_calculado": gw * (rw / 10.0)
+        }
+
+    return {}
+
+
 def clasificar_marcador_gruplac(marcador: str, seccion: str = "") -> str:
-    """Clasifica marcadores GrupLAC con whitelist estricta (port compañero).
-    Retorna "" si no hay tipo válido (se cuenta como omitido, no se inventa)."""
+    """Clasifica marcadores GrupLAC con compatibilidad hacia las etiquetas legibles."""
     m = _norm_txt(marcador).replace("_", " ")
     if m.startswith("publicado en revista"):
         return "Articulo"
@@ -103,7 +377,7 @@ def clasificar_marcador_gruplac(marcador: str, seccion: str = "") -> str:
     if "contenido digital" in m or "produccion de contenido" in m or "audiovisual" in m:
         return "Contenido"
     if m.startswith("edicion") or (m.startswith("compilacion") and "divulgaci" not in m):
-        return "Libro"  # Compilación ~ Libro (contrato CHECK SQLite de 15 tipos)
+        return "Libro"
     if m.startswith("regulacion") or m.startswith("norma"):
         return "Regulacion"
     if seccion == "evaluador":
@@ -745,17 +1019,6 @@ class MotorIngesta:
             bloque = texto_plano[inicio:marcas[idx + 1][0]]
             mk = _norm_txt(marcador_raw)
             sec = _seccion_de(inicio, spans)
-            tipo = clasificar_marcador_gruplac(marcador_raw, sec)
-            if not tipo:
-                if mk in ("otra", "otro") and any(
-                        k in _norm_txt(bloque[:400]) for k in
-                        ("disponibilidad", "nombre comercial", "financiadora", "sitio web")):
-                    tipo = "Software"
-                elif mk in ("otra", "otro") and sec == "apropiacion":
-                    tipo = "Evento"
-                else:
-                    omitidos += 1
-                    continue
             titulo = _titulo_bloque(bloque, mk)
             if _es_titulo_marcador(titulo, mk):
                 omitidos += 1
@@ -764,6 +1027,25 @@ class MotorIngesta:
                 omitidos += 1
                 continue
             anio = _anio_bloque(bloque)
+
+            info_2024 = clasificar_marcador_gruplac_2024(marcador_raw, sec, bloque, titulo)
+            if not info_2024:
+                if mk in ("otra", "otro") and any(
+                        k in _norm_txt(bloque[:400]) for k in
+                        ("disponibilidad", "nombre comercial", "financiadora", "sitio web")):
+                    info_2024 = {
+                        "tipo": "Software", "subtipo_codigo": "SF", "familia": "DTI",
+                        "clase_medicion": "DTI-B", "global_weight": 35, "weight": 8.0, "peso_calculado": 28.0
+                    }
+                elif mk in ("otra", "otro") and sec == "apropiacion":
+                    info_2024 = {
+                        "tipo": "Evento", "subtipo_codigo": "EC", "familia": "DPC",
+                        "clase_medicion": "DPC", "global_weight": 50, "weight": 10.0, "peso_calculado": 50.0
+                    }
+                else:
+                    omitidos += 1
+                    continue
+
             maut = re.search(r"Autores:\s*([^\n]+(?:\n[^\n:]+)?)", bloque)
             if not maut:
                 maut = re.search(
@@ -776,14 +1058,26 @@ class MotorIngesta:
                 autores = [a.strip().rstrip(".") for a in re.split(r",", maut.group(1)) if a.strip()]
             if titulo and anio:
                 validado = chulos.get((mk, _norm_txt(titulo)[:60], anio), False)
-                prods_parsed.append({"titulo": titulo[:110], "anio": anio, "tipo": tipo,
-                                     "autores": autores,
-                                     "validado": validado})
+                prods_parsed.append({
+                    "titulo": titulo[:110], "anio": anio, "tipo": info_2024.get("tipo", "Articulo"),
+                    "subtipo_codigo": info_2024.get("subtipo_codigo", "ART"),
+                    "familia": info_2024.get("familia", "GNC"),
+                    "clase_medicion": info_2024.get("clase_medicion", "GNC-A"),
+                    "peso_calculado": float(info_2024.get("peso_calculado", 0.0)),
+                    "autores": autores,
+                    "validado": validado
+                })
             else:
                 omitidos += 1
         resumen["omitidos"] = omitidos
 
         # Solo reemplazar productos viejos si hay productos nuevos (no vaciar)
+        # A1: deduplicar productos por título normalizado + año (prioriza DOI, une autores)
+        try:
+            prods_parsed, _mdup = _dedupe_products(prods_parsed)
+        except Exception:
+            pass
+
         if prods_parsed and g_existente and g_existente.primer_producto:
             prods_viejos = []
             p_cur = g_existente.primer_producto
@@ -828,7 +1122,9 @@ class MotorIngesta:
                 id_prod = f"PROD-{sufijo_nro}-{prod_count:04d}"
                 if not multi.buscar_producto(id_prod):
                     multi.insertar_producto(cod_grupo, rh, id_prod, p["tipo"], p["titulo"],
-                                            p["anio"], "Por verificar", p["validado"], True)
+                                            p["anio"], "Por verificar", p["validado"], True,
+                                            p.get("subtipo_codigo", "ART"), p.get("familia", "GNC"),
+                                            p.get("clase_medicion", "GNC-A"), p.get("peso_calculado", 0.0))
                     resumen["productos"] += 1
                     if p["validado"]:
                         resumen["validados"] += 1
@@ -929,7 +1225,13 @@ class MotorIngesta:
                 id_p = f"CVLAC-{cod_rh[-4:]}-{prod_count:03d}"
                 titulo = mt.group(1).strip()[:110]
                 if not multi.buscar_producto(id_p):
-                    multi.insertar_producto(cod_grupo_def, cod_rh, id_p, "Articulo", titulo, anio, "A1", True, True)
+                    res_art = CatalogoMinCiencias2024.clasificar_producto("Articulo", "A1", titulo)
+                    gw = float(res_art.get("global_weight", 100) or 100)
+                    rw = float(res_art.get("weight", 9.5) or 9.5)
+                    p_calc = gw * (rw / 10.0)
+                    multi.insertar_producto(cod_grupo_def, cod_rh, id_p, "Articulo", titulo, anio, "A1", True, True,
+                                            res_art.get("codigo_2024", "ART_A1"), res_art.get("familia", "GNC"),
+                                            res_art.get("measurement_class", "GNC-TOP"), p_calc)
                     resumen["productos"] += 1
                 if prod_count >= 20:
                     break
@@ -972,7 +1274,13 @@ class MotorIngesta:
 
                 # 3. Producto
                 if id_p and not multi.buscar_producto(id_p):
-                    multi.insertar_producto(cod_g, doc_i, id_p, tipo_p, tit_p, anio_p, cat_p, val_p, True)
+                    res_csv = CatalogoMinCiencias2024.clasificar_producto(tipo_p, cat_p, tit_p)
+                    gw = float(res_csv.get("global_weight", 50) or 50)
+                    rw = float(res_csv.get("weight", 5.0) or 5.0)
+                    p_calc = gw * (rw / 10.0)
+                    multi.insertar_producto(cod_g, doc_i, id_p, tipo_p, tit_p, anio_p, cat_p, val_p, True,
+                                            res_csv.get("codigo_2024", "ART"), res_csv.get("familia", "GNC"),
+                                            res_csv.get("measurement_class", "GNC-A"), p_calc)
                     resumen["productos"] += 1
 
         return resumen

@@ -105,8 +105,70 @@ flowchart TD
 ## 5. Plan de Acción Inmediato
 
 - [x] **Paso 1:** Registrar la auditoría en la bóveda Obsidian (`043` y bitácora `060`).
-- [ ] **Paso 2:** Incorporar `clean_doi()` y hash de deduplicación independiente de autores en `src/python/core/ingesta.py`.
-- [ ] **Paso 3:** Implementar el extractor de PDFs de Scienti Web (Ctrl+P) en `src/python/core/ingesta.py`.
-- [ ] **Paso 4:** Actualizar `reporte_pdf.py` con `NumberedCanvas` ("Página X de Y") y soporte de fuentes TTF.
-- [ ] **Paso 5:** Incorporar la vista de Cola FIFO de Validación en las consolas interactivas C++ y Python.
-- [ ] **Paso 6:** Verificar compilación (`make`), tests (`make test`) y re-empaquetado (`python3 scripts/package_zip.py`).
+- [x] **Paso 2:** Incorporar `clean_doi()` y hash de deduplicación independiente de autores en `src/python/core/ingesta.py`.
+- [x] **Paso 3:** Implementar el extractor de PDFs de Scienti Web (Ctrl+P) en `src/python/core/ingesta.py`.
+- [x] **Paso 4:** Actualizar `reporte_pdf.py` con `NumberedCanvas` ("Página X de Y") y soporte de fuentes TTF.
+- [x] **Paso 5:** Incorporar la vista de Cola FIFO de Validación en las consolas interactivas C++ y Python.
+- [x] **Paso 6:** Verificar compilación (`make`), tests (`make test`) y re-empaquetado (`python3 scripts/package_zip.py`).
+
+---
+
+## 6. Auditoría Comparativa de Scrapers y Modelo de Datos (MinCiencias 2024 / Convocatoria 957)
+
+### 🔬 6.1. Contraste: Khemia vs Damián (`PEA-I-taller2`) vs PEA-i
+
+Se ejecutó un análisis forense comparativo entre:
+1. **Khemia (`sys-pea-integration`):** Implementación de referencia web con backend FastAPI y scraper en `backend/app/scraper.py`.
+2. **Damián (`PEA-I-taller2`):** Implementación de Damián (`Taller2_KM_PO_XX.py`, `MODELO_FALTANTE_Punto5.md`, `schema.sql`).
+3. **PEA-i (`Taller 2 estructura`):** Nuestro proyecto actual.
+
+```mermaid
+flowchart TD
+    subgraph Damian ["Damián (PEA-I-taller2)"]
+        D1["Scraper GrupLAC HTML"] -->|Extrae solo texto de cabecera| D2["15 Tipos Planos (Articulo, Libro, Software...)"]
+        D2 --> D3["Base de Datos sin Subtipos ni Familias"]
+    end
+
+    subgraph Khemia ["Khemia (sys-pea-integration)"]
+        K1["Scraper GrupLAC HTML"] -->|Mapeo de Sección + Marcadores| K2["70 Subtipos Anexo 1 (ART_A1, SF, TD, TM, TP, WP...)"]
+        K2 --> K3["SQL Server con Tipología Oficial"]
+    end
+
+    subgraph PEAi ["PEA-i (Actualizado Sesión 48)"]
+        P1["Motor Ingesta (GrupLAC HTML + PDF + CSV)"] -->|SECTION_MAP_2024 + Marcadores Granulares| P2["70 Subtipos Oficiales Anexo 1 + 5 Familias"]
+        P2 --> P3["SQLite3 Canónico: subtipo_codigo, familia, clase_medicion, peso_calculado"]
+        P3 --> P4["Multilista Ortogonal 3D C++17 y Python (100% Equivalencia)"]
+    end
+```
+
+### 📌 6.2. Causa Raíz de la Fragilidad Detectada en el Scraper de Damián
+
+El scraper de Damián en `/home/kovyn/Documentos/Proyectos/PEA-I-taller2/Taller2_KM_PO_XX.py` (Líneas 610–645):
+1. **Aplanamiento a 15 tablas visuales:** GrupLAC HTML (tecnología heredada de hace más de 15 años) agrupa la producción en tablas visuales con nombres genéricos (`table.transparente`). Damián asumió esas 15 etiquetas como el modelo ontológico de datos.
+2. **Pérdida de la tipología Anexo 1:** MinCiencias 2024 define 70 subtipos agrupados en 5 familias (`GNC`, `DTI`, `ASC`, `DPC`, `FRH`). Al aplanar a 15 textos planos:
+   - **Tesis Doctorales (`TD`, FRH-A, 160 pts):** Se confundían con Trabajos de Pregrado (`TP`, FRH-B, 20 pts).
+   - **Working Papers (`WP`, 100 pts) y Libros de Divulgación (`LIB_DIV`, 100 pts):** Pertenecen a Divulgación Pública de la Ciencia (`DPC`), pero se clasificaban falsamente en `GNC` (Generación de Nuevo Conocimiento).
+   - **Software Registrado (`SF`):** Pertenece a `DTI` (clase `DTI-B`), con peso global oficial de 35 y peso relativo de 8.0 ($35 \times 8 / 10 = 28$ pts), pero se le asignaban pesos empíricos de 90 pts.
+3. **El puerto en nuestro repositorio:** En sesiones previas, `src/python/core/ingesta.py:58` documentaba explícitamente `# port compañero`, habiendo importado la lógica simplificada de Damián. Cuando se introdujo el catálogo JSON de 2024, se intentó clasificar mediante heurísticas aproximadas de cadenas sobre el campo `tipo`, arrastrando los falsos positivos.
+
+### 🚀 6.3. Solución Implementada en PEA-i (Sesión 48)
+
+1. **Esquema de Base de Datos Canónico (`data/schema.sql`):**
+   ```sql
+   ALTER TABLE Productos ADD COLUMN subtipo_codigo TEXT DEFAULT 'ART';
+   ALTER TABLE Productos ADD COLUMN familia TEXT NOT NULL DEFAULT 'GNC' CHECK(familia IN ('GNC', 'DTI', 'ASC', 'DPC', 'FRH', 'OTRO'));
+   ALTER TABLE Productos ADD COLUMN clase_medicion TEXT DEFAULT 'GNC-A';
+   ALTER TABLE Productos ADD COLUMN peso_calculado REAL DEFAULT 0.0;
+   ```
+2. **Scraper Granular:** Portado el diccionario canónico `SECTION_MAP_2024` y la función `clasificar_marcador_gruplac_2024` de Khemia, enriquecida con análisis de patrones para discernir Doctorados (`TD` / `FRH-A`) de Maestrías (`TM`) y Pregrados (`TP`), patentes de invención (`PAT_INV`) vs modelos de utilidad (`MOD_UTIL`), y artículos Open Access.
+3. **Ponderaciones Oficiales:** Alineación rigurosa con la Tabla 6 y Anexo 1 de la Convocatoria 957:
+   - `SF` (Software): `DTI`, `DTI-B`, peso relativo 8.0, peso global 35 (IPP = 28 pts).
+   - `TD` (Tesis Doctoral): `FRH`, `FRH-A`, peso global 160.
+   - `TM` (Tesis Maestría): `FRH`, `FRH-B`, peso global 70.
+   - `TP` (Trabajo Pregrado): `FRH`, `FRH-B`, peso global 20.
+   - `WP` (Working Paper): `DPC`, peso global 100.
+4. **Validación Cruzada y Cero Warnings:**
+   - `make clean && make` compila sin un solo warning (`-Wall -Wextra`).
+   - `make test` supera el 100% de pruebas unitarias en C++ y Python.
+   - `make verify` confirma 100% de paridad funcional y estructural entre el motor C++17 y el motor Python.
+

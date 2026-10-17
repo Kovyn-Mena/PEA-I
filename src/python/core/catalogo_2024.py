@@ -129,7 +129,7 @@ class CatalogoMinCiencias2024:
         return None
 
     @classmethod
-    def clasificar_producto(cls, tipo: str, categoria: str = "A1", titulo: str = "") -> Dict[str, Any]:
+    def clasificar_producto(cls, tipo: str, categoria: str = "A1", titulo: str = "", subtipo: str = "") -> Dict[str, Any]:
         """
         Mapea un producto a su tipología oficial MinCiencias 2024 (70 subtipos del Anexo 1),
         retornando familia, código 2024, clase de medición y pesos.
@@ -137,59 +137,94 @@ class CatalogoMinCiencias2024:
         t = (tipo or "").strip().lower()
         cat = (categoria or "").strip().upper()
         tit = (titulo or "").strip().lower()
+        sub = (subtipo or "").strip().upper()
 
-        # Si la categoría ya viene como un código oficial del catálogo 2024, resolver directo
-        directo = cls.buscar_por_codigo(cat)
-        if directo:
-            return cls._resultado(
-                directo["familia"],
-                directo["codigo_2024"],
-                directo["nombre"],
-                directo["model_ref"],
-                directo["measurement_class"],
-                directo["weight"],
-                directo["global_weight"],
-            )
+        # Si se especificó un subtipo o código oficial del catálogo 2024, resolver directo
+        for candidato in [sub, (tipo or "").strip().upper(), cat]:
+            if candidato:
+                directo = cls.buscar_por_codigo(candidato)
+                if directo:
+                    return cls._resultado(
+                        directo["familia"],
+                        directo["codigo_2024"],
+                        directo["nombre"],
+                        directo["model_ref"],
+                        directo["measurement_class"],
+                        directo["weight"],
+                        directo["global_weight"],
+                    )
 
-        # 1. GNC: Generación de Nuevo Conocimiento (10 subtipos: ART, NCE, LIB, CAP, GC, PA, PMU, VV, NRA, PMR, AAD)
+        # 1. FRH: Formación de Recurso Humano (Prioridad sobre 'Articulo' para títulos de tesis y formación)
+        if any(k in t for k in ["trabajo de grado", "tesis", "grado", "direccion", "dirección", "trabajo dirigido", "doctoral", "doctorado", "maestr", "pregrado"]) or \
+           any(k in tit for k in ["doctorado", "doctoral", "tesis doctoral", "maestria", "maestría", "magister", "pregrado/universitario", "trabajo de grado", "formación académica"]):
+            if any(k in tit for k in ["doctor", "doc"]) or any(k in t for k in ["doctor"]):
+                return cls._resultado("FRH", "TD", "Dirección de tesis de doctorado", "2.2.4.1", "FRH-A", 10, 160)
+            elif any(k in tit for k in ["maestr", "master", "mag"]) or any(k in t for k in ["maestr"]):
+                return cls._resultado("FRH", "TM", "Dirección de trabajo de grado de maestría", "2.2.4.2", "FRH-B", 10, 70)
+            elif any(k in tit for k in ["ondas", "apo", "semillero", "joven"]) or any(k in t for k in ["ondas", "apo"]):
+                return cls._resultado("FRH", "APO", "Acompañamiento al Programa Ondas", "2.2.4.6", "FRH-B", 5, 30)
+            return cls._resultado("FRH", "TP", "Dirección de trabajo de grado de pregrado", "2.2.4.3", "FRH-B", 10, 20)
+
+        # 2. DPC: Working papers (Documento de trabajo)
+        if any(k in t for k in ["documento de trabajo", "working paper", "working papers", "wp"]) or \
+           any(k in tit for k in ["documento de trabajo", "working paper", "working papers"]):
+            return cls._resultado("DPC", "WP", "Documento de trabajo (Working Paper)", "2.2.4.2", "DPC", 10, 100)
+
+        # 3. GNC: Generación de Nuevo Conocimiento (10 subtipos: ART, N, LIB, CAP_LIB, PA, PMU, VV, NRA, PMR, AAD)
         if any(k in t for k in ["articulo", "artículo", "nota cientifica", "nota científica"]):
+            es_open = "open" in t or "abierto" in t or "open" in tit or "abierto" in tit
             if "NOTA" in t.upper() or "D" == cat:
-                return cls._resultado("GNC", "NCE_A1", "Nota científica en revista indexada", "2.2.1.1", "GNC-B", 10, 20)
+                return cls._resultado("GNC", "N_A1", "Nota científica en revista indexada", "2.2.1.2", "GNC-B", 10, 4)
             elif "A1" in cat:
-                return cls._resultado("GNC", "ART_A1", "Artículo de investigación A1 (Q1)", "2.2.1.1", "GNC-TOP", 10, 100)
+                if es_open:
+                    return cls._resultado("GNC", "ART_OPEN_A1", "Artículo A1 - Acceso Abierto", "2.2.1.1", "GNC-TOP", 10, 100)
+                return cls._resultado("GNC", "ART_A1", "Artículo de investigación A1 (Q1)", "2.2.1.1", "GNC-TOP", 9.5, 100)
             elif "A2" in cat or cat == "A":
-                return cls._resultado("GNC", "ART_A2", "Artículo de investigación A2 (Q2)", "2.2.1.1", "GNC-TOP", 6, 60)
+                if es_open:
+                    return cls._resultado("GNC", "ART_OPEN_A2", "Artículo A2 - Acceso Abierto", "2.2.1.1", "GNC-TOP", 6, 100)
+                return cls._resultado("GNC", "ART_A2", "Artículo de investigación A2 (Q2)", "2.2.1.1", "GNC-TOP", 5.5, 100)
             elif "B" in cat:
-                return cls._resultado("GNC", "ART_B", "Artículo de investigación B (Q3)", "2.2.1.1", "GNC-A", 3.5, 35)
+                if es_open:
+                    return cls._resultado("GNC", "ART_OPEN_B", "Artículo B - Acceso Abierto", "2.2.1.1", "GNC-A", 3.5, 100)
+                return cls._resultado("GNC", "ART_B", "Artículo de investigación B (Q3)", "2.2.1.1", "GNC-A", 3, 100)
             else:
-                return cls._resultado("GNC", "ART_C", "Artículo de investigación C (Q4)", "2.2.1.1", "GNC-A", 2, 20)
+                if es_open:
+                    return cls._resultado("GNC", "ART_OPEN_C", "Artículo C - Acceso Abierto", "2.2.1.1", "GNC-A", 2, 100)
+                return cls._resultado("GNC", "ART_C", "Artículo de investigación C (Q4)", "2.2.1.1", "GNC-A", 1.5, 100)
 
-        elif any(k in t for k in ["libro"]) and not any(k in t for k in ["capitulo", "capítulo", "formacion", "divulgacion"]):
+        # Distinción estricta de Libros: Formación y Divulgación pertenecen a DPC (Sección 2.2.4)
+        elif any(k in t for k in ["libro de formacion", "libros de formacion", "libro de formación", "libros de formación"]):
+            return cls._resultado("DPC", "LIB_FOR", "Libro de formación CTeI", "2.2.4.5", "DPC", 10, 100)
+
+        elif any(k in t for k in ["libro de divulgacion", "libros de divulgacion", "libro de divulgación", "libros de divulgación"]):
+            return cls._resultado("DPC", "LIB_DIV", "Libro de divulgación científica", "2.2.4.4", "DPC", 10, 100)
+
+        elif any(k in t for k in ["libro"]) and not any(k in t for k in ["capitulo", "capítulo"]):
             if "A1" in cat:
-                return cls._resultado("GNC", "LIB_A1", "Libro resultado de investigación A1", "2.2.1.2", "GNC-TOP", 10, 300)
+                return cls._resultado("GNC", "LIB_A1", "Libro resultado de investigación A1", "2.2.1.3", "GNC-TOP", 10, 300)
             elif "A" in cat:
-                return cls._resultado("GNC", "LIB_A", "Libro resultado de investigación A", "2.2.1.2", "GNC-TOP", 9, 270)
-            return cls._resultado("GNC", "LIB_B", "Libro resultado de investigación B", "2.2.1.2", "GNC-A", 8, 240)
+                return cls._resultado("GNC", "LIB_A", "Libro resultado de investigación A", "2.2.1.3", "GNC-TOP", 9, 300)
+            return cls._resultado("GNC", "LIB_B", "Libro resultado de investigación B", "2.2.1.3", "GNC-A", 8, 300)
 
         elif any(k in t for k in ["capitulo", "capítulo"]):
             if "A1" in cat:
-                return cls._resultado("GNC", "CAP_A1", "Capítulo en libro resultado de investigación A1", "2.2.1.3", "GNC-TOP", 10, 100)
+                return cls._resultado("GNC", "CAP_A1", "Capítulo en libro resultado de investigación A1", "2.2.1.4", "GNC-TOP", 10, 100)
             elif "A" in cat:
-                return cls._resultado("GNC", "CAP_A", "Capítulo en libro resultado de investigación A", "2.2.1.3", "GNC-TOP", 9, 90)
-            return cls._resultado("GNC", "CAP_B", "Capítulo en libro resultado de investigación B", "2.2.1.3", "GNC-A", 8, 80)
+                return cls._resultado("GNC", "CAP_A", "Capítulo en libro resultado de investigación A", "2.2.1.4", "GNC-TOP", 9, 100)
+            return cls._resultado("GNC", "CAP_B", "Capítulo en libro resultado de investigación B", "2.2.1.4", "GNC-A", 8, 100)
 
         elif any(k in t for k in ["patente", "invencion", "invención", "modelo de utilidad"]):
             if "utilidad" in t:
-                return cls._resultado("GNC", "PMU_A1", "Patente de modelo de utilidad A1", "2.2.1.5.2", "GNC-TOP", 10, 100)
-            return cls._resultado("GNC", "PA_A1", "Patente de invención obtenida A1", "2.2.1.5.1", "GNC-TOP", 10, 300)
+                return cls._resultado("GNC", "MOD_UTIL", "Patente de modelo de utilidad", "2.2.1.5.2", "GNC-TOP", 10, 100)
+            return cls._resultado("GNC", "PAT_INV", "Patente de invención", "2.2.1.5.1", "GNC-TOP", 10, 300)
 
         elif any(k in t for k in ["variedad vegetal", "variedad", "raza", "pecuaria"]):
-            return cls._resultado("GNC", "VV_A1", "Variedad vegetal o nueva raza animal", "2.2.1.6.1", "GNC-TOP", 10, 300)
+            return cls._resultado("GNC", "VV", "Variedad vegetal o nueva raza animal", "2.2.1.6", "GNC-TOP", 10, 300)
 
         elif any(k in t for k in ["creacion", "creación", "obra", "arquitectura"]):
-            return cls._resultado("GNC", "AAD_A", "Obra de investigación-creación en artes y diseño", "2.2.1.7", "GNC-TOP", 8, 80)
+            return cls._resultado("GNC", "AAD", "Obra de investigación-creación en artes y diseño", "2.2.1.7", "GNC-TOP", 8, 80)
 
-        # 2. DTI: Desarrollo Tecnológico e Innovación (25 subtipos: DI, ECI, SF, PP, PI, SD, PN, CC, NRC, SE, EBT, EC, RNL, GPC, GMI, etc.)
+        # 2. DTI: Desarrollo Tecnológico e Innovación (Software registrado: Anexo 1 -> DTI-B, peso relativo 8, peso global 35)
         elif any(k in t for k in ["software", "soporte logico", "algoritmo", "computacional"]):
             return cls._resultado("DTI", "SF", "Software registrado ante la DNDA", "2.2.2.1.3", "DTI-B", 8, 35)
 
@@ -200,7 +235,7 @@ class CatalogoMinCiencias2024:
             return cls._resultado("DTI", "PI", "Prototipo industrial registrado", "2.2.2.1.5", "DTI-A", 4, 35)
 
         elif any(k in t for k in ["diseno", "diseño"]):
-            return cls._resultado("DTI", "DI_A", "Diseño industrial registrado", "2.2.2.1.1", "DTI-A", 10, 35)
+            return cls._resultado("DTI", "DI", "Diseño industrial registrado", "2.2.2.1.1", "DTI-A", 10, 35)
 
         elif any(k in t for k in ["esquema", "circuito"]):
             return cls._resultado("DTI", "ECI", "Esquema de circuito integrado", "2.2.2.1.2", "DTI-A", 4, 35)
@@ -215,50 +250,51 @@ class CatalogoMinCiencias2024:
             return cls._resultado("DTI", "CC", "Colección científica con curaduría vigente", "2.2.2.1.8", "DTI-B", 10, 35)
 
         elif any(k in t for k in ["secreto", "spin-off", "spinoff", "empresa de base"]):
-            return cls._resultado("DTI", "EBT_A", "Empresa de base tecnológica (Spin-off / Start-up)", "2.2.2.2.2", "DTI-A", 10, 100)
+            return cls._resultado("DTI", "EBT", "Empresa de base tecnológica (Spin-off / Start-up)", "2.2.2.2.2", "DTI-A", 10, 100)
 
-        elif any(k in t for k in ["regulacion", "regulación", "norma", "guia", "protocolo"]):
-            return cls._resultado("DTI", "RNL_A", "Regulación, norma o reglamento técnico", "2.2.2.3.1", "DTI-A", 10, 70)
+        elif any(k in t for k in ["regulacion", "regulación", "norma", "protocolo"]):
+            return cls._resultado("DTI", "REG_NORM", "Regulación, norma o reglamento técnico", "2.2.2.3.1", "DTI-A", 10, 70)
 
-        elif any(k in t for k in ["informe", "innovacion", "innovación"]):
-            return cls._resultado("DTI", "INF_TEC", "Informe técnico final de investigación", "2.2.2.4", "DTI-B", 5, 50)
+        elif any(k in t for k in ["informe tecnico", "informes tecnicos", "informe final"]):
+            return cls._resultado("DPC", "INF", "Informe técnico final de investigación", "2.2.4.7", "DPC", 10, 100)
 
         elif any(k in t for k in ["consultoria", "consultoría"]):
-            return cls._resultado("DTI", "CT_A", "Consultoría científico-tecnológica o en arte", "2.2.2.4.1", "DTI-B", 10, 50)
+            return cls._resultado("DPC", "CON_CT", "Consultoría científico-tecnológica", "2.2.4.8", "DPC", 10, 50)
 
-        # 3. FRH: Formación de Recurso Humano en CTeI (13 subtipos: TD, TM, TP, PID, PAI, PPC, PFM, PFP, JIN, APO, etc.)
-        elif any(k in t for k in ["trabajo de grado", "tesis", "grado", "direccion", "dirección"]):
+        # 3. FRH: Formación de Recurso Humano (Separación estricta de Doctorados FRH-A vs Maestrías/Pregrados FRH-B)
+        elif any(k in t for k in ["trabajo de grado", "tesis", "grado", "direccion", "dirección", "trabajo dirigido"]):
             if "doctor" in tit or "doc" in tit or "doctor" in t:
-                return cls._resultado("FRH", "TD_A", "Dirección de tesis de doctorado con distinción", "2.2.5.1.1", "FRH-A", 10, 100)
+                return cls._resultado("FRH", "TD", "Dirección de tesis de doctorado", "2.2.4.1", "FRH-A", 10, 160)
             elif "maestr" in tit or "master" in tit or "mag" in tit or "maestr" in t:
-                return cls._resultado("FRH", "TM_A", "Dirección de trabajo de grado de maestría", "2.2.5.1.2", "FRH-B", 10, 70)
+                return cls._resultado("FRH", "TM", "Dirección de trabajo de grado de maestría", "2.2.4.2", "FRH-B", 10, 70)
             elif "ondas" in tit or "apo" in tit or "semillero" in tit or "joven" in tit:
-                return cls._resultado("FRH", "APO", "Acompañamiento al Programa Ondas / Jóvenes Investigadores", "2.2.5.5", "FRH-B", 5, 30)
-            return cls._resultado("FRH", "TP_A", "Dirección de trabajo de grado de pregrado", "2.2.5.1.3", "FRH-B", 10, 40)
+                return cls._resultado("FRH", "APO", "Acompañamiento al Programa Ondas", "2.2.4.6", "FRH-B", 5, 30)
+            return cls._resultado("FRH", "TP", "Dirección de trabajo de grado de pregrado", "2.2.4.3", "FRH-B", 10, 20)
 
         elif any(k in t for k in ["jurado", "evaluador"]):
-            return cls._resultado("FRH", "JUR_EVAL", "Jurado o comité evaluador de trabajo de grado", "2.2.5.1", "FRH-B", 4, 40)
+            return cls._resultado("FRH", "JUR_EVAL", "Jurado o comité evaluador de trabajo de grado", "2.2.4.1", "FRH-B", 4, 20)
 
         elif any(k in t for k in ["cursocorto", "curso"]):
-            return cls._resultado("FRH", "CUR_COR", "Curso de corta duración en programa de formación", "2.2.5.3", "FRH-B", 3, 30)
+            return cls._resultado("FRH", "CUR_COR", "Curso de corta duración en programa de formación", "2.2.4.5", "FRH-B", 3, 20)
 
-        # 4. ASC: Apropiación Social del Conocimiento (10 subtipos: PP, CC_ASC, FCSC, FCP, etc.)
+        # 4. ASC: Apropiación Social del Conocimiento
         elif any(k in t for k in ["apropiacion", "apropiación", "innovacion social", "ciudadana", "comunidad"]):
-            return cls._resultado("ASC", "PP_A", "Proceso de apropiación social del conocimiento", "2.2.3.1", "ASC-A", 10, 80)
+            return cls._resultado("ASC", "PP", "Proceso de apropiación social del conocimiento", "2.2.3.1", "ASC", 10, 80)
+
+        # 5. DPC: Divulgación Pública de la Ciencia (Working Papers pertenecen a DPC, Secc 2.2.4.2)
+        elif any(k in t for k in ["documento de trabajo", "working paper", "working papers", "wp"]):
+            return cls._resultado("DPC", "WP", "Documento de trabajo (Working Paper)", "2.2.4.2", "DPC", 10, 100)
 
         elif any(k in t for k in ["contenido", "audiovisual", "sonoro", "multimedia"]):
-            return cls._resultado("DPC", "CD_AUD", "Contenido digital o producción audiovisual CTeI", "2.2.4.1", "DPC-B", 4, 40)
+            return cls._resultado("DPC", "PCD", "Contenido digital o producción audiovisual CTeI", "2.2.4.1", "DPC", 10, 100)
 
-        # 5. DPC: Divulgación Pública de la Ciencia (12 subtipos: EC, RC, LFD, MFD, BF, DT, NC, etc.)
-        elif any(k in t for k in ["evento", "ponencia", "conferencia", "taller", "documento de trabajo", "divulgacion", "divulgación", "boletin"]):
+        elif any(k in t for k in ["evento", "ponencia", "conferencia", "taller", "divulgacion", "divulgación", "boletin"]):
             if "evento" in t or "ponencia" in t:
-                return cls._resultado("DPC", "EC_A", "Evento científico o artístico con componente de apropiación", "2.2.4.1", "DPC-A", 6, 60)
-            elif "documento" in t:
-                return cls._resultado("DPC", "DT", "Documento de trabajo (Working Paper)", "2.2.4.3", "DPC-B", 5, 50)
-            return cls._resultado("DPC", "LFD", "Publicación o taller de divulgación pública CTeI", "2.2.4.2", "DPC-B", 4, 40)
+                return cls._resultado("DPC", "EC", "Evento científico con componente de divulgación", "2.2.4.9", "DPC", 10, 50)
+            return cls._resultado("DPC", "GC", "Generación de contenido o divulgación pública CTeI", "2.2.4.3", "DPC", 10, 100)
 
         # Por defecto: GNC
-        return cls._resultado("GNC", "ART_B", "Producto científico general (GNC)", "2.2.1.1", "GNC-A", 3.5, 35)
+        return cls._resultado("GNC", "ART_B", "Producto científico general (GNC)", "2.2.1.1", "GNC-A", 3, 100)
 
     @staticmethod
     def _resultado(familia: str, codigo: str, nombre: str, ref: str, clase: str, peso: float, peso_global: int) -> Dict[str, Any]:

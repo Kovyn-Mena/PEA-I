@@ -109,8 +109,12 @@ private:
                 json << "          \"categoria\": \"" << escaparJSON(p->categoria_minciencias) << "\",\n";
                 json << "          \"validado\": " << (p->validado ? "true" : "false") << ",\n";
                 json << "          \"activo\": " << (p->activo ? "true" : "false") << ",\n";
-                json << "          \"id_investigador\": \"" << escaparJSON(p->id_investigador) << "\"\n";
-                json << "        }";
+                json << "          \"id_investigador\": \"" << escaparJSON(p->id_investigador) << "\",\n"
+          << "          \"subtipo_codigo\": \"" << escaparJSON(p->subtipo_codigo) << "\",\n"
+          << "          \"familia\": \"" << escaparJSON(p->familia) << "\",\n"
+          << "          \"clase_medicion\": \"" << escaparJSON(p->clase_medicion) << "\",\n"
+          << "          \"peso_calculado\": " << p->peso_calculado << "\n"
+          << "        }";
                 p = p->sigProductoGrupo;
             }
             json << "\n      ]\n";

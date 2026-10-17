@@ -1446,8 +1446,8 @@ class ConsolaApp:
             p = g.primer_producto
             while p:
                 if p.activo and g.activo:
-                    info = CatalogoMinCiencias2024.clasificar_producto(p.tipo, p.categoria_minciencias, p.titulo)
-                    f = info["familia"]
+                    info = CatalogoMinCiencias2024.clasificar_producto(getattr(p, 'subtipo_codigo', '') or p.tipo, p.categoria_minciencias, p.titulo)
+                    f = getattr(p, 'familia', '') or info["familia"]
                     if f == "GNC": fam_gnc += 1
                     elif f == "DTI": fam_dti += 1
                     elif f == "ASC": fam_asc += 1
@@ -1466,11 +1466,14 @@ class ConsolaApp:
                     elif p.categoria_minciencias == "B": cat_b += 1
                     elif p.categoria_minciencias == "C": cat_c += 1
 
+                    peso_base = getattr(p, 'peso_calculado', 0.0)
+                    if peso_base <= 0.0:
+                        peso_base = float(info["global_weight"])
                     if p.validado:
                         validados += 1
-                        puntos_ponderados += info["global_weight"]
+                        puntos_ponderados += int(peso_base)
                     else:
-                        puntos_ponderados += (info["global_weight"] // 2)
+                        puntos_ponderados += int(peso_base // 2)
                 p = p.sig_producto_grupo
             g = g.sig_grupo
 

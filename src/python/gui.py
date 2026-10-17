@@ -149,13 +149,17 @@ class DashboardApp:
         while g:
             cur_p = g.primer_producto
             while cur_p:
-                info_2024 = CatalogoMinCiencias2024.clasificar_producto(cur_p.tipo, cur_p.categoria_minciencias, cur_p.titulo)
+                info_2024 = CatalogoMinCiencias2024.clasificar_producto(getattr(cur_p, 'subtipo_codigo', '') or cur_p.tipo, cur_p.categoria_minciencias, cur_p.titulo)
+                peso_val = getattr(cur_p, 'peso_calculado', 0.0)
+                if peso_val <= 0.0:
+                    peso_val = float(info_2024["global_weight"])
                 filas_prods.append({
                     "id": cur_p.id_producto,
                     "tipo": cur_p.tipo,
-                    "familia": info_2024["familia"],
+                    "subtipo": getattr(cur_p, 'subtipo_codigo', '') or info_2024["codigo_2024"],
+                    "familia": getattr(cur_p, 'familia', '') or info_2024["familia"],
                     "codigo_2024": info_2024["codigo_2024"],
-                    "peso": info_2024["global_weight"],
+                    "peso": peso_val,
                     "titulo": cur_p.titulo,
                     "anio": cur_p.anio,
                     "categoria": cur_p.categoria_minciencias,

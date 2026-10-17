@@ -66,9 +66,16 @@ public:
         }
 
         // 3. Cargar Productos
-        const char* sqlProd = "SELECT id_producto, tipo, titulo, anio, categoria_minciencias, validado, codigo_grupo, id_investigador, activo FROM Productos;";
+        const char* sqlProd = "SELECT id_producto, tipo, titulo, anio, categoria_minciencias, validado, codigo_grupo, id_investigador, activo, subtipo_codigo, familia, clase_medicion, peso_calculado FROM Productos;";
         sqlite3_stmt* stmtP = nullptr;
-        if (sqlite3_prepare_v2(db, sqlProd, -1, &stmtP, nullptr) == SQLITE_OK) {
+        bool fallback = false;
+        if (sqlite3_prepare_v2(db, sqlProd, -1, &stmtP, nullptr) != SQLITE_OK) {
+            fallback = true;
+            const char* sqlProdOld = "SELECT id_producto, tipo, titulo, anio, categoria_minciencias, validado, codigo_grupo, id_investigador, activo FROM Productos;";
+            sqlite3_prepare_v2(db, sqlProdOld, -1, &stmtP, nullptr);
+        }
+
+        if (stmtP) {
             while (sqlite3_step(stmtP) == SQLITE_ROW) {
                 std::string id_p = columnaTextoSegura(stmtP, 0);
                 std::string tipo = columnaTextoSegura(stmtP, 1);
@@ -80,7 +87,22 @@ public:
                 std::string id_inv = columnaTextoSegura(stmtP, 7);
                 bool act = sqlite3_column_int(stmtP, 8) != 0;
 
-                multi.insertarProducto(cod_g, id_inv, id_p, tipo, tit, anio, cat_m, val, act);
+                std::string sub_c = "ART";
+                std::string fam = "GNC";
+                std::string cls_m = "GNC-A";
+                double peso = 0.0;
+
+                if (!fallback && sqlite3_column_count(stmtP) >= 13) {
+                    sub_c = columnaTextoSegura(stmtP, 9);
+                    fam = columnaTextoSegura(stmtP, 10);
+                    cls_m = columnaTextoSegura(stmtP, 11);
+                    peso = sqlite3_column_double(stmtP, 12);
+                    if (sub_c.empty()) sub_c = "ART";
+                    if (fam.empty()) fam = "GNC";
+                    if (cls_m.empty()) cls_m = "GNC-A";
+                }
+
+                multi.insertarProducto(cod_g, id_inv, id_p, tipo, tit, anio, cat_m, val, act, sub_c, fam, cls_m, peso);
             }
             sqlite3_finalize(stmtP);
         }
@@ -134,14 +156,19 @@ public:
         }
 
         // 3. Insertar Productos
-        const char* sqlInsP = "INSERT INTO Productos (id_producto, tipo, titulo, anio, categoria_minciencias, validado, codigo_grupo, id_investigador, activo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        const char* sqlInsP = "INSERT INTO Productos (id_producto, tipo, titulo, anio, categoria_minciencias, validado, codigo_grupo, id_investigador, activo, subtipo_codigo, familia, clase_medicion, peso_calculado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         sqlite3_stmt* stmtP = nullptr;
+        bool conCols2024 = true;
         if (sqlite3_prepare_v2(db, sqlInsP, -1, &stmtP, nullptr) != SQLITE_OK) {
-            sqlite3_finalize(stmtG);
-            sqlite3_finalize(stmtI);
-            sqlite3_exec(db, "ROLLBACK;", nullptr, nullptr, nullptr);
-            sqlite3_close(db);
-            return false;
+            conCols2024 = false;
+            const char* sqlInsPOld = "INSERT INTO Productos (id_producto, tipo, titulo, anio, categoria_minciencias, validado, codigo_grupo, id_investigador, activo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            if (sqlite3_prepare_v2(db, sqlInsPOld, -1, &stmtP, nullptr) != SQLITE_OK) {
+                sqlite3_finalize(stmtG);
+                sqlite3_finalize(stmtI);
+                sqlite3_exec(db, "ROLLBACK;", nullptr, nullptr, nullptr);
+                sqlite3_close(db);
+                return false;
+            }
         }
 
         NodoGrupo* g = multi.getCabezaGrupos();
@@ -184,6 +211,12 @@ public:
                 sqlite3_bind_text(stmtP, 7, p->codigo_grupo.c_str(), -1, SQLITE_TRANSIENT);
                 sqlite3_bind_text(stmtP, 8, p->id_investigador.c_str(), -1, SQLITE_TRANSIENT);
                 sqlite3_bind_int(stmtP, 9, p->activo ? 1 : 0);
+                if (conCols2024) {
+                    sqlite3_bind_text(stmtP, 10, p->subtipo_codigo.c_str(), -1, SQLITE_TRANSIENT);
+                    sqlite3_bind_text(stmtP, 11, p->familia.c_str(), -1, SQLITE_TRANSIENT);
+                    sqlite3_bind_text(stmtP, 12, p->clase_medicion.c_str(), -1, SQLITE_TRANSIENT);
+                    sqlite3_bind_double(stmtP, 13, p->peso_calculado);
+                }
                 sqlite3_step(stmtP);
                 sqlite3_reset(stmtP);
 

@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS Investigadores (
 -- 3. Tabla de Productos de Investigación
 CREATE TABLE IF NOT EXISTS Productos (
     id_producto TEXT PRIMARY KEY,
-    tipo TEXT NOT NULL CHECK(tipo IN ('Articulo', 'Libro', 'Capitulo', 'Software', 'Patente', 'Trabajo de Grado', 'Tesis', 'Jurado', 'CursoCorto', 'Evento', 'Consultoria', 'Informe', 'Contenido', 'Regulacion', 'Prototipo', 'Diseno')),
+    tipo TEXT NOT NULL,
     titulo TEXT NOT NULL,
     anio INTEGER NOT NULL,
     categoria_minciencias TEXT NOT NULL DEFAULT 'A1',
@@ -40,6 +40,10 @@ CREATE TABLE IF NOT EXISTS Productos (
     codigo_grupo TEXT NOT NULL,
     id_investigador TEXT NOT NULL,
     activo INTEGER NOT NULL DEFAULT 1, -- 1: Activo, 0: Desactivado
+    subtipo_codigo TEXT DEFAULT 'ART', -- Código canónico MinCiencias 2024 (ART, WP, TD, TM, TP, SF...)
+    familia TEXT NOT NULL DEFAULT 'GNC' CHECK(familia IN ('GNC', 'DTI', 'ASC', 'DPC', 'FRH', 'OTRO')),
+    clase_medicion TEXT DEFAULT 'GNC-A', -- TOP, GNC-A, GNC-B, DTI-A, DTI-B, FRH-A, FRH-B, ASC-A, DPC...
+    peso_calculado REAL DEFAULT 0.0,     -- Peso final = Peso Global x Peso Relativo
     FOREIGN KEY (codigo_grupo) REFERENCES Grupos(codigo_grupo) ON DELETE CASCADE,
     FOREIGN KEY (id_investigador) REFERENCES Investigadores(documento_id) ON DELETE CASCADE
 );
@@ -70,7 +74,10 @@ CREATE TABLE IF NOT EXISTS PerfilInvestigador (
     FOREIGN KEY (documento_id) REFERENCES Investigadores(documento_id) ON DELETE CASCADE
 );
 
--- Índices para optimizar búsquedas y filtrados por año/grupo
+-- Índices para optimizar búsquedas y filtrados por año/grupo/familia
 CREATE INDEX IF NOT EXISTS idx_productos_anio ON Productos(anio);
 CREATE INDEX IF NOT EXISTS idx_productos_grupo ON Productos(codigo_grupo);
 CREATE INDEX IF NOT EXISTS idx_investigadores_grupo ON Investigadores(codigo_grupo);
+CREATE INDEX IF NOT EXISTS idx_productos_familia ON Productos(familia);
+CREATE INDEX IF NOT EXISTS idx_productos_subtipo ON Productos(subtipo_codigo);
+

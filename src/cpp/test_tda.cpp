@@ -4,6 +4,7 @@
 #include "include/Multilista.h"
 #include "include/Pila.h"
 #include "include/Cola.h"
+#include "include/Catalogo2024.h"
 
 void testMultilistaYHipercubo() {
     std::cout << "[TEST C++] 1. Multilista e Hipercubo de Información...\n";
@@ -117,6 +118,50 @@ void testColaIngesta() {
     std::cout << "  -> OK: Cola FIFO verificada.\n";
 }
 
+void testModeloMinCiencias2024() {
+    std::cout << "[TEST C++] 4. Modelo MinCiencias 2024 (70 subtipos, familias y pesos)...\n";
+
+    // 1. Software (SF) en DTI-B
+    InfoTipologia2024 sf = Catalogo2024::clasificar("Software", "A1", "PEA-i Sistema Core", "SF");
+    assert(sf.familia == "DTI");
+    assert(sf.codigo_2024 == "SF");
+    assert(sf.global_weight == 35);
+    assert(sf.weight == 8.0);
+
+    // 2. Tesis Doctoral (TD) en FRH-A vs Tesis Maestría (TM) en FRH-B
+    InfoTipologia2024 td = Catalogo2024::clasificar("Tesis doctoral", "A", "Tesis Doctoral en IA", "TD");
+    assert(td.familia == "FRH");
+    assert(td.global_weight == 160);
+
+    InfoTipologia2024 tm = Catalogo2024::clasificar("Trabajo de grado", "A", "Tesis de Maestría", "TM");
+    assert(tm.familia == "FRH");
+    assert(tm.global_weight == 70);
+
+    InfoTipologia2024 tp = Catalogo2024::clasificar("Trabajo de grado", "A", "Pregrado en Sistemas", "TP");
+    assert(tp.familia == "FRH");
+    assert(tp.global_weight == 20);
+
+    // 3. Working Paper (WP) en DPC (no GNC)
+    InfoTipologia2024 wp = Catalogo2024::clasificar("Documento de trabajo", "B", "Working Paper No. 12", "WP");
+    assert(wp.familia == "DPC");
+    assert(wp.codigo_2024 == "WP");
+
+    // 4. Multilista almacena campos 2024
+    Multilista multi;
+    assert(multi.insertarGrupo("G1", "Grupo 1", "A1", "Area", "Lider", 2010));
+    assert(multi.insertarInvestigador("G1", "INV1", "Investigador 1", "Senior", "PhD"));
+    assert(multi.insertarProducto("G1", "INV1", "P-SF", "Software", "Software PEA", 2024, "A1", true, true,
+                                 "SF", "DTI", "DTI-B", 28.0));
+    NodoProducto* p_sf = multi.buscarProducto("P-SF");
+    assert(p_sf != nullptr);
+    assert(p_sf->subtipo_codigo == "SF");
+    assert(p_sf->familia == "DTI");
+    assert(p_sf->clase_medicion == "DTI-B");
+    assert(p_sf->peso_calculado == 28.0);
+
+    std::cout << "  -> OK: 70 subtipos, 5 familias y ponderaciones Anexo 1 verificados.\n";
+}
+
 int main() {
     std::cout << "========================================\n";
     std::cout << "TEST SUITE TDA C++ (Estructuras Puras)\n";
@@ -125,6 +170,7 @@ int main() {
     testMultilistaYHipercubo();
     testPilaDeshacer();
     testColaIngesta();
+    testModeloMinCiencias2024();
 
     std::cout << "\n[EXITO TOTAL C++] Todos los TDA pasaron las pruebas rigurosamente.\n";
     return 0;

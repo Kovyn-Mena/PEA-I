@@ -35,7 +35,9 @@ class Multilista:
 
     def insertar_producto(self, cod_grupo: str, id_inv: str, id_prod: str,
                           tipo: str, titulo: str, anio: int, cat_min: str,
-                          val: bool, act: bool = True) -> bool:
+                          val: bool, act: bool = True,
+                          subtipo_codigo: str = "ART", familia: str = "GNC",
+                          clase_medicion: str = "GNC-A", peso_calculado: float = 0.0) -> bool:
         grupo = self.buscar_grupo(cod_grupo)
         inv = self.buscar_investigador(id_inv)
         if not grupo or not inv:
@@ -45,7 +47,8 @@ class Multilista:
 
         # Creación de única instancia en memoria
         nuevo = NodoProducto(id_prod, tipo, titulo, anio, cat_min, val,
-                             cod_grupo, id_inv, act)
+                             cod_grupo, id_inv, act,
+                             subtipo_codigo, familia, clase_medicion, peso_calculado)
 
         # 1. Enlace ortogonal en la dimensión Grupo
         nuevo.sig_producto_grupo = grupo.primer_producto

@@ -358,7 +358,36 @@ Archivos raíz perdidos al copiar el repo (papelera y disco revisados: sin copia
 - **Verificación:**
   - Test unitario simulado con mocks en Python verificando que 3 intentos vacíos retornan `False` y credenciales correctas retornan `True`.
   - Compilación limpia de C++ con `make clean && make` (`-Wall -Wextra`).
-  - Prueba de tubería en C++ `printf "\n\n\n\n\n\n" | ./pea_cpp` confirmando que rechaza los intentos vacíos y bloquea el acceso.
+### Sesión 48 — 2026-10-17 (Alineación Integral con los 70 Subtipos de MinCiencias 2024 y Auditoría de Scrapers con Khemia y Damián)
+- **Archivos modificados:**
+  - `data/schema.sql`, `data/init_db.py`, `data/import_pea_json.py`
+  - `src/python/structures/nodos.py`, `src/python/structures/multilista.py`, `src/python/core/db.py`
+  - `src/python/core/catalogo_2024.py`, `src/python/core/ingesta.py`, `src/python/console.py`, `src/python/gui.py`, `src/python/core/reporte_pdf.py`, `src/python/test_tda.py`
+  - `src/cpp/include/Nodo.h`, `src/cpp/include/Multilista.h`, `src/cpp/include/GestorSQLite.h`, `src/cpp/include/Catalogo2024.h`, `src/cpp/include/ConsolaApp.h`, `src/cpp/include/VisualizadorGrafico.h`, `src/cpp/test_tda.cpp`
+  - `documentacion-obsidian/PEA-I/043 - Auditoría Comparativa con Proyecto Khemia (sys-pea-integration).md`, `060 - Bitácora de Cambios y Registro de Errores Lógicos.md`
+- **Causa raíz y Diagnóstico (BUG-30):**
+  - Auditoría solicitada por el usuario a partir de capturas enviadas por el compañero del proyecto Khemia (`sys-pea-integration`) y contraste con el scraping del compañero Damián (`PEA-I-taller2`).
+  - Se confirmó que el scraping de Damián (`PEA-I-taller2/Taller2_KM_PO_XX.py:610-645` y `MODELO_FALTANTE_Punto5.md`) aplanaba la producción a 15 tablas visuales de GrupLAC HTML (`Articulo`, `Libro`, `Software`, etc.), omitiendo los 70 subtipos oficiales del Anexo 1 de la Convocatoria 957 de MinCiencias.
+  - Al portar el scraper en nuestro proyecto (`src/python/core/ingesta.py:58`), se heredó esa simplificación. Al clasificar mediante aproximaciones sobre `tipo`, se producían falsos positivos (Working Papers clasificados erróneamente en GNC en vez de DPC, pérdida de la jerarquía de Tesis Doctorales FRH-A vs Maestrías/Pregrados FRH-B, y asignación de pesos arbitrarios como Software con 90 pts en vez de $35 \times 8$).
+- **Acciones Realizadas:**
+  - **Base de Datos SQLite:** Enriquecida la tabla `Productos` con 4 columnas canónicas: `subtipo_codigo TEXT`, `familia TEXT CHECK(familia IN ('GNC','DTI','ASC','DPC','FRH','OTRO'))`, `clase_medicion TEXT`, `peso_calculado REAL`. Se implementó migración transparente y recalibración masiva de los 3,351 productos.
+  - **Taxonomía Oficial MinCiencias 2024:** Calibración exacta de los 70 subtipos según Anexo 1 y Tabla 6:
+    - Software (`SF`): `DTI`, `DTI-B`, peso relativo 8.0, peso global 35 (IPP = 28 pts).
+    - Tesis Doctorales (`TD`): `FRH`, `FRH-A`, peso global 160.
+    - Tesis de Maestría (`TM`): `FRH`, `FRH-B`, peso global 70.
+    - Trabajos de Grado de Pregrado (`TP`): `FRH`, `FRH-B`, peso global 20.
+    - Working Papers (`WP`): `DPC`, peso global 100.
+    - Libros de Divulgación (`LIB_DIV`): `DPC`, peso global 100.
+    - Artículos A1 Open Access (`ART_OPEN_A1`): `GNC-TOP`, peso relativo 10 vs tradicional 9.5.
+  - **Scraper e Ingesta:** Incorporación del mapeo canónico `SECTION_MAP_2024` y clasificador granular por fila `clasificar_marcador_gruplac_2024` de Khemia, con extracción de subtipos exactos de tablas HTML y discriminación por patrones de títulos para PDFs y CSVs.
+  - **TDAs C++ y Python:** `NodoProducto` actualizado para almacenar los 4 campos canónicos. `Multilista` y `GestorSQLite` / `GestorPersistencia` serializan y deserializan 13 columnas con retrocompatibilidad.
+  - **Interfaces:** `ConsolaApp.h` y `console.py` exhiben familia, subtipo y peso en detalle y estadísticas. `VisualizadorGrafico.h` incluye los metadatos en el JSON del hipercubo.
+  - **Suite de Pruebas:** Pruebas unitarias de tipología y pesos agregadas a `src/cpp/test_tda.cpp` y `src/python/test_tda.py`.
+- **Verificación:**
+  - `make clean && make`: compilación C++17 limpia con `-Wall -Wextra`, cero warnings.
+  - `make test`: 100% de éxito en tests C++ y Python.
+  - `make verify`: 100% equivalencia cruzada funcional y estructural (62 grupos, 362 investigadores, 3,351 productos, 168 en ventana 2 años, 2085 en ventana 5 años, 1984 en corte 2024).
+  - `./pea_cpp --gen`: `dist/visualizador_hipercubo.html` generado exitosamente.
 
 ## 🐛 Bugs
 | ID | Bug | Estado |
@@ -392,4 +421,5 @@ Archivos raíz perdidos al copiar el repo (papelera y disco revisados: sin copia
 | BUG-27 (nuevo, detectado por el usuario) | 51 grupos vacíos en SQLite y código artificial de GISICO (`COL0002099` vs `COL0018706`) provocaban fallos al cargar datos internos y filas duplicadas | **corregido S45**: purga de 51 grupos vacíos (11 grupos consolidados reales), migración relacional `COL0002099` $\rightarrow$ `COL0018706` con FK limpia y aliasing en todos los módulos |
 | BUG-28 (nuevo, detectado por Damián) | C++ carecía del flujo interactivo de arranque y la opción 3 de búsqueda solo imprimía texto sin permitir seleccionar ni descargar el grupo | **corregido S45**: `menuBuscarGrupo()` interactivo con tabla de candidatos, selección por índice, pre-chequeo `--existe-grupo` y enlace directo al menú de inicio y opción 3 de ingesta |
 | BUG-29 (nuevo, detectado por el usuario) | Login en consola permitía entrar con ENTER en blanco por fallback automático a credenciales por defecto (`admin`/`1234`) | **corregido S47**: eliminación de fallbacks automáticos en blanco en `ConsolaApp.h` y `console.py`; rechazo estricto de campos vacíos con aviso |
+| BUG-30 (nuevo, detectado por auditoría de capturas Khemia vs Damián) | Scraper aplanaba producción a 15 tablas visuales heredadas de Damián, perdiendo los 70 subtipos de MinCiencias 2024 (WP falsamente en GNC en vez de DPC, Tesis sin jerarquía FRH-A/FRH-B, y pesos arbitrarios como Software con 90 pts en vez de 35*8) | **corregido S48**: integración de `SECTION_MAP_2024` y clasificador granular por fila de Khemia; 4 columnas canónicas en SQLite (`subtipo_codigo`, `familia`, `clase_medicion`, `peso_calculado`); soporte en TDAs C++ y Python; calibración exacta de los 70 subtipos; 100% de tests y equivalencia cruzada |
 

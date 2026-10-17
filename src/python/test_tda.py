@@ -157,6 +157,51 @@ def test_antiwipe_persistencia():
         shutil.rmtree(tmp, ignore_errors=True)
     print("  -> OK: vacío no borra, fallo no guarda, dato real persiste.")
 
+def test_modelo_minciencias_2024():
+    print("[TEST Python] 5. Catálogo MinCiencias 2024 (70 subtipos, familias y ponderaciones)...")
+    from python.core.catalogo_2024 import CatalogoMinCiencias2024
+
+    # 1. Software (SF) en DTI-B
+    sf = CatalogoMinCiencias2024.clasificar_producto("Software", "A1", "PEA-i Sistema Core", "SF")
+    assert sf["familia"] == "DTI", f"Esperado DTI, obtenido {sf['familia']}"
+    assert sf["codigo_2024"] == "SF"
+    assert sf["global_weight"] == 35
+    assert sf["weight"] == 8.0
+
+    # 2. Tesis Doctoral (TD) en FRH-A vs Tesis Maestría (TM) en FRH-B
+    td = CatalogoMinCiencias2024.clasificar_producto("Tesis doctoral", "A", "Tesis de Doctorado en Computación", "TD")
+    assert td["familia"] == "FRH", f"Esperado FRH, obtenido {td['familia']}"
+    assert td["global_weight"] == 160
+
+    tm = CatalogoMinCiencias2024.clasificar_producto("Trabajo de grado", "A", "Tesis de Maestría en Software", "TM")
+    assert tm["familia"] == "FRH"
+    assert tm["global_weight"] == 70
+
+    tp = CatalogoMinCiencias2024.clasificar_producto("Trabajo de grado", "A", "Trabajo de Grado de Pregrado", "TP")
+    assert tp["familia"] == "FRH"
+    assert tp["global_weight"] == 20
+
+    # 3. Working Paper (WP) y Libros de divulgación (LIB_DIV) en DPC (no GNC)
+    wp = CatalogoMinCiencias2024.clasificar_producto("Documento de trabajo", "B", "Working Paper No. 12", "WP")
+    assert wp["familia"] == "DPC", f"Esperado DPC, obtenido {wp['familia']}"
+    assert wp["codigo_2024"] == "WP"
+
+    lib_div = CatalogoMinCiencias2024.clasificar_producto("Libro", "B", "Libro de divulgación de la ciencia", "LIB_DIV")
+    assert lib_div["familia"] == "DPC", f"Esperado DPC, obtenido {lib_div['familia']}"
+
+    # 4. Multilista almacena campos 2024
+    multi = Multilista()
+    multi.insertar_grupo("G1", "Grupo 1", "A1", "Area", "Lider", 2010)
+    multi.insertar_investigador("G1", "INV1", "Investigador 1", "Senior", "PhD")
+    multi.insertar_producto("G1", "INV1", "P-SF", "Software", "Software PEA", 2024, "A1", True,
+                            subtipo_codigo="SF", familia="DTI", clase_medicion="DTI-B", peso_calculado=28.0)
+    p_sf = multi.buscar_producto("P-SF")
+    assert p_sf.subtipo_codigo == "SF"
+    assert p_sf.familia == "DTI"
+    assert p_sf.clase_medicion == "DTI-B"
+    assert p_sf.peso_calculado == 28.0
+    print("  -> OK: 70 subtipos, familias oficiales y pesos Anexo 1 verificados.")
+
 if __name__ == "__main__":
     print("========================================")
     print("TEST SUITE TDA PYTHON (Estructuras Puras)")
@@ -165,4 +210,5 @@ if __name__ == "__main__":
     test_pila_deshacer()
     test_cola_ingesta()
     test_antiwipe_persistencia()
+    test_modelo_minciencias_2024()
     print("\n[EXITO TOTAL Python] Todos los TDA pasaron las pruebas rigurosamente.")

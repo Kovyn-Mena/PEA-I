@@ -7,7 +7,9 @@ class NodoProducto:
     """Nodo correspondiente a la Dimensión 3: Productos de Investigación"""
     def __init__(self, id_producto: str, tipo: str, titulo: str, anio: int,
                  categoria_minciencias: str, validado: bool, codigo_grupo: str,
-                 id_investigador: str, activo: bool = True):
+                 id_investigador: str, activo: bool = True,
+                 subtipo_codigo: str = "ART", familia: str = "GNC",
+                 clase_medicion: str = "GNC-A", peso_calculado: float = 0.0):
         self.id_producto = id_producto
         self.tipo = tipo                  # Articulo, Libro, Capitulo, Software, Patente
         self.titulo = titulo
@@ -17,6 +19,10 @@ class NodoProducto:
         self.codigo_grupo = codigo_grupo
         self.id_investigador = id_investigador
         self.activo = activo              # True: activo, False: desactivado
+        self.subtipo_codigo = subtipo_codigo
+        self.familia = familia
+        self.clase_medicion = clase_medicion
+        self.peso_calculado = peso_calculado
 
         # Punteros ortogonales (Hipercubo multidimensional)
         self.sig_producto_grupo = None        # Siguiente producto en el mismo Grupo

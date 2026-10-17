@@ -221,7 +221,13 @@ def importar_dataset_completo(limite_grupos: int = None):
                 cid = row["documento_investigador"]
                 act = 1
                 if cg in grupos_db and cid in investigadores_db:
-                    productos_db[pid] = (pid, tipo, tit, anio, cat, val, cg, cid, act)
+                    res_c = CatalogoMinCiencias2024.clasificar_producto(tipo, cat, tit)
+                    gw = float(res_c.get("global_weight", 0) or 0)
+                    rw = float(res_c.get("weight", 1) or 1)
+                    p_calc = gw * (rw / 10.0)
+                    productos_db[pid] = (pid, tipo, tit, anio, cat, val, cg, cid, act,
+                                         res_c.get("codigo_2024", "ART"), res_c.get("familia", "GNC"),
+                                         res_c.get("measurement_class", "GNC-A"), p_calc)
                     csv_rows.append(row)
 
     # Incorporar productos de pea_data_upc.json
@@ -263,7 +269,13 @@ def importar_dataset_completo(limite_grupos: int = None):
         validado = 1 if p.get("validation_status") != "rejected" else 0
         activo = 1 if p.get("status", "active") == "active" else 0
 
-        registro = (id_prod, tipo, titulo, anio, cat_minciencias, validado, cod_grupo, id_inv, activo)
+        gw = float(res_cat.get("global_weight", 0) or 0)
+        rw = float(res_cat.get("weight", 1) or 1)
+        p_calc = gw * (rw / 10.0)
+
+        registro = (id_prod, tipo, titulo, anio, cat_minciencias, validado, cod_grupo, id_inv, activo,
+                    res_cat.get("codigo_2024", "ART"), res_cat.get("familia", "GNC"),
+                    res_cat.get("measurement_class", "GNC-A"), p_calc)
         productos_db[id_prod] = registro
         csv_rows.append({
             "codigo_grupo": cod_grupo,
@@ -279,7 +291,13 @@ def importar_dataset_completo(limite_grupos: int = None):
         })
         agregados_json += 1
 
-    cursor.executemany("INSERT OR REPLACE INTO Productos VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", list(productos_db.values()))
+    cursor.executemany("""
+        INSERT OR REPLACE INTO Productos (
+            id_producto, tipo, titulo, anio, categoria_minciencias, validado,
+            codigo_grupo, id_investigador, activo, subtipo_codigo, familia,
+            clase_medicion, peso_calculado
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, list(productos_db.values()))
     conn.commit()
     conn.close()
 

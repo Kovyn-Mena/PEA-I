@@ -24,6 +24,38 @@ if BASE_DIR not in sys.path:
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
+from src.python.core.catalogo_2024 import CatalogoMinCiencias2024
+
+def migrar_base_datos_si_requerido(conn: sqlite3.Connection):
+    """Garantiza que la tabla Productos contenga las columnas canónicas de MinCiencias 2024."""
+    cursor = conn.cursor()
+    cursor.execute("PRAGMA table_info(Productos);")
+    cols = [r[1] for r in cursor.fetchall()]
+    if cols and "subtipo_codigo" not in cols:
+        print("[MIGRACION] Agregando columnas MinCiencias 2024 a tabla Productos...")
+        cursor.execute("ALTER TABLE Productos ADD COLUMN subtipo_codigo TEXT DEFAULT 'ART';")
+        cursor.execute("ALTER TABLE Productos ADD COLUMN familia TEXT NOT NULL DEFAULT 'GNC';")
+        cursor.execute("ALTER TABLE Productos ADD COLUMN clase_medicion TEXT DEFAULT 'GNC-A';")
+        cursor.execute("ALTER TABLE Productos ADD COLUMN peso_calculado REAL DEFAULT 0.0;")
+        
+        # Poblar columnas con clasificador oficial
+        cursor.execute("SELECT id_producto, tipo, titulo, categoria_minciencias FROM Productos;")
+        rows = cursor.fetchall()
+        for pid, tip, tit, cat in rows:
+            res = CatalogoMinCiencias2024.clasificar_producto(tip, cat, tit)
+            peso = float(res.get("global_weight", 0) or 0) * (float(res.get("weight", 1) or 1) / 10.0)
+            cursor.execute("""
+                UPDATE Productos SET
+                    subtipo_codigo = ?,
+                    familia = ?,
+                    clase_medicion = ?,
+                    peso_calculado = ?
+                WHERE id_producto = ?;
+            """, (res.get("codigo_2024", "ART"), res.get("familia", "GNC"),
+                  res.get("measurement_class", "GNC-A"), peso, pid))
+        conn.commit()
+        print("[MIGRACION] Migración completada exitosamente.")
+
 def init_database(forzar_muestra_reducida: bool = False):
     if not forzar_muestra_reducida and os.path.exists(JSON_PATH):
         try:
@@ -32,7 +64,6 @@ def init_database(forzar_muestra_reducida: bool = False):
             from import_pea_json import importar_dataset_completo
         importar_dataset_completo()
         return
-
 
     print(f"[DB] Inicializando base de datos en: {DB_PATH}")
     if os.path.exists(DB_PATH):
@@ -49,7 +80,6 @@ def init_database(forzar_muestra_reducida: bool = False):
     
     cursor.executescript(schema_sql)
     conn.commit()
-
 
     # 1. Grupos oficiales MinCiencias de la Universidad Popular del Cesar (UPC)
     grupos = [
@@ -101,19 +131,37 @@ def init_database(forzar_muestra_reducida: bool = False):
                 cursor.execute("INSERT OR IGNORE INTO Investigadores VALUES (?, ?, ?, ?, ?, ?)",
                                (doc_i, nom_i, "Junior", "Ingeniería de Sistemas", cod_g, 1))
 
+                tip_p = row["tipo_producto"]
+                tit_p = row["titulo_producto"]
+                cat_p = row["categoria"]
+                res_2024 = CatalogoMinCiencias2024.clasificar_producto(tip_p, cat_p, tit_p)
+                gw = float(res_2024.get("global_weight", 0) or 0)
+                rw = float(res_2024.get("weight", 1) or 1)
+                peso_fin = gw * (rw / 10.0)
+
                 prods.append((
                     row["id_producto"],
-                    row["tipo_producto"],
-                    row["titulo_producto"],
+                    tip_p,
+                    tit_p,
                     int(row["anio"]),
-                    row["categoria"],
+                    cat_p,
                     int(row["validado"]),
                     cod_g,
                     doc_i,
-                    1
+                    1,
+                    res_2024.get("codigo_2024", "ART"),
+                    res_2024.get("familia", "GNC"),
+                    res_2024.get("measurement_class", "GNC-A"),
+                    peso_fin
                 ))
-            cursor.executemany("INSERT OR IGNORE INTO Productos VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", prods)
-            print(f"[DB] {len(prods)} productos científicos reales cargados desde CSV.")
+            cursor.executemany("""
+                INSERT OR IGNORE INTO Productos (
+                    id_producto, tipo, titulo, anio, categoria_minciencias,
+                    validado, codigo_grupo, id_investigador, activo,
+                    subtipo_codigo, familia, clase_medicion, peso_calculado
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, prods)
+            print(f"[DB] {len(prods)} productos científicos reales cargados desde CSV con taxonomía 2024.")
 
     conn.commit()
     conn.close()
