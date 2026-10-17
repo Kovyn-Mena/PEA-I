@@ -226,6 +226,13 @@ public:
         std::string args = "src/python/core/reporte_pdf.py \"" + codGrupo + "\"";
         return ejecutarComandoPython(args, salida);
     }
+
+    // Aplica data/cambios_gui.json (export del portal web) a SQLite.
+    // El parser vive en Python (json + sqlite3); aquí solo se invoca.
+    static bool importarCambiosGUI(std::string& salida) {
+        std::string args = "Taller2_AB_PO_XX.py --importar-cambios";
+        return ejecutarComandoPython(args, salida);
+    }
 };
 
 #endif // GESTOR_INTEROP_H

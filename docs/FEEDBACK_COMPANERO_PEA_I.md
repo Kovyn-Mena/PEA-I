@@ -1,5 +1,12 @@
 # 📋 Auditoría y Feedback Técnico — Proyecto PEA-i (Taller 2)
 
+> **Nota histórica:** Este documento recoge el *feedback* de un compañero sobre una
+> versión intermedia del proyecto (rama de ingesta). Algunos detalles ya fueron
+> superados por la versión final entregada (por ejemplo, el tamaño del ZIP o las
+> librerías gráficas), por lo que debe leerse como bitácora de revisión y no como
+> descripción del estado actual. Para el estado vigente consulte `README.md` y
+> `docs/SPEC_TECNICO.md`.
+
 ---
 
 ## 1. Apreciación Inicial del Trabajo Realizado
@@ -145,4 +152,4 @@ Para que el grupo asegure el **5.0 / 5.0** sin retrabajar ni desgastarnos:
    - De la solución completa que ya tengo estructurada y probada: podemos tomar **la solución completa de TDAs en Python**, **el Portal Ejecutivo / Dashboard gráfico**, **el Catálogo y cálculo del Modelo MinCiencias 2024**, **la suite de testing automatizada (`make test`)** y **el generador de informes PDF oficiales**.
 
 2. **Empaquetado Limpio:**
-   - Asegurarnos de que el ZIP final pese ~2.5 MB, compile con un simple `make` en cualquier sistema operativo y contenga el documento técnico Word (`.docx`) listo para radicar.
+   - Asegurarnos de que el ZIP final compile con un simple `make` en cualquier sistema operativo y contenga el documento técnico Word (`.docx`) listo para radicar (hoy se empaqueta con `make package` / `python3 scripts/package_zip.py`).

@@ -6,7 +6,15 @@ authors = ["Kovyn Mena <kbmena@unicesar.edu.co>"]
 description = "Módulo auditor de invariantes y micro-benchmarks para el sistema PEA-i (Taller 2 Estructura de Datos UPC)"
 
 [dependencies]
-rusqlite = { version = "0.31", features = ["bundled"] }
+# Librería SQLite embebida. Es opcional para permitir un modo degradado sin
+# dependencias externas (--no-default-features) cuando no hay red para
+# descargar crates.
+rusqlite = { version = "0.31", features = ["bundled"], optional = true }
+
+[features]
+# Por defecto se compila la auditoría real contra SQLite.
+default = ["rusqlite"]
+rusqlite = ["dep:rusqlite"]
 
 [[bin]]
 name = "pea_audit"

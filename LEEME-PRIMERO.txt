@@ -32,6 +32,8 @@ PEA-i UPC — LEEME PRIMERO (Windows, 2 minutos)
      paleta (Ctrl+Shift+P) -> "CMake: Configure" -> Compile. Se crea build/
      con pea_cpp.exe ya autocontenido (SQLite amalgamado incluido).
    - Dev-C++: abra el proyecto .devcpp/PEA-i.dev -> Compile & Run.
-   - Compilar C++ NO es obligatorio: la opcion [4] de iniciar.bat ya
-     compila con MSYS2/MinGW sin configuracion, y trae pea_cpp.exe listo.
+   - Compilar C++ NO es obligatorio: la opcion [4] de iniciar.bat
+     compila con MSYS2/MinGW/TDM-GCC si los tiene instalados.
+     No se incluye ningun .exe precompilado (un binario Windows no
+     es portable y el entregable es 100% codigo fuente).
 ===============================================================================

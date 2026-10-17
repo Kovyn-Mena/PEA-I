@@ -362,7 +362,10 @@ class ConsolaApp:
             print(f"\n[+] Abriendo Portal Web Ejecutivo en el navegador...")
             try:
                 import webbrowser
-                webbrowser.open(f"file://{ruta_html}")
+                from pathlib import Path
+                # Path.as_uri() produce 'file:///C:/...' válido en Windows
+                # (un f-string 'file://{ruta}' daría 'file://C:\...', inválido).
+                webbrowser.open(Path(ruta_html).resolve().as_uri())
                 print(f"[OK] Portal abierto exitosamente desde: {ruta_html}")
             except Exception as e:
                 print(f"[!] Error al abrir el navegador: {e}")

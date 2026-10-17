@@ -21,7 +21,7 @@ El sistema implementa dos soluciones complementarias y coordinadas (**C++17** y 
 
 ## Modelo Oficial MinCiencias 2024 & Taxonomía Científica
 
-El sistema incorpora las **5 Macro-familias** oficiales y **15 tipologías** científicas con cálculo del **Índice de Producción Ponderada (IPP)**:
+El sistema incorpora las **5 Macro-familias** oficiales y **16 tipologías** científicas con cálculo del **Índice de Producción Ponderada (IPP)**:
 
 * **1. GNC (Generación de Nuevo Conocimiento):** Artículos indexados A1, A2, B, C; Libros de investigación; Capítulos de libro; Patentes de invención.
 * **2. DTI (Desarrollo Tecnológico e Innovación):** Software registrado DNDA, Prototipos industriales, Diseños industriales, Regulaciones y normas técnicas, Informes técnicos de investigación.
@@ -33,7 +33,7 @@ El sistema incorpora las **5 Macro-familias** oficiales y **15 tipologías** cie
 
 ## Motor de Ingesta, Scraping y Hojas de Vida CvLAC
 
-* **Detección Fidedigna de Aval Institucional (`chulo_1.jpg`)**: El motor de scraping analiza directamente el DOM de GrupLAC detectando la marca `chulo_1.jpg` (avalado oficialmente en la convocatoria) vs `chulo_0.jpg` (pendiente / sin aval). En GISICO (`COL0002099`), clasifica con exactitud matemática **168 productos validados** y **162 sin aval**.
+* **Detección Fidedigna de Aval Institucional (`chulo_1.jpg`)**: El motor de scraping analiza directamente el DOM de GrupLAC detectando la marca `chulo_1.jpg` (avalado oficialmente en la convocatoria) vs `chulo_0.jpg` (pendiente / sin aval), clasificando el estado de aval de cada producto del grupo.
 * **Perfiles Curriculares Enriquecidos (`PerfilInvestigador`)**: Extrae y vincula la condición de **Par Evaluador MinCiencias**, enlace directo a **Google Scholar**, código internacional persistente **ORCID** y máximo nivel educativo.
 * **Respaldo Offline para Sustentación (`data/snapshots/`)**: 90 archivos HTML oficiales (85 CvLAC + 5 GrupLAC) organizados con búsqueda recursiva nativa (`os.walk`), permitiendo demostraciones instantáneas en **0.08 segundos** sin depender de la red institucional.
 * **Dataset Institucional UPC:** 62 grupos de investigación de la UPC, 362 investigadores y 3,351 productos científicos reales.
@@ -71,7 +71,7 @@ El sistema incorpora las **5 Macro-familias** oficiales y **15 tipologías** cie
 │   ├── FEEDBACK_COMPANERO_PEA_I.md    # Auditoría comparativa y mejoras de arquitectura
 │   └── generate_word_doc.py           # Generador automático del documento técnico Word (.docx)
 ├── reportes/
-│   ├── Informe_GrupLAC_COL0002099.pdf # Reporte oficial PDF generado para GISICO
+│   ├── Informe_GrupLAC_COL0018706.pdf # Reporte oficial PDF generado para GISICO
 │   └── Informe_GrupLAC_COL0043834.pdf # Reporte oficial PDF generado para AITICE
 ├── scripts/
 │   └── package_zip.py                 # Empaquetador automático para entrega limpia en ZIP
@@ -199,7 +199,7 @@ clang++ -std=c++17 -I$(brew --prefix sqlite3)/include -L$(brew --prefix sqlite3)
 | **`fatal error: sqlite3.h: No such file or directory`** o `cannot find -lsqlite3` | Falta la cabecera de desarrollo de SQLite3 en el sistema Linux. | Instala la librería con: `sudo apt install libsqlite3-dev`. |
 | **`error: externally-managed-environment`** al usar `pip` en Linux moderno | Protección PEP 668 en Ubuntu 23+/Debian 12+ para proteger el sistema operativo. | Crea un entorno virtual:<br>`python3 -m venv .venv`<br>`source .venv/bin/activate`<br>`pip install -r requirements.txt` |
 | **`ModuleNotFoundError: No module named 'requests'` o `'bs4'`** | Faltan las librerías opcionales de scraping web en vivo. | Ejecuta `pip install -r requirements.txt`. *(Nota: La consola, la multilista, los 3,351 productos y las consultas funcionan aún sin estas librerías).* |
-| **¿Cómo ver los reportes PDF oficiales generados?** | Los documentos oficiales se encuentran en la carpeta `reportes/`. | Abre `reportes/Informe_GrupLAC_COL0002099.pdf` en cualquier visor de PDF del sistema. |
+| **¿Cómo ver los reportes PDF oficiales generados?** | Los documentos oficiales se encuentran en la carpeta `reportes/`. | Abre `reportes/Informe_GrupLAC_COL0018706.pdf` en cualquier visor de PDF del sistema. |
 
 ---
 

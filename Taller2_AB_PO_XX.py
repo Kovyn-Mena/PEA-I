@@ -96,6 +96,23 @@ def main():
         app_gui.iniciar()
         sys.exit(0)
 
+    elif "--importar-cambios" in args:
+        # Aplica data/cambios_gui.json (export del portal web) a SQLite.
+        idx = args.index("--importar-cambios")
+        ruta_json = args[idx + 1] if idx + 1 < len(args) and not args[idx + 1].startswith("-") else None
+        from python.core.sincronizacion_gui import importar_cambios_gui
+        res = importar_cambios_gui(ruta_json, db_path)
+        etiqueta = "[OK]" if res["ok"] else "[!]"
+        print(f"{etiqueta} {res['mensaje']}")
+        if res["ok"]:
+            print(f"    Grupos:         {res['grupos']}")
+            print(f"    Investigadores: {res['investigadores']}")
+            print(f"    Productos:      {res['productos']}")
+            print(f"    Operaciones:    {res['operaciones']}")
+            if res.get("respaldo"):
+                print(f"    Respaldo:       {os.path.basename(res['respaldo'])}")
+        sys.exit(0 if res["ok"] else 1)
+
     elif "--verify" in args:
         from python.core.verificacion_cruzada import ejecutar_verificacion_cruzada
         ok = ejecutar_verificacion_cruzada(db_path)

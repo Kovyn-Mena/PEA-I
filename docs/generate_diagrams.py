@@ -99,7 +99,7 @@ def generar_diagrama_hipercubo():
             ha="center", va="top", fontsize=10, style="italic", color="#4A5568")
 
     # Eje X: Grupos (Horizontal)
-    grupos = [("GISICO\n(COL0002099)\nCat: C", 0.15), ("AITICE\n(COL0043834)\nCat: B", 0.50), ("GISI\n(COL0005544)\nCat: A", 0.85)]
+    grupos = [("GISICO\n(COL0018706)\nCat: C", 0.15), ("AITICE\n(COL0043834)\nCat: B", 0.50), ("GISI\n(COL0005544)\nCat: A", 0.85)]
     for nombre, x in grupos:
         rect = patches.FancyBboxPatch((x - 0.10, 0.72), 0.20, 0.14, boxstyle="round,pad=0.01,rounding_size=0.02",
                                       facecolor=COLOR_VERDE_UPC, edgecolor="#004724", linewidth=2)
@@ -242,9 +242,9 @@ def generar_diagrama_arquitectura():
             ha="center", va="center", fontsize=10.5, fontweight="bold", color=COLOR_TEXTO)
 
     # Sub-bloques GUI
-    ax.text(0.20, 0.16, "C++ GUI Dashboard\n(Canvas HTML5 / ImGui)\nVista Interactiva Hipercubo",
+    ax.text(0.20, 0.16, "Portal Ejecutivo C++\n(HTML5 + Canvas, offline)\nRed del Hipercubo Interactiva",
             ha="center", va="center", fontsize=8.5, color="#2B6CB0", bbox=dict(boxstyle="round,pad=0.3", facecolor="#EBF8FF", ec="#bee3f8"))
-    ax.text(0.50, 0.16, "Python GUI Dashboard\n(Matplotlib + 3 Vistas)\nHistogramas por Año y Barras",
+    ax.text(0.50, 0.16, "Dashboard Analítico Python\n(HTML5 + SVG + 3 Vistas)\nHistogramas por Año y Barras",
             ha="center", va="center", fontsize=8.5, color="#B7791F", bbox=dict(boxstyle="round,pad=0.3", facecolor="#FEFCBF", ec="#fefcbf"))
     ax.text(0.80, 0.16, "Auditor de Invariantes\nMódulo Rust / Benchmarks\nVerificación μs y Concurrencia",
             ha="center", va="center", fontsize=8.5, color="#C53030", bbox=dict(boxstyle="round,pad=0.3", facecolor="#FFF5F5", ec="#feb2b2"))

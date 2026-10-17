@@ -96,7 +96,7 @@ Si explicas esos 5 puntos con seguridad siguiendo este guion, tu nota será un *
 > 
 > *(Entra a la opción `1. Gestión de Grupos` y luego `3. Consultar Detalle de un Grupo`):*
 > *Aquí tenemos la consulta del Hipercubo con búsqueda inteligente. Si escribo `gisico` o presiono directamente **ENTER**, el sistema localiza el grupo:*
-> - *Podemos ver al grupo GISICO (`COL0002099`), su líder el docente John Jairo Patiño Vanegas, sus investigadores adscritos como el profesor Adith Pérez, y la lista completa de productos vinculados.*
+> - *Podemos ver al grupo GISICO (`COL0018706`), su líder el docente John Jairo Patiño Vanegas, sus investigadores adscritos como el profesor Adith Pérez, y la lista completa de productos vinculados.*
 > 
 > *(Regresa con `0`, entra a `2. Gestión de Investigadores` -> `3. Consultar Detalle` y escribe `adith` o su código `0000494917`):*
 > *Observen esta innovación, profesor: al consultar su perfil docente (`0000494917`), el sistema no solo muestra su categoría y formación, sino que recupera su Hoja de Vida CvLAC oficial enriquecida:*
@@ -147,7 +147,7 @@ make test
 > *(Ejecuta `make test`):*
 > *Al ejecutar `make test`, el compilador g++ corre el ejecutable de pruebas verificando la Multilista ortogonal, los conteos de nodos, la Pila LIFO y la Cola FIFO. Inmediatamente después, Python ejecuta su suite espejo para comprobar la paridad estructural.*
 > 
-> *Todo el proyecto está empaquetado y listo para su entrega formal mediante la regla `make package`, que genera un archivo ZIP limpio de 2.5 MB.*
+> *Todo el proyecto está empaquetado y listo para su entrega formal mediante la regla `make package`, que genera un archivo ZIP limpio (código fuente + documentación + datos + portal y dashboard HTML) listo para radicar.*
 > 
 > *Con esto concluyo la sustentación. Muchas gracias por su atención."*
 

@@ -524,33 +524,41 @@ public:
         if (!f.is_open()) {
             std::cout << "\n[!] No se encontró el archivo: " << rutaJSON << "\n\n";
             std::cout << "  Instrucciones para sincronizar desde la Web GUI:\n";
-            std::cout << "  1. Abra el Portal Web (Opción 7 en el menú principal).\n";
+            std::cout << "  1. Abra el Portal Web (Opción 7 del menú principal).\n";
             std::cout << "  2. Vaya a '⚙️ Gestión y Control CRUD' y realice sus operaciones\n";
             std::cout << "     (crear grupos/investigadores/productos o cambiar estados).\n";
-            std::cout << "  3. Presione el botón '💾 Sincronizar / SQLite' en la cabecera.\n";
-            std::cout << "  4. Descargue el archivo y colóquelo como 'data/cambios_gui.json'.\n";
-            std::cout << "  5. Vuelva a esta opción para sincronizar en RAM y SQLite.\n";
+            std::cout << "  3. Presione el botón 'Sincronizar SQLite' (cabecera) y descargue el JSON.\n";
+            std::cout << "  4. Colóquelo como 'data/cambios_gui.json'.\n";
+            std::cout << "  5. Vuelva a esta opción para aplicarlo a SQLite y a la RAM.\n";
+            pausar();
+            return;
+        }
+        f.close();
+
+        if (!GestorInterop::hayPython()) {
+            std::cout << "\n[!] No hay un intérprete Python funcional disponible.\n";
+            std::cout << "    La importación de cambios usa json + sqlite3 de Python.\n";
+            std::cout << "    Instálelo desde https://www.python.org/downloads/ y reintente.\n";
+            std::cout << "    (El .exe del portal no requiere esto: solo esta importación).\n";
             pausar();
             return;
         }
 
-        std::string contenido((std::istreambuf_iterator<char>(f)), std::istreambuf_iterator<char>());
-        f.close();
-
-        std::cout << "[+] Leyendo archivo de exportación (" << contenido.size() << " bytes)...\n";
-        std::cout << "[+] Sincronizando datos con la Multilista en RAM y SQLite...\n";
-        
-        std::cout << "[OK] Sincronización completada exitosamente.\n";
-        std::cout << "     • Grupos en memoria RAM:         " << multi.contarGrupos(false) << "\n";
-        std::cout << "     • Investigadores en memoria RAM: " << multi.contarInvestigadores(false) << "\n";
-        std::cout << "     • Productos en memoria RAM:      " << multi.contarProductos(false) << "\n";
-        std::cout << "-----------------------------------------------------------------\n";
-        std::cout << "¿Desea guardar estos datos inmediatamente en SQLite (" << rutaBD << ")?\n";
-        std::cout << "  [1] Sí, guardar y consolidar\n";
-        std::cout << "  [2] No, mantener solo en RAM temporal\n";
-        int c = leerOpcionMenu("12", "Opción [1 o 2]: ");
-        if (c == 1) {
-            guardarEnBD();
+        std::cout << "\n[+] Aplicando '" << rutaJSON << "' a SQLite por el puente C++ -> Python...\n";
+        std::string salida;
+        if (GestorInterop::importarCambiosGUI(salida)) {
+            std::cout << "\n[+] Recargando la Multilista en RAM desde SQLite y regenerando el Portal Web...\n";
+            multi.liberar();
+            GestorSQLite::cargarDesdeBD(multi, rutaBD);
+            VisualizadorGrafico::generarHTML(multi, "dist/visualizador_hipercubo.html");
+            std::cout << "[OK] Sincronización completada (portal -> SQLite -> RAM -> portal):\n";
+            std::cout << "     • Grupos en memoria RAM:         " << multi.contarGrupos(false) << "\n";
+            std::cout << "     • Investigadores en memoria RAM: " << multi.contarInvestigadores(false) << "\n";
+            std::cout << "     • Productos en memoria RAM:      " << multi.contarProductos(false) << "\n";
+            std::cout << "     • Respaldo automático:           data/pea_investigacion.db.bak\n";
+        } else {
+            std::cout << "\n[!] La importación no se pudo completar. Revise el mensaje anterior.\n";
+            std::cout << "    La base de datos quedó intacta (la importación es transaccional).\n";
         }
         pausar();
     }

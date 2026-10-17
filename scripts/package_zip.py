@@ -97,6 +97,7 @@ OFFICIAL_SAMPLE_REPORTS = {
     "Informe_GrupLAC_COL0001351.pdf",
     "Informe_GrupLAC_COL0000000.pdf",
     "Informe_GrupLAC_COL0002093.pdf",
+    "Informe_GrupLAC_COL0218897.pdf",
 }
 
 def _debe_excluir(root: str, filename: str) -> bool:

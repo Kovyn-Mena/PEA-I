@@ -3,6 +3,12 @@
 **Programa:** Ingeniería de Sistemas | **Asignatura:** Estructura de Datos (2026-I)  
 **Docente:** Ing. Adith Pérez | **Meta de Evaluación:** 5.0 / 5.0  
 
+> **Nota de vigencia:** Este documento es la **guía de planeación** del equipo
+> (fases, ramas y responsabilidades). Para el **estado final entregado** y las
+> decisiones definitivas de arquitectura consulte `README.md` y
+> `docs/SPEC_TECNICO.md`. Las interfaces gráficas finales son **100% web/HTML5
+> autónomas** (nada de ImGui, Raylib, Tkinter ni matplotlib en runtime).
+
 ---
 
 ## 📌 1. Visión General del Proyecto
@@ -34,13 +40,13 @@ flowchart TD
         direction LR
         subgraph TRACK_A ["Línea Persona A (Kovyn - Linux)"]
             F4["Fase 4: Interoperabilidad C++ <-> Python<br><i>(Tuberías IPC popen() + CLI Bridge)</i>"]:::parallelA
-            F4_GUI["Fase 4.B: GUI Creativa en C++<br><i>(Visualizador Gráfico / ImGui o Raylib - Compl. 14.c)</i>"]:::parallelA
+            F4_GUI["Fase 4.B: GUI Creativa en C++<br><i>(Portal Web HTML5 + Canvas offline - Compl. 14.c)</i>"]:::parallelA
             F6_BONUS["Fase 6.B: Módulo Complementario Rust<br><i>(Bonus opcional del Taller - Compl. 14.f)</i>"]:::parallelA
         end
 
         subgraph TRACK_B ["Línea Persona B (Compañero - Windows)"]
             F3["Fase 3: Ingesta Masiva Multifuente<br><i>(Web Scraping GrupLAC/CvLAC + PDF + CSV + Cola)</i>"]:::parallelB
-            F5["Fase 5: Dashboard Gráfico Interactivo<br><i>(Matplotlib + Portal Web + 3 Vistas - Compl. 14.c)</i>"]:::parallelB
+            F5["Fase 5: Dashboard Gráfico Interactivo<br><i>(HTML5 + SVG inline + 3 Vistas - Compl. 14.c)</i>"]:::parallelB
         end
     end
 
@@ -65,12 +71,12 @@ flowchart TD
 | **0** | **Contrato Relacional y SQLite** | Persona A | **Hecho** | Ninguna (Inicio) | — | Crea la única fuente de la verdad (`data/pea_investigacion.db`). Soporta Grupos (con Plan e integrantes), Investigadores y Productos. |
 | **1** | **TDAs Académicos Puros (Nodos)** | Persona A | **Hecho** | Fase 0 | — | Implementa el Hipercubo 3D, Pila y Cola desde cero. Cumple la exigencia del docente de prohibir `std::vector` y listas nativas. |
 | **2** | **Consolas Autónomas (C++ y Python)** | Persona A | **Hecho** | Fases 0 y 1 | — | Base de consola para el examen parcial. CRUD completo (incluyendo Plan del Grupo), filtros de años, 3 vistas estadísticas y UX `getch`. |
-| **3** | **Ingesta Masiva (Scraping/PDF/CSV)** | **Persona B** | **EN CURSO** | Fases 0 y 1 | **Fases 4 y 4.B (Persona A)** | **Punto 7 del Taller:** Descarga automática desde GrupLAC y CvLAC, lectura de informes PDF y archivos CSV usando la Cola TDA. |
-| **4** | **Interoperabilidad C++ $\leftrightarrow$ Python** | **Persona A** | **EN CURSO** | Fase 2 | **Fases 3 y 5 (Persona B)** | **Punto 14.d (Complemento 5.0):** Permite que C++ invoque el scraping o el dashboard en Python mediante `popen()`. |
-| **4.B**| **GUI Creativa en C++** | **Persona A** | **EN CURSO** | Fase 2 | **Fases 3 y 5 (Persona B)** | **Punto 14.c (Complemento 5.0):** Interfaz gráfica creativa en C++ (ImGui / Raylib o canvas gráfico) para visualización visual del Hipercubo. |
-| **5** | **Dashboard Gráfico (Matplotlib + Portal Web)** | **Persona B** | **COMPLETADO** | Fases 0 y 3 | **Fases 4.B y 6.B (Persona A)**| **Punto 12.b (Obligatorio 4.0):** Dashboard con las 3 vistas obligatorias (Grupo, Investigador, Producto), histogramas por año y barras por categoría. |
-| **6.A**| **Documentación Técnica & Entrega Formal** | **Ambos** | **PENDIENTE** | Fases 3, 4, 4.B, 5 | — | **Notas 1 a 8 del Taller:** Word formal (SPEC, HU, Casos de Uso), entrega antes del lunes 19 de octubre 11:59 am con iniciales en los fuentes. |
-| **6.B**| **Módulo Opcional Rust (CLI/Bridge)** | **Persona A** | **OPCIONAL** | Fase 2 | Fase 5 (Persona B) | **Punto 14.f (Complemento 5.0):** Analizador complementario en Rust para blindar el 5.0 rotundo frente a cualquier rúbrica. |
+| **3** | **Ingesta Masiva (Scraping/PDF/CSV)** | **Persona B** | **COMPLETADO** | Fases 0 y 1 | **Fases 4 y 4.B (Persona A)** | **Punto 7 del Taller:** Descarga automática desde GrupLAC y CvLAC, lectura de informes PDF y archivos CSV usando la Cola TDA. |
+| **4** | **Interoperabilidad C++ $\leftrightarrow$ Python** | **Persona A** | **COMPLETADO** | Fase 2 | **Fases 3 y 5 (Persona B)** | **Punto 14.d (Complemento 5.0):** Permite que C++ invoque el scraping, el dashboard o la importación de cambios en Python mediante `popen()`. |
+| **4.B**| **GUI Creativa en C++** | **Persona A** | **COMPLETADO** | Fase 2 | **Fases 3 y 5 (Persona B)** | **Punto 14.c (Complemento 5.0):** Interfaz gráfica creativa y autónoma: Portal Web HTML5 + Canvas (red del Hipercubo, filtros, CRUD) generado por C++ sin dependencias externas. |
+| **5** | **Dashboard Analítico (HTML5 + Portal Web)** | **Persona B** | **COMPLETADO** | Fases 0 y 3 | **Fases 4.B y 6.B (Persona A)**| **Punto 12.b (Obligatorio 4.0):** Dashboard con las 3 vistas obligatorias (Grupo, Investigador, Producto), histogramas por año y barras por categoría, con SVG generado en Python (sin matplotlib). |
+| **6.A**| **Documentación Técnica & Entrega Formal** | **Ambos** | **COMPLETADO** | Fases 3, 4, 4.B, 5 | — | **Notas 1 a 8 del Taller:** Word formal (SPEC, HU, Casos de Uso), iniciales en los fuentes y empaquetado ZIP. |
+| **6.B**| **Módulo Opcional Rust (Auditor de invariantes)** | **Persona A** | **COMPLETADO** | Fase 2 | Fase 5 (Persona B) | **Punto 14.f (Complemento 5.0):** Auditor de invariantes en Rust (rusqlite) con micro-benchmark, integrable en la verificación. |
 
 ---
 
@@ -120,7 +126,7 @@ flowchart TD
 
 ---
 
-### 🔹 Fase 3: Módulo de Ingesta Masiva y Web Scraping (Python) — [EN CURSO: PERSONA B]
+### 🔹 Fase 3: Módulo de Ingesta Masiva y Web Scraping (Python) — [COMPLETADO: PERSONA B]
 * **Rama asignada:** `feature/ingesta-datos`
 * **Archivo a crear:** `src/python/core/ingesta.py`
 * **Librerías a usar:** `requests`, `beautifulsoup4`, `pypdf`, `csv` (todas en `requirements.txt`).
@@ -139,44 +145,45 @@ flowchart TD
 
 ---
 
-### 🔹 Fase 4: Interoperabilidad de Lenguajes C++ $\leftrightarrow$ Python — [EN CURSO: PERSONA A]
+### 🔹 Fase 4: Interoperabilidad de Lenguajes C++ $\leftrightarrow$ Python — [COMPLETADO: PERSONA A]
 * **Rama asignada:** `feature/cpp-interop`
 * **Archivos:** `src/cpp/include/ConsolaApp.h`, `src/cpp/include/GestorInterop.h`.
 * **¿Por qué existe y qué hace?:**
   El Punto 14.d exige integración e interoperabilidad entre lenguajes para aspirar al 5.0.
-  * C++ es rápido y eficiente para algoritmos de memoria en RAM, pero Python tiene las mejores librerías de Web Scraping (`BeautifulSoup`) y visualización (`Matplotlib`).
+  * C++ es rápido y eficiente para algoritmos de memoria en RAM, pero Python tiene las mejores librerías de Web Scraping (`BeautifulSoup`) y parseo de JSON/SQLite para la visualización web generada (`SVG/HTML5 offline`).
   * En lugar de obligar al usuario a abrir dos programas por separado, la consola C++ incluirá opciones en su menú para disparar los procesos de Python a través de tuberías del sistema (`popen()`), capturando su salida y recargando automáticamente la Multilista desde SQLite una vez termine la ingesta.
 * **¿De qué depende?:** De la Fase 2 (Consola C++) y del contrato CLI de las Fases 3 y 5.
 * **¿Se puede hacer en simultáneo con Fase 3?:** **SÍ.** Persona A prepara el puente en C++ definiendo las banderas CLI mientras Persona B programa los scripts en Python.
 
 ---
 
-### 🔹 Fase 4.B: GUI Creativa en C++ (Visualizador Gráfico / ImGui / Raylib) — [EN CURSO: PERSONA A]
-* **Rama asignada:** `feature/cpp-gui` (o integrada en `feature/cpp-interop`)
-* **Archivos a crear:** `src/cpp/include/GUIApp.h`, `src/cpp/gui_main.cpp`.
+### 🔹 Fase 4.B: GUI Creativa en C++ (Portal Web HTML5 + Canvas) — [COMPLETADO: PERSONA A]
+* **Rama asignada:** `feature/cpp-gui` (integrada y fusionada en `main`)
+* **Archivos:** `src/cpp/include/VisualizadorGrafico.h` (genera el HTML/CSS/JS del portal) y `src/cpp/include/ConsolaApp.h` (lo invoca desde el menú).
 * **¿Por qué existe y qué hace?:**
-  El Punto 14.c establece: *"Uso de GUI creativa"*. Aunque el Punto 12.a indica que en C++ la consola descriptiva es suficiente para el 4.0, para garantizar el **5.0 indiscutible**, Persona A construirá una interfaz gráfica nativa complementaria en C++:
-  1. Renderizado interactivo del **Hipercubo 3D / Multilista**: visualiza los nodos ortogonales en pantalla conectando grupos con investigadores y productos mediante líneas o tarjetas dinámicas.
-  2. Tablas interactivas con ordenamiento y filtros por año.
-  3. Ejecución directa mediante la bandera `./pea_cpp --gui`.
+  El Punto 14.c establece: *"Uso de GUI creativa"*. Aunque el Punto 12.a indica que en C++ la consola descriptiva es suficiente para el 4.0, para garantizar el **5.0 indiscutible**, Persona A construyó una interfaz gráfica **autónoma y offline** en C++ que emite un Portal Web HTML5 (con Canvas y SVG propios, sin CDN ni librerías externas):
+  1. Red interactiva del **Hipercubo 3D / Multilista**: visualiza los nodos ortogonales conectando grupos con investigadores y productos con física de repulsión y anti-colisión de etiquetas.
+  2. Tablas interactivas con ordenamiento, búsqueda y filtros por año.
+  3. Panel de **Gestión y Control CRUD** con Pila de Deshacer y exportación de cambios (`data/cambios_gui.json`).
+  4. Generación mediante `./pea_cpp --gen` (y apertura desde el menú, opción 7).
 * **¿De qué depende?:** De la Fase 2 (Multilista y estructuras en C++).
-* **¿Se puede hacer en simultáneo con Fase 3 y 5?:** **SÍ.** Persona A desarrolla la GUI de C++ en Linux mientras Persona B desarrolla la GUI de Python en Windows.
+* **¿Se puede hacer en simultáneo con Fase 3 y 5?:** **SÍ.** Persona A desarrolló la GUI de C++ en Linux mientras Persona B desarrollaba la GUI de Python en Windows.
 
 ---
 
-### 🔹 Fase 5: Dashboard Gráfico Interactivo (Matplotlib + Portal Web) — [COMPLETADO: PERSONA B]
+### 🔹 Fase 5: Dashboard Analítico Interactivo (HTML5 + SVG) — [COMPLETADO: PERSONA B]
 * **Rama asignada:** `feature/python-gui`
-* **Archivo a crear:** `src/python/gui.py`
-* **Librerías a usar:** `matplotlib` (renderizado estático de alta resolución) y Portal HTML5 autónomo.
+* **Archivo:** `src/python/gui.py`
+* **Tecnología:** HTML5 autónomo con gráficos **SVG generados en Python** (sin `matplotlib` ni dependencias externas en runtime).
 * **¿Por qué existe y qué hace?:**
   El Punto 12.b y 12.c exigen:
   > *"En Python el programa mostrará un DASHBOARD con la información estadística, histogramas y diagramas de barras. Ejemplo: https://sistemainvestigacion.uniminuto.edu/PGrupos/Ver/141"*
   > *"El usuario final, puede utilizar diferentes vistas o aproximaciones: i. Por grupo, ii. Por investigador, iii. Por productos."*
-  * Crea una ventana limpia con 3 vistas estadísticas obligatorias (Punto 12.c):
+  * Genera un dashboard web con 3 vistas estadísticas obligatorias (Punto 12.c):
     1. **Vista por Grupo:** Indicadores de producción total, investigadores adscritos, plan estratégico y estado de actividad.
     2. **Vista por Investigador:** Producción autorada por investigador, categorías MinCiencias e histórico de publicaciones.
     3. **Vista por Productos:** Clasificación por tipo (artículos, libros, software, patentes) y estado de aval/validación.
-  * Incrusta gráficos de `matplotlib`:
+  * Incrusta gráficos **SVG** calculados en Python:
     * Gráfico de barras de productos por categoría (`A1`, `A`, `B`, `C`).
     * Histograma de producción científica por año.
   * Incluye controles interactivos para cambiar la ventana de observación (últimos 2 años, 5 años, rango libre) y refrescar los gráficos dinámicamente en pantalla.
@@ -185,7 +192,7 @@ flowchart TD
 
 ---
 
-### 🔹 Fase 6: Documentación Formal (SPEC/HU), Empaquetado y Entrega — [PENDIENTE: AMBOS]
+### 🔹 Fase 6: Documentación Formal (SPEC/HU), Empaquetado y Entrega — [COMPLETADO: AMBOS]
 * **Archivos:** `Documentacion_Tecnica_GrupoXX.docx`, `integrantes.txt`, `Taller2_AB_PO_XX.cpp`, `Taller2_AB_PO_XX.py`, y opcionalmente módulo Rust.
 * **¿Por qué existe y qué hace?:**
   Cumplir con las formalidades y requisitos de entrega estrictos exigidos por el docente en las Notas del Taller:
@@ -217,7 +224,7 @@ El script principal de Python (`Taller2_AB_PO_XX.py` o `src/python/main.py`) ace
 # Modo 1: Consola interactiva normal (predeterminada)
 python Taller2_AB_PO_XX.py
 
-# Modo 2: Lanzar el Dashboard Gráfico Python / Matplotlib (Fase 5)
+# Modo 2: Generar y abrir el Dashboard Analítico HTML5 / SVG (Fase 5)
 python Taller2_AB_PO_XX.py --gui
 
 # Modo 3: Ejecutar Ingesta Masiva desde URL MinCiencias (Fase 3)
@@ -317,7 +324,7 @@ Todas están especificadas en `requirements.txt`:
 * `requests`: Para descargas HTTP de las páginas de GrupLAC y CvLAC.
 * `beautifulsoup4`: Para parsear el HTML y extraer tablas y textos del scraping.
 * `pypdf`: Para leer y procesar texto de archivos PDF de investigación.
-* `matplotlib`: Para generar gráficos de barras, histogramas y visualizaciones estadísticas.
+* `matplotlib` (**solo `make docs`**, no runtime): Para generar las imágenes de diagramas que se incrustan en el documento Word `.docx`. El dashboard de la aplicación **no** usa matplotlib: genera SVG directamente.
 * Librerías nativas estándar utilizadas: `sqlite3`, `csv`, `os`, `sys`, `json`.
 
 ### 🎨 Identidad Institucional de la UPC (Para el Dashboard y Documentos)

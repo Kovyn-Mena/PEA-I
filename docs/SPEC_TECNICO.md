@@ -15,7 +15,7 @@ El sistema resuelve el Taller 2 de Estructura de Datos implementando dos solucio
 
 ### 🛡️ Principio Arquitectónico Sagrado: "Consola Primero"
 1. **Autonomía Total de la Consola:** El núcleo del sistema en C++ (`./pea_cpp`) y en Python (`Taller2_AB_PO_XX.py`) opera de forma completa e independiente desde la terminal. Permite navegación interactiva por teclado con `getch`, búsqueda inteligente de registros con ejemplos aleatorios al presionar ENTER, CRUD completo, filtrado por ventana de observación (últimos 2 o 5 años), ejecución de la Pila Undo y generación de reportes tabulares descriptivos sin requerir ventanas gráficas.
-2. **Desacoplamiento Visual:** Las interfaces gráficas (Dashboard con Matplotlib y Canvas 3D) son capas opcionales externas invocables con la bandera `--gui` o `-g`. Si no hay servidor X11 o entorno gráfico disponible, el sistema opera con total estabilidad sin arrojar excepciones.
+2. **Desacoplamiento Visual:** Las interfaces gráficas son **100% web/HTML5 autónomas** (sin CDN ni dependencias): el Portal Ejecutivo del Hipercubo generado por C++ (`./pea_cpp --gen` → `dist/visualizador_hipercubo.html`) y el Dashboard Analítico generado por Python (`--gui` → `dist/dashboard_python.html`), ambos con gráficos vectoriales Canvas/SVG. No requieren servidor X11 ni librerías de escritorio (nada de Tkinter, matplotlib, ImGui o Raylib en runtime) ni conexión a Internet: se abren en el navegador y operan offline sin arrojar excepciones.
 
 ---
 
@@ -50,7 +50,7 @@ El sistema resuelve el Taller 2 de Estructura de Datos implementando dos solucio
 | Variable | Tipo de Dato | E/S | Descripción y Reglas de Negocio |
 | :--- | :--- | :---: | :--- |
 | `id_producto` | `Cadena (Texto)` | Entrada | Código alfanumérico único (ej. `PROD-2099-0001`). Clave primaria. |
-| `tipo` | `Cadena (Enum)` | Entrada | 15 Tipologías oficiales: `Articulo`, `Libro`, `Capitulo`, `Software`, `Patente`, `Trabajo de Grado`, `Tesis`, `Jurado`, `CursoCorto`, `Evento`, `Consultoria`, `Informe`, `Contenido`, `Regulacion`, `Prototipo`, `Diseno`. |
+| `tipo` | `Cadena (Enum)` | Entrada | 16 Tipologías oficiales: `Articulo`, `Libro`, `Capitulo`, `Software`, `Patente`, `Trabajo de Grado`, `Tesis`, `Jurado`, `CursoCorto`, `Evento`, `Consultoria`, `Informe`, `Contenido`, `Regulacion`, `Prototipo`, `Diseno`. |
 | `titulo` | `Cadena (Texto)` | Entrada | Título oficial de la publicación o desarrollo tecnológico. |
 | `anio` | `Entero (Año)` | Entrada | Año de publicación oficial registrado ante MinCiencias. |
 | `categoria_minciencias`| `Cadena (Texto)` | Entrada | Calidad editorial / impacto (`A1`, `A`, `B`, `C`). |
@@ -213,7 +213,7 @@ graph TD
   ```gherkin
   Escenario: Apertura del Dashboard visual con 3 vistas
     Dado que se ejecuta 'python Taller2_AB_PO_XX.py --gui'
-    Cuando el motor Matplotlib renderiza las métricas del hipercubo
+    Cuando el motor de render (Canvas/SVG incrustado) despliega las métricas del hipercubo
     Entonces se despliegan las 3 vistas obligatorias:
       i.   Vista Por Grupo (distribución por categorías y avales)
       ii.  Vista Por Investigador (productividad individual)
@@ -229,8 +229,8 @@ flowchart TD
     subgraph UI_LAYER ["Capa de Presentación y Experiencia de Usuario"]
         C_CLI["Consola Autónoma C++<br><i>(Interacción getch + Menú Dinámico)</i>"]
         P_CLI["Consola Autónoma Python<br><i>(Búsqueda inteligente + Resúmenes)</i>"]
-        GUI_C["Visualizador 3D C++<br><i>(Canvas HTML5 / ImGui)</i>"]
-        GUI_P["Dashboard Gráfico Python<br><i>(Matplotlib + 3 Vistas)</i>"]
+        GUI_C["Portal Ejecutivo C++<br><i>(HTML5 + Canvas, offline)</i>"]
+        GUI_P["Dashboard Analítico Python<br><i>(HTML5 + SVG inline + 3 Vistas)</i>"]
     end
 
     subgraph CORE_LAYER ["Capa de Lógica de Negocio y TDAs Académicos"]
@@ -287,7 +287,7 @@ make run-py
 # (O bien directamente con python):
 python3 Taller2_AB_PO_XX.py
 
-# 3. Abrir el Dashboard Gráfico Estadístico con Matplotlib
+# 3. Generar y abrir el Dashboard Analítico HTML5 (SVG offline, sin matplotlib)
 python3 Taller2_AB_PO_XX.py --gui
 
 # 4. Ejecutar todas las pruebas unitarias académicas

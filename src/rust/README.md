@@ -28,3 +28,14 @@ O desde la raíz del proyecto si configuras el target en el Makefile:
 ```bash
 cargo run --manifest-path src/rust/Cargo.toml
 ```
+
+Por defecto se compila la **auditoría real** contra SQLite (característica
+`rusqlite`, incluida por defecto). Si no hay red para descargar crates, se
+puede compilar un **modo degradado** que solo verifica el archivo:
+
+```bash
+cargo run --manifest-path src/rust/Cargo.toml --no-default-features
+```
+
+El módulo sale con código de estado `1` si algún invariante de integridad
+falla, para poder integrarlo en una tubería de verificación.

@@ -21,11 +21,11 @@ METADATA = [
     },
     {
         "id": "02_modelo_entidad_relacion",
-        "title": "02. Modelo Entidad-Relación Relacional (16 Tablas)",
-        "subtitle": "Complemento b: Base de Datos SQL Server (peai)",
+        "title": "02. Modelo Entidad-Relación Relacional (Propuesta Normalizada, 16 Tablas)",
+        "subtitle": "Complemento b: Modelo relacional normalizado propuesto (16 tablas)",
         "category": "Modelado Estructural",
         "spec_sec": "§38.2",
-        "desc": "Modelo relacional físico completo con 16 tablas normalizadas en SQL Server, reflejando el catálogo Minciencias 2024 (ProductFamily, ProductSubtype con las 70 tipologías canónicas, QualityCategory con pesos), vínculos ortogonales, cola de validación técnica, historial de operaciones de deshacer y tabla de auditoría inmutable."
+        "desc": "Modelo relacional normalizado de referencia con 16 tablas, planteado como ejercicio de diseño (Complemento b) sobre el catálogo Minciencias 2024 (ProductFamily, ProductSubtype con las 70 tipologías canónicas, QualityCategory con pesos), vínculos ortogonales, cola de validación técnica, historial de operaciones de deshacer y tabla de auditoría inmutable. La persistencia efectivamente implementada es SQLite3 con 5 tablas operativas."
     },
     {
         "id": "03_multilista_memoria_ram",
@@ -406,6 +406,14 @@ def build_index_html():
     </div>
 
     <div class="description-box" id="diag-desc"></div>
+
+    <div class="scope-banner" style="background:#fff7ed;border-left:4px solid #f59e0b;padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:20px;font-size:0.85rem;line-height:1.5;color:#92400e;">
+      <b>Nota de alcance:</b> Los diagramas 02 y 06–11 documentan la <b>propuesta de arquitectura extendida</b>
+      (Complemento b/d): modelo relacional normalizado de 16 tablas y despliegue políglota de referencia.
+      La <b>implementación entregada</b> es la de <code>README.md</code>/<code>SPEC_TECNICO.md</code>:
+      consolas autónomas C++ y Python, Portal y Dashboard <b>HTML5 offline</b> y persistencia
+      <b>SQLite3</b> (5 tablas: Grupos, Investigadores, Productos, PerfilInvestigador, HistorialAcciones).
+    </div>
 
     <div class="view-bar">
       <div class="tab-group">

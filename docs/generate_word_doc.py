@@ -214,7 +214,7 @@ def build_document():
         "Principio de Arquitectura: 'Consola Primero' y Desacoplamiento",
         "El núcleo operativo evaluable en el examen parcial por el docente es 100% autosuficiente desde la terminal "
         "(CRUD, navegación interactiva con getch, consulta inteligente, filtrado por años y reporte tabular). "
-        "Las interfaces gráficas (Dashboard Python con Matplotlib y Visualizador 3D en C++) actúan como capas desacopladas "
+        "El Portal Ejecutivo del Hipercubo (C++ → HTML5 + Canvas) y el Dashboard Analítico (Python → HTML5 + SVG) actúan como capas web desacopladas "
         "que enriquecen la experiencia del usuario sin introducir fallas ni dependencias bloqueantes al ejecutar en consola.",
         border_color_hex=HEX_VERDE_UPC,
         bg_color_hex="F0FFF4"
@@ -233,7 +233,7 @@ def build_document():
     headers_var = ["Variable", "Tipo de Dato", "E/S", "Descripción y Reglas de Negocio"]
     widths_var = [Inches(1.8), Inches(1.1), Inches(0.6), Inches(3.0)]
     data_grp = [
-        ["codigo_grupo", "Cadena (Texto)", "Entrada", "Clave primaria GrupLAC oficial (ej. COL0002099, COL0005544)."],
+        ["codigo_grupo", "Cadena (Texto)", "Entrada", "Clave primaria GrupLAC oficial de MinCiencias (ej. COL0018706, COL0005544)."],
         ["nombre", "Cadena (Texto)", "Entrada", "Nombre registrado del grupo de investigación institucional."],
         ["clasificacion", "Cadena (Enum)", "Entrada", "Categoría MinCiencias: A1, A, B, C, Reconocido o Sin Clasificación."],
         ["area_conocimiento", "Cadena (Texto)", "Entrada", "Gran área OCDE (ej. Ciencias Naturales, Ingeniería y Tecnología)."],
@@ -267,7 +267,7 @@ def build_document():
     tbl_prod = doc.add_table(rows=1, cols=4)
     data_prod = [
         ["id_producto", "Cadena (Texto)", "Entrada", "Código alfanumérico único institucional/MinCiencias (ej. PROD-2099-0001)."],
-        ["tipo", "Cadena (Enum)", "Entrada", "15 Tipologías oficiales: Articulo, Libro, Capitulo, Software, Patente, Trabajo de Grado, Tesis, Jurado, CursoCorto, Evento, Consultoria, Informe, Contenido, Regulacion, Prototipo, Diseno."],
+        ["tipo", "Cadena (Enum)", "Entrada", "16 Tipologías oficiales: Articulo, Libro, Capitulo, Software, Patente, Trabajo de Grado, Tesis, Jurado, CursoCorto, Evento, Consultoria, Informe, Contenido, Regulacion, Prototipo, Diseno."],
         ["titulo", "Cadena (Texto)", "Entrada", "Título de la publicación o desarrollo tecnológico registrado."],
         ["anio", "Entero (Año)", "Entrada", "Año de publicación oficial (relevante para ventanas de observación)."],
         ["categoria_minciencias", "Cadena (Texto)", "Entrada", "Nivel de indexación: A1, A, B, C o Sin Categoría."],
@@ -496,7 +496,7 @@ def build_document():
          "Para analizar el impacto científico de los grupos e investigadores.\n\n"
          "Escenario: Generación del Dashboard visual en Python\n"
          "Dado que el usuario invoca 'python Taller2_AB_PO_XX.py --gui',\n"
-         "Cuando el motor Matplotlib procesa los datos agregados del hipercubo,\n"
+         "Cuando el generador de render (Canvas/SVG incrustado) procesa los datos agregados del hipercubo,\n"
          "Entonces se genera la vista gráfica interactiva con las 3 perspectivas obligatorias:\n"
          "i. Vista por Grupo, ii. Vista por Investigador, iii. Vista por Productos.")
     ]
@@ -527,7 +527,7 @@ def build_document():
     data_comp = [
         ["14.a: Git y GitHub", "Repositorio Git oficial con ramas 'dev', 'feature/cpp-gui', 'backup/pre-scraping' y flujo de commits atómicos.", "Historial trazable, sin contaminación y respaldo limpio previo al scraping."],
         ["14.b: Base de Datos Relacional", "SQLite3 con modo WAL (Write-Ahead Logging), busy_timeout=5000ms y llaves foráneas estrictas.", "Única fuente de la verdad compartida simultáneamente entre C++ y Python."],
-        ["14.c: GUI Creativa", "Doble interfaz: Canvas 3D interactivo para C++ y Dashboard visual con Matplotlib para Python.", "Visualización intuitiva del hipercubo sin comprometer la independencia de la consola."],
+        ["14.c: GUI Creativa", "Doble interfaz web autónoma y offline: Portal HTML5 + Canvas para C++ y Dashboard HTML5 + SVG para Python.", "Visualización intuitiva del hipercubo sin comprometer la independencia de la consola."],
         ["14.d: Interoperabilidad entre Lenguajes", "Tuberías IPC con popen() bidireccional entre el binario C++ y los scripts Python.", "C++ delega descargas y gráficos a Python; Python delega cálculos pesados a C++."],
         ["14.e: Documentación Formal", "Documento Word formal de ingeniería con SPEC, diagramas, HUs y video de 10 min.", "Cumplimiento al 100% de la norma académica institucional de la UPC."],
         ["14.f: ¿Rust? (Auditoría de Invariantes)", "Módulo complementario en Rust (src/rust/) para validación formal y benchmarks a nivel de microsegundos.", "Garantía de rendimiento, seguridad de memoria y excelencia técnica."]
@@ -554,7 +554,7 @@ def build_document():
         ["00:00 - 01:30", "Introducción & Arquitectura", "Presentación personal en cámara, contextualización UPC, modelo SCIENTI y el Hipercubo 3D en Multilista.", "Estudiante A"],
         ["01:30 - 03:30", "Demostración C++ (Core)", "Ejecución de './pea_cpp'. Pregunta inicial [1]/[2], navegación con getch, búsqueda inteligente y filtros de años.", "Estudiante A"],
         ["03:30 - 05:30", "Demostración Python & Ingesta", "Ejecución de 'Taller2_AB_PO_XX.py'. Demostración de la Cola FIFO procesando GrupLAC y CSV.", "Estudiante B"],
-        ["05:30 - 07:30", "Dashboards Gráficos (3 Vistas)", "Exhibición del Dashboard con Matplotlib (--gui), histogramas 1996-2026, vistas por grupo, autor y producto.", "Estudiante B"],
+        ["05:30 - 07:30", "Dashboards Gráficos (3 Vistas)", "Exhibición del Dashboard HTML5/SVG (--gui), histogramas 1996-2026, vistas por grupo, autor y producto.", "Estudiante B"],
         ["07:30 - 09:00", "Pila Undo & SQLite WAL", "Demostración en vivo de modificación de datos y reversión instantánea con la Pila LIFO. Verificación en SQLite.", "Estudiante A"],
         ["09:00 - 10:00", "Conclusiones & Cierre", "Resumen de complementos implementados (interoperabilidad popen, módulo Rust, cero fugas de memoria).", "Ambos"]
     ]

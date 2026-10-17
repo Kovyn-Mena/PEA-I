@@ -180,14 +180,14 @@ echo   [4] Compilar y Ejecutar en C++17 (Autodetecta MSYS2, MinGW, Code::Blocks,
 echo   [5] Ejecutar Pruebas Unitarias de Estructuras de Datos (TDAs)
 echo   [6] Abrir Documentacion Tecnica Oficial Word (.docx)
 echo   [7] Empaquetar Entrega Formal en ZIP (Limpio para envio al docente)
-echo   [8] Ingesta Masiva UPC - Todos los grupos (66) con CvLAC
+echo   [8] Ingesta Masiva UPC - Grupos del indice (66) con CvLAC
 echo   [9] Diagnostico del sistema (reporte para soporte)
 echo   [0] Salir
 echo.
 echo ===============================================================================
 set "OPC="
 set /p OPC="Ingrese el numero de la opcion [0-9]: "
-if errorlevel 1 goto FIN
+if "%OPC%"=="" goto MENU
 
 if "%OPC%"=="1" goto RUN_PY_CONSOLE
 if "%OPC%"=="2" goto RUN_PY_GUI
@@ -360,7 +360,7 @@ if exist "pea_cpp.exe" (
     echo.
     set "RECOMP=1"
     set /p RECOMP="Seleccione [1-2, Enter=1]: "
-    if errorlevel 1 goto FIN
+    if "!RECOMP!"=="" set "RECOMP=1"
     if "!RECOMP!"=="1" goto EXEC_CPP_BIN
 )
 
@@ -543,7 +543,7 @@ if !ERRORLEVEL! neq 0 (
 )
 call :CHECK_DEPS
 echo ===============================================================================
-echo   PEA-i: Ingesta Masiva UPC - 66 grupos con hojas de vida CvLAC
+echo   PEA-i: Ingesta Masiva UPC - Grupos del indice (66) con hojas de vida CvLAC
 echo ===============================================================================
 echo.
 echo   [1] Rapida offline (snapshots locales, sin CvLAC) --auto-ingest --sin-cvlac
@@ -553,7 +553,6 @@ echo   [0] Volver al menu
 echo.
 set "ING="
 set /p ING="Seleccione [0-3]: "
-if errorlevel 1 goto FIN
 if "%ING%"=="1" goto INGESTA_RAPIDA
 if "%ING%"=="2" goto INGESTA_FULL
 if "%ING%"=="3" goto INGESTA_FORZADA
