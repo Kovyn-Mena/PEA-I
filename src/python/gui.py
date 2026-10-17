@@ -58,6 +58,80 @@ def obtener_macro_tipologia(tipo: str) -> str:
         return "FRH (Formación Recurso Humano)"
     return "GNC (Generación Nuevo Conocimiento)"
 
+
+# =====================================================================
+# GENERADORES DE GRÁFICOS SVG EN LÍNEA (Zero-Dependencies)
+# Se renderizan aquí en Python y se incrustan como SVG vectorial:
+# sin matplotlib, sin CDNs y sin JavaScript externo. Funcionan 100%
+# offline y con zoom nítido en cualquier pantalla.
+# =====================================================================
+def _svg_barras_verticales(pares, ancho=780, alto=290, color="#10b981",
+                           color2="#006837", rotular_valores=True):
+    """Histograma / barras verticales. pares: lista de (etiqueta, valor)."""
+    if not pares:
+        return ('<div style="color:#64748b; font-size:0.82rem; padding:1.2rem;'
+                ' border:1px dashed #1e293b; border-radius:8px;">Sin datos disponibles para este gráfico.</div>')
+    maxv = max(v for _, v in pares) or 1
+    n = len(pares)
+    pad_izq, pad_der, pad_arr, pad_abajo = 46, 14, 30, 62
+    area_w = ancho - pad_izq - pad_der
+    area_h = alto - pad_arr - pad_abajo
+    paso = area_w / n
+    ancho_barra = max(4.0, min(46.0, paso * 0.68))
+    partes = []
+    # Rejilla horizontal + escala
+    for gi in range(5):
+        y = pad_arr + area_h * gi / 4
+        val = maxv * (4 - gi) / 4
+        partes.append(f'<line x1="{pad_izq}" y1="{y:.1f}" x2="{ancho - pad_der}" y2="{y:.1f}" '
+                      f'stroke="#1e293b" stroke-width="1"/>')
+        partes.append(f'<text x="{pad_izq - 7}" y="{y + 4:.1f}" fill="#64748b" font-size="10" '
+                      f'text-anchor="end">{val:,.0f}</text>')
+    for i, (et, v) in enumerate(pares):
+        h = area_h * (v / maxv)
+        x = pad_izq + i * paso + (paso - ancho_barra) / 2
+        y = pad_arr + area_h - h
+        c = color if i % 2 == 0 else color2
+        partes.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{ancho_barra:.1f}" '
+                      f'height="{max(1.0, h):.1f}" rx="3" fill="{c}"><title>{et}: {v:,}</title></rect>')
+        if rotular_valores and h >= 15:
+            partes.append(f'<text x="{x + ancho_barra / 2:.1f}" y="{y - 5:.1f}" fill="#cbd5e1" '
+                          f'font-size="9.5" font-weight="700" text-anchor="middle">{v:,}</text>')
+        lx = x + ancho_barra / 2
+        ly = pad_arr + area_h + 16
+        partes.append(f'<text x="{lx:.1f}" y="{ly:.1f}" fill="#94a3b8" font-size="9.5" '
+                      f'text-anchor="end" transform="rotate(-42 {lx:.1f} {ly:.1f})">{et}</text>')
+    return (f'<svg viewBox="0 0 {ancho} {alto}" width="100%" height="auto" role="img" '
+            f'xmlns="http://www.w3.org/2000/svg">' + "".join(partes) + "</svg>")
+
+
+def _svg_barras_horizontales(pares, ancho=780, color="#38bdf8", color2="#006837",
+                             alto_fila=30, ancho_etiqueta=196):
+    """Barras horizontales ordenadas. pares: lista de (etiqueta, valor)."""
+    if not pares:
+        return ('<div style="color:#64748b; font-size:0.82rem; padding:1.2rem;'
+                ' border:1px dashed #1e293b; border-radius:8px;">Sin datos disponibles para este gráfico.</div>')
+    maxv = max(v for _, v in pares) or 1
+    n = len(pares)
+    pad_der = 66
+    area_w = ancho - ancho_etiqueta - pad_der
+    alto = n * alto_fila + 10
+    partes = []
+    for i, (et, v) in enumerate(pares):
+        y = i * alto_fila + 5
+        w = area_w * (v / maxv)
+        c = color if i % 2 == 0 else color2
+        etiqueta = et if len(et) <= 32 else et[:31] + "…"
+        partes.append(f'<text x="{ancho_etiqueta - 9}" y="{y + 15:.1f}" fill="#cbd5e1" font-size="10.5" '
+                      f'text-anchor="end"><title>{et}</title>{etiqueta}</text>')
+        partes.append(f'<rect x="{ancho_etiqueta}" y="{y}" width="{area_w}" height="18" rx="4" fill="#0f172a"/>')
+        partes.append(f'<rect x="{ancho_etiqueta}" y="{y}" width="{max(2.0, w):.1f}" height="18" rx="4" '
+                      f'fill="{c}"><title>{et}: {v:,}</title></rect>')
+        partes.append(f'<text x="{ancho_etiqueta + area_w + 9}" y="{y + 14:.1f}" fill="#e2e8f0" '
+                      f'font-size="10.5" font-weight="700">{v:,}</text>')
+    return (f'<svg viewBox="0 0 {ancho} {alto}" width="100%" height="auto" role="img" '
+            f'xmlns="http://www.w3.org/2000/svg">' + "".join(partes) + "</svg>")
+
 class DashboardApp:
     def __init__(self, ruta_bd: str = "data/pea_investigacion.db"):
         self.ruta_bd = ruta_bd
@@ -168,6 +242,56 @@ class DashboardApp:
                 cur_p = cur_p.sig_producto_grupo
             g = g.sig_grupo
         filas_prods.sort(key=lambda x: x["anio"], reverse=True)
+
+        # =============================================================
+        # AGREGADOS DEL PANEL ANALÍTICO (12.b: histogramas y barras)
+        # Se calculan en Python puro sobre la Multilista en RAM y se
+        # renderizan como SVG vectorial incrustado: offline, sin CDNs,
+        # sin JavaScript de terceros y sin matplotlib.
+        # =============================================================
+        agg_anios, agg_categorias, agg_familias, agg_tipos = {}, {}, {}, {}
+        ipp_total = 0.0
+        for p in filas_prods:
+            anio = p["anio"]
+            if isinstance(anio, int) and anio > 1900:
+                agg_anios[anio] = agg_anios.get(anio, 0) + 1
+            cat = (p["categoria"] or "Sin clasificar").strip() or "Sin clasificar"
+            agg_categorias[cat] = agg_categorias.get(cat, 0) + 1
+            fam = (p["familia"] or "GNC").split(" ")[0].strip() or "GNC"
+            agg_familias[fam] = agg_familias.get(fam, 0) + 1
+            tipo = (p["tipo"] or "Otro").strip() or "Otro"
+            agg_tipos[tipo] = agg_tipos.get(tipo, 0) + 1
+            try:
+                ipp_total += float(p["peso"] or 0.0)
+            except (TypeError, ValueError):
+                pass
+
+        # Ventana de observación (punto 10): últimos 15 años con datos
+        anios_ord = sorted(agg_anios.keys())
+        anios_ventana = anios_ord[-15:] if len(anios_ord) > 15 else anios_ord
+        datos_anios = [(str(a), agg_anios[a]) for a in anios_ventana]
+
+        orden_cat = ["A1", "A", "B", "C", "Reconocido", "Sin clasificar"]
+        cats_ord = sorted(agg_categorias.keys(),
+                          key=lambda c: (orden_cat.index(c) if c in orden_cat else 99, c))
+        datos_categorias = [(c, agg_categorias[c]) for c in cats_ord]
+
+        orden_fam = ["GNC", "DTE", "ASC", "FRH"]
+        fams_ord = sorted(agg_familias.keys(),
+                          key=lambda f: (orden_fam.index(f) if f in orden_fam else 99, f))
+        datos_familias = [(f, agg_familias[f]) for f in fams_ord]
+
+        datos_tipos = sorted(agg_tipos.items(), key=lambda kv: kv[1], reverse=True)[:12]
+        top_grupos = [(gr["nombre"] or gr["codigo"], gr["productos"])
+                      for gr in sorted(filas_grupos, key=lambda x: x["productos"], reverse=True)[:10]]
+        top_invs = [(iv["nombre"], iv["obras"]) for iv in filas_invs[:10]]
+
+        svg_anios = _svg_barras_verticales(datos_anios, color="#38bdf8", color2="#006837")
+        svg_categorias = _svg_barras_verticales(datos_categorias, alto=250, color="#f59e0b", color2="#ED1C24")
+        svg_familias = _svg_barras_verticales(datos_familias, alto=250, color="#10b981", color2="#006837")
+        svg_tipos = _svg_barras_horizontales(datos_tipos, color="#a78bfa", color2="#38bdf8")
+        svg_top_grupos = _svg_barras_horizontales(top_grupos, color="#10b981", color2="#006837")
+        svg_top_invs = _svg_barras_horizontales(top_invs, color="#38bdf8", color2="#0ea5e9")
 
         # Asegurar directorio de reportes y generar de muestra para los primeros grupos si no existen
         rep_dir = os.path.abspath(os.path.join(os.path.dirname(self.ruta_bd), "..", "reportes"))
@@ -305,7 +429,44 @@ class DashboardApp:
                 <div style="color:#94a3b8; font-size:0.85rem;">Productos de Investigación</div>
             </div>
         </div>
-        <p><a href="visualizador_hipercubo.html" target="_blank" style="display:inline-block; background:#006837; color:#fff; padding:8px 16px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.9rem;">&rarr; Abrir Portal Interactivo Completo con Gráficos Canvas 2D y Red 3D</a></p>
+        <p style="font-size:0.8rem; color:#94a3b8;">Producción científica total (IPP acumulado): <b style="color:#f59e0b;">{ipp_total:,.1f} puntos</b> &bull; Este dashboard es 100% autónomo: su análisis se calcula y renderiza localmente, sin depender del portal C++.</p>
+    </div>
+
+    <!-- PANEL ANALÍTICO PROPIO (12.b: histogramas y diagramas de barras) -->
+    <div class="card">
+        <h2>Panel Analítico Institucional — Histogramas y Diagramas de Barras (12.b)</h2>
+        <p style="color:#94a3b8; margin-bottom:1rem;">Gráficos vectoriales generados en Python desde la Multilista en memoria (SVG incrustado, sin dependencias externas ni conexión a Internet).</p>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(420px, 1fr)); gap:1.2rem;">
+            <div style="background:#0f172a; border:1px solid #1e293b; border-radius:10px; padding:1rem;">
+                <h3 style="margin:0 0 0.75rem 0; font-size:0.95rem; color:#38bdf8;">Producción por Año (ventana de observación — Punto 10)</h3>
+                {svg_anios}
+            </div>
+            <div style="background:#0f172a; border:1px solid #1e293b; border-radius:10px; padding:1rem;">
+                <h3 style="margin:0 0 0.75rem 0; font-size:0.95rem; color:#f59e0b;">Productos por Categoría MinCiencias</h3>
+                {svg_categorias}
+            </div>
+            <div style="background:#0f172a; border:1px solid #1e293b; border-radius:10px; padding:1rem;">
+                <h3 style="margin:0 0 0.75rem 0; font-size:0.95rem; color:#10b981;">Distribución por Macro-Tipología 2024</h3>
+                {svg_familias}
+            </div>
+            <div style="background:#0f172a; border:1px solid #1e293b; border-radius:10px; padding:1rem;">
+                <h3 style="margin:0 0 0.75rem 0; font-size:0.95rem; color:#a78bfa;">Tipos de Producto más Frecuentes</h3>
+                {svg_tipos}
+            </div>
+            <div style="background:#0f172a; border:1px solid #1e293b; border-radius:10px; padding:1rem;">
+                <h3 style="margin:0 0 0.75rem 0; font-size:0.95rem; color:#10b981;">Top 10 Grupos por Productos</h3>
+                {svg_top_grupos}
+            </div>
+            <div style="background:#0f172a; border:1px solid #1e293b; border-radius:10px; padding:1rem;">
+                <h3 style="margin:0 0 0.75rem 0; font-size:0.95rem; color:#38bdf8;">Top 10 Investigadores por Producción</h3>
+                {svg_top_invs}
+            </div>
+        </div>
+
+        <p style="margin-top:1.2rem; font-size:0.78rem; color:#64748b;">Este dashboard es exclusivamente analítico: no incluye creación, edición ni borrado de registros. La red de colaboración interactiva y las vistas por entidad con edición viven en el portal C++:
+            <a href="visualizador_hipercubo.html" target="_blank" style="color:#38bdf8;">abrir visualizador_hipercubo.html</a>.
+        </p>
     </div>
 
     <!-- INGESTA MASIVA UPC (panel funcional GUI) -->
