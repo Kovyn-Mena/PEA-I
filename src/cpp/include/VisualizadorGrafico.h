@@ -1655,6 +1655,10 @@ public:
 
         // CAMBIO DE VISTAS PRINCIPALES
         function cambiarVistaPrincipal(vista) {
+            // Detener la simulación de la red cuando se sale de su pestaña (ahorra CPU)
+            if (vista !== "red") {
+                try { detenerSimulacionRed(); } catch (e) { /* aún no definida */ }
+            }
             document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
             document.querySelectorAll(".view-panel").forEach(p => p.classList.remove("active"));
 
@@ -3124,9 +3128,15 @@ public:
             isDragging: false,
             dragStartX: 0,
             dragStartY: 0,
+            dragNode: null,
             hoveredNode: null,
             selectedNode: null,
-            eventsBound: false
+            eventsBound: false,
+            simRAF: null,
+            simAlpha: 1.0,
+            simRunning: false,
+            simFrames: 0,
+            haySolape: false
         };
 
         function poblarSelectGruposRed() {
@@ -3155,6 +3165,7 @@ public:
         function construirYRenderizarRed() {
             const canvas = document.getElementById("canvas-red-colaboracion");
             if (!canvas) return;
+            detenerSimulacionRed();
             const rect = canvas.parentElement.getBoundingClientRect();
             canvas.width = Math.max(600, rect.width || 800);
             canvas.height = Math.max(480, rect.height || 540);
@@ -3260,44 +3271,30 @@ public:
                 }
             }
 
-            // Posicionamiento determinista en anillos concéntricos + relajación de fuerzas
+            // Semilla: anillos concéntricos + ángulo áureo (la simulación de fuerzas refina después)
             const cx = canvas.width / 2;
             const cy = canvas.height / 2;
             const radioMax = Math.min(cx, cy) * 0.78;
 
             nodos.forEach((n, idx) => {
-                n.r = Math.max(8, Math.min(22, 8 + Math.sqrt(n.numProductos) * 2.2 + Math.min(6, n.grado * 0.6)));
+                n.r = Math.max(7, Math.min(24, 7 + Math.sqrt(n.numProductos) * 2.4 + Math.min(7, n.grado * 0.8)));
                 if (idx === 0 && filtroG !== "TODOS") {
                     n.x = cx;
                     n.y = cy;
                 } else {
                     const anillo = idx < 10 ? 0.36 : (idx < 26 ? 0.66 : 0.92);
-                    const angulo = (idx * 2.399963229728653) % (Math.PI * 2); // Ángulo áureo para distribución sin solapamiento
+                    const angulo = (idx * 2.399963229728653) % (Math.PI * 2);
                     n.x = cx + Math.cos(angulo) * (radioMax * anillo);
                     n.y = cy + Math.sin(angulo) * (radioMax * anillo);
                 }
+                n.vx = 0;
+                n.vy = 0;
+                n.fx = null;
+                n.fy = null;
             });
 
-            // Iteraciones rápidas de separación elástica para evitar superposición de nodos
-            for (let iter = 0; iter < 35; iter++) {
-                for (let i = 0; i < nodos.length; i++) {
-                    for (let j = i + 1; j < nodos.length; j++) {
-                        const dx = nodos[j].x - nodos[i].x;
-                        const dy = nodos[j].y - nodos[i].y;
-                        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-                        const minDist = nodos[i].r + nodos[j].r + 22;
-                        if (dist < minDist) {
-                            const force = (minDist - dist) * 0.35;
-                            const ux = dx / dist;
-                            const uy = dy / dist;
-                            if (i > 0 || filtroG === "TODOS") { nodos[i].x -= ux * force; nodos[i].y -= uy * force; }
-                            nodos[j].x += ux * force;
-                            nodos[j].y += uy * force;
-                        }
-                    }
-                }
-            }
-
+            redState.centroX = cx;
+            redState.centroY = cy;
             redState.nodos = nodos;
             redState.aristas = aristas;
             redState.scale = 1.0;
@@ -3308,7 +3305,129 @@ public:
 
             vincularEventosCanvasRed(canvas);
             actualizarSidebarRed();
+            iniciarSimulacionRed();
             dibujarCanvasRed();
+        }
+
+        // =====================================================================
+        // SIMULACIÓN DE FUERZAS CONTINUA (estilo grafo de Obsidian)
+        // Repulsión many-body + resortes por enlace + colisión + gravedad al
+        // centro. Integración de Euler con "alpha" que decae; el arrastre de un
+        // nodo reaviva la simulación y el resto se reacomoda suavemente.
+        // =====================================================================
+        function pasoTickRed() {
+            const { nodos, aristas, centroX, centroY } = redState;
+            const N = nodos.length;
+            if (!N) return;
+            const alpha = redState.simAlpha;
+            let haySolape = false;
+
+            // 1. Repulsión entre todos los pares + colisión. La colisión NO se
+            //    escala por alpha, de modo que el grafo siempre acaba sin
+            //    círculos superpuestos aunque la simulación ya esté "fría".
+            for (let i = 0; i < N; i++) {
+                const ni = nodos[i];
+                for (let j = i + 1; j < N; j++) {
+                    const nj = nodos[j];
+                    let dx = nj.x - ni.x;
+                    let dy = nj.y - ni.y;
+                    let d2 = dx * dx + dy * dy;
+                    if (d2 < 0.01) { dx = (Math.random() - 0.5) * 0.5; dy = (Math.random() - 0.5) * 0.5; d2 = 0.25; }
+                    const dist = Math.sqrt(d2);
+                    const minGap = ni.r + nj.r + 16;
+                    let fx, fy;
+                    if (dist < minGap) {
+                        if (dist < ni.r + nj.r) haySolape = true;
+                        // Colisión: empuje firme proporcional al solapamiento
+                        const fuerza = (minGap - dist) / dist * 4.0;
+                        fx = (dx / dist) * fuerza;
+                        fy = (dy / dist) * fuerza;
+                    } else {
+                        // Repulsión suave tipo many-body (-charge)
+                        const fuerza = 2400 / d2 * alpha;
+                        fx = (dx / dist) * fuerza;
+                        fy = (dy / dist) * fuerza;
+                    }
+                    ni.vx -= fx; ni.vy -= fy;
+                    nj.vx += fx; nj.vy += fy;
+                }
+            }
+
+            // 2. Resortes por enlace (distancia según peso; más peso = más corto)
+            for (let k = 0; k < aristas.length; k++) {
+                const a = aristas[k];
+                const src = nodos[a.source];
+                const tgt = nodos[a.target];
+                if (!src || !tgt) continue;
+                let dx = tgt.x - src.x;
+                let dy = tgt.y - src.y;
+                let dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
+                const reposo = 34 + 70 / (a.peso || 1);
+                const rigidez = 0.06 * Math.min(1.4, (a.peso || 1) / 2);
+                const delta = (dist - reposo) / dist * rigidez * alpha;
+                const fx = dx * delta;
+                const fy = dy * delta;
+                src.vx += fx; src.vy += fy;
+                tgt.vx -= fx; tgt.vy -= fy;
+            }
+
+            // 3. Gravedad ligera hacia el centro + integración + fricción
+            for (let i = 0; i < N; i++) {
+                const n = nodos[i];
+                if (n.fx !== null && n.fy !== null) {
+                    n.x = n.fx;
+                    n.y = n.fy;
+                    n.vx = 0;
+                    n.vy = 0;
+                    continue;
+                }
+                n.vx += (centroX - n.x) * 0.003 * alpha;
+                n.vy += (centroY - n.y) * 0.003 * alpha;
+                n.vx *= 0.86; // fricción/inercia
+                n.vy *= 0.86;
+                // Limitar velocidad para estabilidad
+                const vmax = 18;
+                const v = Math.sqrt(n.vx * n.vx + n.vy * n.vy);
+                if (v > vmax) { n.vx = n.vx / v * vmax; n.vy = n.vy / v * vmax; }
+                n.x += n.vx * alpha;
+                n.y += n.vy * alpha;
+            }
+
+            // 4. Enfriamiento del alpha y estado de solapamiento
+            redState.simAlpha = alpha > 0.006 ? alpha * 0.985 : alpha;
+            redState.haySolape = haySolape;
+        }
+
+        function bucleSimulacionRed() {
+            if (!redState.simRunning) return;
+            pasoTickRed();
+            dibujarCanvasRed();
+            redState.simFrames++;
+            const activo = redState.simAlpha > 0.006 || redState.haySolape;
+            if (activo && redState.simFrames < 2400) {
+                redState.simRAF = requestAnimationFrame(bucleSimulacionRed);
+            } else {
+                redState.simRunning = false;
+                redState.simRAF = null;
+            }
+        }
+
+        function iniciarSimulacionRed(reactivar) {
+            if (reactivar) redState.simAlpha = Math.max(redState.simAlpha, 0.85);
+            else redState.simAlpha = 1.0;
+            redState.simFrames = 0;
+            if (!redState.simRunning) {
+                redState.simRunning = true;
+                redState.simRAF = requestAnimationFrame(bucleSimulacionRed);
+            }
+        }
+
+        function detenerSimulacionRed() {
+            redState.simRunning = false;
+            if (redState.simRAF) {
+                cancelAnimationFrame(redState.simRAF);
+                redState.simRAF = null;
+            }
         }
 
         function dibujarCanvasRed() {
@@ -3324,26 +3443,44 @@ public:
             ctx.translate(offsetX, offsetY);
             ctx.scale(scale, scale);
 
-            // 1. Dibujar aristas
-            aristas.forEach(a => {
+            // 1. Dibujar aristas (curvas suaves, grosor y opacidad por peso/vecindario)
+            for (let k = 0; k < aristas.length; k++) {
+                const a = aristas[k];
                 const n1 = nodos[a.source];
                 const n2 = nodos[a.target];
-                const esVecinoFoco = focoIdx >= 0 && (a.source === focoIdx || a.target === focoIdx);
+                if (!n1 || !n2) continue;
+                const peso = a.peso || 1;
+                const esFoco = focoIdx >= 0 && (a.source === focoIdx || a.target === focoIdx);
+                const ambosVecinos = focoIdx >= 0 &&
+                    nodos[focoIdx].vecinos.has(a.source) && nodos[focoIdx].vecinos.has(a.target);
+                // Curva cuadrática con curvatura leve según el nº de aristas
+                const mx = (n1.x + n2.x) / 2;
+                const my = (n1.y + n2.y) / 2;
+                const dx = n2.x - n1.x;
+                const dy = n2.y - n1.y;
+                const len = Math.sqrt(dx * dx + dy * dy) || 1;
+                const curv = Math.min(18, len * 0.08);
+                const cx = mx + (-dy / len) * curv;
+                const cy = my + (dx / len) * curv;
+
                 ctx.beginPath();
                 ctx.moveTo(n1.x, n1.y);
-                ctx.lineTo(n2.x, n2.y);
-                if (esVecinoFoco) {
-                    ctx.strokeStyle = "rgba(56, 189, 248, 0.85)";
-                    ctx.lineWidth = 2.2;
+                ctx.quadraticCurveTo(cx, cy, n2.x, n2.y);
+                if (esFoco) {
+                    ctx.strokeStyle = "rgba(56, 189, 248, 0.92)";
+                    ctx.lineWidth = Math.min(3.4, 1.4 + peso * 0.55);
+                } else if (ambosVecinos) {
+                    ctx.strokeStyle = "rgba(148, 197, 253, 0.55)";
+                    ctx.lineWidth = Math.min(2.6, 1.0 + peso * 0.4);
                 } else if (focoIdx >= 0) {
-                    ctx.strokeStyle = "rgba(51, 65, 85, 0.22)";
-                    ctx.lineWidth = 1.0;
+                    ctx.strokeStyle = "rgba(51, 65, 85, 0.16)";
+                    ctx.lineWidth = 0.9;
                 } else {
-                    ctx.strokeStyle = "rgba(71, 85, 105, 0.42)";
-                    ctx.lineWidth = 1.2;
+                    ctx.strokeStyle = "rgba(100, 116, 139, 0.42)";
+                    ctx.lineWidth = Math.min(2.4, 0.9 + peso * 0.35);
                 }
                 ctx.stroke();
-            });
+            }
 
             // 2. Dibujar nodos
             nodos.forEach((n, idx) => {
@@ -3459,6 +3596,26 @@ public:
             const n = redState.nodos.find(x => x.id === nodeId);
             if (!n) return;
             redState.selectedNode = n;
+            // Centrado suave con transición (lerp) estilo Obsidian
+            const canvas = document.getElementById("canvas-red-colaboracion");
+            if (canvas) {
+                const objetivoX = canvas.width / 2 - n.x * redState.scale;
+                const objetivoY = canvas.height / 2 - n.y * redState.scale;
+                const ox = redState.offsetX, oy = redState.offsetY, sc = redState.scale;
+                const pasos = 14;
+                let paso = 0;
+                const animar = () => {
+                    paso++;
+                    const t = paso / pasos;
+                    const ease = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+                    redState.offsetX = ox + (objetivoX - ox) * ease;
+                    redState.offsetY = oy + (objetivoY - oy) * ease;
+                    redState.scale = sc;
+                    dibujarCanvasRed();
+                    if (paso < pasos) requestAnimationFrame(animar);
+                };
+                requestAnimationFrame(animar);
+            }
             actualizarSidebarRed();
             dibujarCanvasRed();
         }
@@ -3490,25 +3647,41 @@ public:
         }
 
         function centrarRed() {
-            redState.scale = 1.0;
-            redState.offsetX = 0;
-            redState.offsetY = 0;
-            dibujarCanvasRed();
+            const ox = redState.offsetX, oy = redState.offsetY, sc = redState.scale;
+            const pasos = 14;
+            let paso = 0;
+            const animar = () => {
+                paso++;
+                const t = paso / pasos;
+                const ease = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+                redState.offsetX = ox + (0 - ox) * ease;
+                redState.offsetY = oy + (0 - oy) * ease;
+                redState.scale = sc + (1.0 - sc) * ease;
+                dibujarCanvasRed();
+                if (paso < pasos) requestAnimationFrame(animar);
+            };
+            requestAnimationFrame(animar);
         }
 
         function vincularEventosCanvasRed(canvas) {
             if (redState.eventsBound) return;
             redState.eventsBound = true;
 
-            function obtenerNodoEnPunto(clientX, clientY) {
+            function coordsCanvas(clientX, clientY) {
                 const rect = canvas.getBoundingClientRect();
-                const mx = (clientX - rect.left - redState.offsetX) / redState.scale;
-                const my = (clientY - rect.top - redState.offsetY) / redState.scale;
+                return {
+                    x: (clientX - rect.left - redState.offsetX) / redState.scale,
+                    y: (clientY - rect.top - redState.offsetY) / redState.scale
+                };
+            }
+
+            function obtenerNodoEnPunto(clientX, clientY) {
+                const p = coordsCanvas(clientX, clientY);
                 for (let i = redState.nodos.length - 1; i >= 0; i--) {
                     const n = redState.nodos[i];
-                    const dx = mx - n.x;
-                    const dy = my - n.y;
-                    if (dx * dx + dy * dy <= (n.r + 5) * (n.r + 5)) return n;
+                    const dx = p.x - n.x;
+                    const dy = p.y - n.y;
+                    if (dx * dx + dy * dy <= (n.r + 6) * (n.r + 6)) return n;
                 }
                 return null;
             }
@@ -3516,10 +3689,21 @@ public:
             canvas.addEventListener("mousedown", e => {
                 const hit = obtenerNodoEnPunto(e.clientX, e.clientY);
                 if (hit) {
+                    // Arrastrar NODO: se fija a la posición y se reaviva la simulación
                     redState.selectedNode = hit;
+                    redState.dragNode = hit;
+                    redState.isDragging = true;
+                    const p = coordsCanvas(e.clientX, e.clientY);
+                    hit.fx = p.x;
+                    hit.fy = p.y;
+                    iniciarSimulacionRed(true);
                     actualizarSidebarRed();
-                    dibujarCanvasRed();
+                    canvas.style.cursor = "grabbing";
+                    e.preventDefault();
+                    return;
                 }
+                // Arrastrar el LIENZO (paneo)
+                redState.dragNode = null;
                 redState.isDragging = true;
                 redState.dragStartX = e.clientX - redState.offsetX;
                 redState.dragStartY = e.clientY - redState.offsetY;
@@ -3527,6 +3711,13 @@ public:
             });
 
             window.addEventListener("mouseup", () => {
+                if (redState.dragNode) {
+                    // Liberar el nodo: vuelve a caer suavemente en su lugar
+                    redState.dragNode.fx = null;
+                    redState.dragNode.fy = null;
+                    redState.dragNode = null;
+                    iniciarSimulacionRed(true);
+                }
                 if (redState.isDragging) {
                     redState.isDragging = false;
                     canvas.style.cursor = "grab";
@@ -3534,6 +3725,18 @@ public:
             });
 
             canvas.addEventListener("mousemove", e => {
+                if (redState.isDragging && redState.dragNode) {
+                    const p = coordsCanvas(e.clientX, e.clientY);
+                    redState.dragNode.fx = p.x;
+                    redState.dragNode.fy = p.y;
+                    redState.dragNode.x = p.x;
+                    redState.dragNode.y = p.y;
+                    redState.dragNode.vx = 0;
+                    redState.dragNode.vy = 0;
+                    iniciarSimulacionRed(true);
+                    dibujarCanvasRed();
+                    return;
+                }
                 if (redState.isDragging) {
                     redState.offsetX = e.clientX - redState.dragStartX;
                     redState.offsetY = e.clientY - redState.dragStartY;
