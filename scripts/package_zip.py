@@ -176,8 +176,31 @@ def verificar_formato_windows() -> bool:
             print(f"    [gate] {rel}: {sin_cr} líneas LF→CRLF normalizadas")
     return ok
 
+def asegurar_dashboard_python():
+    """Genera dist/dashboard_python.html si falta.
+
+    'make clean' elimina ese HTML generado; sin este paso el gate de contenido
+    fallaría siempre tras una limpieza. No abre el navegador.
+    """
+    destino = os.path.join(BASE_DIR, "dist", "dashboard_python.html")
+    if os.path.exists(destino):
+        return
+    print("[*] dist/dashboard_python.html ausente; generando dashboard analítico...")
+    try:
+        if BASE_DIR not in sys.path:
+            sys.path.insert(0, BASE_DIR)
+        from src.python.gui import DashboardApp
+        app = DashboardApp(os.path.join(BASE_DIR, "data", "pea_investigacion.db"))
+        os.makedirs(os.path.dirname(destino), exist_ok=True)
+        app.generar_html_dashboard(destino)
+        print(f"    [OK] Dashboard generado: {os.path.relpath(destino, BASE_DIR)}")
+    except Exception as e:
+        print(f"    [!] No se pudo generar el dashboard automáticamente: {e}")
+        print("        Genérelo manualmente con: python Taller2_AB_PO_XX.py --gui")
+
 def empaquetar():
     print("[*] Gate F: frescura del ZIP previo (antes de reemplazarlo)...")
+    asegurar_dashboard_python()
     verificar_frescura()
     if os.path.exists(ZIP_NAME):
         os.remove(ZIP_NAME)
