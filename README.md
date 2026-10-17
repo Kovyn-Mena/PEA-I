@@ -7,7 +7,7 @@
 
 ---
 
-## 📌 Descripción General del Sistema
+## Descripción General del Sistema
 
 **PEA-i** es un sistema computacional integral de analítica científica diseñado para gestionar, auditar, catalogar y evaluar la producción investigativa de la Universidad Popular del Cesar conforme al modelo oficial **SCIENTI (GrupLAC y CvLAC de MinCiencias)** y a la taxonomía vigente del **Modelo de Medición MinCiencias 2024 (Convocatoria 957 / Anexo 1)**.
 
@@ -19,7 +19,7 @@ El sistema implementa dos soluciones complementarias y coordinadas (**C++17** y 
 
 ---
 
-## 🏛️ Modelo Oficial MinCiencias 2024 & Taxonomía Científica
+## Modelo Oficial MinCiencias 2024 & Taxonomía Científica
 
 El sistema incorpora las **5 Macro-familias** oficiales y **15 tipologías** científicas con cálculo del **Índice de Producción Ponderada (IPP)**:
 
@@ -31,7 +31,7 @@ El sistema incorpora las **5 Macro-familias** oficiales y **15 tipologías** cie
 
 ---
 
-## ⚡ Motor de Ingesta, Scraping y Hojas de Vida CvLAC
+## Motor de Ingesta, Scraping y Hojas de Vida CvLAC
 
 * **Detección Fidedigna de Aval Institucional (`chulo_1.jpg`)**: El motor de scraping analiza directamente el DOM de GrupLAC detectando la marca `chulo_1.jpg` (avalado oficialmente en la convocatoria) vs `chulo_0.jpg` (pendiente / sin aval). En GISICO (`COL0002099`), clasifica con exactitud matemática **168 productos validados** y **162 sin aval**.
 * **Perfiles Curriculares Enriquecidos (`PerfilInvestigador`)**: Extrae y vincula la condición de **Par Evaluador MinCiencias**, enlace directo a **Google Scholar**, código internacional persistente **ORCID** y máximo nivel educativo.
@@ -40,7 +40,7 @@ El sistema incorpora las **5 Macro-familias** oficiales y **15 tipologías** cie
 
 ---
 
-## 🧱 Las Estructuras de Datos Académicas Puras (RAM)
+## Las Estructuras de Datos Académicas Puras (RAM)
 
 | TDA Implementado | Disciplina | Función en el Sistema PEA-i |
 | :--- | :---: | :--- |
@@ -50,7 +50,7 @@ El sistema incorpora las **5 Macro-familias** oficiales y **15 tipologías** cie
 
 ---
 
-## 📂 Estructura del Repositorio
+## Estructura del Repositorio
 
 ```text
 .
@@ -89,70 +89,54 @@ El sistema incorpora las **5 Macro-familias** oficiales y **15 tipologías** cie
 
 ---
 
-## 🚀 Guía de Ejecución Rápida y Multiplataforma
+## Guía de Ejecución Rápida y Multiplataforma
 
 > [!IMPORTANT]
-> **¿Por qué a tu compañero o amigo no le abría el programa?**
-> 1. **Si usa Windows:** El archivo `pea_cpp` es un ejecutable binario de **Linux (ELF 64-bit)**. En Windows, hacer doble clic en `pea_cpp` muestra el error *"Esta aplicación no se puede ejecutar en este equipo"* o no hace nada. Además, el comando `make` no viene instalado por defecto en la consola de Windows.
-> 2. **Solución Inmediata para Windows:** Usar la versión en **Python** (que no requiere compilar absolutamente nada) o hacer doble clic en el lanzador automático `ejecutar_windows.bat`.
-> 3. **Si usa Linux:** Si descargó el código comprimido en ZIP, el archivo ejecutable puede haber perdido los permisos de ejecución (`chmod +x pea_cpp`) o puede faltar la librería SQLite3 de desarrollo (`sudo apt install libsqlite3-dev`).
+> **¿Por qué a un compañero no le abría el programa?**
+> 1. **Windows:** el archivo `pea_cpp` es un ejecutable binario de **Linux (ELF 64-bit)**. En Windows, hacer doble clic en `pea_cpp` muestra el error *"Esta aplicación no se puede ejecutar en este equipo"* o no hace nada. Además, el comando `make` no viene instalado por defecto en Windows.
+> 2. **Solución inmediata en Windows:** hacer doble clic en **`iniciar.bat`** y elegir una opción del menú. Las opciones de Python y del Portal Web no requieren compilar nada.
+> 3. **Linux:** si descargaste el código comprimido en ZIP, el ejecutable puede haber perdido permisos (`chmod +x pea_cpp`) o puede faltar la librería de desarrollo de SQLite3 (`sudo apt install libsqlite3-dev`).
 
 ---
 
-### 💻 1. Ejecución en Windows (Para Compañeros y Docente)
+### 1. Ejecución en Windows (Para Compañeros y Docente)
 
-En Windows tienes scripts automatizados de un solo clic que resuelven todo sin configuraciones complejas:
+En Windows todo se maneja desde un único lanzador. Haz **doble clic** sobre:
 
-#### 🌟 Opción 1: Lanzador Maestro con Menú Interactivo (¡El Más Recomendado!)
-Simplemente haz **doble clic** sobre:
 ```text
-INICIAR_WINDOWS.bat
+iniciar.bat
 ```
-Se abrirá un menú interactivo en la consola de Windows donde puedes elegir con un número:
-* `[1]` Ejecutar Consola en Python (Abre al instante sin compilar nada).
-* `[2]` Compilar y Ejecutar en C++ (Detecta automáticamente tu compilador y genera `pea_cpp.exe`).
-* `[3]` Abrir Portal Web Ejecutivo (Visualizador del Hipercubo en Edge/Chrome).
-* `[4]` Ver Documentación Técnica Oficial Word (`.docx`).
-* `[5]` Ver Informe PDF Oficial de Investigación (GISICO).
-* `[6]` Ejecutar Pruebas Unitarias de Estructuras (TDAs).
 
-#### ⚙️ Opción 2: Compilar y Ejecutar en C++ en Windows
-Si deseas ejecutar específicamente la versión en **C++** en Windows:
-1. Haz doble clic sobre:
-   ```text
-   compilar_cpp_windows.bat
-   ```
-2. El script buscará automáticamente si tienes instalado:
-   * **MSYS2 UCRT64** (`C:\msys64\ucrt64\bin\g++.exe` — configuración estándar de la UPC).
-   * **MSYS2 MINGW64** (`C:\msys64\mingw64\bin\g++.exe`).
-   * **Code::Blocks** (`C:\Program Files\CodeBlocks\MinGW\bin\g++.exe`).
-   * **Dev-C++** (`C:\Program Files (x86)\Dev-Cpp\MinGW64\bin\g++.exe`).
-   * O cualquier **g++** en el `PATH` del sistema.
-3. Compilará `pea_cpp.exe` y lo iniciará de inmediato.
-4. *Si no tienes ningún compilador C++ instalado*, el script te avisará cordialmente y te ofrecerá iniciar la versión de Python que tiene exactamente los mismos TDAs y la misma base de datos sin compilar nada.
+Se abre un menú interactivo en la consola donde eliges con un número:
 
-#### ⚡ Opción 3: Ejecución Inmediata en Python (Doble Clic Directo)
-Si solo quieres abrir la consola interactiva sin compilar C++:
-* Haz doble clic sobre:
-  ```text
-  ejecutar_windows.bat
-  ```
-* O por terminal (CMD / PowerShell):
-  ```powershell
-  python Taller2_AB_PO_XX.py
-  ```
+| Opción | Acción |
+| :---: | :--- |
+| `[1]` | Consola interactiva en Python (abre al instante, sin compilar). |
+| `[2]` | Dashboard gráfico en Python (`--gui`): 3 vistas y gráficos, en el navegador. |
+| `[3]` | Portal web del Hipercubo y panel CRUD (HTML5 offline; no requiere Python). |
+| `[4]` | Compilar y ejecutar en C++17 (autodetecta MSYS2 UCRT64/MINGW64, Code::Blocks, Dev-C++). |
+| `[5]` | Pruebas unitarias de TDAs (Python y, si hay compilador, C++). |
+| `[6]` | Abrir la documentación técnica en Word (`.docx`). |
+| `[7]` | Empaquetar la entrega formal en ZIP limpio. |
+| `[8]` | Ingesta masiva UPC (66 grupos) con hojas de vida CvLAC. |
+| `[9]` | Diagnóstico del sistema (reporte para soporte). |
+| `[0]` | Salir. |
 
-#### 🌐 Opción 4: Portal Web Ejecutivo (Visualizador Gráfico del Hipercubo)
-Para ver la interfaz gráfica moderna con tarjetas, estadísticas interactivas, filtrado por macro-familias y perfiles curriculares CvLAC enriquecidos con enlaces y fotos:
-* Haz doble clic directo sobre:
-  ```text
-  dist/visualizador_hipercubo.html
-  ```
-  *(Es 100% autocontenido y funciona offline en Google Chrome, Microsoft Edge o Mozilla Firefox sin necesidad de servidores web ni dependencias externas).*
+El lanzador **detecta automáticamente** Python 3 (evitando el alias falso de Microsoft Store) y el compilador C++ disponible. Si falta una dependencia opcional (por ejemplo, para scraping o informes PDF) avisa con un mensaje claro, sin detener el programa.
+
+Alternativas por terminal (CMD / PowerShell):
+
+```powershell
+python Taller2_AB_PO_XX.py            # Consola interactiva en Python
+python Taller2_AB_PO_XX.py --gui      # Dashboard gráfico en Python (navegador)
+dist\visualizador_hipercubo.html      # Portal web (doble clic; 100% offline)
+```
+
+El portal `dist/visualizador_hipercubo.html` es autocontenido y funciona sin servidor ni dependencias externas en Google Chrome, Microsoft Edge o Mozilla Firefox.
 
 ---
 
-### 🐧 2. Ejecución en Linux (Ubuntu, Debian, Linux Mint, Fedora, Arch)
+### 2. Ejecución en Linux (Ubuntu, Debian, Linux Mint, Fedora, Arch)
 
 En Linux puedes utilizar tanto la solución nativa de alto rendimiento en **C++17** como la solución en **Python 3**.
 
@@ -190,7 +174,7 @@ make gui
 
 ---
 
-### 🍎 3. Ejecución en macOS
+### 3. Ejecución en macOS
 
 En macOS, la forma más rápida y directa es a través de Python 3:
 ```bash
@@ -205,12 +189,12 @@ clang++ -std=c++17 -I$(brew --prefix sqlite3)/include -L$(brew --prefix sqlite3)
 
 ---
 
-### 🔧 Solución de Problemas Frecuentes (FAQ / Troubleshooting)
+### Solución de Problemas Frecuentes (FAQ / Troubleshooting)
 
 | Mensaje de Error o Situación | Causa | Solución Paso a Paso |
 | :--- | :--- | :--- |
-| **"Esta aplicación no se puede ejecutar en este equipo"** (Windows) | Se intentó hacer doble clic en `pea_cpp` (que es un binario compilado para Linux). | Ejecuta `ejecutar_windows.bat` o abre la terminal y escribe `python Taller2_AB_PO_XX.py`. |
-| **`'make' no se reconoce como un comando interno o externo`** (Windows) | Windows CMD/PowerShell no incluye la utilidad `make` de Linux por defecto. | En Windows no necesitas `make`. Ejecuta `python Taller2_AB_PO_XX.py` o abre `dist/visualizador_hipercubo.html`. |
+| **"Esta aplicación no se puede ejecutar en este equipo"** (Windows) | Se intentó hacer doble clic en `pea_cpp` (que es un binario compilado para Linux). | Ejecuta `iniciar.bat` y elige la opción `[1]` (Python) o `[3]` (Portal Web); o abre la terminal y escribe `python Taller2_AB_PO_XX.py`. |
+| **`'make' no se reconoce como un comando interno o externo`** (Windows) | Windows CMD/PowerShell no incluye la utilidad `make` de Linux por defecto. | En Windows no necesitas `make`. Ejecuta `iniciar.bat` o bien `python Taller2_AB_PO_XX.py`; también puedes abrir `dist/visualizador_hipercubo.html`. |
 | **`bash: ./pea_cpp: Permiso denegado`** (`Permission denied` en Linux) | El archivo descargado o descomprimido perdió los permisos de ejecución en Linux. | Ejecuta en terminal: `chmod +x pea_cpp` y vuelve a correr `./pea_cpp`. |
 | **`fatal error: sqlite3.h: No such file or directory`** o `cannot find -lsqlite3` | Falta la cabecera de desarrollo de SQLite3 en el sistema Linux. | Instala la librería con: `sudo apt install libsqlite3-dev`. |
 | **`error: externally-managed-environment`** al usar `pip` en Linux moderno | Protección PEP 668 en Ubuntu 23+/Debian 12+ para proteger el sistema operativo. | Crea un entorno virtual:<br>`python3 -m venv .venv`<br>`source .venv/bin/activate`<br>`pip install -r requirements.txt` |
@@ -219,7 +203,7 @@ clang++ -std=c++17 -I$(brew --prefix sqlite3)/include -L$(brew --prefix sqlite3)
 
 ---
 
-## 🛠️ Automatización con Makefile (Desarrollo y Evaluación en Linux)
+## Automatización con Makefile (Desarrollo y Evaluación en Linux)
 
 Para usuarios y docentes en entornos Linux/Unix, todas las tareas del ciclo de vida del software están completamente automatizadas:
 
@@ -236,7 +220,7 @@ make clean    # Limpia archivos objeto y binarios temporales
 
 ---
 
-## 👥 Acreditación Académica
+## Acreditación Académica
 * **Estudiante / Desarrollador:** Kovyn B. Mena (`kbmena@unicesar.edu.co`)
 * **Asignatura:** Estructura de Datos — Grupo 01
 * **Docente Evaluador:** Ing. Adith Bismarck Pérez Orozco
