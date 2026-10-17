@@ -1,0 +1,13 @@
+[Project]
+Name=PEA-i
+Type=1
+Ver=3
+Includes=src/cpp/include
+Libs=
+CppObjs=src/cpp/sqlite3.c
+Compiler=-std=c++17
+Linker=-static-libgcc -static-libstdc++
+Exe=output/pea_cpp.exe
+
+[Files]
+File1=src/cpp/main.cpp

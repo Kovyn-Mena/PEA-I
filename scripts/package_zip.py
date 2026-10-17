@@ -17,6 +17,7 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 ZIP_NAME = os.path.join(BASE_DIR, "Taller2_EstructuraDatos_GrupoXX.zip")
 
 FILES_TO_INCLUDE = [
+    "CMakeLists.txt",
     "Makefile",
     "README.md",
     "integrantes.txt",
@@ -44,6 +45,8 @@ DIRS_TO_INCLUDE = [
     "docs",
     "reportes",
     "scripts",
+    ".vscode",
+    ".devcpp",
     # pylib: bundle vendored intencional (Python MSYS/Windows sin pip).
     # Ver documentacion-obsidian S45/BUG-26. No retirar sin pip funcional.
     "pylib",

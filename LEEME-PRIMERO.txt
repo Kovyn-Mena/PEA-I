@@ -26,4 +26,12 @@ PEA-i UPC — LEEME PRIMERO (Windows, 2 minutos)
 
 7. Si el .html se abre en Bloc de Notas: cambie la app predeterminada
    de .html a su navegador (Edge/Chrome/Firefox).
+
+8. C++ EN VISUAL STUDIO CODE O Dev-C++ (sin instalar nada):
+   - VS Code: instale la extensión "CMake Tools"; abra esta carpeta; la
+     paleta (Ctrl+Shift+P) -> "CMake: Configure" -> Compile. Se crea build/
+     con pea_cpp.exe ya autocontenido (SQLite amalgamado incluido).
+   - Dev-C++: abra el proyecto .devcpp/PEA-i.dev -> Compile & Run.
+   - Compilar C++ NO es obligatorio: la opcion [4] de iniciar.bat ya
+     compila con MSYS2/MinGW sin configuracion, y trae pea_cpp.exe listo.
 ===============================================================================
