@@ -4,10 +4,18 @@ para incluir en el documento Word formal y en la documentación Markdown.
 Colores institucionales UPC: Verde (#006837), Rojo (#ED1C24), Gris (#2D3748)
 """
 import os
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
+import sys
+
+try:
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    import matplotlib.patches as patches
+except Exception as e:
+    print("[AVISO] No se pudo importar matplotlib. Saltando generación de diagramas.")
+    print(f"       Error: {e}")
+    print("       (matplotlib solo es necesario para generar imágenes para el .docx)")
+    sys.exit(0)
 
 OUTPUT_DIR = "docs/images"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
