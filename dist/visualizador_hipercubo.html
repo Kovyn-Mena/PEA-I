@@ -54439,6 +54439,10 @@
             simFrames: 0,
             haySolape: false
         };
+        // Dimensiones útiles del canvas de la red (las usa la simulación para
+        // escalar la repulsión y contener los nodos dentro del área visible).
+        let canvasRedAncho = 900;
+        let canvasRedAlto = 560;
 
         function poblarSelectGruposRed() {
             const sel = document.getElementById("filtro-red-grupo");
@@ -54470,6 +54474,8 @@
             const rect = canvas.parentElement.getBoundingClientRect();
             canvas.width = Math.max(600, rect.width || 800);
             canvas.height = Math.max(480, rect.height || 540);
+            canvasRedAncho = canvas.width;
+            canvasRedAlto = canvas.height;
 
             const filtroG = document.getElementById("filtro-red-grupo")?.value || (gruposData[0]?.codigo || "COL0018706");
             let candidatos = [];
@@ -54622,6 +54628,12 @@
             if (!N) return;
             const alpha = redState.simAlpha;
             let haySolape = false;
+            // Referencia de área (900x560) para escalar la repulsión según el
+            // tamaño real del canvas: en pantallas grandes el grafo se expande,
+            // en pequeñas no explota. Igual que hace d3-force con sus parámetros.
+            const areaRef = 900 * 560;
+            const carga = 12000 * ((canvasRedAncho * canvasRedAlto) / areaRef);
+            const margen = 26;
 
             // 1. Repulsión entre todos los pares + colisión. La colisión NO se
             //    escala por alpha, de modo que el grafo siempre acaba sin
@@ -54635,7 +54647,7 @@
                     let d2 = dx * dx + dy * dy;
                     if (d2 < 0.01) { dx = (Math.random() - 0.5) * 0.5; dy = (Math.random() - 0.5) * 0.5; d2 = 0.25; }
                     const dist = Math.sqrt(d2);
-                    const minGap = ni.r + nj.r + 16;
+                    const minGap = ni.r + nj.r + 30;
                     let fx, fy;
                     if (dist < minGap) {
                         if (dist < ni.r + nj.r) haySolape = true;
@@ -54645,7 +54657,7 @@
                         fy = (dy / dist) * fuerza;
                     } else {
                         // Repulsión suave tipo many-body (-charge)
-                        const fuerza = 2400 / d2 * alpha;
+                        const fuerza = carga / d2 * alpha;
                         fx = (dx / dist) * fuerza;
                         fy = (dy / dist) * fuerza;
                     }
@@ -54663,7 +54675,7 @@
                 let dx = tgt.x - src.x;
                 let dy = tgt.y - src.y;
                 let dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
-                const reposo = 34 + 70 / (a.peso || 1);
+                const reposo = 60 + 90 / (a.peso || 1);
                 const rigidez = 0.06 * Math.min(1.4, (a.peso || 1) / 2);
                 const delta = (dist - reposo) / dist * rigidez * alpha;
                 const fx = dx * delta;
@@ -54682,8 +54694,8 @@
                     n.vy = 0;
                     continue;
                 }
-                n.vx += (centroX - n.x) * 0.003 * alpha;
-                n.vy += (centroY - n.y) * 0.003 * alpha;
+                n.vx += (centroX - n.x) * 0.0012 * alpha;
+                n.vy += (centroY - n.y) * 0.0012 * alpha;
                 n.vx *= 0.86; // fricción/inercia
                 n.vy *= 0.86;
                 // Limitar velocidad para estabilidad
@@ -54692,6 +54704,14 @@
                 if (v > vmax) { n.vx = n.vx / v * vmax; n.vy = n.vy / v * vmax; }
                 n.x += n.vx * alpha;
                 n.y += n.vy * alpha;
+                // Contención dura dentro del canvas útil: evita que nodos queden
+                // fuera del área visible (anula la componente saliente).
+                const minX = margen + n.r, maxX = canvasRedAncho - margen - n.r;
+                const minY = margen + n.r, maxY = canvasRedAlto - margen - n.r;
+                if (n.x < minX) { n.x = minX; if (n.vx < 0) n.vx = 0; }
+                else if (n.x > maxX) { n.x = maxX; if (n.vx > 0) n.vx = 0; }
+                if (n.y < minY) { n.y = minY; if (n.vy < 0) n.vy = 0; }
+                else if (n.y > maxY) { n.y = maxY; if (n.vy > 0) n.vy = 0; }
             }
 
             // 4. Enfriamiento del alpha y estado de solapamiento
@@ -54808,17 +54828,68 @@
                 ctx.strokeStyle = esFoco ? "#ffffff" : (esVecino ? "#e2e8f0" : "#0f172a");
                 ctx.stroke();
 
-                // Etiqueta de nombre corto
-                if (!atenuado || n.r >= 13 || scale > 1.15) {
-                    const partes = (n.nombre || "").trim().split(/\s+/);
-                    const etiq = partes.length >= 2 ? `${partes[0]} ${partes[partes.length - 1]}` : n.nombre.substring(0, 14);
-                    ctx.font = `${esFoco ? "700 11px" : "600 10px"} 'Inter', system-ui, sans-serif`;
-                    ctx.textAlign = "center";
-                    ctx.fillStyle = esFoco ? "#ffffff" : "#cbd5e1";
-                    ctx.fillText(etiq.substring(0, 18), n.x, n.y + n.r + 12);
-                }
                 ctx.restore();
             });
+
+            // 3. Etiquetas con colocación anti-colisión (segunda pasada, para
+            //    poder medir el texto y comparar contra las ya colocadas).
+            //    En la vista completa solo compiten los nodos importantes; con
+            //    foco se muestran el foco y sus vecinos. El resto se descarta
+            //    para que nunca se pisen los nombres.
+            const cajasColocadas = [];
+            const candidatas = [];
+            nodos.forEach((n, idx) => {
+                const esFoco = (idx === focoIdx);
+                const esVecino = focoIdx >= 0 && nodos[focoIdx].vecinos.has(idx);
+                const atenuado = (focoIdx >= 0 && !esFoco && !esVecino);
+                const importante = n.grado >= 3 || n.numProductos >= 4 || n.r >= 14;
+                const permitida = esFoco || esVecino || (!atenuado && (importante || scale > 1.25));
+                if (!permitida) return;
+                const partes = (n.nombre || "").trim().split(/\s+/);
+                const etiq = (partes.length >= 2 ? `${partes[0]} ${partes[partes.length - 1]}` : n.nombre.substring(0, 14)).substring(0, 18);
+                candidatas.push({ n, idx, etiq, esFoco, esVecino, atenuado, importante, prioridad: esFoco ? 3 : (esVecino ? 2 : (importante ? 1 : 0)) });
+            });
+            candidatas.sort((a, b) => (b.prioridad - a.prioridad) || (b.n.grado - a.n.grado));
+            // En la vista general (sin foco y sin zoom) se rotulan solo los
+            // nodos más importantes, para que el grafo respire. Al hacer zoom
+            // o enfocar un nodo se amplía el detalle automáticamente.
+            const LIMITE_SIN_FOCO = 14;
+            for (let c = 0; c < candidatas.length; c++) {
+                const it = candidatas[c];
+                const n = it.n;
+                if (focoIdx < 0 && scale <= 1.25 && cajasColocadas.length >= LIMITE_SIN_FOCO) break;
+                const fuente = `${it.esFoco ? "700 11px" : "600 10px"} 'Inter', system-ui, sans-serif`;
+                ctx.font = fuente;
+                const ancho = ctx.measureText(it.etiq).width;
+                const cxL = n.x;
+                const cyL = n.y + n.r + 12;
+                const caja = { x1: cxL - ancho / 2 - 3, y1: cyL - 11, x2: cxL + ancho / 2 + 3, y2: cyL + 3 };
+                let choca = false;
+                for (let b = 0; b < cajasColocadas.length; b++) {
+                    const o = cajasColocadas[b];
+                    if (caja.x1 < o.x2 && caja.x2 > o.x1 && caja.y1 < o.y2 && caja.y2 > o.y1) { choca = true; break; }
+                }
+                if (!choca) {
+                    // Evitar que la etiqueta caiga encima de otro nodo
+                    for (let k = 0; k < nodos.length; k++) {
+                        if (k === it.idx) continue;
+                        const o = nodos[k];
+                        if (o.x > caja.x1 - o.r && o.x < caja.x2 + o.r && o.y > caja.y1 - o.r && o.y < caja.y2 + o.r) { choca = true; break; }
+                    }
+                }
+                if (choca && !it.esFoco) continue; // el foco siempre se etiqueta
+                cajasColocadas.push(caja);
+                ctx.save();
+                ctx.globalAlpha = it.atenuado ? 0.5 : 1.0;
+                ctx.font = fuente;
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillStyle = "rgba(9, 13, 22, 0.82)";
+                ctx.fillRect(caja.x1, caja.y1, caja.x2 - caja.x1, caja.y2 - caja.y1);
+                ctx.fillStyle = it.esFoco ? "#ffffff" : (it.esVecino ? "#e2e8f0" : "#cbd5e1");
+                ctx.fillText(it.etiq, cxL, cyL);
+                ctx.restore();
+            }
 
             ctx.restore();
         }
