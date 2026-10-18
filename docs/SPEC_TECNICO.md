@@ -242,7 +242,6 @@ flowchart TD
     subgraph DATA_LAYER ["Capa de Persistencia y Fuentes Externas"]
         SQLITE[("Persistencia Central SQLite3<br><i>data/pea_investigacion.db (WAL Mode)</i>")]
         SCRAPER["Motor de Ingesta Masiva<br>GrupLAC | CvLAC | PDF | CSV"]
-        RUST_AUDIT["Módulo Auditor en Rust<br><i>(src/rust/ Invariant Verifier & Benchmark)</i>"]
     end
 
     C_CLI <--> TDA_CPP
@@ -256,7 +255,6 @@ flowchart TD
     TDA_CPP <--> SQLITE
     TDA_PY <--> SQLITE
     SCRAPER --> SQLITE
-    RUST_AUDIT -.-> SQLITE
 ```
 
 ---
@@ -270,7 +268,7 @@ flowchart TD
 | **03:30 - 05:30** | **Demostración Python & Ingesta** | Ejecución de `Taller2_AB_PO_XX.py`. Demostración de la Cola FIFO procesando GrupLAC y CSV con atribución real de autores. | Puntos 7, 12.a, Nota 10 |
 | **05:30 - 07:30** | **Dashboards Gráficos (3 Vistas)** | Invocación con `--gui`. Exhibición de histogramas 1996-2026, barras por categoría y las 3 vistas (Grupo, Investigador, Productos). | Puntos 12.b, 12.c, 14.c |
 | **07:30 - 09:00** | **Pila Undo & SQLite WAL** | Modificación en vivo de un producto, demostración de reversión instantánea con la Pila LIFO y verificación en SQLite. | Puntos 8, 9, 14.b |
-| **09:00 - 10:00** | **Complementos y Cierre** | Demostración de interoperabilidad IPC `popen()`, módulo Rust y verificación de cero fugas de memoria. | Puntos 14.a-f |
+| **09:00 - 10:00** | **Complementos y Cierre** | Demostración de interoperabilidad IPC `popen()` y verificación de cero fugas de memoria. | Puntos 14.a-f |
 
 ---
 

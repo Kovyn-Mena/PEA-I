@@ -87,15 +87,6 @@ docs:
 	-$(PYTHON) docs/generate_word_doc.py
 	@echo "[OK] Documentación y diagramas generados exitosamente."
 
-# Ejecutar auditoría complementaria en Rust (Punto 14.f)
-audit-rust:
-	@if command -v cargo >/dev/null 2>&1; then \
-		cargo run --manifest-path src/rust/Cargo.toml; \
-	else \
-		echo "[INFO] Compilador Rust (cargo) no detectado en el PATH."; \
-		echo "[INFO] Los archivos fuente se encuentran en src/rust/ para revisión y compilación con 'cargo run'."; \
-	fi
-
 # Limpiar ejecutables y temporales
 clean:
 	rm -f $(TARGET) pea_cpp pea_cpp.exe src/cpp/test_tda src/cpp/test_tda.exe src/cpp/test_sqlite Taller2_EstructuraDatos_GrupoXX.zip
@@ -111,6 +102,6 @@ verify: $(TARGET)
 package: clean docs
 	@$(PYTHON) scripts/package_zip.py
 
-.PHONY: all run run-cpp run-py gui run-gui gui-py run-gui-py test verify docs audit-rust clean package
+.PHONY: all run run-cpp run-py gui run-gui gui-py run-gui-py test verify docs clean package
 
 

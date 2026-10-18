@@ -529,8 +529,7 @@ def build_document():
         ["14.b: Base de Datos Relacional", "SQLite3 con modo WAL (Write-Ahead Logging), busy_timeout=5000ms y llaves foráneas estrictas.", "Única fuente de la verdad compartida simultáneamente entre C++ y Python."],
         ["14.c: GUI Creativa", "Doble interfaz web autónoma y offline: Portal HTML5 + Canvas para C++ y Dashboard HTML5 + SVG para Python.", "Visualización intuitiva del hipercubo sin comprometer la independencia de la consola."],
         ["14.d: Interoperabilidad entre Lenguajes", "Tuberías IPC con popen() bidireccional entre el binario C++ y los scripts Python.", "C++ delega descargas y gráficos a Python; Python delega cálculos pesados a C++."],
-        ["14.e: Documentación Formal", "Documento Word formal de ingeniería con SPEC, diagramas, HUs y video de 10 min.", "Cumplimiento al 100% de la norma académica institucional de la UPC."],
-        ["14.f: ¿Rust? (Auditoría de Invariantes)", "Módulo complementario en Rust (src/rust/) para validación formal y benchmarks a nivel de microsegundos.", "Garantía de rendimiento, seguridad de memoria y excelencia técnica."]
+        ["14.e: Documentación Formal", "Documento Word formal de ingeniería con SPEC, diagramas, HUs y video de 10 min.", "Cumplimiento al 100% de la norma académica institucional de la UPC."]
     ]
     format_table(tbl_comp, widths_comp, headers_comp, data_comp)
     doc.add_paragraph().paragraph_format.space_after = Pt(12)
@@ -556,7 +555,7 @@ def build_document():
         ["03:30 - 05:30", "Demostración Python & Ingesta", "Ejecución de 'Taller2_AB_PO_XX.py'. Demostración de la Cola FIFO procesando GrupLAC y CSV.", "Estudiante B"],
         ["05:30 - 07:30", "Dashboards Gráficos (3 Vistas)", "Exhibición del Dashboard HTML5/SVG (--gui), histogramas 1996-2026, vistas por grupo, autor y producto.", "Estudiante B"],
         ["07:30 - 09:00", "Pila Undo & SQLite WAL", "Demostración en vivo de modificación de datos y reversión instantánea con la Pila LIFO. Verificación en SQLite.", "Estudiante A"],
-        ["09:00 - 10:00", "Conclusiones & Cierre", "Resumen de complementos implementados (interoperabilidad popen, módulo Rust, cero fugas de memoria).", "Ambos"]
+        ["09:00 - 10:00", "Conclusiones & Cierre", "Resumen de complementos implementados (interoperabilidad popen, cero fugas de memoria).", "Ambos"]
     ]
     format_table(tbl_vid, widths_vid, headers_vid, data_vid)
     doc.add_paragraph().paragraph_format.space_after = Pt(14)

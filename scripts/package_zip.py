@@ -58,7 +58,6 @@ SKIP_DIR_PATTERNS = [
     "__pycache__",
     ".pytest_cache",
     "build",
-    "target",           # target/ de cargo (Rust)
     "dist",             # dist/ se incluye via FILES_TO_INCLUDE individualmente
     ".env",
     os.path.join("snapshots", "zip"),  # zips se regeneran con empaquetar_*

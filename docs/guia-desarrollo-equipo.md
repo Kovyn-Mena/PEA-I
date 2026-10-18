@@ -41,7 +41,6 @@ flowchart TD
         subgraph TRACK_A ["Línea Persona A (Kovyn - Linux)"]
             F4["Fase 4: Interoperabilidad C++ <-> Python<br><i>(Tuberías IPC popen() + CLI Bridge)</i>"]:::parallelA
             F4_GUI["Fase 4.B: GUI Creativa en C++<br><i>(Portal Web HTML5 + Canvas offline - Compl. 14.c)</i>"]:::parallelA
-            F6_BONUS["Fase 6.B: Módulo Complementario Rust<br><i>(Bonus opcional del Taller - Compl. 14.f)</i>"]:::parallelA
         end
 
         subgraph TRACK_B ["Línea Persona B (Compañero - Windows)"]
@@ -59,7 +58,7 @@ flowchart TD
     F0 & F1 -->|Cola TDA y Persistencia| F3
     F3 -->|Genera datos para visualización| F5
     F3 & F5 -->|Python scripts listos para ser invocados| F4
-    F4 & F4_GUI & F5 & F6_BONUS -->|Ensamble de todos los complementos| F6
+    F4 & F4_GUI & F5 -->|Ensamble de todos los complementos| F6
 ```
 
 ---
@@ -74,9 +73,8 @@ flowchart TD
 | **3** | **Ingesta Masiva (Scraping/PDF/CSV)** | **Persona B** | **COMPLETADO** | Fases 0 y 1 | **Fases 4 y 4.B (Persona A)** | **Punto 7 del Taller:** Descarga automática desde GrupLAC y CvLAC, lectura de informes PDF y archivos CSV usando la Cola TDA. |
 | **4** | **Interoperabilidad C++ $\leftrightarrow$ Python** | **Persona A** | **COMPLETADO** | Fase 2 | **Fases 3 y 5 (Persona B)** | **Punto 14.d (Complemento 5.0):** Permite que C++ invoque el scraping, el dashboard o la importación de cambios en Python mediante `popen()`. |
 | **4.B**| **GUI Creativa en C++** | **Persona A** | **COMPLETADO** | Fase 2 | **Fases 3 y 5 (Persona B)** | **Punto 14.c (Complemento 5.0):** Interfaz gráfica creativa y autónoma: Portal Web HTML5 + Canvas (red del Hipercubo, filtros, CRUD) generado por C++ sin dependencias externas. |
-| **5** | **Dashboard Analítico (HTML5 + Portal Web)** | **Persona B** | **COMPLETADO** | Fases 0 y 3 | **Fases 4.B y 6.B (Persona A)**| **Punto 12.b (Obligatorio 4.0):** Dashboard con las 3 vistas obligatorias (Grupo, Investigador, Producto), histogramas por año y barras por categoría, con SVG generado en Python (sin matplotlib). |
+| **5** | **Dashboard Analítico (HTML5 + Portal Web)** | **Persona B** | **COMPLETADO** | Fases 0 y 3 | **Fases 4.B (Persona A)**| **Punto 12.b (Obligatorio 4.0):** Dashboard con las 3 vistas obligatorias (Grupo, Investigador, Producto), histogramas por año y barras por categoría, con SVG generado en Python (sin matplotlib). |
 | **6.A**| **Documentación Técnica & Entrega Formal** | **Ambos** | **COMPLETADO** | Fases 3, 4, 4.B, 5 | — | **Notas 1 a 8 del Taller:** Word formal (SPEC, HU, Casos de Uso), iniciales en los fuentes y empaquetado ZIP. |
-| **6.B**| **Módulo Opcional Rust (Auditor de invariantes)** | **Persona A** | **COMPLETADO** | Fase 2 | Fase 5 (Persona B) | **Punto 14.f (Complemento 5.0):** Auditor de invariantes en Rust (rusqlite) con micro-benchmark, integrable en la verificación. |
 
 ---
 
@@ -193,7 +191,7 @@ flowchart TD
 ---
 
 ### 🔹 Fase 6: Documentación Formal (SPEC/HU), Empaquetado y Entrega — [COMPLETADO: AMBOS]
-* **Archivos:** `Documentacion_Tecnica_GrupoXX.docx`, `integrantes.txt`, `Taller2_AB_PO_XX.cpp`, `Taller2_AB_PO_XX.py`, y opcionalmente módulo Rust.
+* **Archivos:** `Documentacion_Tecnica_GrupoXX.docx`, `integrantes.txt`, `Taller2_AB_PO_XX.cpp`, `Taller2_AB_PO_XX.py`.
 * **¿Por qué existe y qué hace?:**
   Cumplir con las formalidades y requisitos de entrega estrictos exigidos por el docente en las Notas del Taller:
   1. **Documento Word formal de especificación técnica:**
@@ -209,8 +207,6 @@ flowchart TD
      * **Fecha y hora límite:** Antes del **lunes 19 de octubre a las 11:59 AM**.
      * **Correo de envío:** `adithperez@unicesar.edu.co`.
      * **Asunto del correo (Subject obligatorio):** `Estructura de datos Taller 2 Grupo XX 2026`.
-  5. **Módulo Opcional Rust (Punto 14.f - Complemento 5.0):**
-     * Analizador CLI complementario en Rust (`src/rust/`) para blindar el 5.0 frente a cualquier rúbrica.
 
 ---
 

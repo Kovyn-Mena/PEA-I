@@ -238,16 +238,14 @@ def generar_diagrama_arquitectura():
     b_gui = patches.FancyBboxPatch((0.05, 0.08), 0.90, 0.22, boxstyle="round,pad=0.015,rounding_size=0.02",
                                   facecolor="#FFFFFF", edgecolor="#CBD5E0", linewidth=1.5)
     ax.add_patch(b_gui)
-    ax.text(0.50, 0.26, "CAPA DE PRESENTACIÓN VISUAL Y COMPLEMENTOS (Desacoplada para el 5.0)",
+    ax.text(0.50, 0.26, "CAPA DE PRESENTACIÓN VISUAL (Portal Web HTML5 y Dashboard Analítico)",
             ha="center", va="center", fontsize=10.5, fontweight="bold", color=COLOR_TEXTO)
 
     # Sub-bloques GUI
-    ax.text(0.20, 0.16, "Portal Ejecutivo C++\n(HTML5 + Canvas, offline)\nRed del Hipercubo Interactiva",
+    ax.text(0.30, 0.16, "Portal Ejecutivo C++\n(HTML5 + Canvas, offline)\nRed del Hipercubo Interactiva",
             ha="center", va="center", fontsize=8.5, color="#2B6CB0", bbox=dict(boxstyle="round,pad=0.3", facecolor="#EBF8FF", ec="#bee3f8"))
-    ax.text(0.50, 0.16, "Dashboard Analítico Python\n(HTML5 + SVG + 3 Vistas)\nHistogramas por Año y Barras",
+    ax.text(0.70, 0.16, "Dashboard Analítico Python\n(HTML5 + SVG + 3 Vistas)\nHistogramas por Año y Barras",
             ha="center", va="center", fontsize=8.5, color="#B7791F", bbox=dict(boxstyle="round,pad=0.3", facecolor="#FEFCBF", ec="#fefcbf"))
-    ax.text(0.80, 0.16, "Auditor de Invariantes\nMódulo Rust / Benchmarks\nVerificación μs y Concurrencia",
-            ha="center", va="center", fontsize=8.5, color="#C53030", bbox=dict(boxstyle="round,pad=0.3", facecolor="#FFF5F5", ec="#feb2b2"))
 
     plt.tight_layout()
     path = os.path.join(OUTPUT_DIR, "arquitectura_sistema.png")
