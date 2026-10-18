@@ -54467,6 +54467,18 @@
             return "#a855f7";
         }
 
+        // Normaliza el nombre a "Nombre Apellido" consistente, corrigiendo los
+        // datos que llegan en MAYÚSCULAS o todo en minúsculas (bug visual).
+        function capitalizarNombre(nombre) {
+            const menores = new Set(["de", "del", "la", "las", "los", "y", "e", "da", "das", "do", "dos", "van", "von", "di"]);
+            const partes = (nombre || "").trim().split(/\s+/).filter(Boolean);
+            return partes.map((w, i) => {
+                const lw = w.toLowerCase();
+                if (i > 0 && menores.has(lw)) return lw;
+                return lw.charAt(0).toUpperCase() + lw.slice(1);
+            }).join(" ");
+        }
+
         function construirYRenderizarRed() {
             const canvas = document.getElementById("canvas-red-colaboracion");
             if (!canvas) return;
@@ -54527,7 +54539,34 @@
             });
 
             const maxNodos = (filtroG === "TODOS") ? 48 : Math.min(55, candidatos.length);
-            const nodos = candidatos.slice(0, maxNodos);
+            let nodos;
+            if (filtroG === "TODOS") {
+                // Núcleo Intergrupal REAL: se toman cupos de forma ROTATIVA entre
+                // grupos (1º de cada grupo, luego 2º, ...). Antes se tomaba el top-48
+                // por productividad y, con la BD real, los 48 nodos caían en un único
+                // grupo (el más productivo), por lo que la "red institucional" no era
+                // intergrupal y quedaba amontonada.
+                const porGrupoCand = {};
+                candidatos.forEach(c => {
+                    if (!porGrupoCand[c.grupo]) porGrupoCand[c.grupo] = [];
+                    porGrupoCand[c.grupo].push(c);
+                });
+                const ordenGrupos = Object.keys(porGrupoCand).sort((a, b) => porGrupoCand[b].length - porGrupoCand[a].length);
+                nodos = [];
+                let nivel = 0;
+                while (nodos.length < maxNodos) {
+                    let agrego = false;
+                    for (let gi = 0; gi < ordenGrupos.length; gi++) {
+                        if (nodos.length >= maxNodos) break;
+                        const lista = porGrupoCand[ordenGrupos[gi]];
+                        if (nivel < lista.length) { nodos.push(lista[nivel]); agrego = true; }
+                    }
+                    if (!agrego) break;
+                    nivel++;
+                }
+            } else {
+                nodos = candidatos.slice(0, maxNodos);
+            }
             const aristas = [];
             const aristaVista = new Set();
 
@@ -54556,13 +54595,18 @@
                 for (let k = 1; k < indices.length; k++) {
                     const idxK = indices[k];
                     agregarArista(hub, idxK, 2, "Núcleo de Grupo");
-                    // Enlazar coautores que comparten líneas de tipología o alta producción
-                    for (let m = 1; m < k; m++) {
+                    // Coautoría ACOTADA: sin tope, en grupos grandes casi todos
+                    // compartían la tipología "Articulo/General" y se generaba un
+                    // grafo COMPLETO (n·(n-1)/2 aristas) que la física colapsaba en
+                    // una bola ilegible. Se limita a 2 coautorías por nodo.
+                    let coaut = 0;
+                    for (let m = 1; m < k && coaut < 2; m++) {
                         const idxM = indices[m];
                         let comparteTipo = false;
                         nodos[idxK].tiposSet.forEach(t => { if (nodos[idxM].tiposSet.has(t)) comparteTipo = true; });
                         if (comparteTipo && ((k + m) % 3 === 0 || (nodos[idxK].numProductos > 3 && nodos[idxM].numProductos > 3))) {
                             agregarArista(idxK, idxM, 3, "Coautoría en línea CTeI");
+                            coaut++;
                         }
                     }
                 }
@@ -54581,15 +54625,15 @@
             // Semilla: anillos concéntricos + ángulo áureo (la simulación de fuerzas refina después)
             const cx = canvas.width / 2;
             const cy = canvas.height / 2;
-            const radioMax = Math.min(cx, cy) * 0.78;
+            const radioMax = Math.min(cx, cy) * 0.82;
 
             nodos.forEach((n, idx) => {
-                n.r = Math.max(7, Math.min(24, 7 + Math.sqrt(n.numProductos) * 2.4 + Math.min(7, n.grado * 0.8)));
+                n.r = Math.max(8, Math.min(24, 8 + Math.sqrt(n.numProductos) * 2.2 + Math.min(6, n.grado * 0.6)));
                 if (idx === 0 && filtroG !== "TODOS") {
                     n.x = cx;
                     n.y = cy;
                 } else {
-                    const anillo = idx < 10 ? 0.36 : (idx < 26 ? 0.66 : 0.92);
+                    const anillo = idx < 10 ? 0.38 : (idx < 26 ? 0.68 : 0.95);
                     const angulo = (idx * 2.399963229728653) % (Math.PI * 2);
                     n.x = cx + Math.cos(angulo) * (radioMax * anillo);
                     n.y = cy + Math.sin(angulo) * (radioMax * anillo);
@@ -54632,7 +54676,11 @@
             // tamaño real del canvas: en pantallas grandes el grafo se expande,
             // en pequeñas no explota. Igual que hace d3-force con sus parámetros.
             const areaRef = 900 * 560;
-            const carga = 12000 * ((canvasRedAncho * canvasRedAlto) / areaRef);
+            // La repulsión crece con el número de nodos: con muchos nodos (p.ej. 48
+            // en la vista institucional) hace falta más empuje para que la red llene
+            // el lienzo en lugar de colapsar en una bola central. Para grafos
+            // pequeños el factor se mantiene en 1 (no altera su comportamiento).
+            const carga = 12000 * ((canvasRedAncho * canvasRedAlto) / areaRef) * (1 + Math.max(0, N - 12) * 0.10);
             const margen = 26;
 
             // 1. Repulsión entre todos los pares + colisión. La colisión NO se
@@ -54647,12 +54695,12 @@
                     let d2 = dx * dx + dy * dy;
                     if (d2 < 0.01) { dx = (Math.random() - 0.5) * 0.5; dy = (Math.random() - 0.5) * 0.5; d2 = 0.25; }
                     const dist = Math.sqrt(d2);
-                    const minGap = ni.r + nj.r + 30;
+                    const minGap = ni.r + nj.r + 42;
                     let fx, fy;
                     if (dist < minGap) {
                         if (dist < ni.r + nj.r) haySolape = true;
                         // Colisión: empuje firme proporcional al solapamiento
-                        const fuerza = (minGap - dist) / dist * 4.0;
+                        const fuerza = (minGap - dist) / dist * 8.0;
                         fx = (dx / dist) * fuerza;
                         fy = (dy / dist) * fuerza;
                     } else {
@@ -54675,7 +54723,7 @@
                 let dx = tgt.x - src.x;
                 let dy = tgt.y - src.y;
                 let dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
-                const reposo = 60 + 90 / (a.peso || 1);
+                const reposo = 70 + 80 / (a.peso || 1);
                 const rigidez = 0.06 * Math.min(1.4, (a.peso || 1) / 2);
                 const delta = (dist - reposo) / dist * rigidez * alpha;
                 const fx = dx * delta;
@@ -54845,8 +54893,17 @@
                 const importante = n.grado >= 3 || n.numProductos >= 4 || n.r >= 14;
                 const permitida = esFoco || esVecino || (!atenuado && (importante || scale > 1.25));
                 if (!permitida) return;
-                const partes = (n.nombre || "").trim().split(/\s+/);
-                const etiq = (partes.length >= 2 ? `${partes[0]} ${partes[partes.length - 1]}` : n.nombre.substring(0, 14)).substring(0, 18);
+                const partes = (n.nombre || "").trim().split(/\s+/).filter(Boolean);
+                let etiq;
+                if (partes.length >= 2) {
+                    etiq = `${partes[0]} ${partes[partes.length - 1]}`;
+                    // Si "Nombre Apellido" es largo, usar inicial del apellido para
+                    // no cortar el texto a mitad de palabra.
+                    if (etiq.length > 20) etiq = `${partes[0]} ${(partes[partes.length - 1][0] || "").toUpperCase()}.`;
+                } else {
+                    etiq = n.nombre || "";
+                }
+                etiq = capitalizarNombre(etiq);
                 candidatas.push({ n, idx, etiq, esFoco, esVecino, atenuado, importante, prioridad: esFoco ? 3 : (esVecino ? 2 : (importante ? 1 : 0)) });
             });
             candidatas.sort((a, b) => (b.prioridad - a.prioridad) || (b.n.grado - a.n.grado));
@@ -54922,7 +54979,7 @@
 
                     insp.innerHTML = `
                         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:6px; margin-bottom:6px;">
-                            <div style="font-weight:800; color:#fff; font-size:0.86rem; line-height:1.25;">${foco.nombre}</div>
+                            <div style="font-weight:800; color:#fff; font-size:0.86rem; line-height:1.25;">${capitalizarNombre(foco.nombre)}</div>
                             <span class="badge-cat" style="background:${colorPorCategoriaRed(foco.categoria)}; color:#000; font-weight:800;">${foco.categoria}</span>
                         </div>
                         <div style="font-size:0.74rem; color:#94a3b8; margin-bottom:8px;">
@@ -54955,7 +55012,7 @@
                 topContainer.innerHTML = ordenados.map((n, i) => `
                     <div onclick="enfocarNodoRed('${n.id}')" style="background:#090d16; border:1px solid ${foco && foco.id === n.id ? '#38bdf8' : '#1e293b'}; border-radius:7px; padding:0.5rem 0.65rem; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:8px; transition:all 0.15s;">
                         <div style="min-width:0; flex:1;">
-                            <div style="font-size:0.76rem; font-weight:700; color:#e2e8f0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${i + 1}. ${n.nombre}</div>
+                            <div style="font-size:0.76rem; font-weight:700; color:#e2e8f0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${i + 1}. ${capitalizarNombre(n.nombre)}</div>
                             <div style="font-size:0.68rem; color:#64748b;"><code>${n.grupo}</code> &bull; ${n.numProductos} prod.</div>
                         </div>
                         <span style="background:#1e293b; color:#38bdf8; border:1px solid #334155; padding:2px 7px; border-radius:99px; font-size:0.7rem; font-weight:800; white-space:nowrap;">Grado ${n.grado}</span>
