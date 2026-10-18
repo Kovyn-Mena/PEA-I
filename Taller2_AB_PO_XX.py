@@ -196,8 +196,20 @@ def main():
         if not motor:
             sys.exit(1)
         forzar = "--forzar" in args
+        forzar_vacios = "--forzar-vacios" in args
         con_cvlac = "--sin-cvlac" not in args
-        solo_snaps = "--con-red" not in args
+        en_vivo = "--con-red" in args or "--en-vivo" in args
+        solo_snaps = not en_vivo
+        reanudar = "--reanudar" in args
+        limite = None
+        if "--limite" in args:
+            idx = args.index("--limite")
+            if idx + 1 < len(args):
+                try:
+                    limite = int(args[idx + 1])
+                except ValueError:
+                    print("[!] --limite requiere un número entero")
+                    sys.exit(1)
         # --nro NRO (repetible) para ingesta selectiva; si ausente, los 66 UPC
         nros_sel = []
         for i, a in enumerate(args):
@@ -205,8 +217,25 @@ def main():
                 nros_sel.append(args[i + 1])
         ok = motor.ejecutar_ingesta_automatica(
             nros=nros_sel if nros_sel else None,
-            forzar=forzar, con_cvlac=con_cvlac, solo_snapshots=solo_snaps)
+            forzar=forzar, con_cvlac=con_cvlac, solo_snapshots=solo_snaps,
+            forzar_vacios=forzar_vacios, limite=limite, reanudar=reanudar,
+            preferir_red=en_vivo)
         sys.exit(0 if ok else 1)
+
+    elif "--reconciliar-datos-abiertos" in args:
+        from python.core.reconciliacion import reconciliar, imprimir_resumen
+        resultado = reconciliar(db_path, socrata={} if "--sin-red" in args else None)
+        imprimir_resumen(resultado)
+        sys.exit(0)
+
+    elif "--purgar-grupos" in args:
+        import subprocess
+        cmd = [sys.executable, os.path.join(BASE_DIR, "scripts", "purgar_grupos.py")]
+        if "--confirmar" in args:
+            cmd.append("--confirmar")
+        if "--sin-red" in args:
+            cmd.append("--sin-red")
+        sys.exit(subprocess.call(cmd))
 
     app = ConsolaApp(db_path)
     app.iniciar()

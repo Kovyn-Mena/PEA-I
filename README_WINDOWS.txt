@@ -47,8 +47,22 @@ nada (portable). Si alguna funcion falla con ModuleNotFoundError, instale con:
 
 4. INGESTA MASIVA POR TERMINAL (alternativa a la opcion [8]):
 -------------------------------------------------------------------------------
-  python Taller2_AB_PO_XX.py --auto-ingest --sin-cvlac   (rapida offline)
-  python Taller2_AB_PO_XX.py --auto-ingest --con-red      (completa en vivo)
-  python Taller2_AB_PO_XX.py --auto-ingest --con-red --forzar  (reprocesa)
-  python Taller2_AB_PO_XX.py --listar-upc                 (ver los 66 grupos)
+  python Taller2_AB_PO_XX.py --auto-ingest --sin-cvlac    (rapida offline)
+  python Taller2_AB_PO_XX.py --auto-ingest --en-vivo --forzar --sin-cvlac
+                                                          (vivo, sin CvLAC)
+  python Taller2_AB_PO_XX.py --auto-ingest --en-vivo --forzar --reanudar
+                                                          (reanudable)
+  python Taller2_AB_PO_XX.py --auto-ingest --en-vivo --forzar --limite 5
+                                                          (muestra de 5 grupos)
+  python Taller2_AB_PO_XX.py --auto-ingest --en-vivo --forzar-vacios
+                                                          (recarga vacios)
+  python Taller2_AB_PO_XX.py --purgar-grupos               (simulacion)
+  python Taller2_AB_PO_XX.py --purgar-grupos --confirmar   (purga real)
+  python Taller2_AB_PO_XX.py --reconciliar-datos-abiertos  (cruce con Socrata)
+  python Taller2_AB_PO_XX.py --listar-upc                  (ver los 66 grupos)
+
+  La purga crea un respaldo en data/backup/ y escribe
+  data/purga_reporte.csv. La reconciliacion escribe
+  data/reconciliacion_upc.csv y no modifica la base.
+  La cola de reanudacion se guarda en data/ingesta_cola.json.
 ===============================================================================

@@ -60,6 +60,7 @@ SKIP_DIR_PATTERNS = [
     "build",
     "dist",             # dist/ se incluye via FILES_TO_INCLUDE individualmente
     ".env",
+    "backup",           # respaldos de BD/índices generados por la purga
     os.path.join("snapshots", "zip"),  # zips se regeneran con empaquetar_*
 ]
 
@@ -79,6 +80,7 @@ SKIP_FILENAMES = {
     ".gitignore",       # innecesario en el entregable
     "GEMINI.md",        # notas internas de desarrollo
     "sqlite3_amalg.o",  # objeto temporal de compilación
+    "ingesta_cola.json",  # estado runtime de la cola de reanudación
 }
 
 # Archivos que se incluyen explícitamente via FILES_TO_INCLUDE y NO deben

@@ -32,6 +32,10 @@ venv/
 !data/empty_placeholder.db
 !data/pea_investigacion.db
 
+# Respaldos y estado de ingesta (generados en ejecución)
+data/backup/
+data/ingesta_cola.json
+
 # IDEs y editores
 .vscode/
 .idea/

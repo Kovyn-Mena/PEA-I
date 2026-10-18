@@ -41,6 +41,24 @@ def normalizar_clave(s: str) -> str:
     return texto
 
 
+def _texto_respuesta(resp) -> str:
+    """Decodifica una respuesta respetando el charset declarado.
+
+    ScienTI responde ISO-8859-1; decodificar como windows-1252 evita que
+    nombres como DIALÓGICA queden con '�'. Se evita importar ingesta para
+    no crear un ciclo de dependencias.
+    """
+    content_type = (resp.headers.get("Content-Type") or "").lower()
+    m = re.search(r"charset=([\w-]+)", content_type)
+    enc = (m.group(1) if m else "") or "windows-1252"
+    if enc.replace("_", "-").lower() in ("iso-8859-1", "latin-1", "latin1"):
+        enc = "windows-1252"
+    try:
+        return resp.content.decode(enc, errors="replace")
+    except Exception:
+        return resp.text
+
+
 def obtener_indice_instituciones(forzar: bool = False) -> list:
     """
     Retorna el listado de instituciones de Colombia con su codInst y total de grupos.
@@ -61,7 +79,7 @@ def obtener_indice_instituciones(forzar: bool = False) -> list:
         url = CIENCIA_BASE + "/busquedaGruposPorInstitucion.do?" + urlencode({"all_grupos_ins_mr_": "2000"})
         r = requests.get(url, headers=USER_AGENT, timeout=20)
         if r.status_code == 200:
-            soup = BeautifulSoup(r.text, "html.parser")
+            soup = BeautifulSoup(_texto_respuesta(r), "html.parser")
             t = soup.find("table", id="all_grupos_ins")
             out = []
             if t:
@@ -133,7 +151,7 @@ def obtener_grupos_institucion(codinst: str, nombre_inst: str = "", forzar: bool
         url = CIENCIA_BASE + "/busquedaGrupoXInstitucionGrupos.do?" + urlencode({"codInst": cod_str})
         r = requests.get(url, headers=USER_AGENT, timeout=25)
         if r.status_code == 200:
-            soup = BeautifulSoup(r.text, "html.parser")
+            soup = BeautifulSoup(_texto_respuesta(r), "html.parser")
             tid = ""
             for t in soup.find_all("table"):
                 th = " ".join(t.get_text(" ").split())
@@ -147,7 +165,7 @@ def obtener_grupos_institucion(codinst: str, nombre_inst: str = "", forzar: bool
                 if r2.status_code == 200:
                     r = r2
 
-            soup2 = BeautifulSoup(r.text, "html.parser")
+            soup2 = BeautifulSoup(_texto_respuesta(r), "html.parser")
             out = []
             for t in soup2.find_all("table"):
                 th = " ".join(t.get_text(" ").split())

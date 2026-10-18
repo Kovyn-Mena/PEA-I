@@ -1,0 +1,63 @@
+codigo,nombre,investigadores,productos,productos_con_autor_ajeno,en_scienti_upc,en_datos_abiertos_upc,accion,motivo
+COL0000000,GIIRA,25,0,0,no,no,BORRAR,no_pertenece_a_la_upc
+COL0001351,GIELEHLA,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0002093,Grupo de óptica e informática,93,1592,0,no,no,BORRAR,no_pertenece_a_la_upc
+COL0005544,GRUPO DE INVESTIGACIÓN EN SISTEMAS INTELIGENTES (GISI),1,2,0,no,no,BORRAR,no_pertenece_a_la_upc
+COL0011545,Grupo de optica e informatica,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0012981,BIOTECNOLOGÍA Y AGROINDUSTRIA CESAR (BIOTEC),1,1,0,no,no,BORRAR,no_pertenece_a_la_upc
+COL0014279,PARASITOLOGIA - AGROECOLOGIA MILENIO,99,566,0,si,si,CONSERVAR,
+COL0018706,GRUPO DE INVESTIGACION EN SISTEMAS Y COMPUTACIÓN -GISICO-,2,13,0,si,si,CONSERVAR,
+COL0024319,CONTROL DE CALIDAD DE LOS PROCESOS EN SALUD,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0027788,"GRUPO INTERDISCIPLINARIO ESTUDIO DEL PENSAMIENTO NUMERICO, POLITICAS PUBLICAS DE CIENCIA Y TECNOLOGIA, PRODUCCION AGRARIA, MEDIO AMBIENTE, Y PROBLEMATICA DE LA EDUCACION LATINOAMERICANA Y DEL CARIBE",0,438,438,si,si,BORRAR,productos_con_autor_ajeno
+COL0031332,Grupo de Espectroscopia  Optica y Laser,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0034862,(BIAT) BIOTECNOLOGIA E INNOVACION AGROINDUSTRIAL TROPICAL,44,54,0,si,si,CONSERVAR,
+COL0036606,Grupo de investigacion ZooBios.,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0041188,Microbiologia agricola y ambiental,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0042078,GILEHKA,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0043019,"APOLO INFINITO POSITIVO, Grupo  interdisciplinario de Estudios Socio - Economico, Contables, Administrativos,  Gestion Tecnologica, Innovacion y Politicas Publicas  del Caribe Colombiano.",0,0,0,no,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0043146,Grupo de Energias Ambiente y Biotecnologia (GEAB),0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0043834,GRUPO DE INVESTIGACIÓN AITICE (UPC),97,685,0,si,si,CONSERVAR,
+COL0044081,"Grupo de Investigacion en Economia de la Salud Humana, Ingenierias, Administrativa, Contables, Social, Juridicas, Cultural y Economica por una Identidad Territorial Regional (GISOCIAL)",0,0,0,no,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0046148,ESTUDIOS SANITARIOS Y AMBIENTALES - E.S.A.,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0048741,grupo de optimizacion agroindustrial,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0049121,FACEUPC,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0049319,"ambiente, ciencia y tecnologia",0,0,0,no,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0052029,DESAFIO BIOMEDICO Y BIOTECNOLOGICO (DESBIOTEC),0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0055746,"CREANDO CIENCIAS ""CRECI""",0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0057606,GUATAPURI (Grupo de Investigacion y estudios socioculturales),0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0079953,Grupo de investigacion en ingenieria de producto y procesos agroindustriales - GIPA,0,0,0,no,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0090244,CINBIOS,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0096927,Grupo de investigacion FASAPROIN (facultad de salud con proyeccion investigativa),0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0116153,Grupo Interdisciplinario de Investigacion en Evaluacion,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0141933,CATEDRA CARRILLO LUQUEZ,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0145398,TC-Psi,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0149673,GINTICS,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0149744,"Grupo de Investigacion en Biotecnologia, Ingenieria y Salud",0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0149931,FRATER JURIS,0,0,0,no,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0159983,Grupo de Investigacion en Matematica Educativa- DELTA,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0164329,"GESTION EN INVESTIGACION,  PRODUCCION Y TRANSFORMACION AGROINDUSTRIAL (GIPTA)",0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0166119,Grupo de investigacion literaria  Luis Mizar,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0171529,Grupo de Investigacion Educativa en Ciencias Naturales y Matematica ECINAMA,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0172045,GRUPO DE INVESTIGACION ARGOS,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0172054,DSP-ASIC BUILDER GROUP,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0172099,GRESBIOCA,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0172582,Grupo de investigacion de desarrollo social y salud GIDESA,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0172635,ESTUDIOS SOCIALES EN EL DEPARTAMENTO DEL CESAR,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0172742,Biotecnologia y Genotoxicidad Ambiental - BiotecGen,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0172911,APOLO INFINITO,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0172939,OBSERVATORIO DE DESARROLLO ECONOMICO DEL CESAR - ODECE,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0172949,Investigarte,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0173374,GIESLE,0,0,0,no,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0173623,DIDACINNOVACIONCN,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0185769,CISATEC-LINE,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0186719,SALUD Y BIENESTAR PARA EL SER HUMANO EN SU ENTORNO (SBSHE),0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0186953,PEDAGOGIA Y EDUCACION EN SALUD (PES),0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0187333,Mente Lila,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0187422,Ambiente Ciencia y Tecnologia,0,0,0,no,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0187478,GESTION AMBIENTAL Y TERRITORIOS SOSTENIBLES  (GE&TES),0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0202091,GIDEATIC Grupo de Investigacion en Desarrollo y Aplicacion de Tecnologias de Informacion y la Comunicacion,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0202117,ECONFI,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0202135,GRUPO DE INVESTIGACION BUTERAMA,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0205324,Sierra Nevada de Santa Marta,0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0218037,"GRUPO INTERDISCIPLINARIO ORGANIZACION SOCIEDAD, EDUCACION Y CULTURA PARA LA PAZ",0,0,0,si,si,BORRAR,vacio_sin_investigadores_ni_productos
+COL0218897,GIESLE,0,0,0,no,si,BORRAR,vacio_sin_investigadores_ni_productos
