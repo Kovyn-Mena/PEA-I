@@ -31,6 +31,30 @@ def manejador_sigint(sig, frame):
                      "      (Para salir del programa, utilice la opción 0 en el menú).\n")
     sys.stdout.flush()
 
+def espaciar(s: str) -> str:
+    """Repara palabras pegadas del HTML de SCIENTI
+    ('Septiembrede2007' -> 'Septiembre de 2007'; 'paraLa' -> 'para La').
+    Solo para texto libre (áreas, formación); nunca en nombres ni títulos/URLs."""
+    if not s:
+        return s
+    out = []
+    i, n = 0, len(s)
+    while i < n:
+        c = s[i]
+        if c in "dD" and i > 0 and i + 6 <= n and s[i + 1] in "eE" \
+                and s[i + 2:i + 6].isdigit() and s[i - 1].islower():
+            out.append(" de ")
+            out.append(s[i + 2:i + 6])
+            i += 6
+            continue
+        out.append(c)
+        if i + 1 < n:
+            a, b = s[i], s[i + 1]
+            if a.islower() and (b.isupper() or b.isdigit()):
+                out.append(" ")
+        i += 1
+    return "".join(out)
+
 class ConsolaApp:
     def __init__(self, ruta_bd: str = "data/pea_investigacion.db"):
         self.ruta_bd = ruta_bd
@@ -799,7 +823,7 @@ class ConsolaApp:
                     print("\n=================================================================")
                     print(f"DETALLE DEL GRUPO: {g.nombre}")
                     print(f"Código: {g.codigo_grupo} | Clasificación: {g.clasificacion}")
-                    print(f"Líder: {g.lider} | Área: {g.area_conocimiento} | Año: {g.anio_creacion}")
+                    print(f"Líder: {g.lider} | Área: {espaciar(g.area_conocimiento)} | Año: {g.anio_creacion}")
                     print(f"Estado: {'ACTIVO' if g.activo else 'DESACTIVADO (Borrado lógico)'}")
 
                     print("\n  -- Investigadores Adscritos --")
@@ -999,7 +1023,7 @@ class ConsolaApp:
                     print("\n=================================================================")
                     print(f"INVESTIGADOR: {inv.nombre_completo}")
                     print(f"Documento: {inv.documento_id} | Categoría: {inv.categoria}")
-                    print(f"Formación: {inv.formacion_academica} | Grupo: {inv.codigo_grupo}")
+                    print(f"Formación: {espaciar(inv.formacion_academica)} | Grupo: {inv.codigo_grupo}")
                     print(f"Estado: {'ACTIVO' if inv.activo else 'DESACTIVADO'}")
 
                     try:

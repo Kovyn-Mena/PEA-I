@@ -5,6 +5,8 @@
 #include <iomanip>
 #include <string>
 #include <sstream>
+#include <vector>
+#include <algorithm>
 #include <map>
 #include <cstdlib>
 #include <csignal>
@@ -202,6 +204,150 @@ public:
     }
 
     // -----------------------------------------------------------------
+    // CAPA DE PRESENTACIÓN: tablas ASCII alineadas y seguras en UTF-8
+    // -----------------------------------------------------------------
+    // Adaptada del enfoque del compañero (PEA-I): mide columnas de
+    // pantalla reales (las tildes/ñ ocupan 1, no 2 bytes como cree
+    // std::setw) y nunca parte un carácter multibyte al truncar. Así
+    // todas las tablas quedan perfectamente alineadas con datos en
+    // español. No cambia datos ni lógica: solo cómo se imprimen.
+
+    // Ancho VISUAL en columnas (ignora bytes de continuación UTF-8).
+    static size_t anchoVisual(const std::string& s) {
+        size_t w = 0;
+        for (size_t i = 0; i < s.size(); i++) {
+            unsigned char b = static_cast<unsigned char>(s[i]);
+            if ((b & 0xC0) == 0x80) continue; // byte de continuación: no suma
+            w++;
+        }
+        return w;
+    }
+
+    // Trunca por ancho visual SIN partir un carácter multibyte.
+    static std::string truncarVisual(const std::string& s, size_t maxVis) {
+        std::string o;
+        size_t w = 0, i = 0;
+        while (i < s.size() && w < maxVis) {
+            unsigned char b = static_cast<unsigned char>(s[i]);
+            size_t n = 1;
+            if (b >= 0xF0) n = 4;
+            else if (b >= 0xE0) n = 3;
+            else if (b >= 0xC0) n = 2;
+            if ((b & 0xC0) == 0x80) n = 1; // byte suelto de continuación (seguridad)
+            if (i + n > s.size()) n = 1;
+            o.append(s, i, n);
+            i += n;
+            w++;
+        }
+        return o;
+    }
+
+    // Reemplaza el carácter de reemplazo U+FFFD (EF BF BD) por '?'.
+    static std::string sinRaros(const std::string& s) {
+        std::string o;
+        for (size_t i = 0; i < s.size(); i++) {
+            unsigned char b = static_cast<unsigned char>(s[i]);
+            if (b == 0xEF && i + 2 < s.size()
+                && static_cast<unsigned char>(s[i + 1]) == 0xBF
+                && static_cast<unsigned char>(s[i + 2]) == 0xBD) {
+                o += '?'; i += 2;
+            } else {
+                o += s[i];
+            }
+        }
+        return o;
+    }
+
+    // Celda con 1 espacio a cada lado, relleno y elipsis "..." si excede.
+    static std::string celdaV(const std::string& s, size_t ancho) {
+        std::string t = sinRaros(s);
+        if (ancho <= 3) {
+            t = truncarVisual(t, ancho);
+        } else if (anchoVisual(t) > ancho) {
+            t = truncarVisual(t, ancho - 3) + "...";
+        }
+        size_t falta = (ancho > anchoVisual(t)) ? (ancho - anchoVisual(t)) : 0;
+        return " " + t + std::string(falta + 1, ' ');
+    }
+
+    // Línea de borde: +-----+-----+  ('-' datos, '=' cabecera).
+    static std::string bordeTabla(const std::vector<size_t>& anchos, char relleno) {
+        std::string b = "+";
+        for (size_t i = 0; i < anchos.size(); i++) b += std::string(anchos[i] + 2, relleno) + "+";
+        return b;
+    }
+
+    // Fila de datos: | a | b | (las celdas se alinean por ancho visual).
+    static std::string filaTabla(const std::vector<std::string>& celdas, const std::vector<size_t>& anchos) {
+        std::string f = "|";
+        for (size_t i = 0; i < celdas.size() && i < anchos.size(); i++) f += celdaV(celdas[i], anchos[i]) + "|";
+        return f;
+    }
+
+    // Título a todo el ancho de la tabla (una sola celda).
+    static std::string tituloTabla(const std::string& s, const std::vector<size_t>& anchos) {
+        size_t tot = 0;
+        for (size_t i = 0; i < anchos.size(); i++) tot += anchos[i];
+        if (anchos.size() > 1) tot += 3 * (anchos.size() - 1);
+        return "|" + celdaV(s, tot) + "|";
+    }
+
+    // Recorta un texto largo con elipsis visual (no parte tildes).
+    static std::string recortar(const std::string& s, size_t maxVis) {
+        if (anchoVisual(s) <= maxVis) return sinRaros(s);
+        return truncarVisual(s, maxVis - 3) + "...";
+    }
+
+    // Repara palabras pegadas del HTML de SCIENTI ("Septiembrede2007" ->
+    // "Septiembre de 2007"; "paraLa" -> "para La"). Solo texto libre
+    // (áreas, formación, plan); NUNCA en nombres ni en títulos/URLs.
+    static std::string espaciar(const std::string& s) {
+        std::string o;
+        for (size_t i = 0; i < s.size(); i++) {
+            unsigned char a = static_cast<unsigned char>(s[i]);
+            // "deYYYY" tras minúscula -> " de YYYY".
+            if ((a == 'd' || a == 'D') && i > 0 && i + 6 <= s.size()
+                && (s[i + 1] == 'e' || s[i + 1] == 'E')
+                && s[i + 2] >= '0' && s[i + 2] <= '9' && s[i + 3] >= '0' && s[i + 3] <= '9'
+                && s[i + 4] >= '0' && s[i + 4] <= '9' && s[i + 5] >= '0' && s[i + 5] <= '9'
+                && s[i - 1] >= 'a' && s[i - 1] <= 'z') {
+                o += " de ";
+                o.append(s, i + 2, 4);
+                i += 5; // el for suma 1 => se consumen 6 caracteres
+                continue;
+            }
+            o += s[i];
+            if (i + 1 < s.size()) {
+                unsigned char b = static_cast<unsigned char>(s[i + 1]);
+                bool aMin = (a >= 'a' && a <= 'z');
+                bool bMay = (b >= 'A' && b <= 'Z');
+                bool bDig = (b >= '0' && b <= '9');
+                if (aMin && (bMay || bDig)) o += ' ';
+            }
+        }
+        return o;
+    }
+
+    // Imprime un texto libre con ajuste de línea por palabras.
+    static void imprimirBloque(const std::string& texto, size_t ancho, const std::string& prefijo) {
+        std::istringstream iss(texto);
+        std::string palabra, linea;
+        bool algo = false;
+        while (iss >> palabra) {
+            algo = true;
+            std::string prueba = linea.empty() ? palabra : linea + " " + palabra;
+            if (anchoVisual(prueba) > ancho && !linea.empty()) {
+                std::cout << prefijo << sinRaros(linea) << "\n";
+                linea = palabra;
+            } else {
+                linea = prueba;
+            }
+        }
+        if (!linea.empty()) std::cout << prefijo << sinRaros(linea) << "\n";
+        if (!algo) std::cout << prefijo << "(sin información)\n";
+    }
+
+    // -----------------------------------------------------------------
     // VALIDACIÓN DE ACCESO PREVIA (LOGIN)
     // -----------------------------------------------------------------
     bool autenticarUsuario() {
@@ -281,23 +427,19 @@ public:
             return false;
         }
 
-        std::cout << "\nCoincidencias encontradas (" << cands.size() << " grupos):\n";
-        std::cout << std::left << std::setw(5) << "No."
-                  << std::setw(14) << "CODIGO"
-                  << std::setw(42) << "GRUPO"
-                  << std::setw(28) << "LIDER" << "\n";
-        std::cout << std::string(88, '-') << "\n";
+        const std::vector<size_t> WC = {4, 14, 42, 28};
+        std::cout << "\n" << bordeTabla(WC, '=') << "\n";
+        std::cout << tituloTabla("COINCIDENCIAS EN SCIENTI (" + std::to_string(cands.size()) + " grupos) - Top 20", WC) << "\n";
+        std::cout << bordeTabla(WC, '=') << "\n";
+        std::cout << filaTabla({"No.", "CODIGO", "GRUPO", "LIDER"}, WC) << "\n";
+        std::cout << bordeTabla(WC, '-') << "\n";
 
         size_t limite = cands.size() < 20 ? cands.size() : 20;
         for (size_t i = 0; i < limite; i++) {
-            std::string nom = cands[i].nombre.substr(0, 40);
-            std::string lid = cands[i].lider.substr(0, 26);
-            std::cout << std::left << std::setw(5) << (i + 1)
-                      << std::setw(14) << cands[i].col
-                      << std::setw(42) << nom
-                      << std::setw(28) << lid << "\n";
+            std::cout << filaTabla({std::to_string(i + 1), cands[i].col,
+                                    cands[i].nombre, cands[i].lider}, WC) << "\n";
         }
-        std::cout << std::string(88, '-') << "\n";
+        std::cout << bordeTabla(WC, '-') << "\n";
 
         int pick = leerEntero("Seleccione opción [1-" + std::to_string(limite) + "] para descargar y cargar (0 cancela): ", 0);
         if (pick <= 0 || (size_t)pick > limite) {
@@ -788,29 +930,23 @@ public:
 
             if (op == 1) {
                 limpiarPantalla();
-                std::cout << "=========================================================================================\n";
-                std::cout << "                             LISTADO DE GRUPOS DE INVESTIGACIÓN                          \n";
-                std::cout << "=========================================================================================\n";
-                std::cout << std::left 
-                          << std::setw(14) << "CODIGO"
-                          << std::setw(35) << "NOMBRE"
-                          << std::setw(12) << "CLASIF."
-                          << std::setw(20) << "LIDER"
-                          << std::setw(8)  << "ESTADO" << "\n";
-                std::cout << std::string(89, '-') << "\n";
+                const std::vector<size_t> WG = {14, 35, 12, 20, 8};
+                std::cout << "\n" << bordeTabla(WG, '=') << "\n";
+                std::cout << tituloTabla("LISTADO DE GRUPOS DE INVESTIGACIÓN", WG) << "\n";
+                std::cout << bordeTabla(WG, '=') << "\n";
+                std::cout << filaTabla({"CODIGO", "NOMBRE", "CLASIF.", "LIDER", "ESTADO"}, WG) << "\n";
+                std::cout << bordeTabla(WG, '-') << "\n";
                 NodoGrupo* g = multi.getCabezaGrupos();
+                size_t totalG = 0;
                 if (!g) std::cout << "  (No hay grupos registrados en memoria)\n";
                 while (g != nullptr) {
-                    std::string nomCorto = g->nombre.length() > 33 ? g->nombre.substr(0, 30) + "..." : g->nombre;
-                    std::cout << std::left 
-                              << std::setw(14) << g->codigo_grupo
-                              << std::setw(35) << nomCorto
-                              << std::setw(12) << g->clasificacion
-                              << std::setw(20) << g->lider
-                              << std::setw(8)  << (g->activo ? "[ACTIVO]" : "[INACT]") << "\n";
+                    totalG++;
+                    std::cout << filaTabla({g->codigo_grupo, g->nombre, g->clasificacion,
+                                            g->lider, g->activo ? "[ACTIVO]" : "[INACT]"}, WG) << "\n";
                     g = g->sigGrupo;
                 }
-                std::cout << "=========================================================================================\n";
+                std::cout << bordeTabla(WG, '-') << "\n";
+                std::cout << "  Total de grupos: " << totalG << "\n";
                 pausar();
             } else if (op == 2) {
                 limpiarPantalla();
@@ -852,11 +988,18 @@ public:
                 if (!g) {
                     std::cout << "\n[!] No se encontró ningún grupo que coincida con '" << busqueda << "'.\n";
                 } else {
-                    std::cout << "\n=================================================================\n";
-                    std::cout << "DETALLE DEL GRUPO: " << g->nombre << "\n";
-                    std::cout << "Código: " << g->codigo_grupo << " | Clasificación: " << g->clasificacion << "\n";
-                    std::cout << "Líder: " << g->lider << " | Área: " << g->area_conocimiento << " | Año: " << g->anio_creacion << "\n";
-                    std::cout << "Estado: " << (g->activo ? "ACTIVO" : "DESACTIVADO (Borrado lógico)") << "\n";
+                    const std::vector<size_t> WD = {20, 59};
+                    std::cout << "\n" << bordeTabla(WD, '=') << "\n";
+                    std::cout << tituloTabla("DETALLE DEL GRUPO", WD) << "\n";
+                    std::cout << bordeTabla(WD, '=') << "\n";
+                    std::cout << filaTabla({"Nombre:", g->nombre}, WD) << "\n";
+                    std::cout << filaTabla({"Código:", g->codigo_grupo}, WD) << "\n";
+                    std::cout << filaTabla({"Clasificación:", g->clasificacion}, WD) << "\n";
+                    std::cout << filaTabla({"Área:", espaciar(g->area_conocimiento)}, WD) << "\n";
+                    std::cout << filaTabla({"Líder:", g->lider}, WD) << "\n";
+                    std::cout << filaTabla({"Año de creación:", std::to_string(g->anio_creacion)}, WD) << "\n";
+                    std::cout << filaTabla({"Estado:", g->activo ? "ACTIVO" : "DESACTIVADO (Borrado lógico)"}, WD) << "\n";
+                    std::cout << bordeTabla(WD, '-') << "\n";
 
                     std::cout << "\n  -- Investigadores Adscritos --\n";
                     NodoInvestigador* inv = g->primerInvestigador;
@@ -870,16 +1013,26 @@ public:
                     std::cout << "\n  -- Productos Generados (Hipercubo) --\n";
                     NodoProducto* p = g->primerProducto;
                     if (!p) std::cout << "     (Sin productos registrados)\n";
+                    std::map<std::string, int> porTipoG;
+                    size_t nProdG = 0;
                     while (p) {
+                        nProdG++;
+                        porTipoG[p->tipo]++;
                         std::cout << "     • [" << p->tipo;
                         if (!p->subtipo_codigo.empty()) std::cout << "/" << p->subtipo_codigo;
-                        std::cout << " " << p->anio << "] " << p->titulo 
+                        std::cout << " " << p->anio << "] " << recortar(p->titulo, 90)
                                   << " (Fam: " << p->familia << ", Cat: " << p->categoria_minciencias << ", " 
                                   << (p->validado ? "Validado" : "No validado") << ") ["
                                   << (p->activo ? "Activo" : "Inactivo") << "]\n";
                         p = p->sigProductoGrupo;
                     }
-                    std::cout << "=================================================================\n";
+                    if (nProdG > 0) {
+                        std::string desg = "Desglose por tipo:";
+                        for (std::map<std::string, int>::iterator it = porTipoG.begin(); it != porTipoG.end(); ++it)
+                            desg += " " + it->first + ":" + std::to_string(it->second);
+                        std::cout << "     Total: " << nProdG << " | " << desg << "\n";
+                    }
+                    std::cout << bordeTabla(WD, '=') << "\n";
                 }
                 pausar();
             } else if (op == 4) {
@@ -1003,34 +1156,28 @@ public:
 
             if (op == 1) {
                 limpiarPantalla();
-                std::cout << "=================================================================================\n";
-                std::cout << "                             LISTADO DE INVESTIGADORES                           \n";
-                std::cout << "=================================================================================\n";
-                std::cout << std::left 
-                          << std::setw(15) << "DOCUMENTO/ID"
-                          << std::setw(28) << "NOMBRE"
-                          << std::setw(15) << "CATEGORIA"
-                          << std::setw(15) << "GRUPO"
-                          << std::setw(8)  << "ESTADO" << "\n";
-                std::cout << std::string(81, '-') << "\n";
+                const std::vector<size_t> WI = {15, 30, 15, 15, 8};
+                std::cout << "\n" << bordeTabla(WI, '=') << "\n";
+                std::cout << tituloTabla("LISTADO DE INVESTIGADORES", WI) << "\n";
+                std::cout << bordeTabla(WI, '=') << "\n";
+                std::cout << filaTabla({"DOCUMENTO/ID", "NOMBRE", "CATEGORIA", "GRUPO", "ESTADO"}, WI) << "\n";
+                std::cout << bordeTabla(WI, '-') << "\n";
                 NodoGrupo* g = multi.getCabezaGrupos();
                 bool hayDatos = false;
+                size_t totalI = 0;
                 while (g) {
                     NodoInvestigador* inv = g->primerInvestigador;
                     while (inv) {
-                        hayDatos = true;
-                        std::cout << std::left 
-                                  << std::setw(15) << inv->documento_id
-                                  << std::setw(28) << inv->nombre_completo
-                                  << std::setw(15) << inv->categoria
-                                  << std::setw(15) << inv->codigo_grupo
-                                  << std::setw(8)  << (inv->activo ? "[ACTIVO]" : "[INACT]") << "\n";
+                        hayDatos = true; totalI++;
+                        std::cout << filaTabla({inv->documento_id, inv->nombre_completo, inv->categoria,
+                                                inv->codigo_grupo, inv->activo ? "[ACTIVO]" : "[INACT]"}, WI) << "\n";
                         inv = inv->sigInvestigador;
                     }
                     g = g->sigGrupo;
                 }
                 if (!hayDatos) std::cout << "  (No hay investigadores registrados)\n";
-                std::cout << "=================================================================================\n";
+                std::cout << bordeTabla(WI, '-') << "\n";
+                std::cout << "  Total de investigadores: " << totalI << "\n";
                 pausar();
             } else if (op == 2) {
                 limpiarPantalla();
@@ -1078,11 +1225,18 @@ public:
                 if (!inv) {
                     std::cout << "\n[!] No se encontró ningún investigador que coincida con '" << busqueda << "'.\n";
                 } else {
-                    std::cout << "\n=================================================================\n";
-                    std::cout << "INVESTIGADOR: " << inv->nombre_completo << "\n";
-                    std::cout << "Documento: " << inv->documento_id << " | Categoría: " << inv->categoria << "\n";
-                    std::cout << "Formación: " << inv->formacion_academica << " | Grupo: " << inv->codigo_grupo << "\n";
-                    std::cout << "Estado: " << (inv->activo ? "ACTIVO" : "DESACTIVADO") << "\n";
+                    const std::vector<size_t> WD = {20, 59};
+                    std::cout << "\n" << bordeTabla(WD, '=') << "\n";
+                    std::cout << tituloTabla("DETALLE DEL INVESTIGADOR", WD) << "\n";
+                    std::cout << bordeTabla(WD, '=') << "\n";
+                    std::cout << filaTabla({"Nombre:", inv->nombre_completo}, WD) << "\n";
+                    std::cout << filaTabla({"Documento:", inv->documento_id}, WD) << "\n";
+                    std::cout << filaTabla({"Categoría:", inv->categoria}, WD) << "\n";
+                    std::cout << filaTabla({"Grupo:", inv->codigo_grupo}, WD) << "\n";
+                    std::cout << filaTabla({"Estado:", inv->activo ? "ACTIVO" : "DESACTIVADO"}, WD) << "\n";
+                    std::cout << bordeTabla(WD, '-') << "\n";
+                    std::cout << "  Formación académica:\n";
+                    imprimirBloque(espaciar(inv->formacion_academica), 96, "    ");
 
                     // Hoja de Vida CvLAC (Par evaluador, Scholar, ORCID)
                     std::string parEval, scholar, orcid, formExtra;
@@ -1091,21 +1245,35 @@ public:
                         std::cout << "  • Par Evaluador MinCiencias: [" << (parEval == "Si" ? "SÍ (Reconocido)" : "No") << "]\n";
                         if (!scholar.empty()) std::cout << "  • Google Scholar: " << scholar << "\n";
                         if (!orcid.empty())   std::cout << "  • Código ORCID:  " << orcid << "\n";
+                        if (!formExtra.empty()) {
+                            std::cout << "  • Formación complementaria:\n";
+                            imprimirBloque(espaciar(formExtra), 96, "      ");
+                        }
                     }
 
                     std::cout << "\n  -- Producción Autorada (Hipercubo Ortogonal) --\n";
                     NodoProducto* p = inv->primerProducto;
                     if (!p) std::cout << "     (Sin productos asociados)\n";
+                    std::map<std::string, int> porTipoI;
+                    size_t nProdI = 0;
                     while (p) {
+                        nProdI++;
+                        porTipoI[p->tipo]++;
                         std::cout << "     • [" << p->tipo;
                         if (!p->subtipo_codigo.empty()) std::cout << "/" << p->subtipo_codigo;
-                        std::cout << " " << p->anio << "] " << p->titulo 
+                        std::cout << " " << p->anio << "] " << recortar(p->titulo, 90)
                                   << " (Fam: " << p->familia << ", Cat: " << p->categoria_minciencias << ", " 
                                   << (p->validado ? "Validado" : "No validado") << ") ["
                                   << (p->activo ? "Activo" : "Inactivo") << "]\n";
                         p = p->sigProductoInvestigador;
                     }
-                    std::cout << "=================================================================\n";
+                    if (nProdI > 0) {
+                        std::string desg = "Desglose por tipo:";
+                        for (std::map<std::string, int>::iterator it = porTipoI.begin(); it != porTipoI.end(); ++it)
+                            desg += " " + it->first + ":" + std::to_string(it->second);
+                        std::cout << "     Total: " << nProdI << " | " << desg << "\n";
+                    }
+                    std::cout << bordeTabla(WD, '=') << "\n";
                 }
                 pausar();
             } else if (op == 4) {
@@ -1231,21 +1399,15 @@ public:
                     size_t totalPaginas = (totalFiltrados == 0) ? 1 : ((totalFiltrados + porPagina - 1) / porPagina);
                     if (pagina >= totalPaginas) pagina = totalPaginas - 1;
 
-                    std::cout << "========================================================================================\n";
-                    std::cout << "                         LISTADO DE PRODUCTOS CIENTÍFICOS (PAGINADO)                    \n";
-                    std::cout << "========================================================================================\n";
+                    const std::vector<size_t> WP = {15, 12, 40, 6, 6, 6, 8};
+                    std::cout << "\n" << bordeTabla(WP, '=') << "\n";
+                    std::cout << tituloTabla("LISTADO DE PRODUCTOS CIENTÍFICOS (PAGINADO)", WP) << "\n";
+                    std::cout << bordeTabla(WP, '=') << "\n";
                     if (!filtroBusqueda.empty()) {
                         std::cout << "  [Filtro activo: \"" << filtroBusqueda << "\" - Coincidencias: " << totalFiltrados << "]\n";
                     }
-                    std::cout << std::left 
-                              << std::setw(15) << "ID"
-                              << std::setw(12) << "TIPO"
-                              << std::setw(36) << "TITULO"
-                              << std::setw(6)  << "AÑO"
-                              << std::setw(6)  << "CAT"
-                              << std::setw(6)  << "AVAL"
-                              << std::setw(8)  << "ESTADO" << "\n";
-                    std::cout << std::string(88, '-') << "\n";
+                    std::cout << filaTabla({"ID", "TIPO", "TITULO", "AÑO", "CAT", "AVAL", "ESTADO"}, WP) << "\n";
+                    std::cout << bordeTabla(WP, '-') << "\n";
 
                     size_t inicio = pagina * porPagina;
                     size_t fin = std::min(inicio + porPagina, totalFiltrados);
@@ -1255,18 +1417,12 @@ public:
                     } else {
                         for (size_t i = inicio; i < fin; ++i) {
                             NodoProducto* p = filtrados[i];
-                            std::string titCorto = p->titulo.length() > 34 ? p->titulo.substr(0, 31) + "..." : p->titulo;
-                            std::cout << std::left 
-                                      << std::setw(15) << p->id_producto
-                                      << std::setw(12) << p->tipo
-                                      << std::setw(36) << titCorto
-                                      << std::setw(6)  << p->anio
-                                      << std::setw(6)  << p->categoria_minciencias
-                                      << std::setw(6)  << (p->validado ? "SI" : "NO")
-                                      << std::setw(8)  << (p->activo ? "[ACT]" : "[INA]") << "\n";
+                            std::cout << filaTabla({p->id_producto, p->tipo, p->titulo, std::to_string(p->anio),
+                                                    p->categoria_minciencias, p->validado ? "SI" : "NO",
+                                                    p->activo ? "[ACT]" : "[INA]"}, WP) << "\n";
                         }
                     }
-                    std::cout << "========================================================================================\n";
+                    std::cout << bordeTabla(WP, '-') << "\n";
                     std::cout << "  Página " << (pagina + 1) << " de " << totalPaginas 
                               << " | Mostrando " << (totalFiltrados == 0 ? 0 : inicio + 1) << "-" << fin 
                               << " de " << totalFiltrados << " productos\n";
@@ -1664,13 +1820,10 @@ public:
             std::cout << "\n[RESULTADO VENTANA " << anioInicio << " - " << anioFin << "]\n";
         }
         std::cout << "Total de productos en la ventana: " << prodsVentana << "\n";
-        std::cout << "\n" << std::left 
-                  << std::setw(12) << "ID"
-                  << std::setw(6)  << "AÑO"
-                  << std::setw(12) << "TIPO"
-                  << std::setw(35) << "TITULO"
-                  << std::setw(14) << "GRUPO" << "\n";
-        std::cout << std::string(79, '-') << "\n";
+        const std::vector<size_t> WV = {12, 6, 12, 38, 14};
+        std::cout << "\n" << bordeTabla(WV, '=') << "\n";
+        std::cout << filaTabla({"ID", "AÑO", "TIPO", "TITULO", "GRUPO"}, WV) << "\n";
+        std::cout << bordeTabla(WV, '-') << "\n";
 
         g = multi.getCabezaGrupos();
         while (g) {
@@ -1680,19 +1833,15 @@ public:
                     ? Multilista::cumpleVentanaModelo2024(p, 2026)
                     : (p->anio >= anioInicio && p->anio <= anioFin);
                 if (p->activo && g->activo && cumple) {
-                    std::string titCorto = p->titulo.length() > 33 ? p->titulo.substr(0, 30) + "..." : p->titulo;
-                    std::cout << std::left 
-                              << std::setw(12) << p->id_producto
-                              << std::setw(6)  << p->anio
-                              << std::setw(12) << p->tipo
-                              << std::setw(35) << titCorto
-                              << std::setw(14) << p->codigo_grupo << "\n";
+                    std::cout << filaTabla({p->id_producto, std::to_string(p->anio), p->tipo,
+                                            p->titulo, p->codigo_grupo}, WV) << "\n";
                 }
                 p = p->sigProductoGrupo;
             }
             g = g->sigGrupo;
         }
-        std::cout << "=================================================================\n";
+        std::cout << bordeTabla(WV, '-') << "\n";
+        std::cout << "  Total listado en la ventana: " << prodsVentana << "\n";
         pausar();
     }
 

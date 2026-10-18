@@ -54,6 +54,67 @@ def _norm_txt(s: str) -> str:
     return re.sub(r"\s+", " ", s).strip()
 
 
+def codificacion_respuesta(resp) -> str:
+    """Charset real declarado por el servidor. SCIENTI declara iso-8859-1 pero
+    envía windows-1252; forzar utf-8 rompía las tildes (llegaban como '?')."""
+    ct = (resp.headers.get("Content-Type") or "").lower()
+    m = re.search(r"charset=([\w-]+)", ct)
+    enc = (m.group(1) if m else "") or resp.apparent_encoding or "utf-8"
+    if enc.replace("_", "-").lower() in ("iso-8859-1", "latin-1", "latin1"):
+        enc = "windows-1252"
+    return enc
+
+
+def texto_respuesta(resp) -> str:
+    """Decodifica el cuerpo HTTP con el charset real (nunca fuerza utf-8)."""
+    try:
+        return resp.content.decode(codificacion_respuesta(resp), errors="replace")
+    except Exception:
+        return resp.text
+
+
+def _decodificar_bytes(datos: bytes) -> str:
+    """Decodifica bytes probando utf-8 y, si falla, windows-1252/latin-1
+    (SCIENTI sirve windows-1252). No descarta tildes con errors='ignore'."""
+    for enc in ("utf-8", "windows-1252", "latin-1"):
+        try:
+            return datos.decode(enc)
+        except UnicodeDecodeError:
+            continue
+    return datos.decode("utf-8", errors="replace")
+
+
+def _leer_texto_archivo(ruta: str) -> str:
+    """Lee un HTML local sin depender de que sea utf-8 puro."""
+    with open(ruta, "rb") as f:
+        return _decodificar_bytes(f.read())
+
+
+def espaciar(s: str) -> str:
+    """Repara palabras pegadas del HTML de SCIENTI:
+    'Septiembrede2007' -> 'Septiembre de 2007'; 'paraLa' -> 'para La'.
+    Solo para texto libre (áreas, formación); nunca en nombres ni títulos/URLs."""
+    if not s:
+        return s
+    out = []
+    i, n = 0, len(s)
+    while i < n:
+        c = s[i]
+        if c in "dD" and i > 0 and i + 6 <= n and s[i + 1] in "eE" \
+                and s[i + 2:i + 6].isdigit() and s[i - 1].islower():
+            out.append(" de ")
+            out.append(s[i + 2:i + 6])
+            i += 6
+            continue
+        out.append(c)
+        if i + 1 < n:
+            a, b = s[i], s[i + 1]
+            if a.islower() and (b.isupper() or b.isdigit()):
+                out.append(" ")
+        i += 1
+    return "".join(out)
+
+
 # Helper dedupe (A1) - alineado con Khemia
 def _normalized_name_key(value: str) -> str:
     if not value:
@@ -731,8 +792,7 @@ def leer_snapshot_cvlac_html(cod_rh: str) -> str:
     ruta = _buscar_snapshot_cvlac(cod_rh)
     if ruta and os.path.exists(ruta):
         try:
-            with open(ruta, "r", encoding="utf-8", errors="ignore") as f:
-                return f.read()
+            return _leer_texto_archivo(ruta)
         except Exception:
             pass
 
@@ -749,7 +809,7 @@ def leer_snapshot_cvlac_html(cod_rh: str) -> str:
                         nombres = z.namelist()
                         for target in [nom, nom_pad]:
                             if target and target in nombres:
-                                return z.read(target).decode("utf-8", errors="ignore")
+                                return _decodificar_bytes(z.read(target))
                 except Exception:
                     pass
     return ""
@@ -828,14 +888,13 @@ class MotorIngesta:
 
         if snapshot_local and os.path.exists(snapshot_local):
             print(f"[Scraping] Usando snapshot oficial local: {os.path.basename(snapshot_local)}")
-            with open(snapshot_local, "r", encoding="utf-8", errors="ignore") as f_snap:
-                html_text = f_snap.read()
+            html_text = _leer_texto_archivo(snapshot_local)
             resumen["modo"] = "OFFLINE_SNAPSHOT"
         else:
             try:
                 print(f"[Scraping] Conectando a MinCiencias GrupLAC ({url})...")
                 resp = self._get_con_reintento(url, timeout=25, intentos=2)
-                html_text = resp.text
+                html_text = texto_respuesta(resp)
             except Exception as e:
                 print(f"[!] Error: No se pudo conectar a MinCiencias ({e}) y no existe snapshot local para el grupo {nro_grupo}.")
                 resumen["modo"] = "ERROR_SIN_CONEXION"
@@ -889,6 +948,7 @@ class MotorIngesta:
             area = td_area.find_next_sibling("td").get_text(strip=True)
             if "--" in area:
                 area = area.split("--")[0].strip()
+        area = espaciar(area)
 
         # 5. Año de Creación
         anio_creacion = 2005
@@ -956,7 +1016,7 @@ class MotorIngesta:
                             try:
                                 perfil_cv = parse_hoja_vida(html_cv)
                                 if perfil_cv.get("formacion_academica"):
-                                    formacion = perfil_cv["formacion_academica"][:90]
+                                    formacion = espaciar(perfil_cv["formacion_academica"])[:90]
                                 if perfil_cv.get("categoria"):
                                     cat = perfil_cv["categoria"]
                                 guardar_perfil_bd(doc_inv, perfil_cv, self.ruta_bd)
@@ -1002,7 +1062,7 @@ class MotorIngesta:
                     nodo_inv = multi.buscar_investigador(rh)
                     if nodo_inv:
                         if p_cv.get("formacion_academica"):
-                            nodo_inv.formacion_academica = p_cv["formacion_academica"][:90]
+                            nodo_inv.formacion_academica = espaciar(p_cv["formacion_academica"])[:90]
                         if p_cv.get("categoria"):
                             nodo_inv.categoria = p_cv["categoria"]
 
@@ -1165,7 +1225,7 @@ class MotorIngesta:
             try:
                 print(f"[Scraping] Conectando a MinCiencias CvLAC ({url})...")
                 resp = self._get_con_reintento(url, timeout=30, intentos=2)
-                html_text = resp.text
+                html_text = texto_respuesta(resp)
             except Exception as e:
                 print(f"[!] Error: No se pudo conectar a CvLAC en vivo ({e}) y no existe snapshot para cod_rh={cod_rh}.")
                 resumen["modo"] = "ERROR_SIN_CONEXION"
@@ -1198,7 +1258,7 @@ class MotorIngesta:
                 break
 
         # 3. Formación Académica
-        formacion = perfil_cv.get("formacion_academica") or "Doctorado en Ingeniería de Sistemas"
+        formacion = espaciar(perfil_cv.get("formacion_academica") or "Doctorado en Ingeniería de Sistemas")
 
         # Registrar o actualizar Investigador
         inv_existente = multi.buscar_investigador(cod_rh)
@@ -1360,7 +1420,7 @@ class MotorIngesta:
                     url = f"https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh={rh}"
                     try:
                         r = self._get_con_reintento(url, timeout=30, intentos=2)
-                        html = r.text
+                        html = texto_respuesta(r)
                     except Exception:
                         html = html or ""
                 if html:
